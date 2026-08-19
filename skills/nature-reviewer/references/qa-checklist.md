@@ -1,5 +1,23 @@
 # QA checklist
 
+## Contents
+
+- [Target-criteria checks](#target-criteria-checks)
+- [Editorial-triage checks](#editorial-triage-checks)
+- [Reviewer-isolation checks](#reviewer-isolation-checks)
+- [Grounding checks](#grounding-checks)
+- [Technical coverage checks](#technical-coverage-checks)
+- [Severity and blocking checks](#severity-and-blocking-checks)
+- [Resolution-test checks](#resolution-test-checks)
+- [Editor-synthesis checks](#editor-synthesis-checks)
+- [Decision-engineering checks](#decision-engineering-checks)
+- [Coverage checks](#coverage-checks)
+- [Boundary checks](#boundary-checks)
+- [Style checks](#style-checks)
+- [Anti-gaming and non-invention checks](#anti-gaming-and-non-invention-checks)
+- [Consistency checks](#consistency-checks)
+- [Final release rule](#final-release-rule)
+
 ## Target-criteria checks
 
 - Exact target journal/venue and article type are stated or marked unresolved.
