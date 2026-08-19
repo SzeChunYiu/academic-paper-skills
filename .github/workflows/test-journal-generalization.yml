@@ -29,7 +29,7 @@ permissions:
   contents: read
 
 jobs:
-  contracts-and-citation:
+  contracts-citation-and-writing:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -40,14 +40,18 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Compile citation scripts
+      - name: Compile citation and writing scripts
         run: |
           python -m py_compile \
             skills/nature-citation/scripts/nature_citation.py \
-            skills/nature-citation/scripts/academic_citation_search.py
+            skills/nature-citation/scripts/academic_citation_search.py \
+            skills/nature-writing/scripts/corpus_structure_stats.py
 
       - name: Test citation search and exports
         run: python -m unittest discover -s skills/nature-citation/tests -p 'test_*.py' -v
+
+      - name: Test writing rhetorical engine and corpus tooling
+        run: python -m unittest discover -s skills/nature-writing/tests -p 'test_*.py' -v
 
       - name: Test shared journal contracts
         run: python -m unittest discover -s skills/nature-shared/tests -p 'test_*.py' -v
