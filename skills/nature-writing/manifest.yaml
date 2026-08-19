@@ -1,9 +1,9 @@
 name: nature-writing
-version: 1.3.0
+version: 2.0.0
 description: >
-  Declarative manifest for the static/dynamic split. SKILL.md uses this to
-  decide which fragments to load for a drafting, restructuring, or
-  initial-submission request.
+  Declarative manifest for journal-aware academic drafting, restructuring, and
+  initial-submission requests. The legacy skill name is retained for backward
+  compatibility; journal behavior is resolved independently from that name.
 
 always_load:
   # Shared layer — common to nature-polishing and nature-writing
@@ -76,23 +76,33 @@ axes:
 
   journal:
     detect: |
-      Use nature only for the flagship journal Nature. Use nat-comms for Nature
-      Communications. Use nat-mach-intell when the user names Nature Machine
-      Intelligence or NMI. If the user says "Nature-family" generically or
-      names a different Nature Portfolio subjournal, use nature-family and
-      check that journal's current instructions before applying exact numbers.
-      Otherwise use generic.
+      Resolve the target independently from the legacy nature-writing skill name.
+      Use nature only for flagship Nature, nat-comms only for Nature
+      Communications, nat-mach-intell only for Nature Machine Intelligence, and
+      nature-family for another Nature Portfolio title or an unresolved
+      Nature-family request. Use profiled whenever the user names any other
+      journal or journal/publisher/venue family (for example Science/AAAS, Cell
+      Press, IEEE, ACM, PLOS, Springer/BMC, Elsevier, Wiley, APA-style,
+      biomedical, humanities, or a specific non-Nature journal). Use generic
+      only when no target or useful family is known. For profiled targets,
+      resolve exact journal -> article type -> stage -> component before exact
+      compliance claims.
     values:
-      nature:         static/fragments/journal/nature.md
-      nature-family:  static/fragments/journal/nature-family.md
-      nat-comms:      static/fragments/journal/nat-comms.md
+      nature:          static/fragments/journal/nature.md
+      nature-family:   static/fragments/journal/nature-family.md
+      nat-comms:       static/fragments/journal/nat-comms.md
       nat-mach-intell: static/fragments/journal/nat-mach-intell.md
-      generic:        static/fragments/journal/generic.md
+      profiled:        static/fragments/journal/profiled.md
+      generic:         static/fragments/journal/generic.md
     default: generic
     multi: false
 
 references:
   on_demand:
+    - condition: any named non-Nature target journal, publisher/venue family, journal transfer, or exact cross-journal submission compliance request
+      path: ../nature-shared/journal-formats/journal-resolution.md
+    - condition: any non-Nature publisher/venue/discipline family needs a fallback writing profile
+      path: ../nature-shared/journal-formats/journal-family-profiles.md
     - condition: task is manuscript and the user is drafting, restructuring, or compressing Results or full main text; deciding what belongs in main text versus captions or SI; preventing revision accretion; reducing statistical or claim repetition; or building the shortest sufficient evidence chain
       path: ../nature-shared/core/main-text-discipline.md
     - condition: needs section-level structure, argument order, or published-article patterns
