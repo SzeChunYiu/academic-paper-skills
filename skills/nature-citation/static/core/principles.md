@@ -1,43 +1,103 @@
 # Core principles (citation)
 
-Use this skill to turn manuscript text into a defensible citation export:
+Use this skill to turn manuscript text into a defensible citation workflow:
 
-- segmented text with citation candidates for each segment
-- a reference-manager import file in `.enw`, `.ris`, or Zotero `.rdf`
-- conservative evidence notes explaining whether each candidate truly supports the segment
+- segmented text with citation candidates for each citable claim
+- conservative evidence notes explaining whether each candidate truly supports the claim
+- complete structured metadata suitable for a reference manager
+- optional journal/style-specific bibliography rendering after evidence selection
 
-## Default scope
+The legacy skill name is retained for compatibility. It does **not** imply a Nature-only evidence search.
 
-Interpret journal scope from the user's wording, but keep the filter strict:
+## Separate two independent decisions
 
-- `Nature系列`: search Nature Portfolio first. Include `Nature`, `Nature [field]`, `Nature Communications`, `Communications [field]`, `Scientific Reports`, and `npj` journals.
-- `CNS`: search `Cell`, `Nature`, and `Science` plus their major sister journals.
-- `CNS及其子刊` or `CNS/sister journals`: search only accepted flagship and subjournal titles in Nature Portfolio, the AAAS Science family, and Cell Press.
-- `只要Nature/Science/Cell正刊`: restrict to the flagship journals `Nature`, `Science`, and `Cell`.
+### 1. Evidence scope
 
-Do not treat merely related journals as in-scope. A title is valid only if it is in the accepted publisher-family whitelist or clearly matches the official naming pattern for that family. If the user needs an exhaustive or submission-critical boundary, verify current official journal pages before finalizing because journal portfolios change. The exact boundary and official source notes are in `references/journal-scope.md`.
+Default: `best-evidence`.
+
+Search the scholarly literature without a prestige/publisher filter and rank papers by direct support for the claim, study design, methodological quality, relevance to the population/model and outcome, recency when time sensitivity matters, and the role the source will play (primary evidence versus review/background).
+
+Do not use journal prestige as a proxy for evidentiary strength.
+
+Optional scopes are allowed only when the user requests them or the task itself makes them necessary:
+
+- `Nature系列`: Nature Portfolio
+- `Science系列`: AAAS Science family
+- `Cell Press`: Cell Press
+- `CNS` / `CNS及其子刊`: Nature Portfolio + AAAS Science family + Cell Press
+- `只要Nature/Science/Cell正刊`: flagship-only
+- exact named journal or set of journals
+- explicit date range, study type, open-access requirement, primary-research-only, review-only, etc.
+
+If the user asks generally for “references”, “supporting papers”, “citations for this paragraph”, or “文献支撑/补引用”, use `best-evidence`; never silently restrict to CNS.
+
+### 2. Citation rendering style
+
+Citation rendering is a later step. The target journal may require numeric, superscript, author-date, notes/bibliography, abbreviated journal names, a particular author truncation rule, or a reference-manager style.
+
+Resolve exact formatting from the target journal/current style guide when the user asks for submission-ready references. Do not alter which papers count as good evidence merely to match the target journal.
+
+Keep machine-readable metadata complete even when the rendered bibliography abbreviates it.
+
+When a named target journal is involved, use `../../nature-shared/journal-formats/journal-resolution.md` to distinguish evidence selection, reporting requirements, house style, and submission mechanics.
+
+## Search routes
+
+### General/default route
+
+Use `scripts/academic_citation_search.py --scope best-evidence` for broad scholarly discovery. It reuses the mature Crossref/PubMed metadata/export helpers from the legacy script without applying the CNS-family filter.
+
+### Explicit prestige/family route
+
+Use `scripts/nature_citation.py` or `academic_citation_search.py` with an explicit `nature`, `science`, `cell`, `cns`, or `flagship` scope only when the user asks for that restriction.
+
+A journal filter and a target citation style are different concepts. A manuscript targeting *Journal X* does not imply that all citations should come from *Journal X*.
 
 ## Source hierarchy
 
-Use sources in this order:
+Use sources according to the information needed, not brand prestige:
 
-1. Structured bibliographic metadata: Crossref, PubMed/NCBI E-utilities, DOI metadata.
-2. Publisher pages: `nature.com`, `science.org`, `cell.com`, and official journal pages.
-3. Full text or abstract pages, if accessible.
-4. Secondary databases such as Google Scholar, Semantic Scholar, Web of Science, or Scopus only as discovery aids, not as the sole support basis.
+1. Primary structured bibliographic metadata: Crossref, PubMed/NCBI E-utilities, DataCite when relevant, DOI metadata, and discipline-specific indexes.
+2. Publisher/journal article pages for exact bibliographic facts, corrections/retractions, and accessible abstracts/full text.
+3. Trusted full-text repositories and indexing databases appropriate to the field.
+4. Discovery systems such as Google Scholar, Semantic Scholar, Web of Science, Scopus, arXiv, SSRN, or domain repositories as appropriate; verify critical metadata/evidence against primary records when possible.
 
-Prefer structured APIs for metadata and publisher pages for claim verification. If metadata and publisher page disagree, preserve the DOI and journal-page facts and flag the discrepancy.
+For clinical/biomedical questions, prioritize databases and study designs appropriate to evidence synthesis rather than a general journal whitelist. For engineering/computing, conference proceedings may be primary literature and must not be discarded merely because they are not journal articles. For humanities/law, books, chapters, archival sources, cases/statutes, editions, or primary documents may be legitimate evidence even though the legacy Crossref journal script cannot retrieve all of them.
+
+If metadata sources disagree, preserve stable identifiers and publisher/primary-record facts and flag the discrepancy.
 
 ## Search quality rules
 
-- Prefer precision over volume. A useful answer is usually 3-8 candidates, not 50 loosely related papers.
-- Use exact phrase searches only for distinctive terms; otherwise use concept terms and synonyms.
-- Check journal identity. Many journals contain the word "nature" but are not Nature Portfolio journals.
-- Treat citation count as a tie-breaker, not evidence of support.
-- Capture retractions, corrections, and expressions of concern when visible in Crossref or publisher metadata.
+- Prefer precision over volume. A useful answer is usually a small set of directly relevant sources plus explicit gaps.
+- Split compound claims before searching; one paper rarely supports every clause of a long sentence.
+- Use exact-phrase search only for distinctive terms; otherwise combine concepts and synonyms.
+- Match source type to claim type. Reviews are useful for context; primary studies are preferable for specific experimental effects when available; guidelines or consensus statements may be appropriate for standards of care/practice.
+- Check population/model, intervention/exposure, comparator, outcome, direction, and boundary before assigning support.
+- Treat citation counts and journal reputation as tie-breakers at most, never as support evidence.
+- Capture retractions, corrections, and expressions of concern when visible.
 - Date-sensitive topics require current searching and an explicit search date.
-- For medical, clinical, or safety claims, search current literature and state that citations do not replace clinical guidance or systematic review.
+- For medical, clinical, legal, or safety claims, use current authoritative evidence and state important uncertainty; a citation lookup is not a substitute for a systematic review or professional guidance.
+
+## Support grading
+
+Use these labels consistently:
+
+- `strong support` — directly tests or establishes the relevant relationship under sufficiently matching conditions
+- `partial support` — supports only part of the claim or a narrower/related setting
+- `background support` — establishes context but not the specific asserted relationship
+- `contradictory/limiting` — conflicts with or materially narrows the claim
+- `metadata-only candidate` — title/metadata suggest relevance, but abstract/full text has not been checked
+
+Never present a metadata-only candidate as evidentiary support.
+
+## Metadata and export integrity
+
+- Prefer DOI/PMID/other stable identifiers.
+- Preserve complete ordered author metadata from structured sources.
+- Do not invent missing volume, issue, pages, article number, publication date, or author names.
+- Stop an “EndNote-ready” export when personal-author metadata is structurally incomplete unless the user deliberately accepts an override.
+- RIS/ENW/Zotero RDF exports are metadata containers; they do not by themselves guarantee the final journal's bibliography punctuation/style.
 
 ## Source notes
 
-This skill is based on public bibliographic APIs and official publisher/import documentation: Crossref REST API and filters, NCBI E-utilities, EndNote RIS import options, Nature Portfolio, AAAS Science journals, and Cell Press portfolio descriptions. Verify pages at use time when exact journal coverage or current import behavior matters.
+This workflow uses public bibliographic APIs and official publisher/import documentation. Exact journal portfolios, submission rules, reference styles, and database behavior change over time; verify current official sources whenever coverage or submission compliance matters.
