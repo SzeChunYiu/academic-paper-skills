@@ -16,14 +16,17 @@
 
 ## Source hierarchy
 
-For an actual target journal:
+Keep **target-policy evidence** and **manuscript evidence** separate rather than forcing them into one ranking.
+
+For target-journal policy, fit, and review-model claims, use:
 
 1. exact current official journal editor/reviewer/publication criteria;
 2. exact article-type/stage guidance;
-3. shared `../nature-shared/core/editor-reviewer-decision-engine.md`;
-4. shared `../nature-shared/journal-formats/editorial-decision-profiles.md`;
-5. this cross-journal research summary;
-6. manuscript facts supplied by the user.
+3. shared `../../nature-shared/core/editor-reviewer-decision-engine.md` for implementation logic;
+4. shared `../../nature-shared/journal-formats/editorial-decision-profiles.md` only as fallback publication-model guidance;
+5. this cross-journal research summary.
+
+For manuscript-specific scientific claims, evidence, strengths, and concerns, the **manuscript facts supplied by the user are the grounding source**. Generic decision engines or journal profiles never override what the supplied manuscript actually contains.
 
 The local Nature source file `editorial criteria and processes.md` remains authoritative **only for flagship Nature Articles within its documented scope**.
 
@@ -198,4 +201,4 @@ The journal-aware reviewer should:
 6. produce an author-facing **decision engineering map** after the simulated decision analysis;
 7. never claim certainty about acceptance or invent numeric acceptance probability;
 8. recommend transfer/repositioning when target fit is the real problem instead of manufacturing importance language;
-9. use `add evidence / reanalyse / correct / clarify / narrow claim / remove claim` as legitimate resolution routes.
+9. use `add evidence / reanalyse / correct / clarify / narrow claim / remove claim / change target/article type` as legitimate resolution routes.
