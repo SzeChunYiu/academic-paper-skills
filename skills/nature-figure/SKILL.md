@@ -1,109 +1,167 @@
 ---
 name: nature-figure
 description: >-
-  Create, revise, audit, and export submission-grade scientific figures for Nature-family and other high-impact venues in Python (matplotlib/seaborn) or R (ggplot2/patchwork/ComplexHeatmap), including multi-panel plots, figures4papers-style work, and journal-ready SVG/PDF/TIFF outputs. Use for paper or scientific plots, manuscript data visualization, 论文配图、学术写作配图、科研绘图、科研作图、画图、作图、出图、论文图表、可视化. Define the conclusion, evidence logic, data integrity, template compatibility, export needs, and reviewer risks before plotting; honor or persist the Python/R backend choice. Also use the separate OpenRouter GPT Image 2 route for explicit AI-generated graphical abstracts, mechanism diagrams, concept schematics, 论文示意图、机制示意图、图形摘要; this route skips backend choice and treats outputs as drafts. Do not use for interactive dashboards, statistics-only analysis, data cleaning, literature review, code debugging, pure photo editing, or Illustrator/Figma-first infographics without manuscript-figure intent.
+  Create, revise, audit, and export submission-grade scientific figures for any academic journal or conference in Python (matplotlib/seaborn) or R (ggplot2/patchwork/ComplexHeatmap), including multi-panel plots, figures4papers-style work, and journal-ready vector/raster outputs. The legacy skill name is retained for compatibility; target-journal compliance is resolved independently for Nature Portfolio, Science/AAAS, Cell Press, IEEE, ACM, PLOS, Springer/BMC, Elsevier, Wiley, society journals, and other venues. Define the conclusion, evidence logic, data integrity, target journal/content type/stage, export needs, accessibility, and reviewer risks before plotting. Also use the separate OpenRouter GPT Image 2 route for explicit AI-generated graphical abstracts, mechanism diagrams, concept schematics, 论文示意图、机制示意图、图形摘要; treat those outputs as drafts and check the exact venue's current AI-image policy. Do not use for interactive dashboards, statistics-only analysis, data cleaning, literature review, code debugging, pure photo editing, or Illustrator/Figma-first infographics without manuscript-figure intent.
 ---
 
-# Nature Figure Making — Router
+# Journal-Aware Scientific Figure Making — Router
 
-This skill is split into two layers:
+`nature-figure` is a legacy entry-point name. Do not infer Nature production rules from the skill name.
 
-- A **static layer** under `static/` that holds versioned, reusable content fragments (the figure contract and default stance, plus a per-backend quick-start for Python and R).
-- A **dynamic layer** (this file plus `manifest.yaml`) that detects the plotting backend and loads only the fragment needed for the current job. The large design, API, pattern, and QA material lives in on-demand references.
+This skill is split into:
 
-Do not try to apply the figure logic from memory or from this router. Always load fragments from disk as described below.
+- a **static layer** under `static/` for the figure contract, stance, and backend quick starts
+- a **dynamic layer** (`SKILL.md` + `manifest.yaml`) that resolves plotting route/backend and loads only the relevant design, QA, and journal-compliance references
+
+Scientific design and journal submission mechanics are separate. Build an honest, legible figure first; adapt packaging to the exact target second.
 
 ## Routing protocol
 
-Follow these steps every time the skill is invoked.
+### 0. Resolve special AI/graphical-abstract routes first
 
-### 0. Check for graphical-abstract and AI-schematic routes
+For every AI-assisted graphical-abstract planning, generation, revision, or audit task, read `references/ai-graphical-abstract-workflow.md` first. It owns the message/audience brief, composition workflow, human scientific review, disclosure boundary, provenance, and policy gate.
 
-For every graphical-abstract planning, generation, revision, or audit task that
-uses AI, read
-[references/ai-graphical-abstract-workflow.md](references/ai-graphical-abstract-workflow.md)
-first. It owns the message/audience brief, composition and palette workflow,
-policy gate, human scientific review, disclosure boundary, and provenance
-requirements. A Nature Careers article is practitioner advice, not submission
-clearance; verify the current official policy for the exact target journal.
-
-If the request is planning or auditing only, do not ask for Python or R unless
-the user also asks to render or revise a data-driven figure.
-
-If the user explicitly asks to generate a manuscript schematic, graphical abstract, mechanism diagram, concept illustration, or paper schematic with OpenRouter, GPT Image 2, an image-generation API, or similar wording, do **not** ask "Python or R?". This is a non-plotting AI-schematic route.
-
-For this route:
+If the user explicitly requests OpenRouter, GPT Image 2, an image-generation API, an AI-generated paper schematic, graphical abstract, mechanism diagram, or concept illustration:
 
 1. Read [manifest.yaml](manifest.yaml) and the `always_load` files.
-2. Read [references/ai-graphical-abstract-workflow.md](references/ai-graphical-abstract-workflow.md).
-3. Read [references/openrouter-image-generation.md](references/openrouter-image-generation.md).
-4. Use [scripts/generate_openrouter_schematic.py](scripts/generate_openrouter_schematic.py) when the user wants a real API call or a reproducible payload.
-5. Treat output as a draft schematic / graphical abstract, not as a quantitative data panel. Do not invent experimental values, author logos, institutional marks, or unsupported mechanisms. Keep internal usefulness separate from submission eligibility.
+2. Read `references/ai-graphical-abstract-workflow.md`.
+3. Read `references/openrouter-image-generation.md`.
+4. Use `scripts/generate_openrouter_schematic.py` when a real API call or reproducible payload is requested.
+5. Treat the result as a draft schematic rather than quantitative data. Do not invent measurements, unsupported mechanisms, author/institutional marks, or provenance.
+6. If a target journal/venue is named, also load `references/journal-adaptation.md` and verify its current AI-generated/AI-assisted image policy. A different journal's permission is not clearance.
 
-Only continue to the Python/R backend gate for plotting, charting, data visualization, or manuscript figure assembly tasks that are not explicit OpenRouter AI image-generation requests.
+Planning/audit-only graphical-abstract work does not need the Python/R backend gate. Continue to the backend gate only for plotting, charting, data visualization, or manuscript figure assembly.
 
-### 1. Load the manifest and the core layer
+### 1. Load the manifest and core layer
 
-Read [manifest.yaml](manifest.yaml). It declares the `backend` axis, the allowed values, and the file paths each value maps to.
+Read [manifest.yaml](manifest.yaml) and every file under `always_load`:
 
-Also read every file listed under `always_load` (`static/core/contract.md` and `static/core/stance.md`). These hold the figure contract, the backend gate, the missing-runtime rule, the privacy rule, and the default operating stance that apply to every figure job.
+- `static/core/contract.md`
+- `static/core/stance.md`
 
-### 2. Resolve the backend — a blocking gate
+The figure contract determines the scientific conclusion, evidence hierarchy, data-integrity checks, target/stage, and output contract before plotting.
 
-Backend selection blocks plotting tasks, but it should not annoy the same user forever. Decide the `backend` value in this order:
+### 2. Resolve the plotting backend — blocking only for plotting tasks
 
-1. If the current request explicitly chooses Python or R, use that backend and save it with `scripts/nature_figure_backend.py set python` or `scripts/nature_figure_backend.py set r`.
-2. If the request provides a clearly language-specific input file/workflow, use that backend and save it.
-3. Otherwise run `scripts/nature_figure_backend.py get`. If it returns `python` or `r`, use the saved preference.
-4. If no saved preference exists, ask exactly one concise question — **Python or R? I will remember this as your default.** — and stop. After the user answers, save the answer before proceeding.
+Determine backend in this order:
 
-- `python` — matplotlib / seaborn.
-- `r` — ggplot2 / patchwork / ComplexHeatmap.
+1. Explicit Python or R choice in the current request.
+2. Clearly language-specific input/workflow.
+3. Saved preference from `scripts/nature_figure_backend.py get`.
+4. If none exists, ask once: **Python or R? I will remember this as your default.** Then save the answer before plotting.
 
-Do not guess or choose a backend by aesthetics alone. Only recommend a backend when the user explicitly asks you to choose; then use `references/backend-selection.md`, state the reason, save the selected backend, and proceed. Once selected, the backend is **exclusive** for all drawing, previewing, exporting, and visual QA (see `core/contract.md`). This gate does not apply to the explicit OpenRouter AI-schematic route above.
+- `python` — matplotlib / seaborn
+- `r` — ggplot2 / patchwork / ComplexHeatmap
 
-### 3. Load the matching backend fragment
+Do not choose a backend by aesthetics alone. If the user asks for a recommendation, load `references/backend-selection.md`, explain the reason, save the selected preference, and proceed. Once resolved, keep the backend exclusive for drawing, preview, export, and visual QA unless the user explicitly changes it.
 
-After the backend is resolved, Read the mapped fragment (`static/fragments/backend/python.md` or `static/fragments/backend/r.md`). It carries the backend-only execution rule and the publication quick-start (rcParams/theme and export helper). Do **not** load the other backend's fragment.
+Backend choice is independent of journal choice.
 
-### 4. Build the figure using the loaded material
+### 3. Resolve target journal/venue and stage
 
-Apply the loaded material in this order:
+For every named target, classify:
 
-1. Figure contract (`core/contract.md`) — write the core conclusion, map the evidence chain, classify the archetype, set the journal/export contract, before any code.
-2. Default stance (`core/stance.md`) — archetype-first composition, hero panel, restrained palette, statistics/integrity as part of the figure.
-3. Backend fragment — the exclusive Python or R quick-start and execution rule.
-4. Template adaptation — when reusing built-in original examples, licensed external material, or user-provided plotting code, load `references/asset-adaptation.md` before mapping data or changing the script.
-5. Delivery preflight — before final delivery, load `references/qa-contract.md`, run `scripts/validate_figure.py` on the plotting source, run `scripts/audit_pdf_text.py` on the exported PDF, then inspect every panel and the complete figure at final physical size. Automated checks do not replace the panel-by-panel uncertainty, salience, spacing, and collision audit.
+`exact journal/venue -> article/content type -> stage -> figure component`
 
-When the target is the flagship journal Nature, also load
-`references/nature-article-requirements.md`. It separates initial-review files
-from accepted-in-principle main and Extended Data production contracts and owns
-the flagship legend limit.
+Use stages:
 
-When the target is Nature Machine Intelligence, instead load
-`../nature-shared/journal-formats/nature-machine-intelligence.md`. Apply its
-combined six-item main display budget, ten-item Extended Data maximum,
-initial-versus-production boundary, 300-dpi/180-mm production checks and source-
-data contract. NMI's current live pages do not assign a standalone per-legend
-number, but its official 2018 brief guide set a historical advisory ceiling of
-fewer than 300 English words per complete figure legend. Count the whole legend,
-not each panel; aim for 150–250 words and keep it below 300 unless the live
-submission system or editor gives a newer instruction. Do not import flagship
-Nature's limit.
+- `planning`
+- `initial-submission`
+- `revision`
+- `accepted`
+- `production`
 
-The chart serves the scientific logic; aesthetic polish is subordinate to making the core conclusion clear, defensible, and reviewable.
+Then route:
 
-### 5. Reach for references only when needed
+- **flagship Nature** -> `references/nature-article-requirements.md`
+- **Nature Machine Intelligence** -> `../nature-shared/journal-formats/nature-machine-intelligence.md`
+- **any other named journal/venue or journal transfer** -> `references/journal-adaptation.md`, plus shared `journal-resolution.md`; add `journal-family-profiles.md` only as fallback context
+- **no target** -> generic accessible publication figure; do not invent dimensions, formats, legend limits, or source-data rules
 
-The files under `references/` are deep references, not defaults. Open them on demand per the `references.on_demand` table in the manifest — for example `references/figure-contract.md` to build the contract, `references/asset-adaptation.md` to reuse a plotting template safely, `references/template-catalog.md` for validated Python CSV templates, `references/api.md` for the Python palette and numerical/layout safety helpers, `references/r-workflow.md` for R, `references/design-theory.md` for color/typography/export rationale, `references/common-patterns.md` and `references/chart-types.md` for layout/chart recipes, `references/nature-2026-observations.md` for real Nature page archetypes, `references/qa-contract.md` before final delivery, `references/nature-article-requirements.md` for exact flagship Nature stage and upload rules, `../nature-shared/journal-formats/nature-machine-intelligence.md` for exact NMI figure rules, `references/ai-graphical-abstract-workflow.md` for AI-assisted graphical-abstract planning, policy gating, human verification, and provenance, and `references/tutorials.md` / `references/demos.md` for worked examples.
+When exact compliance matters, current official instructions for the exact target/content type/stage outrank local profiles.
 
-Do not infer flagship Nature or NMI requirements from a Nature Communications
-corpus or from the visual-style examples in this skill.
+### 4. Load the matching backend fragment
 
-## Why this split
+Read only the selected backend fragment:
 
-- The static layer is versioned and reviewable. The backend gate is now explicit in the manifest rather than buried in prose.
-- The dynamic layer keeps each invocation cheap: only the selected backend's quick-start enters context, and the 2,600+ lines of reference depth load only when a step needs them.
-- The router itself is short on purpose. Update fragments and references, not this file, when adding scope.
-- This structure mirrors `nature-writing`, `nature-polishing`, `nature-reader`, and `nature-paper2ppt`.
+- `static/fragments/backend/python.md`, or
+- `static/fragments/backend/r.md`
+
+Do not load the other backend fragment unless the user explicitly asks to compare backends.
+
+### 5. Build the figure in the correct priority order
+
+Apply:
+
+1. **Scientific contract** — core conclusion, evidence chain, panel map, statistical/data-integrity risks.
+2. **Default stance** — archetype-first composition, clear hierarchy, restrained encoding, accessible typography/color.
+3. **Backend fragment** — executable plotting/export rules.
+4. **Asset adaptation** — if reusing any bundled/user/licensed template, load `references/asset-adaptation.md` before remapping data.
+5. **Journal adaptation** — apply only verified target/stage requirements. Do not change data or evidentiary strength to fit house style.
+6. **Delivery QA** — load `references/qa-contract.md`, run available validators, inspect each panel and the complete figure at final physical size.
+
+For a journal transfer, preserve source data, analysis code, scales, statistics, and panel meaning; remove the old journal's dimensions/legend boilerplate; reflow and re-render for the new verified contract rather than shrinking a raster screenshot.
+
+### 6. What cross-journal adaptation must check
+
+`references/journal-adaptation.md` owns the detailed checklist. At minimum resolve independently:
+
+- display-item count and panel assembly rules
+- column/page width and physical dimensions
+- vector/raster formats and required resolution
+- color mode, fonts, line weights, transparency/layers
+- panel-label convention and in-figure titles
+- legend placement/content/limits
+- scale bars and imaging integrity
+- statistical/sample-size definitions
+- source/underlying-data requirements
+- accessibility and alt-text/long-description requirements
+- graphical abstract / TOC / cover-art rules
+- AI-generated/AI-assisted image policy
+- initial-review versus production differences
+
+Published appearance is not a substitute for the author instructions.
+
+### 7. Reach for references only when needed
+
+Open on demand according to [manifest.yaml](manifest.yaml). Key routes include:
+
+- contract planning -> `references/figure-contract.md`
+- backend recommendation -> `references/backend-selection.md`
+- R workflow -> `references/r-workflow.md`
+- template reuse -> `references/asset-adaptation.md`
+- final QA -> `references/qa-contract.md`
+- non-Nature target/journal transfer -> `references/journal-adaptation.md`
+- exact flagship Nature -> `references/nature-article-requirements.md`
+- exact NMI -> `../nature-shared/journal-formats/nature-machine-intelligence.md`
+- design rationale -> `references/design-theory.md`
+- Python helper API -> `references/api.md`
+- patterns/chart recipes -> `references/common-patterns.md`, `references/chart-types.md`, `references/template-catalog.md`
+- Nature visual examples -> `references/nature-2026-observations.md` as inspiration only, never as another journal's technical contract
+- AI graphical abstract -> `references/ai-graphical-abstract-workflow.md`
+- OpenRouter generation -> `references/openrouter-image-generation.md`
+- legend writing -> `references/figure-legend-conventions.md` plus the exact target-journal rules
+
+## Delivery contract
+
+For journal-specific final delivery, distinguish:
+
+- `verified` — exact current requirements checked
+- `applied` — changes made to satisfy them
+- `unresolved` — unknown article type/stage or conflicting/missing current rules
+- `not applicable` — checked but irrelevant
+
+Automated checks do not replace visual inspection at final physical size.
+
+## Generalization and integrity rules
+
+Never:
+
+- copy Nature/NMI dimensions, display budgets, or legend rules into another venue
+- infer production requirements from a published PDF alone
+- shrink a raster figure until labels become unreadable
+- change axes, crops, normalization, uncertainty, sample size, or statistical annotations deceptively to fit a layout
+- assume graphical abstracts or STAR-style elements are universal across a publisher
+- assume an AI-image policy transfers between journals
+
+The chart serves the scientific logic. Journal aesthetics and production mechanics are subordinate to clarity, integrity, reproducibility, and exact verified target requirements.
