@@ -1,118 +1,229 @@
-# Article Architecture
+# Article architecture
+
+Use this reference to design the **logic of a whole paper**. For detailed section move options, use `section-move-atlas.md`. For empirical justification, use `cross-disciplinary-writing-evidence.md`.
 
 ## Contents
 
-- [Full-paper argument](#full-paper-argument)
-- [Abstract](#abstract)
-- [Introduction](#introduction)
-- [Results](#results)
-- [Discussion](#discussion)
-- [Conclusion](#conclusion)
-- [Title](#title)
+- [Architecture is an argument, not a section template](#architecture-is-an-argument-not-a-section-template)
+- [The argument spine](#the-argument-spine)
+- [Contribution branches](#contribution-branches)
+- [Evidence architecture](#evidence-architecture)
+- [Section handoffs](#section-handoffs)
+- [Common whole-paper architectures](#common-whole-paper-architectures)
+- [Paragraph architecture](#paragraph-architecture)
+- [Claim architecture](#claim-architecture)
+- [Compression and emphasis](#compression-and-emphasis)
+- [Architecture audit](#architecture-audit)
 
+## Architecture is an argument, not a section template
 
-Use this reference when writing or rebuilding manuscript sections. The patterns
-come from curated Nature and Nature Communications examples across materials,
-energy, construction decarbonization and machine learning. They are structural
-patterns, not wording templates.
+A strong paper allows a reader to reconstruct:
 
-## Full-paper argument
+`why this question -> what this paper answers -> why the evidence warrants that answer -> where the answer stops -> why the bounded answer matters`
 
-A strong paper can usually be reduced to:
+That chain can be realized through IMRaD, combined Results/Discussion, theorem-proof sections, case-based chapters, conceptual sections, or another field-appropriate structure.
 
-`field-scale need -> unresolved bottleneck -> proposed move -> decisive evidence
--> broader implication -> boundary`
+Do not judge architecture by whether the headings resemble a familiar journal. Judge whether the evidence and reasoning answer the paper's live questions in a recoverable order.
 
-Before drafting, force the user's material into this chain. If one link is
-missing, mark it as missing rather than writing around it.
+## The argument spine
 
-## Abstract
+Write five statements before designing sections:
 
-Recommended paragraph movement:
+1. **Research tension/question** — the live problem, contradiction, uncertainty, bottleneck, missing test, unexplained phenomenon, or opportunity.
+2. **Answer/contribution** — the narrowest statement that captures what the paper establishes or provides.
+3. **Decisive warrant** — the evidence/reasoning without which the answer would not be convincing.
+4. **Boundary** — population, system, assumptions, scale, conditions, uncertainty, alternative interpretation, or scope limit.
+5. **Meaning** — what changes in knowledge, capability, practice, theory, or future investigation.
 
-1. Field-scale context or problem.
-2. Why current routes do not fully solve it.
-3. What this paper introduces or demonstrates.
-4. The strongest result, preferably with quantitative or comparative support.
-5. The mechanism, workflow or practical consequence.
-6. Bounded implication.
+The paper should make the dependency between these five objects visible.
 
-Useful diagnostics:
+## Contribution branches
 
-- If the abstract begins with `Here, we`, it may be missing context.
-- If it ends with a broad promise, it may need scope control.
-- If it contains no number, comparison or concrete test, it may feel ungrounded.
+Many papers have more than one contribution. Do not flatten them into a grandiose single claim.
 
-## Introduction
+Represent them as:
 
-Use a controlled funnel:
+```text
+central question
+  -> dominant answer
+      -> evidence chain A
+      -> evidence chain B
+  -> secondary contribution 1
+      -> supporting evidence
+  -> secondary contribution 2
+      -> supporting evidence
+  -> integrated meaning + boundaries
+```
 
-1. Establish the field stake.
-2. Explain the bottleneck in existing practice.
-3. Treat prior work fairly and specifically.
-4. Identify the remaining capability gap.
-5. State the present study as a direct response to that gap.
+A secondary contribution earns main-text space when it changes interpretation, credibility, reuse, generalizability, or practical value. Otherwise move it to a subordinate section or supplement.
 
-Avoid:
+## Evidence architecture
 
-- a literature list without a narrowing logic
-- claiming novelty by dismissing prior work
-- announcing results before the reader understands the question
+Results/analysis order should follow a **reasoning dependency**, not simply the order experiments were performed.
 
-## Results
+Useful dependencies include:
 
-Arrange Results as an evidence ladder:
+- establish measurement validity -> report main effect -> test mechanism;
+- baseline -> primary comparison -> ablation/diagnosis -> robustness/generalization;
+- discovery -> independent validation -> external validation;
+- descriptive pattern -> inferential test -> explanatory analysis;
+- contradiction -> discriminating experiment -> revised explanation;
+- method capability -> benchmark -> stress test -> failure analysis;
+- theorem/lemma -> main theorem -> corollary/application;
+- theme -> contrasting theme -> negative case -> integrated interpretation;
+- archival/source claim -> counterevidence -> contextual reconstruction -> argument.
 
-1. system, workflow or design space overview
-2. validation that the platform or assay is credible
-3. primary performance or discovery result
-4. fair comparison with baseline, standard practice or prior method
-5. mechanism, diagnostic analysis or interpretability
-6. scale-up, application, generalization or stress test
+For every evidence block ask: **Why does the reader need this now? What earlier result made this the next useful question?**
 
-Subsection opening rule:
+## Section handoffs
 
-`To test [question], we [action].`
+A section ending should change the reader's question.
 
-Then report the result and evidence. Keep interpretation short unless the
-paragraph explicitly transitions toward Discussion.
+### Introduction handoff
 
-## Discussion
+Reader should know:
 
-Discussion should widen from finding to meaning:
+- the live question/need;
+- why existing knowledge does not settle it;
+- the study's response and scope;
+- what evidence would count as an answer.
 
-1. central advance
-2. why the evidence supports it
-3. how it changes a workflow, design rule or conceptual boundary
-4. how it relates to previous studies
-5. what limits or dependencies remain
-6. what future work is now plausible
+The next question is usually: **How was that answer obtained or tested?**
 
-Do not restate every figure. Select the evidence that changes interpretation.
+### Methods handoff
 
-## Conclusion
+Reader should know enough to evaluate how evidence was generated and what inferential assumptions matter.
 
-Use a compact four-part close:
+The next question is: **What did the evidence show?**
 
-1. This work demonstrates or establishes the main contribution.
-2. The decisive evidence is named.
-3. The broader implication is stated.
-4. The boundary condition is clear.
+### Results/analysis handoff
 
-Conclusions should not introduce new data, new citations or new mechanisms.
+Reader should know the empirical/formal/source-based answer and major qualifications.
 
-## Title
+The next question is: **How should that answer be understood relative to alternatives and prior knowledge?**
 
-Good titles are concrete and searchable:
+### Discussion handoff
 
-`system/object + capability/action + application/consequence`
+Reader should know what the findings mean, what they do not establish, and what remains unresolved.
 
-Examples of title logic:
+The final question is: **What is the most durable bounded contribution?**
 
-- material plus function
-- method plus task
-- process plus scale
-- model plus data regime
+These handoffs are conceptual. They do not require those exact section names.
 
-Avoid vague prestige words such as `novel`, `advanced`, `powerful`, `green`,
-`efficient` unless they are made concrete by the rest of the title.
+## Common whole-paper architectures
+
+### Mechanism/discovery
+
+`phenomenon -> unresolved explanation -> discriminating evidence -> mechanism -> boundary -> implication`
+
+### Method/algorithm
+
+`capability need -> current trade-off/bottleneck -> design principle -> method -> fair evaluation -> diagnostic/ablation -> generalization/failure modes -> implication`
+
+### Resource/benchmark
+
+`fragmented/inadequate evaluation -> design requirements -> resource construction -> validation/coverage -> benchmark findings -> reuse/governance/boundaries`
+
+### Clinical/epidemiological
+
+`clinical/population question -> evidence/design limitation -> study design -> effect/association with uncertainty -> sensitivity/subgroup/adverse outcomes -> interpretation/generalizability -> implication`
+
+### Theory
+
+`formal problem -> assumptions/definitions -> main result -> proof architecture -> consequences/counterexamples -> limitations/applicability`
+
+### Qualitative
+
+`phenomenon/context -> research question/lens -> sampling/data/analytic process -> themes/findings with evidence -> contrasts/negative cases -> interpretation/reflexivity -> transferability/boundaries`
+
+### Humanities/historical
+
+`interpretive/historiographic problem -> source/conceptual framing -> evidence sequence/cases -> counterreading/counterevidence -> synthesis -> bounded argument`
+
+### Review/synthesis
+
+`field problem -> organizing question/lens -> evidence landscape -> synthesis/tensions -> framework/taxonomy -> gaps/agenda -> bounded conclusion`
+
+### Replication/validation
+
+`important prior claim -> uncertainty about robustness/generalizability -> replication/extension design -> comparison to original expectation -> discrepancy/consistency analysis -> consequences for claim scope`
+
+### Negative/null result
+
+`important expected relationship -> adequate test/power/sensitivity -> null/negative evidence -> alternative explanations/limits -> revised boundary of the original claim`
+
+No architecture is automatically superior. Choose the one that makes evidentiary dependency easiest to follow.
+
+## Paragraph architecture
+
+A paragraph is a local argument unit with one **nucleus** and any number of necessary supporting satellites.
+
+Example structures:
+
+```text
+nucleus claim
+  -> evidence
+  -> interpretation
+  -> qualification
+```
+
+```text
+problem/tension nucleus
+  -> example/evidence
+  -> consequence
+  -> bridge to solution
+```
+
+```text
+prior-work synthesis nucleus
+  -> representative evidence
+  -> contrast
+  -> consequence for present study
+```
+
+The first sentence need not always state the conclusion. It should orient the reader efficiently to the nucleus. Observation-first, question-first, context-first, or contrast-first openings may be better depending on genre and information flow.
+
+## Claim architecture
+
+For every major claim maintain a traceable tuple:
+
+`claim -> evidence/reasoning -> uncertainty -> boundary -> competing interpretation`
+
+Not every sentence states all five, but the manuscript should make them recoverable.
+
+Watch for **claim drift**:
+
+- Results: association
+- Discussion: mechanism
+- Abstract: causal effect
+- Title: universal capability
+
+If claim strength grows as text becomes shorter, fix the compression rather than the data.
+
+## Compression and emphasis
+
+Main text is not the complete lab record. Allocate space by argumentative importance:
+
+- more space for the decisive warrant, unexpected qualification, or reasoning readers need to trust;
+- less space for routine procedures, repeated statistics, and evidence already legible in a display;
+- enough context to interpret each display without retelling every cell;
+- important limitations near the claims they constrain, not hidden only in a final limitations paragraph.
+
+Use `../../../nature-shared/core/main-text-discipline.md` for detailed evidence allocation.
+
+## Architecture audit
+
+Before polishing, answer:
+
+1. Can the whole paper be reduced to one dominant question and bounded answer?
+2. Does every main section have a reader question?
+3. Does every major evidence block answer a question created earlier?
+4. Does the next block follow because of what was learned in the previous one?
+5. Are major alternatives/qualifications placed before broad generalization?
+6. Can each paragraph's nucleus be stated in one line?
+7. Do those nucleus lines reconstruct the section argument?
+8. Does each major claim have visible warrant and boundary?
+9. Are secondary contributions subordinate to the dominant spine rather than competing with it?
+10. If headings were removed, would the logical progression still be recoverable?
+
+Fix failed architecture tests before sentence polishing.
