@@ -10,7 +10,7 @@ A publisher family is **not** a manuscript format. A journal name is still not e
 
 For exact compliance, resolve this tuple before applying house rules:
 
-`target journal -> article/content type -> submission stage -> output component`
+`exact journal -> article/content type -> submission stage -> output component`
 
 Examples of output components are title, abstract, main text, references, figure, table, graphical abstract, supplementary file, cover letter, data/code statement, and response-to-reviewers package.
 
