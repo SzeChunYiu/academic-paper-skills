@@ -1,22 +1,65 @@
-# Section: Related Work (writing)
+# Section: Related Work / Literature Review (writing)
 
-## Default structure
+## Reader job
 
-`topic scope -> representative methods grouped by mechanism -> limitation tied to this paper -> distinction`
+Build a map of the intellectual/evidentiary landscape that lets readers understand:
 
-## Drafting rules
+`what approaches/explanations exist -> what each establishes or assumes -> where they agree/differ -> what question the present paper enters`
 
-- **Group by technical topic and mechanism, not by publication year or author.** A paragraph titled "Graph-based approaches" with three contrasting methods is stronger than three single-paper paragraphs.
-- Each subsection ends with a limitation that **this paper addresses**. If a subsection's limitation does not connect back to your contribution, the subsection probably does not belong.
-- Avoid both extremes: do not bash prior work, do not flatter it. State what prior work showed and where its scope ended.
-- Cite the source you actually read. Do not chain-cite review papers as if they were primary sources.
+Do not organize the literature merely to manufacture a limitation that flatters the current paper.
 
-## When Related Work is a separate section vs folded into Introduction
+## Organizing dimensions
 
-- Separate Related Work is common in CS/ML conference style.
-- Folded into Introduction is common in Nature-family style.
-- The user's target venue decides. Ask if unclear.
+Choose the dimension that best explains the field:
 
-## When to open the deep reference
+- competing explanations/theories
+- method families or design principles
+- assumptions
+- data/populations/settings
+- evidence strength or study design
+- historical development when chronology changes interpretation
+- unresolved trade-offs
+- points of consensus and contradiction
+- source traditions / historiographic positions
 
-For topic-based synthesis techniques and concrete patterns, open `references/related-work.md`.
+Author-by-author chronology is appropriate only when intellectual chronology is itself important.
+
+## Paragraph logic
+
+A useful synthesis paragraph often uses:
+
+`nucleus about a body of work -> representative evidence -> comparison/contrast/qualification -> consequence for the live research question`
+
+The consequence does **not** have to be `all prior work is limited, therefore our method`. It may establish consensus, reveal disagreement, define a boundary, motivate replication, explain an assumption, or identify an opportunity.
+
+## Citation roles
+
+Know why each citation is present:
+
+- factual/background support
+- origin/attribution
+- representative example
+- evidence for a consensus
+- contrasting/contradictory evidence
+- methodological precedent
+- comparison/baseline
+- theory/framework
+- data/resource provenance
+
+Do not cite a review as if it were the primary experiment when the primary claim matters. Do not pad a sentence with citations that support different propositions without saying which is which.
+
+## Fair positioning
+
+- Cover the strongest relevant alternatives, not only easy-to-criticize ones.
+- State what prior work succeeds at before defining its boundary.
+- Separate evidence limitation from method limitation.
+- Do not hide a predecessor because it makes the present contribution look incremental.
+- Distinguish `not studied`, `not demonstrated`, `not generalizable`, `not measured`, and `does not work`.
+
+## Placement
+
+A separate Related Work section is common in some computing/engineering venues; integrated literature positioning is common in many natural/social science and humanities papers. Follow the exact article type and field after the logic is built.
+
+## Deeper reference
+
+Load `references/related-work.md` for literature matrices, synthesis patterns, citation-role auditing, and contradiction handling.
