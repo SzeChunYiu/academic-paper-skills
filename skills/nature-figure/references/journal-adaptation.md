@@ -2,6 +2,16 @@
 
 Use this reference whenever a scientific figure has a named target journal/venue outside the exact Nature and Nature Machine Intelligence profiles, or when a figure is being transferred between journals.
 
+## Contents
+
+- [1. Keep scientific design separate from submission mechanics](#1-keep-scientific-design-separate-from-submission-mechanics)
+- [2. Resolve the stage](#2-resolve-the-stage)
+- [3. Verify the exact figure contract](#3-verify-the-exact-figure-contract)
+- [4. Family-specific fallback questions](#4-family-specific-fallback-questions)
+- [5. Journal transfer workflow](#5-journal-transfer-workflow)
+- [6. Compliance report](#6-compliance-report)
+- [Anti-patterns](#anti-patterns)
+
 First read:
 
 - `../../nature-shared/journal-formats/journal-resolution.md`
