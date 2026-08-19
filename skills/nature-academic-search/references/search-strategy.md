@@ -2,6 +2,17 @@
 
 The legacy skill name does not imply a Nature or prestige-journal search. Start from the research question, the source type the question requires, and the field's actual publication ecology.
 
+## Contents
+
+- [1. Convert the question into atomic concepts](#1-convert-the-question-into-atomic-concepts)
+- [2. Select sources by discipline and evidence type](#2-select-sources-by-discipline-and-evidence-type)
+- [3. Construct queries](#3-construct-queries)
+- [4. Search in layers](#4-search-in-layers)
+- [5. Result ranking](#5-result-ranking)
+- [6. Journal scope awareness](#6-journal-scope-awareness)
+- [7. Query quality checks](#7-query-quality-checks)
+- [8. Deduplication and provenance](#8-deduplication-and-provenance)
+
 ## 1. Convert the question into atomic concepts
 
 1. Write the research question or claim in one sentence.
