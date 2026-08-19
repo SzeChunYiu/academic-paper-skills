@@ -1,9 +1,11 @@
 name: nature-writing
-version: 2.0.0
+version: 2.1.0
 description: >
   Declarative manifest for journal-aware academic drafting, restructuring, and
   initial-submission requests. The legacy skill name is retained for backward
   compatibility; journal behavior is resolved independently from that name.
+  Core drafting uses rhetorical moves and empirical cross-disciplinary evidence
+  rather than a single journal skeleton.
 
 always_load:
   # Shared layer — common to nature-polishing and nature-writing
@@ -13,6 +15,7 @@ always_load:
   - ../nature-shared/core/terminology-ledger.md
   # Skill-local core
   - static/core/stance.md
+  - static/core/rhetorical-engine.md
   - static/core/workflow.md
   - static/core/output-format.md
 
@@ -105,7 +108,11 @@ references:
       path: ../nature-shared/journal-formats/journal-family-profiles.md
     - condition: task is manuscript and the user is drafting, restructuring, or compressing Results or full main text; deciding what belongs in main text versus captions or SI; preventing revision accretion; reducing statistical or claim repetition; or building the shortest sufficient evidence chain
       path: ../nature-shared/core/main-text-discipline.md
-    - condition: needs section-level structure, argument order, or published-article patterns
+    - condition: needs cross-disciplinary section structure, rhetorical move selection, argument order, or an alternative to a fixed Nature/IMRaD skeleton
+      path: references/section-move-atlas.md
+    - condition: needs empirical research support for a writing rule, disciplinary variation, syntax, titles, abstracts, Methods rhetoric, Discussion rhetoric, cohesion, paragraph flow, or corpus-grounded writing advice
+      path: references/cross-disciplinary-writing-evidence.md
+    - condition: needs section-level architecture, argument order, or published-article patterns
       path: references/article-architecture.md
     - condition: genre-aware 2025 Nat Commun empirical structure, quantified connector/diction preferences, or research/review/perspective/comment/benchmark differences
       path: references/nat-comms-2025-corpus.md
@@ -113,17 +120,17 @@ references:
       path: references/abstract.md
     - condition: drafting/revising a Nature-family broad-audience summary paragraph or introduction opening
       path: references/nature-summary-paragraph.md
-    - condition: drafting/revising introduction, task framing, technical challenge, contribution framing
+    - condition: drafting/revising introduction, research-need framing, prior-work positioning, contribution framing, or a method-heavy/algorithmic introduction
       path: references/introduction.md
     - condition: rebuilding related work as topic synthesis
       path: references/related-work.md
-    - condition: writing method sections, pipeline modules, module motivation, technical advantages
+    - condition: writing Methods for any study design, including experimental, clinical, qualitative, computational, theoretical, or pipeline/module-based work
       path: references/method.md
     - condition: planning/writing experiments around baselines, ablations, metrics
       path: references/experiments.md
     - condition: writing a bounded conclusion with contribution, evidence, impact, limitation
       path: references/conclusion.md
-    - condition: user asks whether a paragraph flows; use reverse outlining
+    - condition: user asks whether a paragraph or section flows, has logic, feels choppy, needs transitions, or needs sentence-to-sentence / paragraph-to-paragraph coherence
       path: references/paragraph-flow.md
     - condition: final manuscript self-review, rejection-risk audit, claim-evidence alignment
       path: references/paper-review.md
