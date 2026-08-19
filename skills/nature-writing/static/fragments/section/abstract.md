@@ -1,38 +1,51 @@
 # Section: Abstract (writing)
 
-The abstract is a mini-paper. Draft it last, when Results and Discussion are stable.
+The abstract is a compressed argument, not a checklist of paper sections. Draft it after the paper's evidence and interpretation are stable.
 
-## Default Nature pattern
+## Core rule
 
-`context / problem -> gap -> approach -> key result -> implication -> boundary`
+Select the highest-value moves for the target field, article type, and word budget.
 
-## Paragraph movement (recommended)
+Possible moves:
 
-1. Field-scale context or problem.
-2. Why current routes do not fully solve it.
-3. What this paper introduces or demonstrates.
-4. The strongest result, with quantitative or comparative support.
-5. The mechanism, workflow, or practical consequence.
-6. Bounded implication.
+- context/problem
+- research need/tension
+- objective/question
+- design/method
+- main result(s)
+- mechanism/explanation
+- conclusion/implication
+- boundary/population/condition
+- resource/reuse information when central
 
-## Pattern variants for technical / method-heavy papers
+Do **not** force every move once. Large abstract corpora show substantial disciplinary variation and frequent omission/reordering of canonical IMRaD-like moves.
 
-For ML, CV, materials, or method-heavy manuscripts, choose one variant from `references/abstract.md`:
+## Results are usually high-value
 
-- `challenge -> contribution`
-- `challenge -> insight -> contribution`
-- `multiple contributions`
+For empirical papers, readers should normally be able to tell what was found. Include concrete quantitative/comparative evidence when it is important and author-provided; never invent numbers.
 
-Open `references/abstract.md` for templates and examples.
+Do not spend most of the word budget on generic background and then reduce the actual result to `significant improvement was observed`.
 
-## Diagnostics before submitting the draft
+## Common variants
 
-- Beginning with `Here, we` may signal missing context.
-- Ending with a broad promise may need scope control.
-- No number, comparison, or concrete test may feel ungrounded.
+- **empirical**: problem/need -> question/design -> main evidence -> bounded conclusion
+- **clinical**: objective -> design/population -> effect/estimate + uncertainty -> conclusion/boundary
+- **method/algorithm**: capability bottleneck -> method/resource -> fair comparative result -> scope/failure boundary
+- **theory/formal**: problem -> main result/theorem -> consequence; method detail may be minimal
+- **qualitative/social science**: phenomenon/question -> data/analytic approach -> interpretive finding -> implication
+- **review/synthesis**: scope/problem -> organizing lens -> main synthesis/tensions -> implications
 
-## Drafting discipline
+Use `references/abstract.md` for deeper local patterns and `references/section-move-atlas.md` for cross-disciplinary routing.
 
-- Keep it compact. Cut sentences that re-summarize background the title already implies.
-- Include quantitative or comparative detail when the user provided it. Do not invent numbers.
-- End with what the work enables, not generic importance.
+## Diagnostics
+
+- Can a reader identify the paper's central answer?
+- Is the strongest claim matched by evidence shown in the abstract or clearly present in the paper?
+- Does the abstract preserve uncertainty and population/system boundaries?
+- Has compression strengthened causality or generality beyond the manuscript?
+- Does each background sentence earn scarce space?
+- Does the target journal require structured headings or a particular abstract type?
+
+## Nature-family note
+
+A `context -> gap -> Here we -> result -> implication` funnel is a useful local pattern for some Nature-family research articles, not a universal abstract law.
