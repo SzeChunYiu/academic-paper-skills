@@ -1,25 +1,48 @@
 # Section: Title (writing)
 
-## Default pattern
+Titles are field-, genre-, and journal-conditioned. Do not force a universal `object + capability + application` formula.
 
-Prefer concrete titles that combine:
+## Reader job
 
-`system / object + action / capability + application or consequence`
+A good title helps the intended reader predict the paper's subject and distinctive contribution without overstating the evidence.
 
-## Drafting rules
+## Common forms
 
-- Tell the reader what to expect; do not be a slogan.
-- Be searchable: include terms a researcher would search for.
-- Be substantiated by data — if a number or quantitative word appears, verify it against the manuscript.
-- Create curiosity without sacrificing credibility. A hook is only acceptable if the claim remains fully defensible.
+Choose among forms that fit the field/article type:
 
-## Things to avoid
+- descriptive noun phrase
+- method/resource + task/problem
+- declarative finding
+- question title
+- two-part `topic: specification`
+- population/design/outcome form in clinical/social-science work
+- formal result/object form in theory/math
+- interpretive/conceptual form in humanities
 
-- Grant-style aims (`Toward …`, `A study of …`).
-- Overbroad field claims (`A new era of …`, `Revolutionizing …`).
-- Question titles unless the paper genuinely answers the question.
-- Jargon a non-specialist in the target audience would not recognize.
+Use `references/section-move-atlas.md` and target-corpus calibration when title convention materially affects fit.
 
-## When asked for alternatives
+## Drafting checks
 
-Generate 3-5 candidates spanning declarative, finding-led, and (rarely) question patterns. Mark the most defensible one. Verify any quantitative claim in each candidate.
+- Include core searchable entities/terms.
+- Distinguish the paper from neighboring work.
+- Match causal wording to causal evidence.
+- Match population/system/scope to what was actually studied.
+- Use evaluative adjectives only when their comparison is defensible.
+- Avoid abbreviations that the target readership will not recognize.
+- Verify any number or quantitative claim against the manuscript.
+- Apply exact journal title limits/conventions only after resolving article type.
+
+## Alternatives
+
+When asked for alternatives, generate candidates that explore **different truthful rhetorical forms**, not merely synonym swaps. For each candidate, identify what it foregrounds: phenomenon, finding, method, resource, population, mechanism, or implication.
+
+Mark the most defensible candidate and explain any claim-risk difference briefly.
+
+## Avoid
+
+- slogan/marketing language;
+- unsupported `novel`, `revolutionary`, `breakthrough`, `unprecedented`;
+- causal titles for correlational evidence;
+- a question title when the paper does not answer the question;
+- broad application language that exceeds tested conditions;
+- a house style copied from another discipline because the journal is prestigious.
