@@ -1,12 +1,10 @@
 name: nature-figure
-version: 2.5.0
+version: 3.0.0
 description: >
-  Declarative manifest for the static/dynamic split. SKILL.md uses this to
-  decide which fragments to load for a given figure request. The main axis is
-  the plotting backend (Python or R). The first plotting use should establish
-  a saved user preference; later tasks reuse that preference unless the user
-  explicitly changes it. The large body of design, API, pattern, and QA
-  material stays in on-demand references.
+  Declarative manifest for journal-aware scientific figure design. The legacy
+  skill name is retained for compatibility. The plotting backend is independent
+  from the target journal; exact figure compliance is resolved by journal,
+  content type, submission stage, and figure component.
 
 always_load:
   # Skill-local core (figure does not use the prose-oriented nature-shared layer)
@@ -20,7 +18,8 @@ routes:
       audit of a graphical abstract. Planning and audit-only tasks do not need
       the Python/R backend gate. The reference owns the policy check,
       message/audience brief, visual design workflow, human verification,
-      disclosure boundary, and provenance record.
+      disclosure boundary, and provenance record. For a named target journal,
+      also resolve its exact current graphical-abstract/AI-image policy.
     reference: references/ai-graphical-abstract-workflow.md
   openrouter_image_generation:
     detect: |
@@ -39,7 +38,8 @@ preference:
   behavior: |
     For plotting tasks, first honor an explicit Python/R choice, then a clearly
     language-specific input workflow, then the saved preference returned by the
-    backend script. If none exists, ask the user once and save the answer.
+    backend script. If none exists, ask once and save the answer. Backend
+    selection is independent of target journal.
 
 axes:
   backend:
@@ -53,7 +53,7 @@ axes:
       before proceeding. Only recommend a backend when the user explicitly asks
       you to choose; in that case use references/backend-selection.md, state the
       reason, save the selected backend, then proceed. Once selected, the
-      backend is exclusive for all drawing, previewing, exporting, and visual QA.
+      backend is exclusive for drawing, previewing, exporting, and visual QA.
     values:
       python:  static/fragments/backend/python.md
       r:       static/fragments/backend/r.md
@@ -61,6 +61,12 @@ axes:
 
 references:
   on_demand:
+    - condition: any named target journal/venue outside exact Nature/NMI profiles; journal transfer; or cross-journal figure compliance, artwork, accessibility, graphical-abstract, or production adaptation
+      path: references/journal-adaptation.md
+    - condition: resolve an exact target journal, article/content type, submission stage, or distinguish live rules from family fallback
+      path: ../nature-shared/journal-formats/journal-resolution.md
+    - condition: non-Nature publisher/venue/discipline family context is useful before or alongside exact author instructions
+      path: ../nature-shared/journal-formats/journal-family-profiles.md
     - condition: convert a user request into core conclusion, evidence hierarchy, panel map, and review-risk checks
       path: references/figure-contract.md
     - condition: user has not chosen Python/R, asks for a recommendation, or a mixed Python/R workflow is possible
@@ -89,7 +95,7 @@ references:
       path: references/openrouter-image-generation.md
     - condition: AI-assisted graphical abstract planning, generation, revision, audit, journal-policy check, scientific verification, disclosure, or provenance
       path: references/ai-graphical-abstract-workflow.md
-    - condition: writing or auditing figure/table legend text — Fig. N | title, panel style, stats in legend, Source Data boilerplate, attribution; load the flagship Nature requirements too when that is the target journal
+    - condition: writing or auditing figure/table legend text — Fig. N | title, panel style, stats in legend, Source Data boilerplate, attribution; load the exact target-journal rules too when the target is known
       path: references/figure-legend-conventions.md
     - condition: "end-to-end walkthroughs: bars, trends, heatmaps"
       path: references/tutorials.md
