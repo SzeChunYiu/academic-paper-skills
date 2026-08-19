@@ -12,6 +12,14 @@ def read(relative: str) -> str:
 
 
 class JournalGeneralizationContractTests(unittest.TestCase):
+    def assert_relative_exists(self, source_relative: str, target_relative: str) -> None:
+        source = SKILLS / source_relative
+        resolved = (source.parent / target_relative).resolve()
+        self.assertTrue(
+            resolved.exists(),
+            f"{source_relative} points to missing relative resource {target_relative} -> {resolved}",
+        )
+
     def test_shared_resolver_separates_evidence_and_house_style(self) -> None:
         resolver = read("nature-shared/journal-formats/journal-resolution.md")
         self.assertIn("Evidence selection", resolver)
@@ -64,6 +72,45 @@ class JournalGeneralizationContractTests(unittest.TestCase):
             "Humanities and law journals",
         ):
             self.assertIn(marker, profiles)
+
+    def test_deep_relative_journal_links_resolve(self) -> None:
+        links = (
+            (
+                "nature-writing/static/fragments/journal/profiled.md",
+                "../../../../nature-shared/journal-formats/journal-resolution.md",
+            ),
+            (
+                "nature-writing/static/fragments/journal/profiled.md",
+                "../../../../nature-shared/journal-formats/journal-family-profiles.md",
+            ),
+            (
+                "nature-polishing/static/fragments/journal/profiled.md",
+                "../../../../nature-shared/journal-formats/journal-resolution.md",
+            ),
+            (
+                "nature-citation/static/core/principles.md",
+                "../../../nature-shared/journal-formats/journal-resolution.md",
+            ),
+            (
+                "nature-citation/static/core/workflow.md",
+                "../../../nature-shared/journal-formats/journal-resolution.md",
+            ),
+            (
+                "nature-figure/references/journal-adaptation.md",
+                "../../nature-shared/journal-formats/journal-resolution.md",
+            ),
+            (
+                "nature-ref-verifier/references/journal-style-audit.md",
+                "../../nature-shared/journal-formats/journal-resolution.md",
+            ),
+            (
+                "nature-academic-search/references/search-strategy.md",
+                "../../nature-shared/journal-formats/journal-resolution.md",
+            ),
+        )
+        for source, target in links:
+            with self.subTest(source=source, target=target):
+                self.assert_relative_exists(source, target)
 
 
 if __name__ == "__main__":
