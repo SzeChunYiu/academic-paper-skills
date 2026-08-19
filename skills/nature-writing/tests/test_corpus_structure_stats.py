@@ -43,6 +43,24 @@ Reference one.
         self.assertGreater(result["overall"]["words"], 0)
         self.assertEqual(result["overall"]["figure_table_calls"], 1)
 
+    def test_empty_parent_heading_is_preserved_before_subsections(self) -> None:
+        text = """## Results
+### Primary analysis
+The main effect was observed.
+
+### Sensitivity analysis
+The effect remained stable.
+
+## Discussion
+The result is bounded to this setting.
+"""
+        sections = MODULE.split_sections(text)
+        names = [name for name, _ in sections]
+        self.assertEqual(names[0], "results")
+        self.assertIn("primary analysis", names)
+        self.assertIn("sensitivity analysis", names)
+        self.assertIn("discussion", names)
+
     def test_surface_markers_are_descriptive(self) -> None:
         result = MODULE.summarize_text(
             "However, the estimate may vary. Therefore, we tested another sample. "
@@ -52,6 +70,13 @@ Reference one.
         self.assertGreater(result["marker_counts"]["hedge"], 0)
         self.assertGreater(result["marker_counts"]["cause_consequence"], 0)
         self.assertGreater(result["marker_counts"]["contribution_signal"], 0)
+        self.assertGreater(result["marker_counts"]["self_reference"], 0)
+
+    def test_self_reference_does_not_match_inside_other_words(self) -> None:
+        result = MODULE.summarize_text(
+            "Your behaviour changed after four hours, but the observed colour remained stable."
+        )
+        self.assertEqual(result["marker_counts"]["self_reference"], 0)
 
     def test_aggregate_has_no_quality_score(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
