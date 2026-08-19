@@ -88,6 +88,20 @@ class RhetoricalEngineContractTests(unittest.TestCase):
             self.assertIn(marker, notes)
         self.assertIn("not a universal journal sequence", notes)
 
+    def test_full_paper_audit_is_not_ml_acceptance_checklist(self) -> None:
+        review = read("references/paper-review.md")
+        for marker in (
+            "Claim–warrant alignment",
+            "Whole-paper argument continuity",
+            "Qualitative research",
+            "Theory / mathematics",
+            "Humanities / historical work",
+            "A `needs new evidence` finding is different from `needs clearer writing`",
+        ):
+            self.assertIn(marker, review)
+        self.assertNotIn("What Usually Gets a Paper Accepted", review)
+        self.assertNotIn("Better empirical performance than prior methods", review)
+
 
 if __name__ == "__main__":
     unittest.main()
