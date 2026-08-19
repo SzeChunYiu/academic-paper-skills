@@ -39,7 +39,7 @@ Resolve exact formatting from the target journal/current style guide when the us
 
 Keep machine-readable metadata complete even when the rendered bibliography abbreviates it.
 
-When a named target journal is involved, use `../../nature-shared/journal-formats/journal-resolution.md` to distinguish evidence selection, reporting requirements, house style, and submission mechanics.
+When a named target journal is involved, use `../../../nature-shared/journal-formats/journal-resolution.md` to distinguish evidence selection, reporting requirements, house style, and submission mechanics.
 
 ## Search routes
 
