@@ -1,124 +1,175 @@
 ---
 name: nature-writing
-description: Draft, restructure, or plan journal-aware academic manuscript sections and initial-submission materials from author-provided claims, results, figures, notes, or Chinese drafts. The legacy skill name is retained for compatibility, but the workflow supports Nature Portfolio, Science/AAAS, Cell Press, IEEE, ACM, PLOS, Springer/BMC, Elsevier, Wiley, society journals, discipline-specific venues, and unknown targets through an extensible journal resolver. Use for abstracts, introductions, related work, methods, Results or experiments, discussions, conclusions, titles, full manuscript arguments, journal transfer, and first-submission packages such as cover letters, title pages, highlights, author contributions, availability or declaration text, and reviewer suggestions. Also use to classify Results evidence, decide what belongs in main text, captions, Methods or source data, or Supplementary Information, compress Results to the shortest sufficient evidence chain, prevent revision accretion, and audit paragraph necessity or claim repetition. Trigger on drafting a paper or section, structuring a manuscript, academic writing, first submission, journal transfer, 投稿材料、首次投稿、投稿信、标题页、亮点、作者贡献、数据可用性声明、推荐审稿人.
+description: Draft, restructure, or plan journal-aware academic manuscripts from author-provided claims, results, figures, notes, sources, or Chinese drafts. The legacy skill name is retained for compatibility, but core writing is evidence-first, rhetorical-move-based, cross-disciplinary, and independent of Nature style. Use for titles, abstracts, introductions, related work, Methods, Results/experiments, Discussions, Conclusions, full-paper argument architecture, paragraph/sentence logic, target-journal corpus calibration, journal transfer, and initial-submission packages. Also use to map claim-to-evidence logic, sequence analyses, diagnose flow, distinguish observation from interpretation, preserve uncertainty and contribution boundaries, learn current rhetorical patterns from comparable published papers without copying wording, allocate material across main text/captions/Methods/SI, and prevent revision accretion. Supports Nature Portfolio, Science/AAAS, Cell Press, IEEE, ACM, PLOS, Springer/BMC, Elsevier, Wiley, society journals, discipline-specific venues, and unknown targets through the journal resolver. Trigger on academic writing, paper drafting, manuscript structure/logic, 学术写作、科研写作、论文写作、论文逻辑、段落逻辑、论文结构、期刊写作、投稿写作.
 ---
 
-# Journal-Aware Scientific Writing — Router
+# Journal-Aware Academic Writing — Router
 
-`nature-writing` is a legacy entry-point name. Do not infer the target journal from the skill name. Resolve the target from the user's request and manuscript context.
+`nature-writing` is a legacy entry-point name. It does **not** define the target journal, discipline, evidence standard, or rhetorical skeleton.
 
-This skill is split into two layers:
+The writing system has three layers:
 
-- A **static layer** under `static/` that holds versioned, reusable content fragments (core stance + workflow, paper-type playbooks, per-section drafting guidance, initial-submission guidance, language-specific rules, and journal routing fragments).
-- A **dynamic layer** (this file plus `manifest.yaml`) that detects the request's axes and loads only the fragments needed for the current job.
+- **core reasoning** under `static/core/`: evidence/claim stance, rhetorical engine, writing workflow, output contract;
+- **selective fragments/references**: paper type, section, language, journal routing, cross-disciplinary move atlas, empirical corpus evidence, examples;
+- **dynamic calibration**: when target style matters, study a comparable recent paper corpus and derive a temporary rhetorical profile without copying published prose.
 
-Shared journal resolution lives under `../nature-shared/journal-formats/`. Exact live journal instructions outrank local profiles for submission-critical requirements.
+Shared exact-journal resolution lives under `../nature-shared/journal-formats/`. Exact live author instructions outrank local profiles for submission-critical requirements.
 
-Do not try to apply the drafting logic from memory or from this router. Always load fragments from disk as described below.
+Do not draft from remembered prestige style. Load the routed files.
 
 ## Routing protocol
 
-Follow these five steps every time the skill is invoked.
+### 1. Load manifest and core
 
-### 1. Load the manifest and the core layer
+Read [manifest.yaml](manifest.yaml), then every file under `always_load`.
 
-Read [manifest.yaml](manifest.yaml). It declares the axes (`task`, `paper_type`, `section`, `language`, `journal`), the allowed values, and the file paths each value maps to.
+The rhetorical engine is core: plan the paper as reader-facing moves before choosing sentence forms.
 
-Also read every file listed under `always_load`. These hold the default stance, writing workflow, ethics, terminology, and output format that apply to every drafting job.
+### 2. Resolve task axes
 
-### 2. Detect the axis values for this request
+Detect:
 
-For each axis in the manifest, decide the value using the manifest's `detect:` hint and the user's input:
-
-- `task` — manuscript / submission-package. Use `submission-package` for first-submission materials, never for revision correspondence.
-- `paper_type` — research / methods / hypothesis / algorithmic / review. Default: research.
-- `section` — abstract / intro / related-work / method / experiments / discussion / conclusion / title. May be multiple. Ask only if ambiguity materially blocks a correct draft; otherwise make the safest generic choice and mark unresolved assumptions.
-- `language` — en or zh-to-en. Detect from the user's notes themselves.
+- `task` — manuscript / submission-package;
+- `paper_type` — research / methods / hypothesis / algorithmic / review;
+- `section` — abstract / intro / related-work / method / experiments / discussion / conclusion / title; may be multiple;
+- `language` — en / zh-to-en;
 - `journal` — nature / nature-family / nat-comms / nat-mach-intell / profiled / generic.
-  - `nature`: flagship **Nature** only.
-  - `nat-comms`: **Nature Communications** only.
-  - `nat-mach-intell`: **Nature Machine Intelligence** only.
-  - `nature-family`: another Nature Portfolio title or an unresolved Nature-family request.
-  - `profiled`: any named non-Nature journal, publisher/venue family, discipline family, or journal-transfer request. This includes Science/AAAS, Cell Press, IEEE, ACM, PLOS, Springer/BMC, Elsevier, Wiley, society journals, APA-style targets, biomedical/clinical venues, and humanities/law journals.
-  - `generic`: no target or useful family is known.
 
-State the detected axis values in one short line before drafting when doing so helps the user correct a material misclassification.
+For the journal axis:
 
-For `profiled`, the skill name must never bias the result toward Nature style.
+- `nature` = flagship **Nature** only;
+- `nat-comms` = **Nature Communications** only;
+- `nat-mach-intell` = **Nature Machine Intelligence** only;
+- `nature-family` = another Nature Portfolio title or unresolved Nature-family request;
+- `profiled` = any named non-Nature journal/venue/family or journal transfer;
+- `generic` = no useful target known.
 
-### 3. Load the matching fragments
+Ask only when ambiguity would materially change the scientific argument or compliance result. Otherwise choose the safest generic route and state important assumptions.
 
-For each axis value, read the file mapped in the manifest. Skip the `section` axis when the task is `submission-package` or when the user explicitly asks for a free-floating argument paragraph with no section context.
+### 3. Load only relevant fragments
 
-For `journal=profiled`, also follow the fragment's instruction to load:
+Read each selected axis fragment. Do not preload the entire reference library.
 
-- `../nature-shared/journal-formats/journal-resolution.md`
-- `../nature-shared/journal-formats/journal-family-profiles.md`
+For `journal=profiled`, resolve as needed:
 
-Then resolve, as far as the task requires:
+`exact journal -> article/content type -> submission stage -> component`
 
-`exact journal -> article/content type -> stage -> component`
+using `../nature-shared/journal-formats/journal-resolution.md` and current official instructions when exact compliance matters.
 
-If exact compliance matters, check the current official author instructions for that exact journal/content type/stage. Family profiles are fallbacks, not submission contracts.
+### 4. Plan and draft in this priority order
 
-Do **not** read every fragment in `static/`.
+#### A. Evidence and claim integrity
 
-### 4. Draft using the loaded material
+Use `static/core/stance.md` and author-provided material. Never invent results, mechanisms, references, uncertainty, novelty, or limitations.
 
-Apply the loaded fragments in this priority order:
+#### B. Rhetorical engine
 
-1. Core stance + intake (`core/stance.md`) — surface missing claim / evidence / boundary before drafting.
-2. Paper-type playbook — argument chain, drafting order.
-3. Section-specific drafting rules and structure.
-4. Research-reporting obligations and discipline conventions where relevant.
-5. Task-specific submission rules when `task=submission-package`.
-6. Exact journal/content-type/stage requirements when verified.
-7. Journal-family guidance only as a non-numeric fallback.
-8. Language-specific sentence and paragraph rules (apply last).
+Use `static/core/rhetorical-engine.md` to build:
 
-For `task=manuscript`, run the workflow in `core/workflow.md` end-to-end. Do not skip planning just because the user asked for prose immediately.
+`question/tension -> answer/contribution -> evidence chain -> boundary -> meaning`
 
-When drafting or restructuring Results, or compressing a full manuscript's main text, also load `../nature-shared/core/main-text-discipline.md` before building the paragraph map. Classify every result by function, allocate it across main text, captions, Methods/source data, and SI, then draft the shortest sufficient evidence chain. Do not equate a complete analysis record with a complete main text.
+Classify contribution/evidence type. Do not force unrelated contributions into one inflated novelty sentence.
 
-For `task=submission-package`, follow `static/fragments/task/submission-package.md` and `references/submission-package.md`. For a named non-Nature journal, treat any Nature-specific examples in those references as examples only and verify the exact target's current required package.
+#### C. Discipline and paper type
 
-If essential evidence or boundary is missing, write a placeholder and list it under `Assumptions or missing inputs:` instead of inventing content.
+Apply the paper-type fragment and research paradigm. A theorem paper, clinical cohort, qualitative interview study, benchmark paper, materials experiment, and historical argument need different evidence/rhetoric even in the same publisher family.
 
-For a journal transfer, preserve target-independent scientific edits, remove old-journal house style, resolve the new target, and rebuild only target-dependent structure, front/back matter, citation rendering, and mechanics.
+#### D. Section move map
 
-### 5. Reach for references only when needed
+Apply the selected section fragment. If the material does not fit its local default or cross-disciplinary calibration matters, load `references/section-move-atlas.md`.
 
-The files under `references/` are deep references and the example library, not defaults. Open them on demand per the `references.on_demand` table in the manifest. Typical triggers:
+Plan sections as move graphs. Moves can recur or embed; they are not a one-use checklist.
 
-- Any named non-Nature target, publisher/venue family, or journal transfer -> `../nature-shared/journal-formats/journal-resolution.md` and, if useful, `journal-family-profiles.md`.
-- A concrete example/template -> `references/examples/index.md`.
-- A section has structural problems -> the matching `references/<section>.md`.
-- A broad-audience flagship Nature abstract opening or summary paragraph -> `references/nature-summary-paragraph.md`.
-- Paragraph-flow audit -> `references/paragraph-flow.md`.
-- Self-review/rejection-risk audit -> `references/paper-review.md`.
-- Main-text/caption/SI allocation or reviewer-driven accretion -> `../nature-shared/core/main-text-discipline.md`.
-- Complete first-submission package or readiness audit -> `references/submission-package.md`, interpreted through the exact target journal when non-Nature.
-- Flagship Nature exact rules -> `../nature-shared/journal-formats/nature.md`.
-- Nature Machine Intelligence exact rules -> `../nature-shared/journal-formats/nature-machine-intelligence.md`.
-- Regulated or specialist research compliance -> `../nature-shared/core/research-compliance.md`.
+#### E. Paragraph and sentence logic
+
+Use one paragraph **nucleus** plus necessary satellites (evidence, explanation, comparison, qualification, counterargument, implication, bridge). Do not require every paragraph to perform exactly one rhetorical function.
+
+For flow problems, load `references/paragraph-flow.md` and repair in order:
+
+`structure -> relation -> given/new information -> lexical/reference continuity -> sentence form -> connectives`
+
+Do not use transition words to mask a missing logical relation.
+
+#### F. Results evidence allocation
+
+For Results/full manuscript compression, load `../nature-shared/core/main-text-discipline.md`. Build the shortest sufficient evidence chain while keeping conclusion-changing qualifications visible.
+
+Sequence evidence by reasoning dependency—why analysis B becomes necessary after A—not merely chronological experiment order.
+
+#### G. Target-corpus calibration when requested/useful
+
+If the user asks to write like current papers in a named venue/field, or the target has no reliable local profile, load `references/target-corpus-calibration.md`.
+
+For a quick profile, inspect a comparable recent sample rather than one showcase paper. Stratify by article type/study design. Learn:
+
+- argument and evidence sequence;
+- section moves;
+- paragraph nuclei/satellites;
+- sentence information structure and stance;
+- where interpretation, limitations, citations and figure calls occur.
+
+Never create reusable full-sentence templates from copyrighted papers. Learn **moves and relations, not wording**.
+
+For dozens/hundreds of extracted `.md`/`.txt` papers, use `scripts/corpus_structure_stats.py` for descriptive surface statistics, then add semantic move annotation. Corpus frequency is not a writing-quality score.
+
+#### H. Reporting and journal compliance
+
+Apply research-reporting obligations and exact journal/content-type/stage rules. Family profiles are fallbacks, not exact contracts.
+
+#### I. Language polish last
+
+Only after logic is sound, apply language-specific sentence/paragraph guidance. Do not make prose more causal, general, or certain to sound prestigious.
+
+### 5. Reach for evidence/reference layers on demand
+
+Use the manifest's `references.on_demand` table. Important routes include:
+
+- cross-disciplinary section logic -> `references/section-move-atlas.md`;
+- empirical basis behind writing rules -> `references/cross-disciplinary-writing-evidence.md`;
+- current target-paper corpus learning -> `references/target-corpus-calibration.md`;
+- whole-paper architecture -> `references/article-architecture.md`;
+- Introduction logic -> `references/introduction.md`;
+- Methods credibility/reproducibility -> `references/method.md`;
+- paragraph/sentence coherence -> `references/paragraph-flow.md`;
+- local 2025 Nature Communications CS/AI calibration -> `references/nat-comms-2025-corpus.md` (local profile only, never universal);
+- concrete examples -> `references/examples/index.md`;
+- self-review/claim-evidence audit -> `references/paper-review.md`;
+- main-text versus captions/SI -> `../nature-shared/core/main-text-discipline.md`.
+
+## Dynamic learning rule
+
+Published papers are evidence about **how writers solved rhetorical problems under particular conditions**. They are not text templates and not automatic best practice.
+
+When learning from papers:
+
+1. sample comparable papers, not only famous ones;
+2. annotate complete rhetorical units, not isolated attractive sentences;
+3. distinguish cross-disciplinary invariants from discipline/journal/author tendencies;
+4. record legitimate counterexamples;
+5. separate frequency from effectiveness;
+6. validate a proposed core rule outside the corpus that generated it;
+7. keep exact journal mechanics separate from observed writing practice.
 
 ## Submission boundary
 
-- `nature-writing` owns **initial submission** materials prepared before peer review, regardless of journal family.
-- `nature-response` owns revision cover letters, rebuttals, point-by-point responses, marked manuscripts, appeals, and other post-decision correspondence.
-- Route graphical abstracts and TOC graphics to `nature-figure`; route simulated pre-submission peer review to `nature-reviewer`.
+- `nature-writing` owns manuscript drafting and **initial submission** materials before peer review.
+- `nature-response` owns post-decision rebuttals, revision cover letters, marked manuscripts and appeals.
+- graphical abstracts/TOC graphics -> `nature-figure`;
+- simulated pre-submission peer review -> `nature-reviewer`.
 
-## Safety and generalization rules
+## Non-negotiable writing rules
 
-- Never equate journal prestige with evidence quality.
-- Never copy a numeric or mechanical requirement from a sister journal without verifying the exact target.
-- Never force IMRaD onto a genre or discipline that does not use it.
-- Never strengthen causality, novelty, generality, or certainty merely to imitate a selective journal.
-- Exact live author instructions outrank local profiles; exact local profiles outrank family profiles; family profiles outrank generic defaults only for non-submission-critical guidance.
+- Evidence quality and study design determine claim strength; journal prestige does not.
+- A research need need not be a manufactured `gap`.
+- Strong prior work should be represented fairly.
+- Do not hide incrementality to make a contribution appear larger.
+- Do not force IMRaD, conclusion-first Results, pipeline Methods, a fixed abstract funnel, or one-function paragraphs across disciplines.
+- Do not equate more connectives, shorter sentences, denser noun phrases, or more assertive verbs with better academic writing.
+- Exact live journal requirements outrank local formatting profiles; scientific validity outranks all house style.
 
-## Why this split
+## Why this architecture
 
-- The static layer is versioned and reviewable. Adding another exact journal profile is one file plus one manifest route, while thousands of unprofiled journals still work through the resolver.
-- The dynamic layer keeps each invocation cheap: only relevant fragments enter context.
-- Existing `nature-*` entry points remain usable, avoiding a breaking rename while behavior becomes journal-agnostic.
-- Journal-specific formatting is separated from scientific structure, reporting obligations, evidence selection, and submission mechanics.
+- The core stores rules that survived cross-disciplinary testing.
+- Discipline/journal corpora remain local evidence layers rather than contaminating the universal engine.
+- Dynamic calibration lets the skill learn current practice without hard-coding thousands of journals.
+- Regression tests protect the distinction between rhetorical logic and surface imitation.
