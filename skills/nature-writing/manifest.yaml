@@ -112,6 +112,10 @@ references:
       path: references/section-move-atlas.md
     - condition: needs empirical research support for a writing rule, disciplinary variation, syntax, titles, abstracts, Methods rhetoric, Discussion rhetoric, cohesion, paragraph flow, or corpus-grounded writing advice
       path: references/cross-disciplinary-writing-evidence.md
+    - condition: user asks to learn current writing patterns from a named journal/venue or field, emulate recent comparable papers, build/update a local corpus profile, or diagnose why a scientifically correct draft does not resemble the target literature
+      path: references/target-corpus-calibration.md
+    - condition: analyzing dozens or hundreds of extracted .md/.txt papers for scalable section, paragraph, sentence, stance, connective, contribution-signal, or figure/table-call statistics before semantic move annotation
+      path: scripts/corpus_structure_stats.py
     - condition: needs section-level architecture, argument order, or published-article patterns
       path: references/article-architecture.md
     - condition: genre-aware 2025 Nat Commun empirical structure, quantified connector/diction preferences, or research/review/perspective/comment/benchmark differences
