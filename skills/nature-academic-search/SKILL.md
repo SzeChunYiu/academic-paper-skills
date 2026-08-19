@@ -1,74 +1,121 @@
 ---
 name: nature-academic-search
 description: >-
-  Multi-source literature search, citation verification, strict independent other-citation
-  audits, article-level citation metric tables, influential citer profiling with
-  citation-context extraction, MeSH search strategy, citation file management
-  (.nbib/.ris/.bib conversion), and reference management (BibTeX, related articles,
-  ID conversion) via MCP tools (PubMed, CrossRef, arXiv, Scopus, ScienceDirect).
-  Use for coordinated literature workflows beyond one MCP call, including 文献检索、
-  查文献、找文献、文献综述检索、查论文、引文核对、参考文献管理、文献去重、
-  严格他引、他引判定、排除自引、谁引用了我的文章、引用我的文章的人有没有大牛、
-  院士引用、校长引用、院长引用、杰青引用、长江学者引用、Fellow引用、文章引用表、
-  指定文章引用数、严格他引数、整理成表格.
+  Venue-agnostic multi-source literature search, evidence discovery, citation verification,
+  strict independent other-citation audits, article-level citation metric tables, influential
+  citer profiling with citation-context extraction, MeSH search strategy, citation file
+  management (.nbib/.ris/.bib conversion), and reference management (BibTeX, related articles,
+  ID conversion) via scholarly sources such as PubMed, CrossRef/OpenAlex, arXiv, Scopus,
+  ScienceDirect, proceedings indexes, and discipline-specific sources. The legacy skill name is
+  retained for compatibility and does not imply a Nature-only search. Use for coordinated
+  literature workflows beyond one API/MCP call, including 文献检索、查文献、找文献、文献综述检索、
+  查论文、引文核对、参考文献管理、文献去重、严格他引、他引判定、排除自引、谁引用了我的文章、
+  引用我的文章的人有没有大牛、院士引用、校长引用、院长引用、杰青引用、长江学者引用、
+  Fellow引用、文章引用表、指定文章引用数、严格他引数、整理成表格.
 ---
 
-# Academic Search — Router
+# Venue-Agnostic Academic Search — Router
+
+`nature-academic-search` is a legacy entry-point name. Do not infer a Nature, CNS, journal-only, or prestige-journal search constraint from it.
 
 This skill is split into two layers:
 
-- A **static layer** under `static/` that holds versioned, reusable content fragments (the MCP tool inventory and shared modules, and source routing plus operational rules).
-- A **dynamic layer** (this file plus `manifest.yaml`) that detects which workflow the user needs and loads that workflow, reaching for shared modules and scripts only when a step needs them.
-
-Do not try to apply the search logic from memory or from this router. Always load fragments from disk as described below.
+- A **static layer** under `static/` holding the tool inventory and shared source-routing/operational rules.
+- A **dynamic layer** (this file plus `manifest.yaml`) that detects the workflow and loads only that workflow, reaching for shared modules/scripts as needed.
 
 ## Routing protocol
 
-Follow these five steps every time the skill is invoked.
+### 1. Load the manifest and core layer
 
-### 1. Load the manifest and the core layer
+Read [manifest.yaml](manifest.yaml), then every file listed under `always_load`:
 
-Read [manifest.yaml](manifest.yaml). It declares the `workflow` axis, the allowed values, and the file paths each value maps to.
+- `static/core/tools.md`
+- `static/core/routing-and-ops.md`
 
-Also read every file listed under `always_load`:
+### 2. Detect workflow(s)
 
-- `static/core/tools.md` — the MCP tool inventory (core search, extended search, PubMed utilities) and the shared-module map.
-- `static/core/routing-and-ops.md` — the T1→T2→T3 source routing quick guide, environment setup, error handling, and limitations.
+Map the request to one or more values:
 
-### 2. Detect the workflow
-
-Map the user's need to one or more `workflow` values:
-
-- `multi-source-search` — find literature across sources.
+- `multi-source-search` — find literature across appropriate sources.
 - `citation-verification` — verify citations extracted from a document.
 - `mesh-strategy` — build a MeSH/PubMed search strategy.
 - `citation-file-mgmt` — convert/manage `.nbib`/`.ris`/`.bib` files.
-- `reference-mgmt` — BibTeX, related-article discovery, ID conversion.
-- `strict-other-citation-impact-audit` — determine strict independent other-citations, build article-level citation metric tables, identify high-profile citers (academy members, presidents/deans, talent-award holders, fellows, field leaders), and extract how they cited the target paper.
+- `reference-mgmt` — BibTeX, related-article discovery, identifier conversion.
+- `strict-other-citation-impact-audit` — determine strict independent other-citations, build article-level citation metric tables, identify high-profile citers, and extract citation context.
 
-A combined request (for example search then export) may need more than one. State the detected workflow(s) in one short line before proceeding.
+A combined request may need several workflows. State material scope/filter assumptions when they affect what gets retrieved.
 
-### 3. Load the matching workflow fragment(s)
+### 3. Resolve the publication ecology before source selection
 
-Read the file mapped for each detected workflow (under `references/workflows/`). Do **not** read every workflow. Each workflow file links to the shared modules it needs.
+Do not assume every discipline's primary scholarship is a DOI journal article.
 
-### 4. Run the workflow using the loaded material
+- biomedical/clinical -> journals, systematic reviews/guidelines, registries where relevant
+- engineering/computer science -> journals **and proceedings/conferences**; standards/software/data may also matter
+- physics/math -> journals plus preprints/discipline indexes where appropriate
+- social science -> journal articles, working papers/preprints, books/chapters depending field
+- humanities -> monographs, chapters, archives, primary editions and journal scholarship
+- law/policy -> cases, statutes/regulations, official reports and scholarship
+- Chinese scholarship -> CNKI/万方 and field-specific sources where needed
 
-Apply the loaded material in this order:
+If the task is about evidence for a claim, journal prestige is not a ranking criterion. If the user explicitly asks for an exact journal/family corpus, apply that filter and report it.
 
-1. Core tools and routing (`core/tools.md`, `core/routing-and-ops.md`) — which MCP tool for which need, and the T1→T2→T3 fallback chain that is the standard execution order across all workflows.
-2. The workflow fragment — its specific steps.
-3. Shared modules and scripts on demand (dedup, citation parser, search strategy, RIS/BibTeX format, format converter).
+### 4. Load only the matching workflow fragment(s)
 
-Report specific tool failures and continue with remaining tools; broaden terms when there are no results; fall back to manual generation from MCP-fetched metadata if a script fails twice.
+Read the mapped workflow files under `references/workflows/`. Do **not** read all workflows. Each workflow links to shared modules it needs.
 
-### 5. Reach for references only when needed
+For query construction, source selection, and evidence ranking, load `references/search-strategy.md`. Its default is evidence/fit-aware and explicitly separates a journal filter from evidence quality.
 
-The files under `references/` (and `scripts/`) are deep references, not defaults. Open them on demand per the `references.on_demand` table in the manifest — for example `references/source-tiers.md` for the full reliability classification, `references/dedup-engine.md` / `references/citation-parser.md` / `references/search-strategy.md` / `references/ris-bibtex-format.md` for the shared modules, and `scripts/academic_search.py` (no-MCP fallback discovery search) / `scripts/format-converter.py` / `scripts/preflight.py` for the tooling.
+### 5. Run the workflow
 
-## Why this split
+Apply:
 
-- The static layer is versioned and reviewable; the workflow files and shared modules were already factored this way.
-- The dynamic layer keeps each invocation cheap: only the workflow the user needs enters context, instead of all six plus every module.
-- The router itself is short on purpose. Update fragments and references, not this file, when adding scope.
-- This structure mirrors the other nature-* skills (`nature-writing`, `nature-polishing`, `nature-reader`, `nature-paper2ppt`, `nature-figure`, `nature-citation`, `nature-response`, `nature-data`).
+1. Core tools/source routing — choose sources appropriate to field and source type; continue after individual provider failures.
+2. Workflow-specific steps.
+3. Search strategy — atomic concepts, synonyms, layered discovery/verification/evidence reading.
+4. Shared modules/scripts on demand — deduplication, citation parser, format conversion, BibTeX/RIS handling.
+5. Evidence or impact ranking appropriate to the user's question.
+
+Do not use citation count as a universal evidence score. Use citation weighting only when influence/history/impact is itself part of the question.
+
+For systematic/scoping reviews, preserve reproducible database/query/date/filter provenance and use explicit inclusion/exclusion criteria rather than an arbitrary relevance/recency/citation formula.
+
+For claim-support searches, inspect the paper/abstract/primary source before calling it support and actively surface contradictory or limiting literature when material.
+
+### 6. Reach for references only when needed
+
+Use `manifest.yaml`'s `references.on_demand`, including:
+
+- `references/source-tiers.md` — detailed source reliability/fallback notes
+- `references/search-strategy.md` — domain/source selection and evidence-fit ranking
+- `references/dedup-engine.md` — deduplication across sources
+- `references/citation-parser.md` — extracting references from documents
+- `references/ris-bibtex-format.md` — reference formats
+- `scripts/academic_search.py` — no-MCP OpenAlex discovery fallback
+- `scripts/format-converter.py` — DOI/PMID/arXiv export/conversion
+- `scripts/preflight.py` — endpoint preflight
+
+If a named target journal matters for **submission formatting** rather than literature scope, route that question to the shared journal resolver (`../nature-shared/journal-formats/journal-resolution.md`) instead of filtering the search.
+
+## Output principles
+
+Always make the search auditable enough for the task:
+
+- sources searched
+- queries/filters/date when reproducibility matters
+- explicit journal/family restrictions, if any
+- identifiers and duplicate handling
+- source type (primary study/review/guideline/proceeding/book/etc.)
+- whether support was actually read/verified or is metadata-only
+- important gaps, contradictions, or provider failures
+
+## Generalization rules
+
+Never:
+
+- treat Nature/CNS membership as evidence quality
+- discard conference proceedings solely because they are not journals
+- force humanities/legal scholarship into a biomedical source model
+- use a target journal as an automatic evidence-source filter
+- replace systematic-review screening/risk-of-bias logic with citation counts
+
+Existing `nature-*` naming remains for compatibility; behavior is venue-agnostic unless the user supplies a venue restriction.
