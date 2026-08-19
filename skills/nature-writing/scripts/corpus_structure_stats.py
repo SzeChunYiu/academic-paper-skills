@@ -85,7 +85,7 @@ MARKERS: dict[str, tuple[str, ...]] = {
         "proves", "prove", "undoubtedly", "strongly supports", "decisively",
     ),
     "self_reference": (
-        "we ", "we\n", "our ", "this study", "this work", "this paper",
+        "we", "our", "this study", "this work", "this paper",
     ),
     "contribution_signal": (
         "here we", "we propose", "we present", "we introduce", "we develop",
@@ -148,7 +148,14 @@ def is_heading(line: str) -> tuple[bool, str]:
 
 
 def split_sections(text: str) -> list[tuple[str, str]]:
-    """Return ordered (section_name, text) blocks, preserving unknown headings."""
+    """Return ordered ``(section_name, text)`` blocks, preserving headings.
+
+    A common extracted-paper pattern is ``## Results`` immediately followed by a
+    ``###`` subsection. The parent heading still carries structural information
+    even when it has no direct prose, so preserve empty heading blocks instead of
+    dropping the parent IMRaD section. Only an empty synthetic preamble is
+    discarded.
+    """
     sections: list[tuple[str, list[str]]] = [("preamble", [])]
     for raw_line in text.replace("\r\n", "\n").replace("\r", "\n").split("\n"):
         heading, name = is_heading(raw_line)
@@ -156,7 +163,14 @@ def split_sections(text: str) -> list[tuple[str, str]]:
             sections.append((name or "untitled", []))
             continue
         sections[-1][1].append(raw_line)
-    return [(name, "\n".join(lines).strip()) for name, lines in sections if any(x.strip() for x in lines)]
+
+    output: list[tuple[str, str]] = []
+    for name, lines in sections:
+        body = "\n".join(lines).strip()
+        if name == "preamble" and not body:
+            continue
+        output.append((name, body))
+    return output
 
 
 def split_paragraphs(text: str) -> list[str]:
@@ -181,14 +195,16 @@ def words(text: str) -> list[str]:
 
 
 def count_phrase(text_casefolded: str, phrase: str) -> int:
-    phrase = phrase.casefold()
-    if phrase.endswith(" ") or " " in phrase.strip():
-        return text_casefolded.count(phrase)
-    return len(re.findall(rf"\b{re.escape(phrase)}\b", text_casefolded))
+    """Count a marker as a token/phrase, never as an arbitrary substring."""
+    normalized = " ".join(phrase.casefold().split())
+    if not normalized:
+        return 0
+    pattern = r"\s+".join(re.escape(token) for token in normalized.split(" "))
+    return len(re.findall(rf"(?<!\w){pattern}(?!\w)", text_casefolded))
 
 
 def marker_counts(text: str) -> dict[str, int]:
-    folded = f" {text.casefold()} "
+    folded = text.casefold()
     return {
         category: sum(count_phrase(folded, phrase) for phrase in phrases)
         for category, phrases in MARKERS.items()
@@ -233,7 +249,8 @@ def analyze_paper(path: Path, include_back_matter: bool = False) -> dict[str, An
             continue
         metrics = summarize_text(body)
         sections.append({"order": order, "name": name, **metrics})
-        included_texts.append(body)
+        if body:
+            included_texts.append(body)
 
     full_text = "\n\n".join(included_texts)
     return {
