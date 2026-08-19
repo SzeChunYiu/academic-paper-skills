@@ -32,8 +32,8 @@ Before evaluating `significance`, `priority`, `breadth`, `novelty` or `fit`, det
 
 Load:
 
-- `../nature-shared/journal-formats/journal-resolution.md` for exact journal/article type/stage;
-- `../nature-shared/journal-formats/editorial-decision-profiles.md` for fallback publication-model logic;
+- `../../nature-shared/journal-formats/journal-resolution.md` for exact journal/article type/stage;
+- `../../nature-shared/journal-formats/editorial-decision-profiles.md` for fallback publication-model logic;
 - exact live reviewer/editor guidance when submission-critical.
 
 Create a target criteria card:
