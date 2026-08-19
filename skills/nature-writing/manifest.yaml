@@ -112,6 +112,8 @@ references:
       path: references/section-move-atlas.md
     - condition: needs empirical research support for a writing rule, disciplinary variation, syntax, titles, abstracts, Methods rhetoric, Discussion rhetoric, cohesion, paragraph flow, or corpus-grounded writing advice
       path: references/cross-disciplinary-writing-evidence.md
+    - condition: needs concrete cross-venue counterexamples and direct-reading observations spanning Nature/NMI/npj, PLOS, JAMA, IEEE, eLife, and JMLR publication ecologies; especially to test whether a proposed writing rule is genuinely transferable
+      path: references/direct-reading-notes-2025-2026.md
     - condition: user asks to learn current writing patterns from a named journal/venue or field, emulate recent comparable papers, build/update a local corpus profile, or diagnose why a scientifically correct draft does not resemble the target literature
       path: references/target-corpus-calibration.md
     - condition: analyzing dozens or hundreds of extracted .md/.txt papers for scalable section, paragraph, sentence, stance, connective, contribution-signal, or figure/table-call statistics before semantic move annotation
