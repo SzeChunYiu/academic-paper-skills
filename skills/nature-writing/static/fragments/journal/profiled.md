@@ -4,8 +4,8 @@ Use this fragment when the user names a journal outside the repository's exact N
 
 Before drafting submission-sensitive text, read:
 
-1. `../../../nature-shared/journal-formats/journal-resolution.md`
-2. `../../../nature-shared/journal-formats/journal-family-profiles.md`
+1. `../../../../nature-shared/journal-formats/journal-resolution.md`
+2. `../../../../nature-shared/journal-formats/journal-family-profiles.md`
 
 Then resolve `exact journal -> article/content type -> stage -> component`.
 
