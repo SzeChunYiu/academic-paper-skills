@@ -1,19 +1,18 @@
 name: nature-writing
-version: 2.1.0
+version: 2.2.0
 description: >
   Declarative manifest for journal-aware academic drafting, restructuring, and
   initial-submission requests. The legacy skill name is retained for backward
   compatibility; journal behavior is resolved independently from that name.
   Core drafting uses rhetorical moves and empirical cross-disciplinary evidence
-  rather than a single journal skeleton.
+  rather than a single journal skeleton, with optional editor/reviewer decision
+  preflight before submission.
 
 always_load:
-  # Shared layer — common to nature-polishing and nature-writing
   - ../nature-shared/core/reader-workflow.md
   - ../nature-shared/core/paper-type-taxonomy.md
   - ../nature-shared/core/ethics.md
   - ../nature-shared/core/terminology-ledger.md
-  # Skill-local core
   - static/core/stance.md
   - static/core/rhetorical-engine.md
   - static/core/workflow.md
@@ -52,9 +51,9 @@ axes:
   section:
     detect: |
       Identify which section(s) the user wants drafted or rebuilt. The user
-      may name one or several. Ask before loading when ambiguous and load
-      cost matters. Title and abstract often need to be drafted last but
-      planned early.
+      may name one or several. Ask before loading when ambiguity materially
+      changes the scientific argument or compliance result. Title and abstract
+      often need to be drafted last but planned early.
     values:
       abstract:       static/fragments/section/abstract.md
       intro:          static/fragments/section/intro.md
@@ -84,12 +83,9 @@ axes:
       Communications, nat-mach-intell only for Nature Machine Intelligence, and
       nature-family for another Nature Portfolio title or an unresolved
       Nature-family request. Use profiled whenever the user names any other
-      journal or journal/publisher/venue family (for example Science/AAAS, Cell
-      Press, IEEE, ACM, PLOS, Springer/BMC, Elsevier, Wiley, APA-style,
-      biomedical, humanities, or a specific non-Nature journal). Use generic
-      only when no target or useful family is known. For profiled targets,
-      resolve exact journal -> article type -> stage -> component before exact
-      compliance claims.
+      journal or journal/publisher/venue family. Use generic only when no target
+      or useful family is known. For profiled targets, resolve exact journal ->
+      article type -> stage -> component before exact compliance claims.
     values:
       nature:          static/fragments/journal/nature.md
       nature-family:   static/fragments/journal/nature-family.md
@@ -106,6 +102,12 @@ references:
       path: ../nature-shared/journal-formats/journal-resolution.md
     - condition: any non-Nature publisher/venue/discipline family needs a fallback writing profile
       path: ../nature-shared/journal-formats/journal-family-profiles.md
+    - condition: pre-submission editor/reviewer perspective, acceptance-readiness, desk-review risk, rejection-risk engineering, or deciding whether a concern needs more evidence versus claim narrowing/removal
+      path: ../nature-shared/core/editor-reviewer-decision-engine.md
+    - condition: target publication objective must be resolved across selective broad-interest, field-advancement, rigor-first, clinical/policy-priority, evidence-assessment, or conference-selection models
+      path: ../nature-shared/journal-formats/editorial-decision-profiles.md
+    - condition: author wants editor/reviewer preflight, acceptance engineering, likely decision blockers, minimum decisive experiments/analyses, or manuscript changes before submission
+      path: references/editor-reviewer-preflight.md
     - condition: task is manuscript and the user is drafting, restructuring, or compressing Results or full main text; deciding what belongs in main text versus captions or SI; preventing revision accretion; reducing statistical or claim repetition; or building the shortest sufficient evidence chain
       path: ../nature-shared/core/main-text-discipline.md
     - condition: needs cross-disciplinary section structure, rhetorical move selection, argument order, or an alternative to a fixed Nature/IMRaD skeleton
