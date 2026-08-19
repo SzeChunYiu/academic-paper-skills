@@ -103,7 +103,7 @@ Before writing a reference-manager file, run the author-integrity gate:
 
 A metadata export is not the same as the final journal bibliography style.
 
-If the user asks for submission-ready reference rendering, resolve the exact target journal/style using `../../nature-shared/journal-formats/journal-resolution.md` and the current official journal guide or trusted CSL/BibTeX/reference-manager style. Keep evidence selection unchanged while transforming punctuation, numbering, abbreviation, author truncation, and ordering.
+If the user asks for submission-ready reference rendering, resolve the exact target journal/style using `../../../nature-shared/journal-formats/journal-resolution.md` and the current official journal guide or trusted CSL/BibTeX/reference-manager style. Keep evidence selection unchanged while transforming punctuation, numbering, abbreviation, author truncation, and ordering.
 
 ## 6. Optional review artifacts
 
