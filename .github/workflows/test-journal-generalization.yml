@@ -4,6 +4,8 @@ on:
   pull_request:
     paths:
       - 'skills/nature-writing/**'
+      - 'skills/nature-reviewer/**'
+      - 'skills/nature-response/**'
       - 'skills/nature-polishing/**'
       - 'skills/nature-citation/**'
       - 'skills/nature-figure/**'
@@ -16,6 +18,8 @@ on:
       - main
     paths:
       - 'skills/nature-writing/**'
+      - 'skills/nature-reviewer/**'
+      - 'skills/nature-response/**'
       - 'skills/nature-polishing/**'
       - 'skills/nature-citation/**'
       - 'skills/nature-figure/**'
@@ -29,7 +33,7 @@ permissions:
   contents: read
 
 jobs:
-  contracts-citation-and-writing:
+  contracts-citation-writing-and-review:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -52,6 +56,12 @@ jobs:
 
       - name: Test writing rhetorical engine and corpus tooling
         run: python -m unittest discover -s skills/nature-writing/tests -p 'test_*.py' -v
+
+      - name: Test editor reviewer decision engine
+        run: python skills/nature-reviewer/tests/test_editor_reviewer_decision_engine.py -v
+
+      - name: Test revision decision closure
+        run: python skills/nature-response/tests/test_editor_decision_closure.py -v
 
       - name: Test shared journal contracts
         run: python -m unittest discover -s skills/nature-shared/tests -p 'test_*.py' -v
