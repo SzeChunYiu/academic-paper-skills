@@ -1,9 +1,9 @@
 name: nature-shared
-version: 1.4.0
+version: 1.5.0
 description: >
-  Declarative manifest for shared Nature reference modules. This package is not
-  a standalone workflow; installed Nature skills use it to load exact shared
-  core or journal-format files on demand.
+  Declarative manifest for shared academic-paper reference modules. This package
+  is not a standalone workflow; installed skills load exact shared core or
+  journal-format files on demand.
 
 # Design note: never preload the whole shared package. Requesting skills should
 # load only the specific file listed below and then return to their own workflow,
@@ -19,7 +19,7 @@ core:
       path: core/research-compliance.md
     - condition: classifying paper type, article genre, or manuscript family before applying a writing/reader workflow
       path: core/paper-type-taxonomy.md
-    - condition: shared reader workflow is explicitly requested by another Nature skill
+    - condition: shared reader workflow is explicitly requested by another academic-paper skill
       path: core/reader-workflow.md
     - condition: maintaining terminology consistency across paper reading, polishing, writing, or slide generation
       path: core/terminology-ledger.md
@@ -27,9 +27,17 @@ core:
       path: core/consistency-sweep.md
     - condition: drafting, restructuring, compressing, or reviewer-revising scientific main text — classify results as core/support/qualification/robustness/heterogeneity/provenance/alternative inference/edge case; allocate evidence across main text, captions, and SI; run paragraph-necessity, deletion, statistics-location, and claim-repetition checks
       path: core/main-text-discipline.md
+    - condition: pre-submission editor/reviewer simulation, rejection-risk engineering, decision-proof construction, major-revision planning, or deciding whether to add evidence versus narrow/remove a claim
+      path: core/editor-reviewer-decision-engine.md
 
 journal_formats:
   on_demand:
+    - condition: resolving the exact target journal, article type, stage, and output component before applying journal-specific rules
+      path: journal-formats/journal-resolution.md
+    - condition: a non-exact publisher/venue/discipline family profile is needed as a fallback
+      path: journal-formats/journal-family-profiles.md
+    - condition: resolving whether the target uses selective broad-interest, field-advancement, rigor-first, clinical/policy-priority, evidence-assessment, or deadline-constrained editorial decision logic
+      path: journal-formats/editorial-decision-profiles.md
     - condition: formatting, initial-submission readiness, or stage-aware checking for a flagship Nature Article
       path: journal-formats/nature.md
     - condition: formatting or checking output for Nature Communications conventions
