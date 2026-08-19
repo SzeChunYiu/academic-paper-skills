@@ -1,111 +1,248 @@
-# Reviewer workflow
+# Editor/reviewer simulation workflow
 
 ## Contents
 
 - [Default execution order](#default-execution-order)
-- [Input handling](#input-handling)
-- [Immutable review-packet checklist](#immutable-review-packet-checklist)
+- [Target-resolution gate](#target-resolution-gate)
+- [Editorial triage simulation](#editorial-triage-simulation)
+- [Immutable reviewer packet](#immutable-reviewer-packet)
+- [Independent reviewer pass](#independent-reviewer-pass)
 - [Concern-ledger fields](#concern-ledger-fields)
-- [Cross-review generation rule](#cross-review-generation-rule)
+- [Editor synthesis](#editor-synthesis)
+- [Decision-engineering map](#decision-engineering-map)
 - [Failure-safe behaviour](#failure-safe-behaviour)
-
 
 ## Default execution order
 
-1. Identify the input package.
-   - Determine whether the user supplied a full manuscript, abstract-only draft, selected sections, figures, notes, or a pre-submission concept summary.
-2. Build an immutable review packet.
-   - Include the supplied manuscript/source, verified source anchors, assessment boundary, and common journal criteria.
-   - Do not include suspected concerns, a shared interpretation, another report, or a draft synthesis.
-3. Define all reviewer emphasis briefs before review begins.
-   - Keep the source packet and report skeleton identical; vary only the declared emphasis.
-4. Generate each reviewer report in an isolated context.
-   - Give the reviewer only the immutable packet, common rules, report skeleton, and its own emphasis brief.
-   - Within that context, independently extract the central claim, key evidence, stated significance, implied audience, visible limitations, and missing material.
-   - Independently apply `originality`, `scientific importance`, `interdisciplinary interest`, `technical soundness`, and `readability for nonspecialists`.
-5. Build one private concern ledger per reviewer.
-   - Load `technical-concern-taxonomy.md` and mark each axis `applicable`, `not applicable`, or `not assessable` without access to any other reviewer's ledger.
-   - Give every supported concern a reviewer-local issue key, `major` or `minor` severity, a blocking flag for Major Concerns, severity rationale, `claim_pointer`, `evidence_pointer`, and resolution test.
-   - Keep the ledger private to that reviewer; expose only the fields needed to make emitted concerns traceable.
-6. Freeze all reviewer reports.
-   - Do not let reviewers read, cite, agree with, answer, or anticipate one another.
-   - Do not redistribute, add, remove, or rephrase concerns after comparison merely to change overlap.
-   - Render separate `Major Concerns` and `Minor Comments` sections. If a tier has no grounded item, write `None identified from the supplied material` rather than filling a quota.
-7. Generate a post-review synthesis in a separate context.
-   - Summarize consensus blocking concerns, other major concerns, the minor-revision checklist,
-     points of emphasis divergence, and the most decision-relevant technical and significance risks.
-   - Reconcile reviewer-local issue keys only now. Treat an issue as consensus only when at least two frozen reports independently raise the same underlying concern.
-8. Run final QA.
-   - Check context isolation, locked-report status, evidence anchors, post hoc overlap mapping, groundedness, consistency, coverage, and non-invention.
+1. Identify the supplied manuscript package and assessment boundary.
+2. Resolve exact target journal/venue, article type and publication model as far as possible.
+3. Build the target criteria card from current official guidance or mark unresolved axes.
+4. Run an **editorial triage simulation** without reading future reviewer concerns.
+5. Build one immutable reviewer packet.
+6. Define reviewer emphasis briefs before any report is generated.
+7. Generate each reviewer report in a genuinely separate context.
+8. Freeze all reports.
+9. Run a separate **editor synthesis** that weighs decision-relevant arguments rather than reviewer votes.
+10. Produce an author-facing **decision-engineering map** with the cheapest scientifically valid repair route for each risk.
+11. Run QA for target-criteria fidelity, reviewer isolation, traceability, severity, anti-gaming and non-invention.
 
-## Input handling
+## Target-resolution gate
 
-- Acceptable inputs include:
-  - manuscript draft
-  - abstract or summary paragraph
-  - introduction, results, discussion, or methods excerpts
-  - figure legends or selected figures
-  - author notes describing the claimed contribution
-- If the input is thin, the skill should still provide a bounded review, but it must clearly state the assessment boundary.
+Before evaluating `significance`, `priority`, `breadth`, `novelty` or `fit`, determine whether the exact target actually uses that criterion.
 
-## Immutable review-packet checklist
+Load:
 
-- Put only these common inputs into every isolated reviewer context:
-  - supplied manuscript/source material
-  - verified section, figure, table, equation, page, or block anchors
-  - assessment boundary and missing-file inventory
-  - common journal criteria and report skeleton
-  - that reviewer's preassigned emphasis brief
-- Do not put these into the shared packet:
-  - extracted concerns or visible technical gaps
-  - a shared claim-evidence interpretation
-  - another reviewer report or ledger
-  - overlap targets, consensus labels, or synthesis notes
+- `../nature-shared/journal-formats/journal-resolution.md` for exact journal/article type/stage;
+- `../nature-shared/journal-formats/editorial-decision-profiles.md` for fallback publication-model logic;
+- exact live reviewer/editor guidance when submission-critical.
+
+Create a target criteria card:
+
+```yaml
+journal: exact title or unresolved
+article_type: value or unresolved
+publication_model: selective-broad-interest | field-advancement | rigor-first | clinical-policy | evidence-assessment | conference-selection | custom
+editorial_triage_axes: []
+reviewer_axes: []
+acceptance_or_assessment_condition: text
+verified_sources: []
+unresolved_criteria: []
+```
+
+Do not infer a `high-impact` criterion from reputation alone.
+
+## Editorial triage simulation
+
+This is a bounded simulation of likely **decision risks**, not a claim about what the real handling editor will decide.
+
+### Editor packet
+
+Use only:
+
+- manuscript/title/abstract/figures/material supplied by the user;
+- target criteria card;
+- exact official criteria already verified.
+
+Do not use future simulated reviewer concerns.
+
+### Triage questions
+
+1. Is the manuscript in scope and the article type plausible?
+2. Can the central question/tension and contribution be stated faithfully in one compact block?
+3. What is the decisive evidence class?
+4. Does the current manuscript visibly meet target-specific priority/breadth/advancement criteria when those criteria exist?
+5. Is the evidence package mature enough to justify full review?
+6. Does readability/organization obstruct assessment of the contribution?
+7. Is there an obvious integrity/compliance or central-evidence blocker?
+
+### Triage output states
+
+- `send_to_review_case_clear`;
+- `send_to_review_but_positioning_risk`;
+- `technical_case_not_review_ready`;
+- `target_fit_or_priority_risk`;
+- `scope_or_article_type_mismatch`;
+- `integrity_or_compliance_blocker`;
+- `not_assessable_from_supplied_material`.
+
+Never output a numerical desk-rejection probability.
+
+## Immutable reviewer packet
+
+Give every isolated reviewer the same:
+
+- supplied manuscript/source material;
+- verified section/figure/table/equation anchors;
+- assessment boundary and missing-file inventory;
+- target criteria card;
+- report skeleton;
+- shared scientific grounding rules;
+- that reviewer's preassigned emphasis brief.
+
+Do **not** include:
+
+- editorial triage conclusions;
+- suspected concerns;
+- shared claim/evidence criticism;
+- another report/ledger;
+- consensus hints;
+- a desired recommendation.
+
+The editorial triage pass must not contaminate reviewer independence.
+
+## Independent reviewer pass
+
+Inside each isolated context:
+
+1. independently reconstruct the central claims and evidence;
+2. apply universal scientific axes from `review-axes.md`;
+3. apply only target-conditional axes actually present in the target criteria card;
+4. load applicable domain-specific review gates;
+5. build a private concern ledger;
+6. render Major Concerns and Minor Comments;
+7. give each Major Concern a resolution test;
+8. finalize and freeze the report.
+
+### Reviewer recommendation posture
+
+Keep recommendation language conditional and criterion-based, for example:
+
+- `central case could become publishable if the blocking validity issue is resolved`;
+- `technically credible, but the verified target-specific priority criterion is not yet established`;
+- `meets a rigor-first scientific-validity bar from the supplied material, subject to the listed reporting corrections`;
+- `main claim is only partially supported and should be narrowed or strengthened`.
+
+The reviewer does not decide the final outcome.
 
 ## Concern-ledger fields
 
-Use this internal shape before drafting reviewer prose:
+Use this private shape:
 
 ```yaml
-issue_key: experimental-design-control-selection
-axis: experimental-design
+issue_key: generalization-external-validation
+axis: claim_evidence_validity
 applicability: applicable
 severity: major
 blocking: yes
-severity_rationale: The missing control prevents the supplied comparison from isolating the central treatment effect.
-claim_pointer: The treatment effect is attributed to the intervention.
-evidence_pointer: Results, "Primary outcome"; Figure 2
+severity_rationale: The manuscript claims cross-domain generalization but evaluates only one domain.
+claim_pointer: The method is claimed to generalize across domains.
+evidence_pointer: Results, External evaluation; location not provided if unavailable
 evidence_status: located
-concern: The supplied comparison does not isolate the intervention effect.
-resolution_test: Show an appropriate control or narrow the causal claim.
+concern: The visible evidence does not establish the stated scope.
+alternative_interpretation: Performance may be domain-specific.
+resolution_test: Provide an independent cross-domain test or narrow the generalization claim.
+target_criterion: validity / advancement
 reviewer_id: Reviewer 1
 ```
 
-- Use section headings and supplied figure/table identifiers before page or line numbers.
-- Use `location not provided` or `not assessable from supplied material` when an exact pointer cannot be verified.
-- Never infer an absent figure, analysis, control, or manuscript location.
-- Use `blocking: yes` only for a grounded Major Concern that prevents the current manuscript from
-  establishing its central case. Minor Comments always use `blocking: no` internally and do not
-  need to display the field in the final report.
+A concern without a resolution test is incomplete.
 
-## Cross-review generation rule
+## Editor synthesis
 
-- Run synthesis only after all individual reports are final and locked.
-- Treat the synthesis as editor/author-facing; never send it back into any reviewer context.
-- The cross-review synthesis should consolidate, not average away, reviewer differences.
-- A consensus item must map post hoc to equivalent concerns raised by at least two reviewer reports.
-- Preserve consequential single-reviewer concerns under weighting differences; do not drop them merely because they lack consensus.
-- It must separate:
-  - shared strengths
-  - consensus blocking concerns
-  - other shared major concerns
-  - minor revision checklist
-  - differences in significance weighting
-  - differences in readership/readability judgment
+Run only after all reviewer reports are frozen.
+
+### Step 1 — map reviewer-local issues
+
+Reconcile equivalent concerns to synthesis keys without rewriting the original reports.
+
+### Step 2 — classify decision consequence
+
+Use:
+
+- `publication_criteria_blocker`;
+- `technical_blocker`;
+- `major_repairable`;
+- `claim_recalibration`;
+- `clarity_or_reporting`;
+- `optional_enrichment`.
+
+### Step 3 — weight arguments, not votes
+
+- Consensus is useful evidence but not a voting rule.
+- A single technically decisive objection may remain blocking.
+- A reviewer request can be non-essential even if multiple reviewers like it.
+- Give greater weight to a concern when the assigned reviewer lens directly covers that issue, but do not invent hidden expertise.
+
+### Step 4 — compare with initial triage
+
+Ask whether external review changed the picture:
+
+- editor underestimated technical risk;
+- editor overestimated/underestimated significance;
+- target fit remains the main issue;
+- manuscript is scientifically sound but needs claim recalibration;
+- revision can plausibly close the blocking concerns.
+
+### Step 5 — produce simulated decision posture
+
+Allowed labels:
+
+- `strong_case_after_minor_closure`;
+- `promising_major_revision_case`;
+- `central_case_requires_new_decisive_evidence`;
+- `scientifically_valid_but_target_fit_or_priority_problem`;
+- `current_claims_not_established`;
+- `transfer_or_repositioning_may_be_better_than_more_experiments`;
+- `not_assessable`.
+
+These are **simulation postures**, never assertions of the journal's real decision.
+
+## Decision-engineering map
+
+After editor synthesis, switch to an author-facing repair pass. Do not alter frozen reviewer reports.
+
+For each decision-relevant issue record:
+
+```text
+Risk
+Stage where it matters
+Journal criterion
+Claim affected
+Why the concern can change a decision
+Resolution route
+Minimum sufficient change
+Evidence/manuscript locations to update
+Residual risk after repair
+```
+
+Choose among:
+
+1. add decisive evidence;
+2. reanalyse existing evidence;
+3. correct an error;
+4. clarify/restructure the evidence already present;
+5. narrow the claim;
+6. remove the claim;
+7. change target/article type when the scientific work is sound but the journal objective is mismatched.
+
+Prefer the **minimum scientifically sufficient** repair, not the maximum amount of new work.
 
 ## Failure-safe behaviour
 
-- If isolated contexts are unavailable, produce one reviewer report per invocation or disclose that mutual blindness cannot be guaranteed. Do not silently simulate independence inside a shared drafting context.
-- When evidence is absent, say the case is not yet established from the supplied material.
-- When significance is unclear, distinguish `potentially interesting` from `demonstrated broad importance`.
-- When readability is weak, describe the barrier to nonspecialist comprehension instead of rewriting the manuscript unless asked.
+- If isolated contexts are unavailable, produce one reviewer report per invocation or disclose that mutual blindness cannot be guaranteed.
+- If exact target criteria cannot be verified, mark target-specific editorial conclusions `unresolved`; keep the technical review usable.
+- If input is partial, do a bounded review and identify what cannot be assessed.
+- Do not infer absent validations, ethics approvals, data, figures or citations.
+- Do not transform a true design limitation into a wording problem.
+- Do not transform a true target-fit problem into a demand for unnecessary experiments.
+- Do not recommend reviewer/citation gaming as an acceptance strategy.
