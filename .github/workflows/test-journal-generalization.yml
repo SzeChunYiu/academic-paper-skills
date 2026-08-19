@@ -1,0 +1,67 @@
+name: Test journal generalization
+
+on:
+  pull_request:
+    paths:
+      - 'skills/nature-writing/**'
+      - 'skills/nature-reviewer/**'
+      - 'skills/nature-response/**'
+      - 'skills/nature-polishing/**'
+      - 'skills/nature-citation/**'
+      - 'skills/nature-figure/**'
+      - 'skills/nature-academic-search/**'
+      - 'skills/nature-ref-verifier/**'
+      - 'skills/nature-shared/**'
+      - '.github/workflows/test-journal-generalization.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'skills/nature-writing/**'
+      - 'skills/nature-reviewer/**'
+      - 'skills/nature-response/**'
+      - 'skills/nature-polishing/**'
+      - 'skills/nature-citation/**'
+      - 'skills/nature-figure/**'
+      - 'skills/nature-academic-search/**'
+      - 'skills/nature-ref-verifier/**'
+      - 'skills/nature-shared/**'
+      - '.github/workflows/test-journal-generalization.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contracts-citation-writing-and-review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: '3.11'
+
+      - name: Compile citation and writing scripts
+        run: |
+          python -m py_compile \
+            skills/nature-citation/scripts/nature_citation.py \
+            skills/nature-citation/scripts/academic_citation_search.py \
+            skills/nature-writing/scripts/corpus_structure_stats.py
+
+      - name: Test citation search and exports
+        run: python -m unittest discover -s skills/nature-citation/tests -p 'test_*.py' -v
+
+      - name: Test writing rhetorical engine and corpus tooling
+        run: python -m unittest discover -s skills/nature-writing/tests -p 'test_*.py' -v
+
+      - name: Test editor reviewer decision engine
+        run: python skills/nature-reviewer/tests/test_editor_reviewer_decision_engine.py -v
+
+      - name: Test revision decision closure
+        run: python skills/nature-response/tests/test_editor_decision_closure.py -v
+
+      - name: Test shared journal contracts
+        run: python -m unittest discover -s skills/nature-shared/tests -p 'test_*.py' -v

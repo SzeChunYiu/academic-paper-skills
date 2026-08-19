@@ -1,90 +1,160 @@
 # Writing workflow
 
-Run these steps for any drafting or restructuring task. Steps 1-3 are planning, step 3b is an alignment gate, 4-6 are drafting, 7-8 are checking, step 9 is the revision loop.
+Run this workflow for drafting or restructuring. The order is `argument -> rhetorical moves -> paragraph nuclei -> sentences -> journal adaptation`, not `template -> prose`.
 
-## 1. Build a one-sentence argument
+## 1. Build the argument spine
 
-> In [system/problem], we show [advance] using [approach], supported by [evidence], with [boundary].
+Before drafting, identify:
 
-Force every section to serve this sentence. If the sentence cannot be written, the paper does not yet have an argument — surface that to the user.
+- **question / tension** — what is not yet settled, explained, measured, compared, validated, synthesized, or enabled?
+- **answer / contribution** — what does this paper actually establish or provide?
+- **evidence chain** — which results, analyses, proofs, cases, comparisons, or sources make that answer credible?
+- **boundary** — where does the answer stop holding?
+- **meaning** — why does the bounded answer matter to the intended research community?
+
+If there are multiple contributions, identify one dominant spine and attach secondary branches. Do not compress unrelated contributions into a misleading single novelty claim.
+
+If an essential link is absent, expose the missing link rather than inventing it.
 
 ## 1b. Build the Terminology Ledger
 
-On first contact with the material, extract the recurring terms, abbreviations, notation, and proper names into a Terminology Ledger before drafting any prose. Lock the canonical forms and reuse them across every section. See `../../../nature-shared/core/terminology-ledger.md`.
+On first contact with the material, extract recurring terms, abbreviations, notation, variables, datasets, models, populations, conditions, and proper names. Lock canonical forms and reuse them across every section. See `../../../nature-shared/core/terminology-ledger.md`.
 
-## 2. Choose section architecture
+## 2. Classify contribution and evidence type
 
-Pick the section structure from the relevant `section/*.md` fragment and, if needed, deeper patterns from `references/article-architecture.md`.
+Use `static/core/rhetorical-engine.md` to classify the dominant contribution: empirical finding, mechanism, method, resource/benchmark, theory/proof, validation/replication, negative/null result, synthesis/review, or practical/clinical/policy implication.
 
-## 3. Map each paragraph to one job
+Also identify the evidence type and research paradigm. A randomized trial, qualitative interview study, theorem paper, materials experiment, benchmark paper, and historical argument require different rhetorical structures even when they target similarly selective journals.
 
-Each paragraph must do exactly one job from: context, gap, approach, result, comparison, mechanism, implication, limitation.
+## 3. Select section moves, not a universal skeleton
 
-If a paragraph carries two jobs, split it before drafting.
+Load the requested section fragment. When the material does not fit its default pattern, or cross-disciplinary calibration matters, load `references/section-move-atlas.md`.
 
-## 3a. Allocate Results evidence before drafting
+For each section:
 
-When the task includes Results, a full manuscript, main-text compression, or
-main-versus-SI placement, load
-`../../../nature-shared/core/main-text-discipline.md`. Classify each result as
-core discovery, necessary support, qualification, robustness, heterogeneity,
-provenance detail, alternative inference, or edge case. Build the shortest
-sufficient main-text evidence chain and record the destination of everything
-else. Do not bury conclusion-changing evidence in SI.
+1. Write the reader question the section must answer.
+2. Select the minimum rhetorical moves needed to answer it.
+3. Order the moves so each creates a reason for the next.
+4. Mark optional/recurrent moves instead of forcing every move once.
+5. Check the final move hands the reader a useful question for the next section.
 
-## 3b. Confirmation gate — align before drafting
+Use `references/cross-disciplinary-writing-evidence.md` when deciding whether a proposed rule is robust or merely local to one discipline or corpus.
 
-Drafting a full section on a wrong assumed premise wastes the whole draft and is the main reason output "does not match what I meant". Before writing full prose, show the user a short alignment block and **stop for confirmation**:
+## 3a. Map paragraphs as nucleus + satellites
 
-- **One-sentence argument** (from step 1) — the single most important thing to get right. Echo it back in plain language.
-- **Plan**: detected paper type, section(s), journal / word limit, and the paragraph map from step 3 as a short bullet list.
-- **Key terminology**: the canonical forms locked in the Terminology Ledger (step 1b) for the main methods, models, datasets, and metrics. Surface them here so the user can fix a wrong canonical term before it propagates through every section.
-- **Primary reader**: who the draft is optimized for, and which of the five reader questions it leads with (relevance / novelty / trust / reuse / meaning — see `../../../nature-shared/core/reader-workflow.md`). Getting the lead question wrong is a common silent cause of "this is not what I meant".
-- **Key assumptions**: anything else you inferred rather than were told — especially what the core contribution is and which result to lead with. Mark each clearly as an assumption.
-- **At most 2–3 targeted questions**, only on genuinely ambiguous, high-leverage points (how to frame the core contribution, target audience / journal, which result leads). Do not ask about things the user already made clear, and do not pad the list to reach three.
+Each paragraph needs one **nucleus**: the proposition or reader task that makes the paragraph necessary.
 
-Then wait for the user to confirm or correct before drafting the full section.
+Supporting **satellites** may include evidence, explanation, comparison, example, qualification, counterargument, implication, methodological reminder, or a bridge.
 
-Shortcuts:
+Do **not** require one rhetorical function per paragraph. Split only when two independent nuclei compete for control or when the paragraph becomes difficult to parse.
 
-- **Skip the gate** when the core claim, evidence, and boundary are all clearly given and there is no real ambiguity in framing. In that case just state the one-sentence argument in a single line (per the router) and proceed.
-- **Depth dial**: for a full section or a major rewrite, offer to deliver the outline first (the paragraph map from step 3) and expand to full prose only after the user approves it. Reacting to an outline is far cheaper than reacting to full prose. Skip this for short or single-paragraph requests.
-- **Style, not substance**: if the user says the voice or style "is not mine", do not keep guessing — ask for one short sample of their own writing, then calibrate to it. From the sample, match: typical sentence length and rhythm, hedging level (`demonstrate` vs `may` / `could`), preferred connectives and transitions, person (first-person `we` vs passive), and terminology / abbreviation choices. Match the voice, not the content — never reuse the sample's claims or facts.
+For each planned paragraph record:
 
-## 4. Draft from evidence outward
+`nucleus -> supporting evidence/reasoning -> qualification if needed -> next-reader question`
 
-Keep claims near the data that support them. Do not stack claims at the top of a section then leave evidence at the bottom.
+This map is more informative than a label such as `context` or `result` alone.
 
-## 5. Calibrate verbs to evidence strength
+## 3b. Allocate Results evidence before drafting
 
-`show` / `demonstrate` need strong direct evidence. `suggest` / `indicate` are for trend-level or indirect evidence. `may` / `could` are for plausible but unverified mechanisms.
+When the task includes Results, full-manuscript compression, or main-versus-SI placement, load `../../../nature-shared/core/main-text-discipline.md`.
 
-## 6. Remove unsupported novelty and universal claims
+Classify each result as core discovery, necessary support, qualification, robustness, heterogeneity, provenance detail, alternative inference, or edge case. Build the shortest sufficient main-text evidence chain, but do not hide conclusion-changing qualifications in Supplementary Information.
 
-Sweep for `first`, `unique`, `unprecedented`, `comprehensive`, `complete`, `always`, `never`. Replace with bounded claims or delete.
+## 3c. Alignment gate when framing is genuinely ambiguous
 
-## 7. Run a paragraph-flow check
+Do not stop routine drafting merely because several stylistic choices are possible. Use an alignment gate only when a wrong assumption would materially change the scientific argument.
 
-- One paragraph, one message.
-- The first sentence is the topic / claim.
-- Each subsequent sentence has an explicit relation to the previous one (cause, comparison, restriction, example).
+Surface, compactly:
 
-For full reverse-outlining, open `references/paragraph-flow.md`.
+- the proposed argument spine;
+- dominant contribution/evidence type;
+- section move map;
+- primary reader/audience;
+- high-leverage assumptions that are not author-provided.
 
-## 8. Return prose plus notes
+If the user is available, ask only the few questions that materially change the claim or structure. If immediate drafting is preferred, proceed with explicit placeholders/assumptions rather than inventing evidence.
 
-Output the draft together with explicit notes on assumptions, missing inputs, and where evidence is needed. See `output-format.md`.
+## 4. Draft from evidence and reasoning outward
 
-## 9. Revise by targeted edit, not full rewrite
+Keep claims near the evidence or reasoning that warrants them. Avoid large claim stacks followed much later by support.
 
-When the user reacts to a draft, "this is not what I meant" is usually local — a wrong claim, a mis-framed paragraph, the wrong result leading. Do not silently re-draft the whole section: a full rewrite breaks the paragraphs that were already right and forces the user to re-check everything.
+For Results, make the local question and evidentiary answer recoverable. A useful block is often:
 
-- Change **only** the paragraphs or claims the user flagged; keep the rest verbatim.
-- If a requested fix genuinely forces a structural change (reordering sections, moving a claim across paragraphs), say so and confirm the new structure before applying it, rather than restructuring silently.
-- Keep the Terminology Ledger (step 1b) stable across revisions unless the user changes a term; never let a revision reintroduce a variant of a locked term.
-- After revising, re-run only the checks relevant to what changed (steps 5-7), not the whole workflow.
-- If the user's redirection reveals the original premise was wrong, return to the confirmation gate (step 3b) instead of patching prose on a broken premise.
-- Every proposed addition triggers the main-text deletion check: identify the
-  new sentence's function, find existing text with the same function, and prefer
-  replacement or compression before appending. Re-run the paragraph necessity
-  and claim-repetition checks after the edit.
+`question -> setup if needed -> observation/estimate -> evidence -> bounded local inference -> bridge`
+
+Not every paragraph needs every element, and some disciplines defer most interpretation to Discussion.
+
+For theory/humanities/qualitative work, replace quantitative evidence logic with the corresponding proof, source, case, theme, interpretation, or analytic warrant.
+
+## 5. Engineer sentence-to-sentence flow
+
+For each sentence, identify:
+
+- what information is already **given** to the reader;
+- what **new** information is added;
+- the relation to surrounding sentences: evidence, cause, consequence, contrast, concession, specification, example, sequence, or inference.
+
+Keep central entities lexically stable enough to be tracked. Use pronouns only when reference is unambiguous.
+
+Do not add transition words as decoration. If the logical relation is already obvious through information structure and lexical continuity, an explicit connective may be unnecessary.
+
+For deeper repair, load `references/paragraph-flow.md`.
+
+## 6. Match syntax to rhetorical function
+
+Do not optimize for uniformly short sentences or uniformly dense academic syntax.
+
+- use chronological syntax for procedures when sequence matters;
+- use explicit clauses for new causal or conceptual relations;
+- use compact noun phrases for established technical concepts when readers can unpack them;
+- separate observation from interpretation when combining them would blur evidentiary strength;
+- place the sentence's main new claim where readers can find the emphasis easily.
+
+If a sentence is difficult, first diagnose the hidden relation; shortening alone may not fix it.
+
+## 7. Calibrate epistemic stance to evidence
+
+Distinguish observed, estimated, inferred, simulated, proved, hypothesized, associated, and causally identified claims.
+
+`show` / `demonstrate` require strong direct warrant. `suggest` / `indicate` fit indirect or bounded evidence. `may` / `could` fit plausible but unverified interpretations.
+
+Sweep for unsupported `first`, `unique`, `unprecedented`, `comprehensive`, `complete`, `always`, and `never`. Replace them with bounded, testable statements.
+
+Do not hide an incremental relationship to prior work merely to make the contribution sound larger. Explain precisely what changes and why that change matters.
+
+## 8. Run the reader-prediction and coherence audit
+
+After each paragraph ask:
+
+1. What should a competent skeptical reader now believe?
+2. What question will that reader probably ask next?
+3. Does the next paragraph answer or intentionally redirect that question?
+4. Is any needed evidence, definition, comparison, or qualification missing?
+
+Then reverse-outline the section using paragraph nuclei. If the nucleus sequence does not reconstruct the section argument, fix the structure before polishing sentences.
+
+For a full manuscript, also check section handoffs: Introduction -> Methods/evidence plan -> Results -> Discussion -> bounded conclusion.
+
+## 9. Apply journal and article-type adaptation last
+
+Only after the scientific argument works, resolve the exact journal/content type/stage using the journal axis and shared journal resolver.
+
+Journal adaptation may change audience assumptions, section labels, compression, title/abstract conventions, reference rendering, and submission mechanics. It must not change evidence, causal strength, uncertainty, novelty boundary, or limitations.
+
+When the user asks to emulate a target venue's recent writing practice, load `references/target-corpus-calibration.md` and build a temporary profile from comparable papers rather than extrapolating from the legacy Nature corpus.
+
+## 10. Return prose plus reasoning-facing notes
+
+Return the requested draft together with only the notes that help the author revise it: important assumptions, missing evidence, unresolved boundaries, risky claims, and structural choices that materially affect interpretation. Do not bury the prose under generic writing advice.
+
+## 11. Revise locally before rewriting globally
+
+When the author redirects a draft:
+
+- change only the affected claims/paragraphs unless the new information breaks the argument spine;
+- preserve the Terminology Ledger;
+- if a new sentence duplicates an existing function, prefer replacement/compression to accumulation;
+- re-run stance and coherence checks on changed text;
+- if the premise itself changes, rebuild the argument/move map before re-drafting.
+
+Revision should strengthen the argument without introducing reviewer-driven prose accretion.

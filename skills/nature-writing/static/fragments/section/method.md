@@ -1,40 +1,71 @@
-# Section: Method (writing)
+# Section: Methods (writing)
 
-## Default structure
+## Reader job
 
-`task formulation -> overview (pipeline / system / approach) -> per-module detail -> implementation notes -> assumptions and boundary`
+Methods must make the evidence-generation process and its credibility recoverable:
 
-## The three-element pattern (per module)
+`what was studied -> how evidence was generated -> consequential choices -> analysis/inference -> controls/validation -> reproducibility/boundary`
 
-Each module should answer:
+A computational pipeline is only one subtype.
 
-1. **Motivation** — what problem this module solves, and why the obvious alternative fails
-2. **Mechanism** — what the module actually does, to a level a peer could re-implement
-3. **Evidence / role** — how this module contributes to the overall result (ablation hook)
+## Select moves by study design
 
-If any element is missing, the module reads as a black box. Flag the gap.
+Common moves include:
 
-## Pre-writing checklist
+- study/design overview
+- material/data/population/source definition
+- sampling/inclusion/exclusion
+- measurement/representation
+- apparatus/procedure/intervention
+- model/algorithm/formalization
+- analysis/statistics/inference
+- controls/baselines/validation
+- sensitivity/robustness/uncertainty
+- ethics/registration/consent
+- reproducibility/data/code/material availability
 
-Before drafting Method, confirm with the user:
+Use only the moves required by the design and reporting standard.
 
-- Task formulation: inputs, outputs, scope.
-- Overview figure / pipeline diagram: does one exist? It anchors the section.
-- Notation: defined once and consistent.
-- Reproducibility scope: code, weights, data — what will be released.
+## Rationale rule
 
-## Forbidden vague phrases
+Explain **why** a choice was made when a reasonable alternative would materially change interpretation: sampling, endpoint, comparator, preprocessing, model, threshold, assay, time window, statistical test, coding framework, etc.
 
-Never leave:
+Do not claim an untested `technical advantage` inside Methods. State the design intention/property; let Results establish whether the advantage exists.
+
+## Organization
+
+Choose the structure that minimizes reader backtracking:
+
+- chronological procedure
+- evidence-source/experiment based
+- conceptual component based
+- analysis-question based
+- overview -> detailed components
+
+## Computational subtype
+
+For genuine model/pipeline papers, a useful sequence is:
+
+`problem/formalization -> data/representation -> components -> objective/training -> inference -> complexity/resources -> implementation -> evaluation protocol`
+
+Evaluation design—splits/leakage, baselines, metrics, hyperparameters, compute, seeds, ablations, uncertainty, stress/external tests—is part of methodological credibility.
+
+## Non-computational reminder
+
+Clinical, experimental, qualitative, social-science, theoretical and historical/source-based research need different credibility moves. Load `references/method.md` before imposing a pipeline vocabulary.
+
+## Vague phrases to eliminate
+
+Do not leave unsupported placeholders such as:
 
 - `under standard conditions`
 - `using routine methods`
 - `data were analyzed statistically`
 - `the method was validated`
-- `samples were randomly assigned` (without saying how)
+- `samples were randomly assigned` without the actual process
 
-Replace with the actual reproducible information.
+Replace them with the information needed to evaluate/reproduce the work, or flag the missing input.
 
-## Deeper reference
+## Audit
 
-For module-motivation templates, three-elements examples, and overview-template patterns, open `references/method.md` and `references/examples/method/`.
+Every major Results claim should trace to a visible method/analysis path. If readers cannot reconstruct how the evidence supporting a central claim was generated, fix that before polishing prose.

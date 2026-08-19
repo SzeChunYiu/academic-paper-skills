@@ -1,214 +1,337 @@
-# Method Writing Guide
+# Methods writing guide
+
+The Methods section explains **how the evidence was generated and why the procedure is credible enough to support the paper's inferences**. A computational pipeline is one subtype, not the universal model.
 
 ## Contents
 
-- [Goal](#goal)
-- [Pre-Writing Questions](#pre-writing-questions)
-- [Method Writing Steps](#method-writing-steps)
-- [Three Elements of a Pipeline Module](#three-elements-of-a-pipeline-module)
-- [Method Content Decomposition](#method-content-decomposition)
-- [How to Write Module Design](#how-to-write-module-design)
-- [How to Write Module Motivation](#how-to-write-module-motivation)
-- [How to Check Whether Method is Easy to Understand](#how-to-check-whether-method-is-easy-to-understand)
-- [Method Section Skeleton](#method-section-skeleton)
-- [Overview Subsection](#overview-subsection)
-- [Section 3.1 and Other Module Subsections](#section-31-and-other-module-subsections)
-- [Module Writing Pattern (Mermaid)](#module-writing-pattern-mermaid)
-- [Implementation Details](#implementation-details)
-- [Example Bank](#example-bank)
+- [Core reader questions](#core-reader-questions)
+- [Build the method map](#build-the-method-map)
+- [Credibility moves](#credibility-moves)
+- [Rationale: explain consequential choices](#rationale-explain-consequential-choices)
+- [Common organizing principles](#common-organizing-principles)
+- [Experimental science](#experimental-science)
+- [Clinical / epidemiological](#clinical--epidemiological)
+- [Computational / algorithmic](#computational--algorithmic)
+- [Qualitative / social science](#qualitative--social-science)
+- [Theory / simulation](#theory--simulation)
+- [Paragraph and sentence logic](#paragraph-and-sentence-logic)
+- [Reproducibility boundary](#reproducibility-boundary)
+- [Audit](#audit)
 
+## Core reader questions
 
-## Goal
+Methods should let a competent reader determine:
 
-Write the Method section clearly by following this sequence:
+1. What was studied, measured, modeled, sampled, constructed, or analyzed?
+2. How were observations/evidence generated?
+3. Which choices materially affect interpretation?
+4. What controls, comparisons, validation, or checks support credibility?
+5. How were uncertainty, bias, confounding, error, or alternative explanations handled?
+6. Can the work be understood, reproduced, or independently evaluated at the level expected in this field?
+7. Were ethics, registration, consent, data/code, or reporting obligations satisfied where applicable?
 
-1. Answer key method-design questions.
-2. Draw a pipeline figure sketch.
-3. Write the method section step by step.
+Do not use one generic `motivation -> design -> technical advantage` template to answer all seven.
 
-## Pre-Writing Questions
+## Build the method map
 
-`Before writing Method, first answer: (1) what modules exist in the method, and (2) for each module, what is the workflow, why this module is needed, and why this module works.`
+Before prose, map the evidence pipeline:
 
-Recommended organization:
-
-1. List all modules in the pipeline.
-2. For each module, answer three questions:
-
-- How does the module run?
-- Why do we need this module?
-- Why does this module work?
-
-3. Organize answers as a mind map or a table for clarity.
-
-## Method Writing Steps
-
-`Method writing steps: (1) draw pipeline figure sketch, (2) map subsections from the sketch, (3) plan each subsection with motivation/design/advantages, (4) write module design first, (5) then add motivation and technical advantages.`
-
-Step-by-step workflow:
-
-1. Draw the pipeline figure sketch.
-2. Use the sketch to organize Method subsection structure.
-3. For each subsection, plan three parts: motivation, module design, and technical advantages.
-4. Write module design first to build a concrete backbone.
-5. Add motivation and technical advantages afterward.
-
-## Three Elements of a Pipeline Module
-
-`A pipeline module has three elements: Module design, Motivation of this module, and Technical advantages of this module.`
-
-### 1) Module Design
-
-Definition:
-
-1. Describe representation/network/data-structure details.
-2. Describe the forward process clearly: given input -> step 1 -> step 2 -> step 3 -> output.
-
-### 2) Motivation of This Module
-
-Definition:
-
-1. Explain why this module is needed.
-2. Use problem-driven logic: because problem X exists, we design module Y.
-
-### 3) Technical Advantages of This Module
-
-Definition:
-
-1. Explain why this module has technical advantage over alternatives.
-2. Tie advantage to measurable behavior when possible.
-
-### Example of the Three Elements
-
-Local cite:
-
-1. `references/examples/method/example-of-the-three-elements.md`
-
-## Method Content Decomposition
-
-```mermaid
-flowchart LR
-    A["Draw the technical pipeline figure"] --> B["Decompose Method content"]
-    B --> C1["Subsection 1 (Technical Module 1)"]
-    B --> C2["Subsection 2 (Technical Module 2)"]
-    B --> C3["Subsection 3 (Technical Module 3)"]
-    C1 --> D1["Motivation"]
-    C1 --> D2["Detailed design"]
-    C1 --> D3["Technical advantage"]
+```text
+research question
+  -> study material / data / population / formal objects
+  -> design or sampling
+  -> measurement / intervention / representation
+  -> processing / procedure
+  -> analysis / inference
+  -> controls / validation / sensitivity
+  -> outputs used by Results
 ```
 
-## How to Write Module Design
+For each node record:
 
-`Module design usually has two parts: (1) describe specific data/network structures, and (2) describe forward process as input -> steps -> output.`
+- what was done;
+- inputs and outputs;
+- parameters/conditions that matter;
+- rationale if a reasonable alternative would change interpretation;
+- source/reference if established procedure is reused;
+- reproducibility artifact if relevant.
 
-Writing structure:
+Organize subsections around reader recovery of this pipeline, not around arbitrary module counts.
 
-1. Define key structures first (representation, network, data structure).
-2. Write forward process in strict execution order.
-3. End with output interpretation or purpose.
+## Credibility moves
 
-Sentence skeleton:
+Large cross-disciplinary Methods corpora show that Methods rhetorically **demonstrate rigour and credibility**, not merely chronology. Common credibility functions include:
 
-1. `We represent ... with ...`
-2. `Given [input], we first ... then ... finally ...`
-3. `This produces [output], which is used for ...`
+### Contextualize the design
 
-Local cite:
+- study setting;
+- system/material/population;
+- data provenance;
+- assumptions;
+- design type.
 
-1. `references/examples/method/module-design-instant-ngp.md`
+### Establish selection/sampling logic
 
-## How to Write Module Motivation
+- inclusion/exclusion;
+- recruitment;
+- sample construction;
+- case/source selection;
+- train/validation/test split;
+- simulation regime.
 
-`Module motivation is usually problem-driven: because a problem exists, we design xx to solve it.`
+### Establish measurement/representation validity
 
-Typical opening sentences:
+- instrument/calibration;
+- operational definitions;
+- validated scales;
+- labels/annotation;
+- feature/variable construction;
+- source authentication/coding scheme where applicable.
 
-1. `A remaining problem/challenge is ...`
-2. `However, we ...`
-3. `Previous methods have difficulty in ...`
+### Describe procedure
 
-Local cite:
+- chronological steps when order matters;
+- intervention/experimental conditions;
+- preprocessing;
+- algorithm/training/inference;
+- coding/analysis workflow.
 
-1. `references/examples/method/module-motivation-patterns.md`
+### Establish analysis/inference
 
-## How to Check Whether Method is Easy to Understand
+- statistical model/test;
+- estimator;
+- error/uncertainty;
+- assumptions;
+- multiple comparisons;
+- causal identification strategy;
+- qualitative analytic approach;
+- proof/simulation procedure.
 
-`Check method clarity from three levels: writing logic, paragraph writing, and sentence writing.`
+### Establish controls/validation
 
-### 1) Logic-level check
+- negative/positive controls;
+- baselines;
+- ablations;
+- sensitivity/robustness;
+- external validation;
+- inter-rater agreement;
+- triangulation/negative cases;
+- convergence or numerical checks.
 
-1. After finishing the paper, summarize the Method writing logic again.
-2. Check whether this summarized logic is smooth and easy to follow.
+### Establish ethical/reproducible practice
 
-### 2) Paragraph-level check
+- ethics/consent/registration;
+- software/version/environment;
+- data/code/material availability;
+- preregistration/protocol deviation;
+- randomization/blinding where relevant.
 
-1. The first sentence of each paragraph should make readers immediately understand what this paragraph is about.
-2. One paragraph should clearly deliver one message.
+Select only moves needed by the study design and reporting standard.
 
-### 3) Sentence-level check
+## Rationale: explain consequential choices
 
-1. Carefully check whether the **motivation** of each sentence is explicit. Keep one thing clear to readers at all times: **why this sentence content is needed**.
-2. Carefully check sentence-to-sentence flow.
-3. Carefully check term consistency and avoid changing key terms back and forth.
+A rationale is useful when the reader could reasonably ask **why this choice rather than another?**
 
-## Method Section Skeleton
+Good targets:
 
-```latex
-\section{Method}
-% Overview
-% Section 3.1
-% Section 3.2
-% Section 3.3
-```
+- sampling frame;
+- outcome/endpoint;
+- model class;
+- baseline/comparator;
+- preprocessing transformation;
+- threshold/cutoff;
+- hyperparameter search strategy;
+- instrument/assay;
+- time window;
+- exclusion rule;
+- coding framework;
+- statistical procedure.
 
-Local cite:
+Do not justify routine steps with generic claims such as `to improve accuracy`. State the scientific/inferential reason and, when possible, cite validation or show it empirically later.
 
-1. `references/examples/method/section-skeleton.md`
+Methods should not assert a `technical advantage` that only the Results can establish. Methods can explain a **design intention or expected property**; Results establish whether it worked.
 
-## Overview Subsection
+## Common organizing principles
 
-`Overview should usually include: setting, core contribution, optional pipeline figure pointer, and a map of what each subsection contains.`
+### Chronological
 
-Writing structure:
+Best when procedural order matters: recruitment -> intervention -> measurement -> analysis.
 
-1. One to two sentences for task setting.
-2. One to two sentences for core contribution.
-3. If pipeline/framework is novel, point to overview figure.
-4. Tell readers what Section 3.1/3.2/3.3 covers.
+### Evidence-source based
 
-Local cite:
+Best when different experiments/datasets/sources generate distinct evidence chains.
 
-1. `references/examples/method/overview-template.md`
+### Conceptual component based
 
-## Section 3.1 and Other Module Subsections
+Best for complex models/instruments with meaningful independent components.
 
-`Basic subsection logic: (1) motivation of this module, (2) module forward process/module design, (3) technical advantages of this module.`
+### Analysis-question based
 
-Local cite:
+Best when one dataset supports several distinct inferential questions.
 
-1. `references/examples/method/example-of-the-three-elements.md`
+### Nested overview -> detail
 
-## Module Writing Pattern (Mermaid)
+Useful for complex systems: overview first, then components, then implementation/analysis.
 
-```mermaid
-flowchart TB
-    M1["State module motivation (challenge)"] --> M2["Define module design (representation/network)"]
-    M2 --> M3["Describe forward process (input -> steps -> output)"]
-    M3 --> M4["Explain technical advantages and verifiable gains"]
-```
+Choose organization to reduce backtracking. A method figure can help when spatial/data-flow relationships are hard to describe linearly, but it is not mandatory.
 
-## Implementation Details
+## Experimental science
 
-`Implementation details include hyperparameters (e.g., layer count, feature dimensions), coordinate transforms/normalization, and other practical details. Put them near the end of Method or in a dedicated Implementation Details section.`
+Typical needs:
 
-## Example Bank
+- materials/specimens/organisms;
+- preparation;
+- apparatus/instrumentation;
+- experimental conditions;
+- controls;
+- biological vs technical replicates;
+- randomization/blinding if applicable;
+- measurement and calibration;
+- analysis/statistics;
+- source data/image integrity where relevant.
 
-1. `references/examples/method-examples.md`
-2. `references/examples/method/pre-writing-questions.md`
-3. `references/examples/method/module-triad-neural-body.md`
-4. `references/examples/method/module-design-instant-ngp.md`
-5. `references/examples/method/module-motivation-patterns.md`
-6. `references/examples/method/section-skeleton.md`
-7. `references/examples/method/overview-template.md`
-8. `references/examples/method/example-of-the-three-elements.md`
-9. `references/examples/method/method-writing-common-issues-note.md`
+Write sequence precisely enough that results can be interpreted. Do not hide a condition needed to understand a figure in Supplementary Methods only.
+
+## Clinical / epidemiological
+
+Typical needs:
+
+- design and setting;
+- participants/population;
+- eligibility;
+- exposure/intervention;
+- comparator;
+- outcomes and timing;
+- sample-size/power logic;
+- confounders/covariates;
+- missing data;
+- statistical analysis;
+- sensitivity/subgroups;
+- ethics/consent/registration;
+- reporting guideline as applicable.
+
+The Methods language must preserve the inference boundary. An observational design should not be narrated as if treatment assignment were randomized.
+
+## Computational / algorithmic
+
+For a real pipeline/model paper, a useful map is:
+
+`problem/formalization -> representation/data -> components -> objective -> training/optimization -> inference -> complexity/resources -> implementation -> evaluation protocol`
+
+### Component subsection
+
+A component may use:
+
+`local problem/design requirement -> component definition -> data/information flow -> expected consequence`
+
+Only claim performance or superiority when evidence supports it.
+
+### Evaluation is part of methodological credibility
+
+Specify:
+
+- datasets/splits and leakage controls;
+- baselines and why they are fair;
+- metrics;
+- hyperparameter selection;
+- compute/resources;
+- repeated runs/seeds where relevant;
+- ablation design;
+- statistical comparisons/uncertainty;
+- external/stress-test protocol.
+
+A clean pipeline diagram cannot substitute for a fair evaluation design.
+
+## Qualitative / social science
+
+Depending on paradigm, Methods may need:
+
+- research setting/context;
+- participant/case/source sampling rationale;
+- researcher position/reflexivity where relevant;
+- data collection;
+- interview/observation/document procedures;
+- coding/analytic approach;
+- theme/category construction;
+- triangulation/negative cases/member checking where appropriate to the methodology;
+- ethics/consent;
+- saturation/information-power or other adequacy rationale when used.
+
+Do not force quantitative words such as `validation` or `accuracy` onto an interpretive methodology that uses different credibility criteria.
+
+## Theory / simulation
+
+Formal/computational theory Methods may instead foreground:
+
+- assumptions/definitions;
+- model equations;
+- parameter regimes;
+- initial/boundary conditions;
+- numerical methods;
+- discretization/convergence;
+- theorem/proof strategy where separated from Results;
+- simulation repetitions/uncertainty;
+- benchmark/analytic checks.
+
+The reader needs to know which conclusions follow mathematically from assumptions and which are observed only numerically.
+
+## Paragraph and sentence logic
+
+Methods paragraphs often use one of these nuclei:
+
+- define a design/material/data object;
+- explain a selection rule;
+- describe a procedure;
+- justify a consequential choice;
+- define analysis/inference;
+- establish a validation/control.
+
+Satellites add parameters, references, rationale, exceptions, or outputs.
+
+### Tense and voice
+
+Use tense/voice to make agency and status clear:
+
+- past tense often describes what was done in this study;
+- present tense can define equations, general procedures, software behavior, or figure structure;
+- active voice is useful when author choice matters (`we excluded...`, `we fit...`);
+- passive voice is useful when the operation/object deserves focus and agency is unimportant.
+
+Do not switch to passive solely to sound academic.
+
+### Sequence
+
+When procedural order matters, use explicit chronological syntax. When order does not matter, group by conceptual dependency rather than filling prose with `first/then/next`.
+
+## Reproducibility boundary
+
+Reproducibility is field-specific. Before finalizing, determine what a competent independent researcher needs:
+
+- raw/processed data;
+- source code;
+- software/environment/version;
+- trained weights;
+- materials/reagents;
+- protocols;
+- random seeds/configuration;
+- case/source corpus;
+- codebook/annotation instructions;
+- analysis scripts;
+- proprietary restrictions and access route.
+
+If an artifact cannot be shared, explain the constraint and preserve enough methodological description to evaluate the evidence.
+
+## Audit
+
+1. Can every major Results claim be traced to a method/analysis path?
+2. Are all interpretation-changing choices visible?
+3. Are sampling/data provenance and exclusions recoverable?
+4. Are controls/baselines/comparators appropriate to the claim?
+5. Is uncertainty/bias/confounding handled at the level expected by the design?
+6. Does rationale explain consequential choices without advertising untested advantages?
+7. Can an independent reader reconstruct the sequence/data flow?
+8. Are ethics, reporting and availability obligations addressed?
+9. Is Methods detail allocated appropriately between main text, supplement and repository?
+10. Does the section fit the research paradigm rather than an inherited computational template?
+
+Fix credibility gaps before polishing wording.

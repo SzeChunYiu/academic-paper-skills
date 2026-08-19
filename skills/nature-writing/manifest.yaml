@@ -1,18 +1,20 @@
 name: nature-writing
-version: 1.3.0
+version: 2.2.0
 description: >
-  Declarative manifest for the static/dynamic split. SKILL.md uses this to
-  decide which fragments to load for a drafting, restructuring, or
-  initial-submission request.
+  Declarative manifest for journal-aware academic drafting, restructuring, and
+  initial-submission requests. The legacy skill name is retained for backward
+  compatibility; journal behavior is resolved independently from that name.
+  Core drafting uses rhetorical moves and empirical cross-disciplinary evidence
+  rather than a single journal skeleton, with optional editor/reviewer decision
+  preflight before submission.
 
 always_load:
-  # Shared layer — common to nature-polishing and nature-writing
   - ../nature-shared/core/reader-workflow.md
   - ../nature-shared/core/paper-type-taxonomy.md
   - ../nature-shared/core/ethics.md
   - ../nature-shared/core/terminology-ledger.md
-  # Skill-local core
   - static/core/stance.md
+  - static/core/rhetorical-engine.md
   - static/core/workflow.md
   - static/core/output-format.md
 
@@ -49,9 +51,9 @@ axes:
   section:
     detect: |
       Identify which section(s) the user wants drafted or rebuilt. The user
-      may name one or several. Ask before loading when ambiguous and load
-      cost matters. Title and abstract often need to be drafted last but
-      planned early.
+      may name one or several. Ask before loading when ambiguity materially
+      changes the scientific argument or compliance result. Title and abstract
+      often need to be drafted last but planned early.
     values:
       abstract:       static/fragments/section/abstract.md
       intro:          static/fragments/section/intro.md
@@ -76,26 +78,49 @@ axes:
 
   journal:
     detect: |
-      Use nature only for the flagship journal Nature. Use nat-comms for Nature
-      Communications. Use nat-mach-intell when the user names Nature Machine
-      Intelligence or NMI. If the user says "Nature-family" generically or
-      names a different Nature Portfolio subjournal, use nature-family and
-      check that journal's current instructions before applying exact numbers.
-      Otherwise use generic.
+      Resolve the target independently from the legacy nature-writing skill name.
+      Use nature only for flagship Nature, nat-comms only for Nature
+      Communications, nat-mach-intell only for Nature Machine Intelligence, and
+      nature-family for another Nature Portfolio title or an unresolved
+      Nature-family request. Use profiled whenever the user names any other
+      journal or journal/publisher/venue family. Use generic only when no target
+      or useful family is known. For profiled targets, resolve exact journal ->
+      article type -> stage -> component before exact compliance claims.
     values:
-      nature:         static/fragments/journal/nature.md
-      nature-family:  static/fragments/journal/nature-family.md
-      nat-comms:      static/fragments/journal/nat-comms.md
+      nature:          static/fragments/journal/nature.md
+      nature-family:   static/fragments/journal/nature-family.md
+      nat-comms:       static/fragments/journal/nat-comms.md
       nat-mach-intell: static/fragments/journal/nat-mach-intell.md
-      generic:        static/fragments/journal/generic.md
+      profiled:        static/fragments/journal/profiled.md
+      generic:         static/fragments/journal/generic.md
     default: generic
     multi: false
 
 references:
   on_demand:
+    - condition: any named non-Nature target journal, publisher/venue family, journal transfer, or exact cross-journal submission compliance request
+      path: ../nature-shared/journal-formats/journal-resolution.md
+    - condition: any non-Nature publisher/venue/discipline family needs a fallback writing profile
+      path: ../nature-shared/journal-formats/journal-family-profiles.md
+    - condition: pre-submission editor/reviewer perspective, acceptance-readiness, desk-review risk, rejection-risk engineering, or deciding whether a concern needs more evidence versus claim narrowing/removal
+      path: ../nature-shared/core/editor-reviewer-decision-engine.md
+    - condition: target publication objective must be resolved across selective broad-interest, field-advancement, rigor-first, clinical/policy-priority, evidence-assessment, or conference-selection models
+      path: ../nature-shared/journal-formats/editorial-decision-profiles.md
+    - condition: author wants editor/reviewer preflight, acceptance engineering, likely decision blockers, minimum decisive experiments/analyses, or manuscript changes before submission
+      path: references/editor-reviewer-preflight.md
     - condition: task is manuscript and the user is drafting, restructuring, or compressing Results or full main text; deciding what belongs in main text versus captions or SI; preventing revision accretion; reducing statistical or claim repetition; or building the shortest sufficient evidence chain
       path: ../nature-shared/core/main-text-discipline.md
-    - condition: needs section-level structure, argument order, or published-article patterns
+    - condition: needs cross-disciplinary section structure, rhetorical move selection, argument order, or an alternative to a fixed Nature/IMRaD skeleton
+      path: references/section-move-atlas.md
+    - condition: needs empirical research support for a writing rule, disciplinary variation, syntax, titles, abstracts, Methods rhetoric, Discussion rhetoric, cohesion, paragraph flow, or corpus-grounded writing advice
+      path: references/cross-disciplinary-writing-evidence.md
+    - condition: needs concrete cross-venue counterexamples and direct-reading observations spanning Nature/NMI/npj, PLOS, JAMA, IEEE, eLife, and JMLR publication ecologies; especially to test whether a proposed writing rule is genuinely transferable
+      path: references/direct-reading-notes-2025-2026.md
+    - condition: user asks to learn current writing patterns from a named journal/venue or field, emulate recent comparable papers, build/update a local corpus profile, or diagnose why a scientifically correct draft does not resemble the target literature
+      path: references/target-corpus-calibration.md
+    - condition: analyzing dozens or hundreds of extracted .md/.txt papers for scalable section, paragraph, sentence, stance, connective, contribution-signal, or figure/table-call statistics before semantic move annotation
+      path: scripts/corpus_structure_stats.py
+    - condition: needs section-level architecture, argument order, or published-article patterns
       path: references/article-architecture.md
     - condition: genre-aware 2025 Nat Commun empirical structure, quantified connector/diction preferences, or research/review/perspective/comment/benchmark differences
       path: references/nat-comms-2025-corpus.md
@@ -103,17 +128,17 @@ references:
       path: references/abstract.md
     - condition: drafting/revising a Nature-family broad-audience summary paragraph or introduction opening
       path: references/nature-summary-paragraph.md
-    - condition: drafting/revising introduction, task framing, technical challenge, contribution framing
+    - condition: drafting/revising introduction, research-need framing, prior-work positioning, contribution framing, or a method-heavy/algorithmic introduction
       path: references/introduction.md
     - condition: rebuilding related work as topic synthesis
       path: references/related-work.md
-    - condition: writing method sections, pipeline modules, module motivation, technical advantages
+    - condition: writing Methods for any study design, including experimental, clinical, qualitative, computational, theoretical, or pipeline/module-based work
       path: references/method.md
     - condition: planning/writing experiments around baselines, ablations, metrics
       path: references/experiments.md
     - condition: writing a bounded conclusion with contribution, evidence, impact, limitation
       path: references/conclusion.md
-    - condition: user asks whether a paragraph flows; use reverse outlining
+    - condition: user asks whether a paragraph or section flows, has logic, feels choppy, needs transitions, or needs sentence-to-sentence / paragraph-to-paragraph coherence
       path: references/paragraph-flow.md
     - condition: final manuscript self-review, rejection-risk audit, claim-evidence alignment
       path: references/paper-review.md

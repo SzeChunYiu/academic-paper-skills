@@ -1,36 +1,72 @@
 # Section: Introduction (writing)
 
-## Default funnel
+## Reader job
 
-`field scale -> bottleneck -> prior attempts -> unresolved gap -> present study`
+By the end, readers should understand:
 
-For a broad-audience `Nature` summary paragraph, strengthen this into (See `references/nature-summary-paragraph.md`.):
+`what matters -> what is known -> what remains live -> why this study is an appropriate response -> what it will establish`
 
-`broad field -> sharper background -> exact problem -> here we show -> what the result changes -> broader context / outlook`
+This is a rhetorical dependency, **not** a mandatory paragraph count or funnel.
 
-## Paragraph jobs (typical 4-paragraph intro)
+## Research need is broader than a gap
 
-1. Establish the field stake. Make it land for a non-specialist if the target is broad (Nature, Science).
-2. Identify the bottleneck in existing practice.
-3. Summarize what prior work has and has not solved. Synthesize, do not list.
-4. State what this paper does and how it addresses the gap. Preview the contribution, not the results in detail.
+Choose the need that matches the paper:
 
-## Pipeline variants — pick one based on the material
+- unanswered question
+- contradictory evidence
+- missing mechanism/explanation
+- weak or indirect evidence
+- measurement/identification limitation
+- methodological trade-off/bottleneck
+- missing population/condition/scale
+- external-validation/robustness need
+- replication need
+- missing benchmark/resource/standard
+- theory–data mismatch
+- new opportunity enabled by data/instrumentation/computation/event
 
-For method-heavy papers, the introduction often follows a different pattern. Common variants from curated examples (open `references/introduction.md` and `references/examples/introduction-examples.md` for full versions):
+Do not manufacture `few studies have...` when the real motivation is a better test, explanation, measurement, comparison, validation, or resource.
 
-- **task-then-application** — define a task abstractly, then show its applications
-- **application-first** — open with a concrete application or pain point, narrow to the task
-- **general-to-specific-setting** — broad field → specific subproblem
-- **open-with-challenge** — lead with the unsolved difficulty
-- **novel-task-challenge-decomposition** — define a new task, decompose its challenges
-- **technical-challenge** (1-3 variants) — frame around the technical bottleneck, then the move
-- **pipeline-version** (1-4 variants) — for module/pipeline papers, frame contribution as one or several modules
+## Core move families
 
-Tell the user which variant you picked and why.
+Select and order only what the paper needs:
+
+1. establish relevant territory/context;
+2. synthesize current knowledge;
+3. create/sharpen the research need;
+4. position prior approaches/evidence fairly;
+5. state question/objective/hypothesis/design requirement;
+6. state the present response/contribution;
+7. preview scope or evidence classes when useful.
+
+Moves may recur or be embedded. A complex Introduction can narrow through several tensions rather than one `However -> gap -> Here we` turn.
+
+## Discipline/paper variants
+
+- **theory-led**: competing accounts -> discriminating prediction/test
+- **method-led**: capability need -> trade-off -> design principle -> method
+- **observation-led**: surprising phenomenon -> inadequate explanation -> test
+- **resource/benchmark-led**: fragmented practice -> missing common standard -> resource
+- **replication-led**: important prior claim -> robustness uncertainty -> independent test
+- **clinical/social science**: population/construct/evidence/inferential problem -> design
+- **humanities/qualitative**: interpretive/contextual problem -> source/lens/case -> argument
+
+Use `references/introduction.md` and `references/section-move-atlas.md` for the full decision tree.
 
 ## Drafting rules
 
-- Do not summarize results in detail. The final paragraph states the contribution and approach, not the numbers.
-- Cite prior work to position, not to demonstrate breadth. Each citation should earn its place.
-- The transition from "what is known" to "what this paper does" must be explicit, not implied.
+- Work backward from the paper's decisive evidence before writing background.
+- Synthesize prior work by idea/evidence/trade-off, not author-by-author chronology unless chronology matters analytically.
+- Separate method limitation, evidence limitation, scope limitation, conceptual limitation and practical limitation.
+- Represent strong prior work fairly; intellectual ancestry does not diminish a contribution.
+- Do not hide incrementality or a baseline to make the paper sound more novel.
+- The final paragraph should orient the reader, not advertise the paper.
+- Promise only what later evidence can support.
+
+## Paragraph rule
+
+Each paragraph has one nucleus plus supporting submoves. The first sentence should orient the reader to that nucleus, but need not always be a claim-first conclusion.
+
+## Nature-family note
+
+For an exact broad-audience Nature-family summary paragraph, load `references/nature-summary-paragraph.md`. Do not generalize that local form to other journals or fields.

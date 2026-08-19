@@ -1,25 +1,41 @@
 # Section: Conclusion (writing)
 
-## Default structure
+The Conclusion states the **most durable claim left after the Discussion's qualifications**, not the most ambitious version of the abstract.
 
-`contribution -> decisive evidence -> implication -> boundary`
+## Core moves
+
+Select what the article type needs:
+
+- answer to the central question;
+- decisive evidence basis;
+- contribution relative to prior knowledge/capability;
+- bounded implication;
+- unresolved issue/next step when it follows naturally.
+
+A separate Conclusion is not mandatory in every field/journal; sometimes the end of Discussion performs this job.
 
 ## Drafting rules
 
-- No new data. No unsupported promises.
-- Restate the central contribution in one sentence. Do not summarize each Result figure.
-- The implication must be narrower than or equal to the scope of the evidence.
-- A bounded future-work pointer is acceptable, but generic "more work is needed" is not.
+- No new data or new unsupported mechanism.
+- Do not summarize every Results subsection.
+- Preserve uncertainty, population/system conditions and causal boundary.
+- State implication at a scope narrower than or equal to the evidence.
+- Do not turn a validated method into a universal solution.
+- Do not use generic future-work language merely to create an uplifting ending.
+- If the paper's main contribution is negative, replication-based, theoretical, resource-based or interpretive, state that contribution directly rather than forcing a discovery-style close.
 
-## Overclaim check
+## Claim-drift check
 
-Before finalizing, run the check:
+Compare title, abstract, Results, Discussion and Conclusion:
 
-- Does each claim trace back to evidence in this paper?
-- Are mechanism words (`demonstrates`, `proves`, `establishes`) backed by the right study design?
-- Is the scope of the implication narrower than or equal to the scope of the evidence?
-- Is any "first" claim genuinely first within a stated scope?
+- Has `associated with` become `drives`?
+- Has one dataset become a field-wide claim?
+- Has simulation become demonstration in the real world?
+- Has a local proof under assumptions become a universal statement?
+- Has a null/negative result been softened until its scientific value disappears?
+
+The final wording should reflect what the full paper supports after alternatives and limitations are considered.
 
 ## Deeper reference
 
-For full conclusion structure (contribution-evidence-impact-limitation-future), open `references/conclusion.md`.
+Use `references/conclusion.md`, `references/article-architecture.md`, and exact target-journal guidance when a separate conclusion has article-type-specific expectations.

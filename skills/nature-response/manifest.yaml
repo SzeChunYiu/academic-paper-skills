@@ -1,20 +1,16 @@
 name: nature-response
-version: 1.7.0
+version: 1.8.0
 description: >
-  Declarative manifest for the static/dynamic split. SKILL.md uses this to
-  decide which fragments and templates to load for a reviewer-response or
-  revision-cover-letter request.
+  Declarative manifest for reviewer-response and revision-cover-letter workflows.
+  The response lifecycle now separates editor decision conditions, technically
+  blocking reviewer concerns, claim recalibration, clarity/reporting issues, and
+  optional enrichment before choosing revision work.
 
 # Design note: nature-response is a linear, parameterised workflow (intake ->
-# extract editor/reviewer items -> classify -> strategise -> draft -> map ->
-# QA -> package). Its variation — task mode (draft/audit/revise/triage/cover-letter/
-# revision-package/latex-template/appeal),
-# decision type, user language — is identified at runtime, mainly by
-# references/intake-and-routing.md, not by loading different large content
-# bodies. There is therefore no content axis; the split is core (always loaded)
-# plus the existing on-demand references. nature-response keeps its own
-# response-specific stance and source basis, but loads the shared main-text
-# discipline when a reviewer response proposes or performs manuscript edits.
+# extract editor/reviewer items -> classify decision consequence -> choose
+# closure route -> draft -> map -> QA -> package). It remains reviewer-separated
+# and non-inventive while using the shared editor/reviewer decision engine when
+# response strategy or revision scope is being decided.
 
 always_load:
   - static/core/stance.md
@@ -22,6 +18,12 @@ always_load:
 
 references:
   on_demand:
+    - condition: a real editor/reviewer decision is being triaged, major/minor revision strategy is being chosen, reviewer requests need must-address versus optional classification, or deciding whether to add evidence versus reanalyse/clarify/narrow/remove a claim
+      path: ../nature-shared/core/editor-reviewer-decision-engine.md
+    - condition: exact target journal/publication objective matters to the revision strategy or a reviewer/editor request appears inconsistent with the target's publication model
+      path: ../nature-shared/journal-formats/editorial-decision-profiles.md
+    - condition: after parsing a real editor/reviewer decision and before committing to experiments/manuscript expansion — build the decision ledger, classify decision relevance, choose closure routes, and prepare editor-facing closure synthesis
+      path: references/editor-decision-closure.md
     - condition: a reviewer or editor comment leads to additions, deletions, compression, relocation, or statistical-detail changes in the manuscript main text — classify the result, prevent revision accretion, separate main text/caption/SI functions, and run deletion, paragraph-necessity, and claim-repetition checks
       path: ../nature-shared/core/main-text-discipline.md
     - condition: before drafting — identify task mode, enforce the Major/Minor decision-type gate, parse pasted decision emails, minimum inputs, editor IDs, readiness state, and clarifying-question need

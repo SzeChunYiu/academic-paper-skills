@@ -1,70 +1,129 @@
 ---
 name: nature-citation
 description: >-
-  Add strict Nature/CNS citations to manuscript text by splitting long passages into citable
-  segments, searching only accepted flagship and subjournal titles from Nature Portfolio, the
-  AAAS Science family, and Cell Press, filtering by publication time range, and exporting one
-  reference-manager-ready output by default. Use this skill whenever the user asks to input text and
-  automatically get references, add citations to a paragraph/manuscript, find Nature-series or CNS
-  support for statements, create text-to-reference correspondence, "分段引用", "自动给出引用",
-  "Nature系列引用", "CNS及子刊", "支撑文献", "补引用", "找引用", or export EndNote/RIS/ENW/Zotero RDF.
-  Also trigger on general academic-writing citation needs even without the word "Nature", such as
-  adding references while writing a paper, finding sources/literature for a claim, building a
-  reference list, citation/referencing for academic writing, and Chinese phrasings like
+  Add defensible citations to academic manuscript text by splitting long passages into citable
+  claims, searching the best relevant scholarly evidence by default, evaluating support
+  conservatively, validating structured bibliographic metadata, and exporting reference-manager
+  files. The legacy skill name is retained for compatibility: general citation requests are NOT
+  restricted to Nature/Science/Cell. Explicit Nature Portfolio, Science-family, Cell Press, CNS,
+  or flagship-only filters remain available when requested. Target-journal bibliography style is
+  resolved separately from evidence selection. Use whenever the user asks to add references to a
+  paragraph/manuscript, find sources/literature for a claim, build text-to-reference correspondence,
+  create a reference list, search Nature-series/CNS support explicitly, or export EndNote/RIS/Zotero
+  RDF. Trigger on academic-writing citation needs, 支撑文献、补引用、找引用、自动给出引用、分段引用、
   学术写作引用、写论文加引用、写paper找文献、加参考文献、配文献、引用文献、文献支撑.
 metadata:
   author: Yuan1z skill, refactored into static/dynamic layers
 ---
 
-# Nature Citation — Router
+# Evidence-First Academic Citation — Router
+
+`nature-citation` is a legacy entry-point name. Do not infer a Nature/CNS search restriction from the skill name.
 
 This skill is split into two layers:
 
-- A **static layer** under `static/` that holds versioned, reusable content fragments (core principles and scope, the Chinese-user operating mode, and the citation workflow).
-- A **dynamic layer** (this file plus `manifest.yaml`) that loads the core every time and reaches for heavier material only when a step needs it.
-
-Do not try to apply the citation logic from memory or from this router. Always load fragments from disk as described below.
+- A **static layer** under `static/` that holds versioned core principles, Chinese-user behavior, and the claim-to-citation workflow.
+- A **dynamic layer** (this file plus `manifest.yaml`) that chooses the runtime search route and reaches for heavier references only when needed.
 
 ## Routing protocol
 
-Follow these four steps every time the skill is invoked.
+Follow these five steps every time the skill is invoked.
 
-### 1. Load the manifest and the core layer
+### 1. Load the manifest and core layer
 
 Read [manifest.yaml](manifest.yaml). Then read every file listed under `always_load`:
 
-- `static/core/principles.md` — what the skill produces, the strict journal scope, the source hierarchy, and the search-quality rules.
-- `static/core/chinese-mode.md` — how to operate when the user writes in Chinese or asks for `Nature系列`/`CNS及子刊` style support.
-- `static/core/workflow.md` — the seven-step workflow and the final report format.
+- `static/core/principles.md` — evidence scope versus rendering style, source hierarchy, support grading, metadata integrity.
+- `static/core/chinese-mode.md` — Chinese-language operating behavior.
+- `static/core/workflow.md` — the end-to-end citation workflow.
 
-### 2. No content axis — confirm scope and language inline
+### 2. Resolve evidence scope independently from citation style
 
-Unlike the other nature-* skills, nature-citation has no fragment axis. Its variation is runtime parameters, not different content bodies:
+Decide **evidence scope** first.
 
-- **journal scope** — `Nature系列` / `CNS` / `CNS及子刊` / flagship-only. Read it from the user's wording (see `core/principles.md`) and pass it to the script as `--scope`.
-- **user language** — if the user writes Chinese, follow `core/chinese-mode.md` (Chinese notes, English search queries).
-- **input length** — if there are more than ~10 segments, switch to the batched long-article strategy in `references/script-usage.md`.
+Default to `best-evidence` for general requests such as:
 
-State the detected scope and date limits in one short line before searching.
+- add references/citations to this paragraph
+- find literature supporting this claim
+- write a paper and add citations
+- `支撑文献` / `补引用` / `找引用` / `加参考文献`
 
-### 3. Run the workflow
+`best-evidence` means: search appropriate scholarly venues without a Nature/Science/Cell prestige filter and rank by direct evidentiary fit, source type, methods/study quality, claim boundary, and recency where relevant.
 
-Follow the seven steps in `core/workflow.md`: segment, parse, search, evaluate support conservatively, validate complete structured author metadata, export one reference-manager file, generate review artifacts when useful, and report with the HTML browser path first. Prefer `scripts/nature_citation.py` for the search/export when internet access is available; open `references/script-usage.md` for its full flag list and the long-article batch strategy. When DOI metadata lacks given names, refetch the record by PMID or verify it against the publisher rather than exporting surname-only `AU` fields.
+Use an explicit restricted scope only when the user asks for it:
 
-Never present a paper as support merely because its title is related, and never cite a metadata-only candidate without checking the abstract or publisher page. Do not invent missing bibliographic fields.
+- `nature` — Nature Portfolio
+- `science` — AAAS Science family
+- `cell` — Cell Press
+- `cns` — Nature Portfolio + AAAS Science family + Cell Press
+- `flagship` — Nature + Science + Cell only
+- exact journal(s) — only when the user specifically requests same-journal or journal-filtered sources
 
-### 4. Reach for references only when needed
+A manuscript targeting a particular journal does **not** imply that supporting literature should come only from that journal.
 
-The files under `references/` are deep references, not defaults. Open them on demand per the `references.on_demand` table in the manifest:
+Then resolve **citation rendering style** separately when needed. A target journal may require numeric, superscript, author-date, notes/bibliography, or a specific reference-manager/CSL style. If submission-ready formatting matters, load `../nature-shared/journal-formats/journal-resolution.md` and check the exact current target-journal guide/style.
 
-- running the script, full flags, long-article batching → `references/script-usage.md`.
-- turning a claim into search queries and support grades → `references/search-strategy.md`.
-- the exact Nature/CNS journal-family boundary → `references/journal-scope.md`.
-- RIS / EndNote / Zotero RDF export details → `references/ris-endnote.md`.
+State material search restrictions to the user; do not hide them.
+
+### 3. Choose the search route
+
+#### General/default citation request
+
+Use `scripts/academic_citation_search.py` with `--scope best-evidence`.
+
+This route reuses the legacy script's mature Crossref, structured-author, deduplication, and RIS/ENW/Zotero RDF helpers without applying its CNS-family whitelist.
+
+When Crossref journal metadata is insufficient, expand to discipline-appropriate sources. Examples include PubMed/NCBI for biomedical work, conference/proceedings indexes for engineering and computer science, and books/archives/primary legal or humanities sources where those are the right evidence types.
+
+#### Explicit Nature/Science/Cell-family request
+
+Use `scripts/nature_citation.py` or the new wrapper with the requested restricted `--scope`. The legacy script remains useful for its family whitelist, DOI/PMID enrichment, batch checkpoints, exports, and optional HTML browser.
+
+#### Long input
+
+For more than about 10 citable segments, process in batches while preserving stable segment IDs and one final mapping. Use the legacy long-article artifact workflow when HTML/TSV/JSON browsing is useful; otherwise batch the general route.
+
+### 4. Run the claim-to-evidence workflow
+
+Follow `static/core/workflow.md`:
+
+1. segment into atomic citable claims
+2. parse claim type, entities, population/model, direction, and boundary
+3. select appropriate source types and search queries
+4. discover candidates under the resolved evidence scope
+5. inspect abstract/full text or primary records and assign support grades conservatively
+6. validate complete structured author/bibliographic metadata
+7. export metadata and, if requested, render the exact target citation style separately
+
+Never present a paper as support merely because the title looks related. Never promote a `metadata-only candidate` to evidence without checking its abstract/full text or equivalent primary record.
+
+Actively surface contradictory or limiting evidence for high-stakes, contested, or overbroad claims.
+
+### 5. Reach for references only when needed
+
+Open on demand per `manifest.yaml`:
+
+- general journal-agnostic script -> `scripts/academic_citation_search.py`
+- legacy family scope/full flag list/HTML artifacts -> `references/script-usage.md` and `scripts/nature_citation.py`
+- search-query design and support grading -> `references/search-strategy.md`
+- explicit Nature/CNS family boundaries -> `references/journal-scope.md`
+- RIS/EndNote/Zotero RDF details -> `references/ris-endnote.md`
+- named target journal/style -> `../nature-shared/journal-formats/journal-resolution.md`; add `journal-family-profiles.md` only as fallback context
+
+## Output contract
+
+A normal report should make four things distinguishable:
+
+1. **Search scope and sources** — `best-evidence` or explicit restrictions, date/study-type filters, databases searched.
+2. **Claim-to-source mapping** — each source segment, candidate, source type, identifier, support grade, and insertion point.
+3. **Metadata/export** — RIS/ENW/Zotero RDF if requested, with author-integrity warnings surfaced.
+4. **Target rendering/compliance** — exact journal/style used, or `unresolved` if the final bibliography style was not requested/verified.
+
+If a restricted family search produces weak or no direct evidence, say so and keep stronger broader evidence in a separate optional set rather than lowering the support threshold.
 
 ## Why this split
 
-- The static layer is versioned and reviewable; the core stays small for a normal short run.
-- The dynamic layer keeps each invocation cheap: the script flag dump and long-article strategy load only when actually running a search.
-- The router itself is short on purpose. Update fragments and references, not this file, when adding scope.
-- This structure mirrors `nature-writing`, `nature-polishing`, `nature-reader`, `nature-paper2ppt`, and `nature-figure`.
+- Evidence quality and journal prestige are no longer conflated.
+- Existing CNS/Nature workflows remain backward-compatible when explicitly requested.
+- General academic users can cite the strongest field-appropriate work rather than only three publisher families.
+- Reference-manager metadata stays complete and reusable across journal transfers; final house style can be regenerated for a new target without repeating evidence discovery.

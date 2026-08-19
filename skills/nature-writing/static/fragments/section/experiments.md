@@ -1,48 +1,95 @@
-# Section: Experiments / Results (writing)
+# Section: Results / Experiments (writing)
 
-## Default evidence ladder
+## Reader job
 
-`system / workflow validation -> main result -> baseline comparison -> ablation / mechanism analysis -> application or generalization -> stress tests / failure modes`
+Results should let the reader recover:
 
-Each subsection has a claim-first opening, then data support.
+`what question was examined -> what evidence was obtained -> what narrow conclusion that evidence warrants -> why the next analysis follows`
 
-## Drafting rules
+Do not impose one fixed ladder or require every paragraph to be conclusion-first.
 
-- Load `../../../../nature-shared/core/main-text-discipline.md` before deciding
-  which analyses enter the main text. Classify results by their function in the
-  paper and build the shortest sufficient evidence chain.
-- Stay mainly in past tense.
-- Report what was observed, under what conditions, with what quantitative support.
-- Use statistics correctly and sparingly. Every test needs a stated hypothesis.
-- Keep core discovery and necessary support in the main text. Route robustness,
-  non-central heterogeneity, provenance detail, alternative inference, and edge
-  cases to SI unless they change the central interpretation.
-- **Each major claim needs adequate evidence across the manuscript and SI.** Do
-  not force every comparison, ablation, or stress test into the main text; if
-  adequate evidence is absent from the full record, mark it for follow-up rather
-  than drafting around it.
-- Normally report the descriptive quantity and primary inferential statistic in
-  the main text. Put secondary inference and diagnostics in SI unless required
-  or conclusion-changing.
+## Build an evidence dependency graph
 
-## Results syntax (vs Discussion)
+Before prose, map major evidence blocks and the reason each follows the previous one. Common patterns include:
 
-Results sentences usually report:
+- measurement/assay validation -> main finding -> mechanism
+- baseline -> primary comparison -> ablation/diagnosis -> robustness/generalization
+- discovery -> independent validation -> external validation
+- descriptive pattern -> inferential test -> explanatory analysis
+- contradiction -> discriminating analysis -> revised interpretation
+- capability -> benchmark -> stress test -> failure analysis
+- theme -> contrast/negative case -> integrated finding
+- theorem/lemma -> main result -> implication
 
-- `was detected` / `increased` / `showed` / `enabled` / `achieved`
+Use the order that makes the paper's inference easiest to follow, not necessarily the chronological experiment order.
 
-Do not drift into Discussion syntax (`may reflect`, `suggests`, `is likely due to`) unless the transition is intentional.
+## Local result block
 
-## Common failure modes when drafting
+A robust block often selects from:
 
-- Mixing observation and interpretation in the same paragraph.
-- Citing supplementary data when the result should be in the main text.
-- Appending robustness or reviewer-defense prose until the central evidence chain
-  disappears.
-- Repeating the same effects, intervals, and P values in Results and captions.
-- Vague comparisons (`higher than control`) without effect size, sample size, or test.
-- Per-paragraph claims without per-paragraph evidence.
+1. **question / local purpose** — what is being tested or established?
+2. **setup reminder** — only what readers need to interpret this result
+3. **observation / estimate** — what happened?
+4. **evidence** — numbers, uncertainty, comparison, qualitative material, proof, figure/table
+5. **bounded local inference** — what does this result establish?
+6. **bridge** — what new question does it create?
 
-## Deeper reference
+Not every paragraph needs all six. A paragraph may combine evidence and a narrow interpretation when the field/journal permits it.
 
-For ML/conference-style experiment sections — baselines, ablations, metrics, tables, figures — open `references/experiments.md`.
+## Main-text evidence discipline
+
+Load `../../../../nature-shared/core/main-text-discipline.md` before allocating analyses.
+
+- keep decisive discovery and necessary support in the main text;
+- keep conclusion-changing robustness, heterogeneity, alternative inference and negative evidence visible enough to constrain the claim;
+- move routine diagnostics/provenance/secondary checks to captions, Methods, source data or SI where appropriate;
+- do not repeat all display values in prose.
+
+## Reporting rules
+
+- Report direction, magnitude and uncertainty at the level needed to support the claim.
+- Define sample size/replicate meaning where ambiguity would affect inference.
+- Name comparator/baseline explicitly.
+- Match statistical language to the actual analysis; do not use `significant` as a synonym for important.
+- Keep observation, model-based estimate and interpretation distinguishable.
+- Use figure/table calls as evidence pointers, not as the grammatical subject of every paragraph.
+
+## Commentary boundary varies
+
+Some journals/fields integrate interpretation into Results; others reserve most interpretation for Discussion or use a combined Results and Discussion section.
+
+Therefore:
+
+- do not ban all interpretive sentences from Results;
+- do not turn Results into a Discussion by speculating beyond local evidence;
+- follow exact journal/article-type convention after the scientific evidence map works.
+
+## Computational/benchmark subtype
+
+For ML/engineering experiments, common evidence questions include:
+
+- Are baselines fair and competitive?
+- Does the main result hold across datasets/tasks?
+- Which components matter (ablation)?
+- What mechanism/behavior explains performance?
+- What are runtime/compute/data trade-offs?
+- Does it generalize or fail under shift/stress?
+- Are uncertainty and repeated-run variation reported where relevant?
+
+Load `references/experiments.md` for deeper benchmark-specific planning.
+
+## Anti-patterns
+
+- `Experiment 1 / Experiment 2` with no argument linking them
+- a strong claim followed by only a figure pointer
+- paragraph-by-paragraph conclusion statements with no visible uncertainty
+- exhaustive reviewer-defense analyses crowding out the decisive evidence chain
+- interpreting every small difference as mechanism
+- hiding a failed/limiting test that changes the headline conclusion
+- repeating the same result in prose, caption and Discussion
+
+## Handoff test
+
+After each major block ask: **What did we learn, and what question becomes worth asking next because of it?**
+
+If the next subsection cannot answer that question or clearly open a new evidence branch, reconsider the sequence.

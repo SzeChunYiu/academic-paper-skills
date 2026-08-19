@@ -1,173 +1,290 @@
 ---
 name: nature-reviewer
 description: >-
-  Simulate Nature-style or general pre-submission peer review from the referee perspective,
-  not an author rebuttal. Use for reviewer reports, mock peer review, manuscript critique,
-  novelty/significance/technical-soundness assessment, 审稿人视角评估, 模拟审稿, 预审,
-  投稿前自审, 审稿意见模拟, or 帮我审一下论文. Produce evidence-grounded Major Concerns,
-  Minor Comments, and blocking flags. For multiple reviewers, keep every reviewer mutually
-  blind in a separate context, freeze all reports before comparison, and create any synthesis
-  only afterward as a separate editor/author-facing artifact.
+  Simulate journal-aware pre-submission editorial triage, mutually blind peer review,
+  post-review editor synthesis, and an author-facing decision-engineering map. The legacy
+  skill name is retained for compatibility but the workflow is not Nature-only. Resolve the
+  exact journal/venue and publication model before assessing novelty, priority, breadth,
+  advancement, rigor, clinical relevance, or other target-specific criteria. Use for mock peer
+  review, desk-review risk, editor perspective, reviewer perspective, acceptance-readiness,
+  manuscript critique, novelty/significance/technical-soundness assessment, 投稿前自审、编辑视角、
+  审稿人视角、模拟审稿、拒稿风险、接收概率相关风险分析. Produce evidence-grounded Major Concerns,
+  Minor Comments, blocking flags, and minimum-sufficient repair tests without gaming reviewers.
 ---
 
-# Nature Reviewer Assessment Skill
+# Journal-Aware Editor + Reviewer Decision Simulation
 
-Use this skill to simulate a `Nature`-style reviewer assessment package from the referee
-side.
+`nature-reviewer` is a legacy entry-point name. Do **not** infer flagship Nature criteria from the skill name.
 
-This skill is for reviewer-style manuscript evaluation, not for drafting the authors'
-response. If the user wants rebuttal writing, route to `nature-response`.
+The workflow models the publication funnel as separate stages:
 
-## Default stance
+`target criteria -> editorial triage -> independent external review -> editor synthesis -> author-facing decision engineering`
 
-- Ground the review only in the local source basis plus manuscript facts supplied by the user.
-- Evaluate the manuscript against source-grounded axes: `originality`, `scientific importance`, `interdisciplinary readership`, `technical soundness`, and `readability for nonspecialists`.
-- Use the 12-axis technical concern taxonomy only as an internal coverage checklist; it supplements but never replaces the five source-grounded axes.
-- Return exactly `3 mutually blind reviewer reports + 1 post-review synthesis` unless the user explicitly asks for another structure.
-- Give every reviewer only the same immutable manuscript/source packet, the same journal criteria, and that reviewer's preassigned emphasis. Never provide another review, a shared concern ledger, a draft synthesis, or hints about what another reviewer noticed.
-- Run each reviewer in a genuinely separate context, subagent, process, or invocation. If the environment cannot isolate contexts, generate one reviewer report per invocation or explicitly state that mutual blindness cannot be guaranteed; never present shared-context drafting as independent peer review.
-- Define emphasis briefs before any report is generated. They are working lenses, not reviewer identities, specialties, institutions, or biographies.
-- Freeze each individual report before comparing them. Natural duplication or disagreement is valid evidence of independent review and must not be edited away to manufacture diversity.
-- Identify who would be interested in the results and why.
-- Identify technical failings that must be addressed before the authors' case is established.
-- Give every substantive concern a stable ID, a faithful `claim_pointer`, and a verifiable `evidence_pointer`; mark missing locations instead of inventing them.
-- Separate user-visible concerns into `Major Concerns` and `Minor Comments`. Mark a Major Concern
-  `Blocking Yes` only when the current manuscript cannot establish its central case until that
-  concern is resolved; Minor Comments are never blocking.
-- Do not impose a concern quota. If no grounded concern exists at a level, state that explicitly
-  instead of inventing one.
-- Keep the critique intellectually sharp but professionally phrased; severity comes from impact
-  on the manuscript's case, not from hostile wording.
-- Avoid em dashes, en dashes, and colons as routine prose punctuation throughout reviewer reports and synthesis. Prefer a new sentence, comma, semicolon, parentheses, or a short heading followed by a new line. Retain ordinary hyphens in standard compound terms and stable IDs such as `R1-M1`. Preserve punctuation in source-faithful titles, quotations, formulas, identifiers, URLs, times, and required machine-readable syntax when changing it would be inaccurate.
-- Distinguish clearly between what is supported, what is weak, and what is not assessable from the provided material.
-- When the manuscript has a clear technical domain, use claim-dependent domain gates as supporting checks, but keep the output inside the same 3-reviewer `nature-reviewer` structure.
-- Do not claim the editor's final decision or certainty about fit to `Nature`.
+The goal is not to predict or manipulate acceptance. The goal is to make the scientific case correctly scoped, easy to evaluate, and strong against the decision-relevant objections used by the exact target.
+
+## Core stance
+
+- Load `manifest.yaml` and every `always_load` file.
+- Resolve exact target journal/venue, article type and current publication model before applying target-specific axes.
+- Keep universal scientific validity separate from target-specific priority, significance, readership, novelty, advancement, clinical impact or other editorial criteria.
+- Do not use one `novelty + rigor + impact` formula across journals.
+- Build a **decision proof** for each headline claim: claim, importance under target criteria, decisive evidence, strongest alternative explanation, boundary, and resolution test.
+- Simulate editor triage before reviewers, using only the manuscript and verified target criteria. Do not contaminate reviewers with triage conclusions.
+- Return exactly `3 mutually blind reviewer reports + 1 post-review synthesis` by default, while also adding the separate editorial-triage and author-facing decision-engineering layers. The user may request another reviewer count.
+- Give every reviewer the same immutable manuscript/source packet, target criteria and report skeleton, plus only that reviewer's preassigned emphasis.
+- Run each reviewer in a **genuinely separate context**, subagent, process, or invocation. If the environment cannot isolate contexts, generate one reviewer report per invocation or explicitly state that mutual blindness cannot be guaranteed.
+- **Freeze each individual report before comparing** them. Natural duplication/disagreement is evidence, not a defect to edit away.
+- Generate synthesis only afterward as `Editor synthesis (post-review; simulated)` and keep it **not shown to reviewers**.
+- **Do not let one reviewer read** another review, the editorial-triage conclusion, a shared concern ledger, consensus hints, or the author-facing repair plan.
+- Give every substantive concern a stable ID, faithful `claim_pointer`, verifiable `evidence_pointer`, decision consequence and resolution test.
+- Separate user-visible concerns into `Major Concerns` and `Minor Comments`.
+- Mark a Major Concern `Blocking Yes` only when the current manuscript cannot establish a central case or satisfy a hard target criterion until the issue is resolved.
+- **Minor Comments are never blocking**.
+- **Do not impose a concern quota**. Use `None identified from the supplied material` instead of manufacturing issues.
+- Prefer the minimum scientifically sufficient closure: add decisive evidence, reanalyse, correct, clarify/restructure, narrow claim, remove claim, or change target/article type.
+- Treat reviewer requests as optional unless they close a real scientific or publication-criteria gap.
+- Do not claim the real editor's final decision or numeric acceptance probability.
+
+## Target/publication-model gate
+
+When the target is named, load:
+
+1. `../nature-shared/journal-formats/journal-resolution.md`;
+2. current official target editor/reviewer/publication criteria when decision-critical;
+3. `../nature-shared/journal-formats/editorial-decision-profiles.md` as a fallback model only.
+
+Common profiles include:
+
+- selective broad-interest;
+- selective field-advancement;
+- rigor-first scholarly record;
+- clinical/policy priority;
+- evidence-assessment without conventional post-review gatekeeping;
+- deadline-constrained conference selection.
+
+### Important contrasts
+
+- Flagship Nature can screen on importance/broad readership independently from technical validity.
+- PLOS ONE explicitly emphasizes technical rigor/scientific and ethical eligibility rather than perceived importance as a publication threshold.
+- IEEE exposes scope, novelty, validity, data, clarity, compliance and advancement as separate assessment axes.
+- eLife's current assessment model separates significance of findings from strength of evidence and should not be converted into a fake acceptance score.
+
+Always verify the exact target at use time.
 
 ## Accepted inputs
 
-The skill may receive:
+- full manuscript;
+- title/abstract/summary;
+- selected sections;
+- figures/tables/legends;
+- supplementary material;
+- author claim/evidence notes;
+- target journal/venue and article type;
+- cover letter/initial-submission positioning;
+- constraints on additional experiments/analysis.
 
-- full manuscript draft
-- abstract, summary paragraph, or cover-summary style text
-- introduction, results, discussion, or methods excerpts
-- figure legends, selected figures, or result notes
-- author notes in Chinese or English describing the claimed contribution
-- pre-submission positioning notes
-
-If the provided material is partial, perform a bounded review and mark the assessment boundary explicitly.
+If material is partial, perform a bounded review and state the assessment boundary.
 
 ## Workflow
 
-1. Identify the input scope and whether the job is a reviewer-style assessment rather than rebuttal drafting.
-2. Build one immutable review packet containing only the supplied manuscript, verified source anchors, assessment boundary, and common journal criteria. Do not add analytical conclusions or suspected concerns to this packet.
-3. Define the reviewer count and emphasis briefs before launching any reviewer.
-4. Launch each reviewer in an isolated context. Pass only the immutable review packet, that reviewer's emphasis brief, the common report skeleton, and the same grounding rules.
-5. Inside each isolated review, independently assess readiness and the source-grounded axes, then build that reviewer's own concern ledger using `references/technical-concern-taxonomy.md`. If relevant, load only the applicable section of `references/domain-specific-review-gates.md` inside that same isolated context.
-6. Finalize and freeze every reviewer report. Do not show a completed or partial report to another reviewer, and do not redistribute concerns to control overlap.
-7. Only after all reports are frozen, compare them in a separate synthesis pass. Reconcile independently created concerns to shared synthesis keys, and label consensus only when at least two reports independently raise the same underlying concern.
-8. Generate `Cross-review synthesis (post-review; not shown to reviewers)` with consensus blocking concerns, other major concerns, the minor-revision checklist, and genuine differences in emphasis or judgment.
-9. Run QA for reviewer isolation, severity calibration, blocking calibration, evidence anchoring, groundedness, coverage, role boundaries, and non-invention. Overlap is measured only after freezing and must never trigger retroactive rewriting of individual reports.
+### 1. Build target criteria card
 
-## Output format
+Record:
 
-Unless the user asks for another format, return:
+- exact journal/venue;
+- article/content type;
+- publication model;
+- editorial-triage axes;
+- reviewer axes;
+- acceptance/assessment condition;
+- verified sources;
+- unresolved criteria.
+
+### 2. Run editorial triage simulation
+
+Without future reviewer concerns, evaluate:
+
+- scope/article-type fit;
+- contribution clarity;
+- decisive evidence class;
+- target-specific priority/breadth/advancement only if applicable;
+- maturity/readiness for external review;
+- readability/evaluability;
+- obvious integrity/compliance/central-evidence blockers.
+
+Allowed posture labels include:
+
+- `send_to_review_case_clear`;
+- `send_to_review_but_positioning_risk`;
+- `technical_case_not_review_ready`;
+- `target_fit_or_priority_risk`;
+- `scope_or_article_type_mismatch`;
+- `integrity_or_compliance_blocker`;
+- `not_assessable_from_supplied_material`.
+
+These are simulation labels, not predictions of the real editor.
+
+### 3. Build immutable reviewer packet
+
+Include only supplied manuscript facts, verified anchors, assessment boundary, target criteria, report skeleton and reviewer-specific emphasis.
+
+Do not include triage conclusions or pre-generated concerns.
+
+### 4. Run independent reviewers
+
+Use `references/review-axes.md`.
+
+Default emphases:
+
+- Reviewer 1: validity, methods, data, inference and blocking technical concerns;
+- Reviewer 2: prior work, contribution/originality and target-specific significance/priority;
+- Reviewer 3: reproducibility/reporting, clarity/readership and generalization/boundaries.
+
+Modify these lenses for the article type when needed without inventing biographies.
+
+Each reviewer independently builds its own concern ledger and output.
+
+### 5. Construct concerns
+
+For each Major Concern include:
+
+- concern ID;
+- severity;
+- `Blocking Yes / No`;
+- target criterion affected;
+- `claim_pointer`;
+- `evidence_pointer`;
+- concern;
+- alternative interpretation when relevant;
+- why it matters;
+- resolution test.
+
+The resolution test may legitimately be **claim narrowing or removal**, not always a new experiment.
+
+### 6. Freeze reports
+
+Do not rewrite independent reports after comparison to manufacture agreement or diversity.
+
+### 7. Run editor synthesis
+
+After all reports are frozen, classify issues as:
+
+- `publication_criteria_blocker`;
+- `technical_blocker`;
+- `major_repairable`;
+- `claim_recalibration`;
+- `clarity_or_reporting`;
+- `optional_enrichment`.
+
+Editors are simulated as weighing arguments and relevant lenses, not counting votes.
+
+Allowed simulated decision postures:
+
+- `strong_case_after_minor_closure`;
+- `promising_major_revision_case`;
+- `central_case_requires_new_decisive_evidence`;
+- `scientifically_valid_but_target_fit_or_priority_problem`;
+- `current_claims_not_established`;
+- `transfer_or_repositioning_may_be_better_than_more_experiments`;
+- `not_assessable`.
+
+Never state these as the journal's real decision.
+
+### 8. Build decision engineering map
+
+This is author-facing and generated after frozen reviews.
+
+For each decision-relevant risk identify:
+
+- stage where it matters;
+- target criterion;
+- claim affected;
+- why it can change a decision;
+- cheapest valid closure route;
+- minimum sufficient manuscript/evidence change;
+- residual risk.
+
+Also list **Do not waste effort on** items for reviewer requests classified as optional enrichment.
+
+### 9. Run QA
+
+Load `references/qa-checklist.md` and audit:
+
+- target-criteria fidelity;
+- reviewer isolation;
+- traceability;
+- severity/blocking calibration;
+- resolution-test validity;
+- editor/reviewer role boundaries;
+- anti-gaming;
+- non-invention.
+
+## Output contract
+
+Unless the user asks otherwise:
 
 ```text
 Review setup
-- **Input scope** [value]
-- **Assessment boundary** [value]
-- **Shared manuscript claim summary** [value]
-- **Visible evidence base** [value]
-- **Missing materials affecting confidence** [value]
-
+Editorial triage simulation
 Reviewer 1
-- **Overall assessment** [text]
-- **Who would be interested in the results, and why** [text]
-- **Major strengths** [text]
-- **Major Concerns** [items]
-- **Minor Comments** [items]
-- **Technical failings that need to be addressed before the case is established** [IDs or summary]
-- **Assessment against Nature-style criteria** [text]
-- **Recommendation posture** [text]
-
-For each Major Concern
-- **Concern ID** R1-M1
-- **Severity** Major
-- **Blocking** Yes / No
-- **Axis** [value]
-- **Claim pointer** [value]
-- **Evidence pointer** [value]
-- **Concern** [text]
-- **Why it matters** [text]
-- **Resolution test** [text]
-
-For each Minor Comment
-- **Concern ID** R1-m1
-- **Severity** Minor
-- **Axis** [value]
-- **Affected element** [value]
-- **Evidence pointer** [value]
-- **Issue** [text]
-- **Required correction** [text]
-
 Reviewer 2
-[Same structure]
-
 Reviewer 3
-[Same structure]
-
-Cross-review synthesis (post-review; not shown to reviewers)
-- **Consensus strengths** [text]
-- **Consensus blocking concerns** [items]
-- **Other consensus major concerns** [items]
-- **Where emphasis differs across reviewers** [text]
-- **Minor revision checklist** [items]
-- **Broad-interest / significance readout** [text]
-- **Most important issues to resolve before a strong Nature-style case is established** [items]
-
+Editor synthesis (post-review; simulated)
+Decision engineering map (author-facing)
 Risk / unsupported claims
-- [specific unsupported or not-assessable items]
 ```
 
-## Red lines
+Each reviewer retains both `Major Concerns` and `Minor Comments` headings even when one tier is empty.
 
-- Do not invent reviewer identities, specialty roles, or selection history.
-- Do not let one reviewer read, cite, anticipate, agree with, or respond to another review.
-- Do not build or distribute a shared concern ledger before individual reports are frozen.
-- Do not rewrite independent reports after comparison merely to reduce duplication or create artificial disagreement.
-- Do not call reports mutually blind when they were generated in a shared context without an explicit limitation notice.
-- Do not use dash punctuation or colons as habitual sentence connectors when clearer punctuation, headings, or sentence boundaries work.
-- Do not invent experiments, validations, controls, citations, figure details, line numbers, or prior-work distinctions not present in the input.
-- Do not silently turn reviewer assessment into author rebuttal drafting.
-- Do not present the review as an editorial decision letter.
-- Do not state that the manuscript belongs in `Nature` as a settled fact.
-- Do not omit technical failings when the provided evidence does not establish the authors' case.
-- Do not create Major or Minor concerns merely to fill a quota or make reviewer reports look balanced.
-- Do not downgrade a core evidence, validity, ethics, or integrity problem to Minor because it is
-  easy to describe, and do not upgrade a local presentation issue merely to sound severe.
+## Acceptance-engineering red lines
+
+Do not optimize acceptance by:
+
+- hiding negative/contradictory evidence;
+- selectively omitting close competitors;
+- inflating novelty or broad impact;
+- citing likely reviewers to influence them;
+- choosing suggested reviewers because they are expected to be favorable;
+- agreeing to irrelevant reviewer self-citations merely for recommendation benefit;
+- burying limitations that change the headline interpretation;
+- adding cosmetic experiments that do not discriminate between plausible explanations;
+- writing a cover letter that claims significance the manuscript does not establish.
+
+Peer-review research on author-suggested reviewers and reviewer citation requests is treated here as an anti-gaming warning, not a tactic.
+
+## Red lines and legacy integrity contracts
+
+- Do not invent reviewer identities, specialties, institutions, selection history, hidden editor knowledge, competing submissions, experiments, validations, controls, citations, figure details, or line numbers.
+- **Do not invent experiments** or manuscript changes.
+- Do not present an editor simulation as a real decision letter.
+- Do not silently turn reviewer assessment into author rebuttal drafting; real post-decision response work belongs to `nature-response`.
+- **Avoid em dashes, en dashes, and colons** as routine prose connectors in the reviewer-report style contract where a clearer sentence boundary works.
+- **Do not use dash punctuation or colons** habitually when clearer prose is available. Preserve punctuation required by titles, quotations, formulas, identifiers, URLs, times and machine-readable syntax.
+- Do not downgrade core validity, ethics or integrity problems because their prose explanation is short.
+- Do not upgrade local presentation preferences merely to sound severe.
 
 ## Related files
 
-| File | Open when |
-|---|---|
-| [references/source-basis.md](references/source-basis.md) | You need source provenance, local rule summaries, or source-vs-implementation boundaries |
-| [references/reviewer-workflow.md](references/reviewer-workflow.md) | You need the invocation order, fact-base extraction flow, or synthesis rules |
-| [references/review-axes.md](references/review-axes.md) | You need the evaluation axes or reviewer weighting logic |
-| [references/technical-concern-taxonomy.md](references/technical-concern-taxonomy.md) | You need the internal 12-axis coverage check, concern ledger, or claim/evidence-pointer rules |
-| [references/domain-specific-review-gates.md](references/domain-specific-review-gates.md) | The manuscript has clear chemistry, engineering, materials, atmospheric, climate-ecology, hydrology, or remote-sensing evidence chains |
-| [references/report-structure.md](references/report-structure.md) | You need the default output contract or section anatomy |
-| [references/role-boundaries.md](references/role-boundaries.md) | You need constraints on reviewer differences and editor-versus-reviewer boundaries |
-| [references/qa-checklist.md](references/qa-checklist.md) | You are finalizing an output and need groundedness / non-invention checks |
-| [../nature-shared/core/consistency-sweep.md](../nature-shared/core/consistency-sweep.md) | You are checking the manuscript against itself: headline counts that do not reconcile with the Methods, one metric at two precisions, a superlative contradicted by the paper's own table, overlapping error bars presented as an advantage, or internal summaries that disagree |
-| [references/editorial criteria and processes.md](<references/editorial criteria and processes.md>) | You need the primary local Nature source text |
+- `../nature-shared/core/editor-reviewer-decision-engine.md` — shared decision stages, claim decision proof, closure routes and anti-gaming rules.
+- `../nature-shared/journal-formats/editorial-decision-profiles.md` — cross-journal publication-model fallbacks.
+- `references/source-basis.md` — researched public editor/reviewer source basis.
+- `references/reviewer-workflow.md` — exact simulation execution order.
+- `references/review-axes.md` — universal and target-conditional axes.
+- `references/technical-concern-taxonomy.md` — concern coverage/traceability.
+- `references/domain-specific-review-gates.md` — claim-dependent domain checks.
+- `references/report-structure.md` — output anatomy.
+- `references/role-boundaries.md` — editor/reviewer/author-facing separation.
+- `references/qa-checklist.md` — final release gate.
+- `../nature-writing/references/paper-review.md` — full manuscript claim/argument audit.
+- `../nature-shared/core/consistency-sweep.md` — internal manuscript contradiction scan.
 
 ## Source hierarchy
 
-Use sources in this order:
+1. exact current target journal/venue editor/reviewer/publication criteria;
+2. manuscript facts supplied by the user;
+3. shared decision engine and publication-model profile;
+4. `references/source-basis.md`;
+5. exact Nature local source only when flagship Nature is the target;
+6. domain-specific supporting gates when applicable.
 
-1. `references/editorial criteria and processes.md`
-2. manuscript facts supplied by the user
-3. conservative local implementation rules documented in `references/source-basis.md`
-4. domain-specific supporting gates in `references/domain-specific-review-gates.md`
-
-If a user asks for policy-level certainty beyond this local source, state the limit instead of improvising broader journal policy.
+If target-policy certainty is unavailable, mark it unresolved instead of improvising a criterion.

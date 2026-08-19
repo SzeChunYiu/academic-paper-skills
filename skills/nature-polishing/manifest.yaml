@@ -1,8 +1,9 @@
 name: nature-polishing
-version: 6.4.0
+version: 7.0.0
 description: >
-  Declarative manifest for the static/dynamic split. SKILL.md uses this to
-  decide which fragments to load for a given polishing request.
+  Declarative manifest for journal-aware academic polishing. The legacy skill
+  name is retained for backward compatibility; journal behavior is resolved
+  independently from that name.
 
 always_load:
   # Shared layer — common to nature-polishing and nature-writing
@@ -31,9 +32,10 @@ axes:
 
   section:
     detect: |
-      Identify which section(s) the user wants polished. The user may name
-      one or several. If unclear, ask before loading. Skip this axis only
-      when the user provides standalone prose with no section context.
+      Identify which section(s) the user wants polished. The user may name one
+      or several. If unclear, infer conservatively when possible; only request
+      clarification when the ambiguity materially changes the edit. Skip this
+      axis for truly standalone prose with no section context.
     values:
       abstract:       static/fragments/section/abstract.md
       intro:          static/fragments/section/intro.md
@@ -57,20 +59,31 @@ axes:
 
   journal:
     detect: |
-      Use nature only for the flagship journal Nature. Use nat-comms for Nature
-      Communications and nat-mach-intell for Nature Machine Intelligence or
-      NMI. If the user says "Nature-family" generically or names another Nature
-      Portfolio subjournal, use generic and check that title's current guide.
+      Resolve the target independently from the legacy nature-polishing skill
+      name. Use nature only for flagship Nature, nat-comms only for Nature
+      Communications, and nat-mach-intell only for Nature Machine Intelligence.
+      Use profiled whenever the user names any other journal or useful journal/
+      publisher/venue/discipline family (for example another Nature Portfolio
+      title, Science/AAAS, Cell Press, IEEE, ACM, PLOS, Springer/BMC, Elsevier,
+      Wiley, APA-style, biomedical, humanities, or a journal-transfer target).
+      Use generic only when no target or useful family is known. For profiled
+      targets resolve exact journal -> article type -> stage -> component before
+      exact compliance claims.
     values:
-      nature:         static/fragments/journal/nature.md
-      nat-comms:      static/fragments/journal/nat-comms.md
+      nature:          static/fragments/journal/nature.md
+      nat-comms:       static/fragments/journal/nat-comms.md
       nat-mach-intell: static/fragments/journal/nat-mach-intell.md
-      generic:        static/fragments/journal/generic.md
+      profiled:        static/fragments/journal/profiled.md
+      generic:         static/fragments/journal/generic.md
     default: generic
     multi: false
 
 references:
   on_demand:
+    - condition: any named non-Nature target journal, publisher/venue/discipline family, journal transfer, or exact cross-journal compliance request
+      path: ../nature-shared/journal-formats/journal-resolution.md
+    - condition: a non-Nature target needs a publisher/venue/discipline family fallback profile
+      path: ../nature-shared/journal-formats/journal-family-profiles.md
     - condition: polishing, restructuring, or shortening Results or full main text; deciding what belongs in main text versus captions or SI; preventing revision accretion; reducing statistical or claim repetition; or applying a paragraph necessity test
       path: ../nature-shared/core/main-text-discipline.md
     - condition: needs Nature/Nature Communications article-level patterns for abstracts, intros, Results openings, Discussion, conclusions, titles
