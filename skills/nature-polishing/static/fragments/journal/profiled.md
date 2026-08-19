@@ -4,8 +4,8 @@ Use this fragment when the target is a named journal outside the repository's ex
 
 Before applying journal-specific edits, read:
 
-1. `../../../nature-shared/journal-formats/journal-resolution.md`
-2. `../../../nature-shared/journal-formats/journal-family-profiles.md`
+1. `../../../../nature-shared/journal-formats/journal-resolution.md`
+2. `../../../../nature-shared/journal-formats/journal-family-profiles.md`
 
 Resolve `exact journal -> article/content type -> stage -> component` before enforcing house rules.
 
