@@ -32,8 +32,8 @@ Plan figures by scientific claims, not by source tables. Do not turn each table 
 
 When the task is a serious paper-figure redesign and the field/contribution class is known, load:
 
-- `../../nature-shared/core/analogue-paper-calibration.md`;
-- `../../nature-figure/references/analogue-figure-calibration.md` (or the routed equivalent from `SKILL.md`).
+- `../../../nature-shared/core/analogue-paper-calibration.md`;
+- `../../references/analogue-figure-calibration.md`.
 
 Study a few close comparator papers to understand:
 
