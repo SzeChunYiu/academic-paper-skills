@@ -56,12 +56,15 @@ class AnaloguePaperCalibrationTests(unittest.TestCase):
         router = read(SKILLS / "nature-figure" / "SKILL.md")
         manifest = read(SKILLS / "nature-figure" / "manifest.yaml")
         reference = read(SKILLS / "nature-figure" / "references" / "analogue-figure-calibration.md")
+        contract = read(SKILLS / "nature-figure" / "static" / "core" / "contract.md")
         self.assertIn("Run an analogue-paper visual calibration", router)
         self.assertIn("analogue-figure-calibration.md", manifest)
         self.assertIn("Learn figure roles before chart types", reference)
         self.assertIn("Project visual identity to preserve", reference)
-        self.assertIn("Never", reference)
         self.assertIn("use a chart because it is popular in the target journal", reference)
+        self.assertIn("../../../nature-shared/core/analogue-paper-calibration.md", contract)
+        self.assertTrue((SHARED / "core" / "analogue-paper-calibration.md").exists())
+        self.assertTrue((SKILLS / "nature-figure" / "references" / "analogue-figure-calibration.md").exists())
 
 
 if __name__ == "__main__":
