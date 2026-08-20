@@ -1,13 +1,13 @@
 name: nature-figure
-version: 3.0.0
+version: 3.1.0
 description: >
   Declarative manifest for journal-aware scientific figure design. The legacy
   skill name is retained for compatibility. The plotting backend is independent
   from the target journal; exact figure compliance is resolved by journal,
-  content type, submission stage, and figure component.
+  content type, submission stage, and figure component. Analogue-paper study
+  can calibrate evidence roles and plot grammar without copying visual identity.
 
 always_load:
-  # Skill-local core (figure does not use the prose-oriented nature-shared layer)
   - static/core/contract.md
   - static/core/stance.md
 
@@ -61,6 +61,10 @@ axes:
 
 references:
   on_demand:
+    - condition: study a few similar papers to decide which figures/panels/data belong in the manuscript, what visual evidence roles are conventional, how comparable data are plotted, or what belongs in main text versus SI without copying another paper's visual identity
+      path: references/analogue-figure-calibration.md
+    - condition: cross-skill analogue-paper study for argument/evidence/figure architecture before manuscript or figure redesign
+      path: ../nature-shared/core/analogue-paper-calibration.md
     - condition: any named target journal/venue outside exact Nature/NMI profiles; journal transfer; or cross-journal figure compliance, artwork, accessibility, graphical-abstract, or production adaptation
       path: references/journal-adaptation.md
     - condition: resolve an exact target journal, article/content type, submission stage, or distinguish live rules from family fallback
