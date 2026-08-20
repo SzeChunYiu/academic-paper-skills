@@ -1,20 +1,21 @@
 ---
 name: nature-writing
-description: Draft, restructure, or plan journal-aware academic manuscripts from author-provided claims, results, figures, notes, sources, or Chinese drafts. The legacy skill name is retained for compatibility, but core writing is evidence-first, rhetorical-move-based, cross-disciplinary, and independent of Nature style. Use for titles, abstracts, introductions, related work, Methods, Results/experiments, Discussions, Conclusions, full-paper argument architecture, paragraph/sentence logic, target-journal corpus calibration, editor/reviewer preflight, acceptance-readiness engineering, journal transfer, and initial-submission packages. Also use to map claim-to-evidence logic, sequence analyses, diagnose flow, distinguish observation from interpretation, preserve uncertainty and contribution boundaries, learn current rhetorical patterns from comparable published papers without copying wording, allocate material across main text/captions/Methods/SI, identify likely editorial/reviewer blockers, and decide whether a concern needs evidence, reanalysis, clarification, claim narrowing/removal, or a better target. Supports Nature Portfolio, Science/AAAS, Cell Press, IEEE, ACM, PLOS, Springer/BMC, Elsevier, Wiley, society journals, discipline-specific venues, and unknown targets through the journal resolver. Trigger on academic writing, paper drafting, manuscript structure/logic, editor perspective, reviewer perspective, acceptance readiness, rejection-risk preflight, 学术写作、科研写作、论文写作、论文逻辑、段落逻辑、论文结构、期刊写作、投稿写作、编辑视角、审稿人视角、拒稿风险.
+description: Draft, restructure, or plan journal-aware academic manuscripts from author-provided claims, results, figures, notes, sources, or Chinese drafts. The legacy skill name is retained for compatibility, but core writing is evidence-first, rhetorical-move-based, cross-disciplinary, and independent of Nature style. Use for titles, abstracts, introductions, related work, Methods, Results/experiments, Discussions, Conclusions, full-paper argument architecture, paragraph/sentence logic, target-journal corpus calibration, analogue-paper study, author-voice preservation, editor/reviewer preflight, acceptance-readiness engineering, journal transfer, and initial-submission packages. For substantial rewrites, study a few genuinely comparable papers to learn how similar work frames the problem, sequences evidence, chooses main figures/data displays, plots key comparisons, and allocates material between main text and SI, while preserving a separate author-voice profile so the final manuscript remains recognizably the author's own writing. Also use to map claim-to-evidence logic, sequence analyses, diagnose flow, distinguish observation from interpretation, preserve uncertainty and contribution boundaries, allocate material across main text/captions/Methods/SI, identify likely editorial/reviewer blockers, and decide whether a concern needs evidence, reanalysis, clarification, claim narrowing/removal, or a better target. Supports Nature Portfolio, Science/AAAS, Cell Press, IEEE, ACM, PLOS, Springer/BMC, Elsevier, Wiley, society journals, discipline-specific venues, and unknown targets through the journal resolver. Trigger on academic writing, paper drafting, manuscript structure/logic, similar papers, reference papers, editor perspective, reviewer perspective, acceptance readiness, rejection-risk preflight, 学术写作、科研写作、论文写作、论文逻辑、段落逻辑、论文结构、参考相似论文、期刊写作、投稿写作、编辑视角、审稿人视角、拒稿风险.
 ---
 
 # Journal-Aware Academic Writing — Router
 
 `nature-writing` is a legacy entry-point name. It does **not** define the target journal, discipline, evidence standard, rhetorical skeleton, or editorial objective.
 
-The writing system has four layers:
+The writing system has five layers:
 
 - **core reasoning** under `static/core/`: evidence/claim stance, rhetorical engine, writing workflow, output contract;
 - **selective fragments/references**: paper type, section, language, journal routing, cross-disciplinary move atlas, empirical corpus evidence, examples;
-- **dynamic corpus calibration**: when target style matters, study comparable recent papers and derive a temporary rhetorical profile without copying prose;
+- **analogue-paper + author-voice calibration**: close-read a few similar papers for structural/evidence/figure priors while separately preserving the author's own expression profile;
+- **dynamic corpus calibration**: when broader target-style inference matters, study a larger comparable recent corpus without copying prose;
 - **decision preflight**: before submission, model exact target criteria, editorial triage, reviewer objections, and minimum-sufficient repair routes.
 
-Shared exact-journal resolution and decision logic live under `../nature-shared/`. Exact live author/editor/reviewer instructions outrank local profiles for submission-critical requirements.
+Shared exact-journal resolution, analogue calibration, author voice, and decision logic live under `../nature-shared/`. Exact live author/editor/reviewer instructions outrank local profiles for submission-critical requirements.
 
 Do not draft from remembered prestige style. Load the routed files.
 
@@ -81,13 +82,53 @@ Classify contribution/evidence type. Do not force unrelated contributions into o
 
 Apply the paper-type fragment and research paradigm. A theorem paper, clinical cohort, qualitative interview study, benchmark paper, materials experiment, and historical argument need different evidence/rhetoric even in the same publisher family.
 
-#### D. Section move map
+#### D. Analogue-paper study + author voice for substantial rewrites
+
+When rewriting/restructuring more than a tiny local passage and the field, contribution class, or target is known, load `../nature-shared/core/analogue-paper-calibration.md`.
+
+Study a few **near-neighbor papers** matched by research question/contribution class, study design, data/evidence type, article type, subfield/audience, and target venue when possible. Comparability outranks prestige.
+
+Extract:
+
+- research-need construction and contribution placement;
+- section and paragraph move patterns;
+- why one evidence block leads to the next;
+- what data/evidence are visible in main text;
+- what the main figures are *for*;
+- how similar papers display controls, uncertainty, raw observations, validation, generalization, mechanism, and failure boundaries;
+- what is moved to Methods/SI/Extended Data;
+- local expectations for background depth, signposting, citations, and interpretation.
+
+For figure/plot questions, route to `nature-figure` and its `references/analogue-figure-calibration.md`; writing may still use the analogue study to plan the figure's **scientific role and evidence dependency**.
+
+Do not copy wording, distinctive paragraph architecture, figure layouts, visual identity, normalization/statistical choices, or production dimensions.
+
+If the user supplied representative prose or asks to keep their style, also load `../nature-shared/core/author-voice-profile.md`. Build a compact profile from the author's own material, separating:
+
+- **voice invariants** — cadence, agency, technical directness, signposting level, terminology, epistemic rhythm;
+- **flexible traits** — sentence/paragraph length, transitions, heading form, context amount, local compression.
+
+Then use this hierarchy:
+
+`author evidence = truth constraint`
+
+`journal rules = compliance constraint`
+
+`analogue papers = structural/evidence priors`
+
+`author voice = expression prior`
+
+A substantial rewrite should end with a **re-voice pass** after logic/evidence structure is stable. The goal is a clearer, stronger version of this author, not an imitation of the analogue set.
+
+Skip or bound the analogue pass for tiny edits, layout-only work, or when no reliable comparable papers are available.
+
+#### E. Section move map
 
 Apply the selected section fragment. If the material does not fit its local default or cross-disciplinary calibration matters, load `references/section-move-atlas.md`.
 
 Plan sections as move graphs. Moves can recur or embed; they are not a one-use checklist.
 
-#### E. Paragraph and sentence logic
+#### F. Paragraph and sentence logic
 
 Use one paragraph **nucleus** plus necessary satellites (evidence, explanation, comparison, qualification, counterargument, implication, bridge). Do not require every paragraph to perform exactly one rhetorical function.
 
@@ -97,13 +138,15 @@ For flow problems, load `references/paragraph-flow.md` and repair in order:
 
 Do not use transition words to mask a missing logical relation.
 
-#### F. Results evidence allocation
+#### G. Results evidence allocation
 
 For Results/full manuscript compression, load `../nature-shared/core/main-text-discipline.md`. Build the shortest sufficient evidence chain while keeping conclusion-changing qualifications visible.
 
 Sequence evidence by reasoning dependency — why analysis B becomes necessary after A — not merely chronological experiment order.
 
-#### G. Editor/reviewer decision preflight before final submission polish
+Use analogue papers as a **placement prior**, not a placement rule. Final main-text/SI allocation follows the function of the evidence in this paper and exact target requirements.
+
+#### H. Editor/reviewer decision preflight before final submission polish
 
 When acceptance-readiness or rejection-risk matters, do this **before** target-style polishing.
 
@@ -124,11 +167,13 @@ When acceptance-readiness or rejection-risk matters, do this **before** target-s
 
 Do not assume more experiments are always the correct answer. A target-fit problem may require transfer; an over-broad secondary claim may be better removed; a missed existing control may require restructuring rather than new data.
 
-#### H. Target-corpus calibration when requested/useful
+#### I. Larger target-corpus calibration when requested/useful
 
-If the user asks to write like current papers in a named venue/field, or the target has no reliable local profile, load `references/target-corpus-calibration.md`.
+If the user asks to characterize current writing patterns across a target field/venue beyond a few close analogues, load `references/target-corpus-calibration.md`.
 
-For a quick profile, inspect a comparable recent sample rather than one showcase paper. Stratify by article type/study design. Learn:
+Use the **analogue pass** for close reading of a handful of nearest neighbors and the **target-corpus pass** for broader distributions/tendencies. Do not confuse them.
+
+For a broader profile, stratify by article type/study design. Learn:
 
 - argument and evidence sequence;
 - section moves;
@@ -140,24 +185,26 @@ Never create reusable full-sentence templates from copyrighted papers. Learn **m
 
 For dozens/hundreds of extracted `.md`/`.txt` papers, use `scripts/corpus_structure_stats.py` for descriptive surface statistics, then add semantic move annotation. Corpus frequency is not a writing-quality score.
 
-#### I. Reporting and journal compliance
+#### J. Reporting and journal compliance
 
 Apply research-reporting obligations and exact journal/content-type/stage rules. Family profiles are fallbacks, not exact contracts.
 
-#### J. Language polish last
+#### K. Language polish last
 
-Only after logic, evidence and decision-readiness are sound, apply language-specific sentence/paragraph guidance. Do not make prose more causal, general, important, novel, or certain to sound prestigious.
+Only after logic, evidence, voice restoration, and decision-readiness are sound, apply language-specific sentence/paragraph guidance. Do not make prose more causal, general, important, novel, or certain to sound prestigious.
 
 ### 5. Reach for evidence/reference layers on demand
 
 Use the manifest's `references.on_demand` table. Important routes include:
 
+- close analogue-paper study -> `../nature-shared/core/analogue-paper-calibration.md`;
+- author voice preservation/re-voicing -> `../nature-shared/core/author-voice-profile.md`;
 - editor/reviewer decision logic -> `../nature-shared/core/editor-reviewer-decision-engine.md`;
 - publication-model differences -> `../nature-shared/journal-formats/editorial-decision-profiles.md`;
 - author-facing acceptance-readiness preflight -> `references/editor-reviewer-preflight.md`;
 - cross-disciplinary section logic -> `references/section-move-atlas.md`;
 - empirical basis behind writing rules -> `references/cross-disciplinary-writing-evidence.md`;
-- current target-paper corpus learning -> `references/target-corpus-calibration.md`;
+- broader target-paper corpus learning -> `references/target-corpus-calibration.md`;
 - whole-paper architecture -> `references/article-architecture.md`;
 - Introduction logic -> `references/introduction.md`;
 - Methods credibility/reproducibility -> `references/method.md`;
@@ -169,25 +216,27 @@ Use the manifest's `references.on_demand` table. Important routes include:
 
 ## Dynamic learning rule
 
-Published papers are evidence about **how writers solved rhetorical problems under particular conditions**. They are not text templates and not automatic best practice.
+Published papers are evidence about **how writers solved rhetorical, evidentiary, and visual problems under particular conditions**. They are not text/figure templates and not automatic best practice.
 
 When learning from papers:
 
 1. sample comparable papers, not only famous ones;
-2. annotate complete rhetorical units, not isolated attractive sentences;
-3. distinguish cross-disciplinary invariants from discipline/journal/author tendencies;
+2. annotate complete rhetorical/evidence units, not isolated attractive sentences or plots;
+3. distinguish scientific necessity from discipline/journal/author tendencies;
 4. record legitimate counterexamples;
 5. separate frequency from effectiveness;
-6. validate a proposed core rule outside the corpus that generated it;
-7. keep exact journal mechanics separate from observed writing practice;
-8. also distinguish **survivorship** from evidence of causality — published-paper patterns show what survived one publication ecology, not what independently caused acceptance.
+6. choose final figures/plots from the user's data and claim, not popularity;
+7. validate a proposed core rule outside the corpus that generated it;
+8. keep exact journal mechanics separate from observed published practice;
+9. distinguish **survivorship** from evidence of causality — published-paper patterns show what survived one publication ecology, not what independently caused acceptance;
+10. preserve an independent author/project voice after structural calibration.
 
 ## Submission boundary
 
-- `nature-writing` owns manuscript drafting, pre-submission decision engineering, and **initial submission** materials before peer review.
+- `nature-writing` owns manuscript drafting, analogue-paper structural calibration, author-voice restoration, pre-submission decision engineering, and **initial submission** materials before peer review.
+- `nature-figure` owns detailed visual analogue calibration, plot choice, figure building, and graphical abstracts.
 - `nature-reviewer` owns isolated pre-submission editor/reviewer simulation when the user wants full mock reports.
 - `nature-response` owns post-decision rebuttals, revision cover letters, marked manuscripts and appeals.
-- graphical abstracts/TOC graphics -> `nature-figure`.
 
 ## Acceptance-engineering red lines
 
@@ -205,6 +254,8 @@ When learning from papers:
 - A research need need not be a manufactured `gap`.
 - Strong prior work should be represented fairly.
 - Do not hide incrementality to make a contribution appear larger.
+- Do not copy distinctive prose or figure design from analogue papers.
+- Do not erase the author's coherent voice merely to resemble a target corpus.
 - Do not force IMRaD, conclusion-first Results, pipeline Methods, a fixed abstract funnel, or one-function paragraphs across disciplines.
 - Do not equate more connectives, shorter sentences, denser noun phrases, or more assertive verbs with better academic writing.
 - Exact live journal requirements outrank local formatting profiles; scientific validity outranks all house style.
@@ -212,7 +263,8 @@ When learning from papers:
 ## Why this architecture
 
 - The core stores rules that survived cross-disciplinary testing.
-- Discipline/journal corpora remain local evidence layers rather than contaminating the universal engine.
+- A close analogue set supplies paper-class-specific structural/evidence priors; broader corpora remain separate evidence layers.
+- Author voice is modeled separately so structural learning does not become style cloning.
 - Dynamic calibration lets the skill learn current practice without hard-coding thousands of journals.
 - The decision preflight separates `scientifically weak`, `scientifically sound but hard to evaluate`, and `scientifically sound but target-mismatched` manuscripts.
-- Regression tests protect the distinction between scientific/rhetorical logic and surface imitation or review-system gaming.
+- Regression tests protect the distinction between scientific/rhetorical logic, author identity, surface imitation, and review-system gaming.
