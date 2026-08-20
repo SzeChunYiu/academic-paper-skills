@@ -37,5 +37,3 @@ references:
       path: references/qa-checklist.md
     - condition: checking the manuscript against itself — headline counts that do not reconcile with Methods, metric precision drift, claims contradicted by tables, or internal summaries that disagree
       path: ../nature-shared/core/consistency-sweep.md
-    - condition: full pre-submission manuscript audit, claim-warrant ledger, argument continuity, or identifying the cheapest scientifically valid repair before submission
-      path: ../nature-writing/references/paper-review.md
