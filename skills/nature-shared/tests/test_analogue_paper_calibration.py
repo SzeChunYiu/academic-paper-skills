@@ -38,9 +38,11 @@ class AnaloguePaperCalibrationTests(unittest.TestCase):
 
     def test_writing_router_runs_analogue_and_revoice_pass(self) -> None:
         router = read(SKILLS / "nature-writing" / "SKILL.md")
+        workflow = read(SKILLS / "nature-writing" / "static" / "core" / "workflow.md")
         manifest = read(SKILLS / "nature-writing" / "manifest.yaml")
         self.assertIn("Analogue-paper study + author voice", router)
         self.assertIn("re-voice pass", router)
+        self.assertIn("Run focused analogue-paper study", workflow)
         self.assertIn("figure/data choices", manifest)
         self.assertIn("author-voice-profile.md", manifest)
 
@@ -65,6 +67,11 @@ class AnaloguePaperCalibrationTests(unittest.TestCase):
         self.assertIn("../../../nature-shared/core/analogue-paper-calibration.md", contract)
         self.assertTrue((SHARED / "core" / "analogue-paper-calibration.md").exists())
         self.assertTrue((SKILLS / "nature-figure" / "references" / "analogue-figure-calibration.md").exists())
+
+    def test_reviewer_can_use_analogues_as_context_not_policy(self) -> None:
+        manifest = read(SKILLS / "nature-reviewer" / "manifest.yaml")
+        self.assertIn("core/analogue-paper-calibration.md", manifest)
+        self.assertIn("context only, not publication policy", manifest)
 
 
 if __name__ == "__main__":
