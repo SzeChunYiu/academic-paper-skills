@@ -21,7 +21,7 @@ A strong rewrite should sound like a clearer, more rigorous version of the autho
 
 The voice profile records **how this author tends to communicate scientific reasoning** while separating those preferences from errors, ambiguity, unsupported claims, and journal mechanics.
 
-The profile does not freeze weak prose. It preserves identity where doing so does not conflict with scientific accuracy, clarity, accessibility, or target requirements.
+The profile does not freeze weak prose. It preserves identity where doing so does not conflict with scientific accuracy, clarity, accessibility, or target requirements. Do not flatten a manuscript into **generic academic prose** merely because that prose is grammatically clean.
 
 ## When to build a voice profile
 
