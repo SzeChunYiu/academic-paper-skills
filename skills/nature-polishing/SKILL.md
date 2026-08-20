@@ -1,6 +1,6 @@
 ---
 name: nature-polishing
-description: Polish, restructure, shorten, or translate academic prose into journal-aware scholarly English while preserving facts, evidence boundaries, terminology, uncertainty, and citation intent. The legacy skill name is retained for compatibility, but the workflow supports Nature Portfolio, Science/AAAS, Cell Press, IEEE, ACM, PLOS, Springer/BMC, Elsevier, Wiley, society journals, discipline-specific venues, journal transfer, and unknown targets through an extensible journal resolver. Use for manuscript paragraphs, abstracts, introductions, Results, discussions, conclusions, titles, Methods, Chinese drafts, proofreading, language editing, and general academic or scientific writing. Also use to shorten bloated Results, allocate evidence across main text, captions, Methods/source data, and Supplementary Information, prevent reviewer-driven revision accretion, reduce repeated statistics or claims, and apply paragraph-necessity checks. Covers LaTeX layout or typesetting fixes such as sparse pages, stranded headings, oversized or split figures, float errors, multi-panel arrangement, and sparse Supplementary Information via references/latex-layout.md. Trigger on 学术写作、科研写作、论文润色、SCI写作、英文论文润色、语言润色、润色、改写、学术英语、期刊转换、排版.
+description: Polish, restructure, shorten, or translate academic prose into journal-aware scholarly English while preserving facts, evidence boundaries, terminology, uncertainty, citation intent, and a recognizable author voice. The legacy skill name is retained for compatibility, but the workflow supports Nature Portfolio, Science/AAAS, Cell Press, IEEE, ACM, PLOS, Springer/BMC, Elsevier, Wiley, society journals, discipline-specific venues, journal transfer, and unknown targets through an extensible journal resolver. For substantial rewrites, study a few genuinely comparable papers to learn rhetorical moves, evidence/figure expectations, data presentation, and current field conventions without copying wording; separately build an author-voice profile so the result sounds like a clearer version of the author rather than a synthetic target-journal imitation. Use for manuscript paragraphs, abstracts, introductions, Results, discussions, conclusions, titles, Methods, Chinese drafts, proofreading, language editing, and general academic or scientific writing. Also use to shorten bloated Results, allocate evidence across main text, captions, Methods/source data, and Supplementary Information, prevent reviewer-driven revision accretion, reduce repeated statistics or claims, and apply paragraph-necessity checks. Covers LaTeX layout or typesetting fixes such as sparse pages, stranded headings, oversized or split figures, float errors, multi-panel arrangement, and sparse Supplementary Information via references/latex-layout.md. Trigger on 学术写作、科研写作、论文润色、SCI写作、英文论文润色、语言润色、润色、改写、学术英语、期刊转换、排版.
 ---
 
 # Journal-Aware Academic Polishing — Router
@@ -63,6 +63,35 @@ Do **not** read every fragment in `static/`.
 
 Use two conceptual passes even if the final output is delivered once.
 
+#### Pre-pass — analogue papers and author voice for substantial rewrites
+
+When rewriting more than a small local passage and the field/contribution class or target is known, load `../nature-shared/core/analogue-paper-calibration.md` and inspect a few close analogue papers when reliable access is available.
+
+Learn only transferable functions:
+
+- how comparable papers build the research need;
+- how evidence blocks are ordered;
+- what data/figures normally carry claims of this type;
+- where validation, robustness, generalization, negative cases, and limitations appear;
+- how much context and signposting this audience appears to need;
+- what is commonly kept in main text versus SI.
+
+Do not copy phrases, distinctive paragraph forms, figure layouts, visual identity, or unverified analysis choices.
+
+If the user supplied representative prose or asks to keep their style, also load `../nature-shared/core/author-voice-profile.md`. Record a compact voice profile before rewriting: cadence, agency, technical density, signposting, terminology, epistemic stance, paragraph rhythm, and citation integration. Separate **voice invariants** from flexible traits.
+
+Use this conceptual split:
+
+`analogue papers = structural/evidence priors`
+
+`author voice = expression prior`
+
+`author evidence = truth constraint`
+
+`journal rules = compliance constraint`
+
+For a tiny correction, layout-only job, or missing/reliably incomparable analogue set, skip or bound this pre-pass rather than inventing a corpus.
+
 #### Pass A — target-independent scientific edit
 
 Apply:
@@ -71,9 +100,13 @@ Apply:
 2. Section-specific job and failure modes.
 3. Paragraph logic and claim/evidence/boundary discipline.
 4. Terminology, units, numbers, tense, and cross-manuscript consistency.
-5. Language-specific sentence and paragraph repair.
+5. Analogue-derived structural/evidence lessons only where they solve a real reader/reviewer problem.
+6. Author-voice invariants where they remain compatible with clarity and scientific accuracy.
+7. Language-specific sentence and paragraph repair.
 
 Fix clarity without changing facts, uncertainty, causal strength, novelty boundaries, or limitations.
+
+If major restructuring was required, run a **re-voice pass** after the logic is stable so the result does not collapse into generic academic prose.
 
 #### Pass B — target-dependent adaptation
 
@@ -93,7 +126,7 @@ For Results, full-main-text compression, main-versus-SI allocation, or prose add
 
 When the job is a whole manuscript rather than a passage, or the text has already been through more than one round of editing, also load `../nature-shared/core/consistency-sweep.md`. Sweep for accumulated terminology/unit/number drift, claims contradicted by displays, repeated evidence, and tense/label inconsistencies before polishing sentences, and repeat until a pass finds nothing new.
 
-For a journal transfer, preserve target-independent edits, remove the old journal's house style and boilerplate, resolve the new journal/content type/stage, then re-apply only verified target-dependent constraints.
+For a journal transfer, preserve target-independent edits and the manuscript-level author voice, remove the old journal's house style and boilerplate, resolve the new journal/content type/stage, then re-apply only verified target-dependent constraints.
 
 If a structural problem cannot be fixed without inventing content, flag it instead of papering over it.
 
@@ -101,19 +134,23 @@ If a structural problem cannot be fixed without inventing content, flag it inste
 
 The files under `references/` are deep references, not defaults. Open them on demand per the `references.on_demand` table in the manifest.
 
+- Substantial rewrite with similar-paper study -> `../nature-shared/core/analogue-paper-calibration.md`.
+- Preserve author's recognizable style -> `../nature-shared/core/author-voice-profile.md`.
 - Any named non-Nature target, family, or journal transfer -> shared `journal-resolution.md` and `journal-family-profiles.md`.
 - Nature/Nature Communications published-pattern examples -> `references/published-article-patterns.md`; do not apply them automatically to non-Nature targets.
 - Section moves/phrase alternatives/style mechanics -> the relevant local references.
 - Whole-manuscript consistency -> `../nature-shared/core/consistency-sweep.md`.
 - Nature Machine Intelligence exact requirements -> `../nature-shared/journal-formats/nature-machine-intelligence.md`.
 
-**Layout/typesetting requests are different.** If the user asks to fix placement rather than wording — loose/sparse pages, stranded headings, figures that do not fill the page or split across pages, `Float too large`, multi-panel arrangement, sparse Supplementary Information — load `references/latex-layout.md` directly for diagnosis and layout repair. If a named target journal is involved, also resolve that journal's current template and stage-specific mechanics; never assume Nature layout rules. Always compile and visually inspect rendered pages before and after when execution tools are available.
+**Layout/typesetting requests are different.** If the user asks to fix placement rather than wording — loose/sparse pages, stranded headings, figures that do not fill the page or split across pages, `Float too large`, multi-panel arrangement, sparse Supplementary Information — load `references/latex-layout.md` directly for diagnosis and layout repair. Do not run prose rewriting, analogue-style calibration, or author-voice rewriting for a placement-only request. If a named target journal is involved, also resolve that journal's current template and stage-specific mechanics; never assume Nature layout rules. Always compile and visually inspect rendered pages before and after when execution tools are available.
 
 ## Safety and generalization rules
 
 - Never equate prestigious wording with scientific quality.
 - Never make a claim more causal, general, certain, or novel to match a journal's perceived tone.
+- Never copy distinctive wording or visual identity from analogue papers.
 - Never force IMRaD, Nature summary-paragraph logic, STAR Methods, IEEE/ACM layout, or another family convention onto an incompatible paper type.
+- Never erase a coherent author voice merely to resemble target papers; preserve voice after logic/evidence repair unless clarity or exact requirements require change.
 - Exact live author instructions outrank local profiles; exact local profiles outrank family profiles; family profiles outrank generic defaults only for non-submission-critical guidance.
 
 ## Why this split
@@ -122,3 +159,4 @@ The files under `references/` are deep references, not defaults. Open them on de
 - The dynamic layer keeps each invocation cheap: only fragments relevant to this draft enter context.
 - Existing `nature-*` names remain backward-compatible while behavior becomes journal-agnostic.
 - Scientific editing is separated from journal-specific house style and submission mechanics.
+- Analogue papers inform architecture/evidence expectations while a separate author-voice layer preserves manuscript identity.

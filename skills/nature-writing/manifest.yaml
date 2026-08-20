@@ -1,12 +1,13 @@
 name: nature-writing
-version: 2.2.0
+version: 2.3.0
 description: >
   Declarative manifest for journal-aware academic drafting, restructuring, and
   initial-submission requests. The legacy skill name is retained for backward
   compatibility; journal behavior is resolved independently from that name.
   Core drafting uses rhetorical moves and empirical cross-disciplinary evidence
   rather than a single journal skeleton, with optional editor/reviewer decision
-  preflight before submission.
+  preflight. Substantial rewrites can study close analogue papers for writing,
+  evidence, data, and figure conventions while preserving a separate author voice.
 
 always_load:
   - ../nature-shared/core/reader-workflow.md
@@ -98,6 +99,10 @@ axes:
 
 references:
   on_demand:
+    - condition: substantial rewrite/drafting where the user wants to preserve a recognizable authorial style, cadence, agency, terminology, or manuscript-level voice after structural editing
+      path: ../nature-shared/core/author-voice-profile.md
+    - condition: rewrite/restructure where a few close similar papers should be studied for rhetorical architecture, evidence sequence, figure/data choices, plot expectations, main-text-versus-SI allocation, or current field/venue conventions without copying wording or visual identity
+      path: ../nature-shared/core/analogue-paper-calibration.md
     - condition: any named non-Nature target journal, publisher/venue family, journal transfer, or exact cross-journal submission compliance request
       path: ../nature-shared/journal-formats/journal-resolution.md
     - condition: any non-Nature publisher/venue/discipline family needs a fallback writing profile

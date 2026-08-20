@@ -1,10 +1,11 @@
 name: nature-reviewer
-version: 2.0.0
+version: 2.1.0
 description: >
   Declarative manifest for journal-aware pre-submission editor/reviewer
   simulation. The legacy skill name remains for compatibility; review criteria
   are resolved from the exact target journal/publication model rather than
-  assuming flagship Nature.
+  assuming flagship Nature. Close analogue papers may inform field-specific
+  evidence expectations but never substitute for official criteria or manuscript facts.
 
 always_load:
   - references/source-basis.md
@@ -12,6 +13,8 @@ always_load:
 
 references:
   on_demand:
+    - condition: user asks how comparable papers establish similar claims, what evidence/figures reviewers in this paper class may expect, or whether the manuscript's evidence architecture is unusual relative to close analogues; use as context only, not publication policy
+      path: ../nature-shared/core/analogue-paper-calibration.md
     - condition: target journal/venue is named, journal fit or desk-review risk is being assessed, or exact publication criteria matter
       path: ../nature-shared/journal-formats/journal-resolution.md
     - condition: target publication model must be resolved as selective broad-interest, field-advancement, rigor-first, clinical/policy-priority, evidence-assessment, or deadline-constrained
@@ -34,5 +37,3 @@ references:
       path: references/qa-checklist.md
     - condition: checking the manuscript against itself — headline counts that do not reconcile with Methods, metric precision drift, claims contradicted by tables, or internal summaries that disagree
       path: ../nature-shared/core/consistency-sweep.md
-    - condition: full pre-submission manuscript audit, claim-warrant ledger, argument continuity, or identifying the cheapest scientifically valid repair before submission
-      path: ../nature-writing/references/paper-review.md

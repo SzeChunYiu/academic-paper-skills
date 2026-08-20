@@ -1,6 +1,6 @@
 # Writing workflow
 
-Run this workflow for drafting or restructuring. The order is `argument -> rhetorical moves -> paragraph nuclei -> sentences -> journal adaptation`, not `template -> prose`.
+Run this workflow for drafting or restructuring. The order is `argument -> analogue/voice calibration when useful -> rhetorical moves -> paragraph nuclei -> sentences -> journal adaptation`, not `template -> prose`.
 
 ## 1. Build the argument spine
 
@@ -25,6 +25,50 @@ On first contact with the material, extract recurring terms, abbreviations, nota
 Use `static/core/rhetorical-engine.md` to classify the dominant contribution: empirical finding, mechanism, method, resource/benchmark, theory/proof, validation/replication, negative/null result, synthesis/review, or practical/clinical/policy implication.
 
 Also identify the evidence type and research paradigm. A randomized trial, qualitative interview study, theorem paper, materials experiment, benchmark paper, and historical argument require different rhetorical structures even when they target similarly selective journals.
+
+## 2b. Run focused analogue-paper study for substantial rewrites
+
+When the task is a substantial rewrite/restructure and the field, study design, contribution class, or target is known, load `../../../nature-shared/core/analogue-paper-calibration.md`.
+
+Use a few close papers as **structural/evidence priors**. Prefer comparability over prestige. Study:
+
+- how the research need is created;
+- how the contribution is positioned;
+- how evidence blocks are sequenced and why;
+- what main-text evidence is visible for comparable claims;
+- what the main figures are meant to establish;
+- what data/uncertainty/controls/validation/generalization/failure boundaries are shown;
+- what is moved to Methods/SI/Extended Data;
+- how much background, signposting, citation synthesis, and local interpretation the audience receives.
+
+Do not copy phrases, distinctive paragraph structures, figure compositions, palettes, normalization/statistical choices, or journal mechanics inferred from published PDFs.
+
+If detailed figure/plot planning is required, route to `nature-figure` and its analogue-figure workflow; keep writing focused on **figure role and evidence dependency**.
+
+Skip or bound this step for tiny edits or when no trustworthy comparator set exists.
+
+## 2c. Build an author-voice profile when the rewrite should remain recognizably theirs
+
+When representative author prose is available or the user asks to preserve style, load `../../../nature-shared/core/author-voice-profile.md`.
+
+Record a compact profile:
+
+- voice invariants: cadence, agency, technical directness, signposting level, stable terminology, epistemic rhythm;
+- flexible traits: paragraph/sentence length, transitions, headings, context amount, local compression.
+
+Do not preserve errors or ambiguity as `voice`.
+
+Use the separation:
+
+`author evidence = truth constraint`
+
+`journal rules = compliance constraint`
+
+`analogue papers = structural/evidence priors`
+
+`author voice = expression prior`
+
+After any large structural rewrite, run a re-voice pass so the improved section does not sound like generic academic English or a clone of the analogue set.
 
 ## 3. Select section moves, not a universal skeleton
 
@@ -59,6 +103,8 @@ This map is more informative than a label such as `context` or `result` alone.
 When the task includes Results, full-manuscript compression, or main-versus-SI placement, load `../../../nature-shared/core/main-text-discipline.md`.
 
 Classify each result as core discovery, necessary support, qualification, robustness, heterogeneity, provenance detail, alternative inference, or edge case. Build the shortest sufficient main-text evidence chain, but do not hide conclusion-changing qualifications in Supplementary Information.
+
+Use the analogue set only as a prior about local expectations. Final placement follows the function of the evidence in this paper plus exact journal requirements.
 
 ## 3c. Alignment gate when framing is genuinely ambiguous
 
@@ -122,7 +168,7 @@ Sweep for unsupported `first`, `unique`, `unprecedented`, `comprehensive`, `comp
 
 Do not hide an incremental relationship to prior work merely to make the contribution sound larger. Explain precisely what changes and why that change matters.
 
-## 8. Run the reader-prediction and coherence audit
+## 8. Run the reader-prediction, voice, and coherence audit
 
 After each paragraph ask:
 
@@ -135,26 +181,31 @@ Then reverse-outline the section using paragraph nuclei. If the nucleus sequence
 
 For a full manuscript, also check section handoffs: Introduction -> Methods/evidence plan -> Results -> Discussion -> bounded conclusion.
 
+If an author-voice profile is active, also ask whether the revised text still sounds like the same author after structural repair: stable terminology, recognizable agency, directness, cadence, and signposting without preserving defects.
+
 ## 9. Apply journal and article-type adaptation last
 
 Only after the scientific argument works, resolve the exact journal/content type/stage using the journal axis and shared journal resolver.
 
-Journal adaptation may change audience assumptions, section labels, compression, title/abstract conventions, reference rendering, and submission mechanics. It must not change evidence, causal strength, uncertainty, novelty boundary, or limitations.
+Journal adaptation may change audience assumptions, section labels, compression, title/abstract conventions, reference rendering, and submission mechanics. It must not change evidence, causal strength, uncertainty, novelty boundary, limitations, or the manuscript's coherent author identity beyond what the target actually requires.
 
-When the user asks to emulate a target venue's recent writing practice, load `references/target-corpus-calibration.md` and build a temporary profile from comparable papers rather than extrapolating from the legacy Nature corpus.
+When the user asks for a broader characterization of target-venue writing practice beyond a few close analogue papers, load `references/target-corpus-calibration.md` and build a temporary profile from a stratified corpus.
 
 ## 10. Return prose plus reasoning-facing notes
 
 Return the requested draft together with only the notes that help the author revise it: important assumptions, missing evidence, unresolved boundaries, risky claims, and structural choices that materially affect interpretation. Do not bury the prose under generic writing advice.
+
+When an analogue pass materially changed the draft, it can be useful to summarize only the decision-relevant transfer as `adopt / adapt / reject / unresolved` rather than listing every observed pattern.
 
 ## 11. Revise locally before rewriting globally
 
 When the author redirects a draft:
 
 - change only the affected claims/paragraphs unless the new information breaks the argument spine;
-- preserve the Terminology Ledger;
+- preserve the Terminology Ledger and author-voice invariants;
 - if a new sentence duplicates an existing function, prefer replacement/compression to accumulation;
 - re-run stance and coherence checks on changed text;
-- if the premise itself changes, rebuild the argument/move map before re-drafting.
+- if the premise itself changes, rebuild the argument/move map before re-drafting;
+- if the change invalidates a prior analogue-derived assumption, drop that assumption rather than forcing conformity.
 
-Revision should strengthen the argument without introducing reviewer-driven prose accretion.
+Revision should strengthen the argument without introducing reviewer-driven prose accretion or target-corpus style cloning.

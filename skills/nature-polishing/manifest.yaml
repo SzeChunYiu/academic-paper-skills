@@ -1,17 +1,17 @@
 name: nature-polishing
-version: 7.0.0
+version: 7.1.0
 description: >
   Declarative manifest for journal-aware academic polishing. The legacy skill
   name is retained for backward compatibility; journal behavior is resolved
-  independently from that name.
+  independently from that name. Substantial rewrites can study close analogue
+  papers for rhetorical/evidence conventions while preserving the author's own
+  voice through a separate voice profile.
 
 always_load:
-  # Shared layer — common to nature-polishing and nature-writing
   - ../nature-shared/core/reader-workflow.md
   - ../nature-shared/core/paper-type-taxonomy.md
   - ../nature-shared/core/ethics.md
   - ../nature-shared/core/terminology-ledger.md
-  # Skill-local core
   - static/core/stance.md
   - static/core/failure-modes.md
   - static/core/output-format.md
@@ -63,12 +63,9 @@ axes:
       name. Use nature only for flagship Nature, nat-comms only for Nature
       Communications, and nat-mach-intell only for Nature Machine Intelligence.
       Use profiled whenever the user names any other journal or useful journal/
-      publisher/venue/discipline family (for example another Nature Portfolio
-      title, Science/AAAS, Cell Press, IEEE, ACM, PLOS, Springer/BMC, Elsevier,
-      Wiley, APA-style, biomedical, humanities, or a journal-transfer target).
-      Use generic only when no target or useful family is known. For profiled
-      targets resolve exact journal -> article type -> stage -> component before
-      exact compliance claims.
+      publisher/venue/discipline family. Use generic only when no target or useful
+      family is known. For profiled targets resolve exact journal -> article type
+      -> stage -> component before exact compliance claims.
     values:
       nature:          static/fragments/journal/nature.md
       nat-comms:       static/fragments/journal/nat-comms.md
@@ -80,6 +77,10 @@ axes:
 
 references:
   on_demand:
+    - condition: substantial rewrite/polish where the user wants to retain their own recognizable style, cadence, agency, terminology, or manuscript voice
+      path: ../nature-shared/core/author-voice-profile.md
+    - condition: substantial rewrite/restructure where a few close comparable papers should be studied for rhetorical moves, evidence sequence, figure/data expectations, main-text-versus-SI allocation, or current field/venue conventions without copying their wording
+      path: ../nature-shared/core/analogue-paper-calibration.md
     - condition: any named non-Nature target journal, publisher/venue/discipline family, journal transfer, or exact cross-journal compliance request
       path: ../nature-shared/journal-formats/journal-resolution.md
     - condition: a non-Nature target needs a publisher/venue/discipline family fallback profile

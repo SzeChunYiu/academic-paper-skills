@@ -1,6 +1,6 @@
 # Figure contract before plotting
 
-A publication-quality scientific figure is a visual argument, not an isolated pretty plot. Every figure starts from a claim, an evidence hierarchy, and a review-risk check before code or aesthetics. Before generating or editing code, establish the contract below.
+A publication-quality scientific figure is a visual argument, not an isolated pretty plot. Every figure starts from a claim, an evidence hierarchy, and a review-risk check before code or aesthetics. For serious manuscript figure design/redesign, a focused analogue-paper pass may also be needed to learn what visual evidence comparable claims normally require without copying another paper's visual identity.
 
 ## Backend selection uses a saved preference
 
@@ -28,14 +28,36 @@ If any row, column, replicate, image, or category is excluded, record the before
 
 Plan figures by scientific claims, not by source tables. Do not turn each table into a separate figure when several tables answer the same question. If an effect is defined within matched datasets, subjects, seeds, or tasks, inspect and visualize paired differences rather than relying only on overlapping marginal distributions; large between-unit heterogeneity can hide a strong paired effect.
 
-## The five-point contract
+## Analogue-paper calibration gate
+
+When the task is a serious paper-figure redesign and the field/contribution class is known, load:
+
+- `../../../nature-shared/core/analogue-paper-calibration.md`;
+- `../../references/analogue-figure-calibration.md`.
+
+Study a few close comparator papers to understand:
+
+- what scientific role each main figure performs;
+- which controls/comparators/uncertainty are visible;
+- whether raw observations, distributions, pairing, validation, mechanism, generalization, or failure boundaries are shown;
+- how figure roles are sequenced;
+- what is delegated to SI/Extended Data.
+
+Then choose the final representation from the user's actual estimand/data structure. A chart's popularity in analogue papers is never sufficient justification for using it.
+
+Preserve a coherent project visual identity: semantic colors, typography hierarchy, panel labels, line/marker logic, notation, spacing rhythm, and annotation style. Do not copy a comparator paper's distinctive layout or palette.
+
+Skip this gate for small mechanical export/layout fixes or when no reliable analogue set exists.
+
+## The six-point contract
 
 1. **Core conclusion**: write the one-sentence claim the figure must defend.
 2. **Evidence chain**: map each planned panel to one unique claim question, and drop or merge panels that only redraw another panel's evidence.
-3. **Archetype**: classify the figure as `quantitative grid`, `schematic-led composite`, `image plate + quant`, or `asymmetric mixed-modality figure`.
-4. **Backend**: use the explicit or saved Python/R track exclusively for all figure drawing, previewing, exporting, and visual QA. Do not cross-render with the other language.
-5. **Journal/export contract**: set final dimensions, a 5 pt floor for every rendered glyph, editable text, source data, statistics, image-integrity notes, and export formats before styling.
+3. **Analogue evidence prior**: when applicable, record what comparable papers make visible for claims of this type, plus at least one pattern we deliberately reject if it does not fit our data.
+4. **Archetype**: classify the figure as `quantitative grid`, `schematic-led composite`, `image plate + quant`, or `asymmetric mixed-modality figure`.
+5. **Backend**: use the explicit or saved Python/R track exclusively for all figure drawing, previewing, exporting, and visual QA. Do not cross-render with the other language.
+6. **Journal/export contract**: set final dimensions, a 5 pt floor for every rendered glyph, editable text, source data, statistics, image-integrity notes, and export formats before styling.
 
-The highest-priority rule is: **the chart serves the scientific logic**. Aesthetic polish, template matching, and complex layout are subordinate to making the core conclusion clear, defensible, and reviewable.
+The highest-priority rule is: **the chart serves the scientific logic**. Aesthetic polish, template matching, analogue similarity, and complex layout are subordinate to making the core conclusion clear, defensible, reviewable, and faithful to the data.
 
 For the full method to convert a request into core conclusion, evidence hierarchy, panel map, and review-risk checks, open `references/figure-contract.md`.
