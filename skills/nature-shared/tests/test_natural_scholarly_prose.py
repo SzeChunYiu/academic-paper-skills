@@ -19,7 +19,8 @@ class NaturalScholarlyProseTests(unittest.TestCase):
 
     def test_quality_model_is_not_detector_evasion(self) -> None:
         text = read(SHARED / "core" / "natural-scholarly-prose.md")
-        self.assertIn("not an AI-detector evasion guide", text)
+        self.assertIn("writing-quality contract", text)
+        self.assertIn("It is **not** an AI-detector evasion guide.", text)
         self.assertIn("No AI-word blacklist", text)
         self.assertIn("Never introduce grammatical errors", text)
         self.assertIn("random sentence lengths", text)
