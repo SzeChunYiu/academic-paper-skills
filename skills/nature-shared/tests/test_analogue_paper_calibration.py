@@ -41,7 +41,8 @@ class AnaloguePaperCalibrationTests(unittest.TestCase):
         workflow = read(SKILLS / "nature-writing" / "static" / "core" / "workflow.md")
         manifest = read(SKILLS / "nature-writing" / "manifest.yaml")
         self.assertIn("Analogue-paper study + author voice", router)
-        self.assertIn("re-voice pass", router)
+        self.assertIn("re-voice", workflow)
+        self.assertIn("author voice", workflow)
         self.assertIn("Run focused analogue-paper study", workflow)
         self.assertIn("figure/data choices", manifest)
         self.assertIn("author-voice-profile.md", manifest)
@@ -51,7 +52,11 @@ class AnaloguePaperCalibrationTests(unittest.TestCase):
         manifest = read(SKILLS / "nature-polishing" / "manifest.yaml")
         self.assertIn("analogue papers = structural/evidence priors", router)
         self.assertIn("author voice = expression prior", router)
-        self.assertIn("Do not run prose rewriting, analogue-style calibration, or author-voice rewriting for a placement-only request.", router)
+        self.assertIn("placement-only request", router)
+        self.assertIn("prose rewriting", router)
+        self.assertIn("analogue-style calibration", router)
+        self.assertIn("natural-prose rewriting", router)
+        self.assertIn("author-voice rewriting", router)
         self.assertIn("core/author-voice-profile.md", manifest)
 
     def test_figure_router_learns_figure_roles_not_visual_identity(self) -> None:
