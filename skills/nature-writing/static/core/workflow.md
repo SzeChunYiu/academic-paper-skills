@@ -1,6 +1,6 @@
 # Writing workflow
 
-Run this workflow for drafting or restructuring. The order is `argument -> analogue/voice calibration when useful -> rhetorical moves -> paragraph nuclei -> sentences -> journal adaptation`, not `template -> prose`.
+Run this workflow for drafting or restructuring. The order is `argument -> analogue/voice calibration when useful -> rhetorical moves -> paragraph nuclei -> sentence dependencies -> natural scholarly realization -> journal adaptation`, not `template -> prose`.
 
 ## 1. Build the argument spine
 
@@ -132,33 +132,101 @@ Not every paragraph needs every element, and some disciplines defer most interpr
 
 For theory/humanities/qualitative work, replace quantitative evidence logic with the corresponding proof, source, case, theme, interpretation, or analytic warrant.
 
-## 5. Engineer sentence-to-sentence flow
+## 5. Build sentence dependency before polishing sentences
 
-For each sentence, identify:
+For a difficult paragraph, first reduce each sentence to its proposition and map dependencies.
 
-- what information is already **given** to the reader;
-- what **new** information is added;
-- the relation to surrounding sentences: evidence, cause, consequence, contrast, concession, specification, example, sequence, or inference.
+Example:
 
-Keep central entities lexically stable enough to be tracked. Use pronouns only when reference is unambiguous.
+```text
+S1 establishes A
+S2 qualifies A under B
+S3 explains why B changes interpretation C
+S4 tests C against alternative D
+S5 closes with bounded inference E
+```
 
-Do not add transition words as decoration. If the logical relation is already obvious through information structure and lexical continuity, an explicit connective may be unnecessary.
+Then, for each sentence after the first, write:
 
-For deeper repair, load `references/paragraph-flow.md`.
+`inherits X -> relation R -> adds Y -> enables Z`
 
-## 6. Match syntax to rhetorical function
+This is the **why-this-sentence-now test**.
+
+If a sentence inherits nothing, has no meaningful relation, or could be moved almost anywhere in the paragraph without consequence, it may be an orphan sentence or a generic mini-summary.
+
+Load `references/paragraph-flow.md` for dependency-graph, handoff, and coherence repair.
+
+## 6. Engineer information progression and identity chains
+
+A useful default is given -> new:
+
+`A -> B; B -> C; C -> D`
+
+But this is not universal. Use constant-topic, derived-theme, contrast, question-answer, or claim-evidence-boundary progression when the reasoning needs it.
+
+Keep core entities trackable through **identity chains**:
+
+- exact technical term repetition;
+- stable abbreviation;
+- precise demonstrative noun phrase;
+- unambiguous pronoun;
+- clearly marked subtype/category relation.
+
+Do not rotate synonyms for a central technical concept merely to reduce repetition. Controlled repetition is often clearer and more natural in scholarly prose.
+
+## 7. Realize the paragraph as natural scholarly prose
+
+For substantial drafting/rewrite or prose that feels generic, over-smoothed, formulaic, connector-heavy, or machine-like, load `../../../nature-shared/core/natural-scholarly-prose.md`.
+
+Use this hierarchy:
+
+`scientific relation -> information flow -> lexical/reference continuity -> stance -> syntax -> connective -> cadence`
+
+### 7a. Match syntax to rhetorical function
 
 Do not optimize for uniformly short sentences or uniformly dense academic syntax.
 
 - use chronological syntax for procedures when sequence matters;
 - use explicit clauses for new causal or conceptual relations;
 - use compact noun phrases for established technical concepts when readers can unpack them;
+- use parallel syntax when evidence/functions are genuinely parallel;
 - separate observation from interpretation when combining them would blur evidentiary strength;
-- place the sentence's main new claim where readers can find the emphasis easily.
+- integrate a qualification with its claim when subordination makes the boundary clearer;
+- place the sentence's main new information where readers can recover the emphasis easily.
 
-If a sentence is difficult, first diagnose the hidden relation; shortening alone may not fix it.
+Functional variation is natural. Random variation is not.
 
-## 7. Calibrate epistemic stance to evidence
+### 7b. Use precise conventional vocabulary
+
+Prefer the most precise conventional field term over rare or ornamental academic vocabulary.
+
+Do not make prose `more academic` by:
+
+- synonymizing common precise verbs;
+- inflating abstract nouns;
+- repeatedly using prestige phrases;
+- replacing stable technical names with near-synonyms.
+
+### 7c. Use connectives only for real relations
+
+Do not add transition words as decoration. If lexical continuity and syntax already expose the relation, an explicit connective may be unnecessary.
+
+Never target a connector density or start every paragraph with `however`, `moreover`, `furthermore`, or `additionally`.
+
+### 7d. Run cadence audit last
+
+After logic and stance are stable, read continuously and check:
+
+- repeated sentence openings;
+- identical clause rhythms serving different functions;
+- buried verbs;
+- long noun stacks;
+- abrupt boundaries that split one logical relation;
+- repeated generic paragraph closings.
+
+Do not inject random short sentences, punctuation quirks, deliberate fragments, errors, or `burstiness` to appear human.
+
+## 8. Calibrate epistemic stance to evidence
 
 Distinguish observed, estimated, inferred, simulated, proved, hypothesized, associated, and causally identified claims.
 
@@ -168,7 +236,9 @@ Sweep for unsupported `first`, `unique`, `unprecedented`, `comprehensive`, `comp
 
 Do not hide an incremental relationship to prior work merely to make the contribution sound larger. Explain precisely what changes and why that change matters.
 
-## 8. Run the reader-prediction, voice, and coherence audit
+Stance should vary **because evidence status varies**, not because prose needs random stylistic variation.
+
+## 9. Run the reader-prediction, voice, and coherence audit
 
 After each paragraph ask:
 
@@ -176,6 +246,7 @@ After each paragraph ask:
 2. What question will that reader probably ask next?
 3. Does the next paragraph answer or intentionally redirect that question?
 4. Is any needed evidence, definition, comparison, or qualification missing?
+5. Can every sentence's position be justified through `inherits -> relation -> adds -> enables`?
 
 Then reverse-outline the section using paragraph nuclei. If the nucleus sequence does not reconstruct the section argument, fix the structure before polishing sentences.
 
@@ -183,7 +254,21 @@ For a full manuscript, also check section handoffs: Introduction -> Methods/evid
 
 If an author-voice profile is active, also ask whether the revised text still sounds like the same author after structural repair: stable terminology, recognizable agency, directness, cadence, and signposting without preserving defects.
 
-## 9. Apply journal and article-type adaptation last
+## 10. Re-voice after major structural/natural-prose repair
+
+Natural scholarly prose is the quality floor. Author voice is the identity layer above it.
+
+After major rewriting:
+
+1. compare representative original and revised passages;
+2. restore observed cadence, agency, technical density, signposting, and terminology;
+3. keep any scientific/coherence repairs that made the reader path clearer;
+4. reject analogue-paper wording leakage and generic journal cosplay;
+5. verify that no claim became stronger merely because the rewrite became more fluent.
+
+Never define `voice` through an AI-detector score, a word blacklist, deliberate errors, or arbitrary sentence-length variance.
+
+## 11. Apply journal and article-type adaptation last
 
 Only after the scientific argument works, resolve the exact journal/content type/stage using the journal axis and shared journal resolver.
 
@@ -191,13 +276,28 @@ Journal adaptation may change audience assumptions, section labels, compression,
 
 When the user asks for a broader characterization of target-venue writing practice beyond a few close analogue papers, load `references/target-corpus-calibration.md` and build a temporary profile from a stratified corpus.
 
-## 10. Return prose plus reasoning-facing notes
+## 12. Final anti-template / scientific-drift audit
+
+Before release, check for:
+
+- repeated empty frames such as `It is important to note that...`;
+- connector-led paragraph glue without a real relation;
+- repeated `These findings highlight/underscore...` endings when a concrete consequence is available;
+- ornamental vocabulary replacing precise field terms;
+- repeated sentence templates with only synonym substitution;
+- depersonalized constructions that hide consequential author decisions;
+- generic significance language not anchored in a specific consequence;
+- any change in causality, generality, certainty, novelty, or limitation scope.
+
+These are diagnostics, not banned phrases. Do not maintain an `AI word` blacklist or optimize a detector score.
+
+## 13. Return prose plus reasoning-facing notes
 
 Return the requested draft together with only the notes that help the author revise it: important assumptions, missing evidence, unresolved boundaries, risky claims, and structural choices that materially affect interpretation. Do not bury the prose under generic writing advice.
 
 When an analogue pass materially changed the draft, it can be useful to summarize only the decision-relevant transfer as `adopt / adapt / reject / unresolved` rather than listing every observed pattern.
 
-## 11. Revise locally before rewriting globally
+## 14. Revise locally before rewriting globally
 
 When the author redirects a draft:
 
@@ -206,6 +306,7 @@ When the author redirects a draft:
 - if a new sentence duplicates an existing function, prefer replacement/compression to accumulation;
 - re-run stance and coherence checks on changed text;
 - if the premise itself changes, rebuild the argument/move map before re-drafting;
-- if the change invalidates a prior analogue-derived assumption, drop that assumption rather than forcing conformity.
+- if the change invalidates a prior analogue-derived assumption, drop that assumption rather than forcing conformity;
+- rerun the why-this-sentence-now test only on changed dependencies plus the local handoff.
 
-Revision should strengthen the argument without introducing reviewer-driven prose accretion or target-corpus style cloning.
+Revision should strengthen the argument without introducing reviewer-driven prose accretion, target-corpus style cloning, or machine-like generic smoothing.
