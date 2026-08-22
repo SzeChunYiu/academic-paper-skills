@@ -1,5 +1,5 @@
 name: nature-writing
-version: 2.3.0
+version: 2.4.0
 description: >
   Declarative manifest for journal-aware academic drafting, restructuring, and
   initial-submission requests. The legacy skill name is retained for backward
@@ -7,7 +7,8 @@ description: >
   Core drafting uses rhetorical moves and empirical cross-disciplinary evidence
   rather than a single journal skeleton, with optional editor/reviewer decision
   preflight. Substantial rewrites can study close analogue papers for writing,
-  evidence, data, and figure conventions while preserving a separate author voice.
+  evidence, data, and figure conventions while preserving a separate author voice
+  and research-backed natural scholarly prose.
 
 always_load:
   - ../nature-shared/core/reader-workflow.md
@@ -99,6 +100,8 @@ axes:
 
 references:
   on_demand:
+    - condition: drafting or rewriting academic prose that feels generic, formulaic, over-smoothed, machine-like, repetitive, connector-heavy, weakly authorial, or difficult to follow sentence by sentence; use for proposition dependencies, given/new progression, identity chains, local stance, functional syntax, cadence, and anti-template repair without detector evasion
+      path: ../nature-shared/core/natural-scholarly-prose.md
     - condition: substantial rewrite/drafting where the user wants to preserve a recognizable authorial style, cadence, agency, terminology, or manuscript-level voice after structural editing
       path: ../nature-shared/core/author-voice-profile.md
     - condition: rewrite/restructure where a few close similar papers should be studied for rhetorical architecture, evidence sequence, figure/data choices, plot expectations, main-text-versus-SI allocation, or current field/venue conventions without copying wording or visual identity
