@@ -8,6 +8,7 @@ The repository has grown from a collection of Nature-oriented skills into a broa
 
 - [Academic Writing Research: What Strong Papers Actually Do](academic-writing-research_EN.md) — cross-disciplinary rhetoric, cohesion, stance, sentence flow, human/LLM academic-writing research, and section-specific writing.
 - [Natural Scholarly Writing](natural-scholarly-writing_EN.md) — practical paragraph and sentence-to-sentence editing using dependency, given/new progression, identity chains, stance, functional syntax, connectives, cadence, and author voice.
+- [Explanatory Sufficiency: Is the Paper Explained Enough?](explanatory-sufficiency_EN.md) — adaptive elaboration, hidden-premise checks, reader reconstruction, and deciding when concise prose has compressed away necessary reasoning.
 - [What Belongs in a Paper — and What Figures Should It Show?](manuscript-content-and-figures_EN.md) — content admission, repository-to-manuscript leakage, main/Methods/SI/availability allocation, figure roles, and plot suggestions.
 
 ## Architecture
@@ -27,8 +28,9 @@ The repository has grown from a collection of Nature-oriented skills into a broa
 3. Evidence completeness across the publication package, not exhaustive main-text detail.
 4. Close analogue papers as structural/evidence priors, never wording/visual templates.
 5. Natural scholarly prose as reader-facing reasoning quality, never detector evasion.
-6. Author voice as an identity layer after logic/clarity repair.
-7. Figure choice from claims, estimands, data structure, uncertainty, and alternative explanations.
-8. Repository/artifact documentation stays out of scientific narrative unless it performs a scientific function.
-9. Editor/reviewer engineering means decisionability and valid evidence, not manipulation.
-10. Research rules through empirical corpora, direct reading, official guidance, and regression tests.
+6. Explanatory sufficiency as adaptive reader support: expand missing reasoning, not word count for its own sake.
+7. Author voice as an identity layer after logic/clarity repair.
+8. Figure choice from claims, estimands, data structure, uncertainty, and alternative explanations.
+9. Repository/artifact documentation stays out of scientific narrative unless it performs a scientific function.
+10. Editor/reviewer engineering means decisionability and valid evidence, not manipulation.
+11. Research rules through empirical corpora, direct reading, official guidance, and regression tests.
