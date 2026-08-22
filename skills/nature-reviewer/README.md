@@ -12,8 +12,9 @@
 - 在互盲条件下生成 reviewers，覆盖 validity/methods、contribution/positioning、reproducibility/clarity/boundary 等 lens。
 - 每个 Major Concern 都必须有明确 **resolution test**。
 - 把问题分类为 publication-criteria blocker、technical blocker、major repairable、claim recalibration、clarity/reporting 或 optional enrichment。
-- 区分 `needs more evidence`、`needs reanalysis`、`needs clearer structure`、`narrow/remove claim` 与 `change target/article type`。
-- 把 close analogue papers 作为**领域证据期望的 context**，而不是虚构 journal policy。
+- 区分 `needs more evidence`、`needs reanalysis`、`needs clearer structure/explanation`、`narrow/remove claim` 与 `change target/article type`。
+- 审查 **explanatory sufficiency**：核心概念、方法、机制、公式、Results interpretation 与 figure conclusion 是否给了足够 rationale 和 intermediate reasoning，让读者不需要自己补 hidden premise 就能恢复科学逻辑。
+- 把 close analogue papers 作为**领域 evidence/explanation expectation 的 context**，而不是虚构 journal policy。
 - 检查 main-text content 和 figures 是否真正暴露 decisive evidence，还是被无关 implementation/repository detail 淹没。
 - 如果 headline claim 需要 validation/generalization/failure-boundary evidence，指出缺失的 plot/figure。
 - 交叉核对 terminology、units、counts、numeric precision、Methods facts、tables 与 claims。
@@ -22,7 +23,8 @@
 
 - “按 Nature Methods 做：先 editor triage，再三份独立 reviewer reports，最后综合。”
 - “这是 PLOS ONE，不要因为不够 broad-interest 扣分；重点看 validity 和 reporting。”
-- “哪些 reviewer concerns 真需要新实验，哪些可以通过收窄 claim 关闭？”
+- “science 都在，但解释够不够深？reviewer 会不会必须自己补中间步骤才能看懂？”
+- “哪些 reviewer concerns 真需要新实验，哪些可以通过更好的 explanation、restructuring 或收窄 claim 关闭？”
 - “这些 figures 足以支持 external generalization 吗，还是 pooled metric 把 site heterogeneity 隐藏了？”
 - “哪些 implementation/code detail 应从 manuscript 删除，留在 Methods/availability/repository docs？”
 
@@ -40,6 +42,7 @@
 - 不按票数、而按 concern reasoning 加权的 editor synthesis。
 - Decision-engineering map：concern class、blocking status、resolution test 与 minimum valid repair route。
 - Claim/evidence/boundary weakness 与 missing alternative-explanation tests。
+- **Explanation-depth findings**：hidden premise、under-explained central concept/inference、缺失 rationale/meaning/boundary，以及最便宜 repair 是否其实是 clarification 而不是 new science。
 - Figure/evidence gap，包括什么时候新增 plot 或把支持证据提升到 main text 能提高 decisionability。
 - 当 science sound 但 publication objective 不匹配时，可给 target-fit recommendation。
 
@@ -47,14 +50,16 @@
 
 - 不会虚构 reviewer identity、hidden editorial information 或真实期刊的 final decision/probability。
 - Reviewer 互相不可见；模拟 triage conclusion 不会喂给 reviewer packet。
-- Analogue-paper pattern 只是 contextual evidence expectation，不是 policy。
+- Analogue-paper pattern 只是 contextual evidence/explanation expectation，不是 policy。
 - 不会建议挑 friendly reviewers、战略性引用潜在 reviewer、隐藏 competitor/adverse evidence 或添加 cosmetic experiments。
-- 更多实验并不自动更好；evidence、reanalysis、clarification、claim narrowing/removal 或 target change 都可能是正确 repair。
+- 更多实验并不自动更好；evidence、reanalysis、explanation/restructuring、claim narrowing/removal 或 target change 都可能是正确 repair。
+- 不会把“写得更长”当成“解释更清楚”；under-explanation 和 over-explanation 是两个独立 review problem。
 - 真实 editor decision 之后的 rebuttal/revision package 使用 `nature-response`。
 
 ## 相关技能
 
-- `nature-writing`：投稿前修 argument/content/figures。
+- `nature-writing`：投稿前修 argument、explanation depth、content 与 figures。
+- `nature-polishing`：修 under-explained / over-compressed prose，同时保留 author voice。
 - `nature-figure`：设计或重建缺失的 decision-relevant visual evidence。
 - `nature-statistics`：深入 statistical validity/reporting audit。
 - `nature-response`：真实 decision 后关闭 editor/reviewer concerns。
