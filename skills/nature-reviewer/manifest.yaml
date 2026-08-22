@@ -1,11 +1,13 @@
 name: nature-reviewer
-version: 2.1.0
+version: 2.2.0
 description: >
   Declarative manifest for journal-aware pre-submission editor/reviewer
   simulation. The legacy skill name remains for compatibility; review criteria
   are resolved from the exact target journal/publication model rather than
   assuming flagship Nature. Close analogue papers may inform field-specific
   evidence expectations but never substitute for official criteria or manuscript facts.
+  Review may also audit whether content is allocated to the correct manuscript/artifact
+  layer and whether the figure set exposes the evidence required by headline claims.
 
 always_load:
   - references/source-basis.md
@@ -13,6 +15,10 @@ always_load:
 
 references:
   on_demand:
+    - condition: reviewer/editor should assess whether source-code/repository/project details are cluttering the scientific narrative, whether decisive evidence is buried in Methods/SI, or whether content belongs in main text, figures, legends, Methods, availability, artifact docs, or should be omitted
+      path: ../nature-shared/core/manuscript-content-selection.md
+    - condition: reviewer/editor should assess whether the figure set actually supports headline claims, which plots/evidence roles are missing, whether pooled summaries hide heterogeneity/pairing/calibration/failure boundaries, or what visual evidence would close a decision-relevant concern
+      path: ../nature-shared/core/figure-evidence-planning.md
     - condition: user asks how comparable papers establish similar claims, what evidence/figures reviewers in this paper class may expect, or whether the manuscript's evidence architecture is unusual relative to close analogues; use as context only, not publication policy
       path: ../nature-shared/core/analogue-paper-calibration.md
     - condition: target journal/venue is named, journal fit or desk-review risk is being assessed, or exact publication criteria matter
