@@ -2,7 +2,7 @@
 
 Run this workflow for drafting or restructuring. The order is:
 
-`argument -> source/content triage -> analogue/voice calibration -> evidence/figure planning -> rhetorical moves -> paragraph nuclei -> sentence dependencies -> natural scholarly realization -> journal adaptation`
+`argument -> source/content triage -> analogue/voice calibration -> evidence/figure planning -> rhetorical moves -> paragraph nuclei -> sentence dependencies -> explanatory sufficiency -> natural scholarly realization -> journal adaptation`
 
 not `repository/docs/template -> prose`.
 
@@ -78,7 +78,7 @@ Use a few close papers as **structural/evidence priors**. Prefer comparability o
 - what the main figures are meant to establish;
 - what data/uncertainty/controls/validation/generalization/failure boundaries are shown;
 - what is moved to Methods/SI/Extended Data;
-- how much background, signposting, citation synthesis, and local interpretation the audience receives.
+- how much background, signposting, citation synthesis, local interpretation, and explanatory depth the audience receives.
 
 Do not copy phrases, distinctive paragraph structures, figure compositions, palettes, normalization/statistical choices, or journal mechanics inferred from published PDFs.
 
@@ -205,6 +205,54 @@ Not every paragraph needs every element, and some disciplines defer most interpr
 
 For theory/humanities/qualitative work, use the corresponding proof, source, case, theme, interpretation, or analytic warrant rather than forcing quantitative evidence logic.
 
+## 5a. Explanatory sufficiency gate
+
+For central, novel, conceptually dense, cross-disciplinary, surprising, or interpretation-critical material, load `../../../nature-shared/core/explanatory-sufficiency.md` before compressing or polishing.
+
+First define the **reader baseline** for the current section. Then inspect each important concept/inference using the minimum-sufficient explanation packet:
+
+- **E1 identity** — what is it?
+- **E2 purpose** — why is it needed here?
+- **E3 mechanism/logic** — how does it work or how does the inference follow, when non-obvious?
+- **E4 evidence/observable consequence** — how do we know or what should be seen?
+- **E5 boundary/assumption** — when does it hold?
+- **E6 connection** — what does this enable or explain next?
+
+Do not force all six elements for every idea. Add only the elements the intended reader needs.
+
+### Hidden-premise test
+
+For every important A -> B reasoning step ask:
+
+> What must the reader know or believe for B to follow from A?
+
+Classify the premise as:
+
+- safe shared knowledge;
+- already established locally;
+- specialist but essential and therefore worth a brief explanation;
+- paper-specific assumption that must be stated;
+- disputed inference that needs justification/qualification;
+- unsupported leap that needs evidence or removal.
+
+A transition word does not supply a missing premise.
+
+### Reader reconstruction test
+
+After a central explanatory unit, ask whether the intended reader can recover, as relevant:
+
+`what -> why -> how/logic -> evidence/comparison -> boundary -> what follows`
+
+If several answers require guessing, the passage is under-explained even if it is elegant and concise.
+
+### Adaptive elaboration
+
+Elaborate most when `centrality × unfamiliarity × inferential dependence` is high.
+
+Compress when the material is routine, already explained, operational artifact detail, or secondary support that does not change interpretation.
+
+Do not solve under-explanation with generic filler. Add the **specific missing reasoning step**.
+
 ## 6. Build sentence dependency before polishing sentences
 
 For a difficult paragraph, reduce each sentence to its proposition and map dependencies.
@@ -289,7 +337,7 @@ Use the strongest verb warranted by evidence. Sweep unsupported `first`, `unique
 
 Do not hide incrementality merely to make the contribution appear larger.
 
-## 10. Run the reader-prediction, content, voice, and coherence audit
+## 10. Run the reader-prediction, explanation, content, voice, and coherence audit
 
 After each paragraph ask:
 
@@ -298,9 +346,12 @@ After each paragraph ask:
 3. Does the next paragraph answer or intentionally redirect it?
 4. Is needed evidence/definition/comparison/qualification missing?
 5. Can every sentence's position be justified through `inherits -> relation -> adds -> enables`?
-6. Did repository/artifact detail enter the narrative without a scientific function?
-7. Could any content be relocated to Methods/SI/availability/repository without weakening understanding?
-8. Is a needed figure/plot missing because a central pattern is being described inefficiently in prose?
+6. For central ideas, can the intended reader reconstruct `what / why / how / evidence / boundary / what follows` without guessing?
+7. Did a citation or named method substitute for explanation the reader needs locally?
+8. Did repository/artifact detail enter the narrative without a scientific function?
+9. Could any content be relocated to Methods/SI/availability/repository without weakening understanding?
+10. Is a needed figure/plot missing because a central pattern is being described inefficiently in prose?
+11. Has explanatory expansion become repetitive or textbook-like?
 
 Then reverse-outline the section using paragraph nuclei.
 
@@ -314,9 +365,9 @@ After major rewriting:
 
 1. compare representative original/revised passages;
 2. restore observed cadence, agency, technical density, signposting, terminology;
-3. keep scientific/coherence repairs;
+3. keep scientific/coherence/explanatory repairs;
 4. reject analogue wording leakage and generic journal cosplay;
-5. verify no claim became stronger merely because prose became more fluent.
+5. verify no claim became stronger merely because prose became more fluent or more elaborate.
 
 Never define voice through an AI-detector score, word blacklist, deliberate errors, or arbitrary sentence-length variance.
 
@@ -338,6 +389,7 @@ Check for:
 - ornamental vocabulary;
 - repeated syntax with synonym substitution;
 - depersonalized constructions hiding consequential author decisions;
+- compressed central ideas with missing rationale/mechanism/comparison/boundary;
 - repository URLs/file paths/helper names in narrative without scientific necessity;
 - exhaustive technical detail that belongs in Methods/artifact docs;
 - redundant panels/plots;
@@ -351,6 +403,7 @@ Return requested prose together with only notes that help revision.
 
 For substantial manuscript planning/rewrite, also maintain compactly:
 
+- **explanation ledger** — concept/inference -> reader baseline -> missing E1–E6 elements -> recommended expansion -> destination -> status;
 - **content-allocation ledger** — item -> function -> destination -> reason;
 - **repository-leakage list** — artifact detail -> scientific abstraction/correct destination;
 - **figure/plot suggestion ledger** — claim/question -> unit/estimand -> plot -> uncertainty/comparator -> main/support;
@@ -366,8 +419,8 @@ When the author redirects a draft:
 - change affected claims/paragraphs unless the argument spine breaks;
 - preserve Terminology Ledger and voice invariants;
 - replace/compress rather than accumulate duplicated functions;
-- rerun stance/coherence/content-allocation checks locally;
+- rerun stance/coherence/explanatory/content-allocation checks locally;
 - rebuild argument/move/figure plans if the premise changes;
 - drop invalid analogue-derived assumptions rather than forcing conformity.
 
-Revision should strengthen the argument without reviewer-driven prose accretion, repository leakage, target-corpus cloning, or machine-like generic smoothing.
+Revision should strengthen the argument without reviewer-driven prose accretion, explanatory underspecification, textbook over-explanation, repository leakage, target-corpus cloning, or machine-like generic smoothing.

@@ -1,11 +1,12 @@
 name: nature-polishing
-version: 7.2.0
+version: 7.3.0
 description: >
   Declarative manifest for journal-aware academic polishing. The legacy skill
   name is retained for backward compatibility; journal behavior is resolved
   independently from that name. Substantial rewrites can study close analogue
   papers for rhetorical/evidence conventions while preserving the author's own
-  voice and applying research-backed natural scholarly prose.
+  voice, applying research-backed natural scholarly prose, and checking whether
+  central ideas are explained deeply enough for the intended reader.
 
 always_load:
   - ../nature-shared/core/reader-workflow.md
@@ -77,6 +78,8 @@ axes:
 
 references:
   on_demand:
+    - condition: prose is polished or concise but a reader may not understand a central idea, method, mechanism, result, equation, figure interpretation, or implication because rationale, intermediate reasoning, comparison meaning, assumptions, or boundaries are missing; use to add minimum sufficient explanation and avoid both under- and over-explanation
+      path: ../nature-shared/core/explanatory-sufficiency.md
     - condition: prose feels generic, over-smoothed, formulaic, repetitive, connector-heavy, machine-like, weakly authorial, or difficult to follow sentence by sentence; use for sentence dependencies, information progression, identity chains, stance, functional syntax, anti-template repair, and cadence without detector evasion
       path: ../nature-shared/core/natural-scholarly-prose.md
     - condition: substantial rewrite/polish where the user wants to retain their own recognizable style, cadence, agency, terminology, or manuscript voice

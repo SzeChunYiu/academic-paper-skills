@@ -1,5 +1,5 @@
 name: nature-writing
-version: 2.5.0
+version: 2.6.0
 description: >
   Declarative manifest for journal-aware academic drafting, restructuring, and
   initial-submission requests. The legacy skill name is retained for backward
@@ -8,8 +8,8 @@ description: >
   rather than a single journal skeleton, with optional editor/reviewer decision
   preflight. Substantial rewrites can study close analogue papers for writing,
   evidence, data, and figure conventions while preserving a separate author voice,
-  research-backed natural scholarly prose, explicit manuscript-content selection,
-  and claim-driven figure/plot suggestions.
+  research-backed natural scholarly prose, explanatory sufficiency, explicit
+  manuscript-content selection, and claim-driven figure/plot suggestions.
 
 always_load:
   - ../nature-shared/core/reader-workflow.md
@@ -101,6 +101,8 @@ axes:
 
 references:
   on_demand:
+    - condition: manuscript prose is concise but a reader may not understand a central idea, method, mechanism, result, equation, figure interpretation, or implication because rationale, intermediate reasoning, assumptions, comparison meaning, or boundaries are missing; use to audit minimum sufficient explanation without turning the paper into a textbook
+      path: ../nature-shared/core/explanatory-sufficiency.md
     - condition: deciding what source material belongs in main text, figures, legends, Methods, Extended Data/SI, Data/Code/Resource Availability, repository documentation, or should be omitted; especially when file paths, helper names, scripts, setup commands, project/repository links, configs, implementation modules, or exhaustive technical details are leaking into manuscript prose
       path: ../nature-shared/core/manuscript-content-selection.md
     - condition: deciding what figures or plots the manuscript needs, suggesting visual evidence for each major claim, or mapping reader questions/estimands/data structures/uncertainty to plot families and main-versus-support figure roles before rendering
