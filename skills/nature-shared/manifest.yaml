@@ -1,5 +1,5 @@
 name: nature-shared
-version: 1.8.0
+version: 1.9.0
 description: >
   Declarative manifest for shared academic-paper reference modules. This package
   is not a standalone workflow; installed skills load exact shared core or
@@ -27,6 +27,8 @@ core:
       path: core/author-voice-profile.md
     - condition: drafting, rewriting, or polishing academic prose that feels generic, formulaic, over-smoothed, machine-like, choppy, repetitive, connector-heavy, weakly authorial, or difficult to follow sentence by sentence; use for natural scholarly cadence and sentence-flow repair, never detector evasion
       path: core/natural-scholarly-prose.md
+    - condition: checking whether a manuscript idea, method, mechanism, result, equation, figure interpretation, or implication is explained deeply enough for the intended reader; especially when prose is concise but assumes hidden premises, names concepts without rationale, jumps from observation to conclusion, or compresses a central idea into too little explanation
+      path: core/explanatory-sufficiency.md
     - condition: studying a few close analogue papers before rewriting, restructuring evidence, choosing main figures, deciding what data belongs in main text versus SI, or learning field/venue conventions without copying wording or visual identity
       path: core/analogue-paper-calibration.md
     - condition: deciding what information belongs in main text, figures, legends, Methods, Extended Data/SI, availability statements, repository documentation, or nowhere; especially when codebase/repository details, file paths, helper names, setup commands, project links, exhaustive technical detail, or implementation documentation are leaking into manuscript prose
