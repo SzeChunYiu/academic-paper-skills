@@ -111,6 +111,12 @@ class ContentAndFigureSelectionTests(unittest.TestCase):
         self.assertIn("Planning-only exception", contract)
         self.assertIn("deciding which figures/plots the paper needs does not require selecting Python/R", contract)
 
+    def test_reviewer_can_audit_content_and_figure_adequacy(self) -> None:
+        manifest = read(SKILLS / "nature-reviewer" / "manifest.yaml")
+        self.assertIn("manuscript-content-selection.md", manifest)
+        self.assertIn("figure-evidence-planning.md", manifest)
+        self.assertIn("not publication policy", manifest)
+
 
 if __name__ == "__main__":
     unittest.main()
