@@ -1,11 +1,12 @@
 name: nature-figure
-version: 3.1.0
+version: 3.2.0
 description: >
   Declarative manifest for journal-aware scientific figure design. The legacy
   skill name is retained for compatibility. The plotting backend is independent
   from the target journal; exact figure compliance is resolved by journal,
-  content type, submission stage, and figure component. Analogue-paper study
-  can calibrate evidence roles and plot grammar without copying visual identity.
+  content type, submission stage, and figure component. Claim-driven planning
+  maps reader questions and estimands to visual evidence before rendering, while
+  analogue-paper study calibrates evidence roles without copying visual identity.
 
 always_load:
   - static/core/contract.md
@@ -61,6 +62,10 @@ axes:
 
 references:
   on_demand:
+    - condition: decide what figures or plots a paper needs from its claims, reader questions, estimands, data structures, uncertainty, alternative explanations, contribution type, and main-versus-support evidence role before rendering
+      path: ../nature-shared/core/figure-evidence-planning.md
+    - condition: decide whether a candidate figure/panel/detail belongs in main text, Extended Data/SI, Methods, availability, repository documentation, or should be omitted because it does not serve the scientific narrative
+      path: ../nature-shared/core/manuscript-content-selection.md
     - condition: study a few similar papers to decide which figures/panels/data belong in the manuscript, what visual evidence roles are conventional, how comparable data are plotted, or what belongs in main text versus SI without copying another paper's visual identity
       path: references/analogue-figure-calibration.md
     - condition: cross-skill analogue-paper study for argument/evidence/figure architecture before manuscript or figure redesign

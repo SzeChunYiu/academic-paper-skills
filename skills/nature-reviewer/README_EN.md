@@ -2,52 +2,59 @@
 
 [中文说明](README.md)
 
-`nature-reviewer` simulates Nature-style pre-submission review from the reviewer perspective, helping authors find risks in novelty, significance, technical soundness, and reader value before submission.
+`nature-reviewer` simulates a **journal-aware editor + reviewer decision process** before submission. It does not assume flagship Nature from the legacy skill name and does not count reviewer votes. It resolves the target publication model, separates editorial triage from independent technical review, then produces an editor synthesis and an author-facing repair map.
 
 ## What To Use It For
 
-- Stress-test a manuscript, abstract, figure set, or result storyline before submission.
-- Evaluate originality, scientific importance, interdisciplinary readership, technical soundness, and readability using Nature-style review dimensions.
-- Generate three reviewer reports in mutually blind isolated contexts, then create a separate cross-review synthesis only after every report is frozen.
-- Mark unsupported claims, technical defects, evidence-chain breaks, and barriers for non-specialist readers.
-- Separate comments into `Major Concerns` and `Minor Comments`, marking Major issues that block the central case as `Blocking Yes`.
-- Keep severe criticism direct, professional, and evidence-grounded; keep minor comments specific and actionable without inventing issues to fill a quota.
-- Avoid dash punctuation and colons throughout the prose when a sentence boundary, comma, semicolon, parentheses, or a short label on a new line is clearer; retain necessary source punctuation and hyphens in stable IDs and compound terms.
-- Use an internal 12-axis technical checklist and bind each substantive concern to a claim pointer and verifiable evidence location.
-- Cross-check terminology, units, numeric precision, Methods counts, and table support within the manuscript, separating language issues from substantive contradictions that weaken credibility.
-- Do not coordinate or rewrite reviews to reduce duplication; treat an issue as consensus only when at least two reviewers raise it independently in the post-review synthesis.
-- Identify which readers would care about the work and why.
+- Stress-test a manuscript, abstract, figure set, or Results storyline before submission.
+- Resolve the exact target's decision model rather than applying one universal novelty/impact score.
+- Simulate editorial triage: scope, article type, target-specific priority, recoverability of contribution/evidence, and maturity for external review.
+- Generate mutually blind reviewer reports with validity/methods, contribution/positioning, and reproducibility/clarity/boundary lenses.
+- Require a **resolution test** for every Major Concern.
+- Classify issues as publication-criteria blockers, technical blockers, major repairable, claim recalibration, clarity/reporting, or optional enrichment.
+- Distinguish `needs more evidence` from `needs reanalysis`, `needs clearer structure`, `narrow/remove claim`, or `change target/article type`.
+- Use close analogue papers as **context for field-specific evidence expectations**, never as invented publication policy.
+- Check whether main-text content and figures expose the decisive evidence or are cluttered by non-scientific implementation/repository detail.
+- Flag missing validation/generalization/failure-boundary plots when the manuscript's headline claims require them.
+- Cross-check manuscript-internal terminology, units, counts, numeric precision, Methods facts, tables, and claims.
 
 ## Typical Requests
 
-- "Review this introduction and Figure 1 like a Nature reviewer."
-- "Before submission, find the technical issues reviewers are most likely to attack."
-- "Give me three reviewer reports and one synthesis, not a rebuttal."
+- "Review this for Nature Methods: first simulate editor triage, then three independent reviewers, then synthesize."
+- "For this PLOS ONE paper, don't penalize it for not being broad-interest; focus on validity and reporting."
+- "Tell me which reviewer concerns really require experiments and which can be closed by narrowing the claim."
+- "Are our figures sufficient to support external generalization, or are we hiding site heterogeneity behind pooled metrics?"
+- "Which implementation/code details should be removed from the manuscript and left in Methods/availability/repository docs?"
 
 ## What You Need To Provide
 
-- Manuscript, abstract, key sections, figures, legends, or author notes.
-- Target journal, field, and the review risks you are most worried about.
-- Existing supplementary experiments or constraints on adding new experiments.
+- Manuscript, key sections, figures/legends, Methods, or author notes.
+- Exact target journal/venue and article type when known.
+- Known study design, central claims, and any constraints on new experiments/analyses.
+- Supplementary evidence when you want the reviewer simulation to consider it.
 
 ## Outputs
 
-- Three peer-review style reports.
-- Cross-review synthesis: consensus problems, divergent emphases, and editor-level risks.
-- Traceable concerns with stable IDs, claim pointers, evidence pointers, and resolution tests.
-- Tiered Major/Minor comments, blocking risks, and a deduplicated minor-revision checklist.
-- List of experiments, analyses, narrative changes, or figure evidence that must be strengthened.
-- Explicit labels for judgments that cannot be made from the supplied evidence.
+- Editorial triage simulation.
+- Independent reviewer reports.
+- Editor synthesis that weighs concern reasoning rather than votes.
+- Decision-engineering map with concern class, blocking status, resolution test, and minimum valid repair route.
+- Claim/evidence/boundary weaknesses and missing alternative-explanation tests.
+- Figure/evidence gaps, including when a new plot or reallocation to main text would improve decisionability.
+- Optional target-fit recommendation when the science is sound but the publication objective is mismatched.
 
 ## Boundaries
 
-- The skill does not invent specific reviewer identities, expert personas, or editorial decisions.
-- Reviewers cannot read, cite, agree with, or respond to one another; synthesis begins only after all independent reports are locked.
-- It makes conservative simulations only from the provided material and the skill's official review rules.
-- For writing responses to real reviewer comments, use `nature-response`.
+- The skill does not invent reviewer identities, hidden editorial information, or the real journal's final decision/probability.
+- Reviewers remain mutually blind; the simulated triage conclusion is not fed into reviewer packets.
+- Analogue-paper patterns are contextual evidence expectations, not policy.
+- It does not recommend friendly-reviewer selection, strategic reviewer citation, concealment of competitors/adverse evidence, or cosmetic experiments.
+- More experiments are not automatically better; evidence, reanalysis, clarification, claim narrowing/removal, or target change can be the right repair.
+- For actual post-decision rebuttals/revision packages, use `nature-response`.
 
 ## Related Skills
 
-- `nature-response`: turn real reviewer comments into a response package.
-- `nature-writing`: rebuild manuscript narrative based on review risks.
-- `nature-statistics`: deeply audit statistical design and reporting.
+- `nature-writing`: repair argument/content/figures before submission.
+- `nature-figure`: design or rebuild missing decision-relevant visual evidence.
+- `nature-statistics`: deep statistical validity and reporting audit.
+- `nature-response`: close real editor/reviewer concerns after a decision.

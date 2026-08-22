@@ -1,6 +1,10 @@
 # Writing workflow
 
-Run this workflow for drafting or restructuring. The order is `argument -> analogue/voice calibration when useful -> rhetorical moves -> paragraph nuclei -> sentences -> journal adaptation`, not `template -> prose`.
+Run this workflow for drafting or restructuring. The order is:
+
+`argument -> source/content triage -> analogue/voice calibration -> evidence/figure planning -> rhetorical moves -> paragraph nuclei -> sentence dependencies -> natural scholarly realization -> journal adaptation`
+
+not `repository/docs/template -> prose`.
 
 ## 1. Build the argument spine
 
@@ -12,7 +16,7 @@ Before drafting, identify:
 - **boundary** — where does the answer stop holding?
 - **meaning** — why does the bounded answer matter to the intended research community?
 
-If there are multiple contributions, identify one dominant spine and attach secondary branches. Do not compress unrelated contributions into a misleading single novelty claim.
+If there are multiple contributions, identify one dominant spine and attach secondary branches. Do not compress unrelated contributions into one inflated novelty claim.
 
 If an essential link is absent, expose the missing link rather than inventing it.
 
@@ -26,9 +30,44 @@ Use `static/core/rhetorical-engine.md` to classify the dominant contribution: em
 
 Also identify the evidence type and research paradigm. A randomized trial, qualitative interview study, theorem paper, materials experiment, benchmark paper, and historical argument require different rhetorical structures even when they target similarly selective journals.
 
-## 2b. Run focused analogue-paper study for substantial rewrites
+## 2b. Triage source material before it leaks into the manuscript
 
-When the task is a substantial rewrite/restructure and the field, study design, contribution class, or target is known, load `../../../nature-shared/core/analogue-paper-calibration.md`.
+For substantial drafting/rewrite from mixed source material — notes, code, repositories, configs, project docs, experiment logs, notebooks, figure folders — load `../../../nature-shared/core/manuscript-content-selection.md`.
+
+For every candidate content item, classify whether it is:
+
+- inference-critical;
+- interpretation-critical;
+- reproducibility-critical;
+- compliance/provenance-critical;
+- orientation-critical;
+- or none.
+
+Then assign the correct destination:
+
+`main text / main figure / legend / Methods / Extended Data / SI / availability / repository-artifact docs / omit`
+
+### Repository-to-manuscript leakage gate
+
+Flag file paths, script/helper/class names, setup commands, CLI flags, configs, branch/PR/issue history, unit tests, internal module structure, repeated GitHub links, and developer workflow as potential **implementation-detail leakage**.
+
+Translate artifacts into scientific abstractions:
+
+- script/function -> scientifically consequential method/analysis;
+- config -> consequential parameter values;
+- GitHub/resource link -> Code/Resource Availability;
+- setup/reproduction commands -> artifact README/appendix;
+- internal names -> canonical scientific terminology.
+
+Use the test:
+
+> If the implementation were rewritten but the scientific method and results stayed identical, would this detail still matter?
+
+If not, do not let it occupy scientific narrative merely because it exists in the repository.
+
+## 2c. Run focused analogue-paper study for substantial rewrites
+
+When the task is substantial and the field, study design, contribution class, or target is known, load `../../../nature-shared/core/analogue-paper-calibration.md`.
 
 Use a few close papers as **structural/evidence priors**. Prefer comparability over prestige. Study:
 
@@ -43,11 +82,9 @@ Use a few close papers as **structural/evidence priors**. Prefer comparability o
 
 Do not copy phrases, distinctive paragraph structures, figure compositions, palettes, normalization/statistical choices, or journal mechanics inferred from published PDFs.
 
-If detailed figure/plot planning is required, route to `nature-figure` and its analogue-figure workflow; keep writing focused on **figure role and evidence dependency**.
-
 Skip or bound this step for tiny edits or when no trustworthy comparator set exists.
 
-## 2c. Build an author-voice profile when the rewrite should remain recognizably theirs
+## 2d. Build an author-voice profile when the rewrite should remain recognizably theirs
 
 When representative author prose is available or the user asks to preserve style, load `../../../nature-shared/core/author-voice-profile.md`.
 
@@ -68,144 +105,269 @@ Use the separation:
 
 `author voice = expression prior`
 
-After any large structural rewrite, run a re-voice pass so the improved section does not sound like generic academic English or a clone of the analogue set.
+After large structural rewriting, run a re-voice pass so the improved section does not sound like generic academic English or a clone of the analogue set.
 
-## 3. Select section moves, not a universal skeleton
+## 3. Plan evidence and figures before prose becomes fixed
+
+For Results/full manuscripts, load:
+
+- `../../../nature-shared/core/main-text-discipline.md`;
+- `../../../nature-shared/core/figure-evidence-planning.md` when figures/plots are not already settled.
+
+### 3a. Allocate evidence
+
+Classify each result as core discovery, necessary support, qualification, robustness, heterogeneity, provenance detail, alternative inference, edge case, or artifact operation.
+
+Build the **shortest sufficient evidence chain** while keeping conclusion-changing qualifications visible.
+
+### 3b. Build a claim-to-figure plan
+
+For every headline claim ask:
+
+```text
+What reader question should a figure answer?
+What is the scientific/statistical unit?
+What is the estimand/quantity of interest?
+What variation, pairing, uncertainty, or alternative explanation must be visible?
+What plot/image/table/schematic family best exposes that evidence?
+Does this deserve main-text space or support placement?
+```
+
+The writing skill may proactively propose figures/plots; `nature-figure` owns detailed rendering.
+
+Examples of starting points:
+
+- small-sample continuous groups -> individual observations/distribution;
+- paired effect -> connected pairs/paired differences;
+- time/dose/ordered parameter -> trajectory when order is meaningful;
+- association -> scatter/hexbin with justified relation model;
+- classification -> ROC/precision–recall/operating-point display according to the decision problem;
+- calibration -> calibration/reliability curve, not discrimination alone;
+- survival -> censoring-aware survival/cumulative-incidence display;
+- heterogeneity -> forest/stratified effect display;
+- ML benchmark -> per-task/site/run comparisons when variation matters, not just grand means;
+- robustness -> sensitivity curves/intervals, usually support;
+- imaging -> representative image plus quantitative evidence for population-level claims;
+- null/negative result -> effect estimate + uncertainty/equivalence logic;
+- qualitative/theory -> do not force quantitative plots.
+
+Do not add a plot because analysis software generated it or top-tier papers commonly contain it.
+
+## 4. Select section moves, not a universal skeleton
 
 Load the requested section fragment. When the material does not fit its default pattern, or cross-disciplinary calibration matters, load `references/section-move-atlas.md`.
 
 For each section:
 
 1. Write the reader question the section must answer.
-2. Select the minimum rhetorical moves needed to answer it.
-3. Order the moves so each creates a reason for the next.
-4. Mark optional/recurrent moves instead of forcing every move once.
-5. Check the final move hands the reader a useful question for the next section.
+2. Select the minimum rhetorical moves needed.
+3. Order moves so each creates a reason for the next.
+4. Mark optional/recurrent moves rather than forcing every move once.
+5. Check the final move hands the reader a useful next question.
 
-Use `references/cross-disciplinary-writing-evidence.md` when deciding whether a proposed rule is robust or merely local to one discipline or corpus.
+Use `references/cross-disciplinary-writing-evidence.md` when deciding whether a proposed rule is robust or merely local to one discipline/corpus.
 
-## 3a. Map paragraphs as nucleus + satellites
+## 4a. Map paragraphs as nucleus + satellites
 
-Each paragraph needs one **nucleus**: the proposition or reader task that makes the paragraph necessary.
+Each paragraph needs one **nucleus**: the proposition or reader task that makes it necessary.
 
-Supporting **satellites** may include evidence, explanation, comparison, example, qualification, counterargument, implication, methodological reminder, or a bridge.
+Supporting **satellites** may include evidence, explanation, comparison, example, qualification, counterargument, implication, methodological reminder, or bridge.
 
-Do **not** require one rhetorical function per paragraph. Split only when two independent nuclei compete for control or when the paragraph becomes difficult to parse.
+Do not require one rhetorical function per paragraph. Split only when independent nuclei compete or parsing becomes difficult.
 
-For each planned paragraph record:
+Record:
 
 `nucleus -> supporting evidence/reasoning -> qualification if needed -> next-reader question`
 
-This map is more informative than a label such as `context` or `result` alone.
+## 4b. Alignment gate when framing is genuinely ambiguous
 
-## 3b. Allocate Results evidence before drafting
+Use an alignment gate only when a wrong assumption would materially change the scientific argument.
 
-When the task includes Results, full-manuscript compression, or main-versus-SI placement, load `../../../nature-shared/core/main-text-discipline.md`.
+Surface compactly:
 
-Classify each result as core discovery, necessary support, qualification, robustness, heterogeneity, provenance detail, alternative inference, or edge case. Build the shortest sufficient main-text evidence chain, but do not hide conclusion-changing qualifications in Supplementary Information.
-
-Use the analogue set only as a prior about local expectations. Final placement follows the function of the evidence in this paper plus exact journal requirements.
-
-## 3c. Alignment gate when framing is genuinely ambiguous
-
-Do not stop routine drafting merely because several stylistic choices are possible. Use an alignment gate only when a wrong assumption would materially change the scientific argument.
-
-Surface, compactly:
-
-- the proposed argument spine;
+- proposed argument spine;
 - dominant contribution/evidence type;
 - section move map;
 - primary reader/audience;
-- high-leverage assumptions that are not author-provided.
+- high-leverage assumptions not supplied by the author.
 
-If the user is available, ask only the few questions that materially change the claim or structure. If immediate drafting is preferred, proceed with explicit placeholders/assumptions rather than inventing evidence.
+If immediate drafting is preferred, proceed with explicit placeholders/assumptions rather than inventing evidence.
 
-## 4. Draft from evidence and reasoning outward
+## 5. Draft from evidence and reasoning outward
 
-Keep claims near the evidence or reasoning that warrants them. Avoid large claim stacks followed much later by support.
+Keep claims near the evidence/reasoning that warrants them. Avoid claim stacks followed much later by support.
 
-For Results, make the local question and evidentiary answer recoverable. A useful block is often:
+For Results, a useful block is often:
 
 `question -> setup if needed -> observation/estimate -> evidence -> bounded local inference -> bridge`
 
 Not every paragraph needs every element, and some disciplines defer most interpretation to Discussion.
 
-For theory/humanities/qualitative work, replace quantitative evidence logic with the corresponding proof, source, case, theme, interpretation, or analytic warrant.
+For theory/humanities/qualitative work, use the corresponding proof, source, case, theme, interpretation, or analytic warrant rather than forcing quantitative evidence logic.
 
-## 5. Engineer sentence-to-sentence flow
+## 6. Build sentence dependency before polishing sentences
 
-For each sentence, identify:
+For a difficult paragraph, reduce each sentence to its proposition and map dependencies.
 
-- what information is already **given** to the reader;
-- what **new** information is added;
-- the relation to surrounding sentences: evidence, cause, consequence, contrast, concession, specification, example, sequence, or inference.
+Example:
 
-Keep central entities lexically stable enough to be tracked. Use pronouns only when reference is unambiguous.
+```text
+S1 establishes A
+S2 qualifies A under B
+S3 explains why B changes interpretation C
+S4 tests C against alternative D
+S5 closes with bounded inference E
+```
 
-Do not add transition words as decoration. If the logical relation is already obvious through information structure and lexical continuity, an explicit connective may be unnecessary.
+Then, for each sentence after the first:
 
-For deeper repair, load `references/paragraph-flow.md`.
+`inherits X -> relation R -> adds Y -> enables Z`
 
-## 6. Match syntax to rhetorical function
+If a sentence inherits nothing, has no meaningful relation, or could be moved almost anywhere without consequence, it may be an orphan sentence or generic mini-summary.
 
-Do not optimize for uniformly short sentences or uniformly dense academic syntax.
+Load `references/paragraph-flow.md` for dependency-graph, handoff, and coherence repair.
 
-- use chronological syntax for procedures when sequence matters;
-- use explicit clauses for new causal or conceptual relations;
-- use compact noun phrases for established technical concepts when readers can unpack them;
-- separate observation from interpretation when combining them would blur evidentiary strength;
-- place the sentence's main new claim where readers can find the emphasis easily.
+## 7. Engineer information progression and identity chains
 
-If a sentence is difficult, first diagnose the hidden relation; shortening alone may not fix it.
+A useful default is given -> new:
 
-## 7. Calibrate epistemic stance to evidence
+`A -> B; B -> C; C -> D`
+
+But this is not universal. Use constant-topic, derived-theme, contrast, question-answer, claim-evidence-boundary, or another defensible progression when needed.
+
+Keep core entities trackable through **identity chains**:
+
+- exact technical term repetition;
+- stable abbreviation;
+- precise demonstrative noun phrase;
+- unambiguous pronoun;
+- clearly marked subtype/category relation.
+
+Do not rotate synonyms for central technical concepts merely to reduce repetition.
+
+## 8. Realize the paragraph as natural scholarly prose
+
+For substantial drafting/rewrite or prose that feels generic, over-smoothed, formulaic, connector-heavy, or machine-like, load `../../../nature-shared/core/natural-scholarly-prose.md`.
+
+Use this hierarchy:
+
+`scientific relation -> information flow -> lexical/reference continuity -> stance -> syntax -> connective -> cadence`
+
+### Match syntax to rhetorical function
+
+- chronological syntax for procedures when sequence matters;
+- explicit clauses for new causal/conceptual relations;
+- compact noun phrases for established technical concepts;
+- parallel syntax for genuinely parallel evidence/functions;
+- observation and interpretation separated when combination would inflate certainty;
+- qualification integrated when subordination clarifies the boundary;
+- main new information placed where rhetorical emphasis is recoverable.
+
+Functional variation is natural. Random variation is not.
+
+### Use precise conventional vocabulary
+
+Choose vocabulary for field meaning, evidence strength, collocation, reader familiarity, and economy—not rarity.
+
+Do not create `academic style` by synonymizing precise verbs, inflating nouns, or inserting generic prestige phrases.
+
+### Use connectives only for real relations
+
+Do not target connector density. Add explicit markers only when the relation would otherwise be difficult to recover.
+
+### Run cadence audit last
+
+After logic/stance are stable, check repeated openings, identical clause rhythms, buried verbs, noun stacks, abrupt boundaries, and generic closings.
+
+Do not inject random short sentences, punctuation quirks, errors, or `burstiness` to appear human.
+
+## 9. Calibrate epistemic stance to evidence
 
 Distinguish observed, estimated, inferred, simulated, proved, hypothesized, associated, and causally identified claims.
 
-`show` / `demonstrate` require strong direct warrant. `suggest` / `indicate` fit indirect or bounded evidence. `may` / `could` fit plausible but unverified interpretations.
+Use the strongest verb warranted by evidence. Sweep unsupported `first`, `unique`, `unprecedented`, `comprehensive`, `complete`, `always`, and `never`.
 
-Sweep for unsupported `first`, `unique`, `unprecedented`, `comprehensive`, `complete`, `always`, and `never`. Replace them with bounded, testable statements.
+Do not hide incrementality merely to make the contribution appear larger.
 
-Do not hide an incremental relationship to prior work merely to make the contribution sound larger. Explain precisely what changes and why that change matters.
-
-## 8. Run the reader-prediction, voice, and coherence audit
+## 10. Run the reader-prediction, content, voice, and coherence audit
 
 After each paragraph ask:
 
 1. What should a competent skeptical reader now believe?
 2. What question will that reader probably ask next?
-3. Does the next paragraph answer or intentionally redirect that question?
-4. Is any needed evidence, definition, comparison, or qualification missing?
+3. Does the next paragraph answer or intentionally redirect it?
+4. Is needed evidence/definition/comparison/qualification missing?
+5. Can every sentence's position be justified through `inherits -> relation -> adds -> enables`?
+6. Did repository/artifact detail enter the narrative without a scientific function?
+7. Could any content be relocated to Methods/SI/availability/repository without weakening understanding?
+8. Is a needed figure/plot missing because a central pattern is being described inefficiently in prose?
 
-Then reverse-outline the section using paragraph nuclei. If the nucleus sequence does not reconstruct the section argument, fix the structure before polishing sentences.
+Then reverse-outline the section using paragraph nuclei.
 
-For a full manuscript, also check section handoffs: Introduction -> Methods/evidence plan -> Results -> Discussion -> bounded conclusion.
+If an author-voice profile is active, check stable terminology, recognizable agency/directness/cadence/signposting without preserving defects.
 
-If an author-voice profile is active, also ask whether the revised text still sounds like the same author after structural repair: stable terminology, recognizable agency, directness, cadence, and signposting without preserving defects.
+## 11. Re-voice after major structural/natural-prose repair
 
-## 9. Apply journal and article-type adaptation last
+Natural scholarly prose is the quality floor. Author voice is the identity layer above it.
 
-Only after the scientific argument works, resolve the exact journal/content type/stage using the journal axis and shared journal resolver.
+After major rewriting:
 
-Journal adaptation may change audience assumptions, section labels, compression, title/abstract conventions, reference rendering, and submission mechanics. It must not change evidence, causal strength, uncertainty, novelty boundary, limitations, or the manuscript's coherent author identity beyond what the target actually requires.
+1. compare representative original/revised passages;
+2. restore observed cadence, agency, technical density, signposting, terminology;
+3. keep scientific/coherence repairs;
+4. reject analogue wording leakage and generic journal cosplay;
+5. verify no claim became stronger merely because prose became more fluent.
 
-When the user asks for a broader characterization of target-venue writing practice beyond a few close analogue papers, load `references/target-corpus-calibration.md` and build a temporary profile from a stratified corpus.
+Never define voice through an AI-detector score, word blacklist, deliberate errors, or arbitrary sentence-length variance.
 
-## 10. Return prose plus reasoning-facing notes
+## 12. Apply journal and article-type adaptation last
 
-Return the requested draft together with only the notes that help the author revise it: important assumptions, missing evidence, unresolved boundaries, risky claims, and structural choices that materially affect interpretation. Do not bury the prose under generic writing advice.
+Only after the scientific argument works, resolve exact journal/content type/stage using the shared resolver.
 
-When an analogue pass materially changed the draft, it can be useful to summarize only the decision-relevant transfer as `adopt / adapt / reject / unresolved` rather than listing every observed pattern.
+Journal adaptation may change audience assumptions, section labels, compression, title/abstract conventions, reference rendering, display allocation, and submission mechanics. It must not change evidence, causal strength, uncertainty, novelty boundary, limitations, or coherent author identity beyond what the target actually requires.
 
-## 11. Revise locally before rewriting globally
+For broader venue/field tendencies beyond close analogues, load `references/target-corpus-calibration.md`.
+
+## 13. Final anti-template / content-drift audit
+
+Check for:
+
+- repeated empty frames;
+- connector-led paragraph glue without relation;
+- generic `highlight/underscore` closings where a concrete consequence is available;
+- ornamental vocabulary;
+- repeated syntax with synonym substitution;
+- depersonalized constructions hiding consequential author decisions;
+- repository URLs/file paths/helper names in narrative without scientific necessity;
+- exhaustive technical detail that belongs in Methods/artifact docs;
+- redundant panels/plots;
+- any change in causality, generality, certainty, novelty, limitation scope, or displayed uncertainty.
+
+These are diagnostics, not banned phrases/objects.
+
+## 14. Return prose plus decision-facing planning when useful
+
+Return requested prose together with only notes that help revision.
+
+For substantial manuscript planning/rewrite, also maintain compactly:
+
+- **content-allocation ledger** — item -> function -> destination -> reason;
+- **repository-leakage list** — artifact detail -> scientific abstraction/correct destination;
+- **figure/plot suggestion ledger** — claim/question -> unit/estimand -> plot -> uncertainty/comparator -> main/support;
+- **shortest evidence chain**;
+- **important missing evidence/boundaries**.
+
+Do not bury the prose under audit machinery unless the user asks for full detail.
+
+## 15. Revise locally before rewriting globally
 
 When the author redirects a draft:
 
-- change only the affected claims/paragraphs unless the new information breaks the argument spine;
-- preserve the Terminology Ledger and author-voice invariants;
-- if a new sentence duplicates an existing function, prefer replacement/compression to accumulation;
-- re-run stance and coherence checks on changed text;
-- if the premise itself changes, rebuild the argument/move map before re-drafting;
-- if the change invalidates a prior analogue-derived assumption, drop that assumption rather than forcing conformity.
+- change affected claims/paragraphs unless the argument spine breaks;
+- preserve Terminology Ledger and voice invariants;
+- replace/compress rather than accumulate duplicated functions;
+- rerun stance/coherence/content-allocation checks locally;
+- rebuild argument/move/figure plans if the premise changes;
+- drop invalid analogue-derived assumptions rather than forcing conformity.
 
-Revision should strengthen the argument without introducing reviewer-driven prose accretion or target-corpus style cloning.
+Revision should strengthen the argument without reviewer-driven prose accretion, repository leakage, target-corpus cloning, or machine-like generic smoothing.

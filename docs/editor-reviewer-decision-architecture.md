@@ -1,13 +1,13 @@
 # Editor–Reviewer Decision Architecture
 
-> Research and implementation note. Last reviewed: 2026-08-19.
+> Research and implementation note. Last reviewed: 2026-08-22.
 
 ## Contents
 
 - [Problem](#problem)
-- [Research team lenses](#research-team-lenses)
 - [Central finding](#central-finding)
 - [Decision lifecycle](#decision-lifecycle)
+- [Pre-review manuscript intelligence](#pre-review-manuscript-intelligence)
 - [Cross-journal publication models](#cross-journal-publication-models)
 - [Claim decision proofs](#claim-decision-proofs)
 - [Reviewer simulation](#reviewer-simulation)
@@ -19,95 +19,155 @@
 
 ## Problem
 
-A manuscript can fail at several distinct stages for different reasons:
+A manuscript can fail for very different reasons:
 
-- not in scope or wrong article type;
-- scientifically interesting but not a priority for a selective target;
-- editor cannot recover the contribution/evidence quickly enough to justify review;
-- technically invalid or under-supported central claim;
-- sound central case but over-broad secondary claims;
-- reviewer requests that are useful but not publication-critical;
-- revisions that answer letters without changing the manuscript/evidence state;
-- scientifically sound work sent to a publication model whose objective is mismatched.
+- wrong scope/article type;
+- valid science but wrong publication objective;
+- contribution/evidence too difficult for an editor to recover quickly;
+- central claim under-supported or invalid;
+- sound central case with over-broad secondary claims;
+- decisive negative/boundary evidence buried in support material;
+- figures show headline metrics but not the variation/generalization/calibration needed to evaluate the claim;
+- main narrative is cluttered with implementation/repository details while the scientific logic remains implicit;
+- reviewer requests are useful but not publication-critical;
+- revision letters answer comments without changing the evidence/manuscript state.
 
-A single `acceptance score` hides these failure modes and makes revision strategy worse.
-
-## Research team lenses
-
-The implementation was designed from four complementary perspectives:
-
-1. **Handling editor / triage lens** — scope, article type, priority, readership, maturity and decision cost.
-2. **Methods / reproducibility reviewer lens** — design, evidence, inference, reproducibility and technical blockers.
-3. **Domain reviewer / argument lens** — contribution, prior work, significance, alternatives and boundaries.
-4. **Meta-review / decision-engineering lens** — how multiple reports become an editorial decision and how a revision closes decision-relevant concerns.
-
-The roles are analytical lenses, not invented real reviewer identities.
+A single `acceptance score` hides these failure modes.
 
 ## Central finding
 
 There is no universal publication objective.
 
-Current official guidance contains deliberately different models:
+Examples of deliberately different models include:
 
-- **Nature** adds editorial gates for outstanding importance and interdisciplinary interest to a technically credible case.
-- **PLOS ONE** explicitly evaluates technical rigor and scientific/ethical eligibility rather than a perceived-importance threshold.
-- **IEEE** exposes scope, novelty, validity, data, clarity, compliance and advancement as separate review dimensions.
-- **PLOS Medicine / selective clinical models** add importance of the question and possible care/policy/research implications.
-- **eLife's current Reviewed Preprint model** separates significance of findings from strength of evidence rather than using conventional post-review accept/reject gatekeeping.
-- **Conference selection** can make current-version completeness decisive because a long journal-style revision cycle may not exist.
+- selective broad-interest journals, where scope/priority/readership add gates beyond technical validity;
+- selective field-advancement journals, where contribution to a specialist field matters;
+- rigor-first scholarly-record models such as PLOS ONE, where perceived importance is not the publication threshold;
+- clinical/policy-priority models;
+- evidence-assessment models such as current eLife Reviewed Preprints;
+- deadline-constrained conferences.
 
 Therefore:
 
-> `scientifically strong` and `good fit for this exact publication model` are separate states.
+> `scientifically strong`, `easy to evaluate`, and `good fit for this publication model` are different states.
 
 ## Decision lifecycle
 
-The shared engine models:
+The shared system models:
 
 ```text
-Stage 0  Integrity / compliance
+Stage -1  Manuscript intelligence / decisionability
    ↓
-Stage 1  Editorial triage
+Stage 0   Integrity / reporting / compliance
    ↓
-Stage 2  Independent external review
+Stage 1   Editorial triage
    ↓
-Stage 3  Editor synthesis
+Stage 2   Independent external review
    ↓
-Stage 4  Revision closure / transfer / stop
+Stage 3   Editor synthesis
+   ↓
+Stage 4   Revision closure / transfer / stop
 ```
 
-### Stage 0
+### Stage -1 — manuscript intelligence
 
-Authorship, ethics, registration, data/image integrity, duplicate publication and required reporting can independently block publication. Do not treat these as rhetoric problems.
+Before simulating acceptance/rejection risk, the writing system can repair the manuscript so reviewers are testing the **science**, not avoidable presentation failures.
 
-### Stage 1
+This includes:
 
-The editor simulation asks whether the manuscript fits the exact target, has a recoverable contribution, satisfies target-specific priority criteria, and is mature enough to justify external review.
+- argument spine;
+- manuscript-content selection;
+- close analogue-paper study;
+- evidence/figure planning;
+- sentence/paragraph dependency and natural scholarly prose;
+- author-voice restoration;
+- exact journal/reporting resolution.
 
-### Stage 2
+This stage must never manufacture broader significance or stronger evidence.
 
-Independent reviewers stress-test the scientific case using universal axes plus only those target-conditional criteria the journal actually uses.
+### Stage 0 — integrity/compliance
 
-### Stage 3
+Authorship, ethics, registration, data/image integrity, duplicate publication, reporting checklists, and required data/code/material availability can independently block publication. They are not rhetoric problems.
 
-The editor synthesis weighs concern reasoning and relevant review lenses rather than counting recommendations.
+### Stage 1 — editorial triage
 
-### Stage 4
+Ask whether the paper:
 
-The author closes decision-relevant issues using the minimum scientifically sufficient route.
+- fits scope/content type;
+- has a recoverable bounded contribution;
+- satisfies target-specific priority criteria;
+- presents evidence mature enough to justify external review;
+- exposes the central evidence rather than forcing editors to excavate it from SI/code/project docs.
+
+### Stage 2 — independent review
+
+Independent reviewers stress-test design, evidence, inference, positioning, reproducibility, clarity, and claim boundaries. They do not receive the simulated triage conclusion.
+
+### Stage 3 — editor synthesis
+
+The simulated editor weighs the **reasoning and relevance** of concerns. It does not count votes or average incompatible scores.
+
+### Stage 4 — revision closure
+
+A concern closes only when the scientific/manuscript state satisfies a resolution test.
+
+## Pre-review manuscript intelligence
+
+### 1. Content selection
+
+`skills/nature-shared/core/manuscript-content-selection.md` asks whether every candidate detail is:
+
+- inference-critical;
+- interpretation-critical;
+- reproducibility-critical;
+- compliance/provenance-critical;
+- orientation-critical;
+- or none.
+
+Then it assigns the detail to main text, figure, legend, Methods, Extended Data/SI, availability, repository docs, or omit.
+
+This prevents **repository-to-manuscript leakage**: file paths, helper names, setup commands, internal modules, configs, CI/tests, repeated project links, and developer workflow appearing in scientific narrative without a scientific function.
+
+### 2. Figure/evidence planning
+
+`skills/nature-shared/core/figure-evidence-planning.md` maps:
+
+`claim -> reader question -> statistical unit -> estimand -> data structure -> alternative explanation/uncertainty -> visual evidence -> placement`
+
+A reviewer-ready generalization claim may need site/task/population-level evidence, not one pooled metric. A calibration claim needs calibration evidence, not discrimination alone. A paired effect should preserve pairing. A negative result needs effect/uncertainty logic rather than `P > 0.05` alone.
+
+### 3. Natural scholarly prose
+
+`skills/nature-shared/core/natural-scholarly-prose.md` reduces interpretive friction through:
+
+`proposition/dependency -> information progression -> identity chains -> stance -> syntax -> connectives -> cadence`
+
+For difficult paragraphs:
+
+`inherits X -> relation R -> adds Y -> enables Z`
+
+This is a decisionability tool, not AI-detector evasion.
+
+### 4. Analogue papers
+
+Close analogue papers can inform local evidence/figure expectations and rhetorical architecture, but **never become publication policy**. Published patterns contain survivorship bias.
+
+### 5. Author voice
+
+After structural/natural-prose repair, restore the manuscript's recognizable cadence, agency, terminology, technical density, and stance. Clearer does not need to mean generic.
 
 ## Cross-journal publication models
 
-Implemented fallback profiles:
+Fallback profiles implemented in the shared layer include:
 
 - selective broad-interest;
 - selective field-advancement;
 - rigor-first scholarly record;
-- clinical / policy priority;
+- clinical/policy priority;
 - evidence-assessment without conventional post-review gatekeeping;
 - deadline-constrained conference selection.
 
-Exact current journal guidance always overrides a fallback profile.
+Exact current target guidance overrides fallback profiles.
 
 ## Claim decision proofs
 
@@ -115,102 +175,104 @@ Every headline claim should be auditable as:
 
 ```text
 Claim
-Why it matters under the target criteria
+Why it matters for this target
 Evidence type
 Decisive evidence
 Strongest plausible alternative explanation
 Discriminating test / analysis
 Uncertainty and boundary
-Location
+Manuscript/figure location
 Status
 ```
 
-This changes experiment planning. Instead of asking `What else can we add?`, ask:
+This changes experiment planning. Instead of asking:
 
-> `What is the cheapest convincing evidence that distinguishes the headline interpretation from the strongest plausible alternative?`
+`What else can we add?`
 
-Sometimes that is a new experiment. Sometimes it is a sensitivity analysis, negative control, external validation, counterexample, clearer source evidence, or narrower claim.
+ask:
+
+> `What is the minimum convincing evidence that distinguishes the headline interpretation from the strongest plausible alternative?`
+
+That may be a new experiment, reanalysis, sensitivity analysis, negative control, external validation, counterexample, clearer presentation of existing evidence, narrower claim, or removal of a secondary claim.
 
 ## Reviewer simulation
 
-Three default independent lenses are used without invented biographies:
+Default mutually blind lenses:
 
 - validity / methods / evidence;
 - contribution / prior work / target-specific significance;
 - reproducibility / clarity / boundaries / readership.
 
-Article-type-specific lenses can replace them.
+Article-type-specific lenses can replace these.
 
-Every major concern must have a **resolution test**. This prevents vague preference from being treated as a blocking scientific objection.
+Every Major Concern requires a **resolution test**. This prevents reviewer preference from automatically becoming a blocking scientific requirement.
 
-Reviewer packets do not receive the editorial-triage conclusion. Reports are frozen before synthesis.
+Analogue papers may inform whether evidence architecture is unusual for the claim class, but they are context only.
 
 ## Editor synthesis
 
-Post-review issues are classified as:
+Concerns are classified as:
 
-- publication-criteria blocker;
-- technical blocker;
-- major repairable;
-- claim recalibration;
-- clarity/reporting;
-- optional enrichment.
+- `publication_criteria_blocker`;
+- `technical_blocker`;
+- `major_repairable`;
+- `claim_recalibration`;
+- `clarity_or_reporting`;
+- `optional_enrichment`.
 
-The synthesis does not average review scores. Consensus is useful evidence but not a voting rule. A single technically decisive concern can remain blocking; multiple optional requests do not become mandatory merely through repetition.
+A single technically decisive concern may remain blocking. Many optional requests do not become mandatory through repetition.
+
+The synthesis also distinguishes:
+
+- weak science;
+- sound science that is difficult to evaluate;
+- sound science with poor target fit.
 
 ## Revision closure
 
-Closure routes:
+Valid closure routes include:
 
 1. add decisive evidence;
 2. reanalyse existing evidence;
 3. correct an error;
-4. clarify/restructure existing evidence;
+4. clarify/restructure/reallocate existing evidence;
 5. narrow the claim;
 6. remove the claim;
-7. change journal/article type when target mismatch is the real problem.
+7. explain justified nonimplementation;
+8. change journal/article type when fit is the real problem.
 
-This supports an important rule:
+Important rule:
 
 > Do not perform an experiment merely because a reviewer requested it. Perform it when it is needed to distinguish interpretations or satisfy a real publication criterion.
 
-A response letter does not close a concern unless the evidentiary/manuscript state now satisfies the resolution test.
+Similarly, do not add a paragraph/panel simply because a reviewer asked. If the requested content is important but operational/supporting, place it in the scientifically correct location.
 
 ## Acceptance engineering and anti-gaming
 
-The term **acceptance engineering** is used narrowly:
+`Acceptance engineering` means:
 
 - improve exact-target fit;
 - improve decisionability;
 - strengthen or correctly bound evidence;
-- surface limitations before reviewers discover them;
-- make methods and analyses auditable;
+- expose decisive negative/alternative evidence;
+- make Methods/figures/data/code auditable;
 - close real objections efficiently.
 
-It does **not** include:
+It does **not** mean:
 
 - friendly-reviewer selection;
 - strategic citation of likely reviewers;
-- hiding adverse evidence;
-- omitting strong competitors;
-- inflated novelty/significance language;
+- hiding adverse evidence or strong competitors;
+- inflated novelty/significance wording;
 - fake reviewer consensus;
 - cosmetic experiments;
-- burying decision-changing limitations.
-
-Empirical peer-review research showing more favorable recommendations from author-suggested reviewers and associations between reviewer citation requests and recommendations is treated as an anti-gaming warning, not as a strategy.
+- burying conclusion-changing limitations;
+- cargo-cult imitation of accepted papers;
+- AI-detector manipulation.
 
 ### Survivorship warning
 
-Published papers and accepted-manuscript patterns are useful evidence about how arguments were presented under a publication ecology. They do **not** establish that a phrase, structure, figure count, or rhetorical style caused acceptance.
-
-The system therefore separates:
-
-- official decision criteria;
-- scientific reasoning about evidence;
-- observed published-paper conventions;
-- empirical peer-review associations;
-- unsupported causal claims about acceptance.
+Published papers show what survived one publication ecology. They do not prove that a phrase, structure, plot, figure count, or visual style caused acceptance.
 
 ## Implementation map
 
@@ -218,45 +280,34 @@ The system therefore separates:
 
 - `skills/nature-shared/core/editor-reviewer-decision-engine.md`
 - `skills/nature-shared/journal-formats/editorial-decision-profiles.md`
+- `skills/nature-shared/core/manuscript-content-selection.md`
+- `skills/nature-shared/core/figure-evidence-planning.md`
+- `skills/nature-shared/core/natural-scholarly-prose.md`
+- `skills/nature-shared/core/analogue-paper-calibration.md`
+- `skills/nature-shared/core/author-voice-profile.md`
 
 ### Writing
 
 - `skills/nature-writing/references/editor-reviewer-preflight.md`
-- routed from `nature-writing/manifest.yaml` and `nature-writing/SKILL.md`
+- `skills/nature-writing/static/core/workflow.md`
 
 ### Mock review
 
-- `nature-reviewer` now runs target resolution, editorial triage, mutually blind reviewers, editor synthesis, and author-facing decision engineering.
+- `nature-reviewer`: target resolution -> editorial triage -> mutually blind reviewers -> editor synthesis -> author-facing decision map.
 
 ### Real revision
 
 - `skills/nature-response/references/editor-decision-closure.md`
-- classifies must-address versus optional requests and chooses the minimum valid closure route.
+- `nature-response`: editor conditions -> blocking concerns -> closure routes -> concise manuscript changes + full reviewer-facing responses.
 
-### Tests
+### Research docs
 
-Focused contracts protect:
-
-- journal-specific decision profiles;
-- no universal weighted acceptance score;
-- no vote counting;
-- no reviewer contamination by editorial triage;
-- claim narrowing/removal as valid closure routes;
-- anti-gaming rules;
-- editor conditions outranking optional reviewer preferences.
+- `docs/academic-writing-research_EN.md`
+- `docs/natural-scholarly-writing_EN.md`
+- `docs/manuscript-content-and-figures_EN.md`
 
 ## Current source basis
 
-Public guidance reviewed 2026-08-19 includes:
+The architecture has been calibrated against current official/editorial/reviewer guidance and direct-reading examples across Nature Portfolio (including Nature, Nature Methods, Nature Computational Science, Nature Medicine, Nature Cell Biology), PLOS, IEEE, ACM, JAMA and eLife publication models, plus empirical peer-review and academic-writing research.
 
-- Nature editorial criteria/process and peer-review policy;
-- IEEE Author Center peer-review and reviewer guidance;
-- PLOS ONE Reviewer Guidelines and Academic Editor philosophy;
-- PLOS Biology and PLOS Medicine selective criteria;
-- PLOS editor decision guidance;
-- JAMA Network peer-reviewer guidance;
-- eLife Assessment definitions and current Reviewed Preprint model;
-- venue-specific ACM review criteria as examples of conference/community variation;
-- empirical JAMA/eLife peer-review studies relevant to reviewer-suggestion/citation anti-gaming safeguards.
-
-Exact URLs are recorded in the shared source/decision files. Re-verify current official criteria whenever a real target journal decision is being modeled.
+For exact submission decisions, re-verify current official criteria for the real target journal/content type/stage. Local profiles and published-paper patterns are reasoning aids, not permanent substitutes for live target guidance.

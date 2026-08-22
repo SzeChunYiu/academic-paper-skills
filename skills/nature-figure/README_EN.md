@@ -2,93 +2,134 @@
 
 [中文说明](README.md)
 
-`nature-figure` designs, generates, and audits submission-grade scientific figures for Nature-series papers, high-impact journals, manuscript panels, mechanism schematics, and graphical-abstract drafts.
+`nature-figure` plans, designs, generates, and audits journal-aware scientific figures. It can work **before plotting** to decide which figures a paper actually needs, which scientific question each panel should answer, what data/uncertainty must remain visible, and which plot family matches the estimand and data structure; rendering then follows in Python or R.
 
 ## What To Use It For
 
-- Generate Python / R plotting scripts and editable figures from data, legends, or manuscript claims.
-- Redraw existing figures into clearer multi-panel manuscript figures.
+- Decide whether a claim needs a figure at all, or whether prose/table is clearer.
+- Build a claim-driven figure plan: `claim -> reader question -> statistical unit -> estimand -> data structure -> uncertainty/alternative explanation -> plot -> main/support placement`.
+- Suggest plot families for distributions, paired effects, trajectories, associations, agreement, calibration, classification, survival, heterogeneity, sensitivity, benchmarks, ablations, imaging, high-dimensional data, null results, and more.
+- Study a few close analogue papers to learn **figure roles and evidence expectations** without copying layout, palette, normalization, or visual identity.
+- Decide which evidence belongs in main figures versus Extended Data/SI using the shared manuscript-content-selection logic.
+- Generate Python / R plotting scripts and editable publication figures from data, legends, or manuscript claims.
+- Redraw existing figures into clearer multi-panel evidence chains.
 - Plan Figure 1, mechanism diagrams, workflows, graphical abstracts, or supplementary figures.
-- Check panel labels, color hierarchy, panel-by-panel uncertainty, actual PDF glyph sizes, statistical annotations, source data, and export formats.
-- Separate flagship `Nature` initial, final main-figure, and Extended Data file contracts, including the under-250-word legend limit.
-- Apply `Nature Machine Intelligence` (NMI)'s separate six-main-display, up-to-ten Extended Data, initial/final, 300-dpi/180-mm, and source-data requirements; the current pages give no standalone legend number, so retain the official 2018 `<300`-English-word rule only as a historical advisory, count the whole legend rather than each panel, and aim for 150–250 words.
-- When explicitly requested, call `openai/gpt-image-2` through the OpenRouter Images API to draft AI concept schematics.
-- For AI-assisted graphical abstracts, define one central message, figure type, audience, and evidence boundary before comparing compositions and accessible palettes; then separately verify the target journal's current AI policy, scientific accuracy, copyright, disclosure, and provenance. Treat the *Nature Careers* column as practitioner advice, not submission permission.
+- Audit panel labels, uncertainty, statistical units, accessibility, actual PDF glyph sizes, source data, image integrity, and export formats.
+- Adapt final packaging to exact target-journal/article-type/stage rules without changing the underlying evidence.
+- When explicitly requested, use the separate OpenRouter GPT Image 2 route for draft concept schematics/graphical abstracts, subject to target-policy and human scientific review.
 
 ## Workflow
 
-Start with a figure contract rather than a template:
+Planning comes before rendering:
 
-- Core conclusion: what the figure must demonstrate.
-- Evidence hierarchy: which panels are primary evidence and which are explanatory.
-- Figure prototype: scatter, box plot, heatmap, mechanism diagram, workflow, multi-panel composition, and so on.
-- Backend choice: Python or R; the first choice can be reused as the default preference.
-- Data integrity: preserve all observations and requested variables by default, and record every exclusion rule with before/after counts.
-- Template compatibility: compare scientific meaning, data shape, and transform constraints before exact reuse, structural adaptation, or style-only inheritance.
-- Submission constraints: size, typography, color, resolution, vector format, and source-data traceability.
+```text
+claim
+-> reader question
+-> figure necessity
+-> scientific/statistical unit
+-> estimand
+-> data structure
+-> alternative explanation / uncertainty
+-> representation
+-> panel/evidence sequence
+-> main vs support
+-> analogue calibration when useful
+-> Python/R rendering
+-> exact journal adaptation
+-> visual + source-data QA
+```
+
+Important rules:
+
+- **Planning-only tasks do not require choosing Python or R.** Backend selection begins when plotting/rendering starts.
+- A chart's popularity in a top journal or analogue set is never sufficient justification.
+- Small-sample continuous data often need visible individual observations/distributions rather than mean bars alone.
+- Paired data should expose pairing when pairing is the estimand.
+- AUC does not replace calibration/threshold behavior when those are the scientific/clinical questions.
+- A UMAP/t-SNE image alone should not carry a quantitative separation or mechanistic claim.
+- A null result should be shown with an effect estimate and relevant uncertainty/equivalence logic, not inferred from `P > 0.05` alone.
+- A panel exists only when it closes a real evidentiary or orientation question.
 
 ## Typical Requests
 
-- "Make a Nature-style multi-panel figure from this dataset, preferably in Python."
-- "Use the figures4papers Nature Machine Intelligence layout as a reference and add a method-comparison figure."
-- "Redraw this mechanism schematic, export SVG/PDF, and give me the source-data table."
-- "Use OpenRouter to draft a graphical abstract, but do not treat it as a quantitative data figure."
+- "Given these Results, tell me what Figures 1–4 should be and what each panel should prove before you plot anything."
+- "This is paired data. Recommend the plot that best shows the actual treatment effect and uncertainty."
+- "Read 4 similar Nature Methods papers and tell me which validation/benchmark/generalization figures our method paper is missing."
+- "Our model claims external generalization. Suggest the right site-level, calibration, and failure-boundary plots rather than one pooled metric."
+- "Make the planned figure set in Python and export editable SVG/PDF plus source-data mapping."
+- "Draft a graphical abstract, but keep generated imagery separate from quantitative evidence."
 
 ## Example Preview
 
 | Direction | Preview | Reusable Pattern |
 |-----------|---------|------------------|
-| Multi-panel manuscript figure | <a href="assets/gallery/fig1-material-mechanism-rich.png"><img src="assets/gallery/fig1-material-mechanism-rich.png" width="220" alt="Material design and physical validation"></a> | Mechanism schematic, image panels, quantitative results, and correlation in one evidence chain |
-| Chart-type atlas | <a href="assets/chart-atlas/atlas-03-heatmaps.png"><img src="assets/chart-atlas/atlas-03-heatmaps.png" width="220" alt="Heatmap atlas"></a> | Heatmaps, annotation matrices, cluster blocks, and diverging color scales |
-| Third-party figures4papers reference | <a href="assets/figures4papers/figure_VIGIL/figures/comparison_radar.png"><img src="assets/figures4papers/figure_VIGIL/figures/comparison_radar.png" width="220" alt="VIGIL comparison radar"></a> | Study layout, legend, and multi-metric comparison grammar only; read the separate copyright notice before use |
+| Multi-panel manuscript figure | <a href="assets/gallery/fig1-material-mechanism-rich.png"><img src="assets/gallery/fig1-material-mechanism-rich.png" width="220" alt="Material design and physical validation"></a> | Study how heterogeneous evidence can be organized into one visual argument; do not treat the exact composition as a template. |
+| Chart-type atlas | <a href="assets/chart-atlas/atlas-03-heatmaps.png"><img src="assets/chart-atlas/atlas-03-heatmaps.png" width="220" alt="Heatmap atlas"></a> | Candidate visual grammars; final choice must follow data structure and reader task. |
+| Third-party figures4papers reference | <a href="assets/figures4papers/figure_VIGIL/figures/comparison_radar.png"><img src="assets/figures4papers/figure_VIGIL/figures/comparison_radar.png" width="220" alt="VIGIL comparison radar"></a> | Inspiration/reference only; read copyright notices and never inherit a chart merely because it appears publication-like. |
 
 ## What You Need To Provide
 
-- Raw data, existing figure, legend, manuscript claim, or intended mechanism.
-- Target journal, single-column / double-column size, output format, and whether source data is required.
-- Python / R preference; if absent, the skill asks or reuses the local preference.
+For planning:
+
+- headline claims/questions;
+- what data exist for each claim;
+- statistical/experimental unit, pairing/repeated structure, groups/conditions, time/order, and important uncertainty when known;
+- target field/paper type/journal when known.
+
+For rendering:
+
+- raw data or analysis-ready table;
+- selected plot/figure plan or permission to propose one;
+- output format and target dimensions/stage;
+- Python/R preference; if absent, the skill asks or reuses the saved local preference.
 
 ## Outputs
 
-- Runnable Python or R plotting script.
-- SVG/PDF/TIFF/PNG figure files, with editable vector output preferred.
-- Panel notes, source-data mapping, exclusion counts, a panel-by-panel visual audit, and a pre-submission QA record.
-- For AI-schematic tasks, a concept draft and a list of elements that need human redrawing or verification.
+Depending on the task:
+
+- figure/plot suggestion ledger: `claim/question -> unit -> estimand -> plot -> uncertainty/comparator -> main/support`;
+- Figure 1–N evidence-role plan and panel map;
+- main-versus-Extended-Data/SI visual allocation;
+- explicit `adopt / adapt / reject` notes from analogue figures;
+- runnable Python or R plotting script;
+- SVG/PDF/TIFF/PNG figure files, with editable vector output preferred;
+- panel notes, source-data mapping, exclusion counts, and panel-by-panel QA;
+- for AI-schematic tasks, a concept draft plus elements requiring human scientific verification/redrawing.
 
 ## Built-In References
 
-- `references/api.md`: Python palette, style, and plotting-helper conventions.
-- `references/asset-adaptation.md`: semantic matching, field mapping, and data-integrity rules for templates.
-- `references/template-catalog.md`: validated Python CSV templates for volcano, ROC, marker dot plot, marginal, and paired figures.
-- `references/chart-types.md`: chart selection and visual rules.
-- `references/demos.md`: third-party `figures4papers` index, use boundaries, and original adaptation patterns.
-- `references/qa-contract.md`: export QA, source-data constraints, and static-preflight entry points.
-- `references/ai-graphical-abstract-workflow.md`: message brief, composition and color, journal-policy gate, human scientific verification, disclosure, and provenance for AI-assisted graphical abstracts.
-- `references/openrouter-image-generation.md`: provider-specific OpenRouter / GPT Image 2 generation and QA.
-- `scripts/validate_figure.py`: reproducible static QA for Python and R plotting source.
-- `scripts/audit_pdf_text.py`: scan exported PDF `Tf` operators for real glyph runs below the 5 pt floor, including reduced mathtext scripts.
-- `scripts/figure_safety.py`: strict monotone interpolation and data/uncertainty-driven label positioning helpers.
-- `assets/figures4papers/`: retained third-party scripts and previews; the repository MIT License does not automatically apply, so read `THIRD_PARTY_NOTICES.md` before use.
+- `../nature-shared/core/figure-evidence-planning.md`: claim-driven figure necessity and question-to-plot atlas.
+- `../nature-shared/core/manuscript-content-selection.md`: main/support/Methods/availability/repository allocation.
+- `references/analogue-figure-calibration.md`: learn visual evidence roles from similar papers without copying identity.
+- [`docs/manuscript-content-and-figures_EN.md`](../../docs/manuscript-content-and-figures_EN.md): public guide to manuscript content and figure planning.
+- `references/figure-contract.md`: core conclusion, evidence hierarchy, panel map, and review-risk checks.
+- `references/qa-contract.md`: export QA, source-data constraints, and visual inspection.
+- `references/journal-adaptation.md`: exact-target/stage packaging.
+- `references/ai-graphical-abstract-workflow.md`: evidence/policy/provenance boundary for AI-assisted graphical abstracts.
+- `references/template-catalog.md`, `references/chart-types.md`, and `references/demos.md`: candidate implementations/patterns, never automatic scientific choices.
 
 ## Boundaries
 
-- AI-generated images are not treated as real experimental results or quantitative data panels.
-- An internally useful AI draft is not automatically described as a submission-ready final asset; assess those two states separately.
-- The skill does not invent statistical tests, sample sizes, error-bar meanings, or experiment conditions.
-- The skill does not silently sample for rendering convenience, ignore requested variables, or remove incomplete observations.
-- Passing automated checks is not treated as visual acceptance; uncertainty, label collisions, spacing, and salience still require panel-by-panel inspection.
-- Private templates can be used locally, but user-facing outputs should not expose private paths, filenames, or sources.
-- Third-party reference materials remain subject to their source terms and `THIRD_PARTY_NOTICES.md`; this repository grants no additional rights to those files.
+- The skill does not invent data, statistical tests, sample sizes, uncertainty, mechanisms, or experimental conditions.
+- It does not choose plots merely because top papers use them.
+- It does not silently drop observations/variables, hide adverse variation, or change axes/crops/normalization deceptively.
+- It does not treat embeddings, bars, radar plots, or other visually familiar forms as evidence unless they answer the actual reader question.
+- AI-generated images are never treated as quantitative data or experimental evidence.
+- Automated validators do not replace final physical-size visual inspection.
+- Published figures are not submission contracts; exact current target rules are resolved separately.
+- Third-party assets remain subject to their original terms and notices.
 
 ## Related Skills
 
-- `nature-statistics`: check statistical annotations, n definitions, and p-value wording.
-- `nature-writing`: align figure conclusions with manuscript narrative.
-- `nature-paper2ppt`: turn manuscript figures into presentation slides.
+- `nature-writing`: builds the claim/evidence/content plan and can request figure suggestions before prose is fixed.
+- `nature-statistics`: audits estimands, uncertainty, statistical units, multiplicity, and inferential display choices.
+- `nature-reviewer`: stress-tests whether figures close decision-relevant reviewer questions.
+- `nature-paper2ppt`: reuses validated manuscript figures in presentations.
 
 ## Relationship With Other Skills
 
-- If the core task is statistical interpretation, sample-size definition, or significance wording, let `nature-statistics` audit the text before returning to `nature-figure`.
-- If the figure is finished but the user needs the claim written into an abstract, introduction, or results section, hand off to `nature-writing`.
-- If the figure should become a lab meeting deck or presentation slide, hand off to `nature-paper2ppt`.
-- `nature-figure` is responsible for the figure itself; it does not replace statistical review or manuscript narration.
+- If the user asks **what to plot**, `nature-figure` can answer at the planning layer without a backend choice.
+- If the user asks **what belongs in the paper at all**, combine with `nature-writing` / shared manuscript-content selection.
+- If the main uncertainty is statistical, let `nature-statistics` determine the correct estimand/inference first.
+- If the final figure needs prose integration, `nature-writing` owns the Results/Discussion narration.
+- `nature-figure` owns visual evidence planning/rendering/QA; it does not replace manuscript argument design or statistical review.

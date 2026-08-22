@@ -2,93 +2,134 @@
 
 [English](README_EN.md)
 
-`nature-figure` 用于设计、生成和审查投稿级科研图件，面向 Nature 系列、高影响力期刊、论文图版、机制示意图和 graphical abstract 草稿。
+`nature-figure` 用于规划、设计、生成和审查 journal-aware 科研图件。它可以在**真正开始画图之前**先决定：论文到底需要哪些 figure、每个 panel 应回答什么科学问题、哪些 data/uncertainty 必须可见、什么 plot family 才匹配真实 estimand 与 data structure；之后再进入 Python 或 R 渲染。
 
 ## 适合用它做什么
 
-- 根据数据、图注或论文结论生成 Python / R 绘图脚本和可编辑图件。
-- 将已有图件重画为更清楚的多面板论文 figure。
-- 规划 Figure 1、机制图、workflow、graphical abstract 或补充图。
-- 检查面板标签、配色与视觉层级、逐面板误差线、最终 PDF 实际字号、统计标注、source data 和导出格式。
-- 区分旗舰 `Nature` 初投稿、主图终稿和 Extended Data 的文件契约，并执行 `<250` 词图注上限。
-- 对 `Nature Machine Intelligence` 单独执行 6 个主 display、最多 10 个 Extended Data、初投稿/终稿边界、300 dpi/180 mm 和 source data 要求；当前官网未给独立图注数字，保留 2018 官方 `<300` 英文词为历史建议线，整张图注建议 150–250 词且不是每个 panel 分别计算。
-- 在用户明确要求时，通过 OpenRouter Images API 调用 `openai/gpt-image-2` 生成 AI 概念示意图草稿。
-- 对 AI 辅助 graphical abstract 先定义单一中心信息、图件类型、目标读者和证据边界，再比较构图与可访问配色；投稿前单独核验目标期刊最新 AI 政策、科学准确性、版权、披露和 provenance。`Nature Careers` 专栏仅作为实践建议，不等于投稿许可。
+- 判断一个 claim 是否真的需要 figure，还是 prose/table 更清楚。
+- 建立 claim-driven figure plan：`claim -> reader question -> statistical unit -> estimand -> data structure -> uncertainty/alternative explanation -> plot -> main/support placement`。
+- 为 distribution、paired effect、trajectory、association、agreement、calibration、classification、survival、heterogeneity、sensitivity、benchmark、ablation、imaging、high-dimensional data、null result 等建议合适 plot family。
+- 精读几篇 close analogue papers，学习**figure role 与 evidence expectation**，但不复制 layout、palette、normalization 或 visual identity。
+- 通过 shared manuscript-content-selection logic 决定哪些 evidence 应进入 main figures，哪些去 Extended Data/SI。
+- 根据 data、legend 或 manuscript claim 生成 Python / R plotting script 与可编辑 publication figure。
+- 把已有图件重画成更清楚的 multi-panel evidence chain。
+- 规划 Figure 1、mechanism diagram、workflow、graphical abstract 或 supplementary figure。
+- 审查 panel label、uncertainty、statistical unit、accessibility、最终 PDF 实际字号、source data、image integrity 与 export format。
+- 最后按 exact target journal/article type/stage 适配 packaging，但不改变 underlying evidence。
+- 用户明确要求时，使用独立 OpenRouter GPT Image 2 路径生成 concept schematic / graphical abstract 草稿，并单独做 target-policy 与 human scientific review。
 
 ## 工作方式
 
-绘图前先建立图件契约，而不是直接套模板：
+Planning 先于 rendering：
 
-- 核心结论：这张图要证明什么。
-- 证据层级：哪些面板是主证据，哪些是补充解释。
-- 图件原型：散点、箱线、热图、机制图、流程图、多面板组合等。
-- 后端选择：Python 或 R；第一次选择后会作为默认偏好复用。
-- 数据完整性：默认保留全部观测和指定变量，任何排除都记录规则与前后计数。
-- 模板兼容性：先核对科学含义、数据结构和变换条件，再决定精确复用、结构适配或只继承样式。
-- 投稿约束：尺寸、字体、色彩、分辨率、矢量格式和 source-data 可追溯性。
+```text
+claim
+-> reader question
+-> figure necessity
+-> scientific/statistical unit
+-> estimand
+-> data structure
+-> alternative explanation / uncertainty
+-> representation
+-> panel/evidence sequence
+-> main vs support
+-> analogue calibration when useful
+-> Python/R rendering
+-> exact journal adaptation
+-> visual + source-data QA
+```
+
+重要规则：
+
+- **只做 figure/plot planning 时不需要先选 Python 或 R。** 真正开始 plotting/rendering 才进入 backend gate。
+- 某个 chart 在顶刊或 analogue papers 中很常见，不构成使用它的充分理由。
+- 小样本 continuous data 往往需要显示 individual observations/distribution，而不是只有 mean bar。
+- Paired data 在 pairing 就是 estimand 时应该把 pairing 画出来。
+- 当 calibration/threshold behavior 是科学或临床问题时，AUC 不能替代它们。
+- UMAP/t-SNE 单图不能独立承担 quantitative separation 或 mechanism claim。
+- Null result 应展示 effect estimate 与适当 uncertainty/equivalence logic，而不是只靠 `P > 0.05`。
+- 每个 panel 都必须关闭一个真实 evidence/orientation question，而不是为了填满版面。
 
 ## 典型请求
 
-- “把这组数据做成 Nature 风格多面板图，优先 Python。”
-- “参考 figures4papers 里 Nature Machine Intelligence 的布局，帮我补一个方法对比图。”
-- “重画这个机制示意图，导出 SVG/PDF，并给我 source data 表。”
-- “用 OpenRouter 生成 graphical abstract 草稿，但不要当作定量数据图。”
+- “根据这些 Results，先告诉我 Figures 1–4 应该是什么、每个 panel 要证明什么，先别画。”
+- “这是 paired data，帮我选最能展示 treatment effect 和 uncertainty 的 plot。”
+- “先读 4 篇类似 Nature Methods 论文，看看我们的 method paper 缺哪些 validation/benchmark/generalization figures。”
+- “我们的 model 声称 external generalization。不要只给 pooled metric，帮我规划 site-level、calibration 和 failure-boundary plots。”
+- “按这个 figure plan 用 Python 画出来，并导出 editable SVG/PDF 和 source-data mapping。”
+- “做 graphical abstract 草稿，但把 generated imagery 和 quantitative evidence 严格分开。”
 
 ## 示例预览
 
 | 方向 | 预览 | 可借鉴模式 |
 |------|------|------------|
-| 多面板论文图 | <a href="assets/gallery/fig1-material-mechanism-rich.png"><img src="assets/gallery/fig1-material-mechanism-rich.png" width="220" alt="Material design and physical validation"></a> | 机制示意、图像面板、定量结果和相关性放在同一证据链中 |
-| 图表类型 atlas | <a href="assets/chart-atlas/atlas-03-heatmaps.png"><img src="assets/chart-atlas/atlas-03-heatmaps.png" width="220" alt="Heatmap atlas"></a> | 热图、注释矩阵、聚类块和发散色标的组合模式 |
-| 第三方 figures4papers 参考 | <a href="assets/figures4papers/figure_VIGIL/figures/comparison_radar.png"><img src="assets/figures4papers/figure_VIGIL/figures/comparison_radar.png" width="220" alt="VIGIL comparison radar"></a> | 仅用于研究 layout、legend 和多指标比较语法；使用前阅读独立版权说明 |
+| 多面板论文图 | <a href="assets/gallery/fig1-material-mechanism-rich.png"><img src="assets/gallery/fig1-material-mechanism-rich.png" width="220" alt="Material design and physical validation"></a> | 学习 heterogeneous evidence 如何组成一条 visual argument；不要把具体 composition 当模板。 |
+| 图表类型 atlas | <a href="assets/chart-atlas/atlas-03-heatmaps.png"><img src="assets/chart-atlas/atlas-03-heatmaps.png" width="220" alt="Heatmap atlas"></a> | 候选 visual grammar；最终选择必须服从 data structure 与 reader task。 |
+| 第三方 figures4papers 参考 | <a href="assets/figures4papers/figure_VIGIL/figures/comparison_radar.png"><img src="assets/figures4papers/figure_VIGIL/figures/comparison_radar.png" width="220" alt="VIGIL comparison radar"></a> | 仅用于 inspiration/reference；先读版权说明，也不要因为看起来“像论文”就继承这种 chart。 |
 
 ## 你需要提供
 
-- 原始数据、已有图、图注、论文 claim 或想表达的机制。
-- 目标期刊、单栏/双栏尺寸、输出格式和是否需要 source data。
-- Python / R 偏好；如果没有偏好，技能会先询问或沿用本机记录。
+Planning 阶段：
+
+- headline claims/questions；
+- 每个 claim 有哪些 data；
+- 已知的话提供 statistical/experimental unit、pairing/repeated structure、groups/conditions、time/order 和重要 uncertainty；
+- target field/paper type/journal（如果已知）。
+
+Rendering 阶段：
+
+- raw data 或 analysis-ready table；
+- 已选 figure plan，或允许技能先提出方案；
+- output format 与 target dimensions/stage；
+- Python/R 偏好；若没有，技能会询问或复用保存的本机偏好。
 
 ## 产出
 
-- 可运行的 Python 或 R 绘图脚本。
-- SVG/PDF/TIFF/PNG 等图件文件，优先保留可编辑矢量版本。
-- 面板说明、source data 映射、排除计数、逐面板视觉审查表和投稿前 QA 记录。
-- AI 示意图任务中，输出概念草稿和需要人工重画/核实的元素列表。
+根据任务可以输出：
+
+- figure/plot suggestion ledger：`claim/question -> unit -> estimand -> plot -> uncertainty/comparator -> main/support`；
+- Figure 1–N evidence-role plan 与 panel map；
+- main-versus-Extended-Data/SI visual allocation；
+- analogue figures 的 `adopt / adapt / reject` notes；
+- 可运行 Python 或 R plotting script；
+- SVG/PDF/TIFF/PNG figure files，优先 editable vector output；
+- panel notes、source-data mapping、exclusion counts 与逐 panel QA；
+- AI-schematic 任务中的 concept draft 与需要人工科学核验/重画的元素列表。
 
 ## 内置参考
 
-- `references/api.md`：Python 配色、样式和绘图 helper 约定。
-- `references/asset-adaptation.md`：模板语义匹配、字段映射和数据完整性规则。
-- `references/template-catalog.md`：volcano、ROC、marker dot plot、marginal 和 paired 的已验证 Python CSV 模板。
-- `references/chart-types.md`：常见图型选择和视觉规则。
-- `references/demos.md`：第三方 `figures4papers` 示例索引、使用边界和原创适配模式。
-- `references/qa-contract.md`：导出前检查项、source-data 约束和静态预检入口。
-- `references/ai-graphical-abstract-workflow.md`：AI 图形摘要的信息简报、构图与配色、期刊政策门、人工科学核验、披露和 provenance 工作流。
-- `references/openrouter-image-generation.md`：OpenRouter / GPT Image 2 的 provider-specific 生成与 QA 路径。
-- `scripts/validate_figure.py`：Python/R 绘图源码的可复现静态 QA。
-- `scripts/audit_pdf_text.py`：扫描导出 PDF 的 `Tf` 操作符，发现 mathtext 上下标等低于 5 pt 的实际字形。
-- `scripts/figure_safety.py`：严格单调插值和基于数据/误差范围的标签高度 helper。
-- `assets/figures4papers/`：保留的第三方参考脚本与预览图；不自动适用本仓库 MIT License，使用前阅读 `THIRD_PARTY_NOTICES.md`。
+- `../nature-shared/core/figure-evidence-planning.md`：claim-driven figure necessity 与 question-to-plot atlas。
+- `../nature-shared/core/manuscript-content-selection.md`：main/support/Methods/availability/repository allocation。
+- `references/analogue-figure-calibration.md`：从 similar papers 学 visual evidence role，但不复制 identity。
+- [`docs/manuscript-content-and-figures.md`](../../docs/manuscript-content-and-figures.md)：面向用户的论文内容与 figure planning 指南。
+- `references/figure-contract.md`：core conclusion、evidence hierarchy、panel map 与 review-risk checks。
+- `references/qa-contract.md`：export QA、source-data constraints 与 visual inspection。
+- `references/journal-adaptation.md`：exact target/stage packaging。
+- `references/ai-graphical-abstract-workflow.md`：AI graphical abstract 的 evidence/policy/provenance boundary。
+- `references/template-catalog.md`、`references/chart-types.md`、`references/demos.md`：候选 implementation/pattern，不能自动变成 scientific choice。
 
 ## 边界
 
-- 不会把 AI 生成图片当作真实实验结果或定量数据面板。
-- 不会把内部可用的 AI 草稿自动称为可投稿终稿；两者分别判定。
-- 不会凭空补统计检验、样本量、误差线含义或实验条件。
-- 不会为了渲染方便静默抽样、忽略变量或删除不完整观测。
-- 不会把自动校验通过当作视觉验收；最终交付仍需逐面板检查不确定性、标签碰撞、间距和显著性层级。
-- 私有模板可以在本机使用，但不应在面向用户输出中暴露私有路径、文件名或来源。
-- 第三方参考材料的版权和再使用条件以其来源及 `THIRD_PARTY_NOTICES.md` 为准；本仓库不额外授予这些文件的使用权。
+- 不会虚构 data、statistical test、sample size、uncertainty、mechanism 或 experimental condition。
+- 不会因为 top papers 常用某种 plot 就自动选择它。
+- 不会静默删除 observations/variables、隐藏 adverse variation，或用 deceptive axis/crop/normalization 放大效果。
+- 不会把 embedding、bar、radar 等熟悉形式当作 evidence，除非它们真的回答 reader question。
+- AI-generated image 永远不当作 quantitative data 或 experimental evidence。
+- Automated validator 不能替代 final physical-size visual inspection。
+- Published figure 不是 submission contract；exact target rule 单独解析。
+- 第三方 assets 继续受原始 terms 与 notices 约束。
 
 ## 相关技能
 
-- `nature-statistics`：检查统计标注、n 定义和 p 值表述。
-- `nature-writing`：把图件结论放回手稿叙事。
-- `nature-paper2ppt`：把论文图件整理成汇报幻灯片。
+- `nature-writing`：建立 claim/evidence/content plan，并可在 prose 固定之前主动要求 figure suggestions。
+- `nature-statistics`：审查 estimand、uncertainty、statistical unit、multiplicity 与 inferential display choice。
+- `nature-reviewer`：检查 figure 是否真正关闭 decision-relevant reviewer question。
+- `nature-paper2ppt`：把已经验证的 manuscript figures 用于 presentation。
 
 ## 与其他技能的关系
 
-- 如果任务核心是统计解释、样本量定义或显著性表述，优先让 `nature-statistics` 先把文字审清，再回到 `nature-figure` 画图。
-- 如果图件已经定稿，但需要把结论组织成摘要、引言或结果段落，交给 `nature-writing` 继续承接。
-- 如果图件要直接转成组会材料或答辩汇报，再交给 `nature-paper2ppt` 组织成页面。
-- `nature-figure` 负责图件本身；它不替代统计审查，也不替代手稿叙事。
+- 用户问的是**“该画什么”**时，`nature-figure` 可以停留在 planning layer，不需要 backend choice。
+- 用户问的是**“这些内容到底该不该进论文”**时，与 `nature-writing` / shared manuscript-content selection 联动。
+- 如果核心不确定性是 statistical，先让 `nature-statistics` 确定正确 estimand/inference。
+- 如果 final figure 需要写回 Results/Discussion，`nature-writing` 负责 manuscript narration。
+- `nature-figure` 负责 visual evidence planning/rendering/QA；它不替代 manuscript argument design 或 statistical review。

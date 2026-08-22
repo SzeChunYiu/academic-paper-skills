@@ -1,5 +1,5 @@
 name: nature-shared
-version: 1.6.0
+version: 1.8.0
 description: >
   Declarative manifest for shared academic-paper reference modules. This package
   is not a standalone workflow; installed skills load exact shared core or
@@ -25,8 +25,14 @@ core:
       path: core/terminology-ledger.md
     - condition: rewriting or polishing substantial author-provided prose while preserving a recognizable authorial cadence, agency, terminology, stance, or manuscript-level voice
       path: core/author-voice-profile.md
+    - condition: drafting, rewriting, or polishing academic prose that feels generic, formulaic, over-smoothed, machine-like, choppy, repetitive, connector-heavy, weakly authorial, or difficult to follow sentence by sentence; use for natural scholarly cadence and sentence-flow repair, never detector evasion
+      path: core/natural-scholarly-prose.md
     - condition: studying a few close analogue papers before rewriting, restructuring evidence, choosing main figures, deciding what data belongs in main text versus SI, or learning field/venue conventions without copying wording or visual identity
       path: core/analogue-paper-calibration.md
+    - condition: deciding what information belongs in main text, figures, legends, Methods, Extended Data/SI, availability statements, repository documentation, or nowhere; especially when codebase/repository details, file paths, helper names, setup commands, project links, exhaustive technical detail, or implementation documentation are leaking into manuscript prose
+      path: core/manuscript-content-selection.md
+    - condition: deciding what figures/plots a paper needs, suggesting visual evidence for claims, mapping reader questions and estimands to plot families, or planning main versus supporting figure roles before rendering
+      path: core/figure-evidence-planning.md
     - condition: auditing an existing or multi-round-revised manuscript for accumulated drift — terminology/unit/number variants, headline counts that do not reconcile with the Methods, claims contradicted by the paper's own tables, over- or under-claiming, tense parallelism, and prose that restates displays
       path: core/consistency-sweep.md
     - condition: drafting, restructuring, compressing, or reviewer-revising scientific main text — classify results as core/support/qualification/robustness/heterogeneity/provenance/alternative inference/edge case; allocate evidence across main text, captions, and SI; run paragraph-necessity, deletion, statistics-location, and claim-repetition checks
