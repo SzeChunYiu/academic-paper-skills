@@ -47,7 +47,8 @@ class AcademicWritingCanonicalTests(unittest.TestCase):
         for marker in ("inherits X", "relation R", "adds Y", "enables Z"):
             self.assertIn(marker, skill)
         self.assertIn("scientifically sufficient, not verbose", skill)
-        self.assertIn("minimum sufficient scientific explanation", skill.lower())
+        self.assertIn("Do not delete reasoning merely to make prose short", skill)
+        self.assertIn("Do not add textbook filler merely to make prose long", skill)
 
     def test_legacy_nature_writing_is_explicitly_support_only(self) -> None:
         agent = read(LEGACY / "agents" / "openai.yaml")
