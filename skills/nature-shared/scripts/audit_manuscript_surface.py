@@ -33,6 +33,15 @@ CODE_EXTENSIONS = (
     "ckpt", "pkl", "joblib",
 )
 
+# Extensions that make a relative project path substantially less ambiguous than
+# prose such as "test/retest" or "results/discussion". The scanner intentionally
+# does not hard-fail every prefix/token pair.
+PROJECT_FILE_EXTENSIONS = CODE_EXTENSIONS + (
+    "csv", "tsv", "xlsx", "xls", "parquet", "feather", "h5", "hdf5", "npz", "npy",
+    "svg", "pdf", "png", "jpg", "jpeg", "tif", "tiff", "eps",
+    "md", "rst", "tex", "bib", "log", "txt",
+)
+
 PATH_PREFIXES = (
     "src", "script", "scripts", "test", "tests", "config", "configs",
     "asset", "assets", "output", "outputs", "result", "results", "build",
@@ -73,6 +82,17 @@ def _iter_context(lines: list[str]):
         yield idx, line, availability, in_fence
 
 
+def _iter_prose_lines(lines: list[str]):
+    """Yield only non-fenced manuscript lines with original line numbers."""
+    in_fence = False
+    for idx, line in enumerate(lines, 1):
+        if re.match(r"^\s*```", line):
+            in_fence = not in_fence
+            continue
+        if not in_fence:
+            yield idx, line
+
+
 def _add_regex_findings(
     findings: list[Finding],
     line_no: int,
@@ -99,18 +119,70 @@ def _add_regex_findings(
         )
 
 
+def _audit_delimiters(findings: list[Finding], lines: list[str]) -> None:
+    """Audit parentheses/brackets in prose only, ignoring fenced code entirely."""
+    for opening, closing, kind in (("(", ")", "parentheses"), ("[", "]", "brackets")):
+        stack: list[tuple[int, int]] = []
+        for line_no, line in _iter_prose_lines(lines):
+            for col, ch in enumerate(line, 1):
+                if ch == opening:
+                    stack.append((line_no, col))
+                elif ch == closing:
+                    if stack:
+                        stack.pop()
+                    else:
+                        findings.append(
+                            Finding(
+                                line_no,
+                                col,
+                                f"unbalanced_{kind}",
+                                "error",
+                                ch,
+                                f"Closing {kind} delimiter has no matching opener.",
+                            )
+                        )
+        for line_no, col in stack:
+            findings.append(
+                Finding(
+                    line_no,
+                    col,
+                    f"unbalanced_{kind}",
+                    "error",
+                    opening,
+                    f"Opening {kind} delimiter has no matching closer.",
+                )
+            )
+
+
 def audit_text(text: str) -> list[Finding]:
     findings: list[Finding] = []
     lines = text.splitlines()
 
     ext = "|".join(map(re.escape, CODE_EXTENSIONS))
+    project_ext = "|".join(map(re.escape, PROJECT_FILE_EXTENSIONS))
     prefixes = "|".join(map(re.escape, PATH_PREFIXES))
 
-    local_path = re.compile(r"(?:/Users/|/home/|/tmp/|[A-Za-z]:\\\\)[^\s`'\"]+")
-    repo_path = re.compile(
-        rf"\b(?:{prefixes})/[A-Za-z0-9_.@+\-/]+(?:\.(?:{ext}))?\b",
+    # One literal backslash after a Windows drive letter is the normal path form.
+    # Forward-slash Windows paths are also common in copied logs/scripts.
+    local_path = re.compile(
+        r"(?:/Users/|/home/|/tmp/|[A-Za-z]:[\\/])[^\s`'\"]+",
         flags=re.IGNORECASE,
     )
+
+    # Hard-error relative repository paths only when they look like actual files.
+    # This avoids false positives for ordinary scientific prose such as
+    # "test/retest" and "results/discussion".
+    repo_file_path = re.compile(
+        rf"\b(?:{prefixes})/(?:[A-Za-z0-9_.@+\-]+/)*[A-Za-z0-9_.@+\-]+\.(?:{project_ext})\b",
+        flags=re.IGNORECASE,
+    )
+    # Deep extensionless paths are still suspicious but are review-only because
+    # slash-separated scientific notation can be legitimate in some fields.
+    repo_nested_path = re.compile(
+        rf"\b(?:{prefixes})/[A-Za-z0-9_.@+\-]+/[A-Za-z0-9_.@+\-/]+\b",
+        flags=re.IGNORECASE,
+    )
+
     code_file = re.compile(rf"(?<![\w/.-])(?:[A-Za-z0-9_.-]+\.)+(?:{ext})\b", re.IGNORECASE)
     cli_flag = re.compile(r"(?<!\w)--[a-z][a-z0-9-]*\b", re.IGNORECASE)
     code_call = re.compile(r"`(?:[A-Za-z_]\w*(?:\.[A-Za-z_]\w*)*\(\)|[A-Za-z_]\w*(?:\.[A-Za-z_]\w*)+)`")
@@ -136,71 +208,185 @@ def audit_text(text: str) -> list[Finding]:
             continue
 
         # A manuscript containing fenced code is itself review-worthy, but do not
-        # recursively lint code punctuation as prose.
+        # recursively lint code punctuation or delimiters as prose.
         if in_fence:
             if re.match(r"^\s*```", line):
                 findings.append(
-                    Finding(line_no, 1, "code_fence", "review", line.strip(),
-                            "Code fence on a manuscript-facing surface; verify that code belongs in the paper rather than artifact documentation.", availability)
+                    Finding(
+                        line_no,
+                        1,
+                        "code_fence",
+                        "review",
+                        line.strip(),
+                        "Code fence on a manuscript-facing surface; verify that code belongs in the paper rather than artifact documentation.",
+                        availability,
+                    )
                 )
             continue
 
-        _add_regex_findings(findings, line_no, line, local_path, "local_path", "error",
-                            "Local filesystem path should not appear in manuscript-facing prose.", availability)
-        _add_regex_findings(findings, line_no, line, repo_path, "repository_path", "error",
-                            "Repository path should be translated into scientific meaning or moved to artifact documentation.", availability,
-                            downgrade_in_availability=True)
-        _add_regex_findings(findings, line_no, line, code_file, "code_filename", "error",
-                            "Code/config/checkpoint filename leaked into manuscript-facing text.", availability,
-                            downgrade_in_availability=True)
-        _add_regex_findings(findings, line_no, line, cli_flag, "cli_flag", "error",
-                            "Command-line flag belongs in artifact/reproducibility documentation unless explicitly required.", availability,
-                            downgrade_in_availability=True)
-        _add_regex_findings(findings, line_no, line, code_call, "code_identifier", "error",
-                            "Code/helper identifier should normally be replaced by the scientific operation.", availability,
-                            downgrade_in_availability=True)
-        _add_regex_findings(findings, line_no, line, dev_history, "developer_history", "error",
-                            "Branch/PR/issue/commit/CI history is developer provenance, not scientific narrative.", availability,
-                            downgrade_in_availability=True)
-        _add_regex_findings(findings, line_no, line, repo_url, "repository_url", "review",
-                            "Repository URL should normally be concentrated in a designated availability/artifact section.", availability)
-        _add_regex_findings(findings, line_no, line, suspicious_output, "output_filename", "error",
-                            "Internal output filename should not be exposed in a paper-facing figure/body/legend surface.", availability,
-                            downgrade_in_availability=True)
+        _add_regex_findings(
+            findings,
+            line_no,
+            line,
+            local_path,
+            "local_path",
+            "error",
+            "Local filesystem path should not appear in manuscript-facing prose.",
+            availability,
+        )
+        _add_regex_findings(
+            findings,
+            line_no,
+            line,
+            repo_file_path,
+            "repository_path",
+            "error",
+            "Repository file path should be translated into scientific meaning or moved to artifact documentation.",
+            availability,
+            downgrade_in_availability=True,
+        )
+        _add_regex_findings(
+            findings,
+            line_no,
+            line,
+            repo_nested_path,
+            "repository_path_review",
+            "review",
+            "Slash-separated project-like path is suspicious; verify that it is not ordinary scientific notation/prose before relocating it.",
+            availability,
+        )
+        _add_regex_findings(
+            findings,
+            line_no,
+            line,
+            code_file,
+            "code_filename",
+            "error",
+            "Code/config/checkpoint filename leaked into manuscript-facing text.",
+            availability,
+            downgrade_in_availability=True,
+        )
+        _add_regex_findings(
+            findings,
+            line_no,
+            line,
+            cli_flag,
+            "cli_flag",
+            "error",
+            "Command-line flag belongs in artifact/reproducibility documentation unless explicitly required.",
+            availability,
+            downgrade_in_availability=True,
+        )
+        _add_regex_findings(
+            findings,
+            line_no,
+            line,
+            code_call,
+            "code_identifier",
+            "error",
+            "Code/helper identifier should normally be replaced by the scientific operation.",
+            availability,
+            downgrade_in_availability=True,
+        )
+        _add_regex_findings(
+            findings,
+            line_no,
+            line,
+            dev_history,
+            "developer_history",
+            "error",
+            "Branch/PR/issue/commit/CI history is developer provenance, not scientific narrative.",
+            availability,
+            downgrade_in_availability=True,
+        )
+        _add_regex_findings(
+            findings,
+            line_no,
+            line,
+            repo_url,
+            "repository_url",
+            "review",
+            "Repository URL should normally be concentrated in a designated availability/artifact section.",
+            availability,
+        )
+        _add_regex_findings(
+            findings,
+            line_no,
+            line,
+            suspicious_output,
+            "output_filename",
+            "error",
+            "Internal output filename should not be exposed in a paper-facing figure/body/legend surface.",
+            availability,
+            downgrade_in_availability=True,
+        )
 
-        _add_regex_findings(findings, line_no, line, repeated_punct, "repeated_punctuation", "error",
-                            "Likely accidental repeated punctuation.", availability)
-        _add_regex_findings(findings, line_no, line, space_before, "space_before_punctuation", "error",
-                            "Unexpected space before punctuation.", availability)
-        _add_regex_findings(findings, line_no, line, missing_after, "missing_space_after_punctuation", "error",
-                            "Likely missing space after punctuation.", availability)
-        _add_regex_findings(findings, line_no, line, repeated_space, "repeated_space", "warning",
-                            "Repeated spaces in prose; verify typography.", availability)
-        _add_regex_findings(findings, line_no, line, broken_fig, "figure_reference_punctuation", "error",
-                            "Malformed figure-reference punctuation/spacing.", availability)
-        _add_regex_findings(findings, line_no, line, ascii_range, "range_hyphen_review", "review",
-                            "Numeric range uses ASCII hyphen; verify target style (often en dash) and ensure this is not subtraction/identifier syntax.", availability)
+        _add_regex_findings(
+            findings,
+            line_no,
+            line,
+            repeated_punct,
+            "repeated_punctuation",
+            "error",
+            "Likely accidental repeated punctuation.",
+            availability,
+        )
+        _add_regex_findings(
+            findings,
+            line_no,
+            line,
+            space_before,
+            "space_before_punctuation",
+            "error",
+            "Unexpected space before punctuation.",
+            availability,
+        )
+        _add_regex_findings(
+            findings,
+            line_no,
+            line,
+            missing_after,
+            "missing_space_after_punctuation",
+            "error",
+            "Likely missing space after punctuation.",
+            availability,
+        )
+        _add_regex_findings(
+            findings,
+            line_no,
+            line,
+            repeated_space,
+            "repeated_space",
+            "warning",
+            "Repeated spaces in prose; verify typography.",
+            availability,
+        )
+        _add_regex_findings(
+            findings,
+            line_no,
+            line,
+            broken_fig,
+            "figure_reference_punctuation",
+            "error",
+            "Malformed figure-reference punctuation/spacing.",
+            availability,
+        )
+        _add_regex_findings(
+            findings,
+            line_no,
+            line,
+            ascii_range,
+            "range_hyphen_review",
+            "review",
+            "Numeric range uses ASCII hyphen; verify target style (often en dash) and ensure this is not subtraction/identifier syntax.",
+            availability,
+        )
 
-    # Conservative global delimiter check. Braces are omitted because LaTeX/math
-    # commonly uses them extensively.
-    for opening, closing, kind in (("(", ")", "parentheses"), ("[", "]", "brackets")):
-        balance = 0
-        for pos, ch in enumerate(text):
-            if ch == opening:
-                balance += 1
-            elif ch == closing:
-                balance -= 1
-                if balance < 0:
-                    line = text.count("\n", 0, pos) + 1
-                    col = pos - text.rfind("\n", 0, pos)
-                    findings.append(Finding(line, col, f"unbalanced_{kind}", "error", ch,
-                                            f"Closing {kind} delimiter has no matching opener."))
-                    balance = 0
-        if balance:
-            findings.append(Finding(1, 1, f"unbalanced_{kind}", "error", opening,
-                                    f"Text contains {balance} unmatched opening {kind} delimiter(s)."))
+    _audit_delimiters(findings, lines)
 
-    return sorted(findings, key=lambda f: (f.line, f.column, f.kind))
+    # Deduplicate exact overlaps while preserving distinct diagnostic classes.
+    unique = {(f.line, f.column, f.kind, f.text, f.message, f.availability_context): f for f in findings}
+    return sorted(unique.values(), key=lambda f: (f.line, f.column, f.kind))
 
 
 def audit_files(paths: Iterable[Path]) -> dict[str, list[Finding]]:
