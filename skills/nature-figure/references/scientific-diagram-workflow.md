@@ -4,6 +4,26 @@ Use this reference for manuscript-facing **flowcharts, mechanism diagrams, conce
 
 The goal is not `make boxes and arrows prettier`. The goal is to encode the scientific relationship with the right topology, layout engine, visual hierarchy, and publication-quality vector output.
 
+## Contents
+
+- [Core principle](#core-principle)
+- [Diagram necessity test](#diagram-necessity-test)
+- [Topology first](#topology-first)
+- [Backend toolkit inspired by mature open-source peers](#backend-toolkit-inspired-by-mature-open-source-peers)
+- [Icon/illustration assets](#iconillustration-assets)
+- [Diagram grammar](#diagram-grammar)
+- [Visual hierarchy](#visual-hierarchy)
+- [Beauty through constraint](#beauty-through-constraint)
+- [Scientific color semantics](#scientific-color-semantics)
+- [Mechanism diagrams](#mechanism-diagrams)
+- [Study/clinical flow diagrams](#studyclinical-flow-diagrams)
+- [Computational/ML diagrams](#computationalml-diagrams)
+- [Hybrid diagram + quantitative evidence](#hybrid-diagram--quantitative-evidence)
+- [Label and caption rules](#label-and-caption-rules)
+- [Layout QA](#layout-qa)
+- [Source inspiration and boundary](#source-inspiration-and-boundary)
+- [Output contract](#output-contract)
+
 ## Core principle
 
 Start from the relationship graph:
@@ -89,158 +109,61 @@ These are optional implementation routes, not mandatory dependencies and not sou
 
 ### Graphviz
 
-Best for:
+Best for directed flows/DAGs, hierarchies, clustered pipelines, dependency graphs, and medium-size networks.
 
-- directed flows/DAGs;
-- hierarchical diagrams;
-- clustered pipelines;
-- dependency graphs;
-- medium-size networks.
+Useful engines include `dot` for layered directed graphs, `neato`/`fdp`/`sfdp` for force-directed networks, `circo` for circular topology, and `twopi` for radial layouts. Graphviz produces SVG/PDF and supports clusters, node/edge attributes, shapes, and typography.
 
-Useful engines:
-
-- `dot` — layered directed graphs; aims edges in one direction and reduces crossings/edge length;
-- `neato` / `fdp` / `sfdp` — force-directed network relations;
-- `circo` — circular topology;
-- `twopi` — radial layout.
-
-Graphviz produces SVG/PDF and supports clusters, node/edge attributes, shapes and typography.
-
-**Publication rule:** use automatic layout to solve geometry, then inspect the output at final size. Automatic graph drawing does not know the scientific emphasis hierarchy.
+**Publication rule:** use automatic layout to solve geometry, then inspect at final size. Automatic graph drawing does not know the scientific emphasis hierarchy.
 
 ### Schemdraw
 
-Best for:
+Best for electrical/electronic circuits, signal-processing diagrams, state machines, compact flowcharts, precise connectors, and SVG-first schematics. Its flow module provides process/decision/state blocks, anchors, arrows, arcs, and containers.
 
-- electrical/electronic circuits;
-- signal-processing diagrams;
-- state machines;
-- compact flowcharts;
-- precise arrows/connectors;
-- SVG-first schematics.
-
-Its flow module provides process/decision/state blocks, anchors, arrows, arcs and containers.
-
-**Publication rule:** use its primitives when they match the scientific object; do not make a biology paper look like an electrical diagram merely because the library is available.
+Use these primitives only when they match the scientific object; do not make an unrelated biology mechanism look like an electrical schematic merely because the library is available.
 
 ### Mermaid
 
-Best for:
-
-- fast logic drafts;
-- flowcharts;
-- state diagrams;
-- sequence diagrams;
-- manuscript planning/collaboration where text-defined diagrams are useful.
-
-Use Mermaid as a **logic/prototyping layer** when convenient. For final high-density scientific figures, inspect whether its layout/typography gives enough control; redraw or post-process to vector when needed.
+Best for fast logic drafts, flowcharts, state diagrams, sequence diagrams, and collaborative text-defined planning. Use it as a **logic/prototyping layer** when convenient. For final high-density scientific figures, inspect whether layout/typography control is sufficient; redraw or post-process to vector when necessary.
 
 ### Python `diagrams` / Graphviz wrappers
 
-Projects such as `mingrammer/diagrams` demonstrate useful diagram-as-code ideas:
-
-- nested clusters;
-- reusable node/edge abstractions;
-- consistent themes;
-- explicit flow direction;
-- Graphviz-backed automatic placement.
+Projects such as `mingrammer/diagrams` demonstrate useful diagram-as-code ideas: nested clusters, reusable node/edge abstractions, consistent themes, explicit flow direction, and Graphviz-backed placement.
 
 That project is specialized for software/cloud architecture. Borrow the **design-as-code patterns**, not its iconography or infrastructure aesthetic for unrelated scientific mechanisms.
 
 ### Matplotlib / SVG custom drawing
 
-Best for:
-
-- mechanism schematics with scientific geometry;
-- hybrid data + diagram panels;
-- annotated spatial processes;
-- bespoke icons/shapes;
-- exact journal-size typography;
-- tightly integrated plot/schematic visual language.
-
-Use `matplotlib.patches`, paths, annotations and transforms or an SVG-native route. Keep all text editable/vector where possible.
+Best for mechanism schematics with scientific geometry, hybrid data+diagram panels, annotated spatial processes, bespoke shapes, exact journal-size typography, and tightly integrated plot/schematic visual language. Keep text editable/vector where possible.
 
 ### TikZ / vector-authoring route
 
-Useful for:
-
-- mathematical diagrams;
-- precise publication geometry;
-- LaTeX-native typography;
-- commutative/graphical structures.
-
-Use only when the user's workflow supports it; do not force LaTeX drawing for a Python/R manuscript pipeline.
+Useful for mathematical diagrams, precise publication geometry, LaTeX-native typography, and commutative/graphical structures. Use only when the user's workflow supports it; do not force LaTeX drawing onto a Python/R workflow.
 
 ## Icon/illustration assets
 
-External icon libraries can reduce redraw effort, but every asset needs:
+External icon libraries can reduce redraw effort, but every asset needs compatible licensing, attribution when required, scientific accuracy, coherent visual treatment, no trademark misuse, and a provenance record.
 
-- compatible license;
-- attribution if required;
-- scientific accuracy;
-- coherent visual treatment;
-- no trademark/brand misuse;
-- provenance record.
-
-Do not scrape attractive scientific icons or figures from papers and reuse them.
-
-When a licensed icon set is used, normalize visual weight/line style so the figure does not become an `icon soup` collage.
+Do not scrape attractive scientific icons or figures from papers and reuse them. Normalize licensed asset line weight/style so the figure does not become an `icon soup` collage.
 
 ## Diagram grammar
 
 ### Nodes
 
-Each node should represent one coherent thing:
-
-- entity;
-- state;
-- process;
-- decision;
-- compartment;
-- evidence/result;
-- population/stage.
-
-Use concise labels. Put explanations in legend/body rather than shrinking long paragraphs into boxes.
+Each node should represent one coherent entity, state, process, decision, compartment, evidence/result, or population/stage. Use concise labels. Put explanation in body/legend rather than shrinking paragraphs into boxes.
 
 ### Edges
 
-Every arrow must have a defined semantic meaning.
+Every arrow must have a defined semantic meaning, such as causes/activates/inhibits, transforms, flows to, precedes, selects/excludes, measures, trains on, predicts, depends on, or corresponds to.
 
-Examples:
-
-- causes/activates/inhibits;
-- transforms;
-- flows to;
-- precedes;
-- selects/excludes;
-- measures;
-- trains on;
-- predicts;
-- depends on;
-- corresponds to.
-
-If different edge semantics exist, distinguish them by line style/arrowhead/labels and explain the encoding.
-
-Do not use arrows merely to guide the eye when they imply causality.
+If multiple edge semantics exist, distinguish them by line style/arrowhead/labels and explain the encoding. Do not use arrows merely to guide the eye when they imply causality.
 
 ### Grouping
 
-Use whitespace/enclosure to show:
-
-- experimental stages;
-- cellular compartments;
-- populations;
-- computational modules;
-- evidence classes;
-- conceptual levels.
-
-Do not box everything.
+Use whitespace/enclosure for experimental stages, cellular compartments, populations, computational modules, evidence classes, or conceptual levels. Do not box everything.
 
 ### Reading direction
 
-Choose one dominant reading flow. Avoid unnecessary zig-zag/serpentine paths.
-
-Use left-to-right for process/causal narratives when compatible with the target layout; top-to-bottom can work for hierarchical/study flow. Physical mechanism diagrams may follow spatial reality instead.
+Choose one dominant reading flow and avoid unnecessary zig-zag paths. Left-to-right often suits process/causal narratives; top-to-bottom can suit hierarchy/study flow. Physical mechanism diagrams may follow spatial reality instead.
 
 ## Visual hierarchy
 
@@ -252,134 +175,55 @@ Prioritize:
 4. secondary annotations;
 5. decorative detail.
 
-The reader should be able to identify the diagram's message at manuscript viewing size before reading every label.
+The diagram's message should be visible at manuscript viewing size before every label is read.
 
 ## Beauty through constraint
 
-A professional diagram usually benefits from:
+Professional diagrams usually benefit from consistent line weights and shape grammar, restrained semantic color, aligned baselines/centers, controlled whitespace, repeated spacing increments, readable labels, limited icon styles, balanced clusters, and short meaningful arrows.
 
-- consistent line weights;
-- consistent corner radii/shape grammar;
-- restrained semantic color system;
-- aligned baselines/centers;
-- controlled whitespace;
-- repeated spacing increments;
-- readable labels;
-- no gratuitous gradients/3D shadows;
-- limited icon styles;
-- visually balanced clusters;
-- short, meaningful arrows.
-
-Do not equate `beautiful` with `decorative`.
+Avoid gratuitous gradients/3D shadows. Do not equate `beautiful` with `decorative`.
 
 ## Scientific color semantics
 
-Assign colors by meaning, not by box index.
-
-Examples:
-
-- treatment/control;
-- observed/inferred;
-- input/process/output;
-- activation/inhibition;
-- train/validation/test;
-- healthy/disease when ethically/semantically appropriate.
-
-Use non-color cues when important. Check grayscale/color-vision accessibility.
+Assign colors by meaning, not box index: treatment/control, observed/inferred, input/process/output, activation/inhibition, train/validation/test, or health/disease when appropriate. Use non-color cues for important distinctions and check grayscale/color-vision accessibility.
 
 ## Mechanism diagrams
 
-For a claimed mechanism, separate:
-
-- directly observed elements;
-- inferred/putative elements;
-- established prior-knowledge elements;
-- experimentally manipulated steps.
-
-Use visual encoding or legend wording so inference does not look like direct observation.
+Separate directly observed, inferred/putative, established-prior-knowledge, and experimentally manipulated elements. Use visual encoding or legend wording so inference does not look like direct observation.
 
 Do not draw an arrow as established causality if the manuscript only shows association.
 
 ## Study/clinical flow diagrams
 
-Show:
-
-- source population;
-- eligibility/exclusion;
-- allocation/groups;
-- follow-up/analysis population;
-- losses/exclusions with counts when required;
-- relevant timing.
-
-Use the applicable reporting guideline rather than inventing a flowchart grammar.
+Show source population, eligibility/exclusion, allocation/groups, follow-up/analysis population, losses/exclusions with counts when required, and relevant timing. Use the applicable reporting guideline rather than inventing a flowchart grammar.
 
 ## Computational/ML diagrams
 
-Keep architecture figures at the scientific abstraction level.
+Keep architecture figures at the scientific abstraction level. Show only modules/data transformations needed to understand/evaluate the contribution.
 
-Show only modules/data transformations needed to understand or evaluate the contribution.
-
-Do not expose:
-
-- source-code filenames;
-- class/function names;
-- repository modules;
-- config keys;
-- internal checkpoint names;
-- file paths.
-
-The figure should describe the **method**, not the codebase.
+Do not expose source-code filenames, class/function names, repository modules, config keys, checkpoint names, or file paths. The figure should describe the **method**, not the codebase.
 
 ## Hybrid diagram + quantitative evidence
 
-A strong main figure can combine:
-
-- orientation schematic;
-- decisive quantitative result;
-- validation/failure panel.
-
-But every panel must share one evidence story. Do not attach an unrelated diagram to make the figure look sophisticated.
+A main figure can combine an orientation schematic, decisive quantitative result, and validation/failure panel when they share one evidence story. Do not attach an unrelated diagram merely to make the figure look sophisticated.
 
 ## Label and caption rules
 
-All diagram text is manuscript-facing.
+All diagram text is manuscript-facing. Before delivery, run the terminology ledger, manuscript-surface QA, and target-aware legend/caption rules.
 
-Before delivery, run:
-
-- terminology ledger;
-- manuscript surface QA;
-- target-aware legend/caption rules.
-
-Never leave Graphviz node IDs, Mermaid syntax, Python variable names, filenames or internal module labels in the final figure unless they are scientifically meaningful identifiers.
+Never leave Graphviz node IDs, Mermaid syntax, Python variable names, filenames, or internal module labels in the final figure unless they are scientifically meaningful identifiers.
 
 ## Layout QA
 
-Inspect:
-
-- edge crossings;
-- ambiguous arrow endpoints;
-- labels colliding with edges;
-- uneven node spacing;
-- excessively long edge routes;
-- cluster nesting depth;
-- visual center of mass;
-- panel balance;
-- reading path;
-- final physical-size text;
-- accessibility.
+Inspect edge crossings, ambiguous endpoints, label/edge collisions, uneven spacing, long edge routes, cluster nesting, visual balance, reading path, final physical-size text, and accessibility.
 
 Automatic layout is a starting solution, not a publication verdict.
 
 ## Source inspiration and boundary
 
-Useful peer projects/frameworks include:
+Useful peer projects/frameworks include Graphviz for graph layout/vector export, Schemdraw for schematic/flow/state primitives, Mermaid for text-defined diagrams, and `mingrammer/diagrams` for Graphviz-backed diagram-as-code architecture patterns.
 
-- Graphviz — graph layout and vector export;
-- Schemdraw — schematic/flow/state primitives;
-- Mermaid — text-defined flow/state/sequence diagrams;
-- `mingrammer/diagrams` — Graphviz-backed diagram-as-code architecture patterns.
-
-Use their documented APIs/libraries according to their licenses when appropriate. Do not copy project source code or visual assets into this repository merely to imitate them.
+Use their documented APIs/libraries according to their licenses when appropriate. Do not copy project source code or visual assets merely to imitate them.
 
 We absorb **capabilities and design lessons**, then build original scientific diagrams for the current manuscript.
 
