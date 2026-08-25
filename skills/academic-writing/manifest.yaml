@@ -1,0 +1,43 @@
+name: academic-writing
+version: 1.0.0
+description: >
+  Canonical journal-agnostic academic manuscript writing router. The historical
+  nature-writing directory remains a compatibility/reference implementation
+  layer, while this public skill resolves archetype, evidence, writing logic,
+  figures, research, author voice, target adaptation, and final surface QA
+  independently from Nature.
+
+always_load:
+  - ../nature-shared/core/reader-workflow.md
+  - ../nature-shared/core/paper-type-taxonomy.md
+  - ../nature-shared/core/paper-archetype-atlas.md
+  - ../nature-shared/core/ethics.md
+  - ../nature-shared/core/terminology-ledger.md
+  - ../nature-shared/core/sentence-logic-and-cohesion.md
+  - ../nature-shared/core/explanatory-sufficiency.md
+  - ../nature-shared/core/manuscript-content-selection.md
+  - ../nature-shared/core/figure-evidence-planning.md
+  - ../nature-shared/core/manuscript-surface-qa.md
+
+references:
+  on_demand:
+    - condition: current paper type, target, reporting norm, writing convention, figure grammar, or review expectation is unfamiliar/uncertain and research is needed before imposing a template
+      path: ../nature-shared/core/unknown-paper-research-protocol.md
+    - condition: substantial manuscript work should study a few genuinely close papers for argument/evidence/figure/explanation/local-convention calibration without copying wording or visual identity
+      path: ../nature-shared/core/analogue-paper-calibration.md
+    - condition: recent cross-archetype direct-reading examples are needed to test whether a proposed writing/figure rule is actually transferable
+      path: ../nature-shared/research/stratified-paper-reading-2025-2026.md
+    - condition: prose feels generic, formulaic, machine-like, connector-heavy, repetitive, weakly authorial, or over-smoothed after the scientific logic is stable
+      path: ../nature-shared/core/natural-scholarly-prose.md
+    - condition: representative author prose exists and a recognizable manuscript-level voice should survive restructuring
+      path: ../nature-shared/core/author-voice-profile.md
+    - condition: target journal/venue, article type, stage, or exact current compliance requirements matter
+      path: ../nature-shared/journal-formats/journal-resolution.md
+    - condition: target publication model needs fallback classification for editor/reviewer preflight
+      path: ../nature-shared/journal-formats/editorial-decision-profiles.md
+    - condition: pre-submission editor/reviewer decision logic or minimum-sufficient repair planning is needed
+      path: ../nature-shared/core/editor-reviewer-decision-engine.md
+    - condition: Results/main-text work needs shortest-sufficient evidence chain, main-versus-support allocation, or revision-accretion control
+      path: ../nature-shared/core/main-text-discipline.md
+    - condition: full or multi-round manuscript needs terminology/unit/number/claim consistency checking
+      path: ../nature-shared/core/consistency-sweep.md
