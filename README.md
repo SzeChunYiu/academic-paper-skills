@@ -1,11 +1,11 @@
 <div align="center">
   <p>
-    <img src="assets/readme-banner-cn.png" alt="Nature Skills：面向全球学者的科研 Skill 库" width="100%">
+    <img src="assets/readme-banner-cn.png" alt="Academic Paper Skills：面向学者的可复用科研与论文工作流" width="100%">
   </p>
   <p>
     <a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/license-Apache--2.0-2ea44f"></a>
     <a href="#5-安装"><img alt="Install" src="https://img.shields.io/badge/install-Claude%20Code%20%7C%20Codex%20%7C%20OpenClaw%20%7C%20OpenCode%20%7C%20Hermes-111827"></a>
-    <a href="#6-技能索引"><img alt="Skills" src="https://img.shields.io/badge/skills-19-0ea5e9"></a>
+    <a href="#6-技能索引"><img alt="Skills" src="https://img.shields.io/badge/skills-20-0ea5e9"></a>
     <a href="README_EN.md"><img alt="Language" src="https://img.shields.io/badge/language-中文%20%7C%20English-1f6feb"></a>
   </p>
   <p>
@@ -13,36 +13,43 @@
     · <a href="#4-快速开始">快速开始</a>
     · <a href="#5-安装">安装</a>
     · <a href="#6-技能索引">技能索引</a>
+    · <a href="docs/deep-paper-calibration.md">论文深度校准</a>
     · <a href="docs/academic-writing-research.md">学术写作研究</a>
-    · <a href="docs/manuscript-content-and-figures.md">论文内容与图件</a>
     · <a href="README_EN.md">English</a>
   </p>
 </div>
 
 ---
 
-`nature-skills` 是面向 AI Agent 的可复用科研 Skill 系统。历史上的 `nature-*` 名称继续保留以保证兼容，但**学术论文工作流已经不再是 Nature-only**：target journal、article type、discipline、study design、evidence standard、writing style、editorial objective 和 submission stage 都会独立解析。
+这是一个面向 AI agents 的可复用 **academic research + academic paper skill system**。项目最初围绕 Nature 工作流构建，所以很多历史目录仍保留 `nature-*` 名称；但论文系统现在已经是 **journal-agnostic、paper-archetype-aware** 的。
 
-当前 paper workflow 是 evidence-first：
+Canonical writing entry point 是 **`academic-writing`**；整篇论文持续迭代的 orchestration entry point 是 **`academic-paper-pipeline`**。Nature 现在只是一个可选 target adapter。
+
+当前 manuscript lifecycle：
 
 ```text
-best evidence
--> scientific argument
--> manuscript content selection
--> close analogue-paper study
--> figure/evidence planning
--> natural scholarly prose + author voice
--> exact journal/reporting adaptation
--> editor/reviewer preflight
--> revision closure
+target + paper archetype
+-> evidence/source intake
+-> literature + comparable-paper research
+-> argument + claim/evidence architecture
+-> content + statistics + figure/diagram planning
+-> academic writing
+-> sentence/explanation/author-voice repair
+-> technical/reporting/surface QA
+-> editor triage
+-> independent reviewers
+-> editor synthesis
+-> revision + targeted re-review
+   ↳ 真实 blocker 仍存在时继续
+-> simulated publication readiness 或 explicit blocker/retarget state
 ```
 
-目标不是让每篇论文都“像顶刊”，而是让 science **清楚、可辩护、可复现、边界准确，并让目标 editor/reviewer/reader 容易评价**。
+目标不是让所有论文“像顶刊”，而是让 science **清楚、内容足够丰富、可辩护、可复现、边界合适、视觉证据可检查，并让目标 reader/editor/reviewer 容易评估**。
 
 ## 目录
 
-- [1. 这个仓库现在是什么](#1-这个仓库现在是什么)
-- [2. 学术写作与论文工程](#2-学术写作与论文工程)
+- [1. 仓库现在是什么](#1-仓库现在是什么)
+- [2. Academic Writing、Review 与 Paper Engineering](#2-academic-writingreview-与-paper-engineering)
 - [3. 架构与设计原则](#3-架构与设计原则)
 - [4. 快速开始](#4-快速开始)
 - [5. 安装](#5-安装)
@@ -50,219 +57,260 @@ best evidence
 - [7. 贡献与开发](#7-贡献与开发)
 - [8. 项目与社区](#8-项目与社区)
 
-## 1. 这个仓库现在是什么
+## 1. 仓库现在是什么
 
-项目最初围绕 Nature-oriented research workflow 建设，现在已经扩展成更一般的 academic-paper architecture，同时保留原目录名避免已有安装失效。
+### Canonical academic writing，不再是 Nature writing
 
-### Journal-aware，而不是 hard-coded journal style
+`academic-writing` 是新的公开 manuscript-writing skill。旧 `nature-writing` 目录只作为 compatibility/reference implementation layer 保留成熟 section fragments、examples 与 corpus scripts，并关闭 implicit invocation。
 
-共享 journal resolver 使用：
+写作会独立解析：
 
-`exact journal -> article/content type -> submission stage -> output component`
+`paper archetype -> study design/evidence -> intended reader -> article type -> exact target/stage`
 
-当前 exact official instruction 高于本地 profile；publisher-family profile 只是 fallback，不是 submission contract。
+不会从一个 Nature 命名推导写作风格。
 
-### Evidence 优先于 prestige
+### Closed-loop manuscript iteration
 
-Citation discovery 默认使用 **best evidence**，不再自动筛 Nature/Science/Cell。只有明确要求时才启用 `nature`、`science`、`cell`、`cns`、`flagship` scope。
+`academic-paper-pipeline` 在所有轮次维护同一个 manuscript state，并协调：
 
-### Writing 是 research engine
+`research -> writing -> statistics -> figures/diagrams -> review -> editor synthesis -> revision -> re-review`
 
-写作系统基于跨学科 rhetorical/corpus research、真实论文 direct reading、close analogue-paper study 和 exact target requirement，不会把一种 Introduction、Results、Discussion 或 sentence template 强行推广到所有学科。
+决定收敛的是 simulated editor，不是 reviewer 票数。Major concerns 有稳定 ID 与 resolution test；major revision 可回到对应 original reviewer，minor clarity/surface issue 在 target process 允许时可以由 editor closure。
 
-### Editor/reviewer decision engineering
+成功 terminal state 是 `simulated_publication_ready_for_target`。这是 readiness simulation，不保证真实期刊 accept。
 
-评审系统区分：
+### 不认识的 paper，先 research 再写
 
-`editorial triage -> independent reviewers -> editor synthesis -> revision closure`
+如果 paper type、target venue、reporting standard、writing convention 或 figure grammar 无法可靠覆盖，AI session 应先研究：
 
-不会用 universal acceptance score，也不会数 reviewer votes。Concern 可以通过 evidence、reanalysis、correction、restructuring、claim narrowing/removal 或更合适的 target/article type 关闭。
+1. current official target guidance；
+2. applicable reporting/methodological standards；
+3. 需要时的 comparable recent-paper quick profile；
+4. 3–6 篇 nearest-neighbor papers deep reading；
+5. 对 apparent convention 的 counterexamples。
 
-### Figures 是 evidence units
+然后建立 temporary manuscript-specific archetype profile，而不是硬套 nearest template。
 
-Figure planning 从：
+### Paper archetype 高于 journal aesthetics
 
-`claim -> reader question -> estimand -> data structure -> uncertainty/alternative explanation -> plot`
+Shared system 至少区分：
 
-开始，而不是“顶刊通常画什么”。Main figures 放最短充分 visual evidence chain；supporting diagnostics/robustness 在适合时进入 Extended Data/SI。
+- experimental discovery/mechanism；
+- randomized intervention/trial；
+- observational/epidemiological/clinical association；
+- computational/ML empirical；
+- method/tool/software/instrument；
+- dataset/resource；
+- theory/proof；
+- qualitative/interpretive；
+- review/systematic review/perspective/synthesis；
+- hybrid papers。
 
-## 2. 学术写作与论文工程
+Clinical trial、ML benchmark、qualitative interview、mechanism paper、theorem paper 不应该因为都投 selective journal 就共享同一 evidence/figure sequence。
 
-写作层已经做了大幅重构。
+### Evidence before prestige
 
-### 2.1 Natural scholarly prose，而不是 AI-detector evasion
+Citation discovery 默认 best evidence，不默认 CNS/Nature filter。Exact current journal/article-type/stage instructions 高于 publisher-family assumption。
 
-文本有“AI 味”时，系统不会维护 `AI-word` blacklist，也不会随机化句长，而是修 reader-facing reasoning：
+## 2. Academic Writing、Review 与 Paper Engineering
 
-`proposition -> dependency -> information progression -> identity/reference chain -> stance -> syntax -> connective -> cadence`
+### 2.1 Sentence-to-sentence logical flow
 
-对困难段落中第一句之后的每一句：
+Academic flow 首先是 reasoning problem。
 
-`inherits X -> relation R -> adds Y -> enables Z`
+困难段落中，每个非首句检查：
 
-它能抓住一种常见问题：每句话单独都很“漂亮”，但彼此没有真正 dependency。
+```text
+inherits X
+-> relation R
+-> adds Y
+-> enables Z
+```
 
-系统还会允许在 referent 不变时精准重复 technical term，只在 rhetorical function 改变时做 syntax variation，并在大重构后恢复作者自己的 voice。
+同时检查 topic/context continuity、identity/reference chains、合适时的 given/new progression、subject–verb distance、stress/emphasis、evidence-to-interpretation warrant、analysis-to-analysis handoff，以及 connective 是否真的对应 relation。
 
-### 2.2 Analogue-paper calibration
+Connective 不能替代缺失的 scientific logic。
 
-对于 substantial rewrite，系统可以在可用时精读大约 **3–6 篇真正可比的论文**，按 question/contribution type、study design、evidence/data type、article type、subfield 与 target venue 匹配。
+### 2.2 Rich content without bloat
 
-学习：
+论文可以很短、语法也正确，但仍然 under-explained。对 central idea/result，系统检查读者是否获得必要的：
 
-- research need 如何创建；
-- evidence sequence；
-- figure roles；
-- data/control/uncertainty 如何展示；
-- main text vs Methods/SI；
-- local stance/signposting/background convention。
+- identity/definition；
+- motivation；
+- mechanism/inferential logic；
+- decisive evidence；
+- comparator/baseline；
+- uncertainty；
+- strongest alternative explanation；
+- assumption/boundary；
+- prior-work relationship；
+- scientific consequence；
+- prose 不够高效时的 visual evidence。
 
-学习的是 function 和 relation，不是句子或 visual identity。
+目标是 **minimum sufficient scientific explanation**，不是最大压缩，也不是最大字数。
 
-### 2.3 论文到底应该写什么？
+### 2.3 Natural scholarly prose + author voice
 
-新增 content-selection layer 防止 **implementation-detail leakage / repository-to-manuscript leakage**。
+当 prose 很 generic / AI-like，系统会修：
 
-每个候选信息先分类：
+`scientific relation -> information flow -> identity chain -> stance -> syntax -> connective -> cadence`
 
-- inference-critical；
-- interpretation-critical；
-- reproducibility-critical；
-- compliance/provenance-critical；
-- orientation-critical；
-- 或 none。
+它允许必要 technical repetition，按 rhetorical function 变化 syntax，在逻辑/evidence 修好后恢复 author voice。
 
-然后再分配到：
+不做 AI-word blacklist、fake burstiness、deliberate errors 或 detector optimization。
 
-`main text / main figure / legend / Methods / Extended Data/SI / Data-Code-Resource Availability / repository docs / omit`
+### 2.4 学很多 papers，但不复制
 
-文件路径、helper 名、setup command、config、internal module、CI/unit-test 细节和反复出现的 repository URL 不会再自动进入 prose。
+使用两层：
 
-一个很有用的判断：
+- **broad stratified corpus**：几十/几百篇 comparable papers 的 descriptive tendencies；
+- **3–6 close analogues**：深入研究 claim/evidence dependency、explanation depth、figure roles、uncertainty、terminology 与 reader assumptions。
 
-> 如果把 implementation 从头重写，但 scientific method/results 完全不变，这个细节还会影响论文吗？
+Corpus frequency 不是 quality score，也不是 acceptance predictor。
 
-### 2.4 在真正画图之前先给 plot suggestions
+### 2.5 什么内容应该进入 paper？
 
-系统可以根据 scientific question 推荐可视化：
+Content-selection layer 防止 **implementation-detail / repository-to-manuscript leakage**。
 
-- distribution -> raw points/distribution-aware display；
-- paired effect -> paired changes/differences；
-- time/dose -> meaningful trajectory；
-- association -> scatter/hexbin + justified model；
-- classification -> ROC/precision–recall/operating point；
-- calibration -> reliability/calibration display；
-- survival -> censoring-aware curve；
-- heterogeneity -> forest/stratified effect；
-- benchmark -> task/site/run-level comparison；
-- robustness -> sensitivity curve/interval/small multiples；
-- imaging -> representative image + quantitative evidence；
-- null result -> effect estimate + uncertainty/equivalence logic；
-- qualitative/theory -> 不强行 quantitative plot。
+内容先分类为 inference-critical、interpretation-critical、reproducibility-critical、compliance/provenance-critical、orientation-critical 或 none，再分配到：
 
-详细指南：[论文到底应该写什么、哪些内容不该进正文，以及应该画什么图？](docs/manuscript-content-and-figures.md)
+`main text / main figure / legend / Methods / Extended Data-SI / availability / artifact docs / omit`
 
-### 2.5 研究文档
+File path、script/notebook、helper/function、config/output filename、CLI、branch/PR/CI/test、raw project URL 不会因为 AI 看得到就自动进入 manuscript。
 
-- [学术写作研究综述：强论文究竟是怎样写出来的](docs/academic-writing-research.md)
-- [自然学术写作：句子到句子的逻辑与表达指南](docs/natural-scholarly-writing.md)
-- [论文到底应该写什么、哪些内容不该进正文，以及应该画什么图？](docs/manuscript-content-and-figures.md)
+### 2.6 Final manuscript-surface QA
+
+Content planning 还不够，因为后续 rewrite 或 caption generation 仍可能把 project detail 带回来。所有 manuscript-facing surfaces 最终再做一次独立 scrub。
+
+核心规则：
+
+> **Audit trail 可以知道 artifact 名字；manuscript 应该写 science。**
+
+同时检查 punctuation spacing、doubled punctuation、bracket balance、Fig. reference、range/minus/hyphen、units、target-aware citation/equation/legend typography，并保护 scientific identifiers。
+
+### 2.7 Figures、plots 与 scientific diagrams
+
+Figure planning：
+
+```text
+claim
+-> reader question
+-> scientific/statistical unit
+-> estimand / visual object
+-> data structure
+-> uncertainty / alternative explanation
+-> representation
+-> main/support/omit
+```
+
+没有 universal ideal figure count。
+
+Scientific-figure skill 还提供独立 diagram route，可处理 flowchart、mechanism diagram、state diagram、timeline、system schematic 与 conceptual illustration；按需使用 Graphviz、Schemdraw、Mermaid、custom Matplotlib/SVG 或 TikZ 的能力，同时保持 scientific semantics 与最终 visual identity 原创。
+
+### 2.8 更真实的 editor/reviewer iteration
+
+Review loop：
+
+`editorial triage -> independent review -> editor synthesis -> revision closure -> targeted re-review`
+
+Editor 区分 publication/technical blocker、explanation/reporting、surface copyedit、claim recalibration 与 optional enrichment。
+
+Round 1 之后新的 blocker 需要真实理由，例如 revision regression 或 new evidence 暴露新问题，避免 reviewer 不断 moving goalposts。
+
+可做的 repair 包括 research、reanalysis、已有 data 的新 plots、diagram redesign、writing/explanation repair、citation work、claim narrowing/removal 与 retargeting。真实 new experiment/data requirement 会成为 explicit author-evidence blocker，不会被虚构。
+
+### 2.9 研究文档
+
+- [学术写作研究](docs/academic-writing-research.md)
+- [深度论文校准](docs/deep-paper-calibration.md)
+- [自然学术写作](docs/natural-scholarly-writing.md)
+- [解释充分性](docs/explanatory-sufficiency.md)
+- [论文内容与图件](docs/manuscript-content-and-figures.md)
 - [All-journals architecture](docs/all-journals-architecture.md)
 - [Editor–Reviewer Decision Architecture](docs/editor-reviewer-decision-architecture.md)
 
 ## 3. 架构与设计原则
 
-### 3.1 Truth、compliance、structure、voice 分开
+### 3.1 Constraint hierarchy
 
 ```text
 author evidence = truth constraint
-journal/reporting rules = compliance constraint
-analogue papers = structural/evidence priors
+paper archetype = evidence/reader-dependency prior
+reporting + exact target rules = compliance constraint
+broad corpus = descriptive tendency layer
+close analogues = manuscript-specific structural/evidence priors
 author voice = expression prior
 ```
 
 Scientific validity 高于所有 surface style rule。
 
-### 3.2 Evidence completeness 不等于 main-text completeness
+### 3.2 Published papers 是 priors，不是 acceptance hacks
 
-完整 evidence/reproducibility record 可以分布在 manuscript、Methods、figures/tables、Extended Data/SI、source data、availability statement 和 repository 中。
+Published papers 有 survivorship bias。它们能告诉我们某个 publication ecology 下哪些解决方案活了下来，但不能证明某种 phrase、plot、figure count 或 layout 导致了 acceptance。
 
-Main text 应该保留**最短充分 reader-facing evidence chain**，同时所有会改变 headline interpretation 的 negative/boundary evidence 必须可见。
+### 3.3 Review convergence 是 concern-led
 
-### 3.3 Contribution type 会改变 evidence architecture
+只有真实 must-address concern 仍存在、且下一轮有 concrete resolution test 时才继续迭代。只剩 optional enrichment / production copyedit 时应停止。
 
-Mechanism paper、clinical cohort、ML benchmark、method/tool paper、dataset/resource、theory、qualitative study 与 review 的 evidence/figure architecture 不应相同。
+### 3.4 Anti-gaming
 
-例如 methods paper 可能需要 performance validation、ground truth/gold standard、benchmarking、reproducibility、general applicability 和 distinct applications；clinical generalization claim 可能需要 site/population-stratified performance、calibration、absolute clinical quantity 或 time-to-event evidence，而不是一个 pooled metric。
-
-### 3.4 Published papers 是 priors，不是 acceptance hacks
-
-Published-paper patterns 有 survivorship bias。它们可以告诉我们在某 publication ecology 下别人怎么解决 rhetorical/evidentiary problem，但不能证明某个 phrase、figure count 或 layout 导致 acceptance。
-
-### 3.5 Anti-gaming
-
-系统不会建议：
-
-- 挑 friendly reviewers；
-- 战略性引用潜在 reviewer；
-- 隐藏 close competitor/adverse evidence；
-- 用 inflated novelty/significance wording；
-- 加 cosmetic experiments；
-- 把 conclusion-changing limitation 埋进 SI；
-- 做 AI-detector evasion tricks。
+不做 friendly-reviewer selection、strategic reviewer citation、隐藏 adverse evidence/competitor、inflated novelty、cosmetic experiment、AI-detector evasion 或 acceptance-probability optimization。
 
 ## 4. 快速开始
 
-安装后可以直接交给 Agent manuscript、paper、figures、reviewer letter、code/project context 或 task description。
+安装后直接提供 manuscript、data、figures、reviewer letter、sources、repository context 或任务描述。
 
-| 想做什么 | 直接这样说 |
-|---|---|
-| 读论文 / 中英文 reader | `把这篇 PDF 做成带 source anchors、图文对应的中英文 Markdown reader。` |
-| 深度精读 | `做一份 Paper Card：方法逻辑、evidence-to-claim chain、结论边界、弱点和可检验研究想法。` |
-| 起草/重建 manuscript | `根据这些 claims、data 和 figures 重建整篇 paper argument。不要默认 Nature style，target journal 单独解析。` |
-| 先学 similar papers | `先找/读 4–6 篇真正可比论文，再告诉我哪些 evidence、figures 和 section logic 应 adopt/adapt/reject。` |
-| 降低 AI 味 | `这段太 generic/像 AI。修 sentence dependency 和 natural scholarly flow，同时保留我的 author voice；不要优化 AI detector。` |
-| 决定什么该进论文 | `审查这些 notes/code/repository materials，把每项分到 main text、figure、legend、Methods、SI、availability、repository docs 或 omit。` |
-| 规划 figures/plots | `针对每个 headline claim，判断是否需要 figure，并根据 estimand/data structure/uncertainty 推荐 plot，不要按期刊流行度选。` |
-| 投稿前评审 | `解析这个 journal 的 decision model，先 editor triage，再独立 reviewers，最后综合 blockers 和 minimum valid repairs。` |
-| 回复 reviewers | `解析 decision letter，先按 editor conditions 和 blocking concerns 排序，再写 point-by-point response 与 manuscript changes。` |
-| 查引用 | `拆分这些 claims，找最强 supporting evidence；除非我指定，不按 prestige 过滤。` |
-| 生成文献汇报 PPT | `把这篇论文做成中文 journal-club PPT，保留关键图件和来源标注。` |
+| 目标 | Prompt |
+| --- | --- |
+| End-to-end iterative hardening | `使用 academic-paper-pipeline：持续 research、write、review、revise、re-review，直到 simulated editor 判断 publication-ready 或遇到真实 blocker。` |
+| Draft/rebuild manuscript | `使用 academic-writing，根据这些 claims/data/figures 重建论文；先解析 paper archetype 与 target，不要假设 Nature style。` |
+| Learn from similar papers | `先研究 broad comparable corpus，再精读 4–6 篇 nearest papers，告诉我 evidence、figures、section logic 哪些 adopt/adapt/reject。` |
+| Naturalize academic prose | `修复 sentence dependencies 和自然 scholarly flow，保留我的 author voice，不要优化 AI detector。` |
+| 检查内容是否足够丰富 | `逐个 central idea 检查 rationale、mechanism/inference、evidence、comparator、uncertainty、boundary、consequence，只展开真正缺失部分。` |
+| Decide what belongs | `把每个 source/project item 分配到 main、figure、legend、Methods、SI、availability、artifact docs 或 omit，最后再做 leakage scrub。` |
+| Plan figures/plots | `对每个 headline claim 先确定 reader question、estimand、uncertainty，再选最合适 representation，不按 journal popularity 选 plot。` |
+| Scientific diagram | `先建立 mechanism/flow topology 和 arrow semantics，再选合适 vector diagram backend。` |
+| Pre-submission review | `解析 target decision model，做 editor triage + independent reviewers，再综合 must-address blockers 与 minimum valid repairs。` |
+| Real reviewer response | `解析这个 decision letter，先处理 editor conditions 和 blocking concerns，再起草 revision/response package。` |
+| Find citations | `拆分 claims 并找 best supporting evidence，除非我指定，不按 prestige filter。` |
+| Deep-read paper | `做 source-grounded Paper Card：method logic、evidence chain、boundaries、weaknesses、testable ideas。` |
 
-如果已经知道 skill 名，可以直接指定；否则自然描述任务即可。
+知道 skill name 可以直接指定，否则自然描述任务即可。
 
 ## 5. 安装
 
-`nature-skills` 以 `skills/` 下的完整 skill directory 组织。许多 router-style skills 依赖 `skills/nature-shared/`，所以**请安装/复制完整目录，不要只复制 `SKILL.md`**。
+Skills 以完整目录放在 `skills/`。很多 academic-paper skills 依赖 `skills/nature-shared/`，因此应复制完整 skill directory，而不是只拷 `SKILL.md`。
 
 ### 5.1 `npx skills`
 
-查看技能：
+列出 skills：
 
 ```bash
 npx skills add Yuan1z0825/nature-skills --list
 ```
 
-给 Codex 全局安装全部 skills：
+为 Codex 全量安装：
 
 ```bash
 npx skills add Yuan1z0825/nature-skills --global --agent codex --skill '*' --yes --copy
 ```
 
-只装某个 skill 时，把需要的 shared package 一起装：
+安装 canonical academic writing + shared：
 
 ```bash
 npx skills add Yuan1z0825/nature-skills --global --agent codex \
-  --skill nature-writing --skill nature-shared --yes --copy
+  --skill academic-writing --skill nature-shared --yes --copy
 ```
 
-后续更新：
+需要完整闭环时，再安装 `academic-paper-pipeline` 与你的 agent 环境中需要调用的 specialist skills。
+
+更新：
 
 ```bash
 npx skills update --global --yes
 ```
 
-### 5.2 Codex repository installer
+### 5.2 Repository installer
 
 ```bash
 git clone https://github.com/Yuan1z0825/nature-skills.git
@@ -271,104 +319,94 @@ scripts/update-codex-skills.sh --pull
 scripts/update-codex-skills.sh --check
 ```
 
-脚本会同步完整 top-level skill directories 并验证复制结果。
+### 5.3 Claude Code 与其他 agents
 
-### 5.3 Claude Code
+Claude Code、OpenClaw、OpenCode、Hermes 等请保持 complete skill directories + shared dependencies 一起安装。参见 [integration guide](docs/open-source-agent-frameworks.md)。
 
-保留稳定 clone，然后用 subagent/slash-command wrapper 指向真实 `skills/*/SKILL.md`，或用 `scripts/autoupdate-skills.sh` 同步完整技能到 `~/.claude/skills/`。
-
-示例：
-
-```bash
-git clone https://github.com/Yuan1z0825/nature-skills.git ~/ai-skills/nature-skills
-~/ai-skills/nature-skills/scripts/autoupdate-skills.sh --force
-```
-
-### 5.4 其他 Agent 与可选 runtime
-
-OpenClaw、OpenCode、Hermes 等见 [接入指南](docs/open-source-agent-frameworks.md)。
-
-Python/R/browser/MCP 依赖只在相关 skill 需要时安装；不要把 API key/provider credential 提交到仓库。
+Optional Python/R/browser/MCP/diagram dependencies 只按需要安装。不要提交 API keys/provider credentials。
 
 ## 6. 技能索引
 
-当前 `skills/` 下有 19 个可触发 skill；`nature-shared` 是内部支持包，不计入这里。
+当前仓库公开 **20 个 triggerable skills**。`nature-shared` 与 legacy `nature-writing` 是 support/reference layer，不计入。
 
-| 技能 | 状态 | 用途 | 触发词 | 详情页 |
+| Skill | Status | Purpose | Example Triggers | Details |
 |---|---|---|---|---|
-| [`nature-figure`](skills/nature-figure/README.md) | Stable | Claim-driven figure planning + Python/R rendering、analogue calibration、main/support allocation、journal adaptation 与 visual/source-data QA | “该画什么图”, “scientific figure”, “Figure 1”, “publication plot”, “graphical abstract” | [详情](skills/nature-figure/README.md) |
-| [`nature-polishing`](skills/nature-polishing/README.md) | Stable | Journal-aware academic rewrite/translation，包含 sentence dependency、natural scholarly prose、analogue calibration、author voice 与 consistency | “润色”, “自然学术表达”, “AI味”, “句间逻辑”, “journal transfer” | [详情](skills/nature-polishing/README.md) |
-| [`nature-writing`](skills/nature-writing/README.md) | Draft | Evidence-first manuscript architecture、content selection、analogue study、plot suggestions、natural prose/voice、editor-reviewer preflight 与首次投稿 | “论文写作”, “重写 Results”, “什么该进论文”, “相似论文”, “编辑视角” | [详情](skills/nature-writing/README.md) |
-| [`nature-reviewer`](skills/nature-reviewer/README.md) | Draft | Journal-aware editor triage + 互盲 reviewer simulation + editor synthesis + decision-relevant repair map | “预投稿评审”, “editor perspective”, “reviewer report”, “拒稿风险” | [详情](skills/nature-reviewer/README.md) |
-| [`nature-citation`](skills/nature-citation/README.md) | Beta | 默认 best-evidence claim citation discovery，同时保留显式 Nature/CNS/flagship scope 与 RIS/ENW/Zotero export | “找引用”, “supporting evidence”, “CNS citation”, “RIS export” | [详情](skills/nature-citation/README.md) |
-| [`nature-data`](skills/nature-data/README.md) | Draft | Data Availability statement、repository plan 与 FAIR checks | “Data Availability”, “数据可用性”, “FAIR” | [详情](skills/nature-data/README.md) |
-| [`nature-statistics`](skills/nature-statistics/README.md) | Draft | 统计设计/reporting：experimental units、estimands、p values、multiplicity、effect sizes、intervals、figure stats 与 numeric consistency | “统计审查”, “p value”, “sample size”, “figure statistics” | [详情](skills/nature-statistics/README.md) |
-| [`nature-reader`](skills/nature-reader/README.md) | Beta | 带 source anchors、图文对应、公式渲染和中英文翻译的全文 Markdown reader | “论文 reader”, “全文 Markdown”, “图文对应”, “翻译” | [详情](skills/nature-reader/README.md) |
-| [`nature-paper-card`](skills/nature-paper-card/README.md) | Beta | Source-grounded 深度精读：method logic、experiment-to-claim evidence、结论边界、批判分析与 research ideas | “Paper Card”, “论文精读”, “evidence chain” | [详情](skills/nature-paper-card/README.md) |
-| [`nature-response`](skills/nature-response/README.md) | Beta | 解析 editor/reviewer decision，构建 closure-oriented rebuttal、cover letter、标红稿与 revision-package checks | “response to reviewers”, “major revision”, “rebuttal”, “返修” | [详情](skills/nature-response/README.md) |
-| [`nature-paper2ppt`](skills/nature-paper2ppt/README.md) | Beta | 从科研论文生成中文 PPTX journal-club/paper-presentation deck | “paper PPT”, “journal club”, “论文汇报” | [详情](skills/nature-paper2ppt/README.md) |
-| [`nature-image2ppt`](skills/nature-image2ppt/README.md) | Beta | 将 slide image、scanned PDF、image-only PPTX 重建为对象级可编辑 PowerPoint 并做 QA | “图片转可编辑PPT”, “扫描PDF转PPTX” | [详情](skills/nature-image2ppt/README.md) |
-| [`nature-paper-to-patent`](skills/nature-paper-to-patent/README.md) | Beta | Evidence-constrained 中国发明专利起草、专利点挖掘、prior-art search 与技术交底迭代 | “论文转专利”, “Chinese patent”, “权利要求” | [详情](skills/nature-paper-to-patent/README.md) |
-| [`nature-ref-verifier`](skills/nature-ref-verifier/README.md) | Stable | 分开校验 reference identity/metadata、target-journal rendering 与 manuscript cross-links | “校验文献”, “reference verification”, “metadata check” | [详情](skills/nature-ref-verifier/README.md) |
-| [`nature-academic-search`](skills/nature-academic-search/README.md) | Beta | Multi-source literature search、citation verification、citation metrics、influential citer profiling 与 reference management | “查文献”, “literature search”, “verify DOI”, “citation table” | [详情](skills/nature-academic-search/README.md) |
-| [`nature-downloader`](skills/nature-downloader/README.md) | Beta | 通过 library access、browser login state 与 OA route 合法获取 academic PDF/full text | “download papers”, “图书馆PDF”, “CARSI” | [详情](skills/nature-downloader/README.md) |
-| [`nature-literature-pipeline`](skills/nature-literature-pipeline/README.md) | Stable | 自动化 literature discovery：retrieval、scoring、deep-reading delivery 与 local archiving | “literature pipeline”, “每日文献”, “cron” | [详情](skills/nature-literature-pipeline/README.md) |
-| [`nature-experiment-log`](skills/nature-experiment-log/README.md) | Draft | 把 experiment image/voice/text 标准化为 Obsidian experiment log 并归档 source | “实验日志”, “record experiment”, “Obsidian” | [详情](skills/nature-experiment-log/README.md) |
-| [`nature-proposal-writer`](skills/nature-proposal-writer/README.md) | Beta | Proposal-first research writing state machine：先建立 evidence、argument 与 section contract 再写作/评审 | “researchwrite”, “proposal”, “研究方案”, “写作QA” | [详情](skills/nature-proposal-writer/README.md) |
+| [`academic-paper-pipeline`](skills/academic-paper-pipeline/README.md) | Beta | Closed-loop research、writing、figure/statistics、independent review、editor synthesis、revision、targeted re-review，直到 simulated publication readiness 或 explicit blocker | "iterate until publishable", "反复 review/revise", "publication-ready pipeline" | [详情](skills/academic-paper-pipeline/README.md) |
+| [`academic-writing`](skills/academic-writing/README.md) | Beta | Canonical journal-agnostic manuscript writing：archetype resolution、self-research fallback、rich explanation、sentence logic、corpus/analogue learning、author voice、figure planning、surface QA | "academic writing", "论文写作", "rewrite Results", "句间逻辑" | [详情](skills/academic-writing/README.md) |
+| [`nature-academic-search`](skills/nature-academic-search/README.md) | Beta | Multi-source literature search、citation verification、metrics 与 reference management | "search papers", "文献检索", "verify DOI" | [详情](skills/nature-academic-search/README.md) |
+| [`nature-citation`](skills/nature-citation/README.md) | Beta | Claim segmentation + best-evidence citation discovery，保留显式 journal/prestige scope 与 RIS/ENW/Zotero export | "find citations", "supporting evidence", "RIS export" | [详情](skills/nature-citation/README.md) |
+| [`nature-data`](skills/nature-data/README.md) | Draft | Data Availability、repository plan 与 FAIR checks | "Data Availability", "FAIR metadata" | [详情](skills/nature-data/README.md) |
+| [`nature-downloader`](skills/nature-downloader/README.md) | Beta | 通过 library/open-access 合法获取 academic full text/PDF | "download papers", "library PDF" | [详情](skills/nature-downloader/README.md) |
+| [`nature-experiment-log`](skills/nature-experiment-log/README.md) | Draft | 将实验 image/voice/text 转成 standardized Obsidian experiment logs | "experiment log", "实验记录" | [详情](skills/nature-experiment-log/README.md) |
+| [`nature-figure`](skills/nature-figure/README.md) | Stable | Archetype/claim-driven figure planning、data plots、scientific diagrams、analogue calibration、target adaptation、legend/surface QA 与 export | "what plots", "科研作图", "机制图", "flowchart" | [详情](skills/nature-figure/README.md) |
+| [`nature-image2ppt`](skills/nature-image2ppt/README.md) | Beta | 将 slide image/scanned PDF/image-only PPTX 重建为 editable PowerPoint | "image to editable PowerPoint" | [详情](skills/nature-image2ppt/README.md) |
+| [`nature-literature-pipeline`](skills/nature-literature-pipeline/README.md) | Stable | 自动 literature discovery、retrieval、scoring、deep-reading delivery、local archive | "literature pipeline", "daily literature" | [详情](skills/nature-literature-pipeline/README.md) |
+| [`nature-paper-card`](skills/nature-paper-card/README.md) | Beta | Source-grounded deep reading：method logic、evidence chains、boundaries、critical analysis、research ideas | "Paper Card", "deep-read paper" | [详情](skills/nature-paper-card/README.md) |
+| [`nature-paper-to-patent`](skills/nature-paper-to-patent/README.md) | Beta | Evidence-constrained Chinese patent drafting、patent-point mining、prior-art search | "paper to patent", "claims drafting" | [详情](skills/nature-paper-to-patent/README.md) |
+| [`nature-paper2ppt`](skills/nature-paper2ppt/README.md) | Beta | 从 research paper 生成中文 journal-club/paper-presentation PPTX | "paper PPT", "journal club" | [详情](skills/nature-paper2ppt/README.md) |
+| [`nature-polishing`](skills/nature-polishing/README.md) | Stable | Journal-aware academic rewriting/translation：explanation、sentence logic、natural prose、author voice、archetype calibration、surface QA | "polish", "AI-like prose", "sentence flow" | [详情](skills/nature-polishing/README.md) |
+| [`nature-proposal-writer`](skills/nature-proposal-writer/README.md) | Beta | Proposal-first research-writing state machine：draft/review 前先建立 evidence/argument/section contracts | "researchwrite", "proposal", "research plan" | [详情](skills/nature-proposal-writer/README.md) |
+| [`nature-reader`](skills/nature-reader/README.md) | Beta | Full-paper Markdown reader：source anchors、figure-text alignment、equations、中英翻译 | "paper reader", "full Markdown" | [详情](skills/nature-reader/README.md) |
+| [`nature-ref-verifier`](skills/nature-ref-verifier/README.md) | Stable | Reference identity/metadata verification，与 target rendering/cross-links 分离 | "verify refs", "metadata check" | [详情](skills/nature-ref-verifier/README.md) |
+| [`nature-response`](skills/nature-response/README.md) | Beta | 真实 editor/reviewer decision 的 closure-oriented response、cover letter、marked manuscript、revision-package checks | "response to reviewers", "major revision", "rebuttal" | [详情](skills/nature-response/README.md) |
+| [`nature-reviewer`](skills/nature-reviewer/README.md) | Draft | Journal-aware editor triage、mutually blind reviewers、editor synthesis、archetype/evidence/figure/explanation audit | "pre-submission review", "reviewer reports" | [详情](skills/nature-reviewer/README.md) |
+| [`nature-statistics`](skills/nature-statistics/README.md) | Draft | Statistical design/reporting：units、estimands、p values、multiplicity、effect sizes、intervals、figure stats | "statistics review", "p value", "figure statistics" | [详情](skills/nature-statistics/README.md) |
 
 ## 7. 贡献与开发
 
-### 7.1 共享设计原则
+### 7.1 Shared principles
 
-1. **Scientific validity first。** Journal prestige、style 和 aesthetic 都不能覆盖 evidence。
-2. **规则优先用 current primary source。** Exact journal requirement 应来自目标期刊，而不是同 publisher 的其他期刊。
-3. **分离不同 function。** Evidence selection、writing logic、author voice、figures、reporting、house style 与 artifact docs 是不同层。
-4. **写作规则要 research。** 优先 cross-disciplinary corpus evidence、direct reading 和 counterexamples，而不是单一作者直觉。
-5. **从 analogues 学 function，不克隆。** 提取 relation/evidence architecture，不复制 sentence/visual identity。
-6. **阻止 repository leakage。** Code/project artifact 必须翻译成 scientific abstraction 并放到正确 publication layer。
-7. **Figure 必须回答问题。** Plot choice 跟着 estimand/data structure/uncertainty，不跟 journal fashion。
-8. **修完后保留 author voice。** Natural scholarly prose 是 quality floor，author voice 是 identity layer。
-9. **不做 detector/reviewer gaming。** 不优化 AI-detector score，也不操纵 peer-review system。
-10. **Contract 要有 regression tests。** 新 shared behavior 应被 focused tests 与 repository validators 保护。
+1. Scientific validity first。
+2. Canonical public paper writing 是 `academic-writing`；Nature-named legacy directory 只做 compatibility，除非 target 真的是 Nature。
+3. 先解析 paper archetype，再借鉴 writing/figure convention。
+4. 不熟悉的 paper/venue 先 research，不猜规则。
+5. Broad corpus 学 tendency，close analogues 学 deep reasoning；frequency 不是 quality。
+6. Preserve author evidence 与 claim boundaries。
+7. 内容要足够理解，但不加 filler。
+8. Figures 必须回答 reader questions 并暴露关键 uncertainty/alternatives。
+9. Project/repository implementation detail 不得泄漏到 manuscript surface。
+10. Punctuation/scientific typography 是 final QA，不是装饰。
+11. Editor/reviewer simulation concern-led、anti-gaming。
+12. Shared behavior 改动必须加 regression tests。
 
-### 7.2 仓库结构
+### 7.2 Repository layout
 
 ```text
 skills/
-├── nature-shared/                # shared reasoning/journal contracts
-├── nature-writing/
-├── nature-polishing/
+├── academic-paper-pipeline/      # canonical closed-loop orchestration
+├── academic-writing/             # canonical manuscript writing router
+├── nature-shared/                # shared reasoning/research/journal contracts
+├── nature-writing/               # legacy compatibility/reference implementation
 ├── nature-figure/
+├── nature-polishing/
 ├── nature-reviewer/
 ├── nature-response/
 └── nature-<topic>/...
 
 docs/
-├── all-journals-architecture.md
-├── editor-reviewer-decision-architecture.md
 ├── academic-writing-research.md
+├── deep-paper-calibration.md
 ├── natural-scholarly-writing.md
-└── manuscript-content-and-figures.md
+├── explanatory-sufficiency.md
+├── manuscript-content-and-figures.md
+├── all-journals-architecture.md
+└── editor-reviewer-decision-architecture.md
 ```
 
-每个 triggerable skill 保留 human-facing `README.md` / `README_EN.md`、governing `SKILL.md` 与 `manifest.yaml`；复杂技能按需 route 到 modular `references/`、`static/`、scripts 与 shared contracts。
+### 7.3 提交前
 
-### 7.3 提交前检查
-
-至少运行仓库 validators 与 focused tests，包括 README count/mirror、skill metadata/index、journal-generalization contracts、writing/figure/shared tests 和 `git diff --check`。
+运行 README mirror/count、skill metadata/index validation、focused academic-paper contracts、specialist tests 与 repository tooling。新 pipeline/writing/figure behavior 应由 regression tests 保护，而不是只写文档。
 
 ## 8. 项目与社区
 
-创始人 / 维护者：**袁一哲（Yizhe Yuan）**。项目也包含核心开发者和社区贡献者的工作。
+Founder / maintainer: **Yizhe Yuan（袁一哲）**。项目也包含 core developers 与 community contributors 的贡献。
 
-项目现有公开资源继续保留：
+- Website: https://yuan1z0825.github.io/nature-skills/
+- 商务合作: [natureskills2026@outlook.com](mailto:natureskills2026@outlook.com)
+- Nature AI service/store: https://apiciyuan.top/
+- Open-source agent integration: [docs/open-source-agent-frameworks.md](docs/open-source-agent-frameworks.md)
 
-- 在线网站：https://yuan1z0825.github.io/nature-skills/
-- 商务合作：[natureskills2026@outlook.com](mailto:natureskills2026@outlook.com)
-- Nature AI 服务/充值卡网：https://apiciyuan.top/
-- Open-source agent 接入：[docs/open-source-agent-frameworks.md](docs/open-source-agent-frameworks.md)
-
-项目的核心理念仍然是：科研 workflow 可以被显式化、可检查化并封装成 reusable agent skill；但这些 workflow 必须继续服从 science，而不能变成僵硬 template。
+更广泛的理念保持不变：research workflows 可以被显式化、检查、复用并持续通过 research 校准，但不能把 science 变成 rigid template。
 
 ### Star History
 
