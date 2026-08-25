@@ -1,18 +1,20 @@
 name: nature-polishing
-version: 7.3.0
+version: 7.4.0
 description: >
   Declarative manifest for journal-aware academic polishing. The legacy skill
   name is retained for backward compatibility; journal behavior is resolved
   independently from that name. Substantial rewrites can study close analogue
   papers for rhetorical/evidence conventions while preserving the author's own
-  voice, applying research-backed natural scholarly prose, and checking whether
-  central ideas are explained deeply enough for the intended reader.
+  voice, applying research-backed natural scholarly prose, checking explanatory
+  sufficiency, calibrating to the paper archetype, and finishing with a hard
+  manuscript-surface scrub for artifact leakage and punctuation/typography defects.
 
 always_load:
   - ../nature-shared/core/reader-workflow.md
   - ../nature-shared/core/paper-type-taxonomy.md
   - ../nature-shared/core/ethics.md
   - ../nature-shared/core/terminology-ledger.md
+  - ../nature-shared/core/manuscript-surface-qa.md
   - static/core/stance.md
   - static/core/failure-modes.md
   - static/core/output-format.md
@@ -78,6 +80,12 @@ axes:
 
 references:
   on_demand:
+    - condition: whole-section/full-paper polish where the dominant epistemic archetype changes what must be explained, retained, moved, or shown; mechanism/discovery, intervention/trial, observational, computational/ML, method/tool/software, resource, theory, qualitative, review/synthesis, or hybrid
+      path: ../nature-shared/core/paper-archetype-atlas.md
+    - condition: final manuscript-facing text, title, abstract, Methods/Results/Discussion, figure/table legend, table note, equation prose, or availability statement needs a last-mile filename/path/script/helper/CLI/repository/output-name scrub plus punctuation, spacing, bracket, range/minus/hyphen and target-aware copy-editing QA
+      path: ../nature-shared/core/manuscript-surface-qa.md
+    - condition: plain-text or Markdown manuscript surface is available for a conservative mechanical artifact-leakage and punctuation scan
+      path: ../nature-shared/scripts/audit_manuscript_surface.py
     - condition: prose is polished or concise but a reader may not understand a central idea, method, mechanism, result, equation, figure interpretation, or implication because rationale, intermediate reasoning, comparison meaning, assumptions, or boundaries are missing; use to add minimum sufficient explanation and avoid both under- and over-explanation
       path: ../nature-shared/core/explanatory-sufficiency.md
     - condition: prose feels generic, over-smoothed, formulaic, repetitive, connector-heavy, machine-like, weakly authorial, or difficult to follow sentence by sentence; use for sentence dependencies, information progression, identity chains, stance, functional syntax, anti-template repair, and cadence without detector evasion
@@ -86,6 +94,8 @@ references:
       path: ../nature-shared/core/author-voice-profile.md
     - condition: substantial rewrite/restructure where a few close comparable papers should be studied for rhetorical moves, evidence sequence, figure/data expectations, main-text-versus-SI allocation, or current field/venue conventions without copying their wording
       path: ../nature-shared/core/analogue-paper-calibration.md
+    - condition: deeper recent cross-archetype examples are useful to challenge a local style assumption
+      path: ../nature-shared/research/stratified-paper-reading-2025-2026.md
     - condition: any named non-Nature target journal, publisher/venue/discipline family, journal transfer, or exact cross-journal compliance request
       path: ../nature-shared/journal-formats/journal-resolution.md
     - condition: a non-Nature target needs a publisher/venue/discipline family fallback profile
