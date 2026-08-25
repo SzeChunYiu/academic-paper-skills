@@ -10,6 +10,7 @@
 - [自然学术写作：句子到句子的逻辑与表达指南](natural-scholarly-writing.md) — 用 dependency、given/new、identity chain、stance、functional syntax、connective、cadence 与 author voice 修 paragraph/sentence flow。
 - [解释充分性：论文到底讲清楚了吗？](explanatory-sufficiency.md) — adaptive elaboration、hidden-premise check、reader reconstruction，以及判断简洁文字是否把必要推理压缩掉了。
 - [论文到底应该写什么、哪些内容不该进正文，以及应该画什么图？](manuscript-content-and-figures.md) — content admission、repository-to-manuscript leakage、main/Methods/SI/availability allocation、figure roles 与 plot suggestions。
+- [深度论文校准：学习科学任务，而不是模仿顶刊表面](deep-paper-calibration.md) — paper archetypes、2025–2026 cross-archetype direct reading、broad corpus vs close analogue、可扩展 figure/caption inventory、最终 artifact-leakage scrub 与 punctuation QA。
 
 ## 架构
 
@@ -26,11 +27,13 @@
 1. Scientific validity 高于 journal prestige 和 surface style。
 2. Exact current journal/article-type/stage rule 高于 publisher-family assumption。
 3. Evidence completeness 由整个 publication package 承担，而不是把所有细节塞进 main text。
-4. Close analogue papers 是 structural/evidence priors，不是 wording/visual templates。
-5. Natural scholarly prose 面向 reader-facing reasoning quality，不做 detector evasion。
-6. Explanatory sufficiency 是自适应的 reader support：补缺失推理，不为字数本身扩写。
-7. Author voice 是 logic/clarity 修复后的 identity layer。
-8. Figure choice 来自 claims、estimands、data structure、uncertainty 与 alternative explanations。
-9. Repository/artifact documentation 除非具有科学功能，否则不应泄漏进 scientific narrative。
-10. Editor/reviewer engineering 指 decisionability 与 valid evidence，不是 manipulation。
-11. 写作/评审规则应来自 empirical corpora、direct reading、official guidance 与 regression tests。
+4. 先判断 paper 的 epistemic archetype，再借鉴 writing / figure convention。
+5. Broad corpus 用于学习 tendency，3–6 篇 close analogues 用于 manuscript-specific 深度推理；frequency 不是 quality。
+6. Natural scholarly prose 面向 reader-facing reasoning quality，不做 detector evasion。
+7. Explanatory sufficiency 是自适应 reader support：补缺失推理，不为字数本身扩写。
+8. Author voice 是 logic/clarity 修复后的 identity layer。
+9. Figure choice 来自 claims、estimands、data structure、uncertainty 与 alternative explanations。
+10. Repository/artifact documentation 除非具有科学功能，否则不应泄漏进 scientific narrative；最终所有 manuscript-facing surface 都要再做一次 leakage scrub。
+11. Punctuation 与 scientific typography 是 final copy-editing QA，不是任意 style decoration。
+12. Editor/reviewer engineering 指 decisionability 与 valid evidence，不是 manipulation。
+13. 写作/评审规则应来自 empirical corpora、stratified direct reading、official guidance、counterexamples 与 regression tests。
