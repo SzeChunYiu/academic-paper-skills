@@ -1,9 +1,9 @@
 name: nature-shared
-version: 2.0.0
+version: 2.1.0
 description: >
   Declarative manifest for shared academic-paper reference modules. This package
-  is not a standalone workflow; installed skills load exact shared core or
-  journal-format files on demand.
+  is not a standalone workflow; installed skills load exact shared core,
+  research, or journal-format files on demand.
 
 # Design note: never preload the whole shared package. Requesting skills should
 # load only the specific file listed below and then return to their own workflow,
@@ -13,6 +13,12 @@ always_load: []
 
 core:
   on_demand:
+    - condition: orchestrating a manuscript through repeated research, drafting, figures/statistics, independent review, editor synthesis, revision and targeted re-review until simulated publication readiness or a real blocker
+      path: core/academic-paper-iteration-pipeline.md
+    - condition: current paper type, study design, target venue, reporting norm, writing convention, figure grammar or review expectation is materially unfamiliar/uncertain and the session should research comparable papers/official guidance rather than force an existing template
+      path: core/unknown-paper-research-protocol.md
+    - condition: sentence-to-sentence or paragraph-to-paragraph logic is weak, prose reads like disconnected mini-summaries, evidence-to-inference or analysis-to-analysis handoffs are unclear, identity chains break, or reader-expectation/given-new/topic/stress principles should be applied without forcing a rigid template
+      path: core/sentence-logic-and-cohesion.md
     - condition: shared ethics, safety, authorship, disclosure, or non-invention guardrails are needed
       path: core/ethics.md
     - condition: human or animal ethics, clinical research, reporting summaries, image integrity, structures, chemistry, taxonomy, geological, archaeological, or palaeontological compliance is involved
@@ -45,6 +51,11 @@ core:
       path: core/main-text-discipline.md
     - condition: pre-submission editor/reviewer simulation, rejection-risk engineering, decision-proof construction, major-revision planning, or deciding whether to add evidence versus narrow/remove a claim
       path: core/editor-reviewer-decision-engine.md
+
+research:
+  on_demand:
+    - condition: recent stratified cross-archetype examples are needed to challenge a local paper/figure/writing assumption across mechanism, trial, computational, resource, qualitative, theory and review papers
+      path: research/stratified-paper-reading-2025-2026.md
 
 journal_formats:
   on_demand:
