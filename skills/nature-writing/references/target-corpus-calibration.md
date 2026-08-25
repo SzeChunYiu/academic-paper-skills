@@ -4,6 +4,23 @@ Use this protocol when the user asks to learn how a field/venue writes, what evi
 
 This is a **rhetorical and evidence-architecture learning** workflow, not a sentence-copying or chart-copying workflow.
 
+## Contents
+
+- [Core separation](#core-separation)
+- [Stratify before counting](#stratify-before-counting)
+- [Corpus design](#corpus-design)
+- [Pass A — scalable descriptive profiling](#pass-a--scalable-descriptive-profiling)
+- [Pass B — semantic rhetorical/evidence reading](#pass-b--semantic-rhetoricalevidence-reading)
+- [Pass C — close analogue reading](#pass-c--close-analogue-reading)
+- [Whole-paper logic reduction](#whole-paper-logic-reduction)
+- [Study transitions between analyses](#study-transitions-between-analyses)
+- [Study claim calibration](#study-claim-calibration)
+- [Separate invariant from variable](#separate-invariant-from-variable)
+- [Profile output](#profile-output)
+- [How to use the profile](#how-to-use-the-profile)
+- [Anti-copying and anti-overfitting](#anti-copying-and-anti-overfitting)
+- [Update protocol](#update-protocol)
+
 ## Core separation
 
 Use three scales for different purposes:
@@ -344,6 +361,8 @@ Never:
 - force a figure when a qualitative/theory paper does not need one.
 
 Learn **moves, dependencies, explanation depth, evidence roles, information structure and claim calibration**, not surface imitation.
+
+For backward-compatible writing-contract language: Learn **moves, relations, sequencing, information structure, and claim calibration**, not wording.
 
 ## Update protocol
 
