@@ -43,8 +43,12 @@ Introduce the technical challenge, then use one to two sentences to present the 
 ### Expert Notes
 
 1. Discuss previous work around the technical challenge that we actually solve.
-2. For the contribution sentence(s), usually mention the technical term/name only; do not explain every detailed step.
-3. The technical term must be easy to understand; readers should not feel a jump.
+2. Use a technical name alone only when it is conventional and immediately
+   interpretable for the intended reader. Otherwise describe the scientific
+   object/role first and defer or omit the label. Do not explain implementation
+   detail, but do supply the identity needed to prevent a reading jump.
+3. Expand or define every retained non-universal abbreviation, coined term,
+   internal label, and formal symbol locally in the standalone abstract.
 4. This ability is very important for writing a good abstract.
 
 Version 1 local cite:
@@ -68,8 +72,11 @@ Introduce the technical challenge, then use one to two sentences to present the 
 
 1. Discuss previous work around the technical challenge that we actually solve.
 2. Introduce the insight in one clear sentence.
-3. For the implementation sentence(s), usually mention the technical term/name only; do not explain every detailed step.
-4. The technical term must be easy to understand; do not create a jump in reading.
+3. Use a technical name alone only when it is conventional and immediately
+   interpretable. Otherwise describe the scientific object/role first and defer
+   or omit the label. Omit implementation detail, not reader-facing identity.
+4. Define retained abbreviations, paper-specific labels, and symbols locally;
+   never guess an unknown expansion.
 5. This ability is very important for writing a good abstract.
 
 Version 2 local cite:
@@ -111,3 +118,9 @@ Version 3 local cite:
 2. Are all major claims supported by experiments?
 3. Are technical names self-contained and readable?
 4. Is there any sentence that mixes too many messages?
+5. Is the abstract self-contained even when read without the body?
+6. Does every internal/coined label have a necessary reader-facing identity, or
+   should it be replaced/removed?
+7. Are displayed equations permitted by the exact target and necessary for
+   comprehension? For an unknown target, prefer verbal or inline mathematics.
+8. Is the notation load proportional to the central result?

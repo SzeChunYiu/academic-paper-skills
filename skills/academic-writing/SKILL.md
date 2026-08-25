@@ -103,7 +103,12 @@ question / unresolved tension
 -> meaning
 ```
 
-For each headline claim build a claim/evidence/boundary record.
+For each headline claim build a claim/evidence/boundary record. For a full
+manuscript, formal/theory section, or readiness decision, also load
+`../nature-shared/core/atomic-claim-verification.md` and inventory every atomic
+definition, assertion, proof dependency, number, source claim, availability
+statement, and cross-section restatement. A pointer is not verification; check
+that the located warrant entails the proposition at its stated scope.
 
 Do not manufacture a `gap` merely to make the paper sound important.
 
@@ -284,7 +289,8 @@ More experiments are not automatically the right repair.
 
 Before returning manuscript-facing text:
 
-1. claim/evidence consistency;
+1. atomic claim/evidence/proof/source verification for full, formal, or
+   submission-ready scope;
 2. explanatory sufficiency;
 3. sentence/paragraph logic;
 4. terminology/number/unit consistency;
@@ -293,7 +299,20 @@ Before returning manuscript-facing text:
 7. main-versus-support allocation;
 8. artifact-leakage scrub;
 9. punctuation/spacing/bracket/range/minus/hyphen/unit QA;
-10. exact target compliance when known.
+10. locally intelligible standalone surfaces and target-resolved abstract
+    displays;
+11. zero unexplained private terms/symbols, unresolved surface-review items, or
+    release placeholders in manuscript-facing text;
+12. every-page rendered-artifact, metadata, accessibility, and final-page/spill
+    review when a PDF or equivalent final artifact exists;
+13. exact target compliance when known.
+
+Do not describe a full manuscript as publication/submission/public-posting ready
+while any in-scope atomic item is `SUPPORTED_INTERNAL`, `UNRESOLVED`,
+`CONTRADICTED`, `BLOCKED`, or `NOT_ASSESSABLE`.
+Continue useful draft work, but return the corresponding blocked state and exact
+resolution test. A prose improvement cannot close a mathematical contradiction
+or missing proof.
 
 When plain-text/Markdown is available, the shared conservative surface scanner may flag high-confidence mechanical issues. Contextual review still decides the repair.
 

@@ -29,6 +29,10 @@ The goal is not to predict or manipulate acceptance. The goal is to make the sci
 - Keep universal scientific validity separate from target-specific priority, significance, readership, novelty, advancement, clinical impact or other editorial criteria.
 - Do not use one `novelty + rigor + impact` formula across journals.
 - Build a **decision proof** for each headline claim: claim, importance under target criteria, decisive evidence, strongest alternative explanation, boundary, and resolution test.
+- For full manuscripts and formal/theory claims, load
+  `../nature-shared/core/atomic-claim-verification.md`. Each blind reviewer builds
+  or coverage-checks the atomic inventory independently; do not place a shared
+  pre-adjudicated ledger or concern list in the reviewer packet.
 - Simulate editor triage before reviewers, using only the manuscript and verified target criteria. Do not contaminate reviewers with triage conclusions.
 - Return exactly `3 mutually blind reviewer reports + 1 post-review synthesis` by default, while also adding the separate editorial-triage and author-facing decision-engineering layers. The user may request another reviewer count.
 - Give every reviewer the same immutable manuscript/source packet, target criteria and report skeleton, plus only that reviewer's preassigned emphasis.
@@ -143,6 +147,9 @@ Default emphases:
 Modify these lenses for the article type when needed without inventing biographies.
 
 Each reviewer independently builds its own concern ledger and output.
+For full/formal scope, each reviewer also checks atomic coverage, immediate
+definition consequences, proof dependencies, counterexamples, source entailment,
+and fail-closed statuses before reports are frozen.
 
 ### 5. Construct concerns
 
@@ -276,6 +283,8 @@ Peer-review research on author-suggested reviewers and reviewer citation request
 - `references/role-boundaries.md` — editor/reviewer/author-facing separation.
 - `references/qa-checklist.md` — final release gate.
 - `../nature-writing/references/paper-review.md` — full manuscript claim/argument audit.
+- `../nature-shared/core/atomic-claim-verification.md` — coverage-complete,
+  fail-closed scientific-content verification.
 - `../nature-shared/core/consistency-sweep.md` — internal manuscript contradiction scan.
 
 ## Source hierarchy

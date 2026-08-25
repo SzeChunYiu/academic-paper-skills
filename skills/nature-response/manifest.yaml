@@ -1,5 +1,5 @@
 name: nature-response
-version: 1.8.0
+version: 1.9.0
 description: >
   Declarative manifest for reviewer-response and revision-cover-letter workflows.
   The response lifecycle now separates editor decision conditions, technically
@@ -18,6 +18,8 @@ always_load:
 
 references:
   on_demand:
+    - condition: a revision changes, adds, narrows, removes, or claims closure of manuscript science, especially a theorem/proof, number, source, availability statement, or decision-relevant assertion
+      path: ../nature-shared/core/atomic-claim-verification.md
     - condition: a real editor/reviewer decision is being triaged, major/minor revision strategy is being chosen, reviewer requests need must-address versus optional classification, or deciding whether to add evidence versus reanalyse/clarify/narrow/remove a claim
       path: ../nature-shared/core/editor-reviewer-decision-engine.md
     - condition: exact target journal/publication objective matters to the revision strategy or a reviewer/editor request appears inconsistent with the target's publication model

@@ -4,6 +4,12 @@
 
 Before returning any manuscript-facing `Draft:` text, run the final surface contract in `../../../nature-shared/core/manuscript-surface-qa.md`.
 
+For a full manuscript, formal/theory section, public-posting/submission-ready
+claim, or decision-relevant rewrite, first run
+`../../../nature-shared/core/atomic-claim-verification.md`. Do not label the work
+verification-complete or ready while any in-scope assertion is merely internally
+supported, unresolved, contradicted, blocked, or not assessable.
+
 This applies to:
 
 - title/abstract/body prose;
@@ -57,6 +63,9 @@ Do not deliver prose with a known high-confidence leakage or punctuation defect 
 3. `Assumptions or missing inputs:` — only material issues; do not pad with style nits.
 4. `Claim-evidence map:` — for major claims, in the form:
    `Claim: ... | Evidence: ... | Status: supported / needs evidence / inferred`
+   For full/formal/readiness work, summarize the atomic verification counts and
+   list every fail-closed item instead of presenting a major-claim sample as
+   complete coverage.
 5. `Why this structure:` — `2-4` short bullets on the structural choices made.
 6. `To redirect me:` — one line inviting targeted feedback, e.g. "Name the paragraph or claim that is off and I will revise only that, keeping the rest." This sets up the targeted revision loop instead of a full rewrite.
 
@@ -80,7 +89,11 @@ For substantial full-paper planning/rewrite, maintain internally or expose when 
 
 Return the full allocation, archetype, explanation and claim-repetition tables only when the manuscript is being comprehensively restructured or the user asks for the audit trail.
 
-If essential evidence or boundary is missing, do not invent. Write a placeholder such as `[Evidence needed: comparator group accuracy on test set X]` and list it under `Assumptions or missing inputs:`.
+If essential evidence or a boundary is missing, do not invent it. Put a
+placeholder such as `[Evidence needed: comparator group accuracy on test set X]`
+only in the author-facing `Assumptions or missing inputs:` audit note. Do not
+leave it inside final manuscript-facing `Draft:` prose, and never label that
+scope ready until it is resolved, qualified, removed, or explicitly blocked.
 
 For `task=submission-package`, replace the default manuscript format with:
 

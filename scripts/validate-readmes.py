@@ -10,6 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SKILLS_DIR = ROOT / "skills"
 TOP_READMES = (ROOT / "README.md", ROOT / "README_EN.md")
+SUPPORT_ONLY = {"nature-shared", "nature-writing"}
 
 
 def fail(message: str) -> None:
@@ -29,7 +30,13 @@ def count_skill_index_rows(text: str) -> int:
         section = text.split("## 6.", 1)[1].split("## 7.", 1)[0]
     except IndexError:
         fail("README is missing the section 6 skill index or section 7 boundary")
-    return len(re.findall(r"^\| \[`nature-[^`]+`\]\(", section, flags=re.MULTILINE))
+    return len(
+        re.findall(
+            r"^\| \[`(?:academic|nature)-[^`]+`\]\(skills/[^)]+/README(?:_EN)?\.md\) \|",
+            section,
+            flags=re.MULTILINE,
+        )
+    )
 
 
 def validate_top_readmes(triggerable_skill_count: int) -> None:
@@ -73,7 +80,7 @@ def main() -> int:
         fail("skills/ directory not found")
 
     skill_dirs = sorted(path for path in SKILLS_DIR.iterdir() if path.is_dir())
-    triggerable_skill_dirs = [path for path in skill_dirs if path.name != "nature-shared"]
+    triggerable_skill_dirs = [path for path in skill_dirs if path.name not in SUPPORT_ONLY]
     validate_top_readmes(len(triggerable_skill_dirs))
     validate_skill_readmes(skill_dirs)
     print("README validation passed.")

@@ -48,6 +48,21 @@ The loop is **editor-controlled, concern-led, and stateful**.
 
 Maintain these ledgers across the whole session.
 
+### Atomic scientific-content ledger
+
+Use `atomic-claim-verification.md` for the schema and release statuses. Inventory
+every in-scope definition, atomic scientific proposition, formal dependency,
+number/statistical statement, source claim, figure/table interpretation,
+availability/compliance statement, and cross-section restatement.
+
+Preserve negation, qualifiers, comparators, quantifiers, conditions, uncertainty,
+and population/domain while splitting claims. A citation, proof label, or table
+pointer is not verification unless the located warrant entails the proposition.
+
+Non-closing/fail-closed statuses are `SUPPORTED_INTERNAL`, `UNRESOLVED`,
+`CONTRADICTED`, `BLOCKED`, and scoped `NOT_ASSESSABLE`. They remain visible
+across rounds.
+
 ### Manuscript state
 
 - `manuscript_version` — monotonically increasing round/version ID;
@@ -258,6 +273,12 @@ Build:
 
 Then build decision proofs for headline claims.
 
+Build the full atomic inventory before treating the headline decision proofs as
+complete. For formal work, normalize definitions/quantifiers, derive immediate
+consequences, check every proof dependency, and search boundary/degenerate cases
+and counterexamples. Reconcile definition -> theorem -> specialization and
+upper/lower proof locators for every `sharp`, `exact`, or `intrinsic` claim.
+
 Use `manuscript-content-selection.md` and `explanatory-sufficiency.md` so the paper is both selective and rich enough to understand.
 
 ## Content richness gate
@@ -330,6 +351,10 @@ Do not optimize for AI detection.
 Before each review round, run:
 
 - claim/evidence consistency;
+- atomic inventory coverage, warrant entailment, definition/proof dependencies,
+  and contradiction checks;
+- an independent coverage pass by a reviewer who did not inherit the author's
+  row boundaries or pre-adjudicated statuses;
 - statistics/reporting checks;
 - figure adequacy and legends;
 - explanatory sufficiency;
@@ -451,6 +476,7 @@ Before re-review:
 
 - update manuscript version;
 - update claim/evidence/figure ledgers;
+- update every affected atomic row and dependency;
 - record exact concern closures;
 - verify the response accurately describes what changed;
 - run consistency and surface QA again.
@@ -522,6 +548,8 @@ For each must-address concern, the editor asks:
 - is the central scientific case now established?
 - are target criteria now satisfied?
 - is remaining work only non-essential enrichment or ordinary production copy-editing?
+- are all in-scope atomic assertions in allowed release states, with no
+  unresolved/contradicted/blocked manuscript assertion hidden outside headline claims?
 
 ## Successful terminal state
 
@@ -535,6 +563,11 @@ only when all are true:
 - no unresolved publication-criteria blocker;
 - no unresolved technical blocker for a headline claim;
 - every headline claim is established or appropriately narrowed/removed;
+- every in-scope atomic assertion has an allowed release status;
+- `SUPPORTED_INTERNAL + UNRESOLVED + CONTRADICTED + BLOCKED = 0` for manuscript
+  assertions under the verification-complete readiness scope;
+- no in-scope item is `NOT_ASSESSABLE`;
+- every headline/formal claim passed an independent atomic coverage check;
 - key uncertainty/boundaries are visible;
 - figure/evidence architecture is sufficient;
 - methods/reporting/statistics are adequate for the claim;
@@ -542,6 +575,12 @@ only when all are true:
 - manuscript sentence/paragraph logic is coherent;
 - citations/prior work are materially fair/verified where needed;
 - main/support allocation is not hiding decision-changing evidence;
+- every standalone surface is locally intelligible and every abstract display
+  has a target-resolved disposition;
+- no unexplained private term/symbol, unresolved surface-review item, or release
+  placeholder remains in manuscript-facing text;
+- rendered artifacts, when present, pass every-page layout, metadata,
+  accessibility, and final-page/spill review;
 - final manuscript surfaces pass artifact-leakage and punctuation QA;
 - remaining reviewer requests are editor-classified optional enrichment or production-level copyedit.
 

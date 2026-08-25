@@ -17,6 +17,7 @@ always_load:
 | `core/paper-type-taxonomy.md` | `nature-polishing`, `nature-writing` |
 | `core/ethics.md` | `nature-polishing`, `nature-writing` |
 | `core/research-compliance.md` | `nature-writing` and skills needing Nature Portfolio specialist compliance checks |
+| `core/atomic-claim-verification.md` | `academic-writing`, `academic-paper-pipeline`, `nature-writing`, `nature-reviewer`, `nature-polishing`, `nature-response` |
 | `core/terminology-ledger.md` | `nature-polishing`, `nature-writing`, `nature-reader`, `nature-paper2ppt` |
 | `core/consistency-sweep.md` | `nature-polishing`, `nature-reviewer`, `nature-response`, `nature-statistics` |
 | `core/main-text-discipline.md` | `nature-writing`, `nature-polishing`, `nature-response` |
@@ -24,7 +25,9 @@ always_load:
 | `journal-formats/nature.md` | `nature-writing` and skills needing exact flagship `Nature Article` submission rules |
 | `journal-formats/nature-machine-intelligence.md` | Writing, polishing, figure, data, and statistics workflows for NMI submissions |
 
-`scripts/check_consistency.py` provides a mechanical first pass for terminology variants, equal values reported at different precision, and equivalent lengths expressed in different units. Its output is a set of warnings for contextual review, not automatic edits.
+`core/atomic-claim-verification.md` is the fail-closed scientific-content contract. Full-manuscript, formal-claim, and readiness workflows must inventory every atomic content item, verify that its cited warrant actually entails it, and block verification-complete readiness while any item is merely internally supported, unresolved, contradicted, blocked, or unassessable.
+
+`scripts/check_consistency.py` provides a mechanical first pass for terminology variants, equal values reported at different precision, and equivalent lengths expressed in different units. `scripts/audit_manuscript_surface.py` adds target-aware abstract, terminology, placeholder, and rendered-surface diagnostics. Script output is triage evidence for contextual review, never a substitute for the atomic verification ledger.
 
 ## When to Put Files Here
 

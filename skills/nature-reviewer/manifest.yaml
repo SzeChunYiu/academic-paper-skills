@@ -1,5 +1,5 @@
 name: nature-reviewer
-version: 2.4.0
+version: 2.5.0
 description: >
   Declarative manifest for journal-aware pre-submission editor/reviewer
   simulation. The legacy skill name remains for compatibility; review criteria
@@ -16,6 +16,8 @@ always_load:
 
 references:
   on_demand:
+    - condition: full manuscript or theory/proof claim needs a coverage-complete inventory of atomic assertions, definitions, proof dependencies, numerical/source/availability claims, contradictions, and fail-closed release statuses; each blind reviewer must perform this independently rather than receiving a shared adjudicated ledger
+      path: ../nature-shared/core/atomic-claim-verification.md
     - condition: reviewer/editor should resolve the dominant paper archetype and ask whether evidence, explanation depth and main-figure roles fit a mechanism/discovery, trial/intervention, observational, computational/ML, method/tool/software, resource/dataset, theory/proof, qualitative, review/synthesis or hybrid scientific promise
       path: ../nature-shared/core/paper-archetype-atlas.md
     - condition: reviewer/editor should inspect recent cross-archetype counterexamples before treating one field/journal pattern as universal

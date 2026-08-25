@@ -29,6 +29,7 @@ class AcademicWritingCanonicalTests(unittest.TestCase):
             "paper-archetype-atlas.md",
             "sentence-logic-and-cohesion.md",
             "explanatory-sufficiency.md",
+            "atomic-claim-verification.md",
             "manuscript-content-selection.md",
             "figure-evidence-planning.md",
             "manuscript-surface-qa.md",
@@ -41,6 +42,15 @@ class AcademicWritingCanonicalTests(unittest.TestCase):
         self.assertIn("unknown-paper-research-protocol.md", manifest)
         self.assertIn("Self-research when uncertain", skill)
         self.assertIn("counterexamples", skill)
+
+    def test_readiness_is_fail_closed_on_atomic_content(self) -> None:
+        manifest = read(SKILL / "manifest.yaml")
+        skill = read(SKILL / "SKILL.md")
+        contract = read(SKILLS / "nature-shared" / "core" / "atomic-claim-verification.md")
+        self.assertIn("atomic-claim-verification.md", manifest)
+        for marker in ("SUPPORTED_INTERNAL", "UNRESOLVED", "CONTRADICTED", "BLOCKED", "NOT_ASSESSABLE"):
+            self.assertIn(marker, skill)
+            self.assertIn(marker, contract)
 
     def test_sentence_logic_and_content_richness_are_explicit(self) -> None:
         skill = read(SKILL / "SKILL.md")
