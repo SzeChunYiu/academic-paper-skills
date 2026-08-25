@@ -1,6 +1,15 @@
 ---
 name: academic-paper-pipeline
-description: Orchestrate an academic manuscript through repeated research, evidence/claim planning, academic writing, statistics, figure/diagram design, independent reviewer simulation, editor synthesis, revision, and targeted re-review until a simulated editor judges it publication-ready for the resolved target or a real blocker remains. Use when the user wants an end-to-end paper workflow, repeated review/revision, publishability hardening, top-tier submission preparation, reviewer-driven iteration, or a self-researching fallback for paper types/venues not already covered. The pipeline is journal-agnostic: Nature is only one optional target adapter. It never fabricates results or treats reviewer votes as acceptance.
+description: >-
+  Orchestrate an academic manuscript through repeated research, evidence/claim
+  planning, academic writing, statistics, figure/diagram design, independent
+  reviewer simulation, editor synthesis, revision, and targeted re-review until
+  a simulated editor judges it publication-ready for the resolved target or a
+  real blocker remains. Use for end-to-end paper workflows, repeated review and
+  revision, publishability hardening, reviewer-driven iteration, or self-research
+  when a paper type or venue is not already covered. The pipeline is journal-
+  agnostic; Nature is only one optional target adapter. It never fabricates
+  results or treats reviewer votes as acceptance.
 ---
 
 # Academic Paper Pipeline
