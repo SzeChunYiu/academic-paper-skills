@@ -26,10 +26,10 @@ Table 1 | Participant characteristics.
         path = Path("paper.md")
         records = mod.extract_displays(path, text)
         self.assertEqual(len(records), 4)
-        roles = {r.number: set(r.candidate_roles) for r in records}
-        self.assertIn("orientation_workflow", roles["1"])
-        self.assertIn("generalization_ood", roles["2"])
-        self.assertIn("failure_limitation", roles["3"])
+        roles = {(r.kind, r.number): set(r.candidate_roles) for r in records}
+        self.assertIn("orientation_workflow", roles[("figure", "1")])
+        self.assertIn("generalization_ood", roles[("figure", "2")])
+        self.assertIn("failure_limitation", roles[("figure", "3")])
         self.assertEqual(records[3].kind, "table")
 
     def test_aggregate_has_explicit_non_scoring_warning(self) -> None:
@@ -37,9 +37,11 @@ Table 1 | Participant characteristics.
         display = mod.DisplayRecord("x.md", "figure", "1", "Result", "Results", ("unclassified",))
         aggregate = mod.aggregate([summary], [display])
         warning = aggregate["methodological_warning"]
+        self.assertIn("keyword heuristics", warning)
         self.assertIn("not semantic ground truth", warning)
-        self.assertIn("not semantic ground truth, writing-quality scores, acceptance predictors", warning)
-        self.assertIn("not instructions to copy frequent plot types", warning)
+        self.assertIn("writing-quality scores", warning)
+        self.assertIn("acceptance predictors", warning)
+        self.assertIn("instructions to copy frequent plot types", warning)
 
     def test_iter_paths_recurses_only_text_like_files(self) -> None:
         with tempfile.TemporaryDirectory() as td:
