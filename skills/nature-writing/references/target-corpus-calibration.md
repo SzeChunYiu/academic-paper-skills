@@ -1,315 +1,361 @@
 # Target-corpus calibration
 
-Use this protocol when the user asks to write for a named journal/venue, emulate current papers in a field, diagnose why a draft does not feel like the target literature, or build/update a local writing profile.
+Use this protocol when the user asks to learn how a field/venue writes, what evidence/figures comparable papers show, why a manuscript does not resemble the relevant literature, or to build/update a maintained paper corpus.
 
-This is a **rhetorical learning** workflow, not a sentence-copying workflow.
+This is a **rhetorical and evidence-architecture learning** workflow, not a sentence-copying or chart-copying workflow.
 
-## Contents
+## Core separation
 
-- [When to calibrate](#when-to-calibrate)
-- [Corpus design](#corpus-design)
-- [Two-pass corpus analysis](#two-pass-corpus-analysis)
-- [Annotation schema](#annotation-schema)
-- [Analysis procedure](#analysis-procedure)
-- [Profile output](#profile-output)
-- [How to use the profile](#how-to-use-the-profile)
-- [Anti-copying and overfitting rules](#anti-copying-and-overfitting-rules)
-- [Update protocol](#update-protocol)
+Use three scales for different purposes:
 
-## When to calibrate
+1. **Broad stratified corpus** — dozens/hundreds of papers for descriptive tendencies.
+2. **Quick target profile** — **8–15 comparable recent papers** when a fast venue/article-type profile is needed.
+3. **Close analogues** — 3–6 nearest neighbors for deep claim/evidence/explanation/figure reasoning.
 
-Calibrate when:
+For a maintained repository profile, aim for **30–100 papers** and stratify them before generalizing. For research-grade studies, use larger reproducible samples with explicit inclusion/exclusion.
 
-- the target journal or venue is explicit and writing style/structure matters;
-- the field has a publication ecology not well represented by the static references;
-- the article type is unusual (registered report, resource, benchmark, brief report, perspective, qualitative study, theorem paper, etc.);
-- the user asks for current target-journal patterns;
-- local guidance conflicts with recent published practice;
-- a draft is scientifically correct but rhetorically unlike comparable papers.
+Frequency is not quality. Published frequency is not an acceptance rule.
 
-Do not calibrate merely to make a paper sound more prestigious.
+## Stratify before counting
+
+The most important improvement over a journal-only corpus is **paper-archetype stratification**.
+
+Before aggregating, record:
+
+- exact journal/venue;
+- article/content type;
+- year;
+- discipline/subfield;
+- study design;
+- dominant paper archetype from `../nature-shared/core/paper-archetype-atlas.md`;
+- secondary archetype(s);
+- evidence modality;
+- target reader/publication model.
+
+Do not average a randomized trial, a benchmark, a qualitative interview study and a resource paper into one `journal style` merely because they share a venue/publisher.
 
 ## Corpus design
 
-### Minimum useful sample
+Prefer matching, in order:
 
-For a quick working profile, inspect **8–15 comparable recent papers** when available.
+1. scientific/epistemic archetype and contribution promise;
+2. study design/evidence type;
+3. article/content type;
+4. discipline/subfield/audience;
+5. exact journal/venue when useful;
+6. recent publication period.
 
-For a maintained repository profile, aim for **30–100 papers** and stratify them before generalizing.
+Comparability outranks prestige.
 
-For a research-grade corpus study, use a larger reproducible sample and document selection/exclusion in enough detail to repeat it.
+Retain counterexamples deliberately. A rigorous outlier can reveal that a supposed `rule` is actually an archetype, field, author or article-type preference.
 
-### Match on the dimensions that matter
+## Pass A — scalable descriptive profiling
 
-Prefer papers matching, in order:
+When dozens or hundreds of papers have been extracted to `.md`, `.markdown`, or `.txt`, use two complementary tools.
 
-1. exact journal/venue;
-2. exact article/content type;
-3. recent publication period;
-4. research paradigm/study design;
-5. discipline/subfield;
-6. contribution type;
-7. comparable evidence structure.
-
-A 2026 clinical cohort article and a 2026 methods resource in the same journal may be poorer rhetorical comparators than two cohort articles in adjacent journals.
-
-### Include counterexamples
-
-Do not select only papers that fit the first pattern noticed. Retain legitimate structural outliers and ask what feature of the study explains the difference.
-
-## Two-pass corpus analysis
-
-Large corpora and close reading answer different questions. Use both without confusing them.
-
-### Pass A — scalable descriptive profiling
-
-When dozens or hundreds of papers have been extracted to `.md`, `.markdown`, or `.txt`, run:
+### A1. Text/rhetoric surface inventory
 
 ```bash
 python scripts/corpus_structure_stats.py CORPUS_DIR --pretty --output corpus-structure.json
 ```
 
-Use this pass for cheap descriptive signals such as:
+Use for descriptive signals such as:
 
-- section/heading presence and order;
-- paragraph and sentence length distributions;
+- section/heading presence/order;
+- paragraph/sentence length distributions;
 - figure/table call density;
 - selected contrast/consequence/example markers;
 - selected hedge/booster/self-reference/contribution signals.
 
-These measurements help identify strata and candidate differences worth reading closely. They are **not writing-quality scores**, do not identify rhetorical moves reliably, and must not be used to conclude that a frequent connective, sentence length, or assertive verb is better writing.
+These are not writing-quality scores and do not identify rhetorical moves reliably.
 
-### Pass B — semantic rhetorical reading
+### A2. Figure/caption/evidence-role inventory
 
-Read complete papers or complete rhetorical units to recover what the surface statistics cannot:
+```bash
+python scripts/corpus_figure_inventory.py CORPUS_DIR \
+  --json corpus-figures.json \
+  --csv corpus-displays.csv
+```
 
-- why the paper creates a particular research need;
-- why evidence block B follows A;
-- what a paragraph's nucleus is;
-- which sentences are evidence versus interpretation;
-- how alternatives/counterevidence are handled;
-- whether a strong verb is actually warranted;
-- why a structural outlier makes sense for its study design.
+Use for:
 
-When resources are limited, prioritize semantic reading over collecting more superficial counts. A smaller well-stratified corpus with careful move/evidence annotation is more useful than a huge unstratified frequency table.
+- figure/table caption counts;
+- in-text display calls;
+- section context of captions;
+- caption text for later semantic annotation;
+- transparent **candidate** evidence roles such as orientation/workflow, primary finding, mechanism, validation, OOD/generalization, robustness, failure/limitation, heterogeneity, calibration/diagnostic, resource coverage, theory/model and qualitative synthesis.
 
-## Annotation schema
+The role labels are keyword heuristics for triage. They are **not semantic ground truth, writing-quality scores, acceptance predictors, or instructions to copy frequent plot types**.
 
-For each paper, record at least:
+### A3. Stratified descriptive summaries
+
+Aggregate only within meaningful strata, for example:
+
+`computational benchmark × biology × 2024–2026`
+
+rather than:
+
+`all Nature Portfolio papers`.
+
+Useful descriptive measures include:
+
+- median/quantiles of main-figure count;
+- table usage;
+- figure-call location;
+- caption length;
+- candidate figure roles;
+- location of validation/failure/heterogeneity evidence;
+- main-versus-support patterns when support text is available;
+- section/move/sentence statistics.
+
+Do not turn medians into mandatory budgets.
+
+## Pass B — semantic rhetorical/evidence reading
+
+Surface statistics cannot explain **why** a paper works.
+
+Read complete papers or complete rhetorical/evidence units to recover:
+
+- question/tension and bounded contribution;
+- why evidence block B becomes necessary after A;
+- paragraph nucleus and satellites;
+- observation versus interpretation;
+- alternatives/counterevidence;
+- hidden assumptions;
+- explanation depth;
+- claim calibration;
+- why a figure is necessary;
+- what reader question each figure resolves;
+- what is placed in main versus support;
+- why a structural outlier is sensible for its study design.
+
+When resources are limited, prioritize semantic reading over collecting more superficial counts.
+
+## Pass C — close analogue reading
+
+For 3–6 nearest-neighbor papers, annotate more deeply:
 
 ### Paper-level
 
-- journal/venue, year, article type;
-- discipline/subfield;
-- research paradigm / study design;
-- contribution type;
-- section/headings structure;
+- dominant/secondary archetype;
 - central question/tension;
 - central answer/contribution;
 - evidence sequence;
-- stated boundaries/limitations.
+- decision-changing boundaries/limitations;
+- main-display sequence and roles;
+- support-material roles.
 
 ### Section-level
 
 For each major section:
 
 - reader question;
-- rhetorical moves and order;
-- recurrent moves;
-- section opening strategy;
-- section closing/handoff strategy;
-- location of interpretation and limitations.
+- rhetorical moves/order;
+- opening/handoff strategy;
+- location of interpretation/limitations;
+- explanation-depth hotspots.
 
 ### Paragraph-level
 
-For a representative sample of paragraphs:
-
-- paragraph nucleus;
-- supporting submoves: evidence, explanation, comparison, qualification, counterargument, implication, bridge;
-- topic-sentence strategy;
-- figure/table/source integration;
-- whether the paragraph leads with question, method, observation, claim, or context.
+- nucleus;
+- evidence/explanation/comparison/qualification/counterargument/implication/bridge;
+- figure/table integration;
+- local reader handoff.
 
 ### Sentence-level
 
-Sample sentences by rhetorical function rather than at random. Record:
+Sample by rhetorical function, not randomly:
 
-- sentence function/move;
-- given-new progression;
-- active/passive choice and agent visibility;
+- sentence function;
+- dependency and given/new progression;
+- identity/reference chains;
+- active/passive and agency;
 - tense/aspect;
 - hedge/booster strength;
-- information density / phrasal versus clausal realization;
-- connective or lexical cohesion strategy;
-- citation placement.
+- clausal versus phrasal realization;
+- citation integration.
 
-Do **not** retain reusable full-sentence templates from copyrighted papers. Abstract the pattern.
+### Figure-level
 
-## Analysis procedure
+For each main/support display:
 
-### 1. Separate invariant from variable
+- figure role;
+- reader question;
+- claim licensed;
+- statistical/scientific unit;
+- estimand/quantity;
+- comparator/control;
+- raw-data visibility;
+- uncertainty;
+- alternative explanation exposed;
+- plot/image/table/schematic family;
+- why this figure follows the previous evidence block;
+- why it is main/support.
 
-Classify each observed pattern as:
+Do **not** retain reusable full-sentence templates or distinctive figure layouts from copyrighted papers. Abstract the function.
 
-- **argument/evidence invariant** — supported by logic/reporting needs across fields;
-- **discipline tendency** — common in this research community;
-- **journal/content-type tendency** — local rhetorical convention;
-- **house/submission rule** — verify against current official instructions;
-- **author-level variation** — do not generalize.
+## Whole-paper logic reduction
 
-### 2. Count, but do not worship frequency
+For every close paper, reduce the manuscript to:
 
-Useful descriptive measures include:
+```text
+question/tension
+-> response/contribution
+-> evidence progression
+-> interpretation
+-> boundary
+-> meaning
+```
 
-- section presence/order;
-- paragraph counts and median paragraph length by section;
-- move prevalence and recurrence after semantic annotation;
-- result/figure call placement;
-- contribution statement location;
-- limitation location;
-- title forms;
-- abstract move coverage/order;
-- first-person/passive tendency;
-- selected transition/stance markers.
+Then separately reduce the main visual argument:
 
-A frequent pattern is a prior, not a command. Ask what communicative problem it solves.
+```text
+reader uncertainty 1 -> figure/evidence role 1
+-> next uncertainty -> figure/evidence role 2
+-> ... -> bounded conclusion
+```
 
-### 3. Trace whole-paper logic
+This lets us compare papers with different visible structures without assuming one skeleton.
 
-For every paper, reduce the manuscript to:
+## Study transitions between analyses
 
-`question/tension -> response -> evidence progression -> interpretation -> boundary -> meaning`
+The most reusable lesson is often the dependency, not the wording or chart.
 
-Then compare **why** papers with similar questions choose different structures.
+Examples:
 
-### 4. Study transitions between analyses
+- baseline failure -> limitation analysis;
+- discovery -> mechanism question;
+- mechanism claim -> discriminating perturbation/control;
+- initial benchmark -> OOD validation;
+- inconsistent effect -> heterogeneity analysis;
+- probability claim -> calibration diagnostic;
+- theorem -> corollary/numerical illustration;
+- qualitative theme -> contrasting/negative case;
+- resource construction -> quality/coverage validation.
 
-The most reusable writing insight is often not a phrase but the logic connecting evidence blocks:
+Record `evidence block A -> reason for block B`.
 
-- result exposes a mechanism question;
-- baseline failure motivates an ablation;
-- discovery motivates external validation;
-- inconsistency motivates subgroup analysis;
-- theorem creates a corollary/application;
-- qualitative theme creates a contrast or negative case;
-- limitation motivates a sensitivity analysis.
+## Study claim calibration
 
-Record these `evidence block A -> reason for block B` links.
-
-### 5. Study claim calibration
-
-Compare each strong claim with the evidence immediately supporting it. Record:
+For each major claim record:
 
 - claim type;
 - evidence type;
 - uncertainty/boundary;
+- alternative interpretation;
 - hedge/booster;
-- whether causality is warranted;
-- how counterevidence is handled.
+- whether causal/generalization language is warranted;
+- figure/table/source supporting it.
 
-This is more useful than counting words such as `clearly` or `significantly` in isolation.
+This is more useful than counting `clearly`, `significantly` or `therefore` in isolation.
 
-### 6. Analyze outliers before deleting them
+## Separate invariant from variable
 
-When a paper violates the dominant pattern, ask whether the difference is explained by article type, study design, evidence architecture, audience, or journal mechanics. Legitimate outliers are often what prevent a local convention from being promoted into a bad universal rule.
+Classify observed patterns as:
+
+- **scientific/evidence dependency** — justified by the claim/design;
+- **archetype tendency** — common for this epistemic paper class;
+- **discipline tendency**;
+- **journal/content-type tendency**;
+- **house/submission rule** — must be verified officially;
+- **author-level variation** — do not generalize.
+
+This classification is required before promoting an observed pattern into a writing/figure rule.
 
 ## Profile output
 
-Produce a temporary profile with these sections:
+Produce a temporary profile containing:
 
-### A. Corpus
+### Corpus definition
 
-- target and article type;
+- target/field/archetype;
 - date window;
 - number of papers;
 - inclusion logic;
 - important coverage gaps.
 
-### B. Whole-paper architecture
+### Whole-paper architecture
 
 - common argument spines;
-- common evidence sequences;
+- evidence sequences;
 - legitimate alternative architectures.
 
-### C. Section move maps
+### Section/paragraph/sentence tendencies
 
-For each section, list:
-
-- core moves;
-- optional/recurrent moves;
-- common ordering;
+- move maps;
+- paragraph nuclei/satellites;
+- sentence information structure/stance;
 - meaningful variants.
 
-### D. Paragraph logic
+### Figure/evidence architecture
 
-- typical paragraph nuclei;
-- common satellite combinations;
-- how evidence and interpretation are linked.
+- main-figure role sequences;
+- recurrent plot families by reader task;
+- uncertainty/comparator patterns;
+- support allocation;
+- legitimate `no-figure` or table-heavy variants;
+- failure/limitation visibility.
 
-### E. Sentence realization
+### Transferable rules
 
-- stance;
-- voice;
-- tense;
-- information density;
-- transition strategy;
-- citation integration.
+Only patterns that make scientific/rhetorical sense and survive counterexamples.
 
-### F. Transferable rules
+### Local tendencies
 
-Only rules that appear robust across the sampled papers and make rhetorical sense.
+Useful defaults only for this stratum.
 
-### G. Local tendencies
+### Unresolved variation
 
-Patterns that should be used as defaults only for this target/article type.
+Conflicting patterns that should not become rules.
 
-### H. Unresolved variation
+### Counterexamples
 
-Conflicting patterns that should not be turned into a rule.
-
-### I. Counterexamples
-
-Record papers that legitimately violate a common pattern and the study/article feature that explains why. This is the guard against overfitting.
+Papers that violate the common pattern and why.
 
 ## How to use the profile
 
-Apply profile information in this priority order:
+Apply in this order:
 
-1. scientific accuracy and evidence boundaries;
-2. reporting/reproducibility requirements;
-3. rhetorical logic from `static/core/rhetorical-engine.md`;
-4. discipline/paper-type conventions;
-5. temporary target-corpus profile;
-6. exact journal house/submission rules.
+1. scientific accuracy/evidence boundary;
+2. exact reporting/reproducibility obligations;
+3. paper-archetype evidence logic;
+4. rhetorical engine;
+5. intended-reader explanation need;
+6. close-analogue reasoning;
+7. broader corpus tendencies;
+8. exact journal house/submission rules.
 
-If the corpus style conflicts with a current official requirement, the official requirement wins for submission mechanics. If it conflicts with evidence integrity, evidence integrity wins.
+If corpus practice conflicts with evidence integrity, evidence integrity wins. If it conflicts with current official submission mechanics, the official requirement wins.
 
-## Anti-copying and overfitting rules
+## Anti-copying and anti-overfitting
 
 Never:
 
-- copy distinctive sentences or phrases from a paper into the user's manuscript;
-- build a phrase bank from copyrighted prose;
-- infer effectiveness from prestige or citation count;
-- generalize a pattern from fewer than several independent papers without labeling it tentative;
-- mix article types and report the average as one journal style;
-- treat a corpus frequency as an exact submission rule;
-- turn a descriptive surface statistic into a writing-quality score;
-- suppress limitations or inflate novelty because target papers use assertive language.
+- copy distinctive sentences/phrases;
+- build reusable phrase banks from copyrighted prose;
+- copy a distinctive multi-panel composition;
+- infer effectiveness from prestige/citation count;
+- infer acceptance probability from figure count/type;
+- mix paper archetypes and report the average as one style;
+- convert caption keyword heuristics into semantic truth;
+- treat corpus frequency as an exact submission rule;
+- hide limitations because published main texts appear compressed;
+- force a plot because it is common in the stratum;
+- force a figure when a qualitative/theory paper does not need one.
 
-Learn **moves, relations, sequencing, information structure, and claim calibration**, not wording.
+Learn **moves, dependencies, explanation depth, evidence roles, information structure and claim calibration**, not surface imitation.
 
 ## Update protocol
 
-For maintained profiles:
+For maintained corpora:
 
 - record sampling date and paper identifiers;
-- retain corpus-selection criteria and extraction provenance;
-- add new papers incrementally rather than replacing the corpus silently;
+- retain selection/exclusion criteria and extraction provenance;
+- add papers incrementally rather than silently replacing the corpus;
 - compare old/new distributions before changing a rule;
-- keep previous profile versions when the journal changes practice;
-- preserve counterexamples instead of averaging them away;
-- promote a local rule into the cross-disciplinary core only after validation outside the source corpus;
-- add a regression test whenever the profile changes routing or a hard drafting contract.
+- keep previous profiles when venue practice shifts;
+- deliberately preserve counterexamples;
+- promote a local rule into cross-disciplinary core only after validation outside the source corpus;
+- add a regression test whenever the profile changes a hard drafting/figure contract.
 
-The existing `nat-comms-2025-corpus.md` is an example of a local empirical profile. Treat it as one stratum, not as the universal source of academic-writing logic.
+The local `nat-comms-2025-corpus.md` remains one useful stratum. It is not a universal academic-writing/legend/figure template.
