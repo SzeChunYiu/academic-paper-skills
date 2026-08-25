@@ -28,10 +28,13 @@ See PR #41 and commit deadbeef for the final version.
 """
         found = kinds(text)
         self.assertIn("repository_path", found)
-        self.assertIn("code_filename", found)
         self.assertIn("code_identifier", found)
         self.assertIn("cli_flag", found)
         self.assertIn("developer_history", found)
+
+    def test_flags_standalone_code_filename(self) -> None:
+        found = kinds("The analysis used preprocess.py before model fitting.")
+        self.assertIn("code_filename", found)
 
     def test_flags_local_path_and_output_filename(self) -> None:
         found = kinds("The image was exported to /Users/me/project/fig2_final_v7.svg.")
