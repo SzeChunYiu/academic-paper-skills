@@ -41,6 +41,21 @@ See PR #41 and commit deadbeef for the final version.
         self.assertIn("local_path", found)
         self.assertIn("output_filename", found)
 
+    def test_flags_normal_windows_path(self) -> None:
+        findings = mod.audit_text(r"The file was read from C:\Users\me\project\results.csv.")
+        self.assertTrue(any(f.kind == "local_path" and f.severity == "error" for f in findings))
+
+    def test_scientific_slash_phrases_are_not_repository_errors(self) -> None:
+        text = "The test/retest reliability is reported in the Results/Discussion transition, with output/input ratios summarized separately."
+        findings = mod.audit_text(text)
+        self.assertFalse(any(f.kind == "repository_path" and f.severity == "error" for f in findings))
+
+    def test_deep_extensionless_project_like_path_is_review_only(self) -> None:
+        findings = mod.audit_text("See results/experiment_a/run_03 for the internal record.")
+        matches = [f for f in findings if f.kind == "repository_path_review"]
+        self.assertEqual(len(matches), 1)
+        self.assertEqual(matches[0].severity, "review")
+
     def test_repository_url_is_reviewed_and_availability_context_recorded(self) -> None:
         body = mod.audit_text("Results are available at https://github.com/example/project.")
         self.assertTrue(any(f.kind == "repository_url" and not f.availability_context for f in body))
@@ -74,6 +89,17 @@ See PR #41 and commit deadbeef for the final version.
     def test_unbalanced_delimiters_are_flagged(self) -> None:
         found = kinds("The estimate (95% CI [0.10, 0.20].")
         self.assertIn("unbalanced_parentheses", found)
+
+    def test_unbalanced_delimiters_inside_fenced_code_do_not_fail_prose(self) -> None:
+        text = """The prose is balanced (and complete).
+```python
+x = func([1, 2
+```
+The manuscript continues normally.
+"""
+        findings = mod.audit_text(text)
+        self.assertFalse(any(f.kind.startswith("unbalanced_") for f in findings))
+        self.assertTrue(any(f.kind == "code_fence" for f in findings))
 
 
 if __name__ == "__main__":
