@@ -3,6 +3,8 @@ name: Test journal generalization
 on:
   pull_request:
     paths:
+      - 'skills/academic-paper-pipeline/**'
+      - 'skills/academic-writing/**'
       - 'skills/nature-writing/**'
       - 'skills/nature-reviewer/**'
       - 'skills/nature-response/**'
@@ -12,11 +14,15 @@ on:
       - 'skills/nature-academic-search/**'
       - 'skills/nature-ref-verifier/**'
       - 'skills/nature-shared/**'
+      - 'scripts/validate-skill-metadata.py'
+      - 'scripts/validate-skill-index.py'
       - '.github/workflows/test-journal-generalization.yml'
   push:
     branches:
       - main
     paths:
+      - 'skills/academic-paper-pipeline/**'
+      - 'skills/academic-writing/**'
       - 'skills/nature-writing/**'
       - 'skills/nature-reviewer/**'
       - 'skills/nature-response/**'
@@ -26,6 +32,8 @@ on:
       - 'skills/nature-academic-search/**'
       - 'skills/nature-ref-verifier/**'
       - 'skills/nature-shared/**'
+      - 'scripts/validate-skill-metadata.py'
+      - 'scripts/validate-skill-index.py'
       - '.github/workflows/test-journal-generalization.yml'
   workflow_dispatch:
 
@@ -47,18 +55,26 @@ jobs:
       - name: Install focused figure test dependency
         run: python -m pip install --disable-pip-version-check numpy
 
-      - name: Compile citation and writing scripts
+      - name: Compile citation, corpus, and manuscript QA scripts
         run: |
           python -m py_compile \
             skills/nature-citation/scripts/nature_citation.py \
             skills/nature-citation/scripts/academic_citation_search.py \
-            skills/nature-writing/scripts/corpus_structure_stats.py
+            skills/nature-writing/scripts/corpus_structure_stats.py \
+            skills/nature-writing/scripts/corpus_figure_inventory.py \
+            skills/nature-shared/scripts/audit_manuscript_surface.py
 
       - name: Test citation search and exports
         run: python -m unittest discover -s skills/nature-citation/tests -p 'test_*.py' -v
 
       - name: Test writing rhetorical engine and corpus tooling
         run: python -m unittest discover -s skills/nature-writing/tests -p 'test_*.py' -v
+
+      - name: Test canonical academic-writing contracts
+        run: python -m unittest discover -s skills/academic-writing/tests -p 'test_*.py' -v
+
+      - name: Test iterative academic-paper pipeline
+        run: python -m unittest discover -s skills/academic-paper-pipeline/tests -p 'test_*.py' -v
 
       - name: Test scientific figure contracts and safety tooling
         run: python -m unittest discover -s skills/nature-figure/tests -p 'test_*.py' -v
@@ -69,5 +85,5 @@ jobs:
       - name: Test revision decision closure
         run: python skills/nature-response/tests/test_editor_decision_closure.py -v
 
-      - name: Test shared journal and analogue contracts
+      - name: Test shared journal, writing, surface, and analogue contracts
         run: python -m unittest discover -s skills/nature-shared/tests -p 'test_*.py' -v
