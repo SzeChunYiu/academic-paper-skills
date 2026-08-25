@@ -71,11 +71,24 @@ class AcademicPaperPipelineTests(unittest.TestCase):
             "unknown-paper-research-protocol.md",
             "sentence-logic-and-cohesion.md",
             "explanatory-sufficiency.md",
+            "atomic-claim-verification.md",
             "manuscript-content-selection.md",
             "figure-evidence-planning.md",
             "manuscript-surface-qa.md",
         ):
             self.assertIn(marker, manifest)
+
+    def test_pipeline_closes_every_atomic_content_item_before_readiness(self) -> None:
+        skill = read(PIPELINE / "SKILL.md")
+        workflow = read(SHARED / "core" / "academic-paper-iteration-pipeline.md")
+        contract = read(SHARED / "core" / "atomic-claim-verification.md")
+        self.assertIn("one row per atomic content item", skill)
+        self.assertIn("Atomic scientific-content ledger", workflow)
+        self.assertIn("independent coverage pass", workflow)
+        for marker in ("SUPPORTED_INTERNAL", "UNRESOLVED", "CONTRADICTED", "BLOCKED", "NOT_ASSESSABLE"):
+            self.assertIn(marker, skill)
+            self.assertIn(marker, workflow)
+            self.assertIn(marker, contract)
 
     def test_skill_is_journal_agnostic(self) -> None:
         skill = read(PIPELINE / "SKILL.md")

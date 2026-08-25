@@ -1,5 +1,5 @@
 name: academic-writing
-version: 1.0.0
+version: 1.1.0
 description: >
   Canonical journal-agnostic academic manuscript writing router. The historical
   nature-writing directory remains a compatibility/reference implementation
@@ -21,6 +21,8 @@ always_load:
 
 references:
   on_demand:
+    - condition: full manuscript, theory/proof section, formal bound, public-posting/submission readiness, or decision-relevant rewrite needs fail-closed atomic claim, definition, proof, source, number, availability, and cross-section verification
+      path: ../nature-shared/core/atomic-claim-verification.md
     - condition: current paper type, target, reporting norm, writing convention, figure grammar, or review expectation is unfamiliar/uncertain and research is needed before imposing a template
       path: ../nature-shared/core/unknown-paper-research-protocol.md
     - condition: substantial manuscript work should study a few genuinely close papers for argument/evidence/figure/explanation/local-convention calibration without copying wording or visual identity

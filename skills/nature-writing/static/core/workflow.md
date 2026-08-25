@@ -337,6 +337,24 @@ Use the strongest verb warranted by evidence. Sweep unsupported `first`, `unique
 
 Do not hide incrementality merely to make the contribution appear larger.
 
+## 9b. Run fail-closed atomic verification when scope requires it
+
+For a full manuscript, theory/proof section, public-posting/submission readiness,
+or a revision that changes decision-relevant science, load
+`../../../nature-shared/core/atomic-claim-verification.md`.
+
+Inventory every in-scope definition, atomic proposition, proof dependency,
+number/statistical statement, source claim, display interpretation, availability
+statement, and cross-section restatement. Verify entailment, not merely the
+presence of a citation or locator. Preserve qualifiers, negation, quantifiers,
+comparators, and conditions while atomizing.
+
+Do not continue to verification-complete final-release language with a
+`SUPPORTED_INTERNAL`, `UNRESOLVED`, `CONTRADICTED`, `BLOCKED`, or in-scope
+`NOT_ASSESSABLE` manuscript assertion. A draft may remain explicitly blocked; a
+wording change cannot close unavailable evidence, a formal contradiction, or a
+missing proof.
+
 ## 10. Run the reader-prediction, explanation, content, voice, and coherence audit
 
 After each paragraph ask:
@@ -352,6 +370,8 @@ After each paragraph ask:
 9. Could any content be relocated to Methods/SI/availability/repository without weakening understanding?
 10. Is a needed figure/plot missing because a central pattern is being described inefficiently in prose?
 11. Has explanatory expansion become repetitive or textbook-like?
+12. Does every in-scope atomic scientific assertion have an allowed release
+    status, with no definition-to-theorem-to-specialization contradiction?
 
 Then reverse-outline the section using paragraph nuclei.
 

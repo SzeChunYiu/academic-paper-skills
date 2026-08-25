@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import importlib.util
+import subprocess
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -100,6 +102,263 @@ The manuscript continues normally.
         findings = mod.audit_text(text)
         self.assertFalse(any(f.kind.startswith("unbalanced_") for f in findings))
         self.assertTrue(any(f.kind == "code_fence" for f in findings))
+
+    def test_flags_markdown_display_math_inside_abstract_only(self) -> None:
+        text = r"""## Abstract
+The bound is central.
+$$x = y$$
+### Interpretation
+\[z \leq 2\]
+## Methods
+$$a = b$$
+"""
+        findings = mod.audit_text(text)
+        matches = [f for f in findings if f.kind == "abstract_display_math_review"]
+        self.assertEqual(len(matches), 2)
+        self.assertTrue(all(f.line < 7 for f in matches))
+
+    def test_flags_latex_abstract_display_but_allows_inline_math(self) -> None:
+        text = r"""\begin{abstract}
+The inline result $x=y$ is compact.
+\begin{equation}
+x = y
+\end{equation}
+\end{abstract}
+\section{Methods}
+\begin{equation}
+a = b
+\end{equation}
+"""
+        matches = [
+            f for f in mod.audit_text(text)
+            if f.kind == "abstract_display_math_review"
+        ]
+        self.assertEqual(len(matches), 1)
+        self.assertEqual(matches[0].line, 3)
+
+    def test_plain_text_and_pandoc_yaml_abstracts_are_scoped(self) -> None:
+        plain = "Abstract\nThe bound follows.\n$$x=y$$\nIntroduction\n$$a=b$$\n"
+        yaml_text = "---\nabstract: |\n  The bound follows.\n  $$x=y$$\nkeywords: [test]\n---\n$$a=b$$\n"
+        yaml_last_key = "---\ntitle: Test\nabstract: |\n  $$x=y$$\n---\n# Introduction\n$$a=b$$\n"
+        for text in (plain, yaml_text, yaml_last_key):
+            matches = [
+                f for f in mod.audit_text(text)
+                if f.kind == "abstract_display_math_review"
+            ]
+            self.assertEqual(len(matches), 1, text)
+
+    def test_markdown_heading_attributes_are_recognized(self) -> None:
+        findings = mod.audit_text("## Abstract {.unnumbered}\n$$x=y$$\n## Methods\n")
+        self.assertEqual(
+            len([f for f in findings if f.kind == "abstract_display_math_review"]),
+            1,
+        )
+
+    def test_commented_latex_abstract_does_not_activate_scope(self) -> None:
+        findings = mod.audit_text("% \\begin{abstract}\n$$x=y$$\n")
+        self.assertFalse(any(f.kind == "abstract_display_math_review" for f in findings))
+
+    def test_latex_starred_abstract_is_recognized(self) -> None:
+        findings = mod.audit_text(
+            "\\begin{abstract*}\n$$x=y$$\n\\end{abstract*}\n$$a=b$$\n"
+        )
+        self.assertEqual(
+            len([f for f in findings if f.kind == "abstract_display_math_review"]),
+            1,
+        )
+
+    def test_multiline_display_is_reported_once_and_not_scanned_as_acronyms(self) -> None:
+        findings = mod.audit_text("## Abstract\n$$\nTARE = R6M\n$$\n")
+        self.assertEqual(
+            len([f for f in findings if f.kind == "abstract_display_math_review"]),
+            1,
+        )
+        self.assertFalse(any(f.kind == "unexpanded_abbreviation_review" for f in findings))
+
+    def test_opaque_identifier_and_unexpanded_acronym_are_review_only(self) -> None:
+        findings = mod.audit_text("## Abstract\nTARE uses the R6M specialization.")
+        by_text = {f.text: f for f in findings if f.kind.endswith("_review")}
+        self.assertEqual(by_text["TARE"].kind, "unexpanded_abbreviation_review")
+        self.assertEqual(by_text["R6M"].kind, "opaque_identifier_review")
+        self.assertEqual(by_text["R6M"].severity, "review")
+
+    def test_two_letter_acronym_requires_local_expansion(self) -> None:
+        unexpanded = kinds("## Abstract\nThe TA was evaluated.")
+        expanded = kinds("## Abstract\nThe transformer architecture (TA) was evaluated.")
+        self.assertIn("unexpanded_abbreviation_review", unexpanded)
+        self.assertNotIn("unexpanded_abbreviation_review", expanded)
+
+    def test_private_kappa_symbol_requires_denotation_not_value_only(self) -> None:
+        variants = (
+            "κ_R6M = 2.",
+            "κR6M = 2.",
+            "λ_R6M = 2.",
+            "μ_X = 2.",
+            r"$\kappa_{R6M}=2$.",
+            r"$\kappa_{\mathrm{R6M}}=2$.",
+            r"$\mu_{X2}=2$.",
+        )
+        for variant in variants:
+            findings = mod.audit_text(f"## Abstract\n{variant}")
+            self.assertTrue(
+                any(f.kind == "undefined_symbol_review" for f in findings),
+                variant,
+            )
+
+        defined = mod.audit_text(
+            "## Abstract\nLet κ_R6M denote the intrinsic support constant. Its value is 2."
+        )
+        self.assertFalse(any(f.kind == "undefined_symbol_review" for f in defined))
+        direct = mod.audit_text(
+            "## Abstract\nκ_R6M denotes the intrinsic support constant."
+        )
+        self.assertFalse(any(f.kind == "undefined_symbol_review" for f in direct))
+        value_only = mod.audit_text("## Abstract\nLet κ_R6M be 2.")
+        self.assertTrue(any(f.kind == "undefined_symbol_review" for f in value_only))
+
+    def test_reader_facing_acronym_definition_passes_but_opaque_code_stays_reviewable(self) -> None:
+        text = (
+            "## Abstract\n"
+            "Tag-and-Restore Encoding (TARE) is evaluated in the one-tag, "
+            "three-block specialization (R6M)."
+        )
+        found = kinds(text)
+        self.assertNotIn("unexpanded_abbreviation_review", found)
+        self.assertIn("opaque_identifier_review", found)
+
+    def test_ledger_verified_opaque_identifier_can_be_exempted(self) -> None:
+        findings = mod.audit_text(
+            "## Abstract\nThe registered H2AX assay was used.",
+            known_identifiers={"H2AX"},
+        )
+        self.assertFalse(any(f.kind == "opaque_identifier_review" for f in findings))
+
+    def test_body_definition_does_not_satisfy_abstract_scope(self) -> None:
+        text = (
+            "## Methods\nTag-and-Restore Encoding (TARE) is defined here.\n"
+            "## Abstract\nTARE is evaluated."
+        )
+        findings = mod.audit_text(text)
+        self.assertTrue(
+            any(f.kind == "unexpanded_abbreviation_review" and f.text == "TARE" for f in findings)
+        )
+
+    def test_wrapped_acronym_expansion_is_recognized_and_late_expansion_is_not(self) -> None:
+        wrapped = mod.audit_text("## Abstract\nTag-and-Restore Encoding\n(TARE) is evaluated.")
+        late = mod.audit_text(
+            "## Abstract\nTARE is evaluated; Tag-and-Restore Encoding (TARE) is the full name."
+        )
+        self.assertFalse(
+            any(f.kind == "unexpanded_abbreviation_review" and f.text == "TARE" for f in wrapped)
+        )
+        self.assertTrue(
+            any(f.kind == "unexpanded_abbreviation_review" and f.text == "TARE" for f in late)
+        )
+
+    def test_all_caps_section_headings_are_not_acronym_findings(self) -> None:
+        findings = mod.audit_text("## ABSTRACT\nText.\n## METHODS\nText.")
+        reviewed = {f.text for f in findings if f.kind == "unexpanded_abbreviation_review"}
+        self.assertNotIn("ABSTRACT", reviewed)
+        self.assertNotIn("METHODS", reviewed)
+
+    def test_known_identifier_can_be_ledger_exempted(self) -> None:
+        findings = mod.audit_text(
+            "DNA damage was measured using H2AX staining and reported by DOI.",
+            known_identifiers={"H2AX"},
+        )
+        reviewed = {f.text for f in findings if f.kind in {"opaque_identifier_review", "unexpanded_abbreviation_review"}}
+        self.assertFalse(reviewed)
+
+    def test_verified_greek_prefixed_biomarker_can_be_exempted(self) -> None:
+        findings = mod.audit_text(
+            "γH2AX staining was quantified.",
+            known_identifiers={"γH2AX"},
+        )
+        self.assertFalse(any(f.kind == "undefined_symbol_review" for f in findings))
+
+    def test_submission_placeholders_are_stage_aware(self) -> None:
+        text = (
+            "Author information to be supplied before submission.\n"
+            "A permanent archival identifier must be inserted before upload."
+        )
+        draft = [f for f in mod.audit_text(text) if f.kind == "submission_placeholder"]
+        final = [f for f in mod.audit_text(text, final=True) if f.kind == "submission_placeholder"]
+        self.assertTrue(draft)
+        self.assertTrue(all(f.severity == "review" for f in draft))
+        self.assertTrue(all(f.severity == "error" for f in final))
+
+    def test_scientific_tk_tbc_and_xxx_are_not_submission_placeholders(self) -> None:
+        text = (
+            "Thymidine kinase (TK) activity was measured. "
+            "Tuberculosis complex (TBC) isolates were sequenced. "
+            "The sample included 47,XXX karyotypes."
+        )
+        findings = mod.audit_text(text, final=True)
+        self.assertFalse(any(f.kind == "submission_placeholder" for f in findings))
+
+    def test_contextual_tk_tbc_and_xxx_placeholders_are_errors(self) -> None:
+        findings = mod.audit_text("Title: TK\nDOI: XXX\n[TBC: add affiliation]", final=True)
+        placeholders = [f for f in findings if f.kind == "submission_placeholder"]
+        self.assertEqual(len(placeholders), 3)
+        self.assertTrue(all(f.severity == "error" for f in placeholders))
+
+    def test_doi_stub_and_wrapped_archival_placeholder_are_final_errors(self) -> None:
+        text = (
+            "The DOI is 10.XXXX/placeholder.\n"
+            "A permanent archival identifier must\n"
+            "be inserted before upload."
+        )
+        findings = mod.audit_text(text, final=True)
+        placeholders = [f for f in findings if f.kind == "submission_placeholder"]
+        self.assertGreaterEqual(len(placeholders), 2)
+        self.assertTrue(all(f.severity == "error" for f in placeholders))
+
+    def test_attachment_failure_pattern_is_covered_together(self) -> None:
+        text = r"""Abstract
+TARE uses the R6M specialization with κ_R6M = 2.
+$$\mu \ge (b-1)t_R$$
+Author information to be supplied before submission.
+Keywords: test
+"""
+        found = kinds(text)
+        for kind in (
+            "unexpanded_abbreviation_review",
+            "opaque_identifier_review",
+            "undefined_symbol_review",
+            "abstract_display_math_review",
+            "submission_placeholder",
+        ):
+            self.assertIn(kind, found)
+
+    def test_fail_on_review_cli_is_conservative_and_disallows_token_bypass(self) -> None:
+        with tempfile.NamedTemporaryFile("w", suffix=".md", encoding="utf-8") as handle:
+            handle.write("## Abstract\nTARE is evaluated.\n")
+            handle.flush()
+            result = subprocess.run(
+                [sys.executable, str(SCRIPT), "--fail-on-review", handle.name],
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            bypass = subprocess.run(
+                [
+                    sys.executable,
+                    str(SCRIPT),
+                    "--fail-on-review",
+                    "--known-identifier",
+                    "TARE",
+                    handle.name,
+                ],
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+        self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+        self.assertEqual(bypass.returncode, 2, bypass.stdout + bypass.stderr)
+
+    def test_procedural_insert_sentence_is_not_a_placeholder(self) -> None:
+        findings = mod.audit_text("The cannula must be inserted 2 cm before fixation.", final=True)
+        self.assertFalse(any(f.kind == "submission_placeholder" for f in findings))
 
 
 if __name__ == "__main__":

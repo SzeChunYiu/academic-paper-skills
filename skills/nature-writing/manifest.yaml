@@ -1,5 +1,5 @@
 name: nature-writing
-version: 2.7.0
+version: 2.8.0
 description: >
   Declarative manifest for journal-aware academic drafting, restructuring, and
   initial-submission requests. The legacy skill name is retained for backward
@@ -103,6 +103,8 @@ axes:
 
 references:
   on_demand:
+    - condition: full manuscript, theory/proof section, formal bound, public-posting/submission readiness, or decision-relevant rewrite needs fail-closed verification of every atomic claim, definition, proof step, number, source, availability statement, and cross-section restatement
+      path: ../nature-shared/core/atomic-claim-verification.md
     - condition: resolve the dominant scientific/epistemic paper archetype and calibrate writing, evidence dependencies, explanation hotspots, main-figure roles, support allocation, and anti-patterns across mechanism/discovery, trial/intervention, observational, computational/ML, method/tool/software, resource/dataset, theory/proof, qualitative, review/synthesis, or hybrid papers
       path: ../nature-shared/core/paper-archetype-atlas.md
     - condition: manuscript prose is concise but a reader may not understand a central idea, method, mechanism, result, equation, figure interpretation, or implication because rationale, intermediate reasoning, assumptions, comparison meaning, or boundaries are missing; use to audit minimum sufficient explanation without turning the paper into a textbook

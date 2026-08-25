@@ -17,6 +17,7 @@ always_load:
 | `core/paper-type-taxonomy.md` | `nature-polishing`, `nature-writing` |
 | `core/ethics.md` | `nature-polishing`, `nature-writing` |
 | `core/research-compliance.md` | `nature-writing` 及需要 Nature Portfolio 专项合规检查的技能 |
+| `core/atomic-claim-verification.md` | `academic-writing`, `academic-paper-pipeline`, `nature-writing`, `nature-reviewer`, `nature-polishing`, `nature-response` |
 | `core/terminology-ledger.md` | `nature-polishing`, `nature-writing`, `nature-reader`, `nature-paper2ppt` |
 | `core/consistency-sweep.md` | `nature-polishing`, `nature-reviewer`, `nature-response`, `nature-statistics` |
 | `core/main-text-discipline.md` | `nature-writing`, `nature-polishing`, `nature-response` |
@@ -24,7 +25,9 @@ always_load:
 | `journal-formats/nature.md` | `nature-writing` 及需要旗舰 `Nature Article` 精确投稿规则的技能 |
 | `journal-formats/nature-machine-intelligence.md` | NMI 投稿的写作、润色、图表、数据与统计工作流 |
 
-`scripts/check_consistency.py` 为一致性扫描提供机械初筛，可报告术语变体、同值不同精度和等值长度单位混用。输出是待人工核对的风险提示，不会自动改稿。
+`core/atomic-claim-verification.md` 是失效即关闭（fail-closed）的科学内容核查契约。全文、形式化主张和投稿就绪工作流必须枚举每个原子内容项，核查所指证据是否真正蕴含该项；只要仍有 `SUPPORTED_INTERNAL`、`UNRESOLVED`、`CONTRADICTED`、`BLOCKED` 或 `NOT_ASSESSABLE` 项，就不得判定为“核查完整且已就绪”。
+
+`scripts/check_consistency.py` 为一致性扫描提供机械初筛，可报告术语变体、同值不同精度和等值长度单位混用。`scripts/audit_manuscript_surface.py` 补充面向目标期刊的摘要、术语、占位符与渲染表面诊断。脚本输出只用于分诊，不能代替原子核查台账。
 
 ## 什么时候把文件放到这里
 

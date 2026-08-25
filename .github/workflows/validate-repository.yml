@@ -50,6 +50,11 @@ jobs:
       - name: Run repository validation
         run: python3 scripts/validate-repository.py
 
+      - name: Validate README skill counts and mirrors
+        run: |
+          python3 scripts/validate-readmes.py
+          python3 scripts/validate-readme-mirror.py
+
       - name: Test star history rendering
         run: python3 -m unittest scripts/tests/test_generate_star_history.py
 

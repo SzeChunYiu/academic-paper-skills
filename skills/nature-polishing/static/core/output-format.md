@@ -4,6 +4,12 @@
 
 Before returning polished manuscript-facing prose, apply `../../../nature-shared/core/manuscript-surface-qa.md`.
 
+For a full-paper polish, formal/theory claim, public-posting/submission-ready
+deliverable, or any rewrite that changes scientific scope/strength, also apply
+`../../../nature-shared/core/atomic-claim-verification.md`. Polishing cannot turn
+an internally supported but unverified, unresolved, contradicted, blocked, or
+unassessable assertion into verified content.
+
 The final text must be checked for:
 
 - leaked file/directory paths;

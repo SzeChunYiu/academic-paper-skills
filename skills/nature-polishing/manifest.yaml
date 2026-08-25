@@ -1,5 +1,5 @@
 name: nature-polishing
-version: 7.4.0
+version: 7.5.0
 description: >
   Declarative manifest for journal-aware academic polishing. The legacy skill
   name is retained for backward compatibility; journal behavior is resolved
@@ -80,6 +80,8 @@ axes:
 
 references:
   on_demand:
+    - condition: full-paper polish, public-posting/submission readiness, theory/proof prose, or a rewrite that changes claim scope/strength needs fail-closed atomic claim, definition, proof, source, number, availability, and cross-section verification
+      path: ../nature-shared/core/atomic-claim-verification.md
     - condition: whole-section/full-paper polish where the dominant epistemic archetype changes what must be explained, retained, moved, or shown; mechanism/discovery, intervention/trial, observational, computational/ML, method/tool/software, resource, theory, qualitative, review/synthesis, or hybrid
       path: ../nature-shared/core/paper-archetype-atlas.md
     - condition: final manuscript-facing text, title, abstract, Methods/Results/Discussion, figure/table legend, table note, equation prose, or availability statement needs a last-mile filename/path/script/helper/CLI/repository/output-name scrub plus punctuation, spacing, bracket, range/minus/hyphen and target-aware copy-editing QA

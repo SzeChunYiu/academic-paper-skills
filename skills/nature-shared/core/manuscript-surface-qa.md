@@ -10,7 +10,9 @@ The invariant is:
 
 > A manuscript-facing surface must read as a scientific document even when the underlying project contains code, repositories, notebooks, scripts, configs, file trees, dashboards, tests, and build artifacts.
 
-This gate is not a substitute for `manuscript-content-selection.md`. It is the final catch after drafting.
+This gate is not a substitute for `manuscript-content-selection.md` or
+`atomic-claim-verification.md`. It is the final catch after drafting and
+scientific verification.
 
 ## Surfaces that must be audited
 
@@ -29,6 +31,42 @@ Audit all text that could be submitted or pasted into a manuscript:
 - Data/Code/Resource Availability.
 
 Also audit generated alt text or long descriptions if they will accompany the publication.
+
+## Pass 0 - standalone-surface and terminology isolation
+
+Read the abstract, highlights, legends, and table notes independently of the
+body. For each surface:
+
+- inventory abbreviations, coined terms, internal/private labels, and formal
+  symbols;
+- require a local reader-facing identity, full form, or denotation before
+  claim-bearing use;
+- remove a private label when a plain scientific description carries the same
+  information;
+- never infer an unknown expansion;
+- check whether notation density obscures the question, result, or boundary.
+
+A consistent token can still be opaque. `R6M`, a run name, or a paper-private
+symbol is not publication-ready merely because it is used consistently.
+
+### Abstract display-math rule
+
+Resolve the exact target first. Some mathematical venues permit formulas, while
+IEEE currently requires a self-contained single-paragraph abstract without
+abbreviations or mathematical equations.
+
+For an unknown target, prefer continuous prose and verbal or inline mathematics.
+Use a displayed equation in an abstract only when all are true:
+
+1. it is central to the result;
+2. the target/genre permits it;
+3. inline or verbal wording would lose necessary meaning;
+4. every retained symbol is locally defined;
+5. adjacent prose explains the scientific meaning.
+
+Short equalities/inequalities and multiple display blocks are review signals,
+not universal errors. The source-level decision matters; a PDF line break is not
+automatically a rendering bug.
 
 ## Pass 1 — artifact-token scrub
 
@@ -155,6 +193,28 @@ Even here:
 - do not paste installation instructions unless the venue explicitly expects an artifact appendix;
 - give one canonical access path rather than repeating links.
 
+## Pass 2b - release placeholders and authoring residue
+
+In draft mode, keep unresolved facts in author-facing notes rather than fluent
+manuscript assertions. In final/public/submission mode, unresolved placeholders
+are release errors.
+
+Review or block as appropriate:
+
+- missing author/affiliation/title metadata;
+- `TBD`, `AUTHOR_INPUT_NEEDED`, `[Evidence needed: ...]`, or
+  `\\todo{...}` inside manuscript-facing text;
+- `TK`, `TBC`, or `XXX` only in an authoring context such as `[TK]`,
+  `Title: TK`, or `DOI: XXX`—not when they are legitimate scientific terms;
+- `author/affiliation/DOI/URL/identifier to be supplied/inserted`;
+- `Review source` or similar internal document-state labels in a public artifact;
+- internal claim-governance prose such as a claim `receives` authority, a result
+  `owns` an idea, or a proof `carries authority`, when ordinary scientific wording
+  should state what is established and under which assumptions.
+
+Do not match ordinary procedural prose merely because it contains `must be
+inserted`; the placeholder object and authoring context must be present.
+
 ## Pass 3 — punctuation and typography QA
 
 Punctuation errors are copy-editing defects, not rhetorical style. Run this pass after the scientific text is stable.
@@ -249,7 +309,7 @@ Flag:
 
 Repair the syntax, not just the mark.
 
-## Pass 5 — final manuscript-only read
+## Pass 5 - final manuscript-only read
 
 Before delivery, read the manuscript **without looking at the repository**.
 
@@ -263,8 +323,26 @@ Ask:
 6. Are punctuation and bracket pairs mechanically clean?
 7. Does punctuation clarify the logic rather than mask a sentence-structure problem?
 8. Did copy-editing alter a scientific identifier, equation, range, citation or chemical/biological name?
+9. Can the abstract be understood without definitions supplied only in the body?
+10. Does any coined/internal label lack a scientific identity or reason to remain?
+11. Does any symbol have a value but no denotation/domain/quantifiers?
+12. Does any draft placeholder or internal document-state label remain?
 
 The manuscript should pass this read independently of the codebase.
+
+## Pass 6 - rendered PDF/artifact review when delivered
+
+Source-text scanning does not preserve pagination or visual hierarchy. When a
+PDF or other rendered submission artifact is delivered:
+
+1. render and inspect every page, including the abstract and final page;
+2. check gratuitous abstract display breaks, sparse spill pages, stranded
+   headings, clipped/overlapping text, and reference pagination;
+3. inspect document metadata for a real title and author information;
+4. check tagged/accessibility state when the target or workflow requires it;
+5. rerun placeholder and availability checks on extracted text while treating
+   extraction-only spacing/math artifacts as non-authoritative;
+6. verify the rendered artifact matches the audited source version.
 
 ## Interaction with other contracts
 
@@ -274,14 +352,31 @@ Run after:
 - `explanatory-sufficiency.md` for explanation depth;
 - `natural-scholarly-prose.md` for sentence flow/voice;
 - `figure-evidence-planning.md` for figure necessity and evidence roles.
+- `atomic-claim-verification.md` for content-level claim/proof closure.
 
 This contract is the final **surface hygiene** layer.
 
 ## Automation boundary
 
-A linter can safely flag high-confidence artifact tokens and mechanical punctuation patterns. It cannot decide whether a package name is scientifically necessary, whether a hyphen belongs in a field-specific term, or whether a comma changes meaning. Automated findings must therefore be reviewed in context.
+A linter can safely flag high-confidence artifact tokens and mechanical
+punctuation patterns. It can also surface display math inside a detected abstract,
+candidate opaque/unexpanded identifiers, and paper-private Greek symbols with
+alphanumeric labels, but those findings remain review-only because target rules
+and field terminology vary. It cannot decide
+whether a package/name is scientifically necessary, whether a hyphen belongs in
+a field-specific term, or whether a comma changes meaning. Automated findings
+must therefore be reviewed in context and reconciled with the Terminology Ledger.
 
-Use `scripts/audit_manuscript_surface.py` for a conservative mechanical scan when plain text/Markdown is available.
+Use `scripts/audit_manuscript_surface.py` for a conservative scan when plain
+text, Markdown, Pandoc YAML, or LaTeX is available. Pass `--final` only for
+public/submission-ready surfaces so unresolved placeholders become errors.
+`--strict` fails on error-severity findings; `--fail-on-review` is the more
+conservative candidate gate and fails while any contextual-review item remains.
+The latter intentionally disallows `--known-identifier`: standard-term and
+target-permitted-display dispositions must be recorded in the terminology/audit
+ledger, because a token exemption is not evidence. In non-gating exploratory
+scans, repeated `--known-identifier` arguments can reduce verified field-term
+noise without hard-coding every discipline's identifiers.
 
 ## Non-negotiable output rule
 

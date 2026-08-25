@@ -77,6 +77,12 @@ If the user says the prose feels `AI-written`, generic, unnatural, over-smoothed
 
 Use `static/core/stance.md` and author-provided material. Never invent results, mechanisms, references, uncertainty, novelty, or limitations.
 
+For full manuscripts, theory/proof sections, public-posting/submission readiness,
+or decision-relevant rewrites, load
+`../nature-shared/core/atomic-claim-verification.md`. Atomize every scientific
+assertion, verify the actual warrant rather than the presence of a pointer, and
+fail closed on unresolved or contradicted content.
+
 #### B. Rhetorical engine
 
 Use `static/core/rhetorical-engine.md` to build:
@@ -208,10 +214,12 @@ When acceptance-readiness or rejection-risk matters, do this **before** target-s
 1. Resolve the exact publication model and verified decision criteria.
 2. Build the compact editor decision brief: question, answer, decisive evidence, target-specific value, boundary, intended community.
 3. Build a decision proof for every headline claim.
-4. Simulate editorial triage separately from external reviewers.
-5. Stress-test the manuscript with independent validity, positioning/significance, and reproducibility/boundary lenses.
-6. Classify risks as target-fit blockers, technical blockers, major repairable, claim recalibration, clarity/reporting, or optional enrichment.
-7. Select the minimum scientifically sufficient repair:
+4. Run the atomic verification contract across definitions, claims, proofs,
+   numbers, sources, availability statements, and cross-section restatements.
+5. Simulate editorial triage separately from external reviewers.
+6. Stress-test the manuscript with independent validity, positioning/significance, and reproducibility/boundary lenses.
+7. Classify risks as target-fit blockers, technical blockers, major repairable, claim recalibration, clarity/reporting, or optional enrichment.
+8. Select the minimum scientifically sufficient repair:
    - add decisive evidence;
    - reanalyse existing evidence;
    - correct an error;
@@ -268,6 +276,7 @@ Use the manifest's `references.on_demand` table. Important routes include:
 - local 2025 Nature Communications CS/AI calibration -> `references/nat-comms-2025-corpus.md` (local profile only, never universal);
 - concrete examples -> `references/examples/index.md`;
 - self-review/claim-evidence audit -> `references/paper-review.md`;
+- fail-closed full-manuscript/formal-claim verification -> `../nature-shared/core/atomic-claim-verification.md`;
 - main-text versus captions/SI -> `../nature-shared/core/main-text-discipline.md`.
 
 ## Dynamic learning rule

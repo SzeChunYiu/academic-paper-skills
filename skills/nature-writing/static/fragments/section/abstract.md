@@ -37,6 +37,33 @@ Do not spend most of the word budget on generic background and then reduce the a
 
 Use `references/abstract.md` for deeper local patterns and `references/section-move-atlas.md` for cross-disciplinary routing.
 
+## Self-contained terminology and notation gate
+
+Treat the abstract as a standalone surface. Definitions in the Introduction or
+Methods do not satisfy abstract first use.
+
+- Expand or semantically define every non-universal abbreviation, coined term,
+  and paper-specific label locally.
+- Replace internal/project labels with the scientific object unless the label is
+  itself necessary, stable, and immediately given a reader-facing identity.
+- Define every nonstandard symbol before claim-bearing use and retain only the
+  notation needed to understand the central result.
+- Do not guess an acronym expansion. Request author input or omit the label.
+
+## Equation and paragraph surface gate
+
+Exact target rules take precedence. For an unknown target, prefer continuous
+prose with verbal or inline mathematics. Use a display equation only when it is
+central, the target/genre permits it, inline wording would lose necessary
+meaning, every symbol is locally defined, and adjacent prose interprets it.
+
+Multiple display equations or a short display that could fit inline trigger a
+readability review. They are not universally forbidden, but they should not
+create gratuitous vertical breaks or turn the abstract into a notation inventory.
+
+For IEEE, apply the current official self-contained single-paragraph abstract
+rule, including its prohibition on abbreviations and mathematical equations.
+
 ## Diagnostics
 
 - Can a reader identify the paper's central answer?
@@ -45,6 +72,10 @@ Use `references/abstract.md` for deeper local patterns and `references/section-m
 - Has compression strengthened causality or generality beyond the manuscript?
 - Does each background sentence earn scarce space?
 - Does the target journal require structured headings or a particular abstract type?
+- Can the abstract be understood without the body, including every retained term
+  and symbol?
+- Is any display equation scientifically necessary and target-permitted?
+- Could a reader-facing description replace an internal label?
 
 ## Nature-family note
 

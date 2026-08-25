@@ -25,6 +25,7 @@ Read `manifest.yaml`, then every file in `always_load`.
 The core lifecycle is defined by:
 
 - `../nature-shared/core/academic-paper-iteration-pipeline.md`;
+- `../nature-shared/core/atomic-claim-verification.md`;
 - `../nature-shared/core/editor-reviewer-decision-engine.md`;
 - `../nature-shared/core/paper-archetype-atlas.md`;
 - `../nature-shared/core/unknown-paper-research-protocol.md`;
@@ -107,7 +108,11 @@ Research enough to establish:
 
 ### 3. Build manuscript state
 
-Maintain claim, evidence, figure, source and concern ledgers.
+Maintain one row per atomic content item in the atomic-claim ledger, together
+with evidence, figure, source and concern ledgers. Split every
+scientific assertion while preserving scope, qualifiers, negation, comparators,
+quantifiers, and conditions. Verify whether the located warrant actually entails
+the assertion.
 
 Build:
 
@@ -151,6 +156,7 @@ scientific relation
 Before simulated review, check:
 
 - claim/evidence consistency;
+- complete atomic-claim coverage and definition/proof/source entailment;
 - statistics/reporting;
 - figure adequacy;
 - explanation depth;
@@ -251,6 +257,9 @@ Use it only when:
 - no unresolved publication-criteria blocker;
 - no unresolved technical blocker to a headline claim;
 - headline claims are established or appropriately narrowed;
+- every in-scope atomic assertion has an allowed release status and zero
+  `SUPPORTED_INTERNAL`, `UNRESOLVED`, `CONTRADICTED`, `BLOCKED`, or in-scope
+  `NOT_ASSESSABLE` manuscript assertions remain;
 - central alternatives/boundaries are visible;
 - methods/statistics/reporting are adequate;
 - figures/diagrams expose the needed evidence;
@@ -259,7 +268,13 @@ Use it only when:
 - author voice is natural rather than generic/AI-like;
 - citations/prior work are fair and sufficiently verified;
 - main/support allocation is appropriate;
-- manuscript surfaces are free of project leakage and obvious punctuation defects;
+- every standalone surface is locally intelligible, every display in the abstract
+  has a target-resolved disposition, and no unexplained private term/symbol or
+  unresolved surface-review item remains;
+- no release placeholder remains in manuscript-facing text;
+- rendered artifacts, when present, pass every-page layout, metadata,
+  accessibility, and final-page/spill review;
+- manuscript surfaces are free of project leakage and punctuation defects;
 - remaining requests are optional enrichment or production copyedit.
 
 This is a **simulation of readiness**, not a promise of real acceptance.

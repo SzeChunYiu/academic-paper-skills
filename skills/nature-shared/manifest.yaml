@@ -1,5 +1,5 @@
 name: nature-shared
-version: 2.1.0
+version: 2.2.0
 description: >
   Declarative manifest for shared academic-paper reference modules. This package
   is not a standalone workflow; installed skills load exact shared core,
@@ -29,6 +29,8 @@ core:
       path: core/paper-archetype-atlas.md
     - condition: shared reader workflow is explicitly requested by another academic-paper skill
       path: core/reader-workflow.md
+    - condition: full manuscript, theory/proof section, submission-ready deliverable, public posting, or decision-relevant revision requires a fail-closed inventory of every atomic scientific assertion, definition, proof dependency, numerical claim, source claim, availability statement, and cross-section restatement
+      path: core/atomic-claim-verification.md
     - condition: maintaining terminology consistency across paper reading, polishing, writing, or slide generation
       path: core/terminology-ledger.md
     - condition: rewriting or polishing substantial author-provided prose while preserving a recognizable authorial cadence, agency, terminology, stance, or manuscript-level voice
@@ -78,5 +80,5 @@ quality_tools:
   consistency_purpose: warn about terminology variants, equivalent lengths expressed in different units, and equal numeric values reported at different precision
   manuscript_surface_script: scripts/audit_manuscript_surface.py
   manuscript_surface_use_when: final plain-text/Markdown manuscript, legend, caption, table-note, abstract, or section QA after scientific drafting is stable
-  manuscript_surface_purpose: conservatively flag repository/artifact leakage and high-confidence mechanical punctuation defects without auto-rewriting meaning-sensitive language
+  manuscript_surface_purpose: conservatively flag repository/artifact leakage, high-confidence mechanical punctuation defects, stage-aware submission placeholders, abstract display-math review, opaque/unexpanded identifier candidates, and paper-private Greek/alphanumeric symbols without auto-rewriting meaning-sensitive language; use fail-on-review only as a candidate gate before ledger adjudication
   script_resolution: resolve relative to the nature-shared package directory, never the user working directory
