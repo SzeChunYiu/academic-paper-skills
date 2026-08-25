@@ -1,8 +1,8 @@
 # Figure contract before plotting
 
-A publication-quality scientific figure is a visual argument, not an isolated pretty plot. Every figure starts from a **claim, reader question, evidence/estimand, data structure, and uncertainty/alternative-explanation check** before code or aesthetics. For serious manuscript figure design/redesign, a focused analogue-paper pass may also be needed to learn what visual evidence comparable claims normally require without copying another paper's visual identity.
+A publication-quality scientific figure is a visual argument, not an isolated pretty plot. Every figure starts from a **claim, reader question, evidence/estimand, data structure, and uncertainty/alternative-explanation check** before code or aesthetics. For serious manuscript figure design/redesign, first resolve the paper's scientific archetype and then study close analogue papers when useful.
 
-When the user asks **what figures or plots should be made**, load `../../../nature-shared/core/figure-evidence-planning.md` before choosing a backend or chart type. When deciding whether a candidate figure belongs in main text/support or should be omitted, also load `../../../nature-shared/core/manuscript-content-selection.md`.
+When the user asks **what figures or plots should be made**, load `../../../nature-shared/core/figure-evidence-planning.md` before choosing a backend or chart type. When deciding whether a candidate figure belongs in main text/support or should be omitted, also load `../../../nature-shared/core/manuscript-content-selection.md`. When the paper class matters, load `../../../nature-shared/core/paper-archetype-atlas.md` so a trial, mechanism paper, benchmark, resource paper, theory paper, qualitative study, review, and hybrid paper are not forced into one visual sequence.
 
 ## Backend selection uses a saved preference
 
@@ -31,6 +31,26 @@ Use all user-provided observations and requested variables unless an exclusion h
 If any row, column, replicate, image, or category is excluded, record the before/after counts, the exact rule, and the reason in the QA notes. Preserve the unmodified source data and never silently select convenient columns to satisfy a template.
 
 Plan figures by scientific claims, not by source tables. Do not turn each table into a separate figure when several tables answer the same question. If an effect is defined within matched datasets, subjects, seeds, or tasks, inspect and visualize paired differences rather than relying only on overlapping marginal distributions; large between-unit heterogeneity can hide a strong paired effect.
+
+## Paper-archetype calibration gate
+
+Before planning a serious manuscript figure sequence, use `../../../nature-shared/core/paper-archetype-atlas.md` to classify the dominant epistemic job.
+
+Examples:
+
+- **mechanism/discovery** — phenomenon, dependency/perturbation, mechanism discrimination, orthogonal/model support, boundary;
+- **randomized intervention** — participant/design orientation, primary outcome/effect with uncertainty, safety/secondary evidence;
+- **observational** — population/estimand, adjusted association, identification/confounding, heterogeneity/sensitivity, generalizability;
+- **computational/ML** — evaluation regime, fair comparison, heterogeneity, component evidence, OOD/generalization, calibration/failure;
+- **method/tool** — principle/capability, technical validation, benchmark, operating regime, real application, limitation;
+- **resource/dataset** — coverage, construction/processing, quality/validation, reuse/access;
+- **theory/proof** — figures only when they clarify geometry/regimes, illustrate consequences, or test numerical behavior; proof remains the decisive evidence for theorem claims;
+- **qualitative** — a paper may legitimately need no main figure; use conceptual/thematic displays only when they improve interpretation;
+- **review/synthesis** — figures encode taxonomy, evidence maps, mechanisms, study-selection/meta-analytic structure, or conceptual relationships rather than pretending to be original empirical results.
+
+Hybrid papers combine only the roles required by their actual publication promises. Do not duplicate orientation/validation simply because two archetypes are present.
+
+There is no universal main-figure count or sequence.
 
 ## Claim-driven plot planning gate
 
@@ -113,16 +133,41 @@ Main figures carry the **shortest sufficient visual evidence chain** for headlin
 
 Do not bury a failed external validation, subgroup reversal, adverse effect, or failure boundary in support material if the abstract/title/general claim would otherwise become misleading.
 
-## The eight-point contract
+## Legend/caption and manuscript-surface gate
+
+Before delivering figure titles, legends, captions, table notes, alt text or body callouts, load:
+
+- `../../references/figure-legend-conventions.md`;
+- `../../../nature-shared/core/manuscript-surface-qa.md`.
+
+This is a **hard last-mile gate**. Manuscript-facing text must not expose internal plotting or repository artifacts merely because the figure pipeline knows them.
+
+Remove, translate or relocate as appropriate:
+
+- plot-script/notebook/config names;
+- local/repository paths;
+- source/output image filenames;
+- helper/class/function names;
+- CLI commands/flags;
+- branch/PR/issue/commit/CI details;
+- temporary run/checkpoint/output identifiers;
+- raw repository links outside the designated availability/artifact location.
+
+A legend should describe the scientific display, not how the project tree generated it.
+
+Then run punctuation/typography QA for doubled punctuation, spacing, bracket balance, figure-reference forms, panel punctuation, units, ranges/minus signs, and target-specific citation/equation/title conventions. Do not mechanically alter scientific identifiers or chemical/biological names.
+
+## The nine-point contract
 
 1. **Core conclusion**: write the one-sentence claim the figure must defend.
 2. **Reader question**: state what uncertainty/comparison the reader should resolve by inspecting the figure.
-3. **Evidence/estimand**: identify the data/statistical unit, quantity of interest, and alternative explanation.
-4. **Representation**: choose the plot/image/table/schematic family from the data/question, not journal popularity.
-5. **Evidence chain**: map each planned panel to one unique claim question, and drop or merge panels that only redraw another panel's evidence.
-6. **Analogue evidence prior**: when applicable, record what comparable papers make visible for claims of this type, plus patterns deliberately rejected if they do not fit our data.
-7. **Backend**: use the explicit or saved Python/R track exclusively once rendering begins.
-8. **Journal/export contract**: set final dimensions, 5 pt glyph floor, editable text, source data, statistics, image-integrity notes, accessibility, and export formats before styling.
+3. **Paper archetype**: identify the relevant epistemic job so figure roles match the scientific promise.
+4. **Evidence/estimand**: identify the data/statistical unit, quantity of interest, and alternative explanation.
+5. **Representation**: choose the plot/image/table/schematic family from the data/question, not journal popularity.
+6. **Evidence chain**: map each planned panel to one unique claim question, and drop or merge panels that only redraw another panel's evidence.
+7. **Analogue evidence prior**: when applicable, record what comparable papers make visible for claims of this type, plus patterns deliberately rejected if they do not fit our data.
+8. **Backend**: use the explicit or saved Python/R track exclusively once rendering begins.
+9. **Journal/export + surface contract**: set physical/export requirements and ensure every manuscript-facing label/legend/caption is artifact-clean, punctuated correctly, and target-aware.
 
 The highest-priority rule is: **the chart serves the scientific logic**. Aesthetic polish, template matching, analogue similarity, and complex layout are subordinate to making the core conclusion clear, defensible, reviewable, and faithful to the data.
 
