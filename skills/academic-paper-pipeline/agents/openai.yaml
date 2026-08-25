@@ -1,0 +1,4 @@
+interface:
+  display_name: "Academic Paper Pipeline"
+  short_description: "Iterate a manuscript through review to readiness"
+  default_prompt: "Use $academic-paper-pipeline to research, write, review, revise, and re-review this manuscript until the simulated editor judges it publication-ready or a real blocker remains."
