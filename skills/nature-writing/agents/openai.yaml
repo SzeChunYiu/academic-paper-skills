@@ -1,4 +1,6 @@
 interface:
-  display_name: "Nature Writing"
-  short_description: "Draft manuscripts and initial-submission materials"
-  default_prompt: "Use $nature-writing to draft a Nature-style manuscript section or initial-submission package from these materials."
+  display_name: "Nature Writing (Legacy)"
+  short_description: "Legacy writing implementation; use academic-writing"
+  default_prompt: "Use $nature-writing only for backward-compatible legacy writing workflows; prefer $academic-writing for new academic manuscript work."
+policy:
+  allow_implicit_invocation: false
