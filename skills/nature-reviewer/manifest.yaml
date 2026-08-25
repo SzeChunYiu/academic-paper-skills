@@ -1,14 +1,14 @@
 name: nature-reviewer
-version: 2.3.0
+version: 2.4.0
 description: >
   Declarative manifest for journal-aware pre-submission editor/reviewer
   simulation. The legacy skill name remains for compatibility; review criteria
   are resolved from the exact target journal/publication model rather than
   assuming flagship Nature. Close analogue papers may inform field-specific
   evidence expectations but never substitute for official criteria or manuscript facts.
-  Review may also audit whether content is allocated to the correct manuscript/artifact
-  layer, whether the figure set exposes the evidence required by headline claims,
-  and whether central ideas are explained deeply enough for the intended reader.
+  Review also checks archetype-appropriate evidence/figure architecture,
+  explanation sufficiency, manuscript/artifact allocation, and final manuscript-
+  surface leakage/punctuation hygiene without confusing copy-editing with science.
 
 always_load:
   - references/source-basis.md
@@ -16,10 +16,16 @@ always_load:
 
 references:
   on_demand:
+    - condition: reviewer/editor should resolve the dominant paper archetype and ask whether evidence, explanation depth and main-figure roles fit a mechanism/discovery, trial/intervention, observational, computational/ML, method/tool/software, resource/dataset, theory/proof, qualitative, review/synthesis or hybrid scientific promise
+      path: ../nature-shared/core/paper-archetype-atlas.md
+    - condition: reviewer/editor should inspect recent cross-archetype counterexamples before treating one field/journal pattern as universal
+      path: ../nature-shared/research/stratified-paper-reading-2025-2026.md
     - condition: reviewer/editor should assess whether a central idea, method, mechanism, result, equation, figure interpretation, or implication is under-explained; whether hidden premises prevent readers from reconstructing the evidence-to-claim chain; or whether the paper is so compressed that technically capable readers must guess rationale, meaning, or boundaries
       path: ../nature-shared/core/explanatory-sufficiency.md
     - condition: reviewer/editor should assess whether source-code/repository/project details are cluttering the scientific narrative, whether decisive evidence is buried in Methods/SI, or whether content belongs in main text, figures, legends, Methods, availability, artifact docs, or should be omitted
       path: ../nature-shared/core/manuscript-content-selection.md
+    - condition: reviewer/editor should assess whether filenames, script/helper names, file paths, raw repository links, CLI/developer residue, figure-caption artifact leakage, or punctuation/spacing/bracket defects remain on manuscript-facing surfaces; classify ordinary copy-editing as clarity/reporting unless it changes meaning or scientific identity
+      path: ../nature-shared/core/manuscript-surface-qa.md
     - condition: reviewer/editor should assess whether the figure set actually supports headline claims, which plots/evidence roles are missing, whether pooled summaries hide heterogeneity/pairing/calibration/failure boundaries, or what visual evidence would close a decision-relevant concern
       path: ../nature-shared/core/figure-evidence-planning.md
     - condition: user asks how comparable papers establish similar claims, what evidence/figures reviewers in this paper class may expect, or whether the manuscript's evidence architecture is unusual relative to close analogues; use as context only, not publication policy
