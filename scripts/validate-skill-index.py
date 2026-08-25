@@ -5,7 +5,7 @@ Checks:
 - the number of listed triggerable skills matches the skill index count
 - every non-support skill appears in the README and README_EN tables
 - every index entry points to an existing skill README
-- nature-shared stays excluded from the triggerable skill count
+- support/reference skills stay excluded from the triggerable skill count
 """
 from __future__ import annotations
 
@@ -15,13 +15,16 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILLS_DIR = ROOT / "skills"
-SUPPORT_ONLY = {"nature-shared"}
+# nature-writing is a legacy implementation/reference layer. The canonical
+# public triggerable replacement is academic-writing.
+SUPPORT_ONLY = {"nature-shared", "nature-writing"}
 INDEX_RE = re.compile(r"^\| \[`([^`]+)`\]\((skills/[^)]+/README(?:_EN)?\.md)\) \|", re.M)
 PLACEHOLDER_SKILL = "nature-<topic>"
 
 
 def filter_entries(entries):
     return [item for item in entries if item[0] != PLACEHOLDER_SKILL]
+
 
 def expected_skill_list(skills):
     return [s for s in skills if s not in SUPPORT_ONLY]
@@ -76,8 +79,9 @@ def main() -> int:
         if not target.exists():
             errors.append(f"Missing index target: {rel} for {name}")
 
-    if "nature-shared" in zh_names or "nature-shared" in en_names:
-        errors.append("nature-shared must not appear in the triggerable skill index")
+    for support_name in SUPPORT_ONLY:
+        if support_name in zh_names or support_name in en_names:
+            errors.append(f"{support_name} must not appear in the triggerable skill index")
 
     if errors:
         print("Skill index validation failed:")

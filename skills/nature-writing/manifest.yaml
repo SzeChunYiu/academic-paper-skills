@@ -1,5 +1,5 @@
 name: nature-writing
-version: 2.6.0
+version: 2.7.0
 description: >
   Declarative manifest for journal-aware academic drafting, restructuring, and
   initial-submission requests. The legacy skill name is retained for backward
@@ -9,13 +9,15 @@ description: >
   preflight. Substantial rewrites can study close analogue papers for writing,
   evidence, data, and figure conventions while preserving a separate author voice,
   research-backed natural scholarly prose, explanatory sufficiency, explicit
-  manuscript-content selection, and claim-driven figure/plot suggestions.
+  manuscript-content selection, claim-driven figure/plot suggestions, archetype-
+  specific evidence logic, and a final manuscript-surface leakage/punctuation scrub.
 
 always_load:
   - ../nature-shared/core/reader-workflow.md
   - ../nature-shared/core/paper-type-taxonomy.md
   - ../nature-shared/core/ethics.md
   - ../nature-shared/core/terminology-ledger.md
+  - ../nature-shared/core/manuscript-surface-qa.md
   - static/core/stance.md
   - static/core/rhetorical-engine.md
   - static/core/workflow.md
@@ -101,10 +103,16 @@ axes:
 
 references:
   on_demand:
+    - condition: resolve the dominant scientific/epistemic paper archetype and calibrate writing, evidence dependencies, explanation hotspots, main-figure roles, support allocation, and anti-patterns across mechanism/discovery, trial/intervention, observational, computational/ML, method/tool/software, resource/dataset, theory/proof, qualitative, review/synthesis, or hybrid papers
+      path: ../nature-shared/core/paper-archetype-atlas.md
     - condition: manuscript prose is concise but a reader may not understand a central idea, method, mechanism, result, equation, figure interpretation, or implication because rationale, intermediate reasoning, assumptions, comparison meaning, or boundaries are missing; use to audit minimum sufficient explanation without turning the paper into a textbook
       path: ../nature-shared/core/explanatory-sufficiency.md
     - condition: deciding what source material belongs in main text, figures, legends, Methods, Extended Data/SI, Data/Code/Resource Availability, repository documentation, or should be omitted; especially when file paths, helper names, scripts, setup commands, project/repository links, configs, implementation modules, or exhaustive technical details are leaking into manuscript prose
       path: ../nature-shared/core/manuscript-content-selection.md
+    - condition: final manuscript-facing text, captions, legends, table notes, equations, or abstract need a last-mile file/path/script/helper/CLI/repository/output-name scrub plus punctuation, spacing, bracket, range/minus/hyphen, figure-reference, and target-aware copy-editing QA
+      path: ../nature-shared/core/manuscript-surface-qa.md
+    - condition: plain-text or Markdown manuscript surface is available for a conservative mechanical artifact-leakage and punctuation scan
+      path: ../nature-shared/scripts/audit_manuscript_surface.py
     - condition: deciding what figures or plots the manuscript needs, suggesting visual evidence for each major claim, or mapping reader questions/estimands/data structures/uncertainty to plot families and main-versus-support figure roles before rendering
       path: ../nature-shared/core/figure-evidence-planning.md
     - condition: drafting or rewriting academic prose that feels generic, formulaic, over-smoothed, machine-like, repetitive, connector-heavy, weakly authorial, or difficult to follow sentence by sentence; use for proposition dependencies, given/new progression, identity chains, local stance, functional syntax, cadence, and anti-template repair without detector evasion
@@ -129,8 +137,10 @@ references:
       path: references/section-move-atlas.md
     - condition: needs empirical research support for a writing rule, disciplinary variation, syntax, titles, abstracts, Methods rhetoric, Discussion rhetoric, cohesion, paragraph flow, or corpus-grounded writing advice
       path: references/cross-disciplinary-writing-evidence.md
-    - condition: needs concrete cross-venue counterexamples and direct-reading observations spanning Nature/NMI/npj, PLOS, JAMA, IEEE, eLife, and JMLR publication ecologies; especially to test whether a proposed writing rule is genuinely transferable
+    - condition: needs concrete cross-venue counterexamples and direct-reading observations spanning Nature/NMI/npj, PLOS, JAMA, IEEE, eLife, JMLR, Scientific Data, mechanism, trial, resource and qualitative publication ecologies; especially to test whether a proposed writing rule is genuinely transferable
       path: references/direct-reading-notes-2025-2026.md
+    - condition: needs the newer stratified 2025-2026 paper-reading corpus organized by epistemic archetype and figure/evidence role
+      path: ../nature-shared/research/stratified-paper-reading-2025-2026.md
     - condition: user asks to learn current writing patterns from a named journal/venue or field, emulate recent comparable papers, build/update a local corpus profile, or diagnose why a scientifically correct draft does not resemble the target literature
       path: references/target-corpus-calibration.md
     - condition: analyzing dozens or hundreds of extracted .md/.txt papers for scalable section, paragraph, sentence, stance, connective, contribution-signal, or figure/table-call statistics before semantic move annotation

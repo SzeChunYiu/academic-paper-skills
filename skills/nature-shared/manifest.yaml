@@ -1,9 +1,9 @@
 name: nature-shared
-version: 1.9.0
+version: 2.1.0
 description: >
   Declarative manifest for shared academic-paper reference modules. This package
-  is not a standalone workflow; installed skills load exact shared core or
-  journal-format files on demand.
+  is not a standalone workflow; installed skills load exact shared core,
+  research, or journal-format files on demand.
 
 # Design note: never preload the whole shared package. Requesting skills should
 # load only the specific file listed below and then return to their own workflow,
@@ -13,12 +13,20 @@ always_load: []
 
 core:
   on_demand:
+    - condition: orchestrating a manuscript through repeated research, drafting, figures/statistics, independent review, editor synthesis, revision and targeted re-review until simulated publication readiness or a real blocker
+      path: core/academic-paper-iteration-pipeline.md
+    - condition: current paper type, study design, target venue, reporting norm, writing convention, figure grammar or review expectation is materially unfamiliar/uncertain and the session should research comparable papers/official guidance rather than force an existing template
+      path: core/unknown-paper-research-protocol.md
+    - condition: sentence-to-sentence or paragraph-to-paragraph logic is weak, prose reads like disconnected mini-summaries, evidence-to-inference or analysis-to-analysis handoffs are unclear, identity chains break, or reader-expectation/given-new/topic/stress principles should be applied without forcing a rigid template
+      path: core/sentence-logic-and-cohesion.md
     - condition: shared ethics, safety, authorship, disclosure, or non-invention guardrails are needed
       path: core/ethics.md
     - condition: human or animal ethics, clinical research, reporting summaries, image integrity, structures, chemistry, taxonomy, geological, archaeological, or palaeontological compliance is involved
       path: core/research-compliance.md
     - condition: classifying paper type, article genre, or manuscript family before applying a writing/reader workflow
       path: core/paper-type-taxonomy.md
+    - condition: resolving the manuscript's dominant epistemic archetype across mechanism/discovery, randomized intervention, observational association, computational/ML, method/tool/software, dataset/resource, theory/proof, qualitative/interpretive, review/synthesis, or hybrid forms so writing/evidence/figure expectations are calibrated by scientific job rather than journal prestige
+      path: core/paper-archetype-atlas.md
     - condition: shared reader workflow is explicitly requested by another academic-paper skill
       path: core/reader-workflow.md
     - condition: maintaining terminology consistency across paper reading, polishing, writing, or slide generation
@@ -35,12 +43,19 @@ core:
       path: core/manuscript-content-selection.md
     - condition: deciding what figures/plots a paper needs, suggesting visual evidence for claims, mapping reader questions and estimands to plot families, or planning main versus supporting figure roles before rendering
       path: core/figure-evidence-planning.md
+    - condition: final manuscript-facing QA after drafting, including a last-mile scrub for filenames, file paths, script/helper/class names, CLI flags, repository/developer history, raw project links, output filenames, figure-legend leakage, punctuation/spacing/bracket defects, range/minus/hyphen review, and target-aware scientific copy-editing
+      path: core/manuscript-surface-qa.md
     - condition: auditing an existing or multi-round-revised manuscript for accumulated drift — terminology/unit/number variants, headline counts that do not reconcile with the Methods, claims contradicted by the paper's own tables, over- or under-claiming, tense parallelism, and prose that restates displays
       path: core/consistency-sweep.md
     - condition: drafting, restructuring, compressing, or reviewer-revising scientific main text — classify results as core/support/qualification/robustness/heterogeneity/provenance/alternative inference/edge case; allocate evidence across main text, captions, and SI; run paragraph-necessity, deletion, statistics-location, and claim-repetition checks
       path: core/main-text-discipline.md
     - condition: pre-submission editor/reviewer simulation, rejection-risk engineering, decision-proof construction, major-revision planning, or deciding whether to add evidence versus narrow/remove a claim
       path: core/editor-reviewer-decision-engine.md
+
+research:
+  on_demand:
+    - condition: recent stratified cross-archetype examples are needed to challenge a local paper/figure/writing assumption across mechanism, trial, computational, resource, qualitative, theory and review papers
+      path: research/stratified-paper-reading-2025-2026.md
 
 journal_formats:
   on_demand:
@@ -59,6 +74,9 @@ journal_formats:
 
 quality_tools:
   consistency_script: scripts/check_consistency.py
-  use_when: auditing an existing full manuscript or a manuscript revised over multiple rounds
-  purpose: warn about terminology variants, equivalent lengths expressed in different units, and equal numeric values reported at different precision
+  consistency_use_when: auditing an existing full manuscript or a manuscript revised over multiple rounds
+  consistency_purpose: warn about terminology variants, equivalent lengths expressed in different units, and equal numeric values reported at different precision
+  manuscript_surface_script: scripts/audit_manuscript_surface.py
+  manuscript_surface_use_when: final plain-text/Markdown manuscript, legend, caption, table-note, abstract, or section QA after scientific drafting is stable
+  manuscript_surface_purpose: conservatively flag repository/artifact leakage and high-confidence mechanical punctuation defects without auto-rewriting meaning-sensitive language
   script_resolution: resolve relative to the nature-shared package directory, never the user working directory

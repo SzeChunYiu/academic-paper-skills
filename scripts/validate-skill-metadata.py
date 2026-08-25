@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate nature-skills metadata consistency.
+"""Validate academic-paper-skills metadata consistency.
 
 Checks every top-level directory under skills/ for:
 - required SKILL.md / README.md / README_EN.md / manifest.yaml files
@@ -26,7 +26,9 @@ except ImportError as exc:  # pragma: no cover - developer environment guard
 ROOT = Path(__file__).resolve().parents[1]
 SKILLS_DIR = ROOT / "skills"
 REQUIRED_FILES = ("SKILL.md", "README.md", "README_EN.md", "manifest.yaml")
-SUPPORT_ONLY = {"nature-shared"}
+# nature-writing is retained only as the implementation/reference compatibility
+# layer behind the canonical triggerable academic-writing skill.
+SUPPORT_ONLY = {"nature-shared", "nature-writing"}
 COMPATIBILITY_SKILL_NAMES = {"nature-proposal-writer": "researchwrite"}
 ALLOWED_SKILL_FRONTMATTER_KEYS = {
     "allowed-tools",
@@ -150,14 +152,7 @@ PATH_KEYS = {"path", "reference", "script", "backend_script"}
 
 
 def iter_manifest_paths(node: Any, parent_key: str | None = None):
-    """Yield file paths declared in manifest routing metadata.
-
-    Manifest routes can point at files in several shapes: explicit `path`,
-    `reference`, or `script` keys; `always_load` lists; and `axes.*.values`
-    mappings whose values are fragment paths. Keep environment/config fields such
-    as `default_config` out of this check so local user paths are not treated as
-    repository files.
-    """
+    """Yield file paths declared in manifest routing metadata."""
     if isinstance(node, dict):
         for key, value in node.items():
             key = str(key)

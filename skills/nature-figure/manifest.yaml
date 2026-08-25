@@ -1,18 +1,29 @@
 name: nature-figure
-version: 3.2.0
+version: 3.4.0
 description: >
   Declarative manifest for journal-aware scientific figure design. The legacy
-  skill name is retained for compatibility. The plotting backend is independent
-  from the target journal; exact figure compliance is resolved by journal,
-  content type, submission stage, and figure component. Claim-driven planning
-  maps reader questions and estimands to visual evidence before rendering, while
-  analogue-paper study calibrates evidence roles without copying visual identity.
+  skill name is retained for compatibility. Data plotting, scientific diagrams,
+  and AI graphical abstracts are separate routes. Claim-driven planning maps
+  reader questions and estimands to evidence before rendering; paper-archetype
+  calibration prevents one universal figure sequence; analogue study calibrates
+  evidence roles without copying visual identity; and final manuscript-facing
+  legends/captions receive artifact-leakage and punctuation QA.
 
 always_load:
   - static/core/contract.md
   - static/core/stance.md
 
 routes:
+  scientific_diagram_workflow:
+    detect: |
+      Use for non-data or hybrid manuscript diagrams such as flowcharts,
+      mechanism diagrams, conceptual schematics, study workflows, state machines,
+      experimental timelines, directed dependency graphs, algorithm diagrams, and
+      system diagrams. Resolve scientific topology and edge semantics first, then
+      choose Graphviz, Schemdraw, Mermaid, custom Matplotlib/SVG, TikZ, or another
+      appropriate vector route. This route does not require the persisted Python/R
+      plotting backend unless quantitative plotting is also part of the figure.
+    reference: references/scientific-diagram-workflow.md
   graphical_abstract_workflow:
     detect: |
       Use this route whenever AI assists the planning, generation, revision, or
@@ -37,24 +48,24 @@ preference:
   config_env: NATURE_FIGURE_CONFIG
   default_config: ~/.config/nature-skills/nature-figure.json
   behavior: |
-    For plotting tasks, first honor an explicit Python/R choice, then a clearly
-    language-specific input workflow, then the saved preference returned by the
-    backend script. If none exists, ask once and save the answer. Backend
-    selection is independent of target journal.
+    For data plotting tasks, first honor an explicit Python/R choice, then a
+    clearly language-specific input workflow, then the saved preference returned
+    by the backend script. If none exists, ask once and save the answer. Backend
+    selection is independent of target journal and does not govern pure diagram
+    routes such as Graphviz/Mermaid/Schemdraw unless they are embedded in a
+    quantitative plotting workflow.
 
 axes:
   backend:
     detect: |
-      BLOCKING GATE WITH PERSISTED PREFERENCE. Determine the plotting backend
-      from an explicit user choice, a clearly language-specific input
-      file/workflow, or the saved preference returned by
+      BLOCKING GATE ONLY FOR DATA PLOTTING/QUANTITATIVE RENDERING. Determine the
+      plotting backend from an explicit user choice, a clearly language-specific
+      input file/workflow, or the saved preference returned by
       scripts/nature_figure_backend.py get. If no saved preference exists, ask
       exactly one concise question — "Python or R? I will remember this as your
       default." — and stop. Save the answer with the backend preference script
-      before proceeding. Only recommend a backend when the user explicitly asks
-      you to choose; in that case use references/backend-selection.md, state the
-      reason, save the selected backend, then proceed. Once selected, the
-      backend is exclusive for drawing, previewing, exporting, and visual QA.
+      before proceeding. Diagram-only planning/rendering through Graphviz,
+      Mermaid, Schemdraw or another routed diagram backend bypasses this gate.
     values:
       python:  static/fragments/backend/python.md
       r:       static/fragments/backend/r.md
@@ -62,14 +73,22 @@ axes:
 
 references:
   on_demand:
+    - condition: user asks for a scientific flowchart, mechanism diagram, conceptual schematic, study workflow, state machine, experimental timeline, directed dependency graph, algorithm diagram, system diagram, or beautiful vector scientific illustration; choose topology/backend and visual grammar before drawing
+      path: references/scientific-diagram-workflow.md
+    - condition: resolve the paper's dominant archetype before planning a full figure sequence, especially mechanism/discovery, randomized intervention, observational, computational/ML, method/tool/software, resource/dataset, theory/proof, qualitative, review/synthesis, or hybrid work
+      path: ../nature-shared/core/paper-archetype-atlas.md
     - condition: decide what figures or plots a paper needs from its claims, reader questions, estimands, data structures, uncertainty, alternative explanations, contribution type, and main-versus-support evidence role before rendering
       path: ../nature-shared/core/figure-evidence-planning.md
     - condition: decide whether a candidate figure/panel/detail belongs in main text, Extended Data/SI, Methods, availability, repository documentation, or should be omitted because it does not serve the scientific narrative
       path: ../nature-shared/core/manuscript-content-selection.md
+    - condition: final figure title, legend, caption, table note, alt text, or manuscript figure-call prose needs a last-mile scrub for filenames, paths, scripts/helpers, CLI/developer residue, repository URLs, punctuation/spacing/bracket defects, figure-reference formatting, and target-aware typography
+      path: ../nature-shared/core/manuscript-surface-qa.md
     - condition: study a few similar papers to decide which figures/panels/data belong in the manuscript, what visual evidence roles are conventional, how comparable data are plotted, or what belongs in main text versus SI without copying another paper's visual identity
       path: references/analogue-figure-calibration.md
     - condition: cross-skill analogue-paper study for argument/evidence/figure architecture before manuscript or figure redesign
       path: ../nature-shared/core/analogue-paper-calibration.md
+    - condition: deeper current cross-archetype calibration from recent mechanism, trial, computational, resource, qualitative, theory and review papers is needed
+      path: ../nature-shared/research/stratified-paper-reading-2025-2026.md
     - condition: any named target journal/venue outside exact Nature/NMI profiles; journal transfer; or cross-journal figure compliance, artwork, accessibility, graphical-abstract, or production adaptation
       path: references/journal-adaptation.md
     - condition: resolve an exact target journal, article/content type, submission stage, or distinguish live rules from family fallback
@@ -104,7 +123,7 @@ references:
       path: references/openrouter-image-generation.md
     - condition: AI-assisted graphical abstract planning, generation, revision, audit, journal-policy check, scientific verification, disclosure, or provenance
       path: references/ai-graphical-abstract-workflow.md
-    - condition: writing or auditing figure/table legend text — Fig. N | title, panel style, stats in legend, Source Data boilerplate, attribution; load the exact target-journal rules too when the target is known
+    - condition: writing or auditing figure/table legend text; use target-aware structure, panel decoding, statistics/uncertainty, artifact-leakage, punctuation and attribution rules rather than a universal Nature Communications skeleton
       path: references/figure-legend-conventions.md
     - condition: "end-to-end walkthroughs: bars, trends, heatmaps"
       path: references/tutorials.md

@@ -1,0 +1,171 @@
+# `academic-writing` Skill
+
+[中文说明](README.md)
+
+`academic-writing` is the canonical journal-agnostic writing skill for this repository. It drafts and restructures manuscripts from scientific evidence rather than from a Nature template.
+
+The older `skills/nature-writing/` directory remains only as a compatibility/reference implementation layer for mature section fragments, examples, and corpus scripts. **New user-facing invocation is `$academic-writing`.**
+
+## What It Does
+
+- resolves the real paper archetype before choosing structure;
+- builds the argument and claim/evidence dependencies before polishing sentences;
+- researches unfamiliar paper types/venues instead of guessing conventions;
+- studies broad stratified corpora and 3–6 close analogue papers without copying prose or figure identity;
+- checks whether ideas are explained deeply enough for the intended reader;
+- makes sentence-to-sentence logic explicit;
+- plans what evidence and figures the paper actually needs;
+- decides what belongs in main text, Methods, SI, availability, artifact docs, or nowhere;
+- preserves a recognizable author voice while avoiding generic AI-like prose;
+- adapts the scientifically stable manuscript to the exact target last;
+- runs a hard final filename/script/repository leakage and punctuation/typography gate.
+
+## Writing Model
+
+For substantial work:
+
+```text
+scientific evidence
+-> paper archetype
+-> question / contribution
+-> claim/evidence/boundary map
+-> content selection
+-> broad corpus + close analogues when useful
+-> figure/statistics plan
+-> section moves
+-> paragraph dependencies
+-> sentence dependencies
+-> explanatory sufficiency
+-> natural scholarly prose + author voice
+-> exact target adaptation
+-> final manuscript-surface QA
+```
+
+## Sentence Logic
+
+A difficult paragraph is audited sentence by sentence:
+
+```text
+inherits X
+-> relation R
+-> adds Y
+-> enables Z
+```
+
+The skill also checks identity chains, topic continuity, given/new progression when useful, subject–verb distance, emphasis position, evidence-to-inference warrants, and analysis-to-analysis handoffs.
+
+A connective labels a relationship. It does not create one.
+
+## Rich Content Without Bloat
+
+For a central idea/result, the skill asks whether the reader has enough of the following to understand and evaluate it:
+
+- identity/definition;
+- motivation;
+- mechanism/inferential logic;
+- decisive evidence;
+- comparator/baseline;
+- uncertainty;
+- alternative explanation;
+- assumption/boundary;
+- relation to prior work;
+- scientific consequence;
+- visual evidence when useful.
+
+This is **minimum sufficient scientific explanation**, not maximal word count.
+
+## Learning From Other Papers
+
+Use two scales:
+
+- **broad stratified corpus** — descriptive tendencies across dozens/hundreds of genuinely comparable papers;
+- **3–6 close analogues** — deep reasoning about evidence sequence, explanation depth, figure roles, uncertainty, local terminology, and reader assumptions.
+
+Published frequency is not a quality score and not an acceptance rule.
+
+Learn the function behind the writing/figure choice, then create original prose and visuals for the current evidence.
+
+## Unknown Paper Types
+
+If the current paper class is not covered confidently, `academic-writing` does not force a nearby template.
+
+It researches:
+
+1. current official target guidance;
+2. applicable reporting/methodological standards;
+3. comparable recent papers;
+4. nearest-neighbor full papers;
+5. counterexamples.
+
+It then builds a temporary manuscript-specific archetype profile.
+
+## Figures
+
+Figure planning follows:
+
+```text
+claim
+-> reader question
+-> scientific/statistical unit
+-> estimand / visual object
+-> data structure
+-> uncertainty / competing explanation
+-> representation
+-> main/support/omit
+```
+
+A qualitative/theory paper may need no quantitative main figure. A failure boundary may deserve a main figure when it changes the headline conclusion.
+
+Detailed rendering and scientific diagrams route to the figure skill.
+
+## Natural Scholarly Tone
+
+The goal is not AI-detector evasion.
+
+The skill repairs:
+
+- repetitive stance;
+- standardized cadence;
+- generic prestige language;
+- synonym rotation that damages technical identity;
+- connector stuffing;
+- depersonalized prose that hides meaningful author decisions;
+- repeated sentence/paragraph templates.
+
+It preserves author voice after logic/evidence repair.
+
+## Final Surface Gate
+
+Before delivery, manuscript-facing text is checked for:
+
+- file/directory paths;
+- script/notebook/config/output filenames;
+- helper/class/function names;
+- CLI commands/flags;
+- branch/PR/issue/commit/CI residue;
+- raw project URLs outside availability sections;
+- doubled/missing punctuation;
+- punctuation spacing;
+- bracket balance;
+- malformed figure references;
+- range/minus/hyphen/unit issues;
+- target-aware citation/equation/legend punctuation.
+
+**The audit trail may name the artifact; the manuscript should name the science.**
+
+## Repeated Review/Revision
+
+For a closed-loop process that keeps researching, writing, rebuilding figures, reviewing, revising, and re-reviewing until the simulated editor reaches a terminal decision, use `academic-paper-pipeline`.
+
+## Boundaries
+
+- Never invent results, experiments, citations, mechanisms, significance, uncertainty, or novelty.
+- Never hide contradictory evidence to improve presentation.
+- Never copy distinctive prose or visual identity from analogue papers.
+- Never force Nature conventions onto a non-Nature target.
+- Never equate more words, more figures, or more experiments with a stronger paper.
+- Never leave repository implementation detail in manuscript prose merely because it is available to the AI session.
+
+## Compatibility
+
+The old `nature-writing` implementation remains installed for backward compatibility and internal references, but it is not the canonical public writing skill and should not be implicitly invoked for new work.

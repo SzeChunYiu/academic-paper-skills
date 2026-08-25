@@ -1,0 +1,37 @@
+name: academic-paper-pipeline
+version: 1.0.0
+description: >
+  Declarative manifest for the journal-agnostic iterative academic-paper
+  orchestration workflow. It coordinates research, writing, figures/statistics,
+  independent review, editor synthesis, revision and re-review until simulated
+  publication readiness or an explicit real-world blocker.
+
+always_load:
+  - ../nature-shared/core/academic-paper-iteration-pipeline.md
+  - ../nature-shared/core/editor-reviewer-decision-engine.md
+  - ../nature-shared/core/paper-archetype-atlas.md
+  - ../nature-shared/core/unknown-paper-research-protocol.md
+  - ../nature-shared/core/sentence-logic-and-cohesion.md
+  - ../nature-shared/core/explanatory-sufficiency.md
+  - ../nature-shared/core/manuscript-content-selection.md
+  - ../nature-shared/core/figure-evidence-planning.md
+  - ../nature-shared/core/manuscript-surface-qa.md
+
+references:
+  on_demand:
+    - condition: exact target journal/venue, article type, submission stage, editorial model or live author instructions matter
+      path: ../nature-shared/journal-formats/journal-resolution.md
+    - condition: exact target publication objective needs fallback classification across selective broad-interest, field-advancement, rigor-first, clinical/policy-priority, evidence-assessment, or deadline-constrained models
+      path: ../nature-shared/journal-formats/editorial-decision-profiles.md
+    - condition: a few close papers should be studied deeply for current evidence, writing, explanation, figure and main-versus-support expectations
+      path: ../nature-shared/core/analogue-paper-calibration.md
+    - condition: author voice should be preserved through repeated rewrite rounds
+      path: ../nature-shared/core/author-voice-profile.md
+    - condition: prose sounds generic/machine-like or needs natural scholarly realization after logic is repaired
+      path: ../nature-shared/core/natural-scholarly-prose.md
+    - condition: current paper needs cross-archetype recent-paper counterexamples or deeper 2025-2026 descriptive calibration
+      path: ../nature-shared/research/stratified-paper-reading-2025-2026.md
+    - condition: manuscript has undergone multiple rounds and needs terminology/unit/number/claim consistency checking
+      path: ../nature-shared/core/consistency-sweep.md
+    - condition: Results/main-text revisions need shortest sufficient evidence chain, main-versus-support allocation, or revision-accretion control
+      path: ../nature-shared/core/main-text-discipline.md

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Academic Writing"
+  short_description: "Draft rigorous journal-agnostic academic manuscripts"
+  default_prompt: "Use $academic-writing to build or revise this academic manuscript from the evidence, with appropriate research, figures, logic, author voice, and target-journal adaptation."

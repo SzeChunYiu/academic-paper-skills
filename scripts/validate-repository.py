@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate repository-level Nature Skills metadata and README consistency.
+"""Validate repository-level academic-paper skill metadata and README consistency.
 
 This lightweight check intentionally avoids optional runtime dependencies. It is
 safe to run locally and in CI to catch stale skill counts, broken README index
@@ -19,10 +19,16 @@ from dataclasses import dataclass
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 SKILLS_DIR = ROOT / "skills"
 README_FILES = (ROOT / "README.md", ROOT / "README_EN.md")
-SKILL_LINK_RE = re.compile(r"\[`(nature-[^`]+)`\]\(skills/([^/)]+)/README(?:_EN)?\.md\)")
+# Public skill labels now include both canonical academic-* names and retained
+# nature-* specialist names. The directory capture remains authoritative.
+SKILL_LINK_RE = re.compile(
+    r"\[`((?:academic|nature)-[^`]+)`\]\(skills/([^/)]+)/README(?:_EN)?\.md\)"
+)
 BADGE_RE = re.compile(r"badge/skills-(\d+)-")
-EXCLUDED_INDEX_DIRS = {"nature-shared"}
-EXCLUDED_LINK_DIRS = {"nature-shared", "nature-<topic>"}
+# nature-writing is intentionally retained on disk as a compatibility/reference
+# implementation behind the canonical academic-writing skill.
+EXCLUDED_INDEX_DIRS = {"nature-shared", "nature-writing"}
+EXCLUDED_LINK_DIRS = {"nature-shared", "nature-writing", "nature-<topic>"}
 JSON_FILE_RE = re.compile(r"(^|/)package-lock\.json$|\.json$")
 TOML_FILE_RE = re.compile(r"\.toml$")
 REFERENCE_CONTENTS_RE = re.compile(
