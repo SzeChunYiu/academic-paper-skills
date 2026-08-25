@@ -5,8 +5,8 @@ from pathlib import Path
 
 
 SKILL = Path(__file__).parents[1]
-ROOT = SKILL.parents[1]
-LEGACY = ROOT / "nature-writing"
+SKILLS = SKILL.parent
+LEGACY = SKILLS / "nature-writing"
 
 
 def read(path: Path) -> str:
@@ -46,7 +46,7 @@ class AcademicWritingCanonicalTests(unittest.TestCase):
         skill = read(SKILL / "SKILL.md")
         for marker in ("inherits X", "relation R", "adds Y", "enables Z"):
             self.assertIn(marker, skill)
-        self.assertIn("Rich means scientifically sufficient", skill)
+        self.assertIn("scientifically sufficient, not verbose", skill)
         self.assertIn("minimum sufficient scientific explanation", skill.lower())
 
     def test_legacy_nature_writing_is_explicitly_support_only(self) -> None:
