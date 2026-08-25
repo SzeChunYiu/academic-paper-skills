@@ -1,12 +1,14 @@
 name: nature-figure
-version: 3.2.0
+version: 3.3.0
 description: >
   Declarative manifest for journal-aware scientific figure design. The legacy
   skill name is retained for compatibility. The plotting backend is independent
   from the target journal; exact figure compliance is resolved by journal,
   content type, submission stage, and figure component. Claim-driven planning
-  maps reader questions and estimands to visual evidence before rendering, while
-  analogue-paper study calibrates evidence roles without copying visual identity.
+  maps reader questions and estimands to visual evidence before rendering,
+  paper-archetype calibration prevents one universal figure sequence, analogue
+  study calibrates evidence roles without copying visual identity, and final
+  manuscript-facing legends/captions receive artifact-leakage and punctuation QA.
 
 always_load:
   - static/core/contract.md
@@ -62,14 +64,20 @@ axes:
 
 references:
   on_demand:
+    - condition: resolve the paper's dominant archetype before planning a full figure sequence, especially mechanism/discovery, randomized intervention, observational, computational/ML, method/tool/software, resource/dataset, theory/proof, qualitative, review/synthesis, or hybrid work
+      path: ../nature-shared/core/paper-archetype-atlas.md
     - condition: decide what figures or plots a paper needs from its claims, reader questions, estimands, data structures, uncertainty, alternative explanations, contribution type, and main-versus-support evidence role before rendering
       path: ../nature-shared/core/figure-evidence-planning.md
     - condition: decide whether a candidate figure/panel/detail belongs in main text, Extended Data/SI, Methods, availability, repository documentation, or should be omitted because it does not serve the scientific narrative
       path: ../nature-shared/core/manuscript-content-selection.md
+    - condition: final figure title, legend, caption, table note, alt text, or manuscript figure-call prose needs a last-mile scrub for filenames, paths, scripts/helpers, CLI/developer residue, repository URLs, punctuation/spacing/bracket defects, figure-reference formatting, and target-aware typography
+      path: ../nature-shared/core/manuscript-surface-qa.md
     - condition: study a few similar papers to decide which figures/panels/data belong in the manuscript, what visual evidence roles are conventional, how comparable data are plotted, or what belongs in main text versus SI without copying another paper's visual identity
       path: references/analogue-figure-calibration.md
     - condition: cross-skill analogue-paper study for argument/evidence/figure architecture before manuscript or figure redesign
       path: ../nature-shared/core/analogue-paper-calibration.md
+    - condition: deeper current cross-archetype calibration from recent mechanism, trial, computational, resource, qualitative, theory and review papers is needed
+      path: ../nature-shared/research/stratified-paper-reading-2025-2026.md
     - condition: any named target journal/venue outside exact Nature/NMI profiles; journal transfer; or cross-journal figure compliance, artwork, accessibility, graphical-abstract, or production adaptation
       path: references/journal-adaptation.md
     - condition: resolve an exact target journal, article/content type, submission stage, or distinguish live rules from family fallback
@@ -104,7 +112,7 @@ references:
       path: references/openrouter-image-generation.md
     - condition: AI-assisted graphical abstract planning, generation, revision, audit, journal-policy check, scientific verification, disclosure, or provenance
       path: references/ai-graphical-abstract-workflow.md
-    - condition: writing or auditing figure/table legend text — Fig. N | title, panel style, stats in legend, Source Data boilerplate, attribution; load the exact target-journal rules too when the target is known
+    - condition: writing or auditing figure/table legend text; use target-aware structure, panel decoding, statistics/uncertainty, artifact-leakage, punctuation and attribution rules rather than a universal Nature Communications skeleton
       path: references/figure-legend-conventions.md
     - condition: "end-to-end walkthroughs: bars, trends, heatmaps"
       path: references/tutorials.md
