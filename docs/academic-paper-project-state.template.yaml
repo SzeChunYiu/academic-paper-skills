@@ -1,0 +1,450 @@
+schema_version: "0.1.0"
+project:
+  id: "project:REPLACE_ME"
+  title_working: "REPLACE_ME"
+  state_version: 1
+  created_at: "YYYY-MM-DDThh:mm:ssZ"
+  updated_at: "YYYY-MM-DDThh:mm:ssZ"
+  scientific_decision_owner_ids:
+    - "agent:human-author-1"
+  operating_mode: "full_research_to_release"  # manuscript_only | proposal_to_paper | full_research_to_release
+  confidentiality:
+    classification: "internal"  # public | internal | confidential | proprietary | regulated
+    external_ai_processing_allowed: false
+    permitted_services: []
+    prohibited_input_classes:
+      - "direct_identifiers"
+      - "unpublished_confidential_peer_review"
+    retention_requirements: "REPLACE_ME"
+  intended_outputs:
+    - "research_article"
+  target:
+    journal_or_venue: null
+    content_type: null
+    stage: "planning"  # planning | drafting | pre_submission | revision | post_publication
+
+agents:
+  - id: "agent:human-author-1"
+    type: "person"
+    name: "REPLACE_ME"
+    roles:
+      - "scientific_decision_owner"
+      - "author"
+  - id: "agent:ai-assistant-1"
+    type: "software"
+    name: "REPLACE_ME"
+    version: "REPLACE_ME"
+    roles:
+      - "writing_assistance"
+    permitted_actions:
+      - "structure"
+      - "draft"
+      - "consistency_check"
+    prohibited_actions:
+      - "independent_scientific_approval"
+
+research_contract:
+  id: "contract:rc-001"
+  version: 1
+  status: "draft"  # draft | frozen | amended | superseded
+  live_question_or_tension: "REPLACE_ME"
+  contribution_class:
+    dominant: "empirical_finding"
+    secondary: []
+  unit_of_observation: "REPLACE_ME"
+  unit_of_inference: "REPLACE_ME"
+  population_domain_or_corpus: "REPLACE_ME"
+  intervention_exposure_or_phenomenon: "REPLACE_ME"
+  comparator_or_alternative_account: "REPLACE_ME"
+  outcome_or_evidence_criterion: "REPLACE_ME"
+  estimand_or_target_quantity: null
+  hypotheses_or_propositions:
+    - id: "hypothesis:h1"
+      text: "REPLACE_ME"
+      status: "prespecified"  # prespecified | exploratory | interpretive | not_applicable
+  intended_headline_claims:
+    - "claim:c1"
+  claim_boundaries:
+    - "REPLACE_ME"
+  decisive_evidence_requirements:
+    - "REPLACE_ME"
+  narrow_reframe_or_abort_rules:
+    - "REPLACE_ME"
+
+classification:
+  paper_archetype:
+    dominant: "observational_association"
+    secondary: []
+  studies:
+    - id: "study:s1"
+      archetype: "observational_association"
+      design: "REPLACE_ME"
+  result_types:
+    - id: "result-type:r1"
+      type: "comparative_estimate"
+
+reporting_profile:
+  id: "reporting:rp-001"
+  resolved_at: "YYYY-MM-DDThh:mm:ssZ"
+  adapters:
+    - id: "adapter:REPLACE_ME"
+      version_or_date: "REPLACE_ME"
+      authority: "REPLACE_ME"
+      reviewed_at: "YYYY-MM-DD"
+      applicability: "applicable"  # applicable | partially_applicable | not_applicable
+      not_applicable_reason: null
+  exact_target_rules:
+    resolved: false
+    official_source_checked_at: null
+    unresolved_items: []
+
+protocols:
+  - id: "protocol:p-001"
+    version: 1
+    status: "draft"  # draft | frozen | amended | superseded
+    frozen_at: null
+    registration:
+      status: "not_registered"  # not_registered | embargoed | public
+      identifier: null
+      registered_at: null
+    study_id: "study:s1"
+    objectives:
+      - "hypothesis:h1"
+    sampling_or_corpus_plan: "REPLACE_ME"
+    variables_outcomes_or_coding_rules: "REPLACE_ME"
+    procedures_or_source_treatment: "REPLACE_ME"
+    quality_control: "REPLACE_ME"
+    ethics_and_governance_links:
+      - "declaration:ethics-001"
+    analysis_plan_ids:
+      - "analysis-plan:ap-001"
+
+analysis_plans:
+  - id: "analysis-plan:ap-001"
+    version: 1
+    status: "draft"  # draft | frozen | amended | superseded
+    protocol_id: "protocol:p-001"
+    question_or_estimand: "REPLACE_ME"
+    analysis_population_or_material: "REPLACE_ME"
+    variables_or_inputs: "REPLACE_ME"
+    model_test_proof_or_interpretive_method: "REPLACE_ME"
+    missingness_or_incomplete_evidence_plan: "REPLACE_ME"
+    multiplicity_or_model_selection_plan: "REPLACE_ME"
+    uncertainty_plan: "REPLACE_ME"
+    diagnostics_and_assumptions:
+      - "REPLACE_ME"
+    robustness_and_sensitivity:
+      - "REPLACE_ME"
+    status_relative_to_data_access: "prespecified"
+
+deviations:
+  - id: "deviation:d-001"
+    applies: false
+    from_object_id: "analysis-plan:ap-001"
+    detected_at: null
+    actor_id: null
+    description: null
+    reason: null
+    affected_claim_ids: []
+    consequence_for_inference: null
+    manuscript_disclosure_locations: []
+    reconciliation_status: "not_applicable"
+
+search_runs:
+  - id: "search:sr-001"
+    mode: "claim_support"  # background_context | claim_support | analogue_calibration | systematic_evidence_synthesis | living_update
+    question: "REPLACE_ME"
+    databases_sources_and_platforms: []
+    exact_queries: []
+    executed_at: null
+    date_limits: null
+    language_limits: null
+    other_limits: null
+    deduplication_method: null
+    eligibility_criteria: []
+    screening_record_location: null
+    stopping_or_saturation_rule: "REPLACE_ME"
+    completeness_claim: "targeted_not_exhaustive"
+    update_due_at: null
+
+sources:
+  - id: "source:src-001"
+    work_identity:
+      title: "REPLACE_ME"
+      doi_or_persistent_id: null
+      publication_type: "journal_article"
+    version:
+      label: "version_of_record"
+      published_or_posted_at: null
+      relation_to_other_versions: []
+    acquisition:
+      acquired_at: null
+      checksum: null
+      license_or_access_basis: null
+    integrity:
+      metadata_status: "unverified"
+      correction_retraction_status: "unchecked"
+    extraction:
+      design_specific_card_status: "not_started"
+      extractor_ids: []
+      adjudication_status: "not_applicable"
+
+source_passages:
+  - id: "passage:sp-001"
+    source_id: "source:src-001"
+    locator_type: "page"  # page | section | figure | table | theorem | paragraph | timestamp
+    locator: "REPLACE_ME"
+    excerpt_hash: null
+    paraphrase: "REPLACE_ME"
+    locator_status: "unverified"
+    extraction_actor_id: "agent:human-author-1"
+
+data_assets:
+  - id: "data:data-001"
+    name: "REPLACE_ME"
+    version: "v1"
+    owner_or_controller: "REPLACE_ME"
+    access_status: "restricted"  # open | restricted | closed | synthetic
+    access_reason: "REPLACE_ME"
+    license: null
+    sensitivity: "confidential"
+    consent_or_governance_constraints: "REPLACE_ME"
+    schema_or_dictionary_id: null
+    units_and_keys: "REPLACE_ME"
+    acquisition_or_generation: "REPLACE_ME"
+    inclusion_exclusion_lineage: "REPLACE_ME"
+    transformation_parent_ids: []
+    checksum: null
+    immutable_snapshot_location: null
+    validation_report_ids: []
+    known_defects:
+      - "REPLACE_ME"
+
+validation_reports:
+  - id: "validation:data-001-v1"
+    asset_id: "data:data-001"
+    executed_at: null
+    validator_version: null
+    rules_checked: []
+    failures: []
+    overrides: []
+    status: "not_run"
+
+analyses:
+  - id: "analysis:a-001"
+    version: 1
+    plan_id: "analysis-plan:ap-001"
+    protocol_status: "prespecified"  # prespecified | deviation | exploratory | post_hoc
+    question_or_estimand: "REPLACE_ME"
+    input_data_ids:
+      - "data:data-001"
+    exclusions_or_filters: "REPLACE_ME"
+    code_or_workflow:
+      repository_or_location: null
+      commit_or_version: null
+      entrypoint: null
+    environment:
+      lockfile_or_image: null
+      hardware_materially_relevant: null
+    randomness:
+      seeds: []
+      nondeterminism_notes: null
+    method_specification: "REPLACE_ME"
+    diagnostics: []
+    robustness_outputs: []
+    exact_results:
+      - id: "result:r-001"
+        value: null
+        unit: null
+        uncertainty: null
+        denominator_or_sample_unit: null
+    execution_receipt:
+      executed_at: null
+      actor_id: null
+      input_hashes: []
+      output_hashes: []
+      status: "not_run"
+    assurance:
+      traceable: false
+      rerun_same_environment: false
+      rerun_clean_environment: false
+      independently_reproduced: false
+
+claims:
+  - id: "claim:c1"
+    text: "REPLACE_ME"
+    atomic: true
+    claim_class: "associational"  # descriptive | associational | causal | predictive | mechanistic | formal | interpretive | practical
+    scope:
+      population_domain_or_corpus: "REPLACE_ME"
+      conditions: []
+      comparator: "REPLACE_ME"
+      quantifier: "REPLACE_ME"
+      time: "REPLACE_ME"
+    evidence_status: "unresolved"  # supported | partially_supported | author_attested | unresolved | contradicted | blocked | not_assessable
+    support_edges:
+      - type: "analysis_result"
+        target_id: "result:r-001"
+        entailment_status: "unchecked"
+      - type: "source_passage"
+        target_id: "passage:sp-001"
+        entailment_status: "unchecked"
+    assumptions_and_boundaries:
+      - "REPLACE_ME"
+    contradicted_by: []
+    manuscript_locations: []
+    assurance_notes: "REPLACE_ME"
+
+figures_and_tables:
+  - id: "figure:f1"
+    type: "figure"
+    question_answered: "REPLACE_ME"
+    supported_claim_ids:
+      - "claim:c1"
+    analysis_ids:
+      - "analysis:a-001"
+    data_asset_ids:
+      - "data:data-001"
+    statistical_or_sample_unit: "REPLACE_ME"
+    comparator_and_uncertainty: "REPLACE_ME"
+    render:
+      code_version: null
+      environment: null
+      receipt_id: null
+    source_data_asset_id: null
+    caption_status: "draft"
+    accessibility:
+      alt_text: "REPLACE_ME"
+      long_description: "REPLACE_ME"
+      machine_generated: false
+      human_verified: false
+
+section_contracts:
+  - section_id: "abstract"
+    reader_question: "What was asked, done, found, and defensibly concluded?"
+    required_input_ids:
+      - "claim:c1"
+      - "result:r-001"
+    allowed_claim_classes:
+      - "associational"
+    forbidden_moves:
+      - "causal_upgrade"
+      - "new_result"
+      - "omit_material_boundary"
+    reporting_hooks: []
+    cross_section_invariants:
+      - "numbers_match_results"
+      - "claim_strength_not_greater_than_discussion"
+    exit_tests:
+      - "all_claims_linked"
+      - "primary_result_present"
+    status: "not_evaluated"
+
+manuscript:
+  current_version_id: "manuscript:m-001"
+  versions:
+    - id: "manuscript:m-001"
+      version: 1
+      location: null
+      created_at: null
+      parent_version_id: null
+      claim_coverage: "incomplete"
+      semantic_delta_id: null
+
+declarations:
+  ethics:
+    - id: "declaration:ethics-001"
+      approval_or_waiver: "REPLACE_ME"
+      reviewing_body: "REPLACE_ME"
+      identifier: "REPLACE_ME"
+      date: "YYYY-MM-DD"
+      consent: "REPLACE_ME"
+      amendments: []
+  contributions:
+    - contributor_id: "agent:human-author-1"
+      authorship_status: "author"
+      roles:
+        - "Conceptualization"
+        - "Writing – original draft"
+      confirmed_by_contributor: false
+  funding_and_conflicts:
+    funding_sources: []
+    funder_roles: []
+    financial_conflicts: []
+    nonfinancial_conflicts: []
+    confirmation_status: "unconfirmed"
+  ai_use:
+    used: true
+    systems:
+      - agent_id: "agent:ai-assistant-1"
+        purpose:
+          - "structure"
+          - "draft"
+        confidential_inputs_processed: false
+        human_verification: "REPLACE_ME"
+        disclosure_locations: []
+    target_policy_checked: false
+
+review:
+  packets:
+    - id: "review-packet:rp-001"
+      manuscript_version_id: "manuscript:m-001"
+      included_artifact_ids: []
+      excluded_context:
+        - "simulated_editor_conclusion"
+      hash: null
+      frozen_at: null
+  concerns:
+    - id: "concern:co-001"
+      reviewer_role: "methodology"
+      severity: "major"
+      claim_or_artifact_ids:
+        - "claim:c1"
+      issue: "REPLACE_ME"
+      closure_route: null
+      artifact_delta_ids: []
+      reverification_status: "not_started"
+      closure_status: "open"
+
+assurance_profile:
+  assessed_at: null
+  manuscript_version_id: "manuscript:m-001"
+  claim_coverage: "incomplete"
+  author_evidence_consistency: "unchecked"
+  source_metadata: "unverified"
+  source_locators: "unverified"
+  source_entailment: "unchecked"
+  protocol_traceability: "draft_only"
+  deviation_transparency: "unchecked"
+  data_provenance: "incomplete"
+  computation: "not_run"
+  independent_verification: "none"
+  external_replication_or_triangulation: "none"
+  reporting_compliance: "not_evaluated"
+  accessibility: "not_evaluated"
+  confidentiality_and_ai_use: "unresolved"
+  summary_class: "A0"
+  blockers:
+    - "REPLACE_ME"
+
+target_projection:
+  target: null
+  content_type: null
+  instructions_checked_at: null
+  reporting_items_status: "not_evaluated"
+  mechanics_status: "not_evaluated"
+  package_status: "not_started"
+  readiness: "not_resolved"
+  unresolved_items: []
+
+release:
+  release_id: null
+  manuscript_version_id: "manuscript:m-001"
+  artifact_ids: []
+  assurance_report_id: null
+  target_projection_id: null
+  release_manifest_hash: null
+  released_at: null
+  status: "not_released"
+  supersedes_release_id: null
+  correction_or_update_reason: null
