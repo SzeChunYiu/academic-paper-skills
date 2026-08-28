@@ -181,7 +181,18 @@
                 "required": ["unit_id", "stage", "reason"],
                 "properties": {
                   "unit_id": {"$ref": "#/$defs/nonEmpty"},
-                  "stage": {"$ref": "#/$defs/nonEmpty"},
+                  "stage": {
+                    "enum": [
+                      "screening",
+                      "eligibility",
+                      "pre_assignment",
+                      "pre_randomization",
+                      "enrollment",
+                      "post_assignment",
+                      "follow_up",
+                      "analysis"
+                    ]
+                  },
                   "reason": {"$ref": "#/$defs/nonEmpty"}
                 }
               }

@@ -238,6 +238,38 @@ class StudyProtocolContractTests(unittest.TestCase):
         self.assertIn("narrow", repair["route"])
         self.assertIn("never backdate", repair["route"])
 
+    def test_outcome_blind_existing_data_can_retain_confirmatory_status(self) -> None:
+        contract = fixture()
+        contract["protocol"]["frozen_at"] = "2026-02-10T09:00:00Z"
+        contract["analysis_plan"]["frozen_at"] = "2026-02-11T09:00:00Z"
+        contract["data_timing"]["protocol_freeze_relation"] = (
+            "after_data_before_outcome_access"
+        )
+        result = self.evaluate(contract)
+        self.assertNotIn("confirmatory_label_not_supported", result["blocker_codes"])
+        self.assertNotIn("false_prospective_status", result["blocker_codes"])
+
+    def test_exclusions_reconcile_separately_before_and_after_assignment(self) -> None:
+        contract = fixture()
+        contract["conduct"]["enrollment"]["planned"] = 102
+        contract["conduct"]["enrollment"]["entered"] = 102
+        contract["conduct"]["enrollment"]["exclusions"].extend(
+            [
+                {
+                    "unit_id": "participant:screen-101",
+                    "stage": "screening",
+                    "reason": "Failed prespecified eligibility criterion."
+                },
+                {
+                    "unit_id": "participant:screen-102",
+                    "stage": "screening",
+                    "reason": "Withdrew before assignment."
+                }
+            ]
+        )
+        result = self.evaluate(contract)
+        self.assertNotIn("exclusion_lineage_incomplete", result["blocker_codes"])
+
     def test_missing_required_ethics_authority_is_not_repaired_by_prose(self) -> None:
         contract = fixture()
         contract["ethics_governance"]["status"] = "missing"

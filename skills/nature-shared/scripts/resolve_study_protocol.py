@@ -360,11 +360,24 @@ def evaluate_study_contract(
         )
 
     enrollment = conduct.get("enrollment", {})
-    excluded_count = len(enrollment.get("exclusions", []))
+    exclusion_records = enrollment.get("exclusions", [])
+    pre_assignment_stages = {
+        "screening",
+        "eligibility",
+        "pre_assignment",
+        "pre_randomization",
+        "enrollment",
+    }
+    pre_assignment_exclusions = sum(
+        item.get("stage") in pre_assignment_stages for item in exclusion_records
+    )
+    post_assignment_exclusions = len(exclusion_records) - pre_assignment_exclusions
+    entered = enrollment.get("entered", 0)
     assigned = enrollment.get("assigned", 0)
     analyzed = enrollment.get("analyzed", 0)
     if "stopping_and_exclusions" in hard_checks and (
-        assigned - analyzed != excluded_count
+        entered - assigned != pre_assignment_exclusions
+        or assigned - analyzed != post_assignment_exclusions
         or execution.get("sample_size_analyzed") != analyzed
     ):
         block(
@@ -399,7 +412,10 @@ def evaluate_study_contract(
     confirmatory = any(
         claim.get("evidential_status") == "confirmatory" for claim in claims
     )
-    if confirmatory and relation != "before_data_access":
+    if confirmatory and relation not in {
+        "before_data_access",
+        "after_data_before_outcome_access",
+    }:
         block(
             "confirmatory_label_not_supported",
             "At least one claim is labeled confirmatory although the protocol was not frozen before data access.",

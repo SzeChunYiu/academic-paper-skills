@@ -85,6 +85,11 @@ Keep independent:
 Do not convert `unknown` to `done` because a manuscript sentence uses the past
 tense. Do not erase a deviation by updating the final protocol text.
 
+For pre-existing data, distinguish `after_data_before_outcome_access` from
+`after_outcome_access`. The former can support an outcome-blind confirmatory
+status only when both protocol and analysis plan precede outcome access; it must
+not be relabeled `before_data_access`.
+
 ## Automatic blockers
 
 The evaluator fails closed on bounded contradictions:
@@ -152,4 +157,3 @@ does_not_certify:
 Venue acceptance remains governed by the exact
 `venue × article type × stage × effective date` decision contract after the
 science record has been evaluated.
-

@@ -82,8 +82,10 @@ and Tzavella explicitly caution that this model is not a universal solution.
 
 **Contract consequence:** record actual protocol/SAP freeze time relative to
 data and outcome access. A false prospective label blocks. Existing-data work
-can remain valuable but must be labeled according to what was knowable when the
-plan was frozen.
+can retain an outcome-blind confirmatory status when the data existed but the
+relevant outcomes were not accessed and both protocol and analysis plan were
+frozen before outcome access. The record must distinguish this from a plan
+frozen before any data access; neither label is inferred from prose.
 
 **Transfer limit:** not all science is confirmatory, and not every qualitative,
 descriptive, discovery, theory, or emergency study should be forced through the
@@ -126,6 +128,10 @@ responsiveness, facilitation, and complexity.
 **Contract consequence:** assignment sequence, concealment, blinding roles,
 fidelity, harms, stopping, exclusions, and participant flow need conduct
 receipts. Methods prose is not an execution receipt.
+
+Participant flow must reconcile exclusions by stage: pre-assignment screening or
+eligibility losses reconcile `entered -> assigned`, while post-assignment and
+analysis exclusions reconcile `assigned -> analyzed`.
 
 ### 4. Reporting standards expose records but do not certify quality
 
@@ -295,4 +301,3 @@ calculation on every design.
 
 These should become separate researched adapters. Unknown domains must stay
 unresolved rather than inheriting a convenient checklist.
-
