@@ -1,0 +1,723 @@
+{
+  "registry_schema_version": "1.0.0",
+  "registry_id": "study-protocol-evidence-registry-2026-08-28",
+  "reviewed_at": "2026-08-28",
+  "search_protocol": {
+    "sources_searched": [
+      "OpenAlex",
+      "Crossref",
+      "Europe PMC metadata and full-text XML",
+      "publisher version-of-record pages",
+      "official reporting-guideline pages"
+    ],
+    "executed_at": "2026-08-28",
+    "query_families": [
+      "preregistration and registered reports",
+      "protocol-publication outcome switching",
+      "randomization allocation concealment and blinding",
+      "stopping flexibility power and sample size",
+      "deviation fidelity and adherence",
+      "observational target-trial design",
+      "computational leakage and benchmark reproducibility",
+      "animal-study design rigor",
+      "systematic-review protocol and search provenance",
+      "qualitative reflexivity saturation and data adequacy",
+      "data provenance FAIR and analytic reproducibility",
+      "reporting-guideline adherence and limitations"
+    ],
+    "records_retrieved": 84,
+    "records_screened": 84,
+    "included_sources": 39,
+    "inclusion_criteria": [
+      "empirical or meta-research evidence for a protocol/conduct risk",
+      "methods evaluation or framework with a bounded contract implication",
+      "current major reporting standard with explicit scope",
+      "computational or data-provenance evidence relevant to traceability"
+    ],
+    "exclusion_criteria": [
+      "journal prestige or citation count alone",
+      "checklist without relevant protocol/conduct fields",
+      "tertiary summary when a primary source was available",
+      "source whose DOI/title identity could not be reconciled"
+    ],
+    "deduplication_key": "DOI when available; otherwise canonical version-of-record URL and title",
+    "stopping_rule": "stop this iteration after every maintained adapter had multiple relevant sources, every automatic blocker had empirical/methodological support, and additional searches mainly produced domain refinements",
+    "search_log_path": "../research/study-protocol-conduct-search-log-2026-08-28.json"
+  },
+  "sources": [
+    {
+      "source_id": "nosek-2018",
+      "title": "The Preregistration Revolution",
+      "url": "https://doi.org/10.1073/pnas.1708274114",
+      "source_type": "methods_synthesis",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "preregistration separates prediction from postdiction",
+        "timing relative to outcome access is central to a confirmatory label"
+      ],
+      "limits": [
+        "preregistration does not by itself guarantee valid design, conduct, analysis, or conclusions",
+        "practical accommodations are needed for pre-existing data"
+      ],
+      "metadata_verification": "doi_title_crossref_and_abstract_europepmc_verified_2026-08-28"
+    },
+    {
+      "source_id": "chambers-2021",
+      "title": "The Past, Present and Future of Registered Reports",
+      "url": "https://doi.org/10.1038/s41562-021-01193-7",
+      "source_type": "methods_review",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "results-blind review can reduce publication and reporting incentives",
+        "registered reports bind question and methods before results are known"
+      ],
+      "limits": [
+        "registered reports are explicitly not a universal solution for irreproducibility",
+        "publication model evidence does not impose registration on every study archetype"
+      ],
+      "metadata_verification": "doi_title_crossref_and_abstract_europepmc_verified_2026-08-28"
+    },
+    {
+      "source_id": "scheel-2021",
+      "title": "An Excess of Positive Results: Comparing the Standard Psychology Literature With Registered Reports",
+      "url": "https://doi.org/10.1177/25152459211007467",
+      "source_type": "meta_research_comparison",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "registered reports in the studied sample had a much lower proportion of positive first-hypothesis results than standard reports",
+        "result-contingent publication and analysis can distort the visible evidence base"
+      ],
+      "limits": [
+        "observational comparison cannot isolate publication bias from every alternative explanation",
+        "psychology sample and publication format constrain transfer"
+      ],
+      "metadata_verification": "doi_title_crossref_and_abstract_openalex_verified_2026-08-28"
+    },
+    {
+      "source_id": "simmons-2011",
+      "title": "False-Positive Psychology: Undisclosed Flexibility in Data Collection and Analysis Allows Presenting Anything as Significant",
+      "url": "https://doi.org/10.1177/0956797611417632",
+      "source_type": "simulation_and_experiment",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "undisclosed analytic and data-collection flexibility can inflate false-positive findings",
+        "stopping, exclusions, outcomes, and model choices require prospective specification or transparent disclosure"
+      ],
+      "limits": [
+        "demonstrations use selected psychology scenarios",
+        "disclosure reduces hidden flexibility but does not certify validity"
+      ],
+      "metadata_verification": "doi_title_crossref_and_abstract_europepmc_verified_2026-08-28"
+    },
+    {
+      "source_id": "munafo-2017",
+      "title": "A Manifesto for Reproducible Science",
+      "url": "https://doi.org/10.1038/s41562-016-0021",
+      "source_type": "methods_synthesis",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "blinding, randomization, preregistration, power, reporting, and incentives interact",
+        "data-independent confirmatory work must be distinguished from data-contingent exploration"
+      ],
+      "limits": [
+        "proposals require continuing empirical evaluation",
+        "no single reform is sufficient or universally applicable"
+      ],
+      "metadata_verification": "doi_title_crossref_and_europepmc_full_text_verified_2026-08-28"
+    },
+    {
+      "source_id": "chan-2004",
+      "title": "Empirical Evidence for Selective Reporting of Outcomes in Randomized Trials: Comparison of Protocols to Published Articles",
+      "url": "https://doi.org/10.1001/jama.291.20.2457",
+      "source_type": "protocol_publication_cohort",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "primary outcomes were frequently changed, introduced, or omitted between protocols and publications",
+        "statistically significant efficacy and harm outcomes were more completely reported"
+      ],
+      "limits": [
+        "cohort comes from trials approved in one regional ethics system in 1994-1995",
+        "protocol comparison detects discrepancies but does not determine every reason or consequence"
+      ],
+      "metadata_verification": "doi_title_crossref_and_abstract_europepmc_verified_2026-08-28"
+    },
+    {
+      "source_id": "dwan-2013",
+      "title": "Systematic Review of the Empirical Evidence of Study Publication Bias and Outcome Reporting Bias — An Updated Review",
+      "url": "https://doi.org/10.1371/journal.pone.0066844",
+      "source_type": "systematic_review",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "significant results were associated with publication and fuller outcome reporting",
+        "protocol-publication inconsistencies and outcome switching require explicit traceability"
+      ],
+      "limits": [
+        "included studies were heterogeneous and were not meta-analyzed",
+        "evidence base centered on randomized trials"
+      ],
+      "metadata_verification": "doi_title_crossref_and_europepmc_full_text_verified_2026-08-28"
+    },
+    {
+      "source_id": "wood-2008",
+      "title": "Empirical Evidence of Bias in Treatment Effect Estimates in Controlled Trials With Different Interventions and Outcomes",
+      "url": "https://doi.org/10.1136/bmj.39465.451748.ad",
+      "source_type": "meta_epidemiology",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "inadequate or unclear concealment and lack of blinding were associated with exaggerated effects for subjective outcomes",
+        "conduct risks depend on outcome type rather than a universal constant penalty"
+      ],
+      "limits": [
+        "meta-epidemiological associations vary among meta-analyses",
+        "objective and mortality outcomes showed less evidence of the same average bias"
+      ],
+      "metadata_verification": "doi_title_crossref_and_abstract_europepmc_verified_2026-08-28"
+    },
+    {
+      "source_id": "savovic-2012",
+      "title": "Influence of Reported Study Design Characteristics on Intervention Effect Estimates From Randomized, Controlled Trials",
+      "url": "https://doi.org/10.7326/0003-4819-157-6-201209180-00537",
+      "source_type": "meta_epidemiology",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "inadequate sequence generation, concealment, and blinding were associated with average exaggeration and heterogeneity",
+        "randomization and blinding execution are evidence-relevant conduct fields"
+      ],
+      "limits": [
+        "incomplete reporting and confounding among design characteristics limit causal interpretation",
+        "average effects were driven mainly by subjective outcomes"
+      ],
+      "metadata_verification": "doi_title_crossref_and_abstract_europepmc_verified_2026-08-28"
+    },
+    {
+      "source_id": "spirit-2025",
+      "title": "SPIRIT 2025 Statement: Updated Guideline for Protocols of Randomised Trials",
+      "url": "https://doi.org/10.1371/journal.pmed.1004589",
+      "source_type": "reporting_guideline",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "minimum protocol fields for randomized trials",
+        "protocol versions, outcomes, harms, data handling, analysis, oversight, and open-science records"
+      ],
+      "limits": [
+        "a reporting guideline does not prove that planned methods are valid or were executed",
+        "scope is randomized-trial protocols"
+      ],
+      "metadata_verification": "doi_title_crossref_and_europepmc_full_text_verified_2026-08-28"
+    },
+    {
+      "source_id": "consort-2025",
+      "title": "CONSORT 2025 Statement: Updated Guideline for Reporting Randomised Trials",
+      "url": "https://doi.org/10.1371/journal.pmed.1004587",
+      "source_type": "reporting_guideline",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "trial reports should expose registration, protocol/SAP access, participant flow, outcomes, harms, intervention delivery, and open-science information",
+        "reported conduct must be reconciled with planned protocol objects"
+      ],
+      "limits": [
+        "completeness of reporting is not proof of unbiased conduct or a correct causal claim",
+        "scope is randomized-trial reports"
+      ],
+      "metadata_verification": "doi_title_crossref_and_europepmc_full_text_verified_2026-08-28"
+    },
+    {
+      "source_id": "tidier-2014",
+      "title": "Better Reporting of Interventions: Template for Intervention Description and Replication (TIDieR) Checklist and Guide",
+      "url": "https://doi.org/10.1136/bmj.g1687",
+      "source_type": "reporting_guideline_development",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "intervention content, provider, mode, setting, dose, tailoring, modification, and actual fidelity must be recoverable",
+        "planned delivery and actual delivery are distinct fields"
+      ],
+      "limits": [
+        "emphasis is reporting and replication, not proof of intervention efficacy",
+        "guidance began as a trial extension although intended for evaluative designs more broadly"
+      ],
+      "metadata_verification": "doi_title_crossref_and_abstract_europepmc_verified_2026-08-28"
+    },
+    {
+      "source_id": "carroll-2007",
+      "title": "A Conceptual Framework for Implementation Fidelity",
+      "url": "https://doi.org/10.1186/1748-5908-2-40",
+      "source_type": "conceptual_framework",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "fidelity includes adherence in content, frequency, duration, and coverage",
+        "quality of delivery, participant responsiveness, facilitation, and complexity can moderate fidelity"
+      ],
+      "limits": [
+        "framework organizes measurement but does not define one universal fidelity instrument",
+        "essential components remain intervention-specific"
+      ],
+      "metadata_verification": "doi_title_crossref_and_europepmc_full_text_verified_2026-08-28"
+    },
+    {
+      "source_id": "hernan-2016",
+      "title": "Using Big Data to Emulate a Target Trial When a Randomized Trial Is Not Available",
+      "url": "https://doi.org/10.1093/aje/kwv254",
+      "source_type": "methods_framework",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "observational causal analyses should specify the target trial and decision-relevant treatment strategies",
+        "explicit target-trial components expose design and analysis mismatches"
+      ],
+      "limits": [
+        "emulation does not remove unmeasured confounding or guarantee identifiability",
+        "framework addresses causal comparative-effectiveness questions, not all observational studies"
+      ],
+      "metadata_verification": "doi_title_crossref_and_abstract_europepmc_verified_2026-08-28"
+    },
+    {
+      "source_id": "hernan-2016-timezero",
+      "title": "Specifying a Target Trial Prevents Immortal Time Bias and Other Self-Inflicted Injuries in Observational Analyses",
+      "url": "https://doi.org/10.1016/j.jclinepi.2016.04.014",
+      "source_type": "methods_commentary",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "eligibility, treatment assignment, and time zero must be aligned in observational causal designs",
+        "explicit protocol emulation can prevent avoidable immortal-time bias"
+      ],
+      "limits": [
+        "target-trial specification does not solve residual confounding",
+        "not every descriptive or associational study seeks a causal target trial"
+      ],
+      "metadata_verification": "doi_title_crossref_and_publisher_full_text_verified_2026-08-28"
+    },
+    {
+      "source_id": "strobe-2007",
+      "title": "The Strengthening the Reporting of Observational Studies in Epidemiology (STROBE) Statement",
+      "url": "https://doi.org/10.1371/journal.pmed.0040296",
+      "source_type": "reporting_guideline",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "observational reports should distinguish what was planned, done, found, and inferred",
+        "cohort, case-control, and cross-sectional studies require design-specific transparency"
+      ],
+      "limits": [
+        "the authors explicitly state STROBE is not a design prescription or quality-assessment instrument",
+        "does not cover every observational design or establish causal validity"
+      ],
+      "metadata_verification": "doi_title_crossref_and_europepmc_full_text_verified_2026-08-28"
+    },
+    {
+      "source_id": "kapoor-2023",
+      "title": "Leakage and the Reproducibility Crisis in Machine-Learning-Based Science",
+      "url": "https://doi.org/10.1016/j.patter.2023.100804",
+      "source_type": "cross_disciplinary_methods_review",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "train/test non-independence and preprocessing on held-out data can create irreproducible performance",
+        "scientific ML leakage controls differ from competition and engineering settings"
+      ],
+      "limits": [
+        "review is a documented lower bound rather than a systematic meta-review",
+        "leakage definitions depend on prediction target, unit, time, hierarchy, and intended deployment"
+      ],
+      "metadata_verification": "doi_title_crossref_and_europepmc_full_text_verified_2026-08-28"
+    },
+    {
+      "source_id": "pineau-2021",
+      "title": "Improving Reproducibility in Machine Learning Research: A Report From the NeurIPS 2019 Reproducibility Program",
+      "url": "https://jmlr.org/papers/v22/20-303.html",
+      "source_type": "programme_evaluation_and_guidance",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "computational claims need code, data, hyperparameters, seeds, resources, and result variability records",
+        "checklists and artifact workflows can improve record completeness"
+      ],
+      "limits": [
+        "conference programme evidence does not certify scientific validity or benchmark fairness",
+        "machine-learning scope and volunteer artifact access constrain transfer"
+      ],
+      "metadata_verification": "jmlr_version_of_record_full_text_verified_2026-08-28"
+    },
+    {
+      "source_id": "sandve-2013",
+      "title": "Ten Simple Rules for Reproducible Computational Research",
+      "url": "https://doi.org/10.1371/journal.pcbi.1003285",
+      "source_type": "methods_guidance",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "every result should retain executable or sufficiently detailed workflow provenance",
+        "versions, parameters, intermediate results, seeds, and raw data behind plots should be retained"
+      ],
+      "limits": [
+        "rules are general guidance rather than controlled evidence for every implementation",
+        "exact reproducibility can still be limited by hardware, nondeterminism, licensing, or unavailable data"
+      ],
+      "metadata_verification": "doi_title_crossref_and_europepmc_full_text_verified_2026-08-28"
+    },
+    {
+      "source_id": "peng-2011",
+      "title": "Reproducible Research in Computational Science",
+      "url": "https://doi.org/10.1126/science.1213847",
+      "source_type": "perspective",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "computational reproducibility can serve as a minimum transparency standard when full replication is unavailable",
+        "analysis artifacts must be inspectable to evaluate published computational claims"
+      ],
+      "limits": [
+        "reproducibility is not independent replication or proof that a claim is correct",
+        "perspective does not specify one complete implementation contract"
+      ],
+      "metadata_verification": "doi_title_crossref_and_abstract_europepmc_verified_2026-08-28"
+    },
+    {
+      "source_id": "baggerly-2009",
+      "title": "Deriving Chemosensitivity From Cell Lines: Forensic Bioinformatics and Reproducible Research in High-Throughput Biology",
+      "url": "https://doi.org/10.1214/09-AOAS291",
+      "source_type": "forensic_case_series",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "weak data-processing provenance can conceal simple but consequential indexing and labeling errors",
+        "raw-to-result lineage and exact processing records are safety-relevant"
+      ],
+      "limits": [
+        "case studies are from a specific high-throughput biomedical setting",
+        "forensic reconstruction does not estimate the prevalence of errors in all computational science"
+      ],
+      "metadata_verification": "doi_title_crossref_and_abstract_openalex_verified_2026-08-28"
+    },
+    {
+      "source_id": "stodden-2018",
+      "title": "An Empirical Analysis of Journal Policy Effectiveness for Computational Reproducibility",
+      "url": "https://doi.org/10.1073/pnas.1708290115",
+      "source_type": "policy_evaluation",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "availability-on-request policies yielded limited artifact acquisition and reproduction in the studied sample",
+        "claimed availability must be verified by accessible, usable artifacts rather than prose alone"
+      ],
+      "limits": [
+        "single-journal policy sample and author response affect estimates",
+        "reproduction of reported findings is not independent scientific replication"
+      ],
+      "metadata_verification": "doi_title_crossref_and_abstract_europepmc_verified_2026-08-28"
+    },
+    {
+      "source_id": "hardwicke-2018",
+      "title": "Data Availability, Reusability, and Analytic Reproducibility: Evaluating the Impact of a Mandatory Open Data Policy at the Journal Cognition",
+      "url": "https://doi.org/10.1098/rsos.180448",
+      "source_type": "policy_evaluation",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "data availability, data reusability, and analytic reproducibility are distinct states",
+        "unclear curation and analysis specification can prevent reproduction despite a sharing policy"
+      ],
+      "limits": [
+        "observational evaluation at one journal cannot isolate all policy effects",
+        "most unreproduced values did not clearly overturn original conclusions"
+      ],
+      "metadata_verification": "doi_title_crossref_and_abstract_openalex_verified_2026-08-28"
+    },
+    {
+      "source_id": "arrive-2020",
+      "title": "Reporting Animal Research: Explanation and Elaboration for the ARRIVE Guidelines 2.0",
+      "url": "https://doi.org/10.1371/journal.pbio.3000411",
+      "source_type": "reporting_guideline_and_evidence_synthesis",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "animal studies should expose design, experimental unit, sample-size reasoning, inclusion/exclusion, randomization, blinding, outcomes, statistics, procedures, and welfare",
+        "planned and actual exclusions and experimental units are critical to interpretation"
+      ],
+      "limits": [
+        "reporting completion does not prove low risk of bias or ethical adequacy",
+        "animal species, interventions, and laboratory contexts require domain-specific additions"
+      ],
+      "metadata_verification": "doi_title_crossref_and_europepmc_full_text_verified_2026-08-28"
+    },
+    {
+      "source_id": "landis-2012",
+      "title": "A Call for Transparent Reporting to Optimize the Predictive Value of Preclinical Research",
+      "url": "https://doi.org/10.1038/nature11556",
+      "source_type": "stakeholder_recommendation",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "sample-size estimation, randomization, blinding, and data handling are core preclinical rigor records",
+        "better reporting can expose whether bias-reduction measures were used"
+      ],
+      "limits": [
+        "workshop recommendation is not controlled evidence of effect for every field",
+        "transparent reporting alone does not ensure the measures were performed correctly"
+      ],
+      "metadata_verification": "doi_title_crossref_and_abstract_europepmc_verified_2026-08-28"
+    },
+    {
+      "source_id": "kilkenny-2009",
+      "title": "Survey of the Quality of Experimental Design, Statistical Analysis and Reporting of Research Using Animals",
+      "url": "https://doi.org/10.1371/journal.pone.0007824",
+      "source_type": "meta_research_survey",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "many surveyed animal studies omitted randomization, blinding, sample-size calculation, and unit clarity",
+        "poor design and reporting records obstruct bias assessment and replication"
+      ],
+      "limits": [
+        "sample covered selected journals and a historical publication period",
+        "absence of reporting is not always proof the conduct step was absent, so execution receipts should distinguish unknown from not done"
+      ],
+      "metadata_verification": "doi_title_crossref_and_europepmc_full_text_verified_2026-08-28"
+    },
+    {
+      "source_id": "macleod-2015",
+      "title": "Risk of Bias in Reports of In Vivo Research: A Focus for Improvement",
+      "url": "https://doi.org/10.1371/journal.pbio.1002273",
+      "source_type": "meta_research_audit",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "randomization and other bias-reduction measures were infrequently reported in sampled in-vivo research",
+        "journal prestige is not a substitute for design and conduct evidence"
+      ],
+      "limits": [
+        "reporting audit cannot always determine what was actually performed",
+        "sample and automated/manual extraction choices constrain prevalence estimates"
+      ],
+      "metadata_verification": "doi_title_crossref_and_europepmc_full_text_verified_2026-08-28"
+    },
+    {
+      "source_id": "prisma-p-2015",
+      "title": "Preferred Reporting Items for Systematic Review and Meta-Analysis Protocols (PRISMA-P) 2015 Statement",
+      "url": "https://doi.org/10.1186/2046-4053-4-1",
+      "source_type": "reporting_guideline",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "systematic reviews need explicit protocol question, eligibility, information sources, search, study records, outcomes, bias, and synthesis plans",
+        "protocol amendments must remain traceable"
+      ],
+      "limits": [
+        "reporting protocol items do not guarantee a complete search or valid synthesis",
+        "primarily developed for systematic reviews and meta-analyses of health research"
+      ],
+      "metadata_verification": "doi_title_crossref_and_europepmc_full_text_verified_2026-08-28"
+    },
+    {
+      "source_id": "prisma-2020",
+      "title": "PRISMA 2020 Explanation and Elaboration: Updated Guidance and Exemplars for Reporting Systematic Reviews",
+      "url": "https://doi.org/10.1136/bmj.n160",
+      "source_type": "reporting_guideline",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "review reports should expose registration/protocol, amendments, searches, selection, extraction, risk of bias, synthesis, certainty, and availability",
+        "review conduct should reconcile with the frozen protocol and exact search records"
+      ],
+      "limits": [
+        "PRISMA is a reporting guideline, not proof that the review is unbiased or exhaustive",
+        "extensions may be required for specialized review types"
+      ],
+      "metadata_verification": "doi_title_crossref_and_europepmc_full_text_verified_2026-08-28"
+    },
+    {
+      "source_id": "prisma-s-2021",
+      "title": "PRISMA-S: An Extension to the PRISMA Statement for Reporting Literature Searches in Systematic Reviews",
+      "url": "https://doi.org/10.1186/s13643-020-01542-z",
+      "source_type": "reporting_guideline",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "database/platform identities, exact strategies, limits, dates, supplementary search routes, deduplication, and peer review should be recoverable",
+        "search strings must be preserved as actually executed"
+      ],
+      "limits": [
+        "authors state the checklist guides reporting rather than conduct",
+        "not every item applies to every review or information source"
+      ],
+      "metadata_verification": "doi_title_crossref_and_europepmc_full_text_verified_2026-08-28"
+    },
+    {
+      "source_id": "coreq-2007",
+      "title": "Consolidated Criteria for Reporting Qualitative Research (COREQ): A 32-Item Checklist for Interviews and Focus Groups",
+      "url": "https://doi.org/10.1093/intqhc/mzm042",
+      "source_type": "reporting_guideline_development",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "qualitative interview/focus-group reports need research-team reflexivity, study design, analysis, context, recording, theme derivation, and supporting evidence",
+        "sampling and respondent validation choices should be explicit"
+      ],
+      "limits": [
+        "COREQ is specific to interviews and focus groups",
+        "checklist completion does not adjudicate paradigm-specific quality or interpretation"
+      ],
+      "metadata_verification": "doi_title_crossref_and_abstract_europepmc_verified_2026-08-28"
+    },
+    {
+      "source_id": "srqr-2014",
+      "title": "Standards for Reporting Qualitative Research: A Synthesis of Recommendations",
+      "url": "https://doi.org/10.1097/ACM.0000000000000388",
+      "source_type": "reporting_standard_synthesis",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "qualitative reporting needs transparent approach, researcher characteristics/reflexivity, context, sampling, data collection, analysis, trustworthiness, and interpretation",
+        "standards must preserve methodological and paradigmatic flexibility"
+      ],
+      "limits": [
+        "SRQR is a reporting synthesis rather than a universal conduct algorithm",
+        "broad scope requires study-specific operationalization"
+      ],
+      "metadata_verification": "doi_title_crossref_and_abstract_europepmc_verified_2026-08-28"
+    },
+    {
+      "source_id": "guest-2006",
+      "title": "How Many Interviews Are Enough?",
+      "url": "https://doi.org/10.1177/1525822X05279903",
+      "source_type": "empirical_methodological_case",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "saturation can be operationalized and tracked during thematic analysis",
+        "sample-size sufficiency depends on thematic yield and variability rather than a universal interview count"
+      ],
+      "limits": [
+        "findings came from one relatively homogeneous study and cannot set a universal threshold",
+        "early metatheme occurrence is not proof of adequate depth for other questions or analyses"
+      ],
+      "metadata_verification": "doi_title_crossref_and_abstract_openalex_verified_2026-08-28"
+    },
+    {
+      "source_id": "malterud-2016",
+      "title": "Sample Size in Qualitative Interview Studies: Guided by Information Power",
+      "url": "https://doi.org/10.1177/1049732315617444",
+      "source_type": "methods_framework",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "qualitative sample adequacy depends on aim, sample specificity, theory, dialogue quality, and analysis strategy",
+        "saturation is methodology-dependent and inconsistently applied"
+      ],
+      "limits": [
+        "information power is a planning framework, not a mechanical stopping formula",
+        "does not replace reflexive evaluation of data adequacy during conduct"
+      ],
+      "metadata_verification": "doi_title_crossref_and_abstract_openalex_verified_2026-08-28"
+    },
+    {
+      "source_id": "vasileiou-2018",
+      "title": "Characterising and Justifying Sample Size Sufficiency in Interview-Based Studies",
+      "url": "https://doi.org/10.1186/s12874-018-0594-7",
+      "source_type": "systematic_methodological_analysis",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "sample-size justifications in qualitative health research were often absent or weak",
+        "data adequacy should be justified from study-specific features rather than community norms alone"
+      ],
+      "limits": [
+        "sample covers three health-related journals and single-interview-per-participant designs",
+        "reporting patterns do not establish a universal sufficient sample size"
+      ],
+      "metadata_verification": "doi_title_crossref_and_abstract_openalex_verified_2026-08-28"
+    },
+    {
+      "source_id": "fair-2016",
+      "title": "The FAIR Guiding Principles for Scientific Data Management and Stewardship",
+      "url": "https://doi.org/10.1038/sdata.2016.18",
+      "source_type": "principles_framework",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "research objects need findable, accessible under stated conditions, interoperable, reusable metadata and provenance",
+        "sensitive data can be discoverable and governed without being openly exposed"
+      ],
+      "limits": [
+        "FAIR is not identical to open and does not certify data accuracy",
+        "authors state the principles precede implementation and are not a single standard or technology"
+      ],
+      "metadata_verification": "doi_title_crossref_and_europepmc_full_text_verified_2026-08-28"
+    },
+    {
+      "source_id": "lakens-2022",
+      "title": "Sample Size Justification",
+      "url": "https://doi.org/10.1525/collabra.33267",
+      "source_type": "methods_overview",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "sample-size rationale should align informational value with inferential goals",
+        "power, precision, resource constraints, population coverage, heuristics, or acknowledged absence are distinct rationales"
+      ],
+      "limits": [
+        "no one justification applies to every quantitative design",
+        "a justified sample size does not guarantee unbiased measurement or analysis"
+      ],
+      "metadata_verification": "doi_title_crossref_and_publisher_full_text_verified_2026-08-28"
+    },
+    {
+      "source_id": "cro-2013",
+      "title": "A Tutorial on Sensitivity Analyses in Clinical Trials: The What, Why, When and How",
+      "url": "https://doi.org/10.1186/1471-2288-13-92",
+      "source_type": "methods_tutorial",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "sensitivity analyses test robustness to assumptions, models, values, and analytic choices",
+        "primary and sensitivity conclusions should be interpreted together"
+      ],
+      "limits": [
+        "clinical-trial examples do not specify every field-specific robustness analysis",
+        "agreement across chosen sensitivities cannot rule out all misspecification"
+      ],
+      "metadata_verification": "doi_title_crossref_and_europepmc_full_text_verified_2026-08-28"
+    },
+    {
+      "source_id": "samaan-2013",
+      "title": "A Systematic Scoping Review of Adherence to Reporting Guidelines in Health Care Literature",
+      "url": "https://doi.org/10.2147/JMDH.S43952",
+      "source_type": "systematic_scoping_review",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "reporting-guideline adherence was frequently suboptimal across surveyed reviews",
+        "endorsement and policy can improve completeness but require implementation"
+      ],
+      "limits": [
+        "review covers health-care reporting up to 2012",
+        "adherence scores do not prove methodological quality or valid conduct"
+      ],
+      "metadata_verification": "doi_title_crossref_and_abstract_europepmc_verified_2026-08-28"
+    }
+  ],
+  "generalization_rule": "No reporting standard, registration state, study design, or reproducibility receipt is a universal quality certificate. Apply only evidence-backed obligations matched to the study archetype and preserve transfer limits.",
+  "update_policy": {
+    "review_due": "2027-02-28",
+    "triggers": [
+      "major reporting-standard revision",
+      "new meta-research reversing a blocker basis",
+      "new study archetype adapter",
+      "identified source correction or retraction"
+    ],
+    "historical_policy": "version a new registry; do not rewrite the recorded basis of prior evaluations"
+  }
+}

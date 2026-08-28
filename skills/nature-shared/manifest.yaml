@@ -1,5 +1,5 @@
 name: nature-shared
-version: 2.4.0
+version: 2.5.0
 description: >
   Declarative manifest for shared academic-paper reference modules. This package
   is not a standalone workflow; installed skills load exact shared core,
@@ -47,6 +47,8 @@ core:
       path: core/figure-evidence-planning.md
     - condition: binding a plot, figure, table, image plate, diagram, or mixed display to its reader task, estimand, statistical unit, candidate representation, inference boundary, data/analysis/render/source-data provenance, caption, accessibility, and stage-specific exit tests
       path: core/scientific-display-decision-contract.md
+    - condition: binding a study to versioned protocol and analysis-plan timing, executed conduct, deviations, ethics/governance, raw-data/analysis receipts, and claim-status boundaries before Methods/Results drafting or readiness assessment
+      path: core/study-protocol-conduct-contract.md
     - condition: final manuscript-facing QA after drafting, including a last-mile scrub for filenames, file paths, script/helper/class names, CLI flags, repository/developer history, raw project links, output filenames, figure-legend leakage, punctuation/spacing/bracket defects, range/minus/hyphen review, and target-aware scientific copy-editing
       path: core/manuscript-surface-qa.md
     - condition: auditing an existing or multi-round-revised manuscript for accumulated drift — terminology/unit/number variants, headline counts that do not reconcile with the Methods, claims contradicted by the paper's own tables, over- or under-claiming, tense parallelism, and prose that restates displays
@@ -62,6 +64,8 @@ research:
       path: research/stratified-paper-reading-2025-2026.md
     - condition: the empirical and methodological basis, transfer boundary, contradiction, or unresolved research gap behind a scientific display adapter or automatic display blocker must be inspected
       path: research/scientific-display-evidence-ledger-2026-08.md
+    - condition: the empirical, methodological, or reporting-standard basis behind a study protocol/conduct adapter, automatic blocker, repair route, or non-universal transfer boundary must be inspected
+      path: research/study-protocol-conduct-evidence-ledger-2026-08.md
 
 journal_formats:
   on_demand:
@@ -92,3 +96,7 @@ quality_tools:
   scientific_display_schema: display-contracts/scientific-display-contract.schema.json
   scientific_display_adapters: display-contracts/maintained-adapters.json
   scientific_display_purpose: return evidence-informed candidate representations rather than a universal best chart, then fail closed on high-risk provenance, inference-boundary, omission, caption, uncertainty, and accessibility defects
+  study_protocol_script: scripts/resolve_study_protocol.py
+  study_protocol_schema: study-contracts/study-protocol-conduct-contract.schema.json
+  study_protocol_adapters: study-contracts/maintained-study-adapters.json
+  study_protocol_purpose: return study-type obligations rather than a universal best design, then fail closed on high-risk timing, outcome, execution, deviation, leakage, ethics, and claim-status contradictions

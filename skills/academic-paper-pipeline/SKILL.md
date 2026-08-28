@@ -101,6 +101,27 @@ Create a temporary manuscript-specific archetype profile.
 
 Do not copy wording or layouts.
 
+## Study protocol and conduct contract
+
+Before manuscript-state claims are treated as scientific evidence, materialize
+the shared **study protocol/conduct decision contract** from
+`../nature-shared/core/study-protocol-conduct-contract.md`.
+
+Resolve the study archetype and applicable obligations, then bind:
+
+`protocol version -> analysis-plan version -> conduct receipt -> deviation ledger -> analysis/result -> claim`.
+
+Keep planned, executed, verified, unknown, not done, and not applicable distinct.
+A protocol/conduct blocker is a manuscript-state blocker when it affects an
+in-scope claim. Valid repairs preserve history: reconcile authoritative records,
+append a dated deviation, rerun from a valid snapshot/split, add a versioned
+sensitivity analysis, reclassify exploratory/post-hoc work, narrow the claim, or
+request a new prospective study. Never backdate, overwrite adverse/null evidence,
+or infer ethics/randomization/blinding execution from prose.
+
+Schema/registration/reporting completion, protocol/conduct traceability,
+scientific validity, and journal acceptance remain separate state layers.
+
 ## Iterative loop
 
 Run these stages in order.
@@ -118,7 +139,15 @@ Separate:
 
 Never invent new study results.
 
-### 2. Research and positioning
+### 2. Materialize protocol and conduct state
+
+For each in-scope study, resolve the maintained adapter or an explicit unresolved
+domain research requirement. Evaluate protocol/SAP timing, registration
+applicability, executed assignment/blinding/fidelity, outcomes, stopping,
+exclusions/attrition, harms, raw-data/analysis lineage, deviations, and
+ethics/governance before licensing confirmatory or causal claim status.
+
+### 3. Research and positioning
 
 Research enough to establish:
 
@@ -133,7 +162,7 @@ Resolve the exact venue decision contract from current official sources or an
 active maintained snapshot. If only a fallback is available, keep target-policy
 status unresolved while useful science and drafting work continues.
 
-### 3. Build manuscript state
+### 4. Build manuscript state
 
 Maintain one row per atomic content item in the atomic-claim ledger, together
 with evidence, figure, source and concern ledgers. Split every
@@ -147,7 +176,7 @@ Build:
 
 Check content richness and explanatory sufficiency.
 
-### 4. Plan figures/statistics/diagrams
+### 5. Plan figures/statistics/diagrams
 
 For every headline claim determine:
 
@@ -174,7 +203,7 @@ narrowing the claim—not by inventing evidence.
 
 Use scientific diagram backends for workflows/mechanisms/flowcharts rather than forcing everything through a plotting grammar.
 
-### 5. Draft/rewrite
+### 6. Draft/rewrite
 
 Use academic-writing logic in this order:
 
@@ -190,11 +219,12 @@ scientific relation
 -> surface QA
 ```
 
-### 6. Pre-review QA
+### 7. Pre-review QA
 
 Before simulated review, check:
 
 - claim/evidence consistency;
+- protocol/conduct/deviation/claim-status consistency;
 - complete atomic-claim coverage and definition/proof/source entailment;
 - statistics/reporting;
 - figure adequacy;
@@ -206,11 +236,11 @@ Before simulated review, check:
 - punctuation/typography;
 - exact target compliance.
 
-### 7. Editorial triage
+### 8. Editorial triage
 
 The simulated editor decides whether the manuscript should proceed to review or whether a target/science/readiness blocker should be repaired first.
 
-### 8. Independent review
+### 9. Independent review
 
 Run mutually blind initial reviewer contexts.
 
@@ -222,7 +252,7 @@ Default lenses:
 
 Every Major Concern requires a stable concern ID and a resolution test.
 
-### 9. Editor synthesis
+### 10. Editor synthesis
 
 The editor weighs **arguments and expertise, not reviewer votes**.
 
@@ -234,7 +264,7 @@ Mark each concern as:
 - surface copyedit;
 - optional enrichment.
 
-### 10. Execute minimum-sufficient revision
+### 11. Execute minimum-sufficient revision
 
 Do every valid repair possible with available material/tools:
 
@@ -254,11 +284,11 @@ Do every valid repair possible with available material/tools:
 
 If a real new experiment/data collection is required, mark it blocked and state the minimum resolution test. Do not fabricate it.
 
-### 11. Freeze revision delta
+### 12. Freeze revision delta
 
 Update ledgers and current manuscript version. Verify every claimed closure exists in the manuscript/evidence state.
 
-### 12. Targeted re-review
+### 13. Targeted re-review
 
 For major revisions, send the relevant changed claims/evidence back to the original concern owner by default.
 
@@ -266,7 +296,7 @@ For minor clarity/surface issues, allow editor-only closure when target practice
 
 Do not re-open the whole paper from zero unnecessarily.
 
-### 13. Moving-goalpost protection
+### 14. Moving-goalpost protection
 
 A new blocking concern after round 1 needs a reason such as:
 
@@ -278,7 +308,7 @@ A new blocking concern after round 1 needs a reason such as:
 
 Otherwise treat it as late optional enrichment unless the editor independently determines it is essential to scientific validity/publication criteria.
 
-### 14. Editor closure
+### 15. Editor closure
 
 Repeat revision/re-review only while a real must-address concern remains and there is a concrete resolution test.
 

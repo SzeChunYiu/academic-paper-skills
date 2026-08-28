@@ -1,4 +1,4 @@
-schema_version: "0.3.0"
+schema_version: "0.4.0"
 project:
   id: "project:REPLACE_ME"
   title_working: "REPLACE_ME"
@@ -99,8 +99,49 @@ reporting_profile:
     official_source_checked_at: null
     unresolved_items: []
 
+study_protocol_contract:
+  id: "study-contract:sc-001"
+  contract_schema_version: "1.0.0"
+  study_id: "study:s1"
+  state_version: 1
+  study_archetype: "observational_association"
+  design_tags: []
+  resolved_at: null
+  protocol_adapter_ids: []
+  adapter_catalog_id: "study-protocol-maintained-adapters-2026-08-28"
+  evidence_registry_id: "study-protocol-evidence-registry-2026-08-28"
+  evidence_reviewed_at: "2026-08-28"
+  data_access_timing:
+    first_data_access_at: null
+    outcomes_first_observed_at: null
+    protocol_freeze_relation: "unknown"  # before_data_access | after_data_before_outcome_access | after_outcome_access | unknown | not_applicable
+  authoritative_object_ids:
+    protocol_ids:
+      - "protocol:p-001"
+    analysis_plan_ids:
+      - "analysis-plan:ap-001"
+    raw_data_snapshot_ids:
+      - "data:data-001"
+    execution_receipt_ids: []
+    deviation_ids: []
+  deviation_classes_visible: []
+  protocol_contract_status: "unresolved"  # pass | blocked | unresolved
+  protocol_blocker_codes: []
+  unresolved_domain_obligations: []
+  certification:
+    schema_valid: false
+    protocol_traceability: "unchecked"
+    conduct_traceability: "unchecked"
+    outcome_alignment: "unchecked"
+    deviation_visibility: "unchecked"
+    does_not_certify_scientific_truth: true
+    does_not_certify_absence_of_bias: true
+    does_not_certify_reporting_completion: true
+    does_not_certify_journal_acceptance: true
+
 protocols:
   - id: "protocol:p-001"
+    study_contract_id: "study-contract:sc-001"
     version: 1
     status: "draft"  # draft | frozen | amended | superseded
     frozen_at: null
@@ -122,6 +163,7 @@ protocols:
 
 analysis_plans:
   - id: "analysis-plan:ap-001"
+    study_contract_id: "study-contract:sc-001"
     version: 1
     status: "draft"  # draft | frozen | amended | superseded
     protocol_id: "protocol:p-001"
@@ -140,6 +182,7 @@ analysis_plans:
 
 deviations:
   - id: "deviation:d-001"
+    study_contract_id: "study-contract:sc-001"
     applies: false
     from_object_id: "analysis-plan:ap-001"
     detected_at: null
@@ -452,6 +495,8 @@ assurance_profile:
   source_locators: "unverified"
   source_entailment: "unchecked"
   protocol_traceability: "draft_only"
+  protocol_contract_status: "unresolved"
+  conduct_traceability: "unchecked"
   deviation_transparency: "unchecked"
   data_provenance: "incomplete"
   computation: "not_run"

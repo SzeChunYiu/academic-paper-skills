@@ -1,0 +1,340 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://academic-paper-skills.local/schema/study-protocol-conduct-contract.schema.json",
+  "title": "Study protocol and conduct decision contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_schema_version",
+    "contract_id",
+    "study_id",
+    "study_archetype",
+    "design_tags",
+    "state_version",
+    "protocol",
+    "data_timing",
+    "analysis_plan",
+    "conduct",
+    "analysis_execution",
+    "deviations",
+    "ethics_governance",
+    "claims",
+    "certification",
+    "source_provenance"
+  ],
+  "properties": {
+    "contract_schema_version": {"type": "string", "const": "1.0.0"},
+    "contract_id": {"$ref": "#/$defs/nonEmpty"},
+    "study_id": {"$ref": "#/$defs/nonEmpty"},
+    "study_archetype": {"$ref": "#/$defs/nonEmpty"},
+    "design_tags": {"$ref": "#/$defs/stringSet"},
+    "state_version": {"type": "integer", "minimum": 1},
+    "protocol": {"$ref": "#/$defs/protocol"},
+    "data_timing": {"$ref": "#/$defs/dataTiming"},
+    "analysis_plan": {"$ref": "#/$defs/analysisPlan"},
+    "conduct": {"$ref": "#/$defs/conduct"},
+    "analysis_execution": {"$ref": "#/$defs/analysisExecution"},
+    "deviations": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/deviation"}
+    },
+    "ethics_governance": {"$ref": "#/$defs/ethics"},
+    "claims": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/claim"}
+    },
+    "certification": {"$ref": "#/$defs/certification"},
+    "source_provenance": {"$ref": "#/$defs/sourceProvenance"}
+  },
+  "$defs": {
+    "nonEmpty": {"type": "string", "minLength": 1},
+    "nullableString": {"type": ["string", "null"]},
+    "dateTime": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?(?:Z|[+-]\\d{2}:\\d{2})$"
+    },
+    "nullableDateTime": {
+      "anyOf": [
+        {"type": "null"},
+        {"$ref": "#/$defs/dateTime"}
+      ]
+    },
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "stringSet": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    },
+    "protocol": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["protocol_id", "version", "status", "frozen_at", "registration", "question", "estimand", "primary_outcomes", "secondary_outcome_ids", "plan_sha256"],
+      "properties": {
+        "protocol_id": {"$ref": "#/$defs/nonEmpty"},
+        "version": {"type": "integer", "minimum": 1},
+        "status": {"enum": ["draft", "frozen", "amended", "superseded"]},
+        "frozen_at": {"$ref": "#/$defs/dateTime"},
+        "registration": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["applicability", "basis", "status", "identifier", "registered_at", "enrollment_started_at"],
+          "properties": {
+            "applicability": {"enum": ["required", "not_required", "unknown"]},
+            "basis": {"$ref": "#/$defs/nonEmpty"},
+            "status": {"enum": ["not_registered", "embargoed", "public", "late", "not_applicable", "unknown"]},
+            "identifier": {"$ref": "#/$defs/nullableString"},
+            "registered_at": {"$ref": "#/$defs/nullableDateTime"},
+            "enrollment_started_at": {"$ref": "#/$defs/nullableDateTime"}
+          }
+        },
+        "question": {"$ref": "#/$defs/nonEmpty"},
+        "estimand": {"$ref": "#/$defs/nonEmpty"},
+        "primary_outcomes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["outcome_id", "definition", "timepoint"],
+            "properties": {
+              "outcome_id": {"$ref": "#/$defs/nonEmpty"},
+              "definition": {"$ref": "#/$defs/nonEmpty"},
+              "timepoint": {"$ref": "#/$defs/nonEmpty"}
+            }
+          }
+        },
+        "secondary_outcome_ids": {"$ref": "#/$defs/stringSet"},
+        "plan_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "dataTiming": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["first_data_access_at", "outcomes_first_observed_at", "protocol_freeze_relation"],
+      "properties": {
+        "first_data_access_at": {"$ref": "#/$defs/nullableDateTime"},
+        "outcomes_first_observed_at": {"$ref": "#/$defs/nullableDateTime"},
+        "protocol_freeze_relation": {"enum": ["before_data_access", "after_data_before_outcome_access", "after_outcome_access", "unknown", "not_applicable"]}
+      }
+    },
+    "analysisPlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["analysis_plan_id", "version", "status", "frozen_at", "primary_outcome_ids", "sample_size_plan", "stopping_rule", "inclusion_exclusion_rules", "missingness_plan", "multiplicity_plan", "sensitivity_analysis_ids", "data_split", "plan_sha256"],
+      "properties": {
+        "analysis_plan_id": {"$ref": "#/$defs/nonEmpty"},
+        "version": {"type": "integer", "minimum": 1},
+        "status": {"enum": ["draft", "frozen", "amended", "superseded"]},
+        "frozen_at": {"$ref": "#/$defs/dateTime"},
+        "primary_outcome_ids": {"$ref": "#/$defs/stringSet"},
+        "sample_size_plan": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["planned_maximum", "rationale"],
+          "properties": {
+            "planned_maximum": {"type": "integer", "minimum": 0},
+            "rationale": {"$ref": "#/$defs/nonEmpty"}
+          }
+        },
+        "stopping_rule": {"$ref": "#/$defs/nonEmpty"},
+        "inclusion_exclusion_rules": {"$ref": "#/$defs/stringSet"},
+        "missingness_plan": {"$ref": "#/$defs/nonEmpty"},
+        "multiplicity_plan": {"$ref": "#/$defs/nonEmpty"},
+        "sensitivity_analysis_ids": {"$ref": "#/$defs/stringSet"},
+        "data_split": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["applicability", "unit_key", "overlap_detected", "preprocessing_fit_scope"],
+          "properties": {
+            "applicability": {"enum": ["required", "not_applicable", "unknown"]},
+            "unit_key": {"$ref": "#/$defs/nullableString"},
+            "overlap_detected": {"type": "boolean"},
+            "preprocessing_fit_scope": {"enum": ["training_only", "nested_training_only", "all_data", "not_applicable", "unknown"]}
+          }
+        },
+        "plan_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "conduct": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["started_at", "ended_at", "enrollment", "assignment", "blinding", "intervention_fidelity", "outcomes_collected", "stopping", "adverse_events", "quality_control_receipts", "raw_data_snapshot"],
+      "properties": {
+        "started_at": {"$ref": "#/$defs/dateTime"},
+        "ended_at": {"$ref": "#/$defs/nullableDateTime"},
+        "enrollment": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["planned", "entered", "assigned", "analyzed", "exclusions"],
+          "properties": {
+            "planned": {"type": "integer", "minimum": 0},
+            "entered": {"type": "integer", "minimum": 0},
+            "assigned": {"type": "integer", "minimum": 0},
+            "analyzed": {"type": "integer", "minimum": 0},
+            "exclusions": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["unit_id", "stage", "reason"],
+                "properties": {
+                  "unit_id": {"$ref": "#/$defs/nonEmpty"},
+                  "stage": {"$ref": "#/$defs/nonEmpty"},
+                  "reason": {"$ref": "#/$defs/nonEmpty"}
+                }
+              }
+            }
+          }
+        },
+        "assignment": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["required", "method", "sequence_receipt", "concealment_planned", "concealment_executed", "execution_verified"],
+          "properties": {
+            "required": {"type": "boolean"},
+            "method": {"$ref": "#/$defs/nonEmpty"},
+            "sequence_receipt": {"type": "string"},
+            "concealment_planned": {"$ref": "#/$defs/nonEmpty"},
+            "concealment_executed": {"$ref": "#/$defs/nonEmpty"},
+            "execution_verified": {"type": "boolean"}
+          }
+        },
+        "blinding": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["planned_roles", "executed_roles", "assessment_receipt"],
+          "properties": {
+            "planned_roles": {"$ref": "#/$defs/stringSet"},
+            "executed_roles": {"$ref": "#/$defs/stringSet"},
+            "assessment_receipt": {"type": "string"}
+          }
+        },
+        "intervention_fidelity": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["applicability", "measured", "receipt"],
+          "properties": {
+            "applicability": {"enum": ["required", "not_applicable", "unknown"]},
+            "measured": {"type": "boolean"},
+            "receipt": {"type": "string"}
+          }
+        },
+        "outcomes_collected": {"$ref": "#/$defs/stringSet"},
+        "stopping": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["planned_maximum", "realized", "rule_changed"],
+          "properties": {
+            "planned_maximum": {"type": "integer", "minimum": 0},
+            "realized": {"type": "integer", "minimum": 0},
+            "rule_changed": {"type": "boolean"}
+          }
+        },
+        "adverse_events": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["applicability", "observed_count", "reported_count", "receipt"],
+          "properties": {
+            "applicability": {"enum": ["required", "not_applicable", "unknown"]},
+            "observed_count": {"type": "integer", "minimum": 0},
+            "reported_count": {"type": "integer", "minimum": 0},
+            "receipt": {"type": "string"}
+          }
+        },
+        "quality_control_receipts": {"$ref": "#/$defs/stringSet"},
+        "raw_data_snapshot": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["asset_id", "sha256"],
+          "properties": {
+            "asset_id": {"$ref": "#/$defs/nonEmpty"},
+            "sha256": {"$ref": "#/$defs/sha256"}
+          }
+        }
+      }
+    },
+    "analysisExecution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["analysis_id", "plan_id", "input_data_sha256", "reported_primary_outcome_ids", "sample_size_analyzed", "execution_receipt"],
+      "properties": {
+        "analysis_id": {"$ref": "#/$defs/nonEmpty"},
+        "plan_id": {"$ref": "#/$defs/nonEmpty"},
+        "input_data_sha256": {"$ref": "#/$defs/sha256"},
+        "reported_primary_outcome_ids": {"$ref": "#/$defs/stringSet"},
+        "sample_size_analyzed": {"type": "integer", "minimum": 0},
+        "execution_receipt": {"$ref": "#/$defs/nonEmpty"}
+      }
+    },
+    "deviation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["deviation_id", "from_object_id", "detected_at", "description", "reason", "classification", "affected_claim_ids", "inference_consequence", "disclosure_locations", "status"],
+      "properties": {
+        "deviation_id": {"$ref": "#/$defs/nonEmpty"},
+        "from_object_id": {"$ref": "#/$defs/nonEmpty"},
+        "detected_at": {"$ref": "#/$defs/dateTime"},
+        "description": {"$ref": "#/$defs/nonEmpty"},
+        "reason": {"$ref": "#/$defs/nonEmpty"},
+        "classification": {"$ref": "#/$defs/nonEmpty"},
+        "affected_claim_ids": {"$ref": "#/$defs/stringSet"},
+        "inference_consequence": {"$ref": "#/$defs/nonEmpty"},
+        "disclosure_locations": {"$ref": "#/$defs/stringSet"},
+        "status": {"enum": ["open", "disclosed", "resolved", "cannot_repair"]}
+      }
+    },
+    "ethics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required", "status", "approval_or_waiver_ids", "consent_status", "privacy_status"],
+      "properties": {
+        "required": {"type": "boolean"},
+        "status": {"enum": ["approved", "waived", "not_required", "pending", "missing", "unknown"]},
+        "approval_or_waiver_ids": {"$ref": "#/$defs/stringSet"},
+        "consent_status": {"$ref": "#/$defs/nonEmpty"},
+        "privacy_status": {"$ref": "#/$defs/nonEmpty"}
+      }
+    },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["claim_id", "claim_type", "evidential_status", "protocol_item_refs", "analysis_ids", "allowed_inferences", "prohibited_inferences"],
+      "properties": {
+        "claim_id": {"$ref": "#/$defs/nonEmpty"},
+        "claim_type": {"$ref": "#/$defs/nonEmpty"},
+        "evidential_status": {"enum": ["confirmatory", "prespecified", "deviation", "exploratory", "post_hoc", "descriptive", "interpretive"]},
+        "protocol_item_refs": {"$ref": "#/$defs/stringSet"},
+        "analysis_ids": {"$ref": "#/$defs/stringSet"},
+        "allowed_inferences": {"$ref": "#/$defs/stringSet"},
+        "prohibited_inferences": {"$ref": "#/$defs/stringSet"}
+      }
+    },
+    "certification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requested_layers", "does_not_certify"],
+      "properties": {
+        "requested_layers": {"$ref": "#/$defs/stringSet"},
+        "does_not_certify": {
+          "allOf": [
+            {"$ref": "#/$defs/stringSet"},
+            {"contains": {"const": "scientific_truth"}},
+            {"contains": {"const": "journal_acceptance"}}
+          ]
+        }
+      }
+    },
+    "sourceProvenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["adapter_catalog_id", "evidence_registry_id", "evaluated_at"],
+      "properties": {
+        "adapter_catalog_id": {"$ref": "#/$defs/nonEmpty"},
+        "evidence_registry_id": {"$ref": "#/$defs/nonEmpty"},
+        "evaluated_at": {"$ref": "#/$defs/dateTime"}
+      }
+    }
+  }
+}

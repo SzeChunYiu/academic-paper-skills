@@ -32,6 +32,27 @@ review model、AI/confidentiality policy、acceptance states 与 certification l
 或有冲突的 target 必须走 live official-source resolution；fallback profile 永远不能
 当成 exact journal policy。
 
+## Study protocol 与 conduct contract
+
+在把 Methods、Results、claims 或 figures 写成 authoritative surface 之前，skill 会
+先物化：
+
+```text
+protocol version -> analysis-plan version -> conduct receipt
+-> deviation ledger -> analysis/result -> bounded claim
+```
+
+10 个 maintained study-type adapters 覆盖 randomized、observational、
+computational/ML、animal、systematic-review、qualitative、experimental、resource
+与 exploratory work，但不宣称存在 universal best design。Behavioral checks 会阻断
+false prospective label、undisclosed outcome change、未验证的 randomization/blinding
+execution、隐藏的 stopping/exclusion/harms、evaluation leakage、无 timing 支持的
+confirmatory status、broken data lineage 与缺失的 required ethics authority。
+
+39-source evidence registry 记录 19 个 full-text、20 个 abstract-level reads、
+transfer limits 与 frozen 84-record search log。通过只代表 bounded traceability，
+不是 scientific-validity certificate，也不是 journal-acceptance prediction。
+
 ## Scientific display decision contract
 
 每个承担 evidence 的 plot、figure、table、image plate 或 diagram 都可以绑定到
@@ -59,6 +80,7 @@ supported decisions、transfer limits、contradictions 与 update triggers。
 ```text
 scientific evidence
 -> paper archetype
+-> protocol + analysis plan + executed conduct + deviations
 -> question / contribution
 -> claim/evidence/boundary map
 -> content selection

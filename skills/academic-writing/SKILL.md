@@ -90,7 +90,28 @@ Never invent results, mechanisms, significance, citations, experiments, novelty,
 
 External research can improve context, methods guidance, interpretation, citations, and genre calibration. It cannot become a result the study did not produce.
 
-## 4. Build the argument before prose
+## 4. Materialize study protocol and conduct before prose
+
+When a study record is in scope, load
+`../nature-shared/core/study-protocol-conduct-contract.md` before projecting
+Methods, Results, claims, figures, or readiness language.
+
+Preserve this authority chain:
+
+`protocol version -> analysis-plan version -> conduct receipt -> deviation ledger -> analysis/result -> claim`
+
+Record freeze timing relative to data/outcome access, planned versus executed
+assignment/blinding/fidelity, stopping and exclusions, harms, raw-data and
+analysis receipts, ethics/governance, and claim evidential status. Methods prose is a projection of these objects, not the authority that proves conduct.
+
+Use study-type adapters, not a universal checklist. Registration, reporting
+completion, protocol traceability, scientific validity, and journal acceptance
+remain separate. Repair a protocol/conduct blocker by reconciling source
+records, disclosing/versioning a deviation, rerunning from valid evidence,
+reclassifying an analysis, narrowing a claim, or conducting a new prospective
+study—never by backdating or inventing an approval/receipt.
+
+## 5. Build the argument before prose
 
 Use the argument spine:
 
@@ -112,7 +133,7 @@ that the located warrant entails the proposition at its stated scope.
 
 Do not manufacture a `gap` merely to make the paper sound important.
 
-## 5. Make the content rich enough to understand
+## 6. Make the content rich enough to understand
 
 Use `../nature-shared/core/explanatory-sufficiency.md` and `../nature-shared/core/manuscript-content-selection.md` together.
 
@@ -133,7 +154,7 @@ For central ideas/results, ensure the intended reader receives the necessary sub
 
 Do not delete reasoning merely to make prose short. Do not add textbook filler merely to make prose long.
 
-## 6. Keep project artifacts out of the paper
+## 7. Keep project artifacts out of the paper
 
 Before drafting and again before release, separate scientific content from repository/developer detail.
 
@@ -149,7 +170,7 @@ Never expose filenames, paths, helper names, temporary output files, branches, P
 
 Use `../nature-shared/core/manuscript-surface-qa.md` as the final release gate.
 
-## 7. Study papers at two scales
+## 8. Study papers at two scales
 
 ### Broad corpus
 
@@ -178,7 +199,7 @@ Learn:
 
 Do not copy sentences, distinctive paragraph architecture, layouts, palettes, or visual identity.
 
-## 8. Plan figures before prose becomes rigid
+## 9. Plan figures before prose becomes rigid
 
 Use `../nature-shared/core/figure-evidence-planning.md`, then create a
 **scientific display decision contract** from
@@ -212,7 +233,7 @@ artifact hashes must remain bound to the current display contract.
 
 Route rendering and detailed diagram design to the scientific-figure capability.
 
-## 9. Build section and paragraph logic
+## 10. Build section and paragraph logic
 
 Use the relevant compatibility fragments under `../nature-writing/static/` and references under `../nature-writing/references/` as needed.
 
@@ -228,7 +249,7 @@ Each paragraph needs a nucleus plus only the satellites required for:
 - implication;
 - bridge.
 
-## 10. Make every sentence logically connected
+## 11. Make every sentence logically connected
 
 Use `../nature-shared/core/sentence-logic-and-cohesion.md`.
 
@@ -254,7 +275,7 @@ Then check:
 
 A connective cannot manufacture logic.
 
-## 11. Humanize by improving scholarly control, not detector evasion
+## 12. Humanize by improving scholarly control, not detector evasion
 
 Use `../nature-shared/core/natural-scholarly-prose.md` and `../nature-shared/core/author-voice-profile.md` when appropriate.
 
@@ -271,7 +292,7 @@ Natural scholarly writing should show:
 
 Do not use AI-word blacklists, random sentence lengths, deliberate errors, fake informality, or detector optimization.
 
-## 12. Apply exact target rules and decision contract last
+## 13. Apply exact target rules and decision contract last
 
 Scientific validity and reader logic come first.
 
@@ -301,7 +322,7 @@ exact profile is versioned local knowledge. A fallback profile is not exact jour
 conflicting, mark it unresolved and run live official-source resolution rather
 than attributing a generic objective to the journal.
 
-## 13. Editor/reviewer preflight
+## 14. Editor/reviewer preflight
 
 For submission readiness, use the shared editor/reviewer decision engine or `$academic-paper-pipeline` for repeated closed-loop review/revision.
 
@@ -318,7 +339,7 @@ Distinguish:
 
 More experiments are not automatically the right repair.
 
-## 14. Final release gate
+## 15. Final release gate
 
 Before returning manuscript-facing text:
 

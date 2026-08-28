@@ -1,0 +1,369 @@
+{
+  "catalog_schema_version": "1.0.0",
+  "catalog_id": "study-protocol-maintained-adapters-2026-08-28",
+  "reviewed_at": "2026-08-28",
+  "selection_mode": "applicable_obligations_not_universal_design",
+  "scope": "Evidence-backed protocol and conduct obligations matched to study archetype and design tags. The catalog does not choose a universal best design or certify scientific validity.",
+  "profiles": [
+    {
+      "adapter_id": "randomized-intervention",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "study_archetypes": [
+          "randomized_intervention"
+        ],
+        "any_design_tags": [
+          "clinical_trial",
+          "field_trial",
+          "randomized_experiment"
+        ]
+      },
+      "obligations": [
+        "Bind eligibility, assignment sequence, concealment, intervention/comparator, primary outcomes, stopping, SAP, harms, and participant flow to versions and execution receipts.",
+        "Separate planned blinding and intervention delivery from what was actually executed.",
+        "Resolve registration applicability from governing ethics, law, registry, funder, reporting, and venue requirements; do not infer it from the adapter alone."
+      ],
+      "hard_checks": [
+        "prospective_timing",
+        "primary_outcome_alignment",
+        "randomization_execution",
+        "blinding_execution",
+        "stopping_and_exclusions",
+        "adverse_event_reconciliation",
+        "ethics_authority"
+      ],
+      "source_refs": [
+        "chan-2004",
+        "wood-2008",
+        "savovic-2012",
+        "spirit-2025",
+        "consort-2025",
+        "tidier-2014",
+        "carroll-2007"
+      ],
+      "transfer_limits": [
+        "Bias associated with concealment/blinding varies by outcome type and setting.",
+        "Reporting completeness does not prove unbiased conduct."
+      ]
+    },
+    {
+      "adapter_id": "observational-causal",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "study_archetypes": [
+          "observational_causal"
+        ],
+        "any_design_tags": [
+          "target_trial_emulation",
+          "comparative_effectiveness"
+        ]
+      },
+      "obligations": [
+        "Specify target population, strategies, eligibility, assignment, time zero, follow-up, estimand, confounders, missingness, and identification assumptions.",
+        "Keep emulation choices and sensitivity analyses versioned relative to outcome access.",
+        "Do not convert design emulation into proof that exchangeability, positivity, consistency, or measurement assumptions hold."
+      ],
+      "hard_checks": [
+        "prospective_timing",
+        "primary_outcome_alignment",
+        "stopping_and_exclusions",
+        "ethics_authority"
+      ],
+      "source_refs": [
+        "hernan-2016",
+        "hernan-2016-timezero",
+        "strobe-2007",
+        "cro-2013"
+      ],
+      "transfer_limits": [
+        "Target-trial framing applies to causal questions, not every observational study.",
+        "Explicit design cannot eliminate unmeasured confounding."
+      ]
+    },
+    {
+      "adapter_id": "observational-association",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "study_archetypes": [
+          "observational_association"
+        ],
+        "any_design_tags": [
+          "cohort",
+          "case_control",
+          "cross_sectional"
+        ]
+      },
+      "obligations": [
+        "Record source population, sampling/selection, variables, measurement timing, missingness, exclusions, model-selection status, and sensitivity analyses.",
+        "Distinguish exploratory associations from prospectively specified tests.",
+        "Keep causal language outside the allowed inference boundary unless identification is separately supported."
+      ],
+      "hard_checks": [
+        "prospective_timing",
+        "primary_outcome_alignment",
+        "stopping_and_exclusions",
+        "ethics_authority"
+      ],
+      "source_refs": [
+        "strobe-2007",
+        "nosek-2018",
+        "munafo-2017",
+        "lakens-2022"
+      ],
+      "transfer_limits": [
+        "STROBE is reporting guidance, not a design or quality certificate.",
+        "Many observational studies are appropriately exploratory or descriptive."
+      ]
+    },
+    {
+      "adapter_id": "computational-ml",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "study_archetypes": [
+          "computational_ml"
+        ],
+        "any_design_tags": [
+          "machine_learning",
+          "benchmark",
+          "prediction",
+          "simulation"
+        ]
+      },
+      "obligations": [
+        "Bind data snapshots, unit/group/time split, preprocessing fit scope, labels, code/environment, seeds, hyperparameters, selection budget, and evaluation outputs.",
+        "Prevent train/test or group leakage and report benchmark changes or reused test feedback.",
+        "Separate executable reproduction from independent replication and scientific validity."
+      ],
+      "hard_checks": [
+        "prospective_timing",
+        "primary_outcome_alignment",
+        "evaluation_leakage",
+        "stopping_and_exclusions",
+        "ethics_authority"
+      ],
+      "source_refs": [
+        "kapoor-2023",
+        "pineau-2021",
+        "sandve-2013",
+        "peng-2011",
+        "baggerly-2009",
+        "stodden-2018",
+        "hardwicke-2018"
+      ],
+      "transfer_limits": [
+        "Leakage depends on the scientific unit, prediction target, hierarchy, and deployment scenario.",
+        "Exact rerun does not prove generalization or absence of conceptual error."
+      ]
+    },
+    {
+      "adapter_id": "animal-preclinical",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "study_archetypes": [
+          "animal_preclinical"
+        ],
+        "any_design_tags": [
+          "in_vivo",
+          "animal_experiment"
+        ]
+      },
+      "obligations": [
+        "Record experimental unit, species/strain/sex/age, allocation, randomization, blinding, sample-size rationale, exclusions, procedures, welfare, and adverse outcomes.",
+        "Distinguish unknown execution from not performed and from not applicable.",
+        "Account for cage, litter, batch, operator, and other hierarchical dependence when relevant."
+      ],
+      "hard_checks": [
+        "prospective_timing",
+        "primary_outcome_alignment",
+        "randomization_execution",
+        "blinding_execution",
+        "stopping_and_exclusions",
+        "adverse_event_reconciliation",
+        "ethics_authority"
+      ],
+      "source_refs": [
+        "arrive-2020",
+        "landis-2012",
+        "kilkenny-2009",
+        "macleod-2015"
+      ],
+      "transfer_limits": [
+        "ARRIVE completion does not certify low risk of bias or ethical adequacy.",
+        "Species and laboratory context require domain-specific welfare and measurement standards."
+      ]
+    },
+    {
+      "adapter_id": "systematic-review",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "study_archetypes": [
+          "systematic_review"
+        ],
+        "any_design_tags": [
+          "meta_analysis",
+          "evidence_synthesis"
+        ]
+      },
+      "obligations": [
+        "Version the review question, eligibility, sources/platforms, exact searches, dates/limits, screening, extraction, risk-of-bias, synthesis, certainty, and update rule.",
+        "Preserve protocol amendments and exact executed search strings.",
+        "Do not equate PRISMA completion with an exhaustive or unbiased review."
+      ],
+      "hard_checks": [
+        "prospective_timing",
+        "primary_outcome_alignment",
+        "stopping_and_exclusions"
+      ],
+      "source_refs": [
+        "dwan-2013",
+        "prisma-p-2015",
+        "prisma-2020",
+        "prisma-s-2021"
+      ],
+      "transfer_limits": [
+        "Reporting standards do not prove search completeness or synthesis validity.",
+        "Specialized review types require extensions and domain-specific sources."
+      ]
+    },
+    {
+      "adapter_id": "qualitative-interpretive",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "study_archetypes": [
+          "qualitative_interpretive"
+        ],
+        "any_design_tags": [
+          "interviews",
+          "focus_groups",
+          "ethnography",
+          "thematic_analysis"
+        ]
+      },
+      "obligations": [
+        "Record methodological orientation, researcher position/reflexivity, context, sampling rationale, consent, data generation, coding/interpretation process, negative cases, and evidence excerpts.",
+        "Use saturation only when it fits the methodology and define how it was assessed.",
+        "Justify data adequacy from study-specific information power and analytic goals; do not force a universal interview count or preregistration gate."
+      ],
+      "hard_checks": [
+        "prospective_timing",
+        "ethics_authority"
+      ],
+      "source_refs": [
+        "coreq-2007",
+        "srqr-2014",
+        "guest-2006",
+        "malterud-2016",
+        "vasileiou-2018"
+      ],
+      "transfer_limits": [
+        "COREQ applies to interviews/focus groups and cannot govern all qualitative traditions.",
+        "Reflexivity and adequacy are substantive judgments, not checkbox certification."
+      ]
+    },
+    {
+      "adapter_id": "experimental-general",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "study_archetypes": [
+          "experimental_general"
+        ],
+        "any_design_tags": [
+          "laboratory_experiment",
+          "human_experiment"
+        ]
+      },
+      "obligations": [
+        "Record unit, assignment/counterbalancing, blinding where applicable, outcomes, sample-size rationale, stopping, exclusions, manipulations, QC, and analysis status.",
+        "Separate prospectively specified tests from data-contingent exploration.",
+        "Expose researcher degrees of freedom rather than treating a significant result as protocol evidence."
+      ],
+      "hard_checks": [
+        "prospective_timing",
+        "primary_outcome_alignment",
+        "randomization_execution",
+        "blinding_execution",
+        "stopping_and_exclusions",
+        "ethics_authority"
+      ],
+      "source_refs": [
+        "simmons-2011",
+        "munafo-2017",
+        "nosek-2018",
+        "lakens-2022"
+      ],
+      "transfer_limits": [
+        "Some experiments cannot blind every role or randomize naturally occurring factors.",
+        "Prespecification improves interpretability but does not replace measurement validity."
+      ]
+    },
+    {
+      "adapter_id": "resource-dataset",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "study_archetypes": [
+          "resource_dataset"
+        ],
+        "any_design_tags": [
+          "dataset",
+          "corpus",
+          "registry",
+          "benchmark_resource"
+        ]
+      },
+      "obligations": [
+        "Version inclusion, acquisition, consent/governance, identifiers, transformations, QC, known defects, access conditions, and lineage.",
+        "Make availability, reusability, and analytic reproducibility separate states.",
+        "Keep sensitive data governed rather than treating open release as universal."
+      ],
+      "hard_checks": [
+        "stopping_and_exclusions",
+        "ethics_authority"
+      ],
+      "source_refs": [
+        "fair-2016",
+        "sandve-2013",
+        "baggerly-2009",
+        "hardwicke-2018"
+      ],
+      "transfer_limits": [
+        "FAIR is not synonymous with open and does not certify data accuracy.",
+        "Resource-specific quality and consent standards still apply."
+      ]
+    },
+    {
+      "adapter_id": "exploratory-descriptive",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "study_archetypes": [
+          "exploratory_descriptive"
+        ],
+        "any_design_tags": [
+          "pilot",
+          "discovery",
+          "hypothesis_generation"
+        ]
+      },
+      "obligations": [
+        "Label data-contingent analyses and outcomes as exploratory or post hoc.",
+        "Preserve exact timing, transformations, exclusions, negative/null observations, and the path by which hypotheses were generated.",
+        "Do not require universal preregistration, but do not present postdiction as prospective confirmation."
+      ],
+      "hard_checks": [
+        "prospective_timing",
+        "stopping_and_exclusions",
+        "ethics_authority"
+      ],
+      "source_refs": [
+        "nosek-2018",
+        "chambers-2021",
+        "scheel-2021",
+        "munafo-2017"
+      ],
+      "transfer_limits": [
+        "Exploration is scientifically valuable when labeled honestly.",
+        "A later prospective replication may strengthen a confirmatory claim but cannot retroactively change timing."
+      ]
+    }
+  ],
+  "evidence_registry_file": "study-protocol-evidence-registry.json"
+}
