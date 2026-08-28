@@ -88,6 +88,16 @@ class AcademicWritingCanonicalTests(unittest.TestCase):
         self.assertIn("no universal best chart", skill.lower())
         self.assertIn("data snapshot -> analysis receipt -> render receipt", skill)
 
+    def test_study_protocol_and_conduct_precede_manuscript_projection(self) -> None:
+        skill = read(SKILL / "SKILL.md")
+        manifest = read(SKILL / "manifest.yaml")
+        readme = read(SKILL / "README_EN.md")
+        self.assertIn("study-protocol-conduct-contract.md", manifest)
+        self.assertIn("protocol version -> analysis-plan version", skill)
+        self.assertIn("conduct receipt -> deviation ledger", skill)
+        self.assertIn("Methods prose is a projection", skill)
+        self.assertIn("not a scientific-validity certificate", readme)
+
 
 if __name__ == "__main__":
     unittest.main()

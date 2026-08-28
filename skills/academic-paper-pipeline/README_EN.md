@@ -33,6 +33,26 @@ Live official-source contracts outrank maintained exact snapshots. A generic
 or publication-model fallback can guide planning, but cannot close exact target
 readiness or be attributed to the journal.
 
+## Study Protocol And Conduct State
+
+The persistent state now binds each in-scope study through:
+
+```text
+protocol version -> analysis-plan version -> conduct receipt
+-> deviation ledger -> analysis/result -> claim status
+```
+
+Study-type adapters activate only relevant obligations; they do not impose one
+universal design. False prospective timing, hidden outcome changes, planned-but-
+unverified randomization or blinding, stopping/exclusion/harms drift,
+computational leakage, broken raw-data lineage, unsupported confirmatory labels,
+and missing required ethics authority remain blockers.
+
+Repairs preserve the historical record: disclose/version deviations, rerun from
+valid evidence, add sensitivity analysis, reclassify exploratory/post-hoc work,
+narrow claims, or request a new prospective study. Registration, reporting
+completion, traceability, scientific validity, and acceptance remain separate.
+
 ## Scientific Display State
 
 The persistent figure ledger now carries a scientific display decision contract
@@ -52,6 +72,7 @@ repaired, or the claim is appropriately narrowed.
 ```text
 target + paper archetype
 -> evidence/source intake
+-> protocol + conduct + deviation resolution
 -> research calibration
 -> argument + claim/evidence architecture
 -> content/figure/statistics planning

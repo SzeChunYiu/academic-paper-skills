@@ -1,0 +1,1116 @@
+{
+  "log_schema_version": "1.0.0",
+  "executed_at": "2026-08-28",
+  "purpose": "Broad, reproducible discovery for study protocol and conduct decision contracts. Search rank is not evidence strength.",
+  "queries": [
+    {
+      "query_id": "preregistration_registered_reports",
+      "query": "preregistration registered reports selective outcome reporting",
+      "provider": "OpenAlex",
+      "request_url": "https://api.openalex.org/works?search=preregistration+registered+reports+selective+outcome+reporting&per-page=7&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Cprimary_location%2Ccited_by_count%2Ctype%2Copen_access",
+      "records": [
+        {
+          "openalex_id": "https://openalex.org/W3043135743",
+          "doi": "https://doi.org/10.1371/journal.pbio.3000411",
+          "title": "Reporting animal research: Explanation and elaboration for the ARRIVE guidelines 2.0",
+          "publication_year": 2020,
+          "type": "article",
+          "source": "PLoS Biology",
+          "landing_page_url": "https://doi.org/10.1371/journal.pbio.3000411",
+          "cited_by_count_at_search": 2846,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3211435516",
+          "doi": "https://doi.org/10.1038/s41562-021-01193-7",
+          "title": "The past, present and future of Registered Reports",
+          "publication_year": 2021,
+          "type": "article",
+          "source": "Nature Human Behaviour",
+          "landing_page_url": "https://doi.org/10.1038/s41562-021-01193-7",
+          "cited_by_count_at_search": 467,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3082857103",
+          "doi": "https://doi.org/10.1177/25152459211007467",
+          "title": "An Excess of Positive Results: Comparing the Standard Psychology Literature With Registered Reports",
+          "publication_year": 2021,
+          "type": "article",
+          "source": "Advances in Methods and Practices in Psychological Science",
+          "landing_page_url": "https://doi.org/10.1177/25152459211007467",
+          "cited_by_count_at_search": 395,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2547503455",
+          "doi": "https://doi.org/10.3389/fpsyg.2016.01832",
+          "title": "Degrees of Freedom in Planning, Running, Analyzing, and Reporting Psychological Studies: A Checklist to Avoid p-Hacking",
+          "publication_year": 2016,
+          "type": "article",
+          "source": "Frontiers in Psychology",
+          "landing_page_url": "https://doi.org/10.3389/fpsyg.2016.01832",
+          "cited_by_count_at_search": 845,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2944234631",
+          "doi": "https://doi.org/10.1111/cobi.13342",
+          "title": "Making conservation science more reliable with preregistration and registered reports",
+          "publication_year": 2019,
+          "type": "article",
+          "source": "Conservation Biology",
+          "landing_page_url": "https://doi.org/10.1111/cobi.13342",
+          "cited_by_count_at_search": 55,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3013367531",
+          "doi": "https://doi.org/10.1371/journal.pbio.3000690",
+          "title": "Preregistration of exploratory research: Learning from the golden age of discovery",
+          "publication_year": 2020,
+          "type": "article",
+          "source": "PLoS Biology",
+          "landing_page_url": "https://doi.org/10.1371/journal.pbio.3000690",
+          "cited_by_count_at_search": 88,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2958422128",
+          "doi": "https://doi.org/10.1101/703181",
+          "title": "The ARRIVE guidelines 2019: updated guidelines for reporting animal research",
+          "publication_year": 2019,
+          "type": "preprint",
+          "source": "bioRxiv (Cold Spring Harbor Laboratory)",
+          "landing_page_url": "https://doi.org/10.1101/703181",
+          "cited_by_count_at_search": 1053,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        }
+      ]
+    },
+    {
+      "query_id": "protocol_outcome_switching",
+      "query": "protocol publication outcome switching clinical trials",
+      "provider": "OpenAlex",
+      "request_url": "https://api.openalex.org/works?search=protocol+publication+outcome+switching+clinical+trials&per-page=7&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Cprimary_location%2Ccited_by_count%2Ctype%2Copen_access",
+      "records": [
+        {
+          "openalex_id": "https://openalex.org/W2970684805",
+          "doi": "https://doi.org/10.1136/bmj.l4898",
+          "title": "RoB 2: a revised tool for assessing risk of bias in randomised trials",
+          "publication_year": 2019,
+          "type": "article",
+          "source": "BMJ",
+          "landing_page_url": "https://doi.org/10.1136/bmj.l4898",
+          "cited_by_count_at_search": 32500,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2156092714",
+          "doi": "https://doi.org/10.1016/j.clinph.2009.08.016",
+          "title": "Safety, ethical considerations, and application guidelines for the use of transcranial magnetic stimulation in clinical practice and research",
+          "publication_year": 2009,
+          "type": "article",
+          "source": "Clinical Neurophysiology",
+          "landing_page_url": "https://doi.org/10.1016/j.clinph.2009.08.016",
+          "cited_by_count_at_search": 5515,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4311249208",
+          "doi": "https://doi.org/10.1001/jama.2022.21022",
+          "title": "Guidelines for Reporting Outcomes in Trial Reports",
+          "publication_year": 2022,
+          "type": "article",
+          "source": "JAMA",
+          "landing_page_url": "https://doi.org/10.1001/jama.2022.21022",
+          "cited_by_count_at_search": 730,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2991341799",
+          "doi": "https://doi.org/10.1038/s41591-019-0654-5",
+          "title": "Integrative molecular and clinical modeling of clinical outcomes to PD1 blockade in patients with metastatic melanoma",
+          "publication_year": 2019,
+          "type": "article",
+          "source": "Nature Medicine",
+          "landing_page_url": "https://doi.org/10.1038/s41591-019-0654-5",
+          "cited_by_count_at_search": 1126,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W1998943227",
+          "doi": "https://doi.org/10.1056/nejmoa0907845",
+          "title": "A Trial of Darbepoetin Alfa in Type 2 Diabetes and Chronic Kidney Disease",
+          "publication_year": 2009,
+          "type": "article",
+          "source": "New England Journal of Medicine",
+          "landing_page_url": "https://doi.org/10.1056/nejmoa0907845",
+          "cited_by_count_at_search": 2098,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2597385103",
+          "doi": "https://doi.org/10.1186/s13063-017-1870-2",
+          "title": "Why clinical trial outcomes fail to translate into benefits for patients",
+          "publication_year": 2017,
+          "type": "article",
+          "source": "Trials",
+          "landing_page_url": "https://doi.org/10.1186/s13063-017-1870-2",
+          "cited_by_count_at_search": 431,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2115499099",
+          "doi": "https://doi.org/10.1093/jnci/djp079",
+          "title": "Dose Escalation Methods in Phase I Cancer Clinical Trials",
+          "publication_year": 2009,
+          "type": "article",
+          "source": "JNCI Journal of the National Cancer Institute",
+          "landing_page_url": "https://doi.org/10.1093/jnci/djp079",
+          "cited_by_count_at_search": 876,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        }
+      ]
+    },
+    {
+      "query_id": "randomization_concealment_blinding",
+      "query": "allocation concealment blinding treatment effect bias randomized trials",
+      "provider": "OpenAlex",
+      "request_url": "https://api.openalex.org/works?search=allocation+concealment+blinding+treatment+effect+bias+randomized+trials&per-page=7&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Cprimary_location%2Ccited_by_count%2Ctype%2Copen_access",
+      "records": [
+        {
+          "openalex_id": "https://openalex.org/W2098923148",
+          "doi": "https://doi.org/10.1136/bmj.d5928",
+          "title": "The Cochrane Collaboration's tool for assessing risk of bias in randomised trials",
+          "publication_year": 2011,
+          "type": "article",
+          "source": "BMJ",
+          "landing_page_url": "https://doi.org/10.1136/bmj.d5928",
+          "cited_by_count_at_search": 34725,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2160795579",
+          "doi": "https://doi.org/10.1136/bmj.39465.451748.ad",
+          "title": "Empirical evidence of bias in treatment effect estimates in controlled trials with different interventions and outcomes: meta-epidemiological study",
+          "publication_year": 2008,
+          "type": "article",
+          "source": "BMJ",
+          "landing_page_url": "https://doi.org/10.1136/bmj.39465.451748.ad",
+          "cited_by_count_at_search": 2572,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2108696783",
+          "doi": "https://doi.org/10.1186/1741-7015-8-18",
+          "title": "CONSORT 2010 Statement: updated guidelines for reporting parallel group randomised trials",
+          "publication_year": 2010,
+          "type": "article",
+          "source": "BMC Medicine",
+          "landing_page_url": "https://doi.org/10.1186/1741-7015-8-18",
+          "cited_by_count_at_search": 13610,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2032541700",
+          "doi": "https://doi.org/10.1136/bmj.c869",
+          "title": "CONSORT 2010 Explanation and Elaboration: updated guidelines for reporting parallel group randomised trials",
+          "publication_year": 2010,
+          "type": "article",
+          "source": "BMJ",
+          "landing_page_url": "https://doi.org/10.1136/bmj.c869",
+          "cited_by_count_at_search": 9116,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2142947341",
+          "doi": "https://doi.org/10.1001/jama.290.7.921",
+          "title": "Association of Funding and Conclusions in Randomized Drug Trials",
+          "publication_year": 2003,
+          "type": "article",
+          "source": "JAMA",
+          "landing_page_url": "https://doi.org/10.1001/jama.290.7.921",
+          "cited_by_count_at_search": 749,
+          "is_open_access": false,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2171811563",
+          "doi": "https://doi.org/10.1136/bmj.e7586",
+          "title": "SPIRIT 2013 explanation and elaboration: guidance for protocols of clinical trials",
+          "publication_year": 2013,
+          "type": "article",
+          "source": "BMJ",
+          "landing_page_url": "https://doi.org/10.1136/bmj.e7586",
+          "cited_by_count_at_search": 7116,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2037669635",
+          "doi": "https://doi.org/10.1371/journal.pone.0098856",
+          "title": "The Need for Randomization in Animal Trials: An Overview of Systematic Reviews",
+          "publication_year": 2014,
+          "type": "review",
+          "source": "PLoS ONE",
+          "landing_page_url": "https://doi.org/10.1371/journal.pone.0098856",
+          "cited_by_count_at_search": 296,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        }
+      ]
+    },
+    {
+      "query_id": "stopping_flexibility_power",
+      "query": "optional stopping researcher degrees of freedom false positive sample size power",
+      "provider": "OpenAlex",
+      "request_url": "https://api.openalex.org/works?search=optional+stopping+researcher+degrees+of+freedom+false+positive+sample+size+power&per-page=7&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Cprimary_location%2Ccited_by_count%2Ctype%2Copen_access",
+      "records": [
+        {
+          "openalex_id": "https://openalex.org/W4391754649",
+          "doi": "https://doi.org/10.1177/10888683241228328",
+          "title": "Power to Detect What? Considerations for Planning and Evaluating Sample Size",
+          "publication_year": 2024,
+          "type": "article",
+          "source": "Personality and Social Psychology Review",
+          "landing_page_url": "https://doi.org/10.1177/10888683241228328",
+          "cited_by_count_at_search": 210,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2167796542",
+          "doi": "https://doi.org/10.3389/fpsyg.2014.00781",
+          "title": "Using Bayes to get the most out of non-significant results",
+          "publication_year": 2014,
+          "type": "article",
+          "source": "Frontiers in Psychology",
+          "landing_page_url": "https://doi.org/10.3389/fpsyg.2014.00781",
+          "cited_by_count_at_search": 2127,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W1541390517",
+          "doi": null,
+          "title": "Researching Effective Pedagogy in the Early Years",
+          "publication_year": 2002,
+          "type": "other",
+          "source": "Digital Education Resource Archive (University College London)",
+          "landing_page_url": "http://dera.ioe.ac.uk/4650/1/RR356.pdf",
+          "cited_by_count_at_search": 530,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4399583329",
+          "doi": "https://doi.org/10.32614/cran.package.semtools",
+          "title": "semTools: Useful Tools for Structural Equation Modeling",
+          "publication_year": 2012,
+          "type": "dataset",
+          "source": null,
+          "landing_page_url": "https://doi.org/10.32614/cran.package.semtools",
+          "cited_by_count_at_search": 659,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2598750737",
+          "doi": "https://doi.org/10.3758/s13423-017-1266-z",
+          "title": "Four reasons to prefer Bayesian analyses over significance testing",
+          "publication_year": 2017,
+          "type": "article",
+          "source": "Psychonomic Bulletin & Review",
+          "landing_page_url": "https://doi.org/10.3758/s13423-017-1266-z",
+          "cited_by_count_at_search": 386,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2147543945",
+          "doi": "https://doi.org/10.1016/j.cortex.2014.11.019",
+          "title": "A purely confirmatory replication study of structural brain-behavior correlations",
+          "publication_year": 2015,
+          "type": "article",
+          "source": "Cortex",
+          "landing_page_url": "https://doi.org/10.1016/j.cortex.2014.11.019",
+          "cited_by_count_at_search": 188,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2154347237",
+          "doi": "https://doi.org/10.1039/b820557b",
+          "title": "Microfluidic lab-on-a-chip platforms: requirements, characteristics and applications",
+          "publication_year": 2010,
+          "type": "article",
+          "source": "Chemical Society Reviews",
+          "landing_page_url": "https://doi.org/10.1039/b820557b",
+          "cited_by_count_at_search": 1627,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        }
+      ]
+    },
+    {
+      "query_id": "deviation_fidelity_adherence",
+      "query": "protocol deviation intervention fidelity adherence clinical trial",
+      "provider": "OpenAlex",
+      "request_url": "https://api.openalex.org/works?search=protocol+deviation+intervention+fidelity+adherence+clinical+trial&per-page=7&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Cprimary_location%2Ccited_by_count%2Ctype%2Copen_access",
+      "records": [
+        {
+          "openalex_id": "https://openalex.org/W2772482629",
+          "doi": "https://doi.org/10.1002/14651858.cd001871.pub4",
+          "title": "Interventions for preventing obesity in children",
+          "publication_year": 2019,
+          "type": "article",
+          "source": "Cochrane Database of Systematic Reviews",
+          "landing_page_url": "https://doi.org/10.1002/14651858.cd001871.pub4",
+          "cited_by_count_at_search": 3030,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3003415550",
+          "doi": "https://doi.org/10.1056/nejmoa1911793",
+          "title": "Reduced Lung-Cancer Mortality with Volume CT Screening in a Randomized Trial",
+          "publication_year": 2020,
+          "type": "article",
+          "source": "New England Journal of Medicine",
+          "landing_page_url": "https://doi.org/10.1056/nejmoa1911793",
+          "cited_by_count_at_search": 3606,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2045663952",
+          "doi": "https://doi.org/10.1089/089771502753754037",
+          "title": "Clinical Trials in Head Injury",
+          "publication_year": 2002,
+          "type": "article",
+          "source": "Journal of Neurotrauma",
+          "landing_page_url": "https://doi.org/10.1089/089771502753754037",
+          "cited_by_count_at_search": 910,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2095437242",
+          "doi": "https://doi.org/10.1186/1471-2288-13-92",
+          "title": "A tutorial on sensitivity analyses in clinical trials: the what, why, when and how",
+          "publication_year": 2013,
+          "type": "article",
+          "source": "BMC Medical Research Methodology",
+          "landing_page_url": "https://doi.org/10.1186/1471-2288-13-92",
+          "cited_by_count_at_search": 922,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2057181385",
+          "doi": "https://doi.org/10.1037/0278-6133.27.3.379",
+          "title": "A taxonomy of behavior change techniques used in interventions.",
+          "publication_year": 2008,
+          "type": "article",
+          "source": "Health Psychology",
+          "landing_page_url": "https://doi.org/10.1037/0278-6133.27.3.379",
+          "cited_by_count_at_search": 2623,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2023606650",
+          "doi": "https://doi.org/10.1016/j.echo.2004.07.013",
+          "title": "American Society of Echocardiography recommendations for use of echocardiography in clinical trials",
+          "publication_year": 2004,
+          "type": "article",
+          "source": "Journal of the American Society of Echocardiography",
+          "landing_page_url": "https://doi.org/10.1016/j.echo.2004.07.013",
+          "cited_by_count_at_search": 909,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3127371223",
+          "doi": "https://doi.org/10.1056/nejmoa2032183",
+          "title": "Once-Weekly Semaglutide in Adults with Overweight or Obesity",
+          "publication_year": 2021,
+          "type": "article",
+          "source": "New England Journal of Medicine",
+          "landing_page_url": "https://doi.org/10.1056/nejmoa2032183",
+          "cited_by_count_at_search": 4887,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        }
+      ]
+    },
+    {
+      "query_id": "observational_target_trial",
+      "query": "target trial emulation time zero immortal time bias",
+      "provider": "OpenAlex",
+      "request_url": "https://api.openalex.org/works?search=target+trial+emulation+time+zero+immortal+time+bias&per-page=7&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Cprimary_location%2Ccited_by_count%2Ctype%2Copen_access",
+      "records": [
+        {
+          "openalex_id": "https://openalex.org/W3022164665",
+          "doi": "https://doi.org/10.1093/ije/dyaa057",
+          "title": "Reflection on modern methods: trial emulation in the presence of immortal-time bias. Assessing the benefit of major surgery for elderly lung cancer patients using observational data",
+          "publication_year": 2020,
+          "type": "article",
+          "source": "International Journal of Epidemiology",
+          "landing_page_url": "https://doi.org/10.1093/ije/dyaa057",
+          "cited_by_count_at_search": 198,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4404021068",
+          "doi": "https://doi.org/10.1097/ede.0000000000001808",
+          "title": "A Structural Description of Biases That Generate Immortal Time",
+          "publication_year": 2024,
+          "type": "article",
+          "source": "Epidemiology",
+          "landing_page_url": "https://doi.org/10.1097/ede.0000000000001808",
+          "cited_by_count_at_search": 85,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3115988362",
+          "doi": "https://doi.org/10.1093/ije/dyaa223",
+          "title": "Versatility of the clone-censor-weight approach: response to “trial emulation in the presence of immortal-time bias”",
+          "publication_year": 2020,
+          "type": "article",
+          "source": "International Journal of Epidemiology",
+          "landing_page_url": "https://doi.org/10.1093/ije/dyaa223",
+          "cited_by_count_at_search": 24,
+          "is_open_access": false,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4321369019",
+          "doi": "https://doi.org/10.1097/ede.0000000000001601",
+          "title": "Emulating Target Trials to Avoid Immortal Time Bias – An Application to Antibiotic Initiation and Preterm Delivery",
+          "publication_year": 2023,
+          "type": "article",
+          "source": "Epidemiology",
+          "landing_page_url": "https://doi.org/10.1097/ede.0000000000001601",
+          "cited_by_count_at_search": 42,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4396683758",
+          "doi": "https://doi.org/10.1016/j.eclinm.2024.102622",
+          "title": "Immune checkpoint inhibitors and anti-vascular endothelial growth factor antibody/tyrosine kinase inhibitors with or without transarterial chemoembolization as first-line treatment for advanced hepatocellular carcinoma (CHANCE2201): a target trial emulation study",
+          "publication_year": 2024,
+          "type": "article",
+          "source": "EClinicalMedicine",
+          "landing_page_url": "https://doi.org/10.1016/j.eclinm.2024.102622",
+          "cited_by_count_at_search": 156,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4416204829",
+          "doi": "https://doi.org/10.1186/s13054-025-05723-x",
+          "title": "Opportunities, challenges and future perspectives for target trial emulation in critical care clinical research",
+          "publication_year": 2025,
+          "type": "article",
+          "source": "Critical Care",
+          "landing_page_url": "https://doi.org/10.1186/s13054-025-05723-x",
+          "cited_by_count_at_search": 10,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4387213750",
+          "doi": "https://doi.org/10.1053/j.ajkd.2023.07.024",
+          "title": "Trial Emulation Methods",
+          "publication_year": 2023,
+          "type": "article",
+          "source": "American Journal of Kidney Diseases",
+          "landing_page_url": "https://doi.org/10.1053/j.ajkd.2023.07.024",
+          "cited_by_count_at_search": 8,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        }
+      ]
+    },
+    {
+      "query_id": "computational_leakage_benchmark",
+      "query": "machine learning data leakage benchmark reproducibility",
+      "provider": "OpenAlex",
+      "request_url": "https://api.openalex.org/works?search=machine+learning+data+leakage+benchmark+reproducibility&per-page=7&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Cprimary_location%2Ccited_by_count%2Ctype%2Copen_access",
+      "records": [
+        {
+          "openalex_id": "https://openalex.org/W4385576721",
+          "doi": "https://doi.org/10.1016/j.patter.2023.100804",
+          "title": "Leakage and the reproducibility crisis in machine-learning-based science",
+          "publication_year": 2023,
+          "type": "article",
+          "source": "Patterns",
+          "landing_page_url": "https://doi.org/10.1016/j.patter.2023.100804",
+          "cited_by_count_at_search": 890,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3200707343",
+          "doi": "https://doi.org/10.1038/s41580-021-00407-0",
+          "title": "A guide to machine learning for biologists",
+          "publication_year": 2021,
+          "type": "article",
+          "source": "Nature Reviews Molecular Cell Biology",
+          "landing_page_url": "https://doi.org/10.1038/s41580-021-00407-0",
+          "cited_by_count_at_search": 2157,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2995022099",
+          "doi": "https://doi.org/10.1561/2200000083",
+          "title": "Advances and Open Problems in Federated Learning",
+          "publication_year": 2020,
+          "type": "article",
+          "source": "Foundations and Trends® in Machine Learning",
+          "landing_page_url": "https://doi.org/10.1561/2200000083",
+          "cited_by_count_at_search": 5260,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4213308398",
+          "doi": "https://doi.org/10.1007/978-3-030-05318-5",
+          "title": "Automated Machine Learning",
+          "publication_year": 2019,
+          "type": "book",
+          "source": "The Springer series on challenges in machine learning",
+          "landing_page_url": "https://doi.org/10.1007/978-3-030-05318-5",
+          "cited_by_count_at_search": 1445,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3012501605",
+          "doi": "https://doi.org/10.1038/s41746-020-00323-1",
+          "title": "The future of digital health with federated learning",
+          "publication_year": 2020,
+          "type": "article",
+          "source": "npj Digital Medicine",
+          "landing_page_url": "https://doi.org/10.1038/s41746-020-00323-1",
+          "cited_by_count_at_search": 2851,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2980576170",
+          "doi": "https://doi.org/10.3390/app9204396",
+          "title": "Machine Learning and Deep Learning Methods for Intrusion Detection Systems: A Survey",
+          "publication_year": 2019,
+          "type": "article",
+          "source": "Applied Sciences",
+          "landing_page_url": "https://doi.org/10.3390/app9204396",
+          "cited_by_count_at_search": 1095,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3021975806",
+          "doi": "https://doi.org/10.48550/arxiv.2005.00687",
+          "title": "Open Graph Benchmark: Datasets for Machine Learning on Graphs",
+          "publication_year": 2020,
+          "type": "preprint",
+          "source": "arXiv (Cornell University)",
+          "landing_page_url": "http://arxiv.org/abs/2005.00687",
+          "cited_by_count_at_search": 491,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        }
+      ]
+    },
+    {
+      "query_id": "animal_design_rigor",
+      "query": "animal research randomization blinding sample size reproducibility",
+      "provider": "OpenAlex",
+      "request_url": "https://api.openalex.org/works?search=animal+research+randomization+blinding+sample+size+reproducibility&per-page=7&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Cprimary_location%2Ccited_by_count%2Ctype%2Copen_access",
+      "records": [
+        {
+          "openalex_id": "https://openalex.org/W2570760970",
+          "doi": "https://doi.org/10.1038/s41562-016-0021",
+          "title": "A manifesto for reproducible science",
+          "publication_year": 2017,
+          "type": "article",
+          "source": "Nature Human Behaviour",
+          "landing_page_url": "https://doi.org/10.1038/s41562-016-0021",
+          "cited_by_count_at_search": 3599,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3043135743",
+          "doi": "https://doi.org/10.1371/journal.pbio.3000411",
+          "title": "Reporting animal research: Explanation and elaboration for the ARRIVE guidelines 2.0",
+          "publication_year": 2020,
+          "type": "article",
+          "source": "PLoS Biology",
+          "landing_page_url": "https://doi.org/10.1371/journal.pbio.3000411",
+          "cited_by_count_at_search": 2846,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2137516955",
+          "doi": "https://doi.org/10.1038/nature11556",
+          "title": "A call for transparent reporting to optimize the predictive value of preclinical research",
+          "publication_year": 2012,
+          "type": "article",
+          "source": "Nature",
+          "landing_page_url": "https://doi.org/10.1038/nature11556",
+          "cited_by_count_at_search": 1224,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3177828909",
+          "doi": "https://doi.org/10.1038/s41586-021-03819-2",
+          "title": "Highly accurate protein structure prediction with AlphaFold",
+          "publication_year": 2021,
+          "type": "article",
+          "source": "Nature",
+          "landing_page_url": "https://doi.org/10.1038/s41586-021-03819-2",
+          "cited_by_count_at_search": 46756,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3160990818",
+          "doi": "https://doi.org/10.1038/s41591-021-01336-3",
+          "title": "MDMA-assisted therapy for severe PTSD: a randomized, double-blind, placebo-controlled phase 3 study",
+          "publication_year": 2021,
+          "type": "article",
+          "source": "Nature Medicine",
+          "landing_page_url": "https://doi.org/10.1038/s41591-021-01336-3",
+          "cited_by_count_at_search": 990,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2042190008",
+          "doi": "https://doi.org/10.1371/journal.pone.0007824",
+          "title": "Survey of the Quality of Experimental Design, Statistical Analysis and Reporting of Research Using Animals",
+          "publication_year": 2009,
+          "type": "article",
+          "source": "PLoS ONE",
+          "landing_page_url": "https://doi.org/10.1371/journal.pone.0007824",
+          "cited_by_count_at_search": 878,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2156092714",
+          "doi": "https://doi.org/10.1016/j.clinph.2009.08.016",
+          "title": "Safety, ethical considerations, and application guidelines for the use of transcranial magnetic stimulation in clinical practice and research",
+          "publication_year": 2009,
+          "type": "article",
+          "source": "Clinical Neurophysiology",
+          "landing_page_url": "https://doi.org/10.1016/j.clinph.2009.08.016",
+          "cited_by_count_at_search": 5515,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        }
+      ]
+    },
+    {
+      "query_id": "review_protocol_search",
+      "query": "systematic review protocol reproducible search duplicate screening",
+      "provider": "OpenAlex",
+      "request_url": "https://api.openalex.org/works?search=systematic+review+protocol+reproducible+search+duplicate+screening&per-page=7&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Cprimary_location%2Ccited_by_count%2Ctype%2Copen_access",
+      "records": [
+        {
+          "openalex_id": "https://openalex.org/W2161374186",
+          "doi": "https://doi.org/10.1186/2046-4053-4-1",
+          "title": "Preferred reporting items for systematic review and meta-analysis protocols (PRISMA-P) 2015 statement",
+          "publication_year": 2015,
+          "type": "review",
+          "source": "Systematic Reviews",
+          "landing_page_url": "https://doi.org/10.1186/2046-4053-4-1",
+          "cited_by_count_at_search": 26948,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2169205464",
+          "doi": "https://doi.org/10.1136/bmj.g7647",
+          "title": "Preferred reporting items for systematic review and meta-analysis protocols (PRISMA-P) 2015: elaboration and explanation",
+          "publication_year": 2015,
+          "type": "review",
+          "source": "BMJ",
+          "landing_page_url": "https://doi.org/10.1136/bmj.g7647",
+          "cited_by_count_at_search": 13423,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3022903699",
+          "doi": "https://doi.org/10.1371/journal.pmed.1000100",
+          "title": "The PRISMA Statement for Reporting Systematic Reviews and Meta-Analyses of Studies That Evaluate Health Care Interventions: Explanation and Elaboration",
+          "publication_year": 2009,
+          "type": "review",
+          "source": "PLoS Medicine",
+          "landing_page_url": "https://doi.org/10.1371/journal.pmed.1000100",
+          "cited_by_count_at_search": 28037,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2134833483",
+          "doi": "https://doi.org/10.1136/bmj.b2700",
+          "title": "The PRISMA statement for reporting systematic reviews and meta-analyses of studies that evaluate healthcare interventions: explanation and elaboration",
+          "publication_year": 2009,
+          "type": "review",
+          "source": "BMJ",
+          "landing_page_url": "https://doi.org/10.1136/bmj.b2700",
+          "cited_by_count_at_search": 17910,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3123893780",
+          "doi": "https://doi.org/10.1136/bmj.n160",
+          "title": "PRISMA 2020 explanation and elaboration: updated guidance and exemplars for reporting systematic reviews",
+          "publication_year": 2021,
+          "type": "review",
+          "source": "BMJ",
+          "landing_page_url": "https://doi.org/10.1136/bmj.n160",
+          "cited_by_count_at_search": 11540,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3123497531",
+          "doi": "https://doi.org/10.1186/s13643-020-01542-z",
+          "title": "PRISMA-S: an extension to the PRISMA Statement for Reporting Literature Searches in Systematic Reviews",
+          "publication_year": 2021,
+          "type": "review",
+          "source": "Systematic Reviews",
+          "landing_page_url": "https://doi.org/10.1186/s13643-020-01542-z",
+          "cited_by_count_at_search": 3157,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4236476849",
+          "doi": "https://doi.org/10.31222/osf.io/v7gm2",
+          "title": "The PRISMA 2020 statement: an updated guideline for reporting systematic reviews",
+          "publication_year": 2020,
+          "type": "preprint",
+          "source": null,
+          "landing_page_url": "https://doi.org/10.31222/osf.io/v7gm2",
+          "cited_by_count_at_search": 5363,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        }
+      ]
+    },
+    {
+      "query_id": "qualitative_reflexivity_saturation",
+      "query": "qualitative research reflexivity saturation audit trail",
+      "provider": "OpenAlex",
+      "request_url": "https://api.openalex.org/works?search=qualitative+research+reflexivity+saturation+audit+trail&per-page=7&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Cprimary_location%2Ccited_by_count%2Ctype%2Copen_access",
+      "records": [
+        {
+          "openalex_id": "https://openalex.org/W2146917737",
+          "doi": "https://doi.org/10.1186/1471-2288-9-59",
+          "title": "Methods for the synthesis of qualitative research: a critical review",
+          "publication_year": 2009,
+          "type": "article",
+          "source": "BMC Medical Research Methodology",
+          "landing_page_url": "https://doi.org/10.1186/1471-2288-9-59",
+          "cited_by_count_at_search": 2083,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2936015247",
+          "doi": "https://doi.org/10.5688/ajpe7120",
+          "title": "A Review of the Quality Indicators of Rigor in Qualitative Research",
+          "publication_year": 2020,
+          "type": "article",
+          "source": "American Journal of Pharmaceutical Education",
+          "landing_page_url": "https://doi.org/10.5688/ajpe7120",
+          "cited_by_count_at_search": 1209,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W1986310676",
+          "doi": "https://doi.org/10.1002/(sici)1098-240x(199704)20:2<169::aid-nur9>3.0.co;2-i",
+          "title": "Interpretive description: A noncategorical qualitative alternative for developing nursing knowledge",
+          "publication_year": 1997,
+          "type": "article",
+          "source": "Research in Nursing & Health",
+          "landing_page_url": "https://doi.org/10.1002/(sici)1098-240x(199704)20:2<169::aid-nur9>3.0.co;2-i",
+          "cited_by_count_at_search": 1698,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2791025127",
+          "doi": "https://doi.org/10.1186/s12913-018-2915-2",
+          "title": "Application of four-dimension criteria to assess rigour of qualitative research in emergency medicine",
+          "publication_year": 2018,
+          "type": "article",
+          "source": "BMC Health Services Research",
+          "landing_page_url": "https://doi.org/10.1186/s12913-018-2915-2",
+          "cited_by_count_at_search": 720,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2346502627",
+          "doi": "https://doi.org/10.1186/s13643-016-0249-x",
+          "title": "Searching for qualitative research for inclusion in systematic reviews: a structured methodological review",
+          "publication_year": 2016,
+          "type": "review",
+          "source": "Systematic Reviews",
+          "landing_page_url": "https://doi.org/10.1186/s13643-016-0249-x",
+          "cited_by_count_at_search": 586,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2115442749",
+          "doi": "https://doi.org/10.46743/2160-3715/2009.2821",
+          "title": "Interviewing the Investigator: Strategies for Addressing Instrumentation and Researcher Bias Concerns in Qualitative Research",
+          "publication_year": 2016,
+          "type": "article",
+          "source": "The Qualitative Report",
+          "landing_page_url": "https://doi.org/10.46743/2160-3715/2009.2821",
+          "cited_by_count_at_search": 452,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2096946369",
+          "doi": "https://doi.org/10.18060/589",
+          "title": "Evaluating Qualitative Research for Social Work Practitioners",
+          "publication_year": 2010,
+          "type": "article",
+          "source": "Advances in Social Work",
+          "landing_page_url": "https://doi.org/10.18060/589",
+          "cited_by_count_at_search": 368,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        }
+      ]
+    },
+    {
+      "query_id": "data_provenance_fair",
+      "query": "FAIR data provenance raw data integrity reproducibility",
+      "provider": "OpenAlex",
+      "request_url": "https://api.openalex.org/works?search=FAIR+data+provenance+raw+data+integrity+reproducibility&per-page=7&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Cprimary_location%2Ccited_by_count%2Ctype%2Copen_access",
+      "records": [
+        {
+          "openalex_id": "https://openalex.org/W3013285202",
+          "doi": "https://doi.org/10.1038/s41597-020-00638-4",
+          "title": "AiiDA 1.0, a scalable computational infrastructure for automated reproducible workflows and data provenance",
+          "publication_year": 2020,
+          "type": "data-paper",
+          "source": "Scientific Data",
+          "landing_page_url": "https://doi.org/10.1038/s41597-020-00638-4",
+          "cited_by_count_at_search": 303,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2127279146",
+          "doi": "https://doi.org/10.1145/1142473.1142534",
+          "title": "Provenance management in curated databases",
+          "publication_year": 2006,
+          "type": "conference-paper",
+          "source": null,
+          "landing_page_url": "https://doi.org/10.1145/1142473.1142534",
+          "cited_by_count_at_search": 298,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3040579653",
+          "doi": "https://doi.org/10.1055/s-0040-1713684",
+          "title": "From Raw Data to FAIR Data: The FAIRification Workflow for Health Research",
+          "publication_year": 2020,
+          "type": "article",
+          "source": "Methods of Information in Medicine",
+          "landing_page_url": "https://doi.org/10.1055/s-0040-1713684",
+          "cited_by_count_at_search": 126,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2805075551",
+          "doi": "https://doi.org/10.1093/jamia/ocy064",
+          "title": "The National Sleep Research Resource: towards a sleep data commons",
+          "publication_year": 2018,
+          "type": "article",
+          "source": "Journal of the American Medical Informatics Association",
+          "landing_page_url": "https://doi.org/10.1093/jamia/ocy064",
+          "cited_by_count_at_search": 920,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3200572611",
+          "doi": null,
+          "title": "",
+          "publication_year": null,
+          "type": "other",
+          "source": "Research Explorer (The University of Manchester)",
+          "landing_page_url": "https://www.research.manchester.ac.uk/portal/en/publications/the-role-of-metadata-in-reproducible-computational-research(eff7d2d6-abca-43dd-88b9-a1f89ff70a13).html",
+          "cited_by_count_at_search": 128,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2128105693",
+          "doi": "https://doi.org/10.1016/j.future.2011.08.004",
+          "title": "Why linked data is not enough for scientists",
+          "publication_year": 2011,
+          "type": "article",
+          "source": "Future Generation Computer Systems",
+          "landing_page_url": "https://doi.org/10.1016/j.future.2011.08.004",
+          "cited_by_count_at_search": 349,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2150469595",
+          "doi": "https://doi.org/10.3389/fninf.2012.00009",
+          "title": "Data sharing in neuroimaging research",
+          "publication_year": 2012,
+          "type": "article",
+          "source": "Frontiers in Neuroinformatics",
+          "landing_page_url": "https://doi.org/10.3389/fninf.2012.00009",
+          "cited_by_count_at_search": 280,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        }
+      ]
+    },
+    {
+      "query_id": "reporting_guideline_limit",
+      "query": "reporting guideline adherence study quality distinction",
+      "provider": "OpenAlex",
+      "request_url": "https://api.openalex.org/works?search=reporting+guideline+adherence+study+quality+distinction&per-page=7&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Cprimary_location%2Ccited_by_count%2Ctype%2Copen_access",
+      "records": [
+        {
+          "openalex_id": "https://openalex.org/W2119340816",
+          "doi": "https://doi.org/10.1016/j.jacc.2013.05.019",
+          "title": "2013 ACCF/AHA Guideline for the Management of Heart Failure",
+          "publication_year": 2013,
+          "type": "article",
+          "source": "Journal of the American College of Cardiology",
+          "landing_page_url": "https://doi.org/10.1016/j.jacc.2013.05.019",
+          "cited_by_count_at_search": 12641,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2140092196",
+          "doi": "https://doi.org/10.1007/s10488-010-0319-7",
+          "title": "Outcomes for Implementation Research: Conceptual Distinctions, Measurement Challenges, and Research Agenda",
+          "publication_year": 2010,
+          "type": "article",
+          "source": "Administration and Policy in Mental Health and Mental Health Services Research",
+          "landing_page_url": "https://doi.org/10.1007/s10488-010-0319-7",
+          "cited_by_count_at_search": 9170,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2121394112",
+          "doi": "https://doi.org/10.1161/cir.0000000000000041",
+          "title": "2014 AHA/ACC/HRS Guideline for the Management of Patients With Atrial Fibrillation",
+          "publication_year": 2014,
+          "type": "article",
+          "source": "Circulation",
+          "landing_page_url": "https://doi.org/10.1161/cir.0000000000000041",
+          "cited_by_count_at_search": 7151,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2169205464",
+          "doi": "https://doi.org/10.1136/bmj.g7647",
+          "title": "Preferred reporting items for systematic review and meta-analysis protocols (PRISMA-P) 2015: elaboration and explanation",
+          "publication_year": 2015,
+          "type": "review",
+          "source": "BMJ",
+          "landing_page_url": "https://doi.org/10.1136/bmj.g7647",
+          "cited_by_count_at_search": 13423,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3164908038",
+          "doi": "https://doi.org/10.1161/str.0000000000000375",
+          "title": "2021 Guideline for the Prevention of Stroke in Patients With Stroke and Transient Ischemic Attack: A Guideline From the American Heart Association/American Stroke Association",
+          "publication_year": 2021,
+          "type": "article",
+          "source": "Stroke",
+          "landing_page_url": "https://doi.org/10.1161/str.0000000000000375",
+          "cited_by_count_at_search": 3147,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2051978340",
+          "doi": "https://doi.org/10.1038/gim.2015.30",
+          "title": "Standards and guidelines for the interpretation of sequence variants: a joint consensus recommendation of the American College of Medical Genetics and Genomics and the Association for Molecular Pathology",
+          "publication_year": 2015,
+          "type": "article",
+          "source": "Genetics in Medicine",
+          "landing_page_url": "https://doi.org/10.1038/gim.2015.30",
+          "cited_by_count_at_search": 33060,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4389166035",
+          "doi": "https://doi.org/10.1161/cir.0000000000001193",
+          "title": "2023 ACC/AHA/ACCP/HRS Guideline for the Diagnosis and Management of Atrial Fibrillation: A Report of the American College of Cardiology/American Heart Association Joint Committee on Clinical Practice Guidelines",
+          "publication_year": 2023,
+          "type": "article",
+          "source": "Circulation",
+          "landing_page_url": "https://doi.org/10.1161/cir.0000000000001193",
+          "cited_by_count_at_search": 2596,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Seven top-ranked records were frozen per query family for metadata screening.",
+    "Targeted reference-chain and official-guideline follow-up may add included sources not present in this broad log.",
+    "Inclusion requires direct relevance to a contract field, with read depth and transfer limits recorded separately."
+  ]
+}

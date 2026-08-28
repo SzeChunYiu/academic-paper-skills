@@ -136,6 +136,25 @@ class AcademicPaperPipelineTests(unittest.TestCase):
         ):
             self.assertIn(marker, state)
 
+    def test_pipeline_requires_protocol_conduct_traceability_before_claims(self) -> None:
+        skill = read(PIPELINE / "SKILL.md")
+        manifest = read(PIPELINE / "manifest.yaml")
+        state = read(PIPELINE.parents[1] / "docs" / "academic-paper-project-state.template.yaml")
+        self.assertIn("study-protocol-conduct-contract.md", manifest)
+        self.assertIn("study protocol/conduct decision contract", skill.lower())
+        self.assertIn("protocol/conduct blocker", skill.lower())
+        for marker in (
+            "study_protocol_contract",
+            "protocol_contract_status",
+            "protocol_adapter_ids",
+            "protocol_blocker_codes",
+            "data_access_timing",
+            "execution_receipt_ids",
+            "deviation_classes_visible",
+            "does_not_certify_scientific_truth",
+        ):
+            self.assertIn(marker, state)
+
 
 if __name__ == "__main__":
     unittest.main()

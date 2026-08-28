@@ -33,6 +33,26 @@ Live official-source contract 高于 maintained exact snapshot。Generic 或
 publication-model fallback 只能辅助 planning，不能关闭 exact target readiness，
 也不能被描述成该期刊的真实 policy。
 
+## Study protocol 与 conduct state
+
+Persistent state 现在会把每个 in-scope study 绑定成：
+
+```text
+protocol version -> analysis-plan version -> conduct receipt
+-> deviation ledger -> analysis/result -> claim status
+```
+
+Study-type adapters 只激活相关 obligations，不强迫 universal design。False
+prospective timing、隐藏的 outcome change、只有 planned 而未验证 execution 的
+randomization/blinding、stopping/exclusion/harms drift、computational leakage、
+broken raw-data lineage、无 timing 支持的 confirmatory label 与 missing required
+ethics authority 都会保留为 blocker。
+
+Repair 必须保留历史：version/disclose deviation、从真实 evidence rerun、增加
+versioned sensitivity analysis、把 work 重分类为 exploratory/post-hoc、缩窄 claim，
+或请求新的 prospective study。Registration、reporting completion、traceability、
+scientific validity 与 acceptance 保持独立。
+
 ## Scientific display state
 
 Persistent figure ledger 现在会为每个承担 evidence 的 figure、plot、table、image
@@ -50,6 +70,7 @@ readiness；必须从真实 evidence 修复 representation/provenance，或合�
 ```text
 target + paper archetype
 -> evidence/source intake
+-> protocol + conduct + deviation resolution
 -> research calibration
 -> argument + claim/evidence architecture
 -> content/figure/statistics planning

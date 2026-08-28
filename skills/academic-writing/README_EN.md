@@ -34,6 +34,29 @@ architecture, not a claim that every journal is hard-coded. Unknown, stale,
 future-effective, or conflicting targets require live official-source
 resolution; a fallback profile is never presented as exact journal policy.
 
+## Study Protocol And Conduct Contracts
+
+Before Methods, Results, claims, or figures are drafted as authoritative, the
+skill can materialize:
+
+```text
+protocol version -> analysis-plan version -> conduct receipt
+-> deviation ledger -> analysis/result -> bounded claim
+```
+
+Ten maintained study-type adapters cover randomized, observational,
+computational/ML, animal, systematic-review, qualitative, experimental,
+resource, and exploratory work without declaring a universal best design.
+Behavioral checks block false prospective labels, undisclosed outcome changes,
+unverified randomization/blinding execution, hidden stopping/exclusions or
+harms, evaluation leakage, unsupported confirmatory status, broken data lineage,
+and missing required ethics authority.
+
+The 39-source evidence registry records 19 full-text and 20 abstract-level
+reads, explicit transfer limits, and a frozen 84-record search log. Passing is a
+bounded traceability result, not a scientific-validity certificate and not a
+journal-acceptance prediction.
+
 ## Scientific Display Decision Contracts
 
 Every evidence-bearing plot, figure, table, image plate, or diagram can now be
@@ -63,6 +86,7 @@ For substantial work:
 ```text
 scientific evidence
 -> paper archetype
+-> protocol + analysis plan + executed conduct + deviations
 -> question / contribution
 -> claim/evidence/boundary map
 -> content selection

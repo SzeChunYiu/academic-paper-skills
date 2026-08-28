@@ -1,0 +1,154 @@
+{
+  "contract_schema_version": "1.0.0",
+  "contract_id": "study-contract:trial-001-v1",
+  "study_id": "study:trial-001",
+  "study_archetype": "randomized_intervention",
+  "design_tags": ["clinical_trial", "parallel_group"],
+  "state_version": 1,
+  "protocol": {
+    "protocol_id": "protocol:trial-001",
+    "version": 1,
+    "status": "frozen",
+    "frozen_at": "2026-01-10T09:00:00Z",
+    "registration": {
+      "applicability": "required",
+      "basis": "prospective_interventional_trial",
+      "status": "public",
+      "identifier": "TEST-REG-001",
+      "registered_at": "2026-01-11T09:00:00Z",
+      "enrollment_started_at": "2026-02-01T09:00:00Z"
+    },
+    "question": "Does the intervention change the prespecified primary outcome?",
+    "estimand": "Mean randomized-group difference at week 12 in the eligible population.",
+    "primary_outcomes": [
+      {
+        "outcome_id": "outcome:primary",
+        "definition": "Prespecified continuous score",
+        "timepoint": "week_12"
+      }
+    ],
+    "secondary_outcome_ids": ["outcome:secondary"],
+    "plan_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "data_timing": {
+    "first_data_access_at": "2026-02-02T09:00:00Z",
+    "outcomes_first_observed_at": "2026-03-01T09:00:00Z",
+    "protocol_freeze_relation": "before_data_access"
+  },
+  "analysis_plan": {
+    "analysis_plan_id": "analysis-plan:trial-001",
+    "version": 1,
+    "status": "frozen",
+    "frozen_at": "2026-01-12T09:00:00Z",
+    "primary_outcome_ids": ["outcome:primary"],
+    "sample_size_plan": {
+      "planned_maximum": 100,
+      "rationale": "Precision-based design recorded before enrollment."
+    },
+    "stopping_rule": "Stop after 100 randomized participants complete enrollment; no outcome-dependent stopping.",
+    "inclusion_exclusion_rules": ["eligibility_rule_1", "eligibility_rule_2"],
+    "missingness_plan": "Prespecified model plus complete-case sensitivity analysis.",
+    "multiplicity_plan": "One primary outcome; secondary outcomes are explicitly secondary.",
+    "sensitivity_analysis_ids": ["analysis:sensitivity-001"],
+    "data_split": {
+      "applicability": "not_applicable",
+      "unit_key": null,
+      "overlap_detected": false,
+      "preprocessing_fit_scope": "not_applicable"
+    },
+    "plan_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  "conduct": {
+    "started_at": "2026-02-01T09:00:00Z",
+    "ended_at": "2026-06-01T09:00:00Z",
+    "enrollment": {
+      "planned": 100,
+      "entered": 100,
+      "assigned": 100,
+      "analyzed": 98,
+      "exclusions": [
+        {
+          "unit_id": "participant:099",
+          "stage": "analysis",
+          "reason": "No post-baseline outcome under the prespecified rule."
+        },
+        {
+          "unit_id": "participant:100",
+          "stage": "analysis",
+          "reason": "Consent withdrawn before outcome collection."
+        }
+      ]
+    },
+    "assignment": {
+      "required": true,
+      "method": "computer_generated_random_sequence",
+      "sequence_receipt": "receipt:random-sequence-001",
+      "concealment_planned": "central_allocation",
+      "concealment_executed": "central_allocation",
+      "execution_verified": true
+    },
+    "blinding": {
+      "planned_roles": ["outcome_assessor"],
+      "executed_roles": ["outcome_assessor"],
+      "assessment_receipt": "receipt:blinding-001"
+    },
+    "intervention_fidelity": {
+      "applicability": "required",
+      "measured": true,
+      "receipt": "receipt:fidelity-001"
+    },
+    "outcomes_collected": ["outcome:primary", "outcome:secondary"],
+    "stopping": {
+      "planned_maximum": 100,
+      "realized": 100,
+      "rule_changed": false
+    },
+    "adverse_events": {
+      "applicability": "required",
+      "observed_count": 3,
+      "reported_count": 3,
+      "receipt": "receipt:harms-001"
+    },
+    "quality_control_receipts": ["receipt:qc-001"],
+    "raw_data_snapshot": {
+      "asset_id": "data:trial-001-v1",
+      "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    }
+  },
+  "analysis_execution": {
+    "analysis_id": "analysis:primary-001",
+    "plan_id": "analysis-plan:trial-001",
+    "input_data_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "reported_primary_outcome_ids": ["outcome:primary"],
+    "sample_size_analyzed": 98,
+    "execution_receipt": "receipt:analysis-primary-001"
+  },
+  "deviations": [],
+  "ethics_governance": {
+    "required": true,
+    "status": "approved",
+    "approval_or_waiver_ids": ["approval:ethics-001"],
+    "consent_status": "documented",
+    "privacy_status": "controlled"
+  },
+  "claims": [
+    {
+      "claim_id": "claim:primary-001",
+      "claim_type": "causal",
+      "evidential_status": "confirmatory",
+      "protocol_item_refs": ["outcome:primary"],
+      "analysis_ids": ["analysis:primary-001"],
+      "allowed_inferences": ["causal_effect_in_randomized_contrast"],
+      "prohibited_inferences": ["unmeasured_population_generalization"]
+    }
+  ],
+  "certification": {
+    "requested_layers": ["schema", "protocol_traceability", "conduct_traceability"],
+    "does_not_certify": ["scientific_truth", "absence_of_bias", "journal_acceptance"]
+  },
+  "source_provenance": {
+    "adapter_catalog_id": "study-protocol-maintained-adapters-2026-08-28",
+    "evidence_registry_id": "study-protocol-evidence-registry-2026-08-28",
+    "evaluated_at": "2026-08-28T00:00:00Z"
+  }
+}
