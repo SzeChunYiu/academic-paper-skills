@@ -147,6 +147,35 @@ rights, privacy, observations, calibration, execution, or release evidence.
 Passing does not certify accuracy, completeness, representativeness, privacy,
 legal compliance, reproducibility, scientific truth, or acceptance.
 
+## Statistical inference and uncertainty contract
+
+After the analysis-ready data snapshot is fixed and before quantitative
+Results, displays, captions, claims, review, or readiness work, materialize
+`../nature-shared/core/statistical-inference-uncertainty-contract.md`.
+
+Bind `question/claim -> estimand -> independent unit/dependence -> analysis
+population -> missingness/multiplicity/decision plan -> immutable input ->
+executed analysis + diagnostics/sensitivity -> estimate + typed uncertainty ->
+table/display/caption/prose bindings -> bounded claim`.
+
+Resolve composable maintained adapters plus live exact-domain/regulator/venue
+policy. Never force a universal best test, model, interval, prior, threshold, or
+frequentist template. Preserve Bayesian, descriptive, exploratory,
+non-quantitative, adverse, harmful, null, failed, and deviating routes.
+
+Block recorded pseudoreplication, unhandled dependence, plan/execution drift,
+missing-data drift, unresolved confirmatory multiplicity, post-result observed
+power as evidence, nonconvergence, unreceipted diagnostics, invalid
+significance/absence/equivalence shortcuts, stale or semantically changed
+surface bindings, omitted planned results, and claims that outrun available
+calibration, prediction, or same-estimand sensitivity evidence. Claim narrowing
+can repair overreach but cannot create execution, independent observations,
+convergence, prespecification, a margin, missing-data work, or policy authority.
+
+Passing certifies only recorded bounded invariants—not model adequacy,
+assumption truth, causal identification, absence of bias, adequate precision,
+external validity, scientific truth, or acceptance.
+
 ## Iterative loop
 
 Run these stages in order.
@@ -182,7 +211,18 @@ retention, and release. Keep blockers, unresolved items, and certification
 exclusions explicit; never substitute an availability sentence for a verified
 release object.
 
-### 4. Research and positioning
+### 4. Resolve statistical inference and uncertainty
+
+For each in-scope quantitative result, resolve the analysis context and
+applicable adapters, then evaluate estimand/population bindings, independent
+unit and dependence, plan/input/execution identity, missingness, multiplicity,
+sample-size rationale, diagnostics, convergence, typed uncertainty,
+sensitivity, deviations, adverse/null/failed-result visibility, and every
+table/display/caption/prose numeric binding. Resolve consequential exact
+analysis policies as of the state date; preserve unmatched, future-effective,
+historical-not-backcastable, or conflicting rules as unresolved research.
+
+### 5. Research and positioning
 
 Research enough to establish:
 
@@ -197,7 +237,7 @@ Resolve the exact venue decision contract from current official sources or an
 active maintained snapshot. If only a fallback is available, keep target-policy
 status unresolved while useful science and drafting work continues.
 
-### 5. Build manuscript state
+### 6. Build manuscript state
 
 Maintain one row per atomic content item in the atomic-claim ledger, together
 with evidence, figure, source and concern ledgers. Split every
@@ -211,7 +251,7 @@ Build:
 
 Check content richness and explanatory sufficiency.
 
-### 6. Plan figures/statistics/diagrams
+### 7. Plan figures/statistics/diagrams
 
 For every headline claim determine:
 
@@ -238,7 +278,7 @@ narrowing the claim—not by inventing evidence.
 
 Use scientific diagram backends for workflows/mechanisms/flowcharts rather than forcing everything through a plotting grammar.
 
-### 7. Draft/rewrite
+### 8. Draft/rewrite
 
 Use academic-writing logic in this order:
 
@@ -254,12 +294,14 @@ scientific relation
 -> surface QA
 ```
 
-### 8. Pre-review QA
+### 9. Pre-review QA
 
 Before simulated review, check:
 
 - claim/evidence consistency;
 - protocol/conduct/deviation/claim-status consistency;
+- statistical-inference contract status, typed uncertainty, and current
+  result-to-surface bindings;
 - complete atomic-claim coverage and definition/proof/source entailment;
 - statistics/reporting;
 - figure adequacy;
@@ -271,11 +313,11 @@ Before simulated review, check:
 - punctuation/typography;
 - exact target compliance.
 
-### 9. Editorial triage
+### 10. Editorial triage
 
 The simulated editor decides whether the manuscript should proceed to review or whether a target/science/readiness blocker should be repaired first.
 
-### 10. Independent review
+### 11. Independent review
 
 Run mutually blind initial reviewer contexts.
 
@@ -287,7 +329,7 @@ Default lenses:
 
 Every Major Concern requires a stable concern ID and a resolution test.
 
-### 11. Editor synthesis
+### 12. Editor synthesis
 
 The editor weighs **arguments and expertise, not reviewer votes**.
 
@@ -299,7 +341,7 @@ Mark each concern as:
 - surface copyedit;
 - optional enrichment.
 
-### 12. Execute minimum-sufficient revision
+### 13. Execute minimum-sufficient revision
 
 Do every valid repair possible with available material/tools:
 
@@ -319,11 +361,11 @@ Do every valid repair possible with available material/tools:
 
 If a real new experiment/data collection is required, mark it blocked and state the minimum resolution test. Do not fabricate it.
 
-### 13. Freeze revision delta
+### 14. Freeze revision delta
 
 Update ledgers and current manuscript version. Verify every claimed closure exists in the manuscript/evidence state.
 
-### 14. Targeted re-review
+### 15. Targeted re-review
 
 For major revisions, send the relevant changed claims/evidence back to the original concern owner by default.
 
@@ -331,7 +373,7 @@ For minor clarity/surface issues, allow editor-only closure when target practice
 
 Do not re-open the whole paper from zero unnecessarily.
 
-### 15. Moving-goalpost protection
+### 16. Moving-goalpost protection
 
 A new blocking concern after round 1 needs a reason such as:
 
@@ -343,7 +385,7 @@ A new blocking concern after round 1 needs a reason such as:
 
 Otherwise treat it as late optional enrichment unless the editor independently determines it is essential to scientific validity/publication criteria.
 
-### 16. Editor closure
+### 17. Editor closure
 
 Repeat revision/re-review only while a real must-address concern remains and there is a concrete resolution test.
 
@@ -362,6 +404,9 @@ Use it only when:
 - the exact target tuple/date is resolved by a supported contract, not a
   fallback presented as policy;
 - no unresolved technical blocker to a headline claim;
+- every required statistical-inference contract passes bounded checks, exact
+  required analysis policy is resolved for the as-of date, and all reported
+  numbers/interval semantics bind to current analysis receipts;
 - headline claims are established or appropriately narrowed;
 - every in-scope atomic assertion has an allowed release status and zero
   `SUPPORTED_INTERNAL`, `UNRESOLVED`, `CONTRADICTED`, `BLOCKED`, or in-scope

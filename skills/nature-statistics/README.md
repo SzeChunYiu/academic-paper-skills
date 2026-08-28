@@ -2,7 +2,7 @@
 
 [English](README_EN.md)
 
-`nature-statistics` 用于审查、改写或起草 Nature / 高影响力期刊投稿中的统计报告文本，重点是透明、可复核、与实验设计一致，而不只是 p 值是否显著。
+`nature-statistics` 用于审查、改写或起草 Nature / 高影响力期刊投稿中的统计报告文本，重点是透明、可追踪、与实验设计一致，而不只是 p 值是否显著。Analysis-backed work 会先使用 shared `../nature-shared/core/statistical-inference-uncertainty-contract.md`，再把数字投影成 prose。
 
 ## 适合用它做什么
 
@@ -12,6 +12,8 @@
 - 识别伪重复、嵌套数据、多重比较、交互解释、相关性过度解释和显著性滥用。
 - 交叉检查摘要、正文、表格和结论中同一统计量的数值精度、单位及统计术语是否一致。
 - 根据审稿人统计意见生成保守回应或修改建议。
+- 绑定 estimand、independent unit/dependence、immutable analysis input、execution、diagnostics/sensitivity、typed uncertainty，以及 table/display/caption/prose 中的每个值。
+- 解析 composable analysis obligations，而不是假装存在 universal best test、model、prior、interval、threshold 或 frequentist route。
 - 对旗舰 `Nature Article` 检查单尾/双尾、exact n、重复次数、显著与非显著 P 值、ANOVA F/df 和 t 检验 t/df。
 - 对 `Nature Machine Intelligence` 检查图注中的 n/误差/检验、source data、适用的 Reporting Summary，以及初投稿与终稿的不同要求。
 
@@ -40,6 +42,8 @@
 - 不会替作者编造样本量、重复数、p 值、效应量、模型假设或检验名称。
 - 不直接替代统计师或完整再分析；如需重新建模，应要求原始数据和分析代码。
 - 不能仅凭图像判断实验单位和独立重复，需要作者确认设计。
+- Contract 通过只证明 recorded bounded invariants，不证明 model adequacy、assumption truth、causal identification、adequate precision、external validity、scientific truth 或 journal acceptance。
+- Claim narrowing 可修复 overreach，但不能制造 execution、independent observations、convergence、prespecification、missing-data work、decision margin 或 policy authority。
 
 ## 相关技能
 

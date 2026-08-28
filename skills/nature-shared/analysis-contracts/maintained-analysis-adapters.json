@@ -1,0 +1,507 @@
+{
+  "catalog_schema_version": "1.0.0",
+  "catalog_id": "statistical-inference-maintained-adapters-2026-08-28",
+  "reviewed_at": "2026-08-28",
+  "selection_mode": "applicable_obligations_not_universal_method",
+  "scope": "Composable maintained obligations for statistical inference and uncertainty engineering. They encode bounded cross-domain failure classes and selected domain adapters, not every discipline, estimator, model, interval, regulator, venue, or decision threshold.",
+  "evidence_registry_file": "statistical-inference-evidence-registry.json",
+  "profiles": [
+    {
+      "adapter_id": "general-estimation-reporting",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "any_analysis_families": [
+          "general_estimation"
+        ],
+        "any_study_archetypes": [],
+        "any_design_tags": [],
+        "any_inference_modes": []
+      },
+      "obligations": [
+        "Define the scientific question, estimand or target quantity, analysis population, independent unit, estimator, estimate, and uncertainty semantics before binding quantitative claims.",
+        "Report effect magnitude, typed uncertainty, denominators, method, deviations, and relevant adverse, harmful, null, failed, and inconclusive results without treating a threshold as scientific truth."
+      ],
+      "hard_checks": [
+        "estimand_binding",
+        "independent_unit",
+        "execution_receipt",
+        "typed_uncertainty",
+        "surface_consistency",
+        "inference_boundary"
+      ],
+      "source_refs": [
+        "ich-e9-r1",
+        "sampl-2013",
+        "asa-pvalue-2016",
+        "greenland-2016-misinterpretations"
+      ],
+      "transfer_limits": [
+        "Does not select a best estimator, model, interval, threshold, or evidential framework; exact domain and venue rules remain live research."
+      ]
+    },
+    {
+      "adapter_id": "randomized-intervention",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "any_analysis_families": [],
+        "any_study_archetypes": [
+          "randomized_intervention"
+        ],
+        "any_design_tags": [
+          "randomized",
+          "cluster_randomized"
+        ],
+        "any_inference_modes": []
+      },
+      "obligations": [
+        "Bind randomized assignment, analysis populations, primary and secondary outcomes, harms, missingness, multiplicity, analysis timing, and deviations to the protocol and executed analysis.",
+        "Preserve intention-to-treat or other declared population semantics and expose exclusions and denominator changes."
+      ],
+      "hard_checks": [
+        "protocol_execution_alignment",
+        "analysis_population",
+        "missing_data",
+        "confirmatory_multiplicity",
+        "harms_visibility"
+      ],
+      "source_refs": [
+        "consort-2025",
+        "consort-harms-2022",
+        "ich-e9-1998",
+        "little-2012-missing"
+      ],
+      "transfer_limits": [
+        "Clinical-trial and biomedical reporting rules are not universal design requirements for every randomized experiment; resolve regulator and venue rules exactly."
+      ]
+    },
+    {
+      "adapter_id": "observational-epidemiologic",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "any_analysis_families": [
+          "regression_association",
+          "causal_inference"
+        ],
+        "any_study_archetypes": [
+          "observational_association",
+          "observational_causal"
+        ],
+        "any_design_tags": [],
+        "any_inference_modes": []
+      },
+      "obligations": [
+        "State target population, exposure/outcome timing, confounding strategy, missingness assumptions, selection mechanisms, and whether the objective is descriptive, associational, predictive, or causal.",
+        "Keep measured adjustment from certifying causal identification and report sensitivity boundaries and deviations."
+      ],
+      "hard_checks": [
+        "estimand_binding",
+        "missing_data",
+        "diagnostic_receipt",
+        "causal_claim_boundary",
+        "selection_and_confounding"
+      ],
+      "source_refs": [
+        "strobe-2007",
+        "lee-2021-tarmos",
+        "sterne-2009-multiple-imputation"
+      ],
+      "transfer_limits": [
+        "STROBE improves reporting but does not validate causal identification; exact design-specific identification assumptions require live domain expertise."
+      ]
+    },
+    {
+      "adapter_id": "diagnostic-accuracy",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "any_analysis_families": [
+          "diagnostic_accuracy"
+        ],
+        "any_study_archetypes": [
+          "diagnostic_accuracy"
+        ],
+        "any_design_tags": [],
+        "any_inference_modes": []
+      },
+      "obligations": [
+        "Identify index and reference tests, target condition, participant spectrum, thresholds, indeterminate results, analysis set, and uncertainty for diagnostic accuracy estimates.",
+        "Do not transfer discrimination-only evidence into calibration, clinical utility, or downstream-outcome claims."
+      ],
+      "hard_checks": [
+        "reference_standard",
+        "threshold_provenance",
+        "indeterminate_results",
+        "metric_uncertainty",
+        "utility_claim_boundary"
+      ],
+      "source_refs": [
+        "stard-2015",
+        "sampl-2013",
+        "altman-bland-1995"
+      ],
+      "transfer_limits": [
+        "Diagnostic accuracy does not by itself establish clinical utility, transportability, or treatment benefit."
+      ]
+    },
+    {
+      "adapter_id": "prediction-model-ml",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "any_analysis_families": [
+          "prediction_model",
+          "machine_learning_benchmark"
+        ],
+        "any_study_archetypes": [
+          "prediction_model",
+          "computational_ml"
+        ],
+        "any_design_tags": [
+          "external_validation"
+        ],
+        "any_inference_modes": []
+      },
+      "obligations": [
+        "Bind prediction target, time horizon, development and validation populations, split or resampling design, leakage controls, calibration, discrimination, utility, subgroup assessment, and uncertainty.",
+        "Report relevant sources of training/evaluation variance and do not let one aggregate score establish calibration, utility, fairness, robustness, or deployment readiness."
+      ],
+      "hard_checks": [
+        "split_integrity",
+        "metric_semantics",
+        "calibration_and_utility",
+        "benchmark_variance",
+        "external_validation_boundary"
+      ],
+      "source_refs": [
+        "tripod-ai-2024",
+        "van-calster-2019-calibration",
+        "vickers-elkin-2006",
+        "bouthillier-2021-variance"
+      ],
+      "transfer_limits": [
+        "Clinical prediction guidance and benchmark studies do not define a universal model, metric, fairness rule, or deployment threshold."
+      ]
+    },
+    {
+      "adapter_id": "systematic-review-meta-analysis",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "any_analysis_families": [
+          "meta_analysis",
+          "network_meta_analysis"
+        ],
+        "any_study_archetypes": [
+          "systematic_review",
+          "evidence_synthesis"
+        ],
+        "any_design_tags": [],
+        "any_inference_modes": []
+      },
+      "obligations": [
+        "Bind eligibility, effect measure, study-level estimates, synthesis model, heterogeneity, missing results, sensitivity analyses, and protocol deviations.",
+        "Use a prediction interval when making a supported claim about effects in a future setting and distinguish it from uncertainty around a pooled mean."
+      ],
+      "hard_checks": [
+        "effect_measure_compatibility",
+        "heterogeneity",
+        "selection_and_missing_results",
+        "prediction_interval_for_future_setting",
+        "protocol_deviation"
+      ],
+      "source_refs": [
+        "prisma-2020",
+        "cochrane-handbook-ch10",
+        "higgins-2003-i2",
+        "inthout-2016-prediction"
+      ],
+      "transfer_limits": [
+        "Review-reporting and intervention meta-analysis guidance does not validate search completeness, exchangeability, bias adjustment, or every synthesis model."
+      ]
+    },
+    {
+      "adapter_id": "animal-preclinical",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "any_analysis_families": [],
+        "any_study_archetypes": [
+          "animal_preclinical"
+        ],
+        "any_design_tags": [
+          "animal_experiment"
+        ],
+        "any_inference_modes": []
+      },
+      "obligations": [
+        "Identify the experimental unit, biological versus technical replication, group allocation, exclusions, blinding, sample-size rationale, outcomes, harms, and dependence.",
+        "Do not report subsamples, wells, fields, sections, or repeated measurements as independent n."
+      ],
+      "hard_checks": [
+        "independent_unit",
+        "pseudoreplication",
+        "allocation_and_blinding",
+        "exclusion_visibility",
+        "harms_visibility"
+      ],
+      "source_refs": [
+        "arrive-2020",
+        "lazic-2018-what-is-n",
+        "lazic-2010-pseudoreplication"
+      ],
+      "transfer_limits": [
+        "ARRIVE is a reporting framework, not proof of rigor or a universal prescription for every organism and design."
+      ]
+    },
+    {
+      "adapter_id": "omics-high-dimensional",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "any_analysis_families": [
+          "high_dimensional_testing"
+        ],
+        "any_study_archetypes": [
+          "omics_high_dimensional"
+        ],
+        "any_design_tags": [
+          "omics",
+          "high_dimensional"
+        ],
+        "any_inference_modes": []
+      },
+      "obligations": [
+        "Bind specimen and batch structure, preprocessing, filtering, feature universe, confirmatory or exploratory hypothesis family, multiplicity objective, stability, and validation.",
+        "Keep false-discovery control, family-wise error control, exploratory ranking, and external validation as distinct objectives."
+      ],
+      "hard_checks": [
+        "batch_structure",
+        "feature_universe",
+        "multiplicity_family",
+        "validation_boundary",
+        "surface_consistency"
+      ],
+      "source_refs": [
+        "leek-2010-batch",
+        "benjamini-hochberg-1995",
+        "noble-2009-multiple-testing"
+      ],
+      "transfer_limits": [
+        "No universal preprocessing, filtering, batch-correction, or multiplicity method transfers across assays and objectives."
+      ]
+    },
+    {
+      "adapter_id": "simulation-computational-benchmark",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "any_analysis_families": [
+          "simulation",
+          "computational_benchmark"
+        ],
+        "any_study_archetypes": [
+          "simulation_study",
+          "computational_benchmark"
+        ],
+        "any_design_tags": [
+          "simulation",
+          "benchmark"
+        ],
+        "any_inference_modes": []
+      },
+      "obligations": [
+        "Specify aims, data-generating mechanisms, estimands, methods, performance measures, factors, simulation size, Monte Carlo uncertainty, failures, and code/environment receipts.",
+        "For empirical benchmarks, expose seeds, splits, repeated trials, tuning budgets, comparator parity, variance sources, and failed or adverse runs."
+      ],
+      "hard_checks": [
+        "simulation_design",
+        "monte_carlo_error",
+        "failed_run_visibility",
+        "benchmark_parity",
+        "execution_receipt"
+      ],
+      "source_refs": [
+        "morris-2019-simulation",
+        "koehler-2009-monte-carlo",
+        "bouthillier-2021-variance",
+        "pineau-2021-reproducibility"
+      ],
+      "transfer_limits": [
+        "ADEMP and ML reproducibility practices guide reporting; they do not establish representative scenarios, fair comparisons, or external validity universally."
+      ]
+    },
+    {
+      "adapter_id": "hierarchical-repeated-clustered",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "any_analysis_families": [
+          "hierarchical_repeated_measures",
+          "multilevel_model"
+        ],
+        "any_study_archetypes": [],
+        "any_design_tags": [
+          "hierarchical",
+          "repeated_measures",
+          "clustered",
+          "cluster_randomized"
+        ],
+        "any_inference_modes": []
+      },
+      "obligations": [
+        "Identify every observation, assignment, analysis, cluster, and independent unit and model, aggregate, or otherwise justify dependence handling.",
+        "Bind cluster counts and effective independent n separately from observation or subsample counts."
+      ],
+      "hard_checks": [
+        "independent_unit",
+        "pseudoreplication",
+        "dependence_handling",
+        "cluster_count",
+        "diagnostic_receipt"
+      ],
+      "source_refs": [
+        "lazic-2018-what-is-n",
+        "lazic-2010-pseudoreplication",
+        "lord-2020-superplots"
+      ],
+      "transfer_limits": [
+        "No universal mixed-model structure or degrees-of-freedom method follows from detecting hierarchy; design and estimand determine the analysis."
+      ]
+    },
+    {
+      "adapter_id": "time-to-event",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "any_analysis_families": [
+          "time_to_event",
+          "survival_analysis"
+        ],
+        "any_study_archetypes": [],
+        "any_design_tags": [
+          "time_to_event",
+          "censoring",
+          "competing_risks"
+        ],
+        "any_inference_modes": []
+      },
+      "obligations": [
+        "Define time origin, endpoint, censoring, competing events, estimand, risk set, follow-up horizon, model or nonparametric method, and proportionality or other relevant diagnostics.",
+        "Expose numbers at risk, censoring or competing-event semantics, uncertainty, and late-follow-up instability where applicable."
+      ],
+      "hard_checks": [
+        "time_origin",
+        "censoring_semantics",
+        "competing_risk_semantics",
+        "risk_set_visibility",
+        "model_diagnostics"
+      ],
+      "source_refs": [
+        "kmunicate-2019",
+        "austin-2016-competing",
+        "pocock-2002-survival"
+      ],
+      "transfer_limits": [
+        "Kaplan-Meier, competing-risk, and model-based estimands are not interchangeable; exact endpoint and regulatory rules require live resolution."
+      ]
+    },
+    {
+      "adapter_id": "bayesian-analysis",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "any_analysis_families": [
+          "bayesian_model"
+        ],
+        "any_study_archetypes": [],
+        "any_design_tags": [],
+        "any_inference_modes": [
+          "bayesian_inference"
+        ]
+      },
+      "obligations": [
+        "Document likelihood, prior and prior predictive implications, computation, convergence and effective sample diagnostics, posterior summaries, posterior predictive checks, and sensitivity to consequential modeling choices.",
+        "Use correctly labeled credible or posterior predictive uncertainty; do not fabricate P values or reinterpret credible intervals as confidence intervals."
+      ],
+      "hard_checks": [
+        "prior_and_likelihood",
+        "computation_diagnostics",
+        "posterior_predictive_check",
+        "typed_uncertainty",
+        "sensitivity"
+      ],
+      "source_refs": [
+        "kruschke-2021-barg",
+        "vehtari-2021-rhat",
+        "gabry-2019-bayes-viz"
+      ],
+      "transfer_limits": [
+        "No universal prior, Bayes-factor threshold, interval, convergence cutoff, or model-comparison rule applies to all Bayesian analyses."
+      ]
+    },
+    {
+      "adapter_id": "equivalence-noninferiority",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "any_analysis_families": [
+          "equivalence_test",
+          "noninferiority_test"
+        ],
+        "any_study_archetypes": [],
+        "any_design_tags": [],
+        "any_inference_modes": [
+          "equivalence",
+          "noninferiority"
+        ]
+      },
+      "obligations": [
+        "Prospectively justify the smallest effect or noninferiority margin, direction, decision rule, analysis populations, interval convention, and consequences of assay sensitivity or protocol deviations.",
+        "Do not infer equivalence, noninferiority, or no meaningful effect from a nonsignificant difference test."
+      ],
+      "hard_checks": [
+        "margin_provenance",
+        "interval_margin_decision",
+        "analysis_population",
+        "nonsignificance_boundary",
+        "deviation_visibility"
+      ],
+      "source_refs": [
+        "lakens-2017-equivalence",
+        "lakens-2018-equivalence",
+        "fda-noninferiority-2016",
+        "ich-e9-1998"
+      ],
+      "transfer_limits": [
+        "Regulatory noninferiority and general equivalence objectives use context-specific margins and analysis conventions; neither transfers automatically."
+      ]
+    },
+    {
+      "adapter_id": "qualitative-nonquantitative-boundary",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "any_analysis_families": [
+          "nonquantitative_interpretive",
+          "formal_proof"
+        ],
+        "any_study_archetypes": [
+          "qualitative_interpretive",
+          "theory_proof",
+          "formal_analysis"
+        ],
+        "any_design_tags": [],
+        "any_inference_modes": [
+          "interpretive",
+          "formal"
+        ]
+      },
+      "obligations": [
+        "Do not fabricate sample-size calculations, P values, confidence intervals, effect estimates, or quantitative uncertainty for a non-quantitative objective.",
+        "Resolve the appropriate qualitative, interpretive, historical, formal-proof, or domain-specific standards and preserve reflexivity, provenance, counterevidence, and bounded transfer claims where relevant."
+      ],
+      "hard_checks": [
+        "nonquantitative_boundary",
+        "evidence_provenance",
+        "claim_boundary"
+      ],
+      "source_refs": [
+        "obrien-2014-srqr",
+        "tong-2007-coreq",
+        "nasem-2019-reproducibility"
+      ],
+      "transfer_limits": [
+        "Qualitative reporting guidelines do not govern formal proof, historical argument, every interpretive tradition, or mixed-method quantitative components; resolve exact domain norms live."
+      ]
+    }
+  ]
+}

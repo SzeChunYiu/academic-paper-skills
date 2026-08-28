@@ -16,6 +16,7 @@ Pipeline 在所有轮次维持同一个 persistent manuscript state：
 - figure ledger；
 - source/research ledger；
 - data integrity、lineage、governance 与 release ledger；
+- statistical inference、uncertainty semantics、execution 与 result-surface ledger；
 - stable reviewer concern IDs；
 - editor must-address conditions；
 - revision delta；
@@ -78,6 +79,33 @@ receipt 或真实 deposit。Passing data contract 不是 accuracy、completeness
 representativeness、privacy、reproducibility、scientific truth 或 acceptance
 certificate。
 
+## Statistical inference 与 uncertainty state
+
+Immutable analysis-ready snapshot 固定后，在 quantitative Results、displays、
+captions、claims、review 或 readiness 之前，pipeline 会加载
+`../nature-shared/core/statistical-inference-uncertainty-contract.md` 并绑定：
+
+```text
+question/claim -> estimand -> independent unit/dependence -> population
+-> missingness/multiplicity/decision plan -> immutable input
+-> executed analysis + diagnostics/sensitivity -> estimate + typed uncertainty
+-> table/display/caption/prose bindings -> bounded claim
+```
+
+Composable maintained adapters 返回 applicable obligations，而不是 universal best
+method。Unknown domain 与 exact regulator/venue analysis rule 保持为明确的 live
+research。该层会阻断已记录的 pseudoreplication、ignored dependence、silent
+plan/execution 或 missing-data change、unresolved confirmatory multiplicity、
+nonconvergence、missing execution/diagnostic receipt、无效的
+significance/absence/equivalence shortcut、遗漏 planned null/adverse/failed result、
+stale numeric surface，以及 unsupported calibration、utility、robustness 或
+future-setting claim。
+
+Claim narrowing 可以修复 overreach，但不能制造 analysis、independent observations、
+convergence、prespecification、missing-data work、margin 或 policy authority。通过只
+证明 recorded bounded invariants，不证明 model adequacy、causal identification、
+adequate precision、truth、generalization 或 acceptance。
+
 ## Scientific display state
 
 Persistent figure ledger 现在会为每个承担 evidence 的 figure、plot、table、image
@@ -97,6 +125,7 @@ target + paper archetype
 -> evidence/source intake
 -> protocol + conduct + deviation resolution
 -> data integrity + stewardship + release resolution
+-> statistical inference + uncertainty + result-surface resolution
 -> research calibration
 -> argument + claim/evidence architecture
 -> content/figure/statistics planning

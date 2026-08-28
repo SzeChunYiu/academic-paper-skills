@@ -1,0 +1,310 @@
+{
+  "contract_schema_version": "1.0.0",
+  "contract_id": "stat-contract:trial-001-v1",
+  "stage": "final",
+  "as_of_date": "2026-08-28",
+  "analysis_context": {
+    "study_archetypes": ["randomized_intervention"],
+    "analysis_families": [
+      "general_estimation",
+      "frequentist_group_comparison",
+      "hierarchical_repeated_measures"
+    ],
+    "design_tags": ["parallel_group", "repeated_measures", "confirmatory"],
+    "inference_modes": ["estimation", "superiority"]
+  },
+  "source_provenance": {
+    "adapter_catalog_id": "statistical-inference-maintained-adapters-2026-08-28",
+    "evidence_registry_id": "statistical-inference-evidence-registry-2026-08-28",
+    "resolved_adapter_ids": [
+      "general-estimation-reporting",
+      "randomized-intervention",
+      "hierarchical-repeated-clustered"
+    ],
+    "resolved_at": "2026-08-28T10:00:00Z"
+  },
+  "upstream_bindings": {
+    "study_protocol": {
+      "contract_id": "study-contract:trial-001-v1",
+      "status": "pass",
+      "analysis_plan_id": "sap:trial-001-v1",
+      "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+    },
+    "data_integrity": {
+      "contract_id": "data-contract:trial-001-v1",
+      "status": "pass",
+      "analysis_ready_snapshot_id": "snapshot:analysis-ready-v1",
+      "sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+    },
+    "analysis_input": {
+      "snapshot_id": "snapshot:analysis-ready-v1",
+      "sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+    }
+  },
+  "questions": [
+    {
+      "question_id": "question:primary",
+      "claim_ids": ["claim:primary-effect"],
+      "role": "primary",
+      "objective": "superiority"
+    }
+  ],
+  "estimands": [
+    {
+      "estimand_id": "estimand:primary",
+      "question_id": "question:primary",
+      "population": "Eligible randomized participants",
+      "condition_a": "Intervention",
+      "condition_b": "Control",
+      "outcome": "Outcome score",
+      "time_horizon": "12 weeks",
+      "summary_measure": "Mean change from baseline",
+      "effect_measure": "Mean difference in change",
+      "scale": "points",
+      "direction": "lower_is_better",
+      "intercurrent_event_strategy": "treatment_policy"
+    }
+  ],
+  "units_and_dependence": {
+    "observation_unit": "participant-timepoint",
+    "assignment_unit": "participant",
+    "analysis_unit": "participant-timepoint",
+    "independent_unit": "participant",
+    "dependence_structure": ["repeated_measures_within_participant"],
+    "observation_count": 200,
+    "independent_unit_count": 100,
+    "reported_n": 100,
+    "cluster_count": null,
+    "dependence_handling": {
+      "status": "modeled",
+      "method": "participant random intercept",
+      "receipt": "receipt:dependence-model-v1"
+    }
+  },
+  "analysis_populations": [
+    {
+      "population_id": "population:primary",
+      "role": "primary",
+      "planned_count": 100,
+      "entered_count": 100,
+      "analyzed_count": 100,
+      "missing_outcome_count": 0,
+      "excluded_count": 0,
+      "group_counts": {
+        "intervention": 50,
+        "control": 50
+      },
+      "exclusion_decision_ids": []
+    }
+  ],
+  "analysis_plans": [
+    {
+      "plan_id": "sap:trial-001-v1",
+      "frozen_at": "2026-01-10T09:00:00Z",
+      "classification": "confirmatory",
+      "primary_result_ids": ["result:primary-effect"],
+      "estimand_ids": ["estimand:primary"],
+      "population_ids": ["population:primary"],
+      "analysis_family": "frequentist_group_comparison",
+      "estimator": "mixed model mean contrast",
+      "model": "linear mixed model",
+      "independent_unit": "participant",
+      "dependence_handling": "participant random intercept",
+      "sample_size": {
+        "justification_type": "power_and_precision",
+        "planned_n": 100,
+        "rationale": "Prespecified design calculation and feasible precision target.",
+        "receipt": "receipt:sample-size-plan-v1",
+        "observed_power_used_for_inference": false
+      },
+      "multiplicity": {
+        "applicability": "not_required_single_confirmatory_result",
+        "family_id": "family:primary",
+        "planned_hypothesis_ids": ["hypothesis:primary"],
+        "executed_hypothesis_ids": ["hypothesis:primary"],
+        "error_criterion": "family_wise_type_i_error",
+        "method": "single_test_no_adjustment",
+        "threshold": 0.05,
+        "receipt": "receipt:multiplicity-plan-v1",
+        "rationale": "One confirmatory hypothesis in the declared family."
+      },
+      "missing_data": {
+        "applicability": "required",
+        "planned_strategy": "likelihood_under_mar",
+        "realized_strategy": "not_needed_no_missing_outcomes",
+        "assumptions": ["missing_at_random_if_missingness_occurs"],
+        "handling_receipt": "receipt:missing-data-check-v1",
+        "sensitivity_required": false,
+        "sensitivity_result_ids": []
+      }
+    }
+  ],
+  "analysis_executions": [
+    {
+      "analysis_id": "analysis:primary-v1",
+      "plan_id": "sap:trial-001-v1",
+      "executed_at": "2026-06-01T12:00:00Z",
+      "input_snapshot_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+      "code_receipt": "receipt:analysis-code-v1",
+      "environment_receipt": "receipt:analysis-environment-v1",
+      "estimator": "mixed model mean contrast",
+      "model": "linear mixed model",
+      "independent_unit": "participant",
+      "dependence_handling": "participant random intercept",
+      "population_ids": ["population:primary"],
+      "convergence_status": "converged",
+      "diagnostics": [
+        {
+          "diagnostic_id": "diagnostic:residual-v1",
+          "dimension": "model_fit_and_residuals",
+          "status": "passed",
+          "method": "residual and influence review",
+          "receipt": "receipt:diagnostic-v1",
+          "consequence": "No analysis change required."
+        }
+      ],
+      "missing_data_strategy": "not_needed_no_missing_outcomes",
+      "multiplicity_method": "single_test_no_adjustment",
+      "result_ids": ["result:primary-effect"]
+    }
+  ],
+  "results": [
+    {
+      "result_id": "result:primary-effect",
+      "analysis_id": "analysis:primary-v1",
+      "estimand_id": "estimand:primary",
+      "population_id": "population:primary",
+      "role": "primary",
+      "claim_ids": ["claim:primary-effect"],
+      "selection_status": "prespecified",
+      "estimate": {
+        "value": -2.4,
+        "scale": "mean_difference",
+        "unit": "points"
+      },
+      "uncertainty": {
+        "interval_id": "interval:primary-95ci",
+        "kind": "confidence_interval",
+        "target": "population_parameter",
+        "level": 0.95,
+        "sidedness": "two_sided",
+        "method": "model_based_wald",
+        "lower": -3.4,
+        "upper": -1.4,
+        "unit": "points",
+        "transformation": "none"
+      },
+      "test": {
+        "framework": "frequentist",
+        "hypothesis_id": "hypothesis:primary",
+        "null_value": 0,
+        "alternative": "two_sided",
+        "statistic_name": "t",
+        "statistic_value": -4.8,
+        "degrees_of_freedom": 98,
+        "p_value": 0.00001,
+        "adjusted_p_value": null,
+        "threshold": 0.05
+      },
+      "decision": {
+        "objective": "superiority",
+        "state": "supported",
+        "comparison_basis": "direct_contrast",
+        "margin": null,
+        "margin_unit": null,
+        "margin_provenance": null
+      },
+      "analyzed_n": 100,
+      "independent_n": 100,
+      "adverse_harmful_null_or_failed": false,
+      "analysis_receipt_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+      "specialist_metrics": []
+    }
+  ],
+  "sensitivity_analyses": [],
+  "claim_links": [
+    {
+      "claim_id": "claim:primary-effect",
+      "claim_class": "comparative_effect",
+      "requested_inference": "group_difference",
+      "result_ids": ["result:primary-effect"],
+      "state": "supported",
+      "comparison_basis": "direct_contrast",
+      "boundary": "Eligible randomized participants at 12 weeks."
+    }
+  ],
+  "surface_bindings": [
+    {
+      "surface_id": "surface:results-sentence-1",
+      "surface_type": "manuscript_results",
+      "result_id": "result:primary-effect",
+      "analysis_receipt_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+      "reported_estimate": -2.4,
+      "reported_interval_kind": "confidence_interval",
+      "reported_interval_level": 0.95,
+      "reported_lower": -3.4,
+      "reported_upper": -1.4,
+      "reported_p_value": 0.00001,
+      "reported_n": 100,
+      "rounding": {
+        "decimal_places": 2,
+        "absolute_tolerance": 0.005,
+        "method": "half_even"
+      }
+    },
+    {
+      "surface_id": "surface:table-1-row-1",
+      "surface_type": "table",
+      "result_id": "result:primary-effect",
+      "analysis_receipt_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+      "reported_estimate": -2.4,
+      "reported_interval_kind": "confidence_interval",
+      "reported_interval_level": 0.95,
+      "reported_lower": -3.4,
+      "reported_upper": -1.4,
+      "reported_p_value": 0.00001,
+      "reported_n": 100,
+      "rounding": {
+        "decimal_places": 2,
+        "absolute_tolerance": 0.005,
+        "method": "half_even"
+      }
+    },
+    {
+      "surface_id": "surface:display-1-caption",
+      "surface_type": "display_caption",
+      "result_id": "result:primary-effect",
+      "analysis_receipt_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+      "reported_estimate": -2.4,
+      "reported_interval_kind": "confidence_interval",
+      "reported_interval_level": 0.95,
+      "reported_lower": -3.4,
+      "reported_upper": -1.4,
+      "reported_p_value": 0.00001,
+      "reported_n": 100,
+      "rounding": {
+        "decimal_places": 2,
+        "absolute_tolerance": 0.005,
+        "method": "half_even"
+      }
+    }
+  ],
+  "deviations": [],
+  "exact_policy_resolution": {
+    "policy_as_of_date": "2026-08-28",
+    "policies": [
+      {
+        "policy_id": "policy:ich-e9-r1",
+        "title": "ICH E9(R1) Addendum on Estimands and Sensitivity Analysis in Clinical Trials",
+        "issuer": "International Council for Harmonisation",
+        "applicability": "required",
+        "resolution_status": "resolved",
+        "source_url": "https://database.ich.org/sites/default/files/E9-R1_Step4_Guideline_2019_1203.pdf",
+        "reviewed_at": "2026-08-28",
+        "effective_from": "2019-11-20",
+        "effective_until": null,
+        "effective_date_basis": "explicit_issuer_date"
+      }
+    ]
+  }
+}

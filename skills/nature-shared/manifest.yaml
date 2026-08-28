@@ -1,5 +1,5 @@
 name: nature-shared
-version: 2.6.0
+version: 2.7.0
 description: >
   Declarative manifest for shared academic-paper reference modules. This package
   is not a standalone workflow; installed skills load exact shared core,
@@ -51,6 +51,8 @@ core:
       path: core/study-protocol-conduct-contract.md
     - condition: binding scientific data from source/acquisition through immutable raw, validated and analysis-ready snapshots, QC and transformation receipts, analysis/display inputs, governance, release, deviations, and bounded claims before downstream writing or readiness assessment
       path: core/data-integrity-stewardship-contract.md
+    - condition: binding questions and claims through estimands, independent units/dependence, analysis populations, immutable inputs, executed analyses, diagnostics/sensitivity, typed uncertainty, cross-surface values, exact policy dates, and bounded inference before quantitative Results, displays, or readiness assessment
+      path: core/statistical-inference-uncertainty-contract.md
     - condition: final manuscript-facing QA after drafting, including a last-mile scrub for filenames, file paths, script/helper/class names, CLI flags, repository/developer history, raw project links, output filenames, figure-legend leakage, punctuation/spacing/bracket defects, range/minus/hyphen review, and target-aware scientific copy-editing
       path: core/manuscript-surface-qa.md
     - condition: auditing an existing or multi-round-revised manuscript for accumulated drift — terminology/unit/number variants, headline counts that do not reconcile with the Methods, claims contradicted by the paper's own tables, over- or under-claiming, tense parallelism, and prose that restates displays
@@ -70,6 +72,8 @@ research:
       path: research/study-protocol-conduct-evidence-ledger-2026-08.md
     - condition: the empirical, standard, governance, or policy basis behind a data integrity/stewardship adapter, automatic blocker, repair boundary, exact-domain obligation, or release route must be inspected
       path: research/data-integrity-stewardship-evidence-ledger-2026-08.md
+    - condition: the statistical, methodological, reporting, or policy basis behind an inference/uncertainty adapter, automatic blocker, repair boundary, exact-analysis obligation, or certification exclusion must be inspected
+      path: research/statistical-inference-uncertainty-evidence-ledger-2026-08.md
 
 journal_formats:
   on_demand:
@@ -108,3 +112,7 @@ quality_tools:
   data_integrity_schema: data-contracts/data-integrity-stewardship-contract.schema.json
   data_integrity_adapters: data-contracts/maintained-data-adapters.json
   data_integrity_purpose: return modality/governance obligations rather than a universal data-quality score, then fail closed on high-risk raw-snapshot, lineage, QC, analysis-input, decision, authority, rights, and release contradictions
+  statistical_inference_script: scripts/resolve_statistical_inference.py
+  statistical_inference_schema: analysis-contracts/statistical-inference-uncertainty-contract.schema.json
+  statistical_inference_adapters: analysis-contracts/maintained-analysis-adapters.json
+  statistical_inference_purpose: return applicable obligations rather than a universal best method, then fail closed on recorded unit/dependence, plan/execution, uncertainty, inference-boundary, cross-surface, policy-date, and receipt contradictions

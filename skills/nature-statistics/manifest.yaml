@@ -1,10 +1,9 @@
 name: nature-statistics
-version: 1.3.0
+version: 1.4.0
 description: >
-  Declarative manifest for the statistics-reporting workflow. SKILL.md uses
-  this to keep the always-needed reporting rules small while loading specialized
-  statistical risk checklists only when the manuscript section, figure legend,
-  or reviewer comment requires them.
+  Declarative manifest for bounded statistical inference, uncertainty, and
+  reporting work. SKILL.md loads the shared analysis contract while keeping
+  specialized risk and exact-target checklists on demand.
 
 # Design note: nature-statistics is a conservative reporting/audit skill. The
 # default path always needs source hierarchy and minimum reporting requirements,
@@ -12,11 +11,14 @@ description: >
 # analysis rewrite does not load every checklist.
 
 always_load:
+  - ../nature-shared/core/statistical-inference-uncertainty-contract.md
   - references/source-basis.md
   - references/statistical-reporting.md
 
 references:
   on_demand:
+    - condition: the evidence, contradiction, transfer boundary, domain adapter, policy provenance, or repair route behind an inference/uncertainty decision needs inspection
+      path: ../nature-shared/research/statistical-inference-uncertainty-evidence-ledger-2026-08.md
     - condition: target is the flagship journal Nature, or the user requests an exact Nature Article statistical submission/readiness audit
       path: references/nature-article-requirements.md
     - condition: target is Nature Machine Intelligence, or exact NMI legend statistics, source-data, reporting-summary, data/code, initial-submission, or production requirements affect the audit

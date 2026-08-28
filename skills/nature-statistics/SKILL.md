@@ -6,7 +6,13 @@ description: >-
 
 # Nature Statistics Reporting Skill
 
-Use this skill to make manuscript statistics transparent, reproducible, and appropriately bounded. It is a reporting and review skill, not a substitute for a statistician reanalysing raw data unless the user supplies the data and explicitly asks for computation.
+Use this skill to make manuscript statistics transparent, traceable, and
+appropriately bounded. For analysis-backed work, load the shared
+`../nature-shared/core/statistical-inference-uncertainty-contract.md`; reporting
+prose is a projection of the estimand, immutable input, executed analysis,
+typed uncertainty, and result-to-surface bindings. This skill is not a
+substitute for a statistician reanalysing raw data unless the user supplies the
+data and explicitly asks for computation.
 
 ## Default stance
 
@@ -34,20 +40,26 @@ If the input is partial, run a bounded audit and state which parts cannot be ass
 ## Workflow
 
 1. **Classify the task.** Decide whether the user wants audit, rewrite, draft, reviewer-response support, figure-statistics alignment, or data-backed reanalysis.
-2. **Extract the design.** Identify groups, treatments, time points, endpoints, blocking factors, repeated measures, randomization, blinding, exclusions, and missing-data handling.
-3. **Define `n` and replication.** Separate independent experimental units, biological replicates, technical replicates, repeated measures, cells/fields/subsamples, simulations, and pooled observations.
-4. **Map claims to analyses.** For each result claim, record the comparison/model, test family, assumptions, correction strategy, effect estimate, uncertainty, and exact p-value policy.
-5. **Check common failure modes.** Use `references/common-failure-modes.md` when the text involves nested data, many comparisons, cell-level measurements, interaction claims, correlations, regression, outliers, small samples, or significance-only reasoning.
-6. **Check reporting completeness.** Use `references/statistical-reporting.md` to verify that Methods and Results give enough information for readers and reviewers to understand the analysis.
+2. **Materialize the analysis contract when evidence is in scope.** Bind the
+   question/claim, estimand, population, independent unit/dependence, plan,
+   immutable input, execution/diagnostics/sensitivity, estimate, typed
+   uncertainty, deviations, exact policy date, and every reported surface.
+   Resolve composable maintained adapters, not a universal best method. Keep an
+   unmatched domain or consequential exact rule as live research.
+3. **Extract the design.** Identify groups, treatments, time points, endpoints, blocking factors, repeated measures, randomization, blinding, exclusions, and missing-data handling.
+4. **Define `n` and replication.** Separate independent experimental units, biological replicates, technical replicates, repeated measures, cells/fields/subsamples, simulations, and pooled observations.
+5. **Map claims to analyses.** For each result claim, record the comparison/model, test family, assumptions, correction strategy, effect estimate, typed uncertainty, decision objective, analysis receipt, and exact-policy provenance.
+6. **Check common failure modes.** Use `references/common-failure-modes.md` when the text involves nested data, many comparisons, cell-level measurements, interaction claims, correlations, regression, outliers, small samples, or significance-only reasoning. Also block analysis/surface hash drift, confidence/credible/prediction interval substitution, silent deviations, omitted null/adverse/failed results, and unsupported calibration, utility, equivalence, absence, or future-setting claims.
+7. **Check reporting completeness.** Use `references/statistical-reporting.md` to verify that Methods and Results give enough information for readers and reviewers to understand the analysis.
    If the target is the flagship journal Nature, also use
    `references/nature-article-requirements.md` for its exact tail, `n`, repeat,
    P-value, test-statistic and degrees-of-freedom requirements.
    If the target is Nature Machine Intelligence, also use
    `../nature-shared/journal-formats/nature-machine-intelligence.md` for its
    legend-statistics, source-data, reporting-summary and stage-specific checks.
-7. **Align figure statistics.** Use `references/figure-statistics.md` when figure legends, panel labels, stars, error bars, box plots, violin plots, source data, or supplementary figure notes are involved.
-8. **Draft or revise.** Produce conservative, ready-to-paste text. Keep claims within the supplied design and evidence. Do not upgrade statistical association into mechanism or causality.
-9. **Run final QA.** Use `references/reviewer-checklist.md` before final delivery for severity labels, unresolved author questions, and reviewer-facing risk.
+8. **Align figure statistics.** Use `references/figure-statistics.md` and the scientific-display contract when figure legends, panel labels, stars, error bars, box plots, violin plots, source data, or supplementary figure notes are involved. Statistics owns numeric/interval semantics; display contracts own representation and rendering.
+9. **Draft or revise.** Produce conservative, ready-to-paste text. Keep claims within the supplied design and evidence. Claim narrowing is a valid repair for overreach, but cannot create execution, independent observations, convergence, prespecification, a margin, missing-data work, or policy authority.
+10. **Run final QA.** Use `references/reviewer-checklist.md` before final delivery for severity labels, unresolved author questions, and reviewer-facing risk.
 
 ## Output format
 
@@ -98,11 +110,16 @@ Reporting notes
 - Do not use “significant” as a synonym for important, large, causal, or biologically meaningful.
 - Do not hide non-significant or weak results by rewriting them into stronger claims.
 - Do not give medical, regulatory, or clinical-trial statistical advice beyond reporting checks unless the user provides the relevant protocol and asks for bounded manuscript wording.
+- Do not treat a passing schema/reporting checklist as model adequacy,
+  assumption truth, causal identification, absence of bias, adequate precision,
+  external validity, scientific truth, or journal acceptance.
 
 ## Related files
 
 | File | Open when |
 |---|---|
+| [../nature-shared/core/statistical-inference-uncertainty-contract.md](../nature-shared/core/statistical-inference-uncertainty-contract.md) | Any quantitative result, analysis decision, uncertainty statement, cross-surface number, or inference claim is being drafted or audited |
+| [../nature-shared/research/statistical-inference-uncertainty-evidence-ledger-2026-08.md](../nature-shared/research/statistical-inference-uncertainty-evidence-ledger-2026-08.md) | You need the evidence, contradiction, transfer limit, domain-adapter rationale, or policy-date boundary behind a contract decision |
 | [references/source-basis.md](references/source-basis.md) | You need the source hierarchy or want to justify why the skill emphasizes transparency, reproducibility, and design reporting |
 | [references/nature-article-requirements.md](references/nature-article-requirements.md) | The target is the flagship journal Nature or the user requests its exact statistical submission checklist |
 | [../nature-shared/journal-formats/nature-machine-intelligence.md](../nature-shared/journal-formats/nature-machine-intelligence.md) | The target is Nature Machine Intelligence or NMI-specific legend, source-data, reporting or stage requirements affect the audit |

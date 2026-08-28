@@ -15,6 +15,7 @@
 - 检查 central ideas 是否解释到目标读者真正能理解；
 - 强化 sentence-to-sentence logical flow；
 - 在下游 claims 前绑定 raw、validated、analysis-ready、analysis-input 与 release data objects；
+- 在 quantitative claims 前绑定 estimand、independent unit、executed analysis、typed uncertainty 与所有 numeric surfaces；
 - 规划论文真正需要的 evidence 与 figures；
 - 决定内容进入 main text、Methods、SI、availability、artifact docs 还是删除；
 - 保留 author voice，同时避免 generic AI-like prose；
@@ -80,6 +81,40 @@ standards/guidance/policies 与 6 个 abstract-level reads，并冻结 12 个 qu
 measurement accuracy、completeness、representativeness、privacy、legal compliance、
 reproducibility、scientific truth 或 acceptance。
 
+## Statistical inference 与 uncertainty contract
+
+Analysis-ready snapshot 固定后、quantitative Results、tables、plots、captions 或
+claims 成为 authoritative surface 之前，skill 会加载
+`../nature-shared/core/statistical-inference-uncertainty-contract.md` 并绑定：
+
+```text
+question/claim -> estimand -> independent unit/dependence -> population
+-> missingness/multiplicity/decision plan -> immutable analysis input
+-> executed analysis + diagnostics/sensitivity -> estimate + typed uncertainty
+-> table/display/caption/prose bindings -> bounded claim
+```
+
+14 个 composable maintained adapters 覆盖主要 analysis families 与明确的
+non-quantitative boundary。它们返回 applicable obligations，而不是 universal best
+test、model、interval、prior、threshold 或 frequentist template。Unmatched method 与
+consequential exact domain/regulator/venue rule 会保留为 live、time-versioned source
+research task。
+
+Behavior checks 会发现 pseudoreplication、ignored dependence、plan/execution 或
+missing-data drift、unresolved confirmatory multiplicity、把 post-result observed
+power 当 evidence、nonconvergence、缺失 diagnostic/execution receipt、把
+nonsignificance 写成 absence、无 justified margin 的 equivalence、跨 surface 的
+interval/numeric drift、隐藏的 planned/null/adverse/failed result，以及超出
+calibration、utility、robustness 或 prediction evidence 的 claim。Claim narrowing 可以
+修复 overreach，但不能创造 analysis execution、independent observations、
+convergence、prespecification、missing-data work、valid margin 或 policy authority。
+
+Evidence base 包含 65 个 reconciled sources，其中 46 个 full-text readings、8 个
+official guideline/policy/technical sources，并冻结 16 个 queries 与 128 个
+metadata-screened records。通过只证明 bounded recorded invariants，不证明 model
+adequacy、assumption truth、causal identification、adequate precision、external
+validity、scientific truth 或 acceptance。
+
 ## Scientific display decision contract
 
 每个承担 evidence 的 plot、figure、table、image plate 或 diagram 都可以绑定到
@@ -109,6 +144,7 @@ scientific evidence
 -> paper archetype
 -> protocol + analysis plan + executed conduct + deviations
 -> raw snapshot + QC + transformations + analysis-ready/release bindings
+-> estimand + independent unit + executed analysis + typed uncertainty + surface bindings
 -> question / contribution
 -> claim/evidence/boundary map
 -> content selection

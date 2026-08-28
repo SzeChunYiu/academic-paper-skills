@@ -21,6 +21,8 @@ always_load:
 | `core/study-protocol-conduct-contract.md` | `academic-writing`, `academic-paper-pipeline` |
 | `core/data-integrity-stewardship-contract.md` | `academic-writing`, `academic-paper-pipeline` 与下游 data/figure/review workflows |
 | `data-contracts/` + `scripts/resolve_data_integrity.py` | machine-readable data lifecycle、non-universal adapters、evidence provenance 与 bounded evaluation |
+| `core/statistical-inference-uncertainty-contract.md` | `academic-writing`、`academic-paper-pipeline`、`nature-statistics` 与下游 display/review workflows |
+| `analysis-contracts/` + `scripts/resolve_statistical_inference.py` | machine-readable estimand/execution/uncertainty/surface lifecycle、composable non-universal adapters、time-versioned evidence 与 bounded evaluation |
 | `core/terminology-ledger.md` | `nature-polishing`, `nature-writing`, `nature-reader`, `nature-paper2ppt` |
 | `core/consistency-sweep.md` | `nature-polishing`, `nature-reviewer`, `nature-response`, `nature-statistics` |
 | `core/main-text-discipline.md` | `nature-writing`, `nature-polishing`, `nature-response` |
@@ -37,6 +39,16 @@ chain。Maintained adapters 明确是 non-universal；unmatched modality 与 exa
 institution、law、funder、repository、licence、consent 或 community policy 必须走
 live competent-source resolution。通过 bounded checks 不证明 accuracy、
 completeness、representativeness、privacy、legal compliance、reproducibility、
+scientific truth 或 acceptance。
+
+`core/statistical-inference-uncertainty-contract.md` 保存从 question 与 estimand，
+经 independent unit/dependence、analysis population、plan、immutable input、
+execution、diagnostics/sensitivity、typed uncertainty，以及每个
+table/display/caption/prose binding，到 bounded claim 的 authority chain。其
+maintained adapters 只返回 applicable obligations，不选择 universal best test、
+model、prior、interval、threshold 或 frequentist template。Unmatched domain 与
+exact regulator/venue rule 必须走 live、date-aware source resolution。通过不证明
+model adequacy、causal identification、adequate precision、external validity、
 scientific truth 或 acceptance。
 
 `scripts/check_consistency.py` 为一致性扫描提供机械初筛，可报告术语变体、同值不同精度和等值长度单位混用。`scripts/audit_manuscript_surface.py` 补充面向目标期刊的摘要、术语、占位符与渲染表面诊断。脚本输出只用于分诊，不能代替原子核查台账。
