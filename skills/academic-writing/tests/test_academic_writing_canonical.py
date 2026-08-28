@@ -79,6 +79,15 @@ class AcademicWritingCanonicalTests(unittest.TestCase):
         self.assertIn("live official-source resolution", skill)
         self.assertIn("fallback profile is not exact journal policy", skill)
 
+    def test_scientific_display_contract_is_canonical_not_cosmetic(self) -> None:
+        skill = read(SKILL / "SKILL.md")
+        manifest = read(SKILL / "manifest.yaml")
+        self.assertIn("scientific-display-decision-contract.md", manifest)
+        self.assertIn("scientific display decision contract", skill.lower())
+        self.assertIn("reader question -> scientific object / estimand", skill)
+        self.assertIn("no universal best chart", skill.lower())
+        self.assertIn("data snapshot -> analysis receipt -> render receipt", skill)
+
 
 if __name__ == "__main__":
     unittest.main()

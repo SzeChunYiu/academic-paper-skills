@@ -34,6 +34,28 @@ architecture, not a claim that every journal is hard-coded. Unknown, stale,
 future-effective, or conflicting targets require live official-source
 resolution; a fallback profile is never presented as exact journal policy.
 
+## Scientific Display Decision Contracts
+
+Every evidence-bearing plot, figure, table, image plate, or diagram can now be
+bound to a machine-readable contract:
+
+```text
+reader question -> estimand/scientific object -> statistical unit/data structure
+-> candidate representation -> allowed/prohibited inference
+-> data snapshot -> analysis receipt -> render receipt -> source data
+-> caption/accessibility -> final-size review
+```
+
+Maintained adapters return candidate families and scientific obligations, not a
+universal best chart. Behavioral checks fail closed on hidden pairing,
+denominator drift, stale analysis/render lineage, undefined uncertainty,
+undisclosed group omission, embedding/workflow overclaims, color-only encoding,
+and missing final-stage alt text.
+
+The initial evidence registry contains 39 reconciled sources (20 full text, 18
+abstract-level, one official standard), with search provenance, read depth,
+supported decisions, transfer limits, contradictions, and update triggers.
+
 ## Writing Model
 
 For substantial work:
@@ -46,6 +68,7 @@ scientific evidence
 -> content selection
 -> broad corpus + close analogues when useful
 -> figure/statistics plan
+-> scientific display decision contracts
 -> section moves
 -> paragraph dependencies
 -> sentence dependencies

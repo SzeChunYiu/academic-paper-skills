@@ -1,5 +1,5 @@
 name: academic-paper-pipeline
-version: 1.2.0
+version: 1.3.0
 description: >
   Declarative manifest for the journal-agnostic iterative academic-paper
   orchestration workflow. It coordinates research, writing, figures/statistics,
@@ -16,6 +16,7 @@ always_load:
   - ../nature-shared/core/explanatory-sufficiency.md
   - ../nature-shared/core/manuscript-content-selection.md
   - ../nature-shared/core/figure-evidence-planning.md
+  - ../nature-shared/core/scientific-display-decision-contract.md
   - ../nature-shared/core/manuscript-surface-qa.md
 
 references:

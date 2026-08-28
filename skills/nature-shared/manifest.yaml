@@ -1,5 +1,5 @@
 name: nature-shared
-version: 2.3.0
+version: 2.4.0
 description: >
   Declarative manifest for shared academic-paper reference modules. This package
   is not a standalone workflow; installed skills load exact shared core,
@@ -45,6 +45,8 @@ core:
       path: core/manuscript-content-selection.md
     - condition: deciding what figures/plots a paper needs, suggesting visual evidence for claims, mapping reader questions and estimands to plot families, or planning main versus supporting figure roles before rendering
       path: core/figure-evidence-planning.md
+    - condition: binding a plot, figure, table, image plate, diagram, or mixed display to its reader task, estimand, statistical unit, candidate representation, inference boundary, data/analysis/render/source-data provenance, caption, accessibility, and stage-specific exit tests
+      path: core/scientific-display-decision-contract.md
     - condition: final manuscript-facing QA after drafting, including a last-mile scrub for filenames, file paths, script/helper/class names, CLI flags, repository/developer history, raw project links, output filenames, figure-legend leakage, punctuation/spacing/bracket defects, range/minus/hyphen review, and target-aware scientific copy-editing
       path: core/manuscript-surface-qa.md
     - condition: auditing an existing or multi-round-revised manuscript for accumulated drift — terminology/unit/number variants, headline counts that do not reconcile with the Methods, claims contradicted by the paper's own tables, over- or under-claiming, tense parallelism, and prose that restates displays
@@ -58,6 +60,8 @@ research:
   on_demand:
     - condition: recent stratified cross-archetype examples are needed to challenge a local paper/figure/writing assumption across mechanism, trial, computational, resource, qualitative, theory and review papers
       path: research/stratified-paper-reading-2025-2026.md
+    - condition: the empirical and methodological basis, transfer boundary, contradiction, or unresolved research gap behind a scientific display adapter or automatic display blocker must be inspected
+      path: research/scientific-display-evidence-ledger-2026-08.md
 
 journal_formats:
   on_demand:
@@ -84,3 +88,7 @@ quality_tools:
   manuscript_surface_use_when: final plain-text/Markdown manuscript, legend, caption, table-note, abstract, or section QA after scientific drafting is stable
   manuscript_surface_purpose: conservatively flag repository/artifact leakage, high-confidence mechanical punctuation defects, stage-aware submission placeholders, abstract display-math review, opaque/unexpanded identifier candidates, and paper-private Greek/alphanumeric symbols without auto-rewriting meaning-sensitive language; use fail-on-review only as a candidate gate before ledger adjudication
   script_resolution: resolve relative to the nature-shared package directory, never the user working directory
+  scientific_display_script: scripts/resolve_scientific_display.py
+  scientific_display_schema: display-contracts/scientific-display-contract.schema.json
+  scientific_display_adapters: display-contracts/maintained-adapters.json
+  scientific_display_purpose: return evidence-informed candidate representations rather than a universal best chart, then fail closed on high-risk provenance, inference-boundary, omission, caption, uncertainty, and accessibility defects

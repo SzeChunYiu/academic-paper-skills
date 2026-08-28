@@ -1,5 +1,5 @@
 name: nature-figure
-version: 3.4.0
+version: 3.5.0
 description: >
   Declarative manifest for journal-aware scientific figure design. The legacy
   skill name is retained for compatibility. Data plotting, scientific diagrams,
@@ -79,6 +79,13 @@ references:
       path: ../nature-shared/core/paper-archetype-atlas.md
     - condition: decide what figures or plots a paper needs from its claims, reader questions, estimands, data structures, uncertainty, alternative explanations, contribution type, and main-versus-support evidence role before rendering
       path: ../nature-shared/core/figure-evidence-planning.md
+    - condition: bind a plot, figure, table, image plate, diagram, or mixed display to the scientific object, evidence lineage, representation rationale, inference boundary, caption, accessibility, and stage-specific blockers before rendering or final delivery
+      path: ../nature-shared/core/scientific-display-decision-contract.md
+      schema: ../nature-shared/display-contracts/scientific-display-contract.schema.json
+      adapters: ../nature-shared/display-contracts/maintained-adapters.json
+      script: ../nature-shared/scripts/resolve_scientific_display.py
+    - condition: inspect the research evidence, source-specific support, transfer limits, contradictions, or remaining research gaps behind a maintained scientific display adapter
+      path: ../nature-shared/research/scientific-display-evidence-ledger-2026-08.md
     - condition: decide whether a candidate figure/panel/detail belongs in main text, Extended Data/SI, Methods, availability, repository documentation, or should be omitted because it does not serve the scientific narrative
       path: ../nature-shared/core/manuscript-content-selection.md
     - condition: final figure title, legend, caption, table note, alt text, or manuscript figure-call prose needs a last-mile scrub for filenames, paths, scripts/helpers, CLI/developer residue, repository URLs, punctuation/spacing/bracket defects, figure-reference formatting, and target-aware typography

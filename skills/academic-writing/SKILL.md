@@ -180,21 +180,35 @@ Do not copy sentences, distinctive paragraph architecture, layouts, palettes, or
 
 ## 8. Plan figures before prose becomes rigid
 
-Use `../nature-shared/core/figure-evidence-planning.md`.
+Use `../nature-shared/core/figure-evidence-planning.md`, then create a
+**scientific display decision contract** from
+`../nature-shared/core/scientific-display-decision-contract.md` for every
+figure, plot, table, image plate, diagram, or mixed display that will carry
+evidence.
+
+The governing chain begins `reader question -> scientific object / estimand`
+and ends at a bounded, provenance-linked representation.
 
 For every major claim ask:
 
 ```text
 reader question
--> scientific/statistical unit
--> estimand / visual object
--> data structure
+-> scientific object / estimand
+-> scientific/statistical unit and data structure
 -> uncertainty / alternative explanation
--> representation
+-> candidate representation
+-> allowed and prohibited inference
+-> data snapshot -> analysis receipt -> render receipt -> source data
 -> main / support / omit
 ```
 
 A qualitative or theory paper may need no quantitative figure. A limitation/failure can deserve a main figure if it changes the headline interpretation.
+
+There is no universal best chart. Resolve candidate families from the reader
+task, estimand, dependence structure, and inference boundary; do not select a
+chart because it is fashionable or frequent in a target journal. Caption,
+denominator, uncertainty, group coverage, transforms, accessibility, and
+artifact hashes must remain bound to the current display contract.
 
 Route rendering and detailed diagram design to the scientific-figure capability.
 

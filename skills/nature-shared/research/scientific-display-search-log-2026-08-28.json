@@ -1,0 +1,816 @@
+{
+  "log_schema_version": "1.0.0",
+  "executed_at": "2026-08-28",
+  "purpose": "Broad discovery and title/metadata screening for scientific display engineering; inclusion decisions are recorded separately in the evidence registry.",
+  "queries": [
+    {
+      "query": "graphical perception empirical visualization position length area color",
+      "provider": "OpenAlex",
+      "endpoint": "https://api.openalex.org/works",
+      "parameters": {
+        "search": "graphical perception empirical visualization position length area color",
+        "per-page": 7
+      },
+      "records": [
+        {
+          "openalex_id": "https://openalex.org/W2292809381",
+          "doi": "https://doi.org/10.63744/r4ysrh7ae534",
+          "title": "Humanities Approaches to Graphical Display",
+          "publication_year": 2011,
+          "work_type": "article",
+          "source": "Digital humanities quarterly"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2001825181",
+          "doi": "https://doi.org/10.1080/00031305.1979.10482688",
+          "title": "Graphical Methods in Statistics",
+          "publication_year": 1979,
+          "work_type": "article",
+          "source": "The American Statistician"
+        },
+        {
+          "openalex_id": "https://openalex.org/W1980799317",
+          "doi": "https://doi.org/10.1109/tvcg.2012.265",
+          "title": "Stacking-Based Visualization of Trajectory Attribute Data",
+          "publication_year": 2012,
+          "work_type": "article",
+          "source": "IEEE Transactions on Visualization and Computer Graphics"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2023846932",
+          "doi": "https://doi.org/10.1145/234972.234975",
+          "title": "Evaluating stereo and motion cues for visualizing information nets in three dimensions",
+          "publication_year": 1996,
+          "work_type": "article",
+          "source": "ACM Transactions on Graphics"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2121955354",
+          "doi": "https://doi.org/10.1109/infvis.2002.1173156",
+          "title": "Interactive information visualization of a million items",
+          "publication_year": 2003,
+          "work_type": "conference-paper",
+          "source": null
+        },
+        {
+          "openalex_id": "https://openalex.org/W3006937233",
+          "doi": "https://doi.org/10.1109/jproc.2020.2969687",
+          "title": "Combinatorial Optimization of Graphical User Interface Designs",
+          "publication_year": 2020,
+          "work_type": "article",
+          "source": "Proceedings of the IEEE"
+        },
+        {
+          "openalex_id": "https://openalex.org/W1961379460",
+          "doi": "https://doi.org/10.1186/s40537-015-0031-2",
+          "title": "Visualizing Big Data with augmented and virtual reality: challenges and research agenda",
+          "publication_year": 2015,
+          "work_type": "article",
+          "source": "Journal Of Big Data"
+        }
+      ]
+    },
+    {
+      "query": "uncertainty visualization confidence intervals error bars empirical study",
+      "provider": "OpenAlex",
+      "endpoint": "https://api.openalex.org/works",
+      "parameters": {
+        "search": "uncertainty visualization confidence intervals error bars empirical study",
+        "per-page": 7
+      },
+      "records": [
+        {
+          "openalex_id": "https://openalex.org/W1990041238",
+          "doi": "https://doi.org/10.3758/s13428-011-0076-x",
+          "title": "RMediation: An R package for mediation analysis confidence intervals",
+          "publication_year": 2011,
+          "work_type": "article",
+          "source": "Behavior Research Methods"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2152761983",
+          "doi": "https://doi.org/10.1023/a:1007515423169",
+          "title": "An Empirical Comparison of Voting Classification Algorithms: Bagging, Boosting, and Variants",
+          "publication_year": 1999,
+          "work_type": "article",
+          "source": "Machine Learning"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2073836327",
+          "doi": "https://doi.org/10.1371/journal.pgen.1004383",
+          "title": "Bayesian Test for Colocalisation between Pairs of Genetic Association Studies Using Summary Statistics",
+          "publication_year": 2014,
+          "work_type": "article",
+          "source": "PLoS Genetics"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3159728495",
+          "doi": "https://doi.org/10.1038/s41586-021-03451-0",
+          "title": "Towards complete and error-free genome assemblies of all vertebrate species",
+          "publication_year": 2021,
+          "work_type": "article",
+          "source": "Nature"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2137070227",
+          "doi": "https://doi.org/10.3389/fpsyg.2013.00863",
+          "title": "Calculating and reporting effect sizes to facilitate cumulative science: a practical primer for t-tests and ANOVAs",
+          "publication_year": 2013,
+          "work_type": "article",
+          "source": "Frontiers in Psychology"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2064299399",
+          "doi": "https://doi.org/10.3133/wsp1473_ed1",
+          "title": "Study and interpretation of the chemical characteristics of natural water",
+          "publication_year": 1959,
+          "work_type": "report",
+          "source": null
+        },
+        {
+          "openalex_id": "https://openalex.org/W2110300022",
+          "doi": "https://doi.org/10.1038/nbt.2676",
+          "title": "Predictive functional profiling of microbial communities using 16S rRNA marker gene sequences",
+          "publication_year": 2013,
+          "work_type": "article",
+          "source": "Nature Biotechnology"
+        }
+      ]
+    },
+    {
+      "query": "misleading deceptive visualization truncated axis empirical",
+      "provider": "OpenAlex",
+      "endpoint": "https://api.openalex.org/works",
+      "parameters": {
+        "search": "misleading deceptive visualization truncated axis empirical",
+        "per-page": 7
+      },
+      "records": [
+        {
+          "openalex_id": "https://openalex.org/W4221069612",
+          "doi": "https://doi.org/10.1038/s41598-022-05353-1",
+          "title": "Impact of COVID-19 forecast visualizations on pandemic risk perceptions",
+          "publication_year": 2022,
+          "work_type": "article",
+          "source": "Scientific Reports"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4225099728",
+          "doi": "https://doi.org/10.1145/3491102.3502138",
+          "title": "Annotating Line Charts for Addressing Deception",
+          "publication_year": 2022,
+          "work_type": "conference-paper",
+          "source": "CHI Conference on Human Factors in Computing Systems"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2617122063",
+          "doi": null,
+          "title": "Deceptive visualizations for time series datasets: an experiment on y-axis manipulation",
+          "publication_year": 2016,
+          "work_type": "dissertation",
+          "source": "Aaltodoc (Aalto University)"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2911710347",
+          "doi": "https://doi.org/10.48550/arxiv.1902.06673",
+          "title": "Fake News Detection on Social Media using Geometric Deep Learning",
+          "publication_year": 2019,
+          "work_type": "preprint",
+          "source": "arXiv (Cornell University)"
+        },
+        {
+          "openalex_id": "https://openalex.org/W1934958791",
+          "doi": "https://doi.org/10.1890/15-1047.1",
+          "title": "Balls, cups, and quasi‐potentials: quantifying stability in stochastic systems",
+          "publication_year": 2015,
+          "work_type": "article",
+          "source": "Ecology"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4200417515",
+          "doi": "https://doi.org/10.31234/osf.io/dnr9s",
+          "title": "Visualization aesthetics influence trust in science, news, and social media",
+          "publication_year": 2021,
+          "work_type": "preprint",
+          "source": null
+        },
+        {
+          "openalex_id": "https://openalex.org/W4320922889",
+          "doi": "https://doi.org/10.31219/osf.io/32mg7",
+          "title": "CALVI: Critical Thinking Assessment for Literacy in Visualizations",
+          "publication_year": 2023,
+          "work_type": "preprint",
+          "source": null
+        }
+      ]
+    },
+    {
+      "query": "scientific data visualization raw data bar charts paired data",
+      "provider": "OpenAlex",
+      "endpoint": "https://api.openalex.org/works",
+      "parameters": {
+        "search": "scientific data visualization raw data bar charts paired data",
+        "per-page": 7
+      },
+      "records": [
+        {
+          "openalex_id": "https://openalex.org/W2056279562",
+          "doi": "https://doi.org/10.1371/journal.pone.0061217",
+          "title": "phyloseq: An R Package for Reproducible Interactive Analysis and Graphics of Microbiome Census Data",
+          "publication_year": 2013,
+          "work_type": "article",
+          "source": "PLoS ONE"
+        },
+        {
+          "openalex_id": "https://openalex.org/W1989299822",
+          "doi": "https://doi.org/10.1186/1471-2105-11-395",
+          "title": "MZmine 2: Modular framework for processing, visualizing, and analyzing mass spectrometry-based molecular profile data",
+          "publication_year": 2010,
+          "work_type": "article",
+          "source": "BMC Bioinformatics"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2504691963",
+          "doi": "https://doi.org/10.1038/nbt.3597",
+          "title": "Sharing and community curation of mass spectrometry data with Global Natural Products Social Molecular Networking",
+          "publication_year": 2016,
+          "work_type": "article",
+          "source": "Nature Biotechnology"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2155419203",
+          "doi": "https://doi.org/10.1257/jep.28.2.3",
+          "title": "Big Data: New Tricks for Econometrics",
+          "publication_year": 2014,
+          "work_type": "article",
+          "source": "The Journal of Economic Perspectives"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2951635356",
+          "doi": "https://doi.org/10.1186/s40537-019-0217-0",
+          "title": "Big data in healthcare: management, analysis and future prospects",
+          "publication_year": 2019,
+          "work_type": "article",
+          "source": "Journal Of Big Data"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4200564640",
+          "doi": "https://doi.org/10.1002/cpz1.323",
+          "title": "BUSCO: Assessing Genomic Data Quality and Beyond",
+          "publication_year": 2021,
+          "work_type": "article",
+          "source": "Current Protocols"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4299506014",
+          "doi": "https://doi.org/10.2307/j.ctvcm4g37",
+          "title": "Ecological Models and Data in R",
+          "publication_year": 2008,
+          "work_type": "book",
+          "source": "Princeton University Press eBooks"
+        }
+      ]
+    },
+    {
+      "query": "scientific colour maps accessibility color vision deficiency",
+      "provider": "OpenAlex",
+      "endpoint": "https://api.openalex.org/works",
+      "parameters": {
+        "search": "scientific colour maps accessibility color vision deficiency",
+        "per-page": 7
+      },
+      "records": [
+        {
+          "openalex_id": "https://openalex.org/W3095402549",
+          "doi": "https://doi.org/10.1038/s41467-020-19160-7",
+          "title": "The misuse of colour in science communication",
+          "publication_year": 2020,
+          "work_type": "article",
+          "source": "Nature Communications"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2772971659",
+          "doi": "https://doi.org/10.1371/journal.pone.0199239",
+          "title": "Optimizing colormaps with consideration for color vision deficiency to enable accurate interpretation of scientific data",
+          "publication_year": 2018,
+          "work_type": "article",
+          "source": "PLoS ONE"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2117453879",
+          "doi": "https://doi.org/10.1186/s12930-014-0010-3",
+          "title": "Subjects with colour vision deficiency in the community: what do primary care physicians need to know?",
+          "publication_year": 2014,
+          "work_type": "article",
+          "source": "Asia Pacific Family Medicine"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2789097411",
+          "doi": "https://doi.org/10.5194/gmd-11-2541-2018",
+          "title": "Geodynamic diagnostics, scientific visualisation and StagLab 3.0",
+          "publication_year": 2018,
+          "work_type": "article",
+          "source": "Geoscientific model development"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3187818469",
+          "doi": "https://doi.org/10.1007/s00371-021-02240-0",
+          "title": "Image recoloring for color vision deficiency compensation: a survey",
+          "publication_year": 2021,
+          "work_type": "article",
+          "source": "The Visual Computer"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4390975897",
+          "doi": "https://doi.org/10.1007/s00521-023-09367-2",
+          "title": "Image recoloring for color vision deficiency compensation using Swin transformer",
+          "publication_year": 2024,
+          "work_type": "article",
+          "source": "Neural Computing and Applications"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2163487732",
+          "doi": "https://doi.org/10.1186/s13617-015-0023-0",
+          "title": "The influence of probabilistic volcanic hazard map properties on hazard communication",
+          "publication_year": 2015,
+          "work_type": "article",
+          "source": "Journal of Applied Volcanology"
+        }
+      ]
+    },
+    {
+      "query": "t-SNE UMAP embedding interpretation pitfalls",
+      "provider": "OpenAlex",
+      "endpoint": "https://api.openalex.org/works",
+      "parameters": {
+        "search": "t-SNE UMAP embedding interpretation pitfalls",
+        "per-page": 7
+      },
+      "records": [
+        {
+          "openalex_id": "https://openalex.org/W2949237386",
+          "doi": "https://doi.org/10.15252/msb.20188746",
+          "title": "Current best practices in single‐cell RNA‐seq analysis: a tutorial",
+          "publication_year": 2019,
+          "work_type": "article",
+          "source": "Molecular Systems Biology"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4385294821",
+          "doi": "https://doi.org/10.1007/s00441-023-03816-z",
+          "title": "The benefits and pitfalls of machine learning for biomarker discovery",
+          "publication_year": 2023,
+          "work_type": "article",
+          "source": "Cell and Tissue Research"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3131634425",
+          "doi": "https://doi.org/10.1038/s41588-021-00790-6",
+          "title": "ArchR is a scalable software package for integrative single-cell chromatin accessibility analysis",
+          "publication_year": 2021,
+          "work_type": "article",
+          "source": "Nature Genetics"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4309473115",
+          "doi": "https://doi.org/10.1038/s42003-022-04080-7",
+          "title": "Identifying behavioral structure from deep variational embeddings of animal motion",
+          "publication_year": 2022,
+          "work_type": "article",
+          "source": "Communications Biology"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4381309750",
+          "doi": "https://doi.org/10.1021/acs.jctc.3c00224",
+          "title": "Clustering Heterogeneous Conformational Ensembles of Intrinsically Disordered Proteins with t-Distributed Stochastic Neighbor Embedding",
+          "publication_year": 2023,
+          "work_type": "article",
+          "source": "Journal of Chemical Theory and Computation"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3200707343",
+          "doi": "https://doi.org/10.1038/s41580-021-00407-0",
+          "title": "A guide to machine learning for biologists",
+          "publication_year": 2021,
+          "work_type": "article",
+          "source": "Nature Reviews Molecular Cell Biology"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3013112475",
+          "doi": "https://doi.org/10.1038/s41467-020-15194-z",
+          "title": "Dimensionality reduction reveals fine-scale structure in the Japanese population with consequences for polygenic risk prediction",
+          "publication_year": 2020,
+          "work_type": "article",
+          "source": "Nature Communications"
+        }
+      ]
+    },
+    {
+      "query": "precision recall ROC class imbalance calibration plot",
+      "provider": "OpenAlex",
+      "endpoint": "https://api.openalex.org/works",
+      "parameters": {
+        "search": "precision recall ROC class imbalance calibration plot",
+        "per-page": 7
+      },
+      "records": [
+        {
+          "openalex_id": "https://openalex.org/W3102927640",
+          "doi": "https://doi.org/10.18653/v1/2020.eval4nlp-1.9",
+          "title": "Probabilistic Extension of Precision, Recall, and F1 Score for More Thorough Evaluation of Classification Models",
+          "publication_year": 2020,
+          "work_type": "conference-paper",
+          "source": null
+        },
+        {
+          "openalex_id": "https://openalex.org/W2903942159",
+          "doi": "https://doi.org/10.1111/2041-210x.13140",
+          "title": "The area under the precision‐recall curve as a performance metric for rare binary events",
+          "publication_year": 2018,
+          "work_type": "article",
+          "source": "Methods in Ecology and Evolution"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2196215201",
+          "doi": "https://doi.org/10.5555/2969239.2969333",
+          "title": "Precision-Recall-Gain curves: PR analysis done right",
+          "publication_year": 2015,
+          "work_type": "article",
+          "source": "Bristol Research (University of Bristol)"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4321214126",
+          "doi": "https://doi.org/10.1186/s13040-023-00322-4",
+          "title": "The Matthews correlation coefficient (MCC) should replace the ROC AUC as the standard metric for assessing binary classification",
+          "publication_year": 2023,
+          "work_type": "article",
+          "source": "BioData Mining"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3040622027",
+          "doi": "https://doi.org/10.1162/neco_a_01362",
+          "title": "The Effect of Class Imbalance on Precision-Recall Curves",
+          "publication_year": 2021,
+          "work_type": "article",
+          "source": "Neural Computation"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4210494925",
+          "doi": "https://doi.org/10.1109/tpami.2022.3145392",
+          "title": "Deep ROC Analysis and AUC as Balanced Average Accuracy, for Improved Classifier Selection, Audit and Explanation",
+          "publication_year": 2022,
+          "work_type": "article",
+          "source": "IEEE Transactions on Pattern Analysis and Machine Intelligence"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2330219538",
+          "doi": "https://doi.org/10.5121/ijdkp.2015.5201",
+          "title": "A Review on Evaluation Metrics for Data Classification Evaluations",
+          "publication_year": 2015,
+          "work_type": "article",
+          "source": "International Journal of Data Mining & Knowledge Management Process"
+        }
+      ]
+    },
+    {
+      "query": "survival curves numbers at risk visualization guidelines",
+      "provider": "OpenAlex",
+      "endpoint": "https://api.openalex.org/works",
+      "parameters": {
+        "search": "survival curves numbers at risk visualization guidelines",
+        "per-page": 7
+      },
+      "records": [
+        {
+          "openalex_id": "https://openalex.org/W2145150141",
+          "doi": "https://doi.org/10.1089/thy.2015.0020",
+          "title": "2015 American Thyroid Association Management Guidelines for Adult Patients with Thyroid Nodules and Differentiated Thyroid Cancer: The American Thyroid Association Guidelines Task Force on Thyroid Nodules and Differentiated Thyroid Cancer",
+          "publication_year": 2015,
+          "work_type": "article",
+          "source": "Thyroid"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2150428940",
+          "doi": "https://doi.org/10.1086/596757",
+          "title": "Clinical Practice Guidelines for the Management Candidiasis: 2009 Update by the Infectious Diseases Society of America",
+          "publication_year": 2009,
+          "work_type": "article",
+          "source": "Clinical Infectious Diseases"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4402064302",
+          "doi": "https://doi.org/10.1093/eurheartj/ehae177",
+          "title": "2024 ESC Guidelines for the management of chronic coronary syndromes",
+          "publication_year": 2024,
+          "work_type": "article",
+          "source": "European Heart Journal"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2195401421",
+          "doi": "https://doi.org/10.1093/eurheartj/ehv318",
+          "title": "2015 ESC Guidelines for the diagnosis and management of pericardial diseases",
+          "publication_year": 2015,
+          "work_type": "article",
+          "source": "European Heart Journal"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3082168186",
+          "doi": "https://doi.org/10.1093/eurheartj/ehaa554",
+          "title": "2020 ESC Guidelines for the management of adult congenital heart disease",
+          "publication_year": 2020,
+          "work_type": "article",
+          "source": "European Heart Journal"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2975859535",
+          "doi": "https://doi.org/10.1093/eurheartj/ehx095",
+          "title": "2017 ESC Guidelines on the Diagnosis and Treatment of Peripheral Arterial Diseases, in collaboration with the European Society for Vascular Surgery (ESVS)",
+          "publication_year": 2017,
+          "work_type": "article",
+          "source": "European Heart Journal"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4293207258",
+          "doi": "https://doi.org/10.1183/13993003.00879-2022",
+          "title": "2022 ESC/ERS Guidelines for the diagnosis and treatment of pulmonary hypertension",
+          "publication_year": 2022,
+          "work_type": "article",
+          "source": "European Respiratory Journal"
+        }
+      ]
+    },
+    {
+      "query": "causal diagrams DAG reporting guidance epidemiology",
+      "provider": "OpenAlex",
+      "endpoint": "https://api.openalex.org/works",
+      "parameters": {
+        "search": "causal diagrams DAG reporting guidance epidemiology",
+        "per-page": 7
+      },
+      "records": [
+        {
+          "openalex_id": "https://openalex.org/W2891367027",
+          "doi": "https://doi.org/10.1513/annalsats.201808-564ps",
+          "title": "Control of Confounding and Reporting of Results in Causal Inference Studies. Guidance for Authors from Editors of Respiratory, Sleep, and Critical Care Journals",
+          "publication_year": 2018,
+          "work_type": "article",
+          "source": "Annals of the American Thoracic Society"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2527078306",
+          "doi": "https://doi.org/10.1093/ije/dyw114",
+          "title": "The tale wagged by the DAG: broadening the scope of causal inference and explanation for epidemiology",
+          "publication_year": 2016,
+          "work_type": "article",
+          "source": "International Journal of Epidemiology"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3114319529",
+          "doi": "https://doi.org/10.1093/ije/dyaa213",
+          "title": "Use of directed acyclic graphs (DAGs) to identify confounders in applied health research: review and recommendations",
+          "publication_year": 2020,
+          "work_type": "article",
+          "source": "International Journal of Epidemiology"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2145429839",
+          "doi": "https://doi.org/10.2202/1557-4679.1203",
+          "title": "An Introduction to Causal Inference",
+          "publication_year": 2010,
+          "work_type": "article",
+          "source": "The International Journal of Biostatistics"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3200948809",
+          "doi": "https://doi.org/10.1001/jama.2021.14075",
+          "title": "A Guideline for Reporting Mediation Analyses of Randomized Trials and Observational Studies",
+          "publication_year": 2021,
+          "work_type": "article",
+          "source": "JAMA"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4385984544",
+          "doi": "https://doi.org/10.1111/ajps.12818",
+          "title": "Placebo Tests for Causal Inference",
+          "publication_year": 2023,
+          "work_type": "article",
+          "source": "American Journal of Political Science"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2909564167",
+          "doi": "https://doi.org/10.1007/s00787-018-1264-3",
+          "title": "The causal web of foetal alcohol spectrum disorders: a review and causal diagram",
+          "publication_year": 2019,
+          "work_type": "article",
+          "source": "European Child & Adolescent Psychiatry"
+        }
+      ]
+    },
+    {
+      "query": "scientific image manipulation integrity figures",
+      "provider": "OpenAlex",
+      "endpoint": "https://api.openalex.org/works",
+      "parameters": {
+        "search": "scientific image manipulation integrity figures",
+        "per-page": 7
+      },
+      "records": [
+        {
+          "openalex_id": "https://openalex.org/W2138833446",
+          "doi": "https://doi.org/10.1083/jcb.200406019",
+          "title": "What's in a picture? The temptation of image manipulation",
+          "publication_year": 2004,
+          "work_type": "article",
+          "source": "The Journal of Cell Biology"
+        },
+        {
+          "openalex_id": "https://openalex.org/W1989829234",
+          "doi": "https://doi.org/10.1016/j.molcel.2006.06.029",
+          "title": "RETRACTED: Cockayne Syndrome A and B Proteins Differentially Regulate Recruitment of Chromatin Remodeling and Repair Factors to Stalled RNA Polymerase II In Vivo",
+          "publication_year": 2006,
+          "work_type": "article",
+          "source": "Molecular Cell"
+        },
+        {
+          "openalex_id": "https://openalex.org/W1989319638",
+          "doi": "https://doi.org/10.1007/s11948-010-9201-y",
+          "title": "Avoiding Twisted Pixels: Ethical Guidelines for the Appropriate Use and Manipulation of Scientific Digital Images",
+          "publication_year": 2010,
+          "work_type": "article",
+          "source": "Science and Engineering Ethics"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2792530460",
+          "doi": "https://doi.org/10.1111/bph.14112",
+          "title": "Goals and practicalities of immunoblotting and immunohistochemistry: A guide for submission to the British Journal of Pharmacology",
+          "publication_year": 2018,
+          "work_type": "article",
+          "source": "British Journal of Pharmacology"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2058159156",
+          "doi": "https://doi.org/10.1046/j.0020-8833.2003.00277.x",
+          "title": "Words, Images, Enemies: Securitization and International Politics",
+          "publication_year": 2003,
+          "work_type": "article",
+          "source": "International Studies Quarterly"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2104469694",
+          "doi": "https://doi.org/10.1016/j.echo.2011.11.010",
+          "title": "EAE/ASE Recommendations for Image Acquisition and Display Using Three-Dimensional Echocardiography",
+          "publication_year": 2011,
+          "work_type": "article",
+          "source": "Journal of the American Society of Echocardiography"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2791382476",
+          "doi": "https://doi.org/10.1038/s41419-018-0430-3",
+          "title": "Automatic detection of image manipulations in the biomedical literature",
+          "publication_year": 2018,
+          "work_type": "article",
+          "source": "Cell Death and Disease"
+        }
+      ]
+    },
+    {
+      "query": "alt text accessibility scientific figures",
+      "provider": "OpenAlex",
+      "endpoint": "https://api.openalex.org/works",
+      "parameters": {
+        "search": "alt text accessibility scientific figures",
+        "per-page": 7
+      },
+      "records": [
+        {
+          "openalex_id": "https://openalex.org/W4393970562",
+          "doi": "https://doi.org/10.1145/3640543.3645212",
+          "title": "FigurA11y: AI Assistance for Writing Scientific Alt Text",
+          "publication_year": 2024,
+          "work_type": "conference-paper",
+          "source": null
+        },
+        {
+          "openalex_id": "https://openalex.org/W2797202416",
+          "doi": "https://doi.org/10.2139/ssrn.3144139",
+          "title": "Social Media, Political Polarization, and Political Disinformation: A Review of the Scientific Literature",
+          "publication_year": 2018,
+          "work_type": "preprint",
+          "source": "SSRN Electronic Journal"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2181986281",
+          "doi": "https://doi.org/10.1016/j.nuclphysa.2005.03.086",
+          "title": "Formation of dense partonic matter in relativistic nucleus–nucleus collisions at RHIC: Experimental evaluation by the PHENIX Collaboration",
+          "publication_year": 2005,
+          "work_type": "article",
+          "source": "Nuclear Physics A"
+        },
+        {
+          "openalex_id": "https://openalex.org/W1965964177",
+          "doi": "https://doi.org/10.2196/jmir.2012",
+          "title": "Can Tweets Predict Citations? Metrics of Social Impact Based on Twitter and Correlation with Traditional Metrics of Scientific Impact",
+          "publication_year": 2011,
+          "work_type": "article",
+          "source": "Journal of Medical Internet Research"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4298051348",
+          "doi": "https://doi.org/10.1145/3517428.3544796",
+          "title": "A Dataset of Alt Texts from HCI Publications",
+          "publication_year": 2022,
+          "work_type": "conference-paper",
+          "source": null
+        },
+        {
+          "openalex_id": "https://openalex.org/W3145094704",
+          "doi": "https://doi.org/10.1371/journal.pbio.3001161",
+          "title": "Creating clear and informative image-based figures for scientific publications",
+          "publication_year": 2021,
+          "work_type": "article",
+          "source": "PLoS Biology"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4224985432",
+          "doi": "https://doi.org/10.1145/3493612.3520449",
+          "title": "Toward supporting quality alt text in computing publications",
+          "publication_year": 2022,
+          "work_type": "conference-paper",
+          "source": null
+        }
+      ]
+    },
+    {
+      "query": "tables versus graphs exact values reader task",
+      "provider": "OpenAlex",
+      "endpoint": "https://api.openalex.org/works",
+      "parameters": {
+        "search": "tables versus graphs exact values reader task",
+        "per-page": 7
+      },
+      "records": [
+        {
+          "openalex_id": "https://openalex.org/W2112796928",
+          "doi": "https://doi.org/10.1109/5.726791",
+          "title": "Gradient-based learning applied to document recognition",
+          "publication_year": 1998,
+          "work_type": "article",
+          "source": "Proceedings of the IEEE"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2604314403",
+          "doi": "https://doi.org/10.1007/978-3-319-93417-4_38",
+          "title": "Modeling Relational Data with Graph Convolutional Networks",
+          "publication_year": 2018,
+          "work_type": "conference-paper",
+          "source": "Lecture notes in computer science"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2144344516",
+          "doi": "https://doi.org/10.1145/24039.24041",
+          "title": "The program dependence graph and its use in optimization",
+          "publication_year": 1987,
+          "work_type": "article",
+          "source": "ACM Transactions on Programming Languages and Systems"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3010336026",
+          "doi": "https://doi.org/10.1145/3447772",
+          "title": "Knowledge Graphs",
+          "publication_year": 2021,
+          "work_type": "article",
+          "source": "ACM Computing Surveys"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2592929672",
+          "doi": "https://doi.org/10.1016/j.media.2017.07.005",
+          "title": "A survey on deep learning in medical image analysis",
+          "publication_year": 2017,
+          "work_type": "article",
+          "source": "Medical Image Analysis"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2133465414",
+          "doi": "https://doi.org/10.1093/nar/gkn923",
+          "title": "Bioinformatics enrichment tools: paths toward the comprehensive functional analysis of large gene lists",
+          "publication_year": 2008,
+          "work_type": "article",
+          "source": "Nucleic Acids Research"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2071608556",
+          "doi": "https://doi.org/10.1016/j.neuroimage.2013.05.033",
+          "title": "Function in the human connectome: Task-fMRI and individual differences in behavior",
+          "publication_year": 2013,
+          "work_type": "article",
+          "source": "NeuroImage"
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Ranking was provider relevance order and was not treated as evidence quality.",
+    "Targeted DOI and reference-chain follow-up supplemented this broad screen.",
+    "Some broad-query hits were irrelevant and were excluded under the documented criteria."
+  ]
+}

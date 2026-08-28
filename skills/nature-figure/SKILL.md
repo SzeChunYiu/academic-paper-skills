@@ -41,6 +41,21 @@ Read [manifest.yaml](manifest.yaml) and every file under `always_load`:
 
 The figure contract determines the scientific conclusion, evidence hierarchy, data-integrity checks, target/stage, and output contract before plotting.
 
+### 1.5 Scientific display decision contract
+
+For every evidence-bearing plot, figure, table, image plate, diagram, or mixed
+display, load `../nature-shared/core/scientific-display-decision-contract.md`.
+Resolve the reader task, scientific object/estimand, statistical unit and
+dependence structure, candidate representation, allowed/prohibited inference,
+data/analysis/render/source-data lineage, caption semantics, omitted groups,
+accessibility, and placement before rendering.
+
+The maintained adapters and `resolve_scientific_display.py` return candidate
+families and obligations, never a universal best chart. An unmatched scientific
+task triggers domain-specific research rather than a forced generic plot. A
+passing automated contract remains bounded: final-size visual inspection and
+human scientific judgment are still required.
+
 ### 2. Resolve the plotting backend — blocking only for plotting tasks
 
 Determine backend in this order:

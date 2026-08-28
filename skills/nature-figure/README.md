@@ -8,6 +8,7 @@
 
 - 判断一个 claim 是否真的需要 figure，还是 prose/table 更清楚。
 - 建立 claim-driven figure plan：`claim -> reader question -> statistical unit -> estimand -> data structure -> uncertainty/alternative explanation -> plot -> main/support placement`。
+- 为每个 display 建立 scientific display decision contract，把 reader task、estimand、statistical unit、allowed/prohibited inference、immutable data/analysis/render/source-data chain、caption 与 accessibility state 连起来。
 - 为 distribution、paired effect、trajectory、association、agreement、calibration、classification、survival、heterogeneity、sensitivity、benchmark、ablation、imaging、high-dimensional data、null result 等建议合适 plot family。
 - 精读几篇 close analogue papers，学习**figure role 与 evidence expectation**，但不复制 layout、palette、normalization 或 visual identity。
 - 通过 shared manuscript-content-selection logic 决定哪些 evidence 应进入 main figures，哪些去 Extended Data/SI。
@@ -31,6 +32,7 @@ claim
 -> data structure
 -> alternative explanation / uncertainty
 -> representation
+-> scientific display decision contract
 -> panel/evidence sequence
 -> main vs support
 -> analogue calibration when useful
@@ -42,6 +44,9 @@ claim
 重要规则：
 
 - **只做 figure/plot planning 时不需要先选 Python 或 R。** 真正开始 plotting/rendering 才进入 backend gate。
+- 不存在 universal best chart：maintained adapters 只返回 candidate families 与 obligations；unmatched task 需要 domain research。
+- Adapter rules 连接到 39-source evidence registry，其中记录 read depth、supported decisions、contradictions 与 transfer limits，而不是只给无来源 bibliography。
+- Denominator、group、transformation、data snapshot、analysis receipt、render receipt、source data 与 caption 不得各自漂移。
 - 某个 chart 在顶刊或 analogue papers 中很常见，不构成使用它的充分理由。
 - 小样本 continuous data 往往需要显示 individual observations/distribution，而不是只有 mean bar。
 - Paired data 在 pairing 就是 estimand 时应该把 pairing 画出来。

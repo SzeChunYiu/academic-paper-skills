@@ -1,0 +1,733 @@
+{
+  "registry_schema_version": "1.0.0",
+  "registry_id": "scientific-display-evidence-registry-2026-08-28",
+  "reviewed_at": "2026-08-28",
+  "search_protocol": {
+    "sources_searched": [
+      "OpenAlex",
+      "Crossref",
+      "Europe PMC full-text XML",
+      "publisher article pages",
+      "W3C official standard"
+    ],
+    "executed_at": "2026-08-28",
+    "query_families": [
+      "graphical perception and visual encoding",
+      "task- and data-dependent chart effectiveness",
+      "uncertainty, confidence intervals, and decision quality",
+      "raw data, distributions, pairing, and repeated measures",
+      "misleading visualization and ethical duties",
+      "scientific color maps and color-vision accessibility",
+      "ROC, precision-recall, calibration, and decision thresholds",
+      "survival and time-to-event plots",
+      "DAG and workflow diagram reporting",
+      "t-SNE, UMAP, and embedding interpretation",
+      "scientific image integrity and image-based figures",
+      "alt text and natural-language visualization descriptions"
+    ],
+    "records_retrieved": 84,
+    "records_screened": 84,
+    "targeted_sources_reviewed": 39,
+    "inclusion_criteria": [
+      "empirical perception/comprehension/decision study",
+      "systematic or meta-research audit",
+      "methods evaluation with explicit display implications",
+      "official reporting or accessibility standard",
+      "high-value specialist guidance with stated boundaries"
+    ],
+    "exclusion_criteria": [
+      "visual gallery without evidence",
+      "journal prestige or frequency alone",
+      "template aesthetics without reader task",
+      "unverified tertiary summary",
+      "source whose metadata could not be reconciled"
+    ],
+    "deduplication_key": "DOI when available; otherwise canonical official URL and title",
+    "stopping_rule": "stop this iteration after every maintained adapter had at least two relevant sources, all major display-risk families had coverage, and new searches produced mostly domain refinements rather than new top-level contract fields",
+    "search_log_path": "../research/scientific-display-search-log-2026-08-28.json"
+  },
+  "sources": [
+    {
+      "source_id": "cleveland-mcgill-1984",
+      "title": "Graphical Perception: Theory, Experimentation, and Application to the Development of Graphical Methods",
+      "url": "https://doi.org/10.1080/01621459.1984.10478080",
+      "source_type": "empirical_experiment",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "elementary graphical-perception tasks",
+        "relative accuracy of position, length, angle, area, volume, and color encodings"
+      ],
+      "limits": [
+        "tested bounded judgment tasks and stimuli",
+        "does not establish a universal chart ranking for every reader task or data structure"
+      ],
+      "metadata_verification": "doi_and_title_crossref_verified_2026-08-28"
+    },
+    {
+      "source_id": "cleveland-1985",
+      "title": "Graphical Perception and Graphical Methods for Analyzing Scientific Data",
+      "url": "https://doi.org/10.1126/science.229.4716.828",
+      "source_type": "methods_synthesis",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "graphical perception as a scientific foundation for display design",
+        "task-specific scientific graph methods"
+      ],
+      "limits": [
+        "brief synthesis rather than a complete modern evidence review"
+      ],
+      "metadata_verification": "doi_and_title_crossref_verified_2026-08-28"
+    },
+    {
+      "source_id": "heer-bostock-2010",
+      "title": "Crowdsourcing Graphical Perception",
+      "url": "https://doi.org/10.1145/1753326.1753357",
+      "source_type": "empirical_experiment",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "replication of spatial-encoding and luminance studies",
+        "area perception, chart size, and gridline effects",
+        "viability of crowdsourced perception experiments"
+      ],
+      "limits": [
+        "crowd platform and tested stimuli constrain transfer",
+        "perceptual accuracy is not the same as scientific inferential validity"
+      ],
+      "metadata_verification": "doi_and_title_crossref_verified_2026-08-28"
+    },
+    {
+      "source_id": "harrison-2014",
+      "title": "Ranking Visualizations of Correlation Using Weber’s Law",
+      "url": "https://doi.org/10.1109/TVCG.2014.2346979",
+      "source_type": "empirical_experiment",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "large crowdsourced comparison of correlation judgments",
+        "task-specific precision differences among nine visualizations"
+      ],
+      "limits": [
+        "only correlation judgment was tested",
+        "positive and negative correlations behaved differently",
+        "does not justify one global visualization ranking"
+      ],
+      "metadata_verification": "doi_and_title_crossref_verified_2026-08-28"
+    },
+    {
+      "source_id": "kim-heer-2018",
+      "title": "Assessing Effects of Task and Data Distribution on the Effectiveness of Visual Encodings",
+      "url": "https://doi.org/10.1111/cgf.13409",
+      "source_type": "empirical_experiment",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "visual-encoding effectiveness depends on analytical task and data distribution",
+        "position, color, size, and faceting trade-offs"
+      ],
+      "limits": [
+        "tested 12 trivariate encodings and selected tasks/distributions",
+        "does not settle domain-specific statistical graphics"
+      ],
+      "metadata_verification": "doi_and_title_crossref_verified_2026-08-28"
+    },
+    {
+      "source_id": "saket-2018",
+      "title": "Task-Based Effectiveness of Basic Visualizations",
+      "url": "https://doi.org/10.1109/TVCG.2018.2829750",
+      "source_type": "empirical_experiment",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "tables, lines, bars, scatterplots, and pies differ by reader task",
+        "exact lookup and pattern tasks need not use the same representation"
+      ],
+      "limits": [
+        "small tabular datasets, ten tasks, and two datasets",
+        "effectiveness results do not override scientific design or uncertainty needs"
+      ],
+      "metadata_verification": "doi_and_title_crossref_verified_2026-08-28"
+    },
+    {
+      "source_id": "weissgerber-2015",
+      "title": "Beyond Bar and Line Graphs: Time for a New Data Presentation Paradigm",
+      "url": "https://doi.org/10.1371/journal.pbio.1002128",
+      "source_type": "systematic_review_and_guidance",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "bar and line summaries can hide distributions, outliers, and paired structure",
+        "small datasets often require visible observations",
+        "figure choice should follow sample size and study design"
+      ],
+      "limits": [
+        "sampled physiology journals and predominantly small-n continuous data",
+        "does not mean every bar chart or every aggregation is invalid"
+      ],
+      "metadata_verification": "doi_and_title_crossref_verified_2026-08-28"
+    },
+    {
+      "source_id": "belia-2005",
+      "title": "Researchers Misunderstand Confidence Intervals and Standard Error Bars",
+      "url": "https://doi.org/10.1037/1082-989X.10.4.389",
+      "source_type": "empirical_experiment",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "researchers confuse confidence intervals and standard-error bars",
+        "independent and repeated-measures designs require different interpretation",
+        "uncertainty semantics must be explicit"
+      ],
+      "limits": [
+        "web task used a specific significance-judgment setup",
+        "sampled selected research communities"
+      ],
+      "metadata_verification": "doi_and_title_crossref_verified_2026-08-28"
+    },
+    {
+      "source_id": "cumming-2005",
+      "title": "Inference by Eye: Confidence Intervals and How to Read Pictures of Data",
+      "url": "https://doi.org/10.1037/0003-066X.60.2.170",
+      "source_type": "methods_guidance",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "intervals should relate directly to the effect of interest",
+        "visual inference must respect experimental design",
+        "overlap heuristics have bounded conditions"
+      ],
+      "limits": [
+        "some rules concern independent-group confidence intervals",
+        "not a universal substitute for formal analysis"
+      ],
+      "metadata_verification": "doi_and_title_crossref_verified_2026-08-28"
+    },
+    {
+      "source_id": "correll-gleicher-2014",
+      "title": "Error Bars Considered Harmful: Exploring Alternate Encodings for Mean and Error",
+      "url": "https://doi.org/10.1109/TVCG.2014.2346298",
+      "source_type": "empirical_experiment",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "uncertainty encoding changes viewer decisions",
+        "mean-plus-error-bar conventions can mislead",
+        "alternative encodings can improve selected judgments"
+      ],
+      "limits": [
+        "crowdsourced general-audience experiments with selected encodings",
+        "no single alternative wins every task"
+      ],
+      "metadata_verification": "doi_and_title_crossref_verified_2026-08-28"
+    },
+    {
+      "source_id": "hullman-2015",
+      "title": "Hypothetical Outcome Plots Outperform Error Bars and Violin Plots for Inferences about Reliability of Variable Ordering",
+      "url": "https://doi.org/10.1371/journal.pone.0142444",
+      "source_type": "empirical_experiment",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "animated outcome displays improved selected multivariate probability judgments",
+        "joint-distribution reasoning differs from single-distribution lookup"
+      ],
+      "limits": [
+        "HOPs were worse for some high-variance univariate tasks",
+        "animated medium and tested distributions constrain transfer"
+      ],
+      "metadata_verification": "doi_and_title_crossref_verified_2026-08-28"
+    },
+    {
+      "source_id": "fernandes-2018",
+      "title": "Uncertainty Displays Using Quantile Dotplots or CDFs Improve Transit Decision-Making",
+      "url": "https://doi.org/10.1145/3173574.3173718",
+      "source_type": "empirical_experiment",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "frequency-based uncertainty displays improved incentivized transit decisions",
+        "point predictions conceal decision-relevant uncertainty"
+      ],
+      "limits": [
+        "single transit-decision context",
+        "display benefits may depend on numeracy, task, and loss function"
+      ],
+      "metadata_verification": "doi_and_title_crossref_verified_2026-08-28"
+    },
+    {
+      "source_id": "correll-2019",
+      "title": "Ethical Dimensions of Visualization Research",
+      "url": "https://doi.org/10.1145/3290605.3300418",
+      "source_type": "ethics_analysis",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "visualization design creates ethical obligations beyond technical correctness",
+        "display choices can materially influence decisions"
+      ],
+      "limits": [
+        "normative analysis rather than a controlled comparative experiment"
+      ],
+      "metadata_verification": "doi_and_title_crossref_verified_2026-08-28"
+    },
+    {
+      "source_id": "crameri-2020",
+      "title": "The Misuse of Colour in Science Communication",
+      "url": "https://doi.org/10.1038/s41467-020-19160-7",
+      "source_type": "methods_synthesis_and_demonstration",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "perceptually non-uniform color maps distort apparent data variation",
+        "scientific color maps should match sequential, diverging, or cyclic structure",
+        "color-vision and grayscale accessibility matter"
+      ],
+      "limits": [
+        "palette suitability remains data- and task-specific",
+        "the paper is guidance and demonstration, not a universal viewer experiment"
+      ],
+      "metadata_verification": "doi_and_title_crossref_verified_2026-08-28"
+    },
+    {
+      "source_id": "nunez-2018",
+      "title": "Optimizing colormaps with consideration for color vision deficiency to enable accurate interpretation of scientific data",
+      "url": "https://doi.org/10.1371/journal.pone.0199239",
+      "source_type": "methods_evaluation",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "color maps can be optimized for color-vision deficiency and perceptual uniformity",
+        "CVD-aware maps improve access to scientific gradients"
+      ],
+      "limits": [
+        "focuses continuous color maps and modeled/viewer conditions",
+        "does not replace redundant encoding where color is categorical or critical"
+      ],
+      "metadata_verification": "doi_and_title_crossref_verified_2026-08-28"
+    },
+    {
+      "source_id": "saito-2015",
+      "title": "The Precision-Recall Plot Is More Informative than the ROC Plot When Evaluating Binary Classifiers on Imbalanced Datasets",
+      "url": "https://doi.org/10.1371/journal.pone.0118432",
+      "source_type": "simulation_and_case_study",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "ROC can hide practical false-positive burden under class imbalance",
+        "precision-recall changes with class prevalence and exposes early-retrieval behavior"
+      ],
+      "limits": [
+        "PR is not universally superior for every decision",
+        "metric choice still depends on costs, prevalence, thresholds, and task"
+      ],
+      "metadata_verification": "doi_and_title_crossref_verified_2026-08-28"
+    },
+    {
+      "source_id": "vancalster-2019",
+      "title": "Calibration: The Achilles Heel of Predictive Analytics",
+      "url": "https://doi.org/10.1186/s12916-019-1466-7",
+      "source_type": "methods_guidance",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "calibration curves are necessary for understanding probabilistic prediction",
+        "discrimination and calibration answer different questions",
+        "external validation needs adequate sample size"
+      ],
+      "limits": [
+        "clinical-risk prediction focus",
+        "calibration alone does not establish utility or fairness"
+      ],
+      "metadata_verification": "doi_and_title_crossref_verified_2026-08-28"
+    },
+    {
+      "source_id": "niculescu-2005",
+      "title": "Predicting Good Probabilities with Supervised Learning",
+      "url": "https://doi.org/10.1145/1102351.1102430",
+      "source_type": "empirical_methods_evaluation",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "different algorithms produce systematic probability distortions",
+        "calibration methods and data requirements matter"
+      ],
+      "limits": [
+        "older algorithm families and benchmark datasets",
+        "not a display-comprehension study"
+      ],
+      "metadata_verification": "doi_and_title_crossref_verified_2026-08-28"
+    },
+    {
+      "source_id": "kmunicate-2019",
+      "title": "Proposals on Kaplan–Meier Plots in Medical Research and a Survey of Stakeholder Views",
+      "url": "https://doi.org/10.1136/bmjopen-2019-030215",
+      "source_type": "stakeholder_survey",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "extended risk tables and confidence bands were preferred additions to Kaplan–Meier plots",
+        "time-to-event displays should expose changing risk sets and uncertainty"
+      ],
+      "limits": [
+        "preferences are not the same as measured comprehension",
+        "sample was dominated by statisticians and clinicians"
+      ],
+      "metadata_verification": "doi_and_title_crossref_verified_2026-08-28"
+    },
+    {
+      "source_id": "pocock-2002",
+      "title": "Survival Plots of Time-to-Event Outcomes in Clinical Trials: Good Practice and Pitfalls",
+      "url": "https://doi.org/10.1016/S0140-6736(02)08594-X",
+      "source_type": "methods_guidance",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "time-to-event plots require survival-specific semantics",
+        "numbers at risk, censoring, scale, and follow-up affect interpretation"
+      ],
+      "limits": [
+        "clinical-trial focus and earlier conventions",
+        "must be combined with current analysis/reporting guidance"
+      ],
+      "metadata_verification": "doi_and_title_crossref_verified_2026-08-28"
+    },
+    {
+      "source_id": "tennant-2020",
+      "title": "Use of Directed Acyclic Graphs to Identify Confounders in Applied Health Research",
+      "url": "https://doi.org/10.1093/ije/dyaa213",
+      "source_type": "systematic_review",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "DAG availability, estimands, construction, and adjustment sets are often underreported",
+        "causal diagrams should expose assumptions and analytical consequences"
+      ],
+      "limits": [
+        "reviewed applied health research",
+        "a diagram does not validate the truth of its causal edges"
+      ],
+      "metadata_verification": "doi_and_title_crossref_verified_2026-08-28"
+    },
+    {
+      "source_id": "wattenberg-2016",
+      "title": "How to Use t-SNE Effectively",
+      "url": "https://doi.org/10.23915/distill.00002",
+      "source_type": "interactive_methods_exposition",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "t-SNE appearance depends strongly on perplexity, iteration, initialization, and data geometry",
+        "cluster sizes and distances can be misleading"
+      ],
+      "limits": [
+        "interactive demonstrations and synthetic examples",
+        "does not invalidate all task-specific use of t-SNE"
+      ],
+      "metadata_verification": "doi_and_title_crossref_verified_2026-08-28"
+    },
+    {
+      "source_id": "kobak-2019",
+      "title": "The Art of Using t-SNE for Single-Cell Transcriptomics",
+      "url": "https://doi.org/10.1038/s41467-019-13056-x",
+      "source_type": "methods_evaluation",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "naive t-SNE can distort global structure",
+        "initialization, learning rate, multiscale kernels, and stability checks affect interpretation"
+      ],
+      "limits": [
+        "single-cell transcriptomics focus",
+        "improved embeddings still do not independently establish mechanism"
+      ],
+      "metadata_verification": "doi_and_title_crossref_verified_2026-08-28"
+    },
+    {
+      "source_id": "chari-2023",
+      "title": "The Specious Art of Single-Cell Genomics",
+      "url": "https://doi.org/10.1371/journal.pcbi.1011288",
+      "source_type": "methods_critique_and_evaluation",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "extreme two-dimensional reduction inevitably distorts high-dimensional data",
+        "parameter tuning can yield contradictory visual stories",
+        "embeddings should not carry unsupported quantitative or mechanistic inference"
+      ],
+      "limits": [
+        "strong critique centered on single-cell genomics",
+        "other domains and bounded orientation tasks may differ"
+      ],
+      "metadata_verification": "doi_and_title_crossref_verified_2026-08-28"
+    },
+    {
+      "source_id": "rossner-2004",
+      "title": "What’s in a Picture? The Temptation of Image Manipulation",
+      "url": "https://doi.org/10.1083/jcb.200406019",
+      "source_type": "integrity_guidance",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "retain original image data",
+        "global adjustments and composites require disclosure and consistency",
+        "selective alteration or representative-image manipulation is unacceptable"
+      ],
+      "limits": [
+        "cell-biology image examples and 2004 tooling context",
+        "exact venue rules and modality-specific standards still vary"
+      ],
+      "metadata_verification": "doi_and_title_crossref_verified_2026-08-28"
+    },
+    {
+      "source_id": "cromey-2010",
+      "title": "Avoiding Twisted Pixels: Ethical Guidelines for Scientific Digital Images",
+      "url": "https://doi.org/10.1007/s11948-010-9201-y",
+      "source_type": "integrity_guidance",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "scientific image processing needs ethical boundaries and auditability",
+        "image adjustment must preserve meaning"
+      ],
+      "limits": [
+        "guidance rather than a controlled validation study",
+        "modality-specific acquisition standards remain necessary"
+      ],
+      "metadata_verification": "doi_and_title_crossref_verified_2026-08-28"
+    },
+    {
+      "source_id": "jambor-2021",
+      "title": "Creating Clear and Informative Image-Based Figures for Scientific Publications",
+      "url": "https://doi.org/10.1371/journal.pbio.3001161",
+      "source_type": "meta_research_and_guidance",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "published image figures often lack scale, accessible colors, annotations, and explanations",
+        "representative images need legibility and traceable quantitative context"
+      ],
+      "limits": [
+        "sampled three biology fields and selected journals",
+        "findings may not transfer unchanged to every imaging domain"
+      ],
+      "metadata_verification": "doi_and_title_crossref_verified_2026-08-28"
+    },
+    {
+      "source_id": "lee-2022",
+      "title": "Toward Supporting Quality Alt Text in Computing Publications",
+      "url": "https://doi.org/10.1145/3493612.3520449",
+      "source_type": "content_analysis_and_interviews",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "scientific alt text has distinctive authoring challenges",
+        "captions and alt text serve overlapping but non-identical functions"
+      ],
+      "limits": [
+        "HCI publication sample and ten interviews",
+        "does not define one universal scientific alt-text template"
+      ],
+      "metadata_verification": "doi_and_title_crossref_verified_2026-08-28"
+    },
+    {
+      "source_id": "lundgard-2021",
+      "title": "Accessible Visualization via Natural Language Descriptions: A Four-Level Model of Semantic Content",
+      "url": "https://doi.org/10.1109/TVCG.2021.3114770",
+      "source_type": "content_analysis_and_user_study",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "visualization descriptions can cover construction, statistical relations, perceptual patterns, and domain insights",
+        "blind and sighted readers may need different semantic access"
+      ],
+      "limits": [
+        "bounded corpus and participant sample",
+        "the four-level model is not a substitute for user testing or long descriptions"
+      ],
+      "metadata_verification": "doi_and_title_crossref_verified_2026-08-28"
+    },
+    {
+      "source_id": "rougier-2014",
+      "title": "Ten Simple Rules for Better Figures",
+      "url": "https://doi.org/10.1371/journal.pcbi.1003833",
+      "source_type": "methods_guidance",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "define audience and message before design",
+        "clarity and reproducibility outrank decoration",
+        "color, tools, and caption choices need purpose"
+      ],
+      "limits": [
+        "expert guidance rather than a systematic comparative trial",
+        "rules require adaptation to the scientific task"
+      ],
+      "metadata_verification": "doi_and_title_crossref_verified_2026-08-28"
+    },
+    {
+      "source_id": "nature-pov-2026",
+      "title": "Points of View, Anew",
+      "url": "https://www.nature.com/articles/s41592-026-03143-5",
+      "source_type": "editorial_synthesis",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "visualization is a scientific method and reproducibility concern",
+        "different data types and tasks require different representations",
+        "the field needs current empirical visualization research"
+      ],
+      "limits": [
+        "editorial framing rather than an acceptance rule or controlled experiment"
+      ],
+      "metadata_verification": "official_url_http_200_verified_2026-08-28"
+    },
+    {
+      "source_id": "wcag-color-2023",
+      "title": "WCAG 2.2 Understanding Success Criterion 1.4.1: Use of Color",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html",
+      "source_type": "official_accessibility_standard",
+      "read_depth": "official_standard",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "color must not be the only visual means of conveying information",
+        "redundant cues support access"
+      ],
+      "limits": [
+        "general web-content standard",
+        "scientific figures may require additional semantic descriptions and domain checks"
+      ],
+      "metadata_verification": "official_url_http_200_verified_2026-08-28"
+    },
+    {
+      "source_id": "krzywinski-2013",
+      "title": "Error Bars",
+      "url": "https://doi.org/10.1038/nmeth.2659",
+      "source_type": "methods_guidance",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "error bars must name the quantity they encode",
+        "standard deviation, standard error, and confidence intervals have different meanings"
+      ],
+      "limits": [
+        "short educational article",
+        "display semantics still depend on design and estimand"
+      ],
+      "metadata_verification": "doi_and_title_crossref_verified_2026-08-28"
+    },
+    {
+      "source_id": "krzywinski-2014",
+      "title": "Visualizing Samples with Box Plots",
+      "url": "https://doi.org/10.1038/nmeth.2813",
+      "source_type": "methods_guidance",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "box-plot conventions and sample summaries require explicit interpretation",
+        "quartile and whisker definitions can vary"
+      ],
+      "limits": [
+        "short educational article",
+        "box plots can still hide observations, pairing, or multimodality"
+      ],
+      "metadata_verification": "doi_and_title_crossref_verified_2026-08-28"
+    },
+    {
+      "source_id": "consort-2010",
+      "title": "CONSORT 2010 Statement: updated guidelines for reporting parallel group randomised trials",
+      "url": "https://doi.org/10.1136/bmj.c332",
+      "source_type": "reporting_standard",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "participant flow and denominators should be transparently reported",
+        "reporting guidance should support appraisal without imposing one rigid article structure"
+      ],
+      "limits": [
+        "parallel-group randomized trials are the primary scope",
+        "reporting compliance does not certify methodological quality"
+      ],
+      "metadata_verification": "doi_and_title_crossref_verified_2026-08-28"
+    },
+    {
+      "source_id": "prisma-2020",
+      "title": "The PRISMA 2020 statement: an updated guideline for reporting systematic reviews",
+      "url": "https://doi.org/10.1136/bmj.n71",
+      "source_type": "reporting_standard",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "study-selection flow, exclusions, synthesis displays, heterogeneity, and certainty require transparent reporting",
+        "flow diagrams are adaptable to review type"
+      ],
+      "limits": [
+        "systematic-review reporting scope",
+        "not a conduct or quality-assessment instrument"
+      ],
+      "metadata_verification": "doi_and_title_crossref_verified_2026-08-28"
+    },
+    {
+      "source_id": "strobe-2007",
+      "title": "The Strengthening the Reporting of Observational Studies in Epidemiology (STROBE) Statement: Guidelines for Reporting Observational Studies",
+      "url": "https://doi.org/10.1371/journal.pmed.0040296",
+      "source_type": "reporting_standard",
+      "read_depth": "full_text",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "observational-study reporting should expose what was planned, done, found, and inferred",
+        "reporting completeness supports appraisal"
+      ],
+      "limits": [
+        "covers cohort, case-control, and cross-sectional designs",
+        "not a rigid manuscript format or methodological-quality certificate"
+      ],
+      "metadata_verification": "doi_and_title_crossref_verified_2026-08-28"
+    },
+    {
+      "source_id": "weissgerber-2019",
+      "title": "Reveal, Don’t Conceal",
+      "url": "https://doi.org/10.1161/CIRCULATIONAHA.118.037777",
+      "source_type": "systematic_review_and_guidance",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "figure structure should align with study design and analysis",
+        "dot, box, and violin plots have task- and sample-dependent trade-offs"
+      ],
+      "limits": [
+        "peripheral vascular disease corpus and primer scope",
+        "does not establish one replacement plot for all continuous data"
+      ],
+      "metadata_verification": "doi_and_title_crossref_verified_2026-08-28"
+    },
+    {
+      "source_id": "raincloud-2019",
+      "title": "Raincloud Plots: A Multi-Platform Tool for Robust Data Visualization",
+      "url": "https://doi.org/10.12688/wellcomeopenres.15191.1",
+      "source_type": "methods_tutorial",
+      "read_depth": "abstract",
+      "accessed_at": "2026-08-28",
+      "supports": [
+        "raw observations, density, and summaries can be combined",
+        "transparent distribution displays can expose patterns hidden by bars"
+      ],
+      "limits": [
+        "tutorial and design proposal rather than a universal perceptual experiment",
+        "combined encodings can become redundant or crowded"
+      ],
+      "metadata_verification": "doi_and_title_crossref_verified_2026-08-28"
+    }
+  ],
+  "generalization_rule": "No source, journal, plot family, or perceptual ranking is universal. Transfer requires matching the reader task, data structure, estimand, audience, medium, and inference claim.",
+  "update_policy": {
+    "next_review_due": "2027-02-28",
+    "earlier_review_triggers": [
+      "new high-quality contradictory study",
+      "new accessibility standard",
+      "new domain adapter",
+      "material change to a maintained rule"
+    ]
+  }
+}
