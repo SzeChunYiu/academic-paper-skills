@@ -181,7 +181,8 @@ At minimum, reject these recorded contradictions:
 - equivalence/noninferiority without a prospectively justified margin and
   compatible interval decision;
 - supported noninferiority without an explicit effect scale, favorable
-  direction, required lower/upper interval bound, and boundary value;
+  direction, required lower/upper interval bound, null value, margin-to-boundary
+  relation, and boundary value;
 - post-hoc observed power used as evidence after results are known;
 - discrimination-only evidence used to claim calibration or clinical utility;
 - a future-setting meta-analytic claim without prediction uncertainty;

@@ -12,6 +12,7 @@ from __future__ import annotations
 import argparse
 import json
 from datetime import date
+from math import isclose
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -487,6 +488,12 @@ def evaluate_statistical_contract(
                 f"Result {result['result_id']} references an unknown analysis execution {result['analysis_id']}.",
                 "Restore the result-to-execution binding or rerun the analysis with code, environment, input, and diagnostic receipts; prose or claim narrowing cannot create an execution.",
             )
+        if result["estimand_id"] not in estimand_map:
+            block(
+                "result_estimand_binding_broken",
+                f"Result {result['result_id']} references an unknown estimand {result['estimand_id']}.",
+                "Restore the exact estimand binding or define and version the scientific target before interpreting the result.",
+            )
         decision = result["decision"]
         linked_claims = [claim_map[c] for c in result["claim_ids"] if c in claim_map]
         if decision["comparison_basis"] == "separate_significance_tests" or any(
@@ -550,6 +557,12 @@ def evaluate_statistical_contract(
                     "higher_is_better": "higher",
                     "lower_is_better": "lower",
                 }.get(estimand["direction"] if estimand else "")
+                if declared_direction is None:
+                    block(
+                        "noninferiority_estimand_direction_unresolved",
+                        "A supported noninferiority decision has no bound estimand with a canonical favorable direction.",
+                        "Bind the exact estimand and record higher_is_better or lower_is_better before evaluating the noninferiority boundary.",
+                    )
                 expected_bound = {
                     "higher": "lower",
                     "lower": "upper",
@@ -566,6 +579,39 @@ def evaluate_statistical_contract(
                         "noninferiority_decision_rule_mismatch",
                         "The noninferiority rule contradicts the result effect scale, favorable direction, estimand direction, or required interval bound.",
                         "Correct the recorded rule from the prespecified estimand and margin, rerun if needed, or mark the result inconclusive.",
+                    )
+                relation = margin_rule["boundary_relation"]
+                margin = decision["margin"]
+                null_value = margin_rule["null_value"]
+                if relation == "margin_is_boundary":
+                    expected_boundary = margin
+                elif relation == "add_margin_to_null":
+                    expected_boundary = null_value + abs(margin)
+                else:
+                    expected_boundary = null_value - abs(margin)
+                relation_matches_direction = (
+                    relation == "margin_is_boundary"
+                    or (
+                        margin_rule["favorable_direction"] == "lower"
+                        and relation == "add_margin_to_null"
+                    )
+                    or (
+                        margin_rule["favorable_direction"] == "higher"
+                        and relation == "subtract_margin_from_null"
+                    )
+                )
+                test_null_matches = result["test"] is None or isclose(
+                    result["test"]["null_value"], null_value
+                )
+                if (
+                    not relation_matches_direction
+                    or not test_null_matches
+                    or not isclose(margin_rule["boundary_value"], expected_boundary)
+                ):
+                    block(
+                        "noninferiority_margin_rule_mismatch",
+                        "The noninferiority boundary is inconsistent with the declared margin, null value, boundary relation, favorable direction, or test null.",
+                        "Correct the exact rule from the prospectively justified margin and estimand, or mark the result inconclusive; do not substitute a more lenient boundary.",
                     )
                 sidedness_bounds = {
                     "two_sided": {"lower", "upper"},

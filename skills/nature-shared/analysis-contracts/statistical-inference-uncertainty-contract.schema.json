@@ -924,6 +924,16 @@
                           "upper"
                         ]
                       },
+                      "null_value": {
+                        "type": "number"
+                      },
+                      "boundary_relation": {
+                        "enum": [
+                          "margin_is_boundary",
+                          "add_margin_to_null",
+                          "subtract_margin_from_null"
+                        ]
+                      },
                       "boundary_value": {
                         "type": "number"
                       }
@@ -932,6 +942,8 @@
                       "effect_scale",
                       "favorable_direction",
                       "required_interval_bound",
+                      "null_value",
+                      "boundary_relation",
                       "boundary_value"
                     ]
                   },

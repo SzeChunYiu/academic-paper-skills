@@ -460,7 +460,7 @@ statistical_inference_contract:
         margin_unit: null
         margin_provenance: null
         # For supported noninferiority: effect_scale, favorable_direction,
-        # required_interval_bound, boundary_value.
+        # required_interval_bound, null_value, boundary_relation, boundary_value.
         margin_rule: null
       analyzed_n: null
       independent_n: null

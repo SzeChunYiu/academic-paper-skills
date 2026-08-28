@@ -89,11 +89,11 @@ significance tests cannot establish a between-group difference; `P > alpha`
 cannot establish equivalence or absence of a meaningful effect; equivalence or
 non-inferiority requires a justified, prospectively fixed margin; supported
 non-inferiority also binds the effect scale, favorable direction, required
-interval bound, and exact boundary rather than assuming every margin is a
-higher-is-better difference; confidence, credible, prediction, bootstrap, and
-compatibility intervals are not interchangeable; and a sensitivity analysis
-targeting a different quantity cannot silently be called robustness of the
-original estimand.
+interval bound, null value, margin-to-boundary relation, and exact boundary
+rather than assuming every margin is a higher-is-better difference; confidence,
+credible, prediction, bootstrap, and compatibility intervals are not
+interchangeable; and a sensitivity analysis targeting a different quantity
+cannot silently be called robustness of the original estimand.
 
 Exploratory multiplicity, Bayesian analyses, descriptive studies, and
 non-quantitative work are not forced into a frequentist confirmatory template.

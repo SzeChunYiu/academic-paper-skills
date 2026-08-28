@@ -268,6 +268,12 @@ class StatisticalInferenceContractTests(unittest.TestCase):
         result = self.evaluate(contract)
         self.assertIn("result_execution_binding_broken", result["blocker_codes"])
 
+    def test_result_must_reference_an_existing_estimand(self) -> None:
+        contract = fixture()
+        contract["results"][0]["estimand_id"] = "estimand:missing"
+        result = self.evaluate(contract)
+        self.assertIn("result_estimand_binding_broken", result["blocker_codes"])
+
     def test_execution_result_manifest_must_match_owned_results(self) -> None:
         contract = fixture()
         contract["analysis_executions"][0]["result_ids"] = ["result:missing"]
@@ -457,6 +463,8 @@ class StatisticalInferenceContractTests(unittest.TestCase):
                 "effect_scale": "mean_difference",
                 "favorable_direction": "lower",
                 "required_interval_bound": "upper",
+                "null_value": 0,
+                "boundary_relation": "add_margin_to_null",
                 "boundary_value": 0.5,
             },
         }
@@ -479,6 +487,8 @@ class StatisticalInferenceContractTests(unittest.TestCase):
                 "effect_scale": "mean_difference",
                 "favorable_direction": "lower",
                 "required_interval_bound": "upper",
+                "null_value": 0,
+                "boundary_relation": "add_margin_to_null",
                 "boundary_value": 0.5,
             },
         }
@@ -494,6 +504,32 @@ class StatisticalInferenceContractTests(unittest.TestCase):
         )
         self.assertNotIn("noninferiority_margin_crossed", result["blocker_codes"])
 
+    def test_noninferiority_rule_cannot_use_a_more_lenient_boundary_than_margin(
+        self,
+    ) -> None:
+        contract = fixture()
+        result_record = contract["results"][0]
+        result_record["uncertainty"]["lower"] = -0.4
+        result_record["uncertainty"]["upper"] = 0.7
+        result_record["decision"] = {
+            "objective": "noninferiority",
+            "state": "supported",
+            "comparison_basis": "direct_contrast",
+            "margin": 0.5,
+            "margin_unit": "points",
+            "margin_provenance": "prespecified domain-justified margin",
+            "margin_rule": {
+                "effect_scale": "mean_difference",
+                "favorable_direction": "lower",
+                "required_interval_bound": "upper",
+                "null_value": 0,
+                "boundary_relation": "add_margin_to_null",
+                "boundary_value": 1.0,
+            },
+        }
+        result = self.evaluate(contract)
+        self.assertIn("noninferiority_margin_rule_mismatch", result["blocker_codes"])
+
     def test_noninferiority_rule_must_match_estimand_direction_and_bound(self) -> None:
         contract = fixture()
         result_record = contract["results"][0]
@@ -508,6 +544,8 @@ class StatisticalInferenceContractTests(unittest.TestCase):
                 "effect_scale": "mean_difference",
                 "favorable_direction": "higher",
                 "required_interval_bound": "lower",
+                "null_value": 0,
+                "boundary_relation": "subtract_margin_from_null",
                 "boundary_value": -0.5,
             },
         }
@@ -529,12 +567,43 @@ class StatisticalInferenceContractTests(unittest.TestCase):
                 "effect_scale": "mean_difference",
                 "favorable_direction": "lower",
                 "required_interval_bound": "upper",
+                "null_value": 0,
+                "boundary_relation": "add_margin_to_null",
                 "boundary_value": 0.5,
             },
         }
         result = self.evaluate(contract)
         self.assertIn(
             "noninferiority_interval_sidedness_mismatch", result["blocker_codes"]
+        )
+
+    def test_supported_noninferiority_requires_canonical_estimand_direction(
+        self,
+    ) -> None:
+        contract = fixture()
+        contract["estimands"][0]["direction"] = "unresolved"
+        result_record = contract["results"][0]
+        result_record["uncertainty"]["lower"] = -0.4
+        result_record["uncertainty"]["upper"] = 0.3
+        result_record["decision"] = {
+            "objective": "noninferiority",
+            "state": "supported",
+            "comparison_basis": "direct_contrast",
+            "margin": 0.5,
+            "margin_unit": "points",
+            "margin_provenance": "prespecified domain-justified margin",
+            "margin_rule": {
+                "effect_scale": "mean_difference",
+                "favorable_direction": "lower",
+                "required_interval_bound": "upper",
+                "null_value": 0,
+                "boundary_relation": "add_margin_to_null",
+                "boundary_value": 0.5,
+            },
+        }
+        result = self.evaluate(contract)
+        self.assertIn(
+            "noninferiority_estimand_direction_unresolved", result["blocker_codes"]
         )
 
     def test_ratio_noninferiority_uses_the_recorded_effect_scale_boundary(self) -> None:
@@ -558,6 +627,8 @@ class StatisticalInferenceContractTests(unittest.TestCase):
                 "effect_scale": "risk_ratio",
                 "favorable_direction": "lower",
                 "required_interval_bound": "upper",
+                "null_value": 1,
+                "boundary_relation": "margin_is_boundary",
                 "boundary_value": 1.3,
             },
         }
