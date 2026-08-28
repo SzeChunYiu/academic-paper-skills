@@ -20,6 +20,18 @@
 - scientific logic 稳定后才适配 exact target；
 - 最终对所有 manuscript-facing surface 做 filename/script/repository leakage 与 punctuation/typography QA。
 
+## Exact venue decision contract
+
+当任务涉及 target-specific readiness 时，`academic-writing` 会解析 **exact
+venue × article type × stage × effective date**，并分别保存 scientific gates、
+novelty/impact/breadth/audience-interest gates、burden-of-doubt、allowed repairs、
+review model、AI/confidentiality policy、acceptance states 与 certification layer。
+
+仓库维护的 TMLR、Nature Article 与 PLOS ONE Research Article snapshots 用于展示
+不同 objective，而不是假装所有期刊都已 hard-code。未知、stale、future-effective
+或有冲突的 target 必须走 live official-source resolution；fallback profile 永远不能
+当成 exact journal policy。
+
 ## Writing model
 
 ```text

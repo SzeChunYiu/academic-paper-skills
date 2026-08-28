@@ -257,17 +257,35 @@ Natural scholarly writing should show:
 
 Do not use AI-word blacklists, random sentence lengths, deliberate errors, fake informality, or detector optimization.
 
-## 12. Apply exact target rules last
+## 12. Apply exact target rules and decision contract last
 
 Scientific validity and reader logic come first.
 
 When a target is known, resolve:
 
-`exact journal/venue -> article/content type -> stage -> component`
+`exact venue × article type × stage × effective date`
+
+Then resolve the output component separately for house style and mechanics.
+
+Use `../nature-shared/journal-formats/venue-decision-contract.md` to keep these
+target fields explicit and independent:
+
+- scientific/eligibility gates;
+- novelty, impact, breadth, and audience-interest gates;
+- burden-of-doubt rules;
+- allowed repair routes, including claim narrowing when supported;
+- review model and decision owner;
+- author/reviewer AI use and confidentiality;
+- acceptance states;
+- any certification layer, separate from acceptance;
+- official sources, access dates, effective-date basis, and unresolved policy.
 
 Use current official instructions for submission-critical requirements.
 
-Publisher-family profiles are fallbacks, not contracts.
+Prefer live official-source resolution for exact current readiness. A maintained
+exact profile is versioned local knowledge. A fallback profile is not exact journal policy. If the tuple/date is unknown, future-effective, stale, or
+conflicting, mark it unresolved and run live official-source resolution rather
+than attributing a generic objective to the journal.
 
 ## 13. Editor/reviewer preflight
 
@@ -276,6 +294,7 @@ For submission readiness, use the shared editor/reviewer decision engine or `$ac
 Distinguish:
 
 - target-fit blockers;
+- exact-contract/source/date uncertainty;
 - technical blockers;
 - missing explanation;
 - reporting/statistical problems;

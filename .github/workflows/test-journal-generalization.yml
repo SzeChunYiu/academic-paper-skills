@@ -52,8 +52,8 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install focused figure test dependency
-        run: python -m pip install --disable-pip-version-check numpy
+      - name: Install focused contract and figure test dependencies
+        run: python -m pip install --disable-pip-version-check numpy jsonschema==4.26.0
 
       - name: Compile citation, corpus, and manuscript QA scripts
         run: |

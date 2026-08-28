@@ -1,0 +1,178 @@
+{
+  "contract_schema_version": "1.0.0",
+  "contract_id": "nature-article-observed-2026-08-28",
+  "venue": {
+    "id": "nature",
+    "name": "Nature",
+    "aliases": ["flagship Nature"]
+  },
+  "article_type": {
+    "id": "article",
+    "name": "Article",
+    "aliases": ["research article"]
+  },
+  "stages": ["initial_submission", "peer_review", "revision"],
+  "policy_validity": {
+    "effective_from": null,
+    "effective_until": null,
+    "effective_date_basis": "The official pages did not state a policy start date; this snapshot is supported only from the observed-active date and must not be back-cast.",
+    "observed_active_at": "2026-08-28",
+    "reviewed_at": "2026-08-28",
+    "next_review_due": "2026-11-28"
+  },
+  "provenance": {
+    "resolution_mode": "maintained_exact_profile",
+    "sources": [
+      {
+        "source_id": "nature-editorial-criteria",
+        "authority": "official_venue",
+        "title": "Nature Editorial Criteria and Processes",
+        "url": "https://www.nature.com/nature/for-authors/editorial-criteria-and-processes",
+        "accessed_at": "2026-08-28",
+        "stated_effective_date": null,
+        "supports": [
+          "publication_criteria",
+          "editorial_triage",
+          "novelty",
+          "scientific_importance",
+          "interdisciplinary_interest",
+          "review_model",
+          "repair_constraints"
+        ]
+      },
+      {
+        "source_id": "nature-ai-policy",
+        "authority": "official_publisher",
+        "title": "Nature Portfolio Artificial Intelligence (AI) Editorial Policy",
+        "url": "https://www.nature.com/nature-portfolio/editorial-policies/ai",
+        "accessed_at": "2026-08-28",
+        "stated_effective_date": null,
+        "supports": ["author_ai_policy", "reviewer_ai_policy", "confidentiality"]
+      }
+    ],
+    "unresolved_conflicts": []
+  },
+  "fallback_profile_id": "selective-broad-interest",
+  "decision_contract": {
+    "acceptance_objective": {
+      "id": "outstanding_importance_plus_interdisciplinary_interest",
+      "scope": "non_universal",
+      "rule": "An Article must report original research, be of outstanding scientific importance, and reach a conclusion of interest to an interdisciplinary readership; editorial triage additionally seeks novel, arresting results with immediate and far-reaching implications.",
+      "source_refs": ["nature-editorial-criteria"]
+    },
+    "scientific_gates": [
+      {
+        "id": "original_scientific_research",
+        "observation_key": "original_work",
+        "required": true,
+        "rule": "The Article reports original scientific research.",
+        "source_refs": ["nature-editorial-criteria"]
+      },
+      {
+        "id": "not_published_or_submitted_elsewhere",
+        "observation_key": "not_published_elsewhere",
+        "required": true,
+        "rule": "Main results and conclusions have not been published or submitted elsewhere.",
+        "source_refs": ["nature-editorial-criteria"]
+      },
+      {
+        "id": "case_established_without_technical_failings",
+        "observation_key": "evidence_supports_claims",
+        "required": true,
+        "rule": "Technical failings identified in review must be addressed before the authors' case is established.",
+        "source_refs": ["nature-editorial-criteria"]
+      },
+      {
+        "id": "readable_for_editorial_assessment",
+        "observation_key": "clear_narrative",
+        "required": true,
+        "rule": "The manuscript is readable enough for editors and nonspecialist readers to understand the work and its field-level consequence.",
+        "source_refs": ["nature-editorial-criteria"]
+      }
+    ],
+    "novelty_gate": {
+      "required": true,
+      "observation_key": "novelty",
+      "rule": "At editorial triage, results should seem novel and arresting (illuminating, unexpected, or surprising).",
+      "source_refs": ["nature-editorial-criteria"]
+    },
+    "impact_gate": {
+      "required": true,
+      "observation_key": "impact",
+      "rule": "The work must be of outstanding scientific importance and have immediate and far-reaching implications under the exact Article criteria.",
+      "source_refs": ["nature-editorial-criteria"]
+    },
+    "breadth_gate": {
+      "required": true,
+      "observation_key": "breadth",
+      "rule": "The conclusion must matter beyond the immediate specialty and be appropriate for an interdisciplinary readership.",
+      "source_refs": ["nature-editorial-criteria"]
+    },
+    "audience_interest_gate": {
+      "required": true,
+      "observation_key": "audience_interest",
+      "accepted_values": ["interdisciplinary", "broad"],
+      "rule": "Nature editors judge whether the work is likely to interest readers outside its immediate field.",
+      "source_refs": ["nature-editorial-criteria"]
+    },
+    "burden_of_doubt": {
+      "default": "editorial_or_review_uncertainty_is_not_presumed_satisfied",
+      "overrides": {},
+      "rule": "No reviewed exact rule instructs editors or referees to resolve uncertainty in favor of satisfying novelty, importance, breadth, or audience interest.",
+      "source_refs": ["nature-editorial-criteria"]
+    },
+    "allowed_repair_routes": [
+      {
+        "route": "address_technical_failings",
+        "policy_status": "explicitly_allowed",
+        "constraint": "The revision must establish the scientific case rather than merely rebut the report.",
+        "source_refs": ["nature-editorial-criteria"]
+      },
+      {
+        "route": "clarify_for_nonspecialists",
+        "policy_status": "explicitly_allowed",
+        "constraint": "Clarification may expose real breadth; it cannot manufacture importance or implications.",
+        "source_refs": ["nature-editorial-criteria"]
+      },
+      {
+        "route": "narrow_claim",
+        "policy_status": "conditionally_allowed",
+        "constraint": "Narrowing is scientifically valid when evidence requires it, but the narrowed paper may then fail Nature's independent importance, implication, or breadth gates.",
+        "source_refs": ["nature-editorial-criteria"]
+      },
+      {
+        "route": "appeal",
+        "policy_status": "conditionally_allowed",
+        "constraint": "Appeals must address a specific serious error in the decision process or technical assessment; they are not a general second review path.",
+        "source_refs": ["nature-editorial-criteria"]
+      }
+    ],
+    "review_model": {
+      "model": "editorial_triage_then_external_peer_review",
+      "triage": "A subject editor makes the initial send-for-review decision, consulting scientific advisers and editorial colleagues; most submissions are declined without review.",
+      "reviewers": "Most reviewed papers go to two or three independent referees, with occasional variation.",
+      "decision_owner": "nature_editor",
+      "vote_rule": "Editors weigh technical arguments and expertise; referee editorial opinions do not mechanically decide Nature fit.",
+      "revision_model": "Technical failings must be addressed, while the editor retains responsibility for journal-level readership and priority judgements.",
+      "source_refs": ["nature-editorial-criteria"]
+    },
+    "ai_confidentiality_policy": {
+      "author_ai_use": "Assistive uses may be permitted by risk level, but human accountability is non-transferable; evaluative or interpretive use requires oversight, verification, and transparent disclosure, and AI cannot be an author.",
+      "reviewer_ai_use": "Reviewers remain responsible for independent expert evaluation, must not delegate critique or judgement to AI, and should disclose AI use.",
+      "confidentiality": "Manuscripts, peer-review reports, and sensitive data must not be shared with unsecured or public AI systems.",
+      "live_check_required": true,
+      "source_refs": ["nature-ai-policy"]
+    },
+    "acceptance_states": {
+      "criteria_satisfied": "contract_criteria_satisfied",
+      "scientific_failure": "scientific_gates_not_met",
+      "target_failure": "target_objective_not_met",
+      "actual_decisions": ["declined_without_peer_review", "sent_for_peer_review", "revision_invited", "accepted", "rejected"]
+    },
+    "certification_layer": {
+      "separate_from_acceptance": true,
+      "schemes": [],
+      "notes": "No article-level certification scheme separate from Nature acceptance was identified in the reviewed exact sources. Repository contract/source certification must never be described as a Nature award or decision."
+    }
+  }
+}

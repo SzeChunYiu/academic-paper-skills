@@ -79,6 +79,20 @@ The simulated editor controls convergence. Reviewer votes are not counted as an 
 
 The successful internal terminal label is `simulated_publication_ready_for_target`; it is a readiness simulation, not a promise of real-world acceptance.
 
+### Exact venue decision contracts
+
+Target-specific decisions resolve:
+
+`exact venue × article type × stage × effective date`
+
+The contract keeps scientific gates, novelty/impact/breadth/audience-interest
+gates, burden-of-doubt rules, repair routes, review model, AI/confidentiality
+policy, acceptance states, certification, and official-source provenance
+separate. Maintained TMLR, Nature Article, and PLOS ONE snapshots demonstrate
+different objectives; unknown journals use live official-source resolution,
+not a fictional hard-coded catalogue. Fallback profiles remain explicitly
+non-exact.
+
 ### Self-research when the paper is unfamiliar
 
 If a paper type, target venue, reporting standard, writing convention, or figure grammar is not confidently covered, the AI session should **research before guessing**:

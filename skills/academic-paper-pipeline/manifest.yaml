@@ -1,5 +1,5 @@
 name: academic-paper-pipeline
-version: 1.1.0
+version: 1.2.0
 description: >
   Declarative manifest for the journal-agnostic iterative academic-paper
   orchestration workflow. It coordinates research, writing, figures/statistics,
@@ -22,6 +22,8 @@ references:
   on_demand:
     - condition: exact target journal/venue, article type, submission stage, editorial model or live author instructions matter
       path: ../nature-shared/journal-formats/journal-resolution.md
+    - condition: exact target decision criteria, policy effective date, burden-of-doubt rule, repair routes, review model, AI/confidentiality policy, acceptance states, or certification layer matters
+      path: ../nature-shared/journal-formats/venue-decision-contract.md
     - condition: exact target publication objective needs fallback classification across selective broad-interest, field-advancement, rigor-first, clinical/policy-priority, evidence-assessment, or deadline-constrained models
       path: ../nature-shared/journal-formats/editorial-decision-profiles.md
     - condition: a few close papers should be studied deeply for current evidence, writing, explanation, figure and main-versus-support expectations

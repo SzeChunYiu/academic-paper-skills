@@ -1,0 +1,87 @@
+{
+  "contract_schema_version": "1.0.0",
+  "contract_id": "example-future-journal-research-article-2027-01-01",
+  "venue": {
+    "id": "example-future-journal",
+    "name": "Example Future Journal",
+    "aliases": []
+  },
+  "article_type": {
+    "id": "research-article",
+    "name": "Research Article",
+    "aliases": []
+  },
+  "stages": ["initial_submission"],
+  "policy_validity": {
+    "effective_from": "2027-01-01",
+    "effective_until": null,
+    "effective_date_basis": "explicit_test_fixture",
+    "observed_active_at": null,
+    "reviewed_at": "2026-08-28"
+  },
+  "provenance": {
+    "resolution_mode": "maintained_exact_profile",
+    "sources": [
+      {
+        "source_id": "future-policy-fixture",
+        "authority": "test_fixture",
+        "title": "Future-effective policy fixture",
+        "url": "https://example.invalid/future-policy",
+        "accessed_at": "2026-08-28",
+        "supports": ["future_effective_date"]
+      }
+    ],
+    "unresolved_conflicts": []
+  },
+  "fallback_profile_id": "rigor-first",
+  "decision_contract": {
+    "acceptance_objective": {
+      "id": "fixture_objective",
+      "scope": "non_universal",
+      "rule": "Fixture only.",
+      "source_refs": ["future-policy-fixture"]
+    },
+    "scientific_gates": [
+      {
+        "id": "soundness",
+        "observation_key": "technical_rigor",
+        "required": true,
+        "rule": "Technically rigorous.",
+        "source_refs": ["future-policy-fixture"]
+      }
+    ],
+    "novelty_gate": {"required": false, "observation_key": "novelty", "rule": "Not a gate.", "source_refs": ["future-policy-fixture"]},
+    "impact_gate": {"required": false, "observation_key": "impact", "rule": "Not a gate.", "source_refs": ["future-policy-fixture"]},
+    "breadth_gate": {"required": false, "observation_key": "breadth", "rule": "Not a gate.", "source_refs": ["future-policy-fixture"]},
+    "audience_interest_gate": {
+      "required": false,
+      "observation_key": "audience_interest",
+      "accepted_values": ["some", "field", "broad"],
+      "rule": "Not a gate.",
+      "source_refs": ["future-policy-fixture"]
+    },
+    "burden_of_doubt": {
+      "default": "unresolved",
+      "overrides": {}
+    },
+    "allowed_repair_routes": [],
+    "review_model": {"model": "fixture", "decision_owner": "editor"},
+    "ai_confidentiality_policy": {
+      "author_ai_use": "unresolved",
+      "reviewer_ai_use": "unresolved",
+      "confidentiality": "unresolved",
+      "live_check_required": true,
+      "source_refs": ["future-policy-fixture"]
+    },
+    "acceptance_states": {
+      "criteria_satisfied": "contract_criteria_satisfied",
+      "scientific_failure": "scientific_gates_not_met",
+      "target_failure": "target_objective_not_met",
+      "actual_decisions": []
+    },
+    "certification_layer": {
+      "separate_from_acceptance": true,
+      "schemes": []
+    }
+  }
+}

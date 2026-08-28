@@ -1,0 +1,54 @@
+{
+  "fallback_schema_version": "1.0.0",
+  "profiles": [
+    {
+      "profile_id": "selective-broad-interest",
+      "objective": "Sound evidence plus verified priority, importance, and broad-reader relevance.",
+      "typical_gates": ["scientific_validity", "novelty_or_advance", "importance", "breadth"],
+      "wrong_optimization": "Do not manufacture breadth or significance with rhetoric.",
+      "source": "editorial-decision-profiles.md"
+    },
+    {
+      "profile_id": "selective-field-advancement",
+      "objective": "Sound, complete work that makes a meaningful field-specific contribution.",
+      "typical_gates": ["scientific_validity", "scope", "novelty_or_contribution", "field_value"],
+      "wrong_optimization": "Do not imitate general-science breadth at the cost of technical precision.",
+      "source": "editorial-decision-profiles.md"
+    },
+    {
+      "profile_id": "rigor-first",
+      "objective": "A rigorous, ethical, intelligible contribution to the scholarly record.",
+      "typical_gates": ["technical_rigor", "claim_support", "ethics", "reporting"],
+      "wrong_optimization": "Do not invent impact, novelty, or breadth gates.",
+      "source": "editorial-decision-profiles.md"
+    },
+    {
+      "profile_id": "clinical-policy-priority",
+      "objective": "Valid evidence plus target-specific clinical, public-health, or policy priority.",
+      "typical_gates": ["design_validity", "clinical_or_policy_importance", "reporting", "harms"],
+      "wrong_optimization": "Do not equate statistical significance with clinical importance.",
+      "source": "editorial-decision-profiles.md"
+    },
+    {
+      "profile_id": "evidence-assessment",
+      "objective": "Report significance and strength of evidence separately without inventing a conventional post-review acceptance gate.",
+      "typical_gates": ["review_eligibility", "evidence_assessment", "significance_assessment"],
+      "wrong_optimization": "Do not collapse evidence strength and significance into one score.",
+      "source": "editorial-decision-profiles.md"
+    },
+    {
+      "profile_id": "conference-selection",
+      "objective": "Select a sufficiently complete current submission under venue and deadline constraints.",
+      "typical_gates": ["scope", "soundness", "contribution", "current_version_completeness"],
+      "wrong_optimization": "Do not assume an indefinite major-revision path exists.",
+      "source": "editorial-decision-profiles.md"
+    },
+    {
+      "profile_id": "generic-scholarly",
+      "objective": "Preserve scientific validity and reader clarity while exact venue policy remains unresolved.",
+      "typical_gates": ["truthfulness", "traceability", "clarity", "ethics"],
+      "wrong_optimization": "Do not attribute generic defaults to the unresolved journal.",
+      "source": "journal-resolution.md"
+    }
+  ]
+}

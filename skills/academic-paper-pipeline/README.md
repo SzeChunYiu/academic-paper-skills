@@ -20,6 +20,19 @@ Pipeline 在所有轮次维持同一个 persistent manuscript state：
 - revision delta；
 - 当前 publication-readiness posture。
 
+## Exact venue decision state
+
+Persistent state 现在解析 **exact venue × article type × stage × effective
+date**，并记录每个 decision field 的 official-source provenance。Scientific
+assurance 与 target-objective fit 保持独立；novelty、impact、breadth、audience
+interest、burden of doubt、allowed repair routes、review model、
+AI/confidentiality rules、acceptance states 与 journal certifications 不会被压成
+一个 acceptance score。
+
+Live official-source contract 高于 maintained exact snapshot。Generic 或
+publication-model fallback 只能辅助 planning，不能关闭 exact target readiness，
+也不能被描述成该期刊的真实 policy。
+
 ## Iteration model
 
 ```text

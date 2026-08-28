@@ -1,0 +1,217 @@
+{
+  "contract_schema_version": "1.0.0",
+  "contract_id": "plos-one-research-article-observed-2026-08-28",
+  "venue": {
+    "id": "plos-one",
+    "name": "PLOS ONE",
+    "aliases": ["PLOS One", "PLOS1"]
+  },
+  "article_type": {
+    "id": "research-article",
+    "name": "Research Article",
+    "aliases": ["research paper"]
+  },
+  "stages": ["initial_submission", "peer_review", "revision"],
+  "policy_validity": {
+    "effective_from": null,
+    "effective_until": null,
+    "effective_date_basis": "The official pages did not state a policy start date; this snapshot is supported only from the observed-active date and must not be back-cast.",
+    "observed_active_at": "2026-08-28",
+    "reviewed_at": "2026-08-28",
+    "next_review_due": "2026-11-28"
+  },
+  "provenance": {
+    "resolution_mode": "maintained_exact_profile",
+    "sources": [
+      {
+        "source_id": "plos-one-publication-criteria",
+        "authority": "official_venue",
+        "title": "PLOS ONE Criteria for Publication",
+        "url": "https://journals.plos.org/plosone/s/criteria-for-publication",
+        "accessed_at": "2026-08-28",
+        "stated_effective_date": null,
+        "supports": [
+          "seven_publication_criteria",
+          "originality",
+          "technical_rigor",
+          "claim_support",
+          "intelligibility",
+          "ethics",
+          "reporting_and_data",
+          "negative_and_null_results",
+          "claim_recalibration"
+        ]
+      },
+      {
+        "source_id": "plos-one-reviewer-guidelines",
+        "authority": "official_venue",
+        "title": "PLOS ONE Guidelines for Reviewers",
+        "url": "https://journals.plos.org/plosone/s/reviewer-guidelines",
+        "accessed_at": "2026-08-28",
+        "stated_effective_date": null,
+        "supports": [
+          "importance_not_acceptance_threshold",
+          "single_anonymized_review",
+          "editor_decision_owner",
+          "not_majority_vote",
+          "revision_model",
+          "review_confidentiality"
+        ]
+      },
+      {
+        "source_id": "plos-ethical-publishing-practice",
+        "authority": "official_publisher",
+        "title": "PLOS Ethical Publishing Practice",
+        "url": "https://journals.plos.org/plosone/s/ethical-publishing-practice",
+        "accessed_at": "2026-08-28",
+        "stated_effective_date": null,
+        "supports": ["author_ai_disclosure", "reviewer_ai_prohibition", "confidentiality"]
+      }
+    ],
+    "unresolved_conflicts": []
+  },
+  "fallback_profile_id": "rigor-first",
+  "decision_contract": {
+    "acceptance_objective": {
+      "id": "rigorous_scientific_record",
+      "scope": "non_universal",
+      "rule": "A Research Article must satisfy PLOS ONE's seven scientific, ethical, reporting, data, originality, and intelligibility criteria; perceived importance is not the publication threshold.",
+      "source_refs": ["plos-one-publication-criteria", "plos-one-reviewer-guidelines"]
+    },
+    "scientific_gates": [
+      {
+        "id": "eligible_original_research",
+        "observation_key": "original_work",
+        "required": true,
+        "rule": "The study presents original research of an eligible article type.",
+        "source_refs": ["plos-one-publication-criteria"]
+      },
+      {
+        "id": "results_not_published_elsewhere",
+        "observation_key": "not_published_elsewhere",
+        "required": true,
+        "rule": "Reported results have not already been published in the peer-reviewed literature or submitted in parallel, subject to stated preprint and related-work rules.",
+        "source_refs": ["plos-one-publication-criteria"]
+      },
+      {
+        "id": "high_technical_standard",
+        "observation_key": "technical_rigor",
+        "required": true,
+        "rule": "Experiments, statistics, and analyses meet a high technical standard and are described in sufficient detail.",
+        "source_refs": ["plos-one-publication-criteria"]
+      },
+      {
+        "id": "conclusions_supported",
+        "observation_key": "evidence_supports_claims",
+        "required": true,
+        "rule": "Conclusions are appropriately stated and supported by the data.",
+        "source_refs": ["plos-one-publication-criteria"]
+      },
+      {
+        "id": "intelligible_standard_english",
+        "observation_key": "intelligible_presentation",
+        "required": true,
+        "rule": "The article is intelligible, clear, correct, and unambiguous in standard English.",
+        "source_refs": ["plos-one-publication-criteria"]
+      },
+      {
+        "id": "ethics_and_integrity",
+        "observation_key": "ethics_and_integrity",
+        "required": true,
+        "rule": "The research meets applicable experimentation ethics and research-integrity standards.",
+        "source_refs": ["plos-one-publication-criteria"]
+      },
+      {
+        "id": "reporting_and_data_standards",
+        "observation_key": "reporting_and_data",
+        "required": true,
+        "rule": "The article follows appropriate reporting guidelines and community data-availability standards.",
+        "source_refs": ["plos-one-publication-criteria"]
+      }
+    ],
+    "novelty_gate": {
+      "required": false,
+      "observation_key": "novelty",
+      "rule": "Eligible original research and honest positioning are required, but novelty of a method or state-of-the-art performance is not a separate importance-style gate; replication work can be eligible with scientific rationale.",
+      "source_refs": ["plos-one-publication-criteria", "plos-one-reviewer-guidelines"]
+    },
+    "impact_gate": {
+      "required": false,
+      "observation_key": "impact",
+      "rule": "Peer review determines technical rigor and scientific/ethical eligibility rather than whether the paper reaches a perceived importance threshold.",
+      "source_refs": ["plos-one-reviewer-guidelines"]
+    },
+    "breadth_gate": {
+      "required": false,
+      "observation_key": "breadth",
+      "rule": "Broad or interdisciplinary significance is not one of the seven Research Article publication criteria.",
+      "source_refs": ["plos-one-publication-criteria", "plos-one-reviewer-guidelines"]
+    },
+    "audience_interest_gate": {
+      "required": false,
+      "observation_key": "audience_interest",
+      "accepted_values": ["some", "field", "interdisciplinary", "broad"],
+      "rule": "The exact criteria do not impose a separate audience-interest threshold beyond scope, intelligibility, and contribution to the scholarly record.",
+      "source_refs": ["plos-one-publication-criteria", "plos-one-reviewer-guidelines"]
+    },
+    "burden_of_doubt": {
+      "default": "unresolved_criteria_require_editorial_assessment",
+      "overrides": {},
+      "rule": "No reviewed exact rule creates a favorable presumption for an uncertain scientific, ethical, reporting, or data criterion; equally, reviewers must not invent an impact threshold.",
+      "source_refs": ["plos-one-reviewer-guidelines"]
+    },
+    "allowed_repair_routes": [
+      {
+        "route": "add_evidence",
+        "policy_status": "conditionally_allowed",
+        "constraint": "Additional evidence is required only where data and analyses do not support the claims or technical rigor remains inadequate.",
+        "source_refs": ["plos-one-reviewer-guidelines"]
+      },
+      {
+        "route": "narrow_claim",
+        "policy_status": "conditionally_allowed",
+        "constraint": "Authors should avoid overstating conclusions and may identify implications as hypotheses rather than conclusions when the data do not establish them.",
+        "source_refs": ["plos-one-publication-criteria"]
+      },
+      {
+        "route": "improve_reporting_or_data_availability",
+        "policy_status": "explicitly_allowed",
+        "constraint": "The revised article must actually satisfy applicable reporting and data standards.",
+        "source_refs": ["plos-one-publication-criteria"]
+      },
+      {
+        "route": "revise_and_re_review",
+        "policy_status": "explicitly_allowed",
+        "constraint": "Original reviewers are often asked to evaluate revisions and responses; editor closure remains controlling.",
+        "source_refs": ["plos-one-reviewer-guidelines"]
+      }
+    ],
+    "review_model": {
+      "model": "single_anonymized_peer_review_with_optional_signed_and_published_history",
+      "triage": "Editors select reviewers with relevant expertise and assess eligibility under PLOS ONE criteria and policy.",
+      "reviewers": "Reviewers assess validity and quality using a structured form; identity is hidden by default unless the reviewer signs.",
+      "decision_owner": "plos_one_editor",
+      "vote_rule": "The editor makes the final decision from reviews, criteria, and independent assessment; decisions are not necessarily majority rule.",
+      "revision_model": "Original reviewers may re-review revised manuscripts, while editors can identify optional or policy-misaligned reviewer requests.",
+      "source_refs": ["plos-one-reviewer-guidelines"]
+    },
+    "ai_confidentiality_policy": {
+      "author_ai_use": "AI contributions must be reported in Methods or Acknowledgements with tools, uses, validation, and affected content; authors remain responsible for accuracy, attribution, citations, and their own scientific ideas.",
+      "reviewer_ai_use": "AI cannot serve as a reviewer or decision editor; any use must be disclosed, and submission content must not be uploaded to generative-AI or other external services.",
+      "confidentiality": "Unpublished submissions and peer-review correspondence are strictly confidential unless an explicit sharing option applies; editors and reviewers must not upload submission content to generative-AI platforms.",
+      "live_check_required": true,
+      "source_refs": ["plos-ethical-publishing-practice", "plos-one-reviewer-guidelines"]
+    },
+    "acceptance_states": {
+      "criteria_satisfied": "contract_criteria_satisfied",
+      "scientific_failure": "scientific_gates_not_met",
+      "target_failure": "target_objective_not_met",
+      "actual_decisions": ["revision_invited", "accepted_for_publication", "rejected"]
+    },
+    "certification_layer": {
+      "separate_from_acceptance": true,
+      "schemes": [],
+      "notes": "No article-level certification scheme separate from PLOS ONE acceptance was identified in the reviewed exact sources. Homepage highlighting is explicitly not part of editorial decision making."
+    }
+  }
+}
