@@ -1,0 +1,1116 @@
+{
+  "log_schema_version": "1.0.0",
+  "purpose": "Frozen broad discovery log for the data-integrity and stewardship decision-contract evidence review; it is not a systematic-review completeness claim.",
+  "executed_at": "2026-08-28",
+  "queries": [
+    {
+      "query_id": "data_management_quality_provenance",
+      "query": "research data management quality provenance reproducibility",
+      "provider": "OpenAlex",
+      "request_url": "https://api.openalex.org/works?search=research+data+management+quality+provenance+reproducibility&per-page=7&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Ctype%2Cprimary_location%2Ccited_by_count%2Copen_access&mailto=research%40example.invalid",
+      "records": [
+        {
+          "openalex_id": "https://openalex.org/W2302501749",
+          "doi": "https://doi.org/10.1038/sdata.2016.18",
+          "title": "The FAIR Guiding Principles for scientific data management and stewardship",
+          "publication_year": 2016,
+          "type": "data-paper",
+          "source": "Scientific Data",
+          "landing_page_url": "https://doi.org/10.1038/sdata.2016.18",
+          "cited_by_count_at_search": 18480,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2917207851",
+          "doi": "https://doi.org/10.1093/nar/gky379",
+          "title": "The Galaxy platform for accessible, reproducible and collaborative biomedical analyses: 2018 update",
+          "publication_year": 2018,
+          "type": "article",
+          "source": "Nucleic Acids Research",
+          "landing_page_url": "https://doi.org/10.1093/nar/gky379",
+          "cited_by_count_at_search": 3982,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4236357753",
+          "doi": "https://doi.org/10.1371/journal.pbio.3000410",
+          "title": "The ARRIVE guidelines 2.0: Updated guidelines for reporting animal research",
+          "publication_year": 2020,
+          "type": "article",
+          "source": "PLoS Biology",
+          "landing_page_url": "https://doi.org/10.1371/journal.pbio.3000410",
+          "cited_by_count_at_search": 5860,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3213732104",
+          "doi": "https://doi.org/10.1371/journal.pcbi.1009581",
+          "title": "RESCRIPt: Reproducible sequence taxonomy reference database management",
+          "publication_year": 2021,
+          "type": "article",
+          "source": "PLoS Computational Biology",
+          "landing_page_url": "https://doi.org/10.1371/journal.pcbi.1009581",
+          "cited_by_count_at_search": 999,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2346143774",
+          "doi": "https://doi.org/10.1093/nar/gkw343",
+          "title": "The Galaxy platform for accessible, reproducible and collaborative biomedical analyses: 2016 update",
+          "publication_year": 2016,
+          "type": "article",
+          "source": "Nucleic Acids Research",
+          "landing_page_url": "https://doi.org/10.1093/nar/gkw343",
+          "cited_by_count_at_search": 2346,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3047879827",
+          "doi": "https://doi.org/10.1113/ep088870",
+          "title": "The ARRIVE guidelines 2.0: Updated guidelines for reporting animal research",
+          "publication_year": 2020,
+          "type": "article",
+          "source": "Experimental Physiology",
+          "landing_page_url": "https://doi.org/10.1113/ep088870",
+          "cited_by_count_at_search": 3552,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3122109253",
+          "doi": "https://doi.org/10.12688/f1000research.29032.2",
+          "title": "Sustainable data analysis with Snakemake",
+          "publication_year": 2021,
+          "type": "article",
+          "source": "F1000Research",
+          "landing_page_url": "https://doi.org/10.12688/f1000research.29032.2",
+          "cited_by_count_at_search": 1824,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        }
+      ]
+    },
+    {
+      "query_id": "data_cleaning_error_detection",
+      "query": "scientific data cleaning error detection quality assurance",
+      "provider": "OpenAlex",
+      "request_url": "https://api.openalex.org/works?search=scientific+data+cleaning+error+detection+quality+assurance&per-page=7&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Ctype%2Cprimary_location%2Ccited_by_count%2Copen_access&mailto=research%40example.invalid",
+      "records": [
+        {
+          "openalex_id": "https://openalex.org/W2918895016",
+          "doi": "https://doi.org/10.1016/j.watres.2019.02.054",
+          "title": "Microplastics in freshwaters and drinking water: Critical review and assessment of data quality",
+          "publication_year": 2019,
+          "type": "article",
+          "source": "Water Research",
+          "landing_page_url": "https://doi.org/10.1016/j.watres.2019.02.054",
+          "cited_by_count_at_search": 2505,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W1993814425",
+          "doi": "https://doi.org/10.1016/s0034-4257(00)00109-7",
+          "title": "Cloud-Screening and Quality Control Algorithms for the AERONET Database",
+          "publication_year": 2000,
+          "type": "article",
+          "source": "Remote Sensing of Environment",
+          "landing_page_url": "https://doi.org/10.1016/s0034-4257(00)00109-7",
+          "cited_by_count_at_search": 1514,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2735242140",
+          "doi": "https://doi.org/10.1038/s41598-017-05838-4",
+          "title": "Assuring quality in microplastic monitoring: About the value of clean-air devices as essentials for verified data",
+          "publication_year": 2017,
+          "type": "article",
+          "source": "Scientific Reports",
+          "landing_page_url": "https://doi.org/10.1038/s41598-017-05838-4",
+          "cited_by_count_at_search": 248,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2802842185",
+          "doi": "https://doi.org/10.1007/s11306-018-1367-3",
+          "title": "Guidelines and considerations for the use of system suitability and quality control samples in mass spectrometry assays applied in untargeted clinical metabolomic studies",
+          "publication_year": 2018,
+          "type": "article",
+          "source": "Metabolomics",
+          "landing_page_url": "https://doi.org/10.1007/s11306-018-1367-3",
+          "cited_by_count_at_search": 880,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2607804943",
+          "doi": "https://doi.org/10.1016/j.neuroimage.2017.10.034",
+          "title": "Image processing and Quality Control for the first 10,000 brain imaging datasets from UK Biobank",
+          "publication_year": 2017,
+          "type": "article",
+          "source": "NeuroImage",
+          "landing_page_url": "https://doi.org/10.1016/j.neuroimage.2017.10.034",
+          "cited_by_count_at_search": 1795,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2109510044",
+          "doi": "https://doi.org/10.1086/324741",
+          "title": "Sloan Digital Sky Survey: Early Data Release",
+          "publication_year": 2002,
+          "type": "article",
+          "source": "The Astronomical Journal",
+          "landing_page_url": "https://doi.org/10.1086/324741",
+          "cited_by_count_at_search": 2428,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4293331936",
+          "doi": "https://doi.org/10.1007/s11306-022-01926-3",
+          "title": "Quality assurance and quality control reporting in untargeted metabolic phenotyping: mQACC recommendations for analytical quality management",
+          "publication_year": 2022,
+          "type": "article",
+          "source": "Metabolomics",
+          "landing_page_url": "https://doi.org/10.1007/s11306-022-01926-3",
+          "cited_by_count_at_search": 201,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        }
+      ]
+    },
+    {
+      "query_id": "fair_data_stewardship",
+      "query": "FAIR data principles stewardship reproducibility",
+      "provider": "OpenAlex",
+      "request_url": "https://api.openalex.org/works?search=FAIR+data+principles+stewardship+reproducibility&per-page=7&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Ctype%2Cprimary_location%2Ccited_by_count%2Copen_access&mailto=research%40example.invalid",
+      "records": [
+        {
+          "openalex_id": "https://openalex.org/W2302501749",
+          "doi": "https://doi.org/10.1038/sdata.2016.18",
+          "title": "The FAIR Guiding Principles for scientific data management and stewardship",
+          "publication_year": 2016,
+          "type": "data-paper",
+          "source": "Scientific Data",
+          "landing_page_url": "https://doi.org/10.1038/sdata.2016.18",
+          "cited_by_count_at_search": 18480,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2804142383",
+          "doi": "https://doi.org/10.1038/s41431-018-0160-0",
+          "title": "The FAIR guiding principles for data stewardship: fair enough?",
+          "publication_year": 2018,
+          "type": "article",
+          "source": "European Journal of Human Genetics",
+          "landing_page_url": "https://doi.org/10.1038/s41431-018-0160-0",
+          "cited_by_count_at_search": 304,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3048186973",
+          "doi": "https://doi.org/10.5334/dsj-2020-043",
+          "title": "The CARE Principles for Indigenous Data Governance",
+          "publication_year": 2020,
+          "type": "article",
+          "source": "Data Science Journal",
+          "landing_page_url": "https://doi.org/10.5334/dsj-2020-043",
+          "cited_by_count_at_search": 1297,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4306173528",
+          "doi": "https://doi.org/10.1038/s41597-022-01710-x",
+          "title": "Introducing the FAIR Principles for research software",
+          "publication_year": 2022,
+          "type": "data-paper",
+          "source": "Scientific Data",
+          "landing_page_url": "https://doi.org/10.1038/s41597-022-01710-x",
+          "cited_by_count_at_search": 479,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4398182689",
+          "doi": "https://doi.org/10.1093/nar/gkae410",
+          "title": "The Galaxy platform for accessible, reproducible, and collaborative data analyses: 2024 update",
+          "publication_year": 2024,
+          "type": "article",
+          "source": "Nucleic Acids Research",
+          "landing_page_url": "https://doi.org/10.1093/nar/gkae410",
+          "cited_by_count_at_search": 921,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2986579771",
+          "doi": "https://doi.org/10.3233/ds-190026",
+          "title": "Towards FAIR principles for research software",
+          "publication_year": 2019,
+          "type": "article",
+          "source": "Data Science",
+          "landing_page_url": "https://doi.org/10.3233/ds-190026",
+          "cited_by_count_at_search": 336,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4226051960",
+          "doi": "https://doi.org/10.1093/nar/gkac247",
+          "title": "The Galaxy platform for accessible, reproducible and collaborative biomedical analyses: 2022 update",
+          "publication_year": 2022,
+          "type": "article",
+          "source": "Nucleic Acids Research",
+          "landing_page_url": "https://doi.org/10.1093/nar/gkac247",
+          "cited_by_count_at_search": 1397,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        }
+      ]
+    },
+    {
+      "query_id": "dataset_documentation",
+      "query": "dataset documentation datasheets data cards transparency",
+      "provider": "OpenAlex",
+      "request_url": "https://api.openalex.org/works?search=dataset+documentation+datasheets+data+cards+transparency&per-page=7&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Ctype%2Cprimary_location%2Ccited_by_count%2Copen_access&mailto=research%40example.invalid",
+      "records": [
+        {
+          "openalex_id": "https://openalex.org/W4283155630",
+          "doi": "https://doi.org/10.1145/3531146.3533231",
+          "title": "Data Cards: Purposeful and Transparent Dataset Documentation for Responsible AI",
+          "publication_year": 2022,
+          "type": "conference-paper",
+          "source": "2022 ACM Conference on Fairness, Accountability, and Transparency",
+          "landing_page_url": "https://doi.org/10.1145/3531146.3533231",
+          "cited_by_count_at_search": 194,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4384071683",
+          "doi": "https://doi.org/10.1038/s41586-023-06291-2",
+          "title": "Large language models encode clinical knowledge",
+          "publication_year": 2023,
+          "type": "article",
+          "source": "Nature",
+          "landing_page_url": "https://doi.org/10.1038/s41586-023-06291-2",
+          "cited_by_count_at_search": 3655,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4283166427",
+          "doi": "https://doi.org/10.1145/3531146.3533239",
+          "title": "Healthsheet: Development of a Transparency Artifact for Health Datasets",
+          "publication_year": 2022,
+          "type": "conference-paper",
+          "source": "2022 ACM Conference on Fairness, Accountability, and Transparency",
+          "landing_page_url": "https://doi.org/10.1145/3531146.3533239",
+          "cited_by_count_at_search": 64,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3197876970",
+          "doi": "https://doi.org/10.18653/v1/2021.emnlp-demo.21",
+          "title": "Datasets: A Community Library for Natural Language Processing",
+          "publication_year": 2021,
+          "type": "conference-paper",
+          "source": null,
+          "landing_page_url": "https://doi.org/10.18653/v1/2021.emnlp-demo.21",
+          "cited_by_count_at_search": 331,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4387966489",
+          "doi": "https://doi.org/10.1038/s41591-023-02608-w",
+          "title": "The value of standards for health datasets in artificial intelligence-based applications",
+          "publication_year": 2023,
+          "type": "article",
+          "source": "Nature Medicine",
+          "landing_page_url": "https://doi.org/10.1038/s41591-023-02608-w",
+          "cited_by_count_at_search": 289,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3135371071",
+          "doi": "https://doi.org/10.1145/3442188.3445918",
+          "title": "Towards Accountability for Machine Learning Datasets: Practices from Software Engineering and Infrastructure",
+          "publication_year": 2021,
+          "type": "conference-paper",
+          "source": null,
+          "landing_page_url": "https://doi.org/10.1145/3442188.3445918",
+          "cited_by_count_at_search": 245,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4388098581",
+          "doi": "https://doi.org/10.5334/johd.124",
+          "title": "Datasheets for Digital Cultural Heritage Datasets",
+          "publication_year": 2023,
+          "type": "article",
+          "source": "Journal of Open Humanities Data",
+          "landing_page_url": "https://doi.org/10.5334/johd.124",
+          "cited_by_count_at_search": 32,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        }
+      ]
+    },
+    {
+      "query_id": "data_lineage_reproducibility",
+      "query": "data lineage provenance reproducible computational research",
+      "provider": "OpenAlex",
+      "request_url": "https://api.openalex.org/works?search=data+lineage+provenance+reproducible+computational+research&per-page=7&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Ctype%2Cprimary_location%2Ccited_by_count%2Copen_access&mailto=research%40example.invalid",
+      "records": [
+        {
+          "openalex_id": "https://openalex.org/W3213732104",
+          "doi": "https://doi.org/10.1371/journal.pcbi.1009581",
+          "title": "RESCRIPt: Reproducible sequence taxonomy reference database management",
+          "publication_year": 2021,
+          "type": "article",
+          "source": "PLoS Computational Biology",
+          "landing_page_url": "https://doi.org/10.1371/journal.pcbi.1009581",
+          "cited_by_count_at_search": 999,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2127279146",
+          "doi": "https://doi.org/10.1145/1142473.1142534",
+          "title": "Provenance management in curated databases",
+          "publication_year": 2006,
+          "type": "conference-paper",
+          "source": null,
+          "landing_page_url": "https://doi.org/10.1145/1142473.1142534",
+          "cited_by_count_at_search": 298,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W1883937078",
+          "doi": "https://doi.org/10.5555/1855511.1855526",
+          "title": "Provenance for the cloud",
+          "publication_year": 2010,
+          "type": "conference-paper",
+          "source": "Digital Access to Scholarship at Harvard (DASH) (Harvard University)",
+          "landing_page_url": "http://nrs.harvard.edu/urn-3:HUL.InstRepos:4797327",
+          "cited_by_count_at_search": 140,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W1999909108",
+          "doi": "https://doi.org/10.3758/bf03193785",
+          "title": "Provenance of correlations in psychological data",
+          "publication_year": 2005,
+          "type": "article",
+          "source": "Psychonomic Bulletin & Review",
+          "landing_page_url": "https://doi.org/10.3758/bf03193785",
+          "cited_by_count_at_search": 132,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2572857085",
+          "doi": "https://doi.org/10.1016/j.future.2017.01.012",
+          "title": "Scientific workflows for computational reproducibility in the life sciences: Status, challenges and opportunities",
+          "publication_year": 2017,
+          "type": "article",
+          "source": "Future Generation Computer Systems",
+          "landing_page_url": "https://doi.org/10.1016/j.future.2017.01.012",
+          "cited_by_count_at_search": 185,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2200241032",
+          "doi": "https://doi.org/10.1109/bigdata.2015.7364047",
+          "title": "Big data provenance: Challenges, state of the art and opportunities",
+          "publication_year": 2015,
+          "type": "conference-paper",
+          "source": null,
+          "landing_page_url": "https://doi.org/10.1109/bigdata.2015.7364047",
+          "cited_by_count_at_search": 98,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2115785123",
+          "doi": "https://doi.org/10.1038/sj.bjc.6605642",
+          "title": "Guidelines for the welfare and use of animals in cancer research",
+          "publication_year": 2010,
+          "type": "article",
+          "source": "British Journal of Cancer",
+          "landing_page_url": "https://doi.org/10.1038/sj.bjc.6605642",
+          "cited_by_count_at_search": 1459,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        }
+      ]
+    },
+    {
+      "query_id": "missing_data_quality_bias",
+      "query": "missing data quality bias observational studies",
+      "provider": "OpenAlex",
+      "request_url": "https://api.openalex.org/works?search=missing+data+quality+bias+observational+studies&per-page=7&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Ctype%2Cprimary_location%2Ccited_by_count%2Copen_access&mailto=research%40example.invalid",
+      "records": [
+        {
+          "openalex_id": "https://openalex.org/W2599076725",
+          "doi": "https://doi.org/10.1371/journal.pmed.0040296",
+          "title": "The Strengthening the Reporting of Observational Studies in Epidemiology (STROBE) Statement: Guidelines for Reporting Observational Studies",
+          "publication_year": 2007,
+          "type": "article",
+          "source": "PLoS Medicine",
+          "landing_page_url": "https://doi.org/10.1371/journal.pmed.0040296",
+          "cited_by_count_at_search": 22070,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2275737843",
+          "doi": "https://doi.org/10.1016/s0140-6736(07)61602-x",
+          "title": "The Strengthening the Reporting of Observational Studies in Epidemiology (STROBE) statement: guidelines for reporting observational studies",
+          "publication_year": 2007,
+          "type": "article",
+          "source": "The Lancet",
+          "landing_page_url": "https://doi.org/10.1016/s0140-6736(07)61602-x",
+          "cited_by_count_at_search": 19859,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2531269403",
+          "doi": "https://doi.org/10.1136/bmj.i4919",
+          "title": "ROBINS-I: a tool for assessing risk of bias in non-randomised studies of interventions",
+          "publication_year": 2016,
+          "type": "article",
+          "source": "BMJ",
+          "landing_page_url": "https://doi.org/10.1136/bmj.i4919",
+          "cited_by_count_at_search": 19823,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4294116629",
+          "doi": "https://doi.org/10.1016/j.ijsu.2014.07.013",
+          "title": "The Strengthening the Reporting of Observational Studies in Epidemiology (STROBE) Statement: Guidelines for reporting observational studies",
+          "publication_year": 2014,
+          "type": "article",
+          "source": "International Journal of Surgery",
+          "landing_page_url": "https://doi.org/10.1016/j.ijsu.2014.07.013",
+          "cited_by_count_at_search": 10136,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2146512944",
+          "doi": "https://doi.org/10.1093/nar/gkv007",
+          "title": "limma powers differential expression analyses for RNA-sequencing and microarray studies",
+          "publication_year": 2015,
+          "type": "article",
+          "source": "Nucleic Acids Research",
+          "landing_page_url": "https://doi.org/10.1093/nar/gkv007",
+          "cited_by_count_at_search": 44063,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2116810060",
+          "doi": "https://doi.org/10.1371/journal.pmed.0040297",
+          "title": "Strengthening the Reporting of Observational Studies in Epidemiology (STROBE): Explanation and Elaboration",
+          "publication_year": 2007,
+          "type": "article",
+          "source": "PLoS Medicine",
+          "landing_page_url": "https://doi.org/10.1371/journal.pmed.0040297",
+          "cited_by_count_at_search": 8554,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2163278718",
+          "doi": "https://doi.org/10.1371/journal.pmed.1001885",
+          "title": "The REporting of studies Conducted using Observational Routinely-collected health Data (RECORD) Statement",
+          "publication_year": 2015,
+          "type": "article",
+          "source": "PLoS Medicine",
+          "landing_page_url": "https://doi.org/10.1371/journal.pmed.1001885",
+          "cited_by_count_at_search": 5557,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        }
+      ]
+    },
+    {
+      "query_id": "omics_batch_effects",
+      "query": "omics batch effects data quality correction reproducibility",
+      "provider": "OpenAlex",
+      "request_url": "https://api.openalex.org/works?search=omics+batch+effects+data+quality+correction+reproducibility&per-page=7&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Ctype%2Cprimary_location%2Ccited_by_count%2Copen_access&mailto=research%40example.invalid",
+      "records": [
+        {
+          "openalex_id": "https://openalex.org/W3211779138",
+          "doi": "https://doi.org/10.1371/journal.pcbi.1009442",
+          "title": "Multivariable association discovery in population-scale meta-omics studies",
+          "publication_year": 2021,
+          "type": "article",
+          "source": "PLoS Computational Biology",
+          "landing_page_url": "https://doi.org/10.1371/journal.pcbi.1009442",
+          "cited_by_count_at_search": 2548,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4283017342",
+          "doi": "https://doi.org/10.1038/s41596-022-00710-w",
+          "title": "Using MetaboAnalyst 5.0 for LC–HRMS spectra processing, multi-omics integration and covariate adjustment of global metabolomics data",
+          "publication_year": 2022,
+          "type": "article",
+          "source": "Nature Protocols",
+          "landing_page_url": "https://doi.org/10.1038/s41596-022-00710-w",
+          "cited_by_count_at_search": 1558,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4379521442",
+          "doi": "https://doi.org/10.1038/s41580-023-00615-w",
+          "title": "The technological landscape and applications of single-cell multi-omics",
+          "publication_year": 2023,
+          "type": "article",
+          "source": "Nature Reviews Molecular Cell Biology",
+          "landing_page_url": "https://doi.org/10.1038/s41580-023-00615-w",
+          "cited_by_count_at_search": 1005,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4403107764",
+          "doi": "https://doi.org/10.1186/s13059-024-03401-9",
+          "title": "Assessing and mitigating batch effects in large-scale omics studies",
+          "publication_year": 2024,
+          "type": "article",
+          "source": "Genome biology",
+          "landing_page_url": "https://doi.org/10.1186/s13059-024-03401-9",
+          "cited_by_count_at_search": 181,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4225278475",
+          "doi": "https://doi.org/10.1038/s41587-022-01284-4",
+          "title": "Multi-omics single-cell data integration and regulatory inference with graph-linked embedding",
+          "publication_year": 2022,
+          "type": "article",
+          "source": "Nature Biotechnology",
+          "landing_page_url": "https://doi.org/10.1038/s41587-022-01284-4",
+          "cited_by_count_at_search": 640,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2236822143",
+          "doi": "https://doi.org/10.1186/s13059-016-0881-8",
+          "title": "A survey of best practices for RNA-seq data analysis",
+          "publication_year": 2016,
+          "type": "article",
+          "source": "Genome biology",
+          "landing_page_url": "https://doi.org/10.1186/s13059-016-0881-8",
+          "cited_by_count_at_search": 2943,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4225598893",
+          "doi": "https://doi.org/10.1038/s41592-021-01336-8",
+          "title": "Benchmarking atlas-level data integration in single-cell genomics",
+          "publication_year": 2021,
+          "type": "article",
+          "source": "Nature Methods",
+          "landing_page_url": "https://doi.org/10.1038/s41592-021-01336-8",
+          "cited_by_count_at_search": 1502,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        }
+      ]
+    },
+    {
+      "query_id": "imaging_metadata_quality",
+      "query": "microscopy imaging metadata data quality reproducibility",
+      "provider": "OpenAlex",
+      "request_url": "https://api.openalex.org/works?search=microscopy+imaging+metadata+data+quality+reproducibility&per-page=7&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Ctype%2Cprimary_location%2Ccited_by_count%2Copen_access&mailto=research%40example.invalid",
+      "records": [
+        {
+          "openalex_id": "https://openalex.org/W2580035316",
+          "doi": "https://doi.org/10.1186/s12859-017-1934-z",
+          "title": "ImageJ2: ImageJ for the next generation of scientific image data",
+          "publication_year": 2017,
+          "type": "article",
+          "source": "BMC Bioinformatics",
+          "landing_page_url": "https://doi.org/10.1186/s12859-017-1934-z",
+          "cited_by_count_at_search": 6329,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2069089843",
+          "doi": "https://doi.org/10.1038/nbt.3192",
+          "title": "Spatial reconstruction of single-cell gene expression data",
+          "publication_year": 2015,
+          "type": "article",
+          "source": "Nature Biotechnology",
+          "landing_page_url": "https://doi.org/10.1038/nbt.3192",
+          "cited_by_count_at_search": 7933,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3166924801",
+          "doi": "https://doi.org/10.1038/s41592-021-01156-w",
+          "title": "Best practices and tools for reporting reproducible fluorescence microscopy methods",
+          "publication_year": 2021,
+          "type": "article",
+          "source": "Nature Methods",
+          "landing_page_url": "https://doi.org/10.1038/s41592-021-01156-w",
+          "cited_by_count_at_search": 130,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2898210859",
+          "doi": "https://doi.org/10.1093/nar/gky949",
+          "title": "Protein Data Bank: the single global archive for 3D macromolecular structure data",
+          "publication_year": 2018,
+          "type": "article",
+          "source": "Nucleic Acids Research",
+          "landing_page_url": "https://doi.org/10.1093/nar/gky949",
+          "cited_by_count_at_search": 1234,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3160476106",
+          "doi": "https://doi.org/10.1038/s41592-021-01166-8",
+          "title": "REMBI: Recommended Metadata for Biological Images—enabling reuse of microscopy data in biology",
+          "publication_year": 2021,
+          "type": "article",
+          "source": "Nature Methods",
+          "landing_page_url": "https://doi.org/10.1038/s41592-021-01166-8",
+          "cited_by_count_at_search": 133,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4226251227",
+          "doi": "https://doi.org/10.1038/s41592-021-01327-9",
+          "title": "Towards community-driven metadata standards for light microscopy: tiered specifications extending the OME model",
+          "publication_year": 2021,
+          "type": "article",
+          "source": "Nature Methods",
+          "landing_page_url": "https://doi.org/10.1038/s41592-021-01327-9",
+          "cited_by_count_at_search": 61,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3123753728",
+          "doi": "https://doi.org/10.1111/jmi.13041",
+          "title": "QUAREP‐LiMi: A community‐driven initiative to establish guidelines for quality assessment and reproducibility for instruments and images in light microscopy",
+          "publication_year": 2021,
+          "type": "article",
+          "source": "Journal of Microscopy",
+          "landing_page_url": "https://doi.org/10.1111/jmi.13041",
+          "cited_by_count_at_search": 62,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        }
+      ]
+    },
+    {
+      "query_id": "sensor_calibration_drift",
+      "query": "sensor data quality calibration drift scientific research",
+      "provider": "OpenAlex",
+      "request_url": "https://api.openalex.org/works?search=sensor+data+quality+calibration+drift+scientific+research&per-page=7&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Ctype%2Cprimary_location%2Ccited_by_count%2Copen_access&mailto=research%40example.invalid",
+      "records": [
+        {
+          "openalex_id": "https://openalex.org/W2099419573",
+          "doi": "https://doi.org/10.1145/2523813",
+          "title": "A survey on concept drift adaptation",
+          "publication_year": 2014,
+          "type": "article",
+          "source": "ACM Computing Surveys",
+          "landing_page_url": "https://doi.org/10.1145/2523813",
+          "cited_by_count_at_search": 3536,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2172877736",
+          "doi": "https://doi.org/10.1175/1520-0426(1998)015<0809:ttrmmt>2.0.co;2",
+          "title": "The Tropical Rainfall Measuring Mission (TRMM) Sensor Package",
+          "publication_year": 1998,
+          "type": "article",
+          "source": "Journal of Atmospheric and Oceanic Technology",
+          "landing_page_url": "https://doi.org/10.1175/1520-0426(1998)015<0809:ttrmmt>2.0.co;2",
+          "cited_by_count_at_search": 2475,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4323653529",
+          "doi": "https://doi.org/10.1021/acsnano.2c12606",
+          "title": "Technology Roadmap for Flexible Sensors",
+          "publication_year": 2023,
+          "type": "article",
+          "source": "ACS Nano",
+          "landing_page_url": "https://doi.org/10.1021/acsnano.2c12606",
+          "cited_by_count_at_search": 1334,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3013886221",
+          "doi": "https://doi.org/10.1186/s40537-020-0285-1",
+          "title": "Sensor data quality: a systematic review",
+          "publication_year": 2020,
+          "type": "review",
+          "source": "Journal Of Big Data",
+          "landing_page_url": "https://doi.org/10.1186/s40537-020-0285-1",
+          "cited_by_count_at_search": 353,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2573003069",
+          "doi": "https://doi.org/10.3390/s17010130",
+          "title": "Wearable Sensors for Remote Health Monitoring",
+          "publication_year": 2017,
+          "type": "article",
+          "source": "Sensors",
+          "landing_page_url": "https://doi.org/10.3390/s17010130",
+          "cited_by_count_at_search": 1365,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2102802363",
+          "doi": "https://doi.org/10.1016/j.websem.2012.05.003",
+          "title": "The SSN ontology of the W3C semantic sensor network incubator group",
+          "publication_year": 2012,
+          "type": "article",
+          "source": "Journal of Web Semantics",
+          "landing_page_url": "https://doi.org/10.1016/j.websem.2012.05.003",
+          "cited_by_count_at_search": 1401,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W147232447",
+          "doi": "https://doi.org/10.1051/0004-6361/201629272",
+          "title": "The Gaia mission",
+          "publication_year": 2016,
+          "type": "article",
+          "source": "Astronomy and Astrophysics",
+          "landing_page_url": "https://doi.org/10.1051/0004-6361/201629272",
+          "cited_by_count_at_search": 7090,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        }
+      ]
+    },
+    {
+      "query_id": "qualitative_data_stewardship",
+      "query": "qualitative research data management anonymization consent sharing",
+      "provider": "OpenAlex",
+      "request_url": "https://api.openalex.org/works?search=qualitative+research+data+management+anonymization+consent+sharing&per-page=7&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Ctype%2Cprimary_location%2Ccited_by_count%2Copen_access&mailto=research%40example.invalid",
+      "records": [
+        {
+          "openalex_id": "https://openalex.org/W2162739315",
+          "doi": "https://doi.org/10.1007/s10664-008-9102-8",
+          "title": "Guidelines for conducting and reporting case study research in software engineering",
+          "publication_year": 2008,
+          "type": "article",
+          "source": "Empirical Software Engineering",
+          "landing_page_url": "https://doi.org/10.1007/s10664-008-9102-8",
+          "cited_by_count_at_search": 3850,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2551792675",
+          "doi": "https://doi.org/10.1186/s12910-016-0153-x",
+          "title": "Public responses to the sharing and linkage of health data for research purposes: a systematic review and thematic synthesis of qualitative studies",
+          "publication_year": 2016,
+          "type": "review",
+          "source": "BMC Medical Ethics",
+          "landing_page_url": "https://doi.org/10.1186/s12910-016-0153-x",
+          "cited_by_count_at_search": 382,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2150469595",
+          "doi": "https://doi.org/10.3389/fninf.2012.00009",
+          "title": "Data sharing in neuroimaging research",
+          "publication_year": 2012,
+          "type": "article",
+          "source": "Frontiers in Neuroinformatics",
+          "landing_page_url": "https://doi.org/10.3389/fninf.2012.00009",
+          "cited_by_count_at_search": 280,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2580761472",
+          "doi": "https://doi.org/10.1186/s12910-016-0162-9",
+          "title": "Dynamic Consent: a potential solution to some of the challenges of modern biomedical research",
+          "publication_year": 2017,
+          "type": "article",
+          "source": "BMC Medical Ethics",
+          "landing_page_url": "https://doi.org/10.1186/s12910-016-0162-9",
+          "cited_by_count_at_search": 381,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3124326066",
+          "doi": "https://doi.org/10.1371/journal.pone.0118053",
+          "title": "What drives academic data sharing?",
+          "publication_year": 2015,
+          "type": "article",
+          "source": "PubMed",
+          "landing_page_url": "https://pubmed.ncbi.nlm.nih.gov/25714752",
+          "cited_by_count_at_search": 350,
+          "is_open_access": false,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2551537348",
+          "doi": "https://doi.org/10.1186/s12889-016-3808-0",
+          "title": "A qualitative study of user perceptions of mobile health apps",
+          "publication_year": 2016,
+          "type": "article",
+          "source": "BMC Public Health",
+          "landing_page_url": "https://doi.org/10.1186/s12889-016-3808-0",
+          "cited_by_count_at_search": 520,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2982749475",
+          "doi": "https://doi.org/10.1136/medethics-2019-105651",
+          "title": "Patients’ and public views and attitudes towards the sharing of health data for research: a narrative review of the empirical evidence",
+          "publication_year": 2019,
+          "type": "review",
+          "source": "Journal of Medical Ethics",
+          "landing_page_url": "https://doi.org/10.1136/medethics-2019-105651",
+          "cited_by_count_at_search": 312,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        }
+      ]
+    },
+    {
+      "query_id": "privacy_reidentification",
+      "query": "research data sharing privacy re-identification de-identification risk",
+      "provider": "OpenAlex",
+      "request_url": "https://api.openalex.org/works?search=research+data+sharing+privacy+re-identification+de-identification+risk&per-page=7&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Ctype%2Cprimary_location%2Ccited_by_count%2Copen_access&mailto=research%40example.invalid",
+      "records": [
+        {
+          "openalex_id": "https://openalex.org/W2963693643",
+          "doi": "https://doi.org/10.1038/s41467-019-10933-3",
+          "title": "Estimating the success of re-identifications in incomplete datasets using generative models",
+          "publication_year": 2019,
+          "type": "article",
+          "source": "Nature Communications",
+          "landing_page_url": "https://doi.org/10.1038/s41467-019-10933-3",
+          "cited_by_count_at_search": 819,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2219591537",
+          "doi": "https://doi.org/10.2147/clep.s91125",
+          "title": "The Danish National Patient Registry: a review of content, data quality, and research potential",
+          "publication_year": 2015,
+          "type": "article",
+          "source": "Clinical Epidemiology",
+          "landing_page_url": "https://doi.org/10.2147/clep.s91125",
+          "cited_by_count_at_search": 4860,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2083384763",
+          "doi": "https://doi.org/10.1371/journal.pone.0028071",
+          "title": "A Systematic Review of Re-Identification Attacks on Health Data",
+          "publication_year": 2011,
+          "type": "review",
+          "source": "PLoS ONE",
+          "landing_page_url": "https://doi.org/10.1371/journal.pone.0028071",
+          "cited_by_count_at_search": 440,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4318619660",
+          "doi": "https://doi.org/10.48550/arxiv.1602.05629",
+          "title": "Communication-Efficient Learning of Deep Networks from Decentralized\\n Data",
+          "publication_year": 2016,
+          "type": "preprint",
+          "source": "arXiv (Cornell University)",
+          "landing_page_url": "http://arxiv.org/abs/1602.05629",
+          "cited_by_count_at_search": 5645,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2541884796",
+          "doi": "https://doi.org/10.48550/arxiv.1602.05629",
+          "title": "Communication-Efficient Learning of Deep Networks from Decentralized Data",
+          "publication_year": 2016,
+          "type": "preprint",
+          "source": "arXiv (Cornell University)",
+          "landing_page_url": "http://arxiv.org/abs/1602.05629",
+          "cited_by_count_at_search": 5186,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2119046642",
+          "doi": "https://doi.org/10.1016/j.adhoc.2012.02.016",
+          "title": "Internet of things: Vision, applications and research challenges",
+          "publication_year": 2012,
+          "type": "article",
+          "source": "Ad Hoc Networks",
+          "landing_page_url": "https://doi.org/10.1016/j.adhoc.2012.02.016",
+          "cited_by_count_at_search": 3584,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2115240023",
+          "doi": "https://doi.org/10.1038/srep01376",
+          "title": "Unique in the Crowd: The privacy bounds of human mobility",
+          "publication_year": 2013,
+          "type": "article",
+          "source": "Scientific Reports",
+          "landing_page_url": "https://doi.org/10.1038/srep01376",
+          "cited_by_count_at_search": 1626,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        }
+      ]
+    },
+    {
+      "query_id": "repository_citation_versioning",
+      "query": "research data repository citation versioning persistent identifier",
+      "provider": "OpenAlex",
+      "request_url": "https://api.openalex.org/works?search=research+data+repository+citation+versioning+persistent+identifier&per-page=7&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Ctype%2Cprimary_location%2Ccited_by_count%2Copen_access&mailto=research%40example.invalid",
+      "records": [
+        {
+          "openalex_id": "https://openalex.org/W2302501749",
+          "doi": "https://doi.org/10.1038/sdata.2016.18",
+          "title": "The FAIR Guiding Principles for scientific data management and stewardship",
+          "publication_year": 2016,
+          "type": "data-paper",
+          "source": "Scientific Data",
+          "landing_page_url": "https://doi.org/10.1038/sdata.2016.18",
+          "cited_by_count_at_search": 18480,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2798054687",
+          "doi": "https://doi.org/10.1016/j.jalz.2018.02.018",
+          "title": "NIA‐AA Research Framework: Toward a biological definition of Alzheimer's disease",
+          "publication_year": 2018,
+          "type": "article",
+          "source": "Alzheimer s & Dementia",
+          "landing_page_url": "https://doi.org/10.1016/j.jalz.2018.02.018",
+          "cited_by_count_at_search": 10720,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2955244474",
+          "doi": "https://doi.org/10.1371/journal.pone.0230416",
+          "title": "The citation advantage of linking publications to research data",
+          "publication_year": 2020,
+          "type": "article",
+          "source": "PLoS ONE",
+          "landing_page_url": "https://doi.org/10.1371/journal.pone.0230416",
+          "cited_by_count_at_search": 352,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W4307846395",
+          "doi": "https://doi.org/10.1186/s13012-022-01245-0",
+          "title": "The updated Consolidated Framework for Implementation Research based on user feedback",
+          "publication_year": 2022,
+          "type": "article",
+          "source": "Implementation Science",
+          "landing_page_url": "https://doi.org/10.1186/s13012-022-01245-0",
+          "cited_by_count_at_search": 4186,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2160697532",
+          "doi": "https://doi.org/10.1186/gb-2004-5-10-r80",
+          "title": "Bioconductor: open software development for computational biology and bioinformatics",
+          "publication_year": 2004,
+          "type": "article",
+          "source": "Genome biology",
+          "landing_page_url": "https://doi.org/10.1186/gb-2004-5-10-r80",
+          "cited_by_count_at_search": 12597,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W3098455240",
+          "doi": "https://doi.org/10.1140/epjds/s13688-017-0109-5",
+          "title": "A roadmap for the computation of persistent homology",
+          "publication_year": 2017,
+          "type": "article",
+          "source": "EPJ Data Science",
+          "landing_page_url": "https://doi.org/10.1140/epjds/s13688-017-0109-5",
+          "cited_by_count_at_search": 775,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        },
+        {
+          "openalex_id": "https://openalex.org/W2934450419",
+          "doi": "https://doi.org/10.1038/s41587-019-0080-8",
+          "title": "FAIRsharing as a community approach to standards, repositories and policies",
+          "publication_year": 2019,
+          "type": "article",
+          "source": "Nature Biotechnology",
+          "landing_page_url": "https://doi.org/10.1038/s41587-019-0080-8",
+          "cited_by_count_at_search": 385,
+          "is_open_access": true,
+          "screening_status": "metadata_screened_candidate"
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Results are frozen metadata candidates and may contain irrelevant records.",
+    "Inclusion in this log does not mean a source supports a contract rule.",
+    "The reconciled evidence registry separately records read depth, supported decisions, contradictions, and transfer limits."
+  ]
+}

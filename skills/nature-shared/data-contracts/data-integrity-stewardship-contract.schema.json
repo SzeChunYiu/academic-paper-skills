@@ -1,0 +1,523 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/SzeChunYiu/academic-paper-skills/data-integrity-stewardship-contract.schema.json",
+  "title": "Data integrity and stewardship decision contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_schema_version",
+    "contract_id",
+    "study_id",
+    "state_version",
+    "as_of_date",
+    "data_context",
+    "source_records",
+    "snapshots",
+    "quality_controls",
+    "transformations",
+    "data_decisions",
+    "realized_missingness_handling",
+    "analysis_bindings",
+    "governance",
+    "release",
+    "deviations",
+    "claims",
+    "source_provenance"
+  ],
+  "properties": {
+    "contract_schema_version": {"const": "1.0.0"},
+    "contract_id": {"$ref": "#/$defs/id"},
+    "study_id": {"$ref": "#/$defs/id"},
+    "state_version": {"type": "integer", "minimum": 1},
+    "as_of_date": {"type": "string", "format": "date"},
+    "data_context": {"$ref": "#/$defs/dataContext"},
+    "source_records": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/sourceRecord"}
+    },
+    "snapshots": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/snapshot"}
+    },
+    "quality_controls": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/qualityControl"}
+    },
+    "transformations": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/transformation"}
+    },
+    "data_decisions": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/dataDecision"}
+    },
+    "realized_missingness_handling": {"$ref": "#/$defs/realizedMissingness"},
+    "analysis_bindings": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/analysisBinding"}
+    },
+    "governance": {"$ref": "#/$defs/governance"},
+    "release": {"$ref": "#/$defs/release"},
+    "deviations": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/deviation"}
+    },
+    "claims": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/claim"}
+    },
+    "source_provenance": {"$ref": "#/$defs/sourceProvenance"}
+  },
+  "$defs": {
+    "id": {"type": "string", "minLength": 1},
+    "nullableId": {
+      "anyOf": [
+        {"$ref": "#/$defs/id"},
+        {"type": "null"}
+      ]
+    },
+    "dateTime": {"type": "string", "format": "date-time"},
+    "nullableDateTime": {
+      "anyOf": [
+        {"$ref": "#/$defs/dateTime"},
+        {"type": "null"}
+      ]
+    },
+    "sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+    "nullableSha256": {
+      "anyOf": [
+        {"$ref": "#/$defs/sha256"},
+        {"type": "null"}
+      ]
+    },
+    "stringArray": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    },
+    "dataContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "modalities",
+        "study_contexts",
+        "sensitivity_tags",
+        "intended_uses",
+        "scientific_unit",
+        "planned_missingness_handling"
+      ],
+      "properties": {
+        "modalities": {"$ref": "#/$defs/stringArray"},
+        "study_contexts": {"$ref": "#/$defs/stringArray"},
+        "sensitivity_tags": {"$ref": "#/$defs/stringArray"},
+        "intended_uses": {"$ref": "#/$defs/stringArray"},
+        "scientific_unit": {"$ref": "#/$defs/id"},
+        "planned_missingness_handling": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["plan_id", "method"],
+          "properties": {
+            "plan_id": {"$ref": "#/$defs/id"},
+            "method": {
+              "enum": [
+                "not_applicable",
+                "none",
+                "complete_case",
+                "multiple_imputation",
+                "single_imputation",
+                "indicator",
+                "weighting",
+                "model_based",
+                "sensitivity_only",
+                "unknown"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "sourceRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_record_id",
+        "kind",
+        "source_name",
+        "version",
+        "acquired_at",
+        "rights_status",
+        "authority_or_licence_ids"
+      ],
+      "properties": {
+        "source_record_id": {"$ref": "#/$defs/id"},
+        "kind": {
+          "enum": [
+            "primary_collected",
+            "third_party",
+            "administrative",
+            "repository",
+            "simulation",
+            "synthetic",
+            "physical_archive"
+          ]
+        },
+        "source_name": {"$ref": "#/$defs/id"},
+        "version": {"$ref": "#/$defs/id"},
+        "acquired_at": {"$ref": "#/$defs/dateTime"},
+        "rights_status": {
+          "enum": ["verified", "not_required", "missing", "prohibited", "unknown"]
+        },
+        "authority_or_licence_ids": {"$ref": "#/$defs/stringArray"}
+      }
+    },
+    "field": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "field_id",
+        "semantic_name",
+        "data_type",
+        "unit",
+        "missing_code",
+        "is_primary_key"
+      ],
+      "properties": {
+        "field_id": {"$ref": "#/$defs/id"},
+        "semantic_name": {"$ref": "#/$defs/id"},
+        "data_type": {
+          "enum": ["string", "integer", "number", "boolean", "date", "datetime", "category", "binary", "object", "array", "image", "audio", "video", "text"]
+        },
+        "unit": {"$ref": "#/$defs/id"},
+        "missing_code": {"type": ["string", "number", "null"]},
+        "is_primary_key": {"type": "boolean"}
+      }
+    },
+    "missingness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["field_id", "missing_count", "denominator"],
+      "properties": {
+        "field_id": {"$ref": "#/$defs/id"},
+        "missing_count": {"type": "integer", "minimum": 0},
+        "denominator": {"type": "integer", "minimum": 0}
+      }
+    },
+    "snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "snapshot_id",
+        "role",
+        "version",
+        "sha256",
+        "record_count",
+        "byte_count",
+        "created_at",
+        "immutable",
+        "source_record_ids",
+        "schema_id",
+        "fields",
+        "missingness",
+        "adverse_or_null_record_count"
+      ],
+      "properties": {
+        "snapshot_id": {"$ref": "#/$defs/id"},
+        "role": {
+          "enum": ["raw", "validated", "analysis_ready", "release", "external_reference", "quarantined"]
+        },
+        "version": {"$ref": "#/$defs/id"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "record_count": {"type": "integer", "minimum": 0},
+        "byte_count": {"type": "integer", "minimum": 0},
+        "created_at": {"$ref": "#/$defs/dateTime"},
+        "immutable": {"type": "boolean"},
+        "source_record_ids": {"$ref": "#/$defs/stringArray"},
+        "schema_id": {"$ref": "#/$defs/id"},
+        "fields": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/field"}
+        },
+        "missingness": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/missingness"}
+        },
+        "adverse_or_null_record_count": {"type": "integer", "minimum": 0}
+      }
+    },
+    "qualityControl": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "qc_id",
+        "target_snapshot_id",
+        "dimension",
+        "applicability",
+        "status",
+        "criteria",
+        "receipt_id",
+        "checked_at",
+        "outcome"
+      ],
+      "properties": {
+        "qc_id": {"$ref": "#/$defs/id"},
+        "target_snapshot_id": {"$ref": "#/$defs/id"},
+        "dimension": {"$ref": "#/$defs/id"},
+        "applicability": {"enum": ["required", "optional", "not_applicable", "unknown"]},
+        "status": {"enum": ["planned", "passed", "failed", "not_run", "unknown", "not_applicable"]},
+        "criteria": {"$ref": "#/$defs/id"},
+        "receipt_id": {"$ref": "#/$defs/nullableId"},
+        "checked_at": {"$ref": "#/$defs/nullableDateTime"},
+        "outcome": {"type": ["string", "null"]}
+      }
+    },
+    "transformation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "transformation_id",
+        "input_snapshot_ids",
+        "output_snapshot_id",
+        "kind",
+        "procedure_or_code_id",
+        "procedure_version",
+        "executed_at",
+        "execution_receipt_id",
+        "parameters_recorded",
+        "actor_id",
+        "records_removed",
+        "records_added",
+        "declared_semantic_changes"
+      ],
+      "properties": {
+        "transformation_id": {"$ref": "#/$defs/id"},
+        "input_snapshot_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/id"},
+          "uniqueItems": true
+        },
+        "output_snapshot_id": {"$ref": "#/$defs/id"},
+        "kind": {"$ref": "#/$defs/id"},
+        "procedure_or_code_id": {"$ref": "#/$defs/id"},
+        "procedure_version": {"$ref": "#/$defs/id"},
+        "executed_at": {"$ref": "#/$defs/dateTime"},
+        "execution_receipt_id": {"$ref": "#/$defs/nullableId"},
+        "parameters_recorded": {"type": "boolean"},
+        "actor_id": {"$ref": "#/$defs/id"},
+        "records_removed": {"type": "integer", "minimum": 0},
+        "records_added": {"type": "integer", "minimum": 0},
+        "declared_semantic_changes": {"$ref": "#/$defs/stringArray"},
+        "multi_input_reconciliation": {
+          "anyOf": [
+            {"$ref": "#/$defs/multiInputReconciliation"},
+            {"type": "null"}
+          ]
+        }
+      }
+    },
+    "multiInputReconciliation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "combination_rule",
+        "expected_output_record_count",
+        "receipt_id",
+        "field_conflict_policy_recorded"
+      ],
+      "properties": {
+        "combination_rule": {
+          "enum": ["keyed_join", "row_concatenation", "aligned_merge", "other"]
+        },
+        "expected_output_record_count": {"type": "integer", "minimum": 0},
+        "receipt_id": {"$ref": "#/$defs/id"},
+        "field_conflict_policy_recorded": {"type": "boolean"}
+      }
+    },
+    "dataDecision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "decision_id",
+        "unit_id",
+        "action",
+        "reason",
+        "source_evidence",
+        "timing_status",
+        "visible",
+        "affects_adverse_or_null",
+        "transformation_id"
+      ],
+      "properties": {
+        "decision_id": {"$ref": "#/$defs/id"},
+        "unit_id": {"$ref": "#/$defs/id"},
+        "action": {"enum": ["exclude", "correct", "impute", "redact", "deduplicate", "quarantine", "restore", "recode"]},
+        "reason": {"$ref": "#/$defs/id"},
+        "source_evidence": {"$ref": "#/$defs/id"},
+        "timing_status": {"enum": ["prespecified", "rule_based", "adjudicated", "deviation", "post_hoc", "unknown"]},
+        "visible": {"type": "boolean"},
+        "affects_adverse_or_null": {"type": "boolean"},
+        "transformation_id": {"$ref": "#/$defs/id"}
+      }
+    },
+    "realizedMissingness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method", "output_snapshot_ids", "receipt_id"],
+      "properties": {
+        "method": {
+          "enum": ["not_applicable", "none", "complete_case", "multiple_imputation", "single_imputation", "indicator", "weighting", "model_based", "sensitivity_only", "unknown"]
+        },
+        "output_snapshot_ids": {"$ref": "#/$defs/stringArray"},
+        "receipt_id": {"$ref": "#/$defs/nullableId"}
+      }
+    },
+    "analysisBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["analysis_id", "input_snapshot_id", "input_sha256", "result_ids", "display_ids"],
+      "properties": {
+        "analysis_id": {"$ref": "#/$defs/id"},
+        "input_snapshot_id": {"$ref": "#/$defs/id"},
+        "input_sha256": {"$ref": "#/$defs/sha256"},
+        "result_ids": {"$ref": "#/$defs/stringArray"},
+        "display_ids": {"$ref": "#/$defs/stringArray"}
+      }
+    },
+    "policyAuthority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["authority", "title", "url", "effective_from", "effective_until", "effective_date_basis", "reviewed_at"],
+      "properties": {
+        "authority": {"$ref": "#/$defs/id"},
+        "title": {"$ref": "#/$defs/id"},
+        "url": {"type": "string", "format": "uri"},
+        "effective_from": {"type": ["string", "null"], "format": "date"},
+        "effective_until": {"type": ["string", "null"], "format": "date"},
+        "effective_date_basis": {"enum": ["official_explicit", "observed_active_not_backcastable", "unresolved"]},
+        "reviewed_at": {"type": "string", "format": "date"}
+      }
+    },
+    "exactPolicyResolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["applicability", "status", "as_of_date", "authorities", "unresolved_items"],
+      "properties": {
+        "applicability": {"enum": ["required", "not_required", "unknown"]},
+        "status": {"enum": ["resolved", "not_applicable", "unresolved"]},
+        "as_of_date": {"type": "string", "format": "date"},
+        "authorities": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/policyAuthority"}
+        },
+        "unresolved_items": {"$ref": "#/$defs/stringArray"}
+      }
+    },
+    "governance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sensitivity_class",
+        "direct_identifiers_present",
+        "indirect_reidentification_risk",
+        "consent_or_authority_requirement",
+        "consent_or_authority_status",
+        "consent_or_authority_ids",
+        "collective_authority_required",
+        "collective_authority_status",
+        "third_party_rights_status",
+        "public_release_permitted",
+        "exact_policy_resolution"
+      ],
+      "properties": {
+        "sensitivity_class": {"enum": ["non_sensitive", "restricted_human", "regulated", "commercial", "security_sensitive", "ecological_or_cultural_sensitive", "indigenous_or_collective", "unknown"]},
+        "direct_identifiers_present": {"type": "boolean"},
+        "indirect_reidentification_risk": {"enum": ["low", "moderate", "high", "unknown", "not_applicable"]},
+        "consent_or_authority_requirement": {"enum": ["required", "not_required", "unknown"]},
+        "consent_or_authority_status": {"enum": ["verified", "not_required", "missing", "unknown", "prohibited"]},
+        "consent_or_authority_ids": {"$ref": "#/$defs/stringArray"},
+        "collective_authority_required": {"type": "boolean"},
+        "collective_authority_status": {"enum": ["verified", "not_required", "missing", "unknown", "prohibited"]},
+        "third_party_rights_status": {"enum": ["verified", "not_required", "missing", "unknown", "prohibited"]},
+        "public_release_permitted": {"type": "boolean"},
+        "exact_policy_resolution": {"$ref": "#/$defs/exactPolicyResolution"}
+      }
+    },
+    "release": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "applicability",
+        "route",
+        "status",
+        "snapshot_id",
+        "snapshot_sha256",
+        "persistent_id",
+        "locator",
+        "version",
+        "licence",
+        "access_conditions",
+        "resolved_at",
+        "peer_review_access"
+      ],
+      "properties": {
+        "applicability": {"enum": ["required", "not_required", "unknown"]},
+        "route": {"enum": ["public_repository", "controlled_access", "trusted_environment", "metadata_only", "on_request", "within_article", "not_available", "not_applicable", "unknown"]},
+        "status": {"enum": ["planned", "deposited", "verified", "withdrawn", "not_applicable", "unknown"]},
+        "snapshot_id": {"$ref": "#/$defs/nullableId"},
+        "snapshot_sha256": {"$ref": "#/$defs/nullableSha256"},
+        "persistent_id": {"$ref": "#/$defs/nullableId"},
+        "locator": {
+          "anyOf": [
+            {"type": "string", "format": "uri"},
+            {"type": "null"}
+          ]
+        },
+        "version": {"$ref": "#/$defs/nullableId"},
+        "licence": {"$ref": "#/$defs/nullableId"},
+        "access_conditions": {"type": ["string", "null"]},
+        "resolved_at": {"$ref": "#/$defs/nullableDateTime"},
+        "peer_review_access": {"enum": ["verified", "not_required", "missing", "unknown"]}
+      }
+    },
+    "deviation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["deviation_id", "classification", "detected_at", "reason", "affected_object_ids", "affected_claim_ids", "status", "disclosure_locations"],
+      "properties": {
+        "deviation_id": {"$ref": "#/$defs/id"},
+        "classification": {"$ref": "#/$defs/id"},
+        "detected_at": {"$ref": "#/$defs/dateTime"},
+        "reason": {"$ref": "#/$defs/id"},
+        "affected_object_ids": {"$ref": "#/$defs/stringArray"},
+        "affected_claim_ids": {"$ref": "#/$defs/stringArray"},
+        "status": {"enum": ["open", "disclosed", "resolved", "cannot_repair"]},
+        "disclosure_locations": {"$ref": "#/$defs/stringArray"}
+      }
+    },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["claim_id", "data_snapshot_ids", "evidential_status", "requires_complete_unit_lineage", "release_statement"],
+      "properties": {
+        "claim_id": {"$ref": "#/$defs/id"},
+        "data_snapshot_ids": {"$ref": "#/$defs/stringArray"},
+        "evidential_status": {"enum": ["confirmatory", "bounded_observational", "exploratory", "descriptive", "interpretive", "deviation", "withdrawn"]},
+        "requires_complete_unit_lineage": {"type": "boolean"},
+        "release_statement": {"type": ["string", "null"]}
+      }
+    },
+    "sourceProvenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["adapter_catalog_id", "evidence_registry_id", "evidence_reviewed_at", "resolved_adapter_ids"],
+      "properties": {
+        "adapter_catalog_id": {"$ref": "#/$defs/id"},
+        "evidence_registry_id": {"$ref": "#/$defs/id"},
+        "evidence_reviewed_at": {"type": "string", "format": "date"},
+        "resolved_adapter_ids": {"$ref": "#/$defs/stringArray"}
+      }
+    }
+  }
+}

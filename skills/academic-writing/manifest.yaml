@@ -1,5 +1,5 @@
 name: academic-writing
-version: 1.4.0
+version: 1.5.0
 description: >
   Canonical journal-agnostic academic manuscript writing router. The historical
   nature-writing directory remains a compatibility/reference implementation
@@ -17,6 +17,7 @@ always_load:
   - ../nature-shared/core/explanatory-sufficiency.md
   - ../nature-shared/core/manuscript-content-selection.md
   - ../nature-shared/core/study-protocol-conduct-contract.md
+  - ../nature-shared/core/data-integrity-stewardship-contract.md
   - ../nature-shared/core/figure-evidence-planning.md
   - ../nature-shared/core/scientific-display-decision-contract.md
   - ../nature-shared/core/manuscript-surface-qa.md
@@ -33,6 +34,8 @@ references:
       path: ../nature-shared/research/stratified-paper-reading-2025-2026.md
     - condition: inspect the evidence, transfer limits, contradictions, or unresolved domain gaps behind a maintained study protocol/conduct adapter or blocker
       path: ../nature-shared/research/study-protocol-conduct-evidence-ledger-2026-08.md
+    - condition: inspect the evidence, transfer limits, contradictions, or unresolved exact-domain gaps behind a data integrity/stewardship adapter, blocker, governance rule, or release route
+      path: ../nature-shared/research/data-integrity-stewardship-evidence-ledger-2026-08.md
     - condition: prose feels generic, formulaic, machine-like, connector-heavy, repetitive, weakly authorial, or over-smoothed after the scientific logic is stable
       path: ../nature-shared/core/natural-scholarly-prose.md
     - condition: representative author prose exists and a recognizable manuscript-level voice should survive restructuring

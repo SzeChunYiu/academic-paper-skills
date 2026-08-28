@@ -1,5 +1,5 @@
 name: academic-paper-pipeline
-version: 1.4.0
+version: 1.5.0
 description: >
   Declarative manifest for the journal-agnostic iterative academic-paper
   orchestration workflow. It coordinates research, writing, figures/statistics,
@@ -16,6 +16,7 @@ always_load:
   - ../nature-shared/core/explanatory-sufficiency.md
   - ../nature-shared/core/manuscript-content-selection.md
   - ../nature-shared/core/study-protocol-conduct-contract.md
+  - ../nature-shared/core/data-integrity-stewardship-contract.md
   - ../nature-shared/core/figure-evidence-planning.md
   - ../nature-shared/core/scientific-display-decision-contract.md
   - ../nature-shared/core/manuscript-surface-qa.md
@@ -38,6 +39,8 @@ references:
       path: ../nature-shared/research/stratified-paper-reading-2025-2026.md
     - condition: a protocol/conduct adapter, blocker, repair route, or domain transfer boundary needs source-specific research inspection
       path: ../nature-shared/research/study-protocol-conduct-evidence-ledger-2026-08.md
+    - condition: a data modality/governance adapter, integrity blocker, repair boundary, exact-policy gap, or release route needs source-specific research inspection
+      path: ../nature-shared/research/data-integrity-stewardship-evidence-ledger-2026-08.md
     - condition: manuscript has undergone multiple rounds and needs terminology/unit/number/claim consistency checking
       path: ../nature-shared/core/consistency-sweep.md
     - condition: Results/main-text revisions need shortest sufficient evidence chain, main-versus-support allocation, or revision-accretion control

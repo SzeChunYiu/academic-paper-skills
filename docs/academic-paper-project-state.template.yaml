@@ -1,4 +1,4 @@
-schema_version: "0.4.0"
+schema_version: "0.5.0"
 project:
   id: "project:REPLACE_ME"
   title_working: "REPLACE_ME"
@@ -137,6 +137,204 @@ study_protocol_contract:
     does_not_certify_scientific_truth: true
     does_not_certify_absence_of_bias: true
     does_not_certify_reporting_completion: true
+    does_not_certify_journal_acceptance: true
+
+data_integrity_contract:
+  id: "data-contract:dc-001"
+  contract_schema_version: "1.0.0"
+  study_id: "study:s1"
+  state_version: 1
+  as_of_date: null
+  data_context:
+    modalities: []
+    study_contexts:
+      - "observational_association"
+    sensitivity_tags: []
+    intended_uses:
+      - "primary_analysis"
+      - "figure_source_data"
+    scientific_unit: "REPLACE_ME"
+  resolution:
+    selection_mode: "non_universal_adapter_plus_live_exact_policy"
+    adapter_catalog_id: "data-integrity-maintained-adapters-2026-08-28"
+    evidence_registry_id: "data-integrity-evidence-registry-2026-08-28"
+    evidence_reviewed_at: "2026-08-28"
+    resolved_adapter_ids: []
+    unmatched_modalities: []
+    live_exact_domain_resolution_required: true
+  exact_policy_resolution:
+    applicability: "unresolved"  # required | not_required | unresolved
+    status: "unresolved"  # resolved | unresolved | conflicting | not_applicable
+    as_of_date: null
+    authorities:
+      - authority: null
+        title: null
+        url: null
+        effective_from: null
+        effective_until: null
+        effective_date_basis: "unresolved"  # official_explicit | observed_active_not_backcastable | unresolved
+        reviewed_at: null
+    unresolved_items:
+      - "Resolve applicable institutional, legal, funder, repository, licence, consent, and community-governance rules."
+  data_identities:
+    source_record_ids:
+      - "data-source:source-001"
+    raw_snapshot_ids:
+      - "data-snapshot:raw-001"
+    external_reference_snapshot_ids: []
+    validated_snapshot_ids:
+      - "data-snapshot:validated-001"
+    analysis_ready_snapshot_ids:
+      - "data-snapshot:analysis-001"
+    released_snapshot_ids: []
+  snapshots:
+    - id: "data-snapshot:raw-001"
+      role: "raw"  # raw | external_reference | validated | analysis_ready | display_source | released
+      version: "v1"
+      sha256: null
+      record_count: null
+      byte_count: null
+      created_at: null
+      immutable: false
+      source_record_ids:
+        - "data-source:source-001"
+      schema_or_codebook_id: null
+      known_defects: []
+      adverse_or_null_record_count: null
+    - id: "data-snapshot:validated-001"
+      role: "validated"
+      version: "v1"
+      sha256: null
+      record_count: null
+      byte_count: null
+      created_at: null
+      immutable: false
+      source_record_ids:
+        - "data-source:source-001"
+      schema_or_codebook_id: null
+      known_defects: []
+      adverse_or_null_record_count: null
+    - id: "data-snapshot:analysis-001"
+      role: "analysis_ready"
+      version: "v1"
+      sha256: null
+      record_count: null
+      byte_count: null
+      created_at: null
+      immutable: false
+      source_record_ids:
+        - "data-source:source-001"
+      schema_or_codebook_id: null
+      known_defects: []
+      adverse_or_null_record_count: null
+  transformations:
+    - id: "data-transform:validate-001"
+      input_snapshot_ids:
+        - "data-snapshot:raw-001"
+      output_snapshot_id: "data-snapshot:validated-001"
+      procedure_or_code_id: null
+      procedure_version: null
+      executed_at: null
+      execution_receipt_id: null
+      parameters_recorded: false
+      declared_semantic_changes: []
+      multi_input_reconciliation: null
+      status: "not_run"  # not_run | executed_unverified | verified | failed
+    - id: "data-transform:analysis-ready-001"
+      input_snapshot_ids:
+        - "data-snapshot:validated-001"
+      output_snapshot_id: "data-snapshot:analysis-001"
+      procedure_or_code_id: null
+      procedure_version: null
+      executed_at: null
+      execution_receipt_id: null
+      parameters_recorded: false
+      declared_semantic_changes: []
+      multi_input_reconciliation: null
+      status: "not_run"
+  quality_controls:
+    - id: "data-qc:qc-001"
+      target_snapshot_id: "data-snapshot:validated-001"
+      dimension: "REPLACE_ME"
+      applicability: "unresolved"  # required | optional | not_applicable | unresolved
+      criteria: null
+      receipt_id: null
+      checked_at: null
+      outcome: null
+      status: "not_checked"  # not_checked | passed | failed | unresolved | not_applicable
+  data_decisions:
+    - id: "data-decision:dd-001"
+      unit_id: null
+      action: null
+      reason: null
+      source_evidence_id: null
+      timing_status: "unknown"  # prespecified | before_outcome_access | post_hoc | unknown
+      visible: true
+      affects_adverse_or_null: false
+      transformation_id: null
+  missingness:
+    planned_method: "REPLACE_ME"
+    realized_method: null
+    receipt_id: null
+    deviation_id: null
+    status: "unresolved"
+  analysis_bindings:
+    - analysis_id: "analysis:a-001"
+      input_snapshot_id: "data-snapshot:analysis-001"
+      input_sha256: null
+      result_ids:
+        - "result:r-001"
+      display_ids:
+        - "figure:f1"
+      status: "unverified"
+  governance:
+    sensitivity_class: "unresolved"
+    direct_identifiers_present: null
+    indirect_reidentification_risk: "unresolved"
+    consent_or_authority_requirement: "unresolved"
+    consent_or_authority_status: "unresolved"
+    consent_or_authority_ids: []
+    collective_authority_required: null
+    collective_authority_status: "unresolved"
+    third_party_rights_status: "unresolved"
+    public_release_permitted: null
+    retention_requirements: "REPLACE_ME"
+  data_release:
+    applicability: "unresolved"
+    route: "not_resolved"  # public_repository | controlled_access | restricted | metadata_only | no_release | not_resolved
+    status: "not_released"  # not_released | planned | deposited_unverified | verified | restricted | withdrawn
+    snapshot_id: null
+    snapshot_sha256: null
+    persistent_id: null
+    locator: null
+    version: null
+    licence: null
+    access_conditions: null
+    resolved_at: null
+    peer_review_access: "unresolved"
+  deviations: []
+  data_integrity_status: "unresolved"  # pass | blocked | unresolved
+  blocker_codes:
+    - "raw_snapshot_not_immutable"
+  unresolved_items:
+    - "Resolve exact data policies and materialize authoritative snapshot hashes and receipts."
+  allowed_repair_routes: []
+  certification:
+    schema_valid: false
+    raw_snapshot_immutability: "unchecked"
+    transformation_traceability: "unchecked"
+    analysis_input_traceability: "unchecked"
+    quality_control_receipts: "unchecked"
+    decision_and_deviation_visibility: "unchecked"
+    governance_resolution: "unchecked"
+    release_resolution: "unchecked"
+    does_not_certify_measurement_accuracy: true
+    does_not_certify_completeness_or_representativeness: true
+    does_not_certify_absence_of_bias: true
+    does_not_certify_privacy_or_anonymity: true
+    does_not_certify_legal_or_policy_compliance: true
+    does_not_certify_analytic_reproducibility: true
+    does_not_certify_scientific_truth: true
     does_not_certify_journal_acceptance: true
 
 protocols:
@@ -498,6 +696,12 @@ assurance_profile:
   protocol_contract_status: "unresolved"
   conduct_traceability: "unchecked"
   deviation_transparency: "unchecked"
+  data_integrity_contract_status: "unresolved"
+  raw_snapshot_immutability: "unchecked"
+  transformation_traceability: "unchecked"
+  analysis_input_traceability: "unchecked"
+  data_governance_resolution: "unresolved"
+  data_release_resolution: "unresolved"
   data_provenance: "incomplete"
   computation: "not_run"
   independent_verification: "none"

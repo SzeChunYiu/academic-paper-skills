@@ -14,6 +14,7 @@ The older `skills/nature-writing/` directory remains only as a compatibility/ref
 - studies broad stratified corpora and 3–6 close analogue papers without copying prose or figure identity;
 - checks whether ideas are explained deeply enough for the intended reader;
 - makes sentence-to-sentence logic explicit;
+- binds raw, validated, analysis-ready, analysis-input, and release data objects before drafting downstream claims;
 - plans what evidence and figures the paper actually needs;
 - decides what belongs in main text, Methods, SI, availability, artifact docs, or nowhere;
 - preserves a recognizable author voice while avoiding generic AI-like prose;
@@ -57,6 +58,33 @@ reads, explicit transfer limits, and a frozen 84-record search log. Passing is a
 bounded traceability result, not a scientific-validity certificate and not a
 journal-acceptance prediction.
 
+## Data Integrity And Stewardship Contracts
+
+Before statistics, Results, displays, claims, availability statements, or
+readiness decisions, the skill binds:
+
+```text
+source/acquisition record -> immutable raw or exact external-reference origin -> validation/QC receipts
+-> versioned transformations -> immutable analysis-ready snapshot
+-> analysis/display inputs -> governed release -> bounded claim
+```
+
+Ten maintained modality/governance adapters activate relevant obligations
+without claiming a universal data-quality score or hard-coded coverage of every
+discipline, law, institution, funder, repository, licence, or community policy.
+Unmatched and exact-policy cases remain live official-source research duties.
+Behavioral checks fail closed on mutable raw data, broken lineage, missing
+execution/QC/calibration evidence, input-hash or count mismatch, hidden
+adverse/null exclusions, unit/semantic drift, unauthorized sensitive release,
+missing authority or rights, and false release/version claims.
+
+The 41-source evidence base includes 22 peer-reviewed full-text studies, 13
+official standards/guidance/policies, and 6 abstract-level reads, plus 12 frozen
+queries and 84 screened metadata records. Passing certifies only recorded
+lifecycle invariants—not measurement accuracy, completeness,
+representativeness, privacy, legal compliance, reproducibility, scientific
+truth, or acceptance.
+
 ## Scientific Display Decision Contracts
 
 Every evidence-bearing plot, figure, table, image plate, or diagram can now be
@@ -87,6 +115,7 @@ For substantial work:
 scientific evidence
 -> paper archetype
 -> protocol + analysis plan + executed conduct + deviations
+-> raw snapshot + QC + transformations + analysis-ready/release bindings
 -> question / contribution
 -> claim/evidence/boundary map
 -> content selection
