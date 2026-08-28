@@ -311,9 +311,19 @@ def evaluate_statistical_contract(
         )
 
     plans = {item["plan_id"]: item for item in contract["analysis_plans"]}
+    executions = contract["analysis_executions"]
+    execution_ids = [item["analysis_id"] for item in executions]
+    execution_map = {item["analysis_id"]: item for item in executions}
     results = contract["results"]
     result_map = {item["result_id"]: item for item in results}
     result_ids = [item["result_id"] for item in results]
+    estimand_map = {item["estimand_id"]: item for item in contract["estimands"]}
+    if len(execution_ids) != len(set(execution_ids)):
+        block(
+            "duplicate_analysis_identity",
+            "Analysis-execution identities are not unique.",
+            "Assign immutable unique analysis identities and repair every plan, result, and receipt binding.",
+        )
     if len(result_ids) != len(set(result_ids)):
         block(
             "duplicate_result_identity",
@@ -321,7 +331,7 @@ def evaluate_statistical_contract(
             "Assign immutable unique result identities and repair every dependent binding.",
         )
 
-    for execution in contract["analysis_executions"]:
+    for execution in executions:
         if execution["input_snapshot_sha256"] != input_sha:
             block(
                 "analysis_input_snapshot_mismatch",
@@ -335,7 +345,13 @@ def evaluate_statistical_contract(
                 "Restore the execution provenance or rerun the analysis in a recorded environment; prose edits cannot create execution evidence.",
             )
         plan = plans.get(execution["plan_id"])
-        if plan:
+        if not plan:
+            block(
+                "analysis_plan_binding_broken",
+                f"Analysis execution {execution['analysis_id']} references an unknown plan {execution['plan_id']}.",
+                "Restore the exact plan binding or visibly classify the execution as unplanned with a versioned deviation; claim narrowing cannot create prespecification.",
+            )
+        else:
             method_changed = any(
                 execution[field] != plan[field]
                 for field in (
@@ -420,6 +436,18 @@ def evaluate_statistical_contract(
                         "Execute and record the diagnostic or mark the check unresolved and narrow dependent claims.",
                     )
 
+        owned_result_ids = {
+            result["result_id"]
+            for result in results
+            if result["analysis_id"] == execution["analysis_id"]
+        }
+        if set(execution["result_ids"]) != owned_result_ids:
+            block(
+                "execution_result_binding_broken",
+                f"Analysis execution {execution['analysis_id']} has a result manifest that does not match the results bound to it.",
+                "Reconcile the execution manifest and result analysis IDs against the immutable execution receipt; do not invent or silently reassign outputs.",
+            )
+
     units = contract["units_and_dependence"]
     if units["reported_n"] > units["independent_unit_count"] or any(
         item["independent_n"] > units["independent_unit_count"] for item in results
@@ -453,6 +481,12 @@ def evaluate_statistical_contract(
 
     claim_map = {item["claim_id"]: item for item in contract["claim_links"]}
     for result in results:
+        if result["analysis_id"] not in execution_map:
+            block(
+                "result_execution_binding_broken",
+                f"Result {result['result_id']} references an unknown analysis execution {result['analysis_id']}.",
+                "Restore the result-to-execution binding or rerun the analysis with code, environment, input, and diagnostic receipts; prose or claim narrowing cannot create an execution.",
+            )
         decision = result["decision"]
         linked_claims = [claim_map[c] for c in result["claim_ids"] if c in claim_map]
         if decision["comparison_basis"] == "separate_significance_tests" or any(
@@ -481,25 +515,88 @@ def evaluate_statistical_contract(
                 "Nonsignificance is represented as evidence of no meaningful effect.",
                 "Use a prospectively justified equivalence/precision objective or narrow the claim to inconclusive evidence.",
             )
-        if decision["state"] == "supported" and decision["objective"] in {
-            "equivalence",
-            "noninferiority",
-        }:
+        if decision["state"] == "supported" and decision["objective"] == "equivalence":
             margin = decision["margin"]
             interval = result["uncertainty"]
             crossed = margin is None
-            if margin is not None and decision["objective"] == "equivalence":
+            if margin is not None:
                 crossed = interval["lower"] <= -abs(margin) or interval["upper"] >= abs(
                     margin
                 )
-            if margin is not None and decision["objective"] == "noninferiority":
-                crossed = interval["lower"] <= -abs(margin)
             if crossed or not decision["margin_provenance"]:
                 block(
                     "equivalence_margin_missing_or_crossed",
-                    "A supported equivalence/noninferiority decision lacks a justified margin or its interval crosses the decision boundary.",
+                    "A supported equivalence decision lacks a justified margin or its interval crosses the decision boundary.",
                     "Prespecify and justify the margin, apply the correct interval decision, or mark the result inconclusive and narrow the claim.",
                 )
+        if (
+            decision["state"] == "supported"
+            and decision["objective"] == "noninferiority"
+        ):
+            margin_rule = decision.get("margin_rule")
+            if (
+                decision["margin"] is None
+                or not decision["margin_provenance"]
+                or margin_rule is None
+            ):
+                block(
+                    "noninferiority_decision_rule_missing",
+                    "A supported noninferiority decision lacks a justified margin or an explicit effect-scale, direction, bound, and boundary rule.",
+                    "Record the prospectively justified margin and exact interval decision rule, or mark the result inconclusive and narrow the claim.",
+                )
+            else:
+                estimand = estimand_map.get(result["estimand_id"])
+                declared_direction = {
+                    "higher_is_better": "higher",
+                    "lower_is_better": "lower",
+                }.get(estimand["direction"] if estimand else "")
+                expected_bound = {
+                    "higher": "lower",
+                    "lower": "upper",
+                }[margin_rule["favorable_direction"]]
+                if (
+                    margin_rule["effect_scale"] != result["estimate"]["scale"]
+                    or margin_rule["required_interval_bound"] != expected_bound
+                    or (
+                        declared_direction is not None
+                        and margin_rule["favorable_direction"] != declared_direction
+                    )
+                ):
+                    block(
+                        "noninferiority_decision_rule_mismatch",
+                        "The noninferiority rule contradicts the result effect scale, favorable direction, estimand direction, or required interval bound.",
+                        "Correct the recorded rule from the prespecified estimand and margin, rerun if needed, or mark the result inconclusive.",
+                    )
+                sidedness_bounds = {
+                    "two_sided": {"lower", "upper"},
+                    "one_sided_lower": {"lower"},
+                    "lower_one_sided": {"lower"},
+                    "one_sided_upper": {"upper"},
+                    "upper_one_sided": {"upper"},
+                }
+                available_bounds = sidedness_bounds.get(
+                    result["uncertainty"]["sidedness"]
+                )
+                required_bound = margin_rule["required_interval_bound"]
+                if available_bounds is None or required_bound not in available_bounds:
+                    block(
+                        "noninferiority_interval_sidedness_mismatch",
+                        "The recorded interval sidedness does not provide the bound required by the noninferiority rule.",
+                        "Use and label the prespecified compatible one- or two-sided interval, or mark the decision inconclusive.",
+                    )
+                observed_bound = result["uncertainty"][required_bound]
+                boundary = margin_rule["boundary_value"]
+                crossed = (
+                    observed_bound <= boundary
+                    if required_bound == "lower"
+                    else observed_bound >= boundary
+                )
+                if crossed:
+                    block(
+                        "noninferiority_margin_crossed",
+                        "The interval bound required by the recorded noninferiority rule reaches or crosses its effect-scale boundary.",
+                        "Report the result as inconclusive for noninferiority, or rerun only a prospectively justified analysis; claim narrowing cannot move the margin.",
+                    )
 
         requested = {claim["requested_inference"] for claim in linked_claims}
         metric_kinds = {metric["kind"] for metric in result["specialist_metrics"]}
@@ -537,6 +634,11 @@ def evaluate_statistical_contract(
     for surface in contract["surface_bindings"]:
         result = result_map.get(surface["result_id"])
         if not result:
+            block(
+                "surface_result_binding_broken",
+                f"Surface {surface['surface_id']} references an unknown result {surface['result_id']}.",
+                "Restore the exact result binding or remove the orphan surface; do not infer numeric authority from unbound prose, tables, or displays.",
+            )
             continue
         if surface["analysis_receipt_sha256"] != result["analysis_receipt_sha256"]:
             block(

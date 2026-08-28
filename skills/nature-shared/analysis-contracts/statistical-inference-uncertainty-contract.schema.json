@@ -902,6 +902,43 @@
                   "string",
                   "null"
                 ]
+              },
+              "margin_rule": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "effect_scale": {
+                        "type": "string"
+                      },
+                      "favorable_direction": {
+                        "enum": [
+                          "higher",
+                          "lower"
+                        ]
+                      },
+                      "required_interval_bound": {
+                        "enum": [
+                          "lower",
+                          "upper"
+                        ]
+                      },
+                      "boundary_value": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "effect_scale",
+                      "favorable_direction",
+                      "required_interval_bound",
+                      "boundary_value"
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
               }
             },
             "required": [

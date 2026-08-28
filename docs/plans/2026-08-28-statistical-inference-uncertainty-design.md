@@ -77,19 +77,23 @@ requirements.
 The evaluator fails closed on structural invalidity and recorded contradictions,
 including analysis-input hash drift, duplicate identities, independent-unit or
 dependence mismatch, false use of subsamples as independent `n`, unlogged
-plan/execution changes, omitted primary/adverse/null results, unaccounted
-confirmatory multiplicity, post-hoc observed power used as evidence, failed
-model convergence, required diagnostics represented as complete without a
+plan/execution changes, broken plan-execution-result-surface identity chains,
+omitted primary/adverse/null results, unaccounted confirmatory multiplicity,
+post-hoc observed power used as evidence, failed model convergence, required
+diagnostics represented as complete without a
 receipt, missingness handling that contradicts the plan, and cross-surface
 estimate/denominator/interval/P-value drift.
 
 Inference-boundary checks reject several high-risk shortcuts: separate
 significance tests cannot establish a between-group difference; `P > alpha`
 cannot establish equivalence or absence of a meaningful effect; equivalence or
-non-inferiority requires a justified, prospectively fixed margin; confidence,
-credible, prediction, bootstrap, and compatibility intervals are not
-interchangeable; and a sensitivity analysis targeting a different quantity
-cannot silently be called robustness of the original estimand.
+non-inferiority requires a justified, prospectively fixed margin; supported
+non-inferiority also binds the effect scale, favorable direction, required
+interval bound, and exact boundary rather than assuming every margin is a
+higher-is-better difference; confidence, credible, prediction, bootstrap, and
+compatibility intervals are not interchangeable; and a sensitivity analysis
+targeting a different quantity cannot silently be called robustness of the
+original estimand.
 
 Exploratory multiplicity, Bayesian analyses, descriptive studies, and
 non-quantitative work are not forced into a frequentist confirmatory template.

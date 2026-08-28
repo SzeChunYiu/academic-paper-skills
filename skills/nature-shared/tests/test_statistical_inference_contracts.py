@@ -180,6 +180,14 @@ class StatisticalInferenceContractTests(unittest.TestCase):
         result = self.evaluate(contract)
         self.assertIn("duplicate_result_identity", result["blocker_codes"])
 
+    def test_analysis_execution_identities_must_be_unique(self) -> None:
+        contract = fixture()
+        contract["analysis_executions"].append(
+            copy.deepcopy(contract["analysis_executions"][0])
+        )
+        result = self.evaluate(contract)
+        self.assertIn("duplicate_analysis_identity", result["blocker_codes"])
+
     def test_subsamples_cannot_be_reported_as_independent_n(self) -> None:
         contract = fixture()
         contract["units_and_dependence"]["reported_n"] = 200
@@ -247,6 +255,24 @@ class StatisticalInferenceContractTests(unittest.TestCase):
         )
         result = self.evaluate(contract)
         self.assertIn("analysis_plan_execution_mismatch", result["blocker_codes"])
+
+    def test_analysis_execution_must_reference_an_existing_plan(self) -> None:
+        contract = fixture()
+        contract["analysis_executions"][0]["plan_id"] = "sap:missing"
+        result = self.evaluate(contract)
+        self.assertIn("analysis_plan_binding_broken", result["blocker_codes"])
+
+    def test_result_must_reference_an_existing_execution(self) -> None:
+        contract = fixture()
+        contract["results"][0]["analysis_id"] = "analysis:missing"
+        result = self.evaluate(contract)
+        self.assertIn("result_execution_binding_broken", result["blocker_codes"])
+
+    def test_execution_result_manifest_must_match_owned_results(self) -> None:
+        contract = fixture()
+        contract["analysis_executions"][0]["result_ids"] = ["result:missing"]
+        result = self.evaluate(contract)
+        self.assertIn("execution_result_binding_broken", result["blocker_codes"])
 
     def test_missing_data_strategy_change_requires_visible_deviation(self) -> None:
         contract = fixture()
@@ -399,6 +425,145 @@ class StatisticalInferenceContractTests(unittest.TestCase):
         result = self.evaluate(contract)
         self.assertIn("equivalence_margin_missing_or_crossed", result["blocker_codes"])
 
+    def test_supported_noninferiority_requires_an_explicit_bound_rule(self) -> None:
+        contract = fixture()
+        result_record = contract["results"][0]
+        result_record["uncertainty"]["lower"] = -0.4
+        result_record["uncertainty"]["upper"] = 0.3
+        result_record["decision"] = {
+            "objective": "noninferiority",
+            "state": "supported",
+            "comparison_basis": "direct_contrast",
+            "margin": 0.5,
+            "margin_unit": "points",
+            "margin_provenance": "prespecified domain-justified margin",
+        }
+        result = self.evaluate(contract)
+        self.assertIn("noninferiority_decision_rule_missing", result["blocker_codes"])
+
+    def test_lower_is_better_noninferiority_uses_the_upper_interval_bound(self) -> None:
+        contract = fixture()
+        result_record = contract["results"][0]
+        result_record["uncertainty"]["lower"] = -0.4
+        result_record["uncertainty"]["upper"] = 0.7
+        result_record["decision"] = {
+            "objective": "noninferiority",
+            "state": "supported",
+            "comparison_basis": "direct_contrast",
+            "margin": 0.5,
+            "margin_unit": "points",
+            "margin_provenance": "prespecified domain-justified margin",
+            "margin_rule": {
+                "effect_scale": "mean_difference",
+                "favorable_direction": "lower",
+                "required_interval_bound": "upper",
+                "boundary_value": 0.5,
+            },
+        }
+        result = self.evaluate(contract)
+        self.assertIn("noninferiority_margin_crossed", result["blocker_codes"])
+
+    def test_exact_lower_is_better_noninferiority_rule_can_pass(self) -> None:
+        contract = fixture()
+        result_record = contract["results"][0]
+        result_record["uncertainty"]["lower"] = -0.4
+        result_record["uncertainty"]["upper"] = 0.3
+        result_record["decision"] = {
+            "objective": "noninferiority",
+            "state": "supported",
+            "comparison_basis": "direct_contrast",
+            "margin": 0.5,
+            "margin_unit": "points",
+            "margin_provenance": "prespecified domain-justified margin",
+            "margin_rule": {
+                "effect_scale": "mean_difference",
+                "favorable_direction": "lower",
+                "required_interval_bound": "upper",
+                "boundary_value": 0.5,
+            },
+        }
+        for surface in contract["surface_bindings"]:
+            surface["reported_lower"] = -0.4
+            surface["reported_upper"] = 0.3
+        result = self.evaluate(contract)
+        self.assertNotIn(
+            "noninferiority_decision_rule_missing", result["blocker_codes"]
+        )
+        self.assertNotIn(
+            "noninferiority_decision_rule_mismatch", result["blocker_codes"]
+        )
+        self.assertNotIn("noninferiority_margin_crossed", result["blocker_codes"])
+
+    def test_noninferiority_rule_must_match_estimand_direction_and_bound(self) -> None:
+        contract = fixture()
+        result_record = contract["results"][0]
+        result_record["decision"] = {
+            "objective": "noninferiority",
+            "state": "supported",
+            "comparison_basis": "direct_contrast",
+            "margin": 0.5,
+            "margin_unit": "points",
+            "margin_provenance": "prespecified domain-justified margin",
+            "margin_rule": {
+                "effect_scale": "mean_difference",
+                "favorable_direction": "higher",
+                "required_interval_bound": "lower",
+                "boundary_value": -0.5,
+            },
+        }
+        result = self.evaluate(contract)
+        self.assertIn("noninferiority_decision_rule_mismatch", result["blocker_codes"])
+
+    def test_noninferiority_interval_must_supply_the_required_bound(self) -> None:
+        contract = fixture()
+        result_record = contract["results"][0]
+        result_record["uncertainty"]["sidedness"] = "one_sided_lower"
+        result_record["decision"] = {
+            "objective": "noninferiority",
+            "state": "supported",
+            "comparison_basis": "direct_contrast",
+            "margin": 0.5,
+            "margin_unit": "points",
+            "margin_provenance": "prespecified domain-justified margin",
+            "margin_rule": {
+                "effect_scale": "mean_difference",
+                "favorable_direction": "lower",
+                "required_interval_bound": "upper",
+                "boundary_value": 0.5,
+            },
+        }
+        result = self.evaluate(contract)
+        self.assertIn(
+            "noninferiority_interval_sidedness_mismatch", result["blocker_codes"]
+        )
+
+    def test_ratio_noninferiority_uses_the_recorded_effect_scale_boundary(self) -> None:
+        contract = fixture()
+        result_record = contract["results"][0]
+        result_record["estimate"].update(
+            {"value": 1.02, "scale": "risk_ratio", "unit": "ratio"}
+        )
+        result_record["uncertainty"].update(
+            {"lower": 0.82, "upper": 1.35, "unit": "ratio"}
+        )
+        result_record["test"]["null_value"] = 1
+        result_record["decision"] = {
+            "objective": "noninferiority",
+            "state": "supported",
+            "comparison_basis": "direct_contrast",
+            "margin": 1.3,
+            "margin_unit": "risk ratio",
+            "margin_provenance": "prespecified domain-justified ratio margin",
+            "margin_rule": {
+                "effect_scale": "risk_ratio",
+                "favorable_direction": "lower",
+                "required_interval_bound": "upper",
+                "boundary_value": 1.3,
+            },
+        }
+        result = self.evaluate(contract)
+        self.assertIn("noninferiority_margin_crossed", result["blocker_codes"])
+
     def test_interval_semantics_are_not_interchangeable_across_surfaces(self) -> None:
         contract = fixture()
         contract["surface_bindings"][2]["reported_interval_kind"] = (
@@ -424,6 +589,12 @@ class StatisticalInferenceContractTests(unittest.TestCase):
         contract["surface_bindings"][0]["analysis_receipt_sha256"] = "e" * 64
         result = self.evaluate(contract)
         self.assertIn("stale_statistical_surface_binding", result["blocker_codes"])
+
+    def test_surface_must_reference_an_existing_result(self) -> None:
+        contract = fixture()
+        contract["surface_bindings"][0]["result_id"] = "result:missing"
+        result = self.evaluate(contract)
+        self.assertIn("surface_result_binding_broken", result["blocker_codes"])
 
     def test_primary_adverse_or_null_result_cannot_be_hidden(self) -> None:
         contract = fixture()

@@ -110,6 +110,11 @@ Preserve:
 - convergence and diagnostic records;
 - produced result identities.
 
+A plan, execution, result, or manuscript surface that names an absent upstream
+object is not partially verified: its identity chain is broken. The execution's
+result manifest and every result's execution identity must agree in both
+directions before result-level or cross-surface checks can pass.
+
 A changed estimator, population, missing-data strategy, outcome, hypothesis
 family, or decision rule is a versioned deviation—not a prose edit. Preserve
 reason, consequence, affected results/claims, classification, and disclosure
@@ -175,6 +180,8 @@ At minimum, reject these recorded contradictions:
 - `P > alpha` used to establish no effect or equivalence;
 - equivalence/noninferiority without a prospectively justified margin and
   compatible interval decision;
+- supported noninferiority without an explicit effect scale, favorable
+  direction, required lower/upper interval bound, and boundary value;
 - post-hoc observed power used as evidence after results are known;
 - discrimination-only evidence used to claim calibration or clinical utility;
 - a future-setting meta-analytic claim without prediction uncertainty;
@@ -204,8 +211,9 @@ Record for every surface:
 
 Regenerate dependent surfaces when an analysis receipt changes. Do not allow a
 table, plot, caption, and prose sentence to drift numerically or change interval
-semantics. Preserve planned primary, adverse, harmful, null, inconclusive, and
-failed results; omission is not a repair.
+semantics. An orphan surface is blocking rather than exempt from numeric checks.
+Preserve planned primary, adverse, harmful, null, inconclusive, and failed
+results; omission is not a repair.
 
 ## 10. Resolve exact policies as of the scientific object
 
@@ -287,4 +295,3 @@ this layer. It does **not** certify:
 
 Those questions require their own evidence, review, and exact decision
 contracts.
-
