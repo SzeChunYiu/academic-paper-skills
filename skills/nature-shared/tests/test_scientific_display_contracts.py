@@ -169,6 +169,18 @@ class ScientificDisplayContractTests(unittest.TestCase):
         result = self.evaluate(contract)
         self.assertIn("embedding_mechanism_overclaim", result["blocker_codes"])
 
+    def test_embedding_cannot_support_causal_claim_without_independent_evidence(self) -> None:
+        contract = fixture()
+        contract["reader_task"] = {
+            "id": "orient_high_dimensional_structure",
+            "question": "What structure is visible in the embedding?",
+        }
+        contract["scientific_object"]["data_structure"] = ["high_dimensional"]
+        contract["claim_links"][0]["claim_type"] = "causal"
+        contract["representation"]["family"] = "embedding"
+        result = self.evaluate(contract)
+        self.assertIn("embedding_mechanism_overclaim", result["blocker_codes"])
+
     def test_workflow_diagram_cannot_silently_become_a_causal_model(self) -> None:
         contract = fixture()
         contract["display_kind"] = "diagram"

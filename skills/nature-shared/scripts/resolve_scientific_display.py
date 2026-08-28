@@ -341,8 +341,9 @@ def evaluate_display_contract(
 
     allowed = _allowed_inferences(contract)
     types = _claim_types(contract)
+    causal_or_mechanistic = {"causal", "causal_effect", "mechanism", "mechanistic"}
     if family in {"embedding", "small_multiple_embedding"} and (
-        "mechanism" in allowed or "mechanistic" in types or "causal_effect" in allowed
+        causal_or_mechanistic & (allowed | types)
     ):
         block(
             "embedding_mechanism_overclaim",
@@ -350,7 +351,7 @@ def evaluate_display_contract(
             "Add independent quantitative or experimental evidence, or narrow the claim to descriptive orientation in the embedding.",
         )
     if family == "workflow_diagram" and (
-        "causal_effect" in allowed or "causal" in types or "mechanistic" in types
+        causal_or_mechanistic & (allowed | types)
     ):
         block(
             "workflow_causal_overclaim",
