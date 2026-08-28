@@ -95,6 +95,24 @@ class AcademicPaperPipelineTests(unittest.TestCase):
         self.assertIn("Nature is only one optional target adapter", skill)
         self.assertIn("The editor, not reviewer vote count, controls convergence", read(PIPELINE / "README_EN.md"))
 
+    def test_pipeline_keeps_science_target_objective_and_certification_separate(self) -> None:
+        skill = read(PIPELINE / "SKILL.md")
+        manifest = read(PIPELINE / "manifest.yaml")
+        state = read(PIPELINE.parents[1] / "docs" / "academic-paper-project-state.template.yaml")
+        self.assertIn("venue-decision-contract.md", manifest)
+        for marker in (
+            "venue_decision_contract",
+            "acceptance_objective",
+            "scientific_gate_status",
+            "target_gate_status",
+            "resolution_certification",
+            "journal_certification_layer",
+            "effective_date_basis",
+        ):
+            self.assertIn(marker, state)
+        self.assertIn("no universal acceptance objective", skill)
+        self.assertIn("certification is separate from acceptance", skill)
+
 
 if __name__ == "__main__":
     unittest.main()

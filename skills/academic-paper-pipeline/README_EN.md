@@ -20,6 +20,19 @@ The pipeline keeps one persistent manuscript state across rounds:
 - revision delta;
 - current publication-readiness posture.
 
+## Exact Venue Decision State
+
+The persistent state now resolves **exact venue × article type × stage ×
+effective date** and records the policy sources behind each decision field.
+Scientific assurance remains independent from target-objective fit. Novelty,
+impact, breadth, audience interest, burden of doubt, allowed repair routes,
+review model, AI/confidentiality rules, acceptance states, and journal
+certifications are not collapsed into one acceptance score.
+
+Live official-source contracts outrank maintained exact snapshots. A generic
+or publication-model fallback can guide planning, but cannot close exact target
+readiness or be attributed to the journal.
+
 ## Iteration Model
 
 ```text

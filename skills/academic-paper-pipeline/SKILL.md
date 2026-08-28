@@ -53,6 +53,7 @@ Resolve or infer conservatively:
 target journal/venue
 article/content type
 submission stage
+policy as-of/effective date
 dominant paper archetype
 secondary archetypes
 intended reader
@@ -61,6 +62,28 @@ real-world constraints on new experiments/analysis
 ```
 
 If a target/archetype is unclear but the current task can proceed safely, build a generic rigorous profile and research the uncertainty instead of repeatedly asking the user.
+
+## Exact venue decision contract
+
+When a target-specific readiness or revision decision matters, resolve:
+
+`exact venue × article type × stage × effective date`
+
+Load `../nature-shared/journal-formats/venue-decision-contract.md`. There is no universal acceptance objective. Keep scientific assurance, target-objective
+fit, real journal decision state, and any certification layer as separate state
+objects.
+
+The resolution order is live official-source contract, active maintained exact
+snapshot, then an explicitly non-exact fallback. A fallback never becomes the
+journal's policy. Future-effective rules do not apply early, and an observed
+snapshot cannot be back-cast before its observation date.
+
+The contract must expose scientific gates; novelty/impact/breadth/audience
+interest gates; burden-of-doubt rules; allowed repair routes; review model;
+AI/confidentiality policy; acceptance states; certification layer; and source
+plus effective-date provenance. Journal certification is separate from acceptance:
+neither a journal annotation nor a resolver/source certification predicts the
+real editorial outcome.
 
 ## Self-research rule
 
@@ -105,6 +128,10 @@ Research enough to establish:
 - nearest paper archetype;
 - local evidence/figure expectations;
 - target criteria when known.
+
+Resolve the exact venue decision contract from current official sources or an
+active maintained snapshot. If only a fallback is available, keep target-policy
+status unresolved while useful science and drafting work continues.
 
 ### 3. Build manuscript state
 
@@ -255,6 +282,8 @@ Use it only when:
 
 - no integrity/compliance blocker;
 - no unresolved publication-criteria blocker;
+- the exact target tuple/date is resolved by a supported contract, not a
+  fallback presented as policy;
 - no unresolved technical blocker to a headline claim;
 - headline claims are established or appropriately narrowed;
 - every in-scope atomic assertion has an allowed release status and zero

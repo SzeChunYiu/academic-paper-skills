@@ -79,6 +79,19 @@ target + paper archetype
 
 成功 terminal state 是 `simulated_publication_ready_for_target`。这是 readiness simulation，不保证真实期刊 accept。
 
+### Exact venue decision contracts
+
+Target-specific decision 会解析：
+
+`exact venue × article type × stage × effective date`
+
+Contract 分别保存 scientific gates、novelty/impact/breadth/audience-interest
+gates、burden-of-doubt、repair routes、review model、AI/confidentiality policy、
+acceptance states、certification 与 official-source provenance。Maintained TMLR、
+Nature Article、PLOS ONE snapshots 用于展示不同 objectives；未知期刊走 live
+official-source resolution，而不是虚构已 hard-code 的全期刊目录。Fallback
+profiles 始终明确标记为 non-exact。
+
 ### 不认识的 paper，先 research 再写
 
 如果 paper type、target venue、reporting standard、writing convention 或 figure grammar 无法可靠覆盖，AI session 应先研究：

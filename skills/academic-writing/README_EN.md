@@ -20,6 +20,20 @@ The older `skills/nature-writing/` directory remains only as a compatibility/ref
 - adapts the scientifically stable manuscript to the exact target last;
 - runs a hard final filename/script/repository leakage and punctuation/typography gate.
 
+## Exact Venue Decision Contracts
+
+When target-specific readiness matters, `academic-writing` resolves **exact
+venue × article type × stage × effective date**. It keeps scientific gates,
+novelty/impact/breadth/audience-interest gates, burden-of-doubt rules, allowed
+repairs, review model, AI/confidentiality policy, acceptance states, and any
+certification layer separate.
+
+Maintained TMLR, Nature Article, and PLOS ONE Research Article snapshots
+demonstrate materially different objectives. They are examples of the
+architecture, not a claim that every journal is hard-coded. Unknown, stale,
+future-effective, or conflicting targets require live official-source
+resolution; a fallback profile is never presented as exact journal policy.
+
 ## Writing Model
 
 For substantial work:

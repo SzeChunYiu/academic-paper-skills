@@ -1,4 +1,4 @@
-schema_version: "0.1.0"
+schema_version: "0.2.0"
 project:
   id: "project:REPLACE_ME"
   title_working: "REPLACE_ME"
@@ -22,6 +22,7 @@ project:
     journal_or_venue: null
     content_type: null
     stage: "planning"  # planning | drafting | pre_submission | revision | post_publication
+    policy_as_of_date: null  # YYYY-MM-DD; null until target-specific policy is evaluated
 
 agents:
   - id: "agent:human-author-1"
@@ -428,9 +429,88 @@ assurance_profile:
     - "REPLACE_ME"
 
 target_projection:
+  id: "target-projection:tp-001"
   target: null
   content_type: null
   instructions_checked_at: null
+  venue_decision_contract:
+    request:
+      venue: null
+      article_type: null
+      normalized_stage: null  # planning | initial_submission | peer_review | revision | accepted | production | post_publication
+      as_of_date: null
+    resolution_mode: "unresolved"  # exact_live_official | exact_contract_snapshot | fallback_with_live_resolution_required | unresolved
+    contract_id: null
+    contract_schema_version: null
+    fallback_profile_id: null
+    fallback_profile_is_not_exact_policy: true
+    live_official_resolution_required: true
+    policy_validity:
+      effective_from: null
+      effective_until: null
+      effective_date_basis: "unresolved"  # official_explicit | observed_active_not_backcastable | unresolved
+      observed_active_at: null
+      reviewed_at: null
+      next_review_due: null
+    source_records:
+      - source_id: null
+        authority: null
+        page_title: null
+        url: null
+        accessed_at: null
+        stated_effective_date: null
+        supports_fields: []
+    unresolved_conflicts: []
+  acceptance_objective:
+    id: null
+    scope: "non_universal"
+    source_contract_id: null
+    rule: null
+  scientific_gate_status:
+    status: "not_evaluated"  # not_evaluated | satisfied | failed | unresolved
+    required_gate_ids: []
+    failed_gate_ids: []
+    unresolved_gate_ids: []
+  target_gate_status:
+    novelty: "not_evaluated"  # required_satisfied | required_failed | not_a_gate | unresolved | not_evaluated
+    impact: "not_evaluated"
+    breadth: "not_evaluated"
+    audience_interest: "not_evaluated"
+    failed_gate_ids: []
+  burden_of_doubt:
+    default: "unresolved"
+    criterion_overrides: {}
+    applied_defaults: []
+  allowed_repair_routes:
+    - route: "narrow_claim"
+      policy_status: "not_resolved"  # explicitly_allowed | conditionally_allowed | not_resolved | not_applicable
+      source_ids: []
+      constraint: null
+  review_model:
+    model: null
+    decision_owner: null
+    vote_rule: null
+    revision_model: null
+  ai_confidentiality_policy:
+    author_ai_use: "unresolved"
+    reviewer_ai_use: "unresolved"
+    confidentiality: "unresolved"
+    source_ids: []
+    live_check_required: true
+  acceptance_state:
+    criteria_evaluation: "not_evaluated"  # contract_criteria_satisfied | scientific_gates_not_met | target_objective_not_met | not_evaluated
+    actual_journal_decision: null
+    is_simulation_only: true
+  resolution_certification:
+    level: "unresolved"  # live_official | maintained_snapshot | fallback_not_exact | unresolved
+    tuple_verified: false
+    does_not_certify:
+      - "real_journal_acceptance"
+      - "manuscript_scientific_validity"
+  journal_certification_layer:
+    separate_from_acceptance: true
+    schemes: []
+    awarded_or_eligible: []
   reporting_items_status: "not_evaluated"
   mechanics_status: "not_evaluated"
   package_status: "not_started"

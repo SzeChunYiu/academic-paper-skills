@@ -1,0 +1,305 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/SzeChunYiu/academic-paper-skills/venue-decision-contract.schema.json",
+  "title": "Exact venue decision contract",
+  "type": "object",
+  "required": [
+    "contract_schema_version",
+    "contract_id",
+    "venue",
+    "article_type",
+    "stages",
+    "policy_validity",
+    "provenance",
+    "fallback_profile_id",
+    "decision_contract"
+  ],
+  "properties": {
+    "contract_schema_version": {"type": "string", "const": "1.0.0"},
+    "contract_id": {"type": "string", "minLength": 1},
+    "venue": {"$ref": "#/$defs/identity"},
+    "article_type": {"$ref": "#/$defs/identity"},
+    "stages": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "planning",
+          "initial_submission",
+          "peer_review",
+          "revision",
+          "accepted",
+          "production",
+          "post_publication"
+        ]
+      }
+    },
+    "policy_validity": {
+      "type": "object",
+      "required": [
+        "effective_from",
+        "effective_until",
+        "effective_date_basis",
+        "observed_active_at",
+        "reviewed_at"
+      ],
+      "properties": {
+        "effective_from": {"$ref": "#/$defs/nullableDate"},
+        "effective_until": {"$ref": "#/$defs/nullableDate"},
+        "effective_date_basis": {"type": "string", "minLength": 1},
+        "observed_active_at": {"$ref": "#/$defs/nullableDate"},
+        "reviewed_at": {"type": "string", "format": "date"},
+        "next_review_due": {"$ref": "#/$defs/nullableDate"}
+      },
+      "additionalProperties": false
+    },
+    "provenance": {
+      "type": "object",
+      "required": ["resolution_mode", "sources", "unresolved_conflicts"],
+      "properties": {
+        "resolution_mode": {
+          "enum": [
+            "maintained_exact_profile",
+            "live_official_resolution",
+            "test_fixture"
+          ]
+        },
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/source"}
+        },
+        "unresolved_conflicts": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      },
+      "additionalProperties": false
+    },
+    "fallback_profile_id": {"type": "string", "minLength": 1},
+    "decision_contract": {
+      "type": "object",
+      "required": [
+        "acceptance_objective",
+        "scientific_gates",
+        "novelty_gate",
+        "impact_gate",
+        "breadth_gate",
+        "audience_interest_gate",
+        "burden_of_doubt",
+        "allowed_repair_routes",
+        "review_model",
+        "ai_confidentiality_policy",
+        "acceptance_states",
+        "certification_layer"
+      ],
+      "properties": {
+        "acceptance_objective": {
+          "type": "object",
+          "required": ["id", "scope", "rule"],
+          "properties": {
+            "id": {"type": "string"},
+            "scope": {"const": "non_universal"},
+            "rule": {"type": "string"},
+            "source_refs": {"$ref": "#/$defs/sourceRefs"}
+          },
+          "additionalProperties": false
+        },
+        "scientific_gates": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/scientificGate"}
+        },
+        "novelty_gate": {"$ref": "#/$defs/targetGate"},
+        "impact_gate": {"$ref": "#/$defs/targetGate"},
+        "breadth_gate": {"$ref": "#/$defs/targetGate"},
+        "audience_interest_gate": {
+          "allOf": [
+            {"$ref": "#/$defs/targetGate"},
+            {
+              "type": "object",
+              "required": ["accepted_values"],
+              "properties": {
+                "accepted_values": {
+                  "type": "array",
+                  "items": {"type": "string"}
+                }
+              }
+            }
+          ]
+        },
+        "burden_of_doubt": {
+          "type": "object",
+          "required": ["default", "overrides"],
+          "properties": {
+            "default": {"type": "string"},
+            "overrides": {
+              "type": "object",
+              "additionalProperties": {"type": "string"}
+            },
+            "rule": {"type": "string"},
+            "source_refs": {"$ref": "#/$defs/sourceRefs"}
+          },
+          "additionalProperties": false
+        },
+        "allowed_repair_routes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["route", "policy_status", "source_refs"],
+            "properties": {
+              "route": {"type": "string"},
+              "policy_status": {
+                "enum": [
+                  "explicitly_allowed",
+                  "conditionally_allowed",
+                  "not_resolved",
+                  "not_applicable"
+                ]
+              },
+              "constraint": {"type": ["string", "null"]},
+              "source_refs": {"$ref": "#/$defs/sourceRefs"}
+            },
+            "additionalProperties": false
+          }
+        },
+        "review_model": {"type": "object", "minProperties": 2},
+        "ai_confidentiality_policy": {
+          "type": "object",
+          "required": [
+            "author_ai_use",
+            "reviewer_ai_use",
+            "confidentiality",
+            "live_check_required",
+            "source_refs"
+          ],
+          "properties": {
+            "author_ai_use": {"type": "string"},
+            "reviewer_ai_use": {"type": "string"},
+            "confidentiality": {"type": "string"},
+            "live_check_required": {"type": "boolean"},
+            "source_refs": {"$ref": "#/$defs/sourceRefs"}
+          },
+          "additionalProperties": false
+        },
+        "acceptance_states": {
+          "type": "object",
+          "required": [
+            "criteria_satisfied",
+            "scientific_failure",
+            "target_failure",
+            "actual_decisions"
+          ],
+          "properties": {
+            "criteria_satisfied": {"type": "string"},
+            "scientific_failure": {"type": "string"},
+            "target_failure": {"type": "string"},
+            "actual_decisions": {
+              "type": "array",
+              "items": {"type": "string"}
+            }
+          },
+          "additionalProperties": false
+        },
+        "certification_layer": {
+          "type": "object",
+          "required": ["separate_from_acceptance", "schemes"],
+          "properties": {
+            "separate_from_acceptance": {"const": true},
+            "schemes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["id", "relationship_to_acceptance", "rule"],
+                "properties": {
+                  "id": {"type": "string"},
+                  "relationship_to_acceptance": {"type": "string"},
+                  "rule": {"type": "string"},
+                  "source_refs": {"$ref": "#/$defs/sourceRefs"}
+                },
+                "additionalProperties": false
+              }
+            },
+            "notes": {"type": "string"}
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "nullableDate": {
+      "oneOf": [
+        {"type": "string", "format": "date"},
+        {"type": "null"}
+      ]
+    },
+    "identity": {
+      "type": "object",
+      "required": ["id", "name", "aliases"],
+      "properties": {
+        "id": {"type": "string"},
+        "name": {"type": "string"},
+        "aliases": {
+          "type": "array",
+          "items": {"type": "string"},
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "sourceRefs": {
+      "type": "array",
+      "items": {"type": "string"},
+      "uniqueItems": true
+    },
+    "source": {
+      "type": "object",
+      "required": ["source_id", "authority", "title", "url", "accessed_at", "supports"],
+      "properties": {
+        "source_id": {"type": "string"},
+        "authority": {"type": "string"},
+        "title": {"type": "string"},
+        "url": {"type": "string", "format": "uri"},
+        "accessed_at": {"type": "string", "format": "date"},
+        "stated_effective_date": {"$ref": "#/$defs/nullableDate"},
+        "supports": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string"}
+        }
+      },
+      "additionalProperties": false
+    },
+    "scientificGate": {
+      "type": "object",
+      "required": ["id", "observation_key", "required", "rule", "source_refs"],
+      "properties": {
+        "id": {"type": "string"},
+        "observation_key": {"type": "string"},
+        "required": {"type": "boolean"},
+        "rule": {"type": "string"},
+        "source_refs": {"$ref": "#/$defs/sourceRefs"}
+      },
+      "additionalProperties": false
+    },
+    "targetGate": {
+      "type": "object",
+      "required": ["required", "observation_key", "rule", "source_refs"],
+      "properties": {
+        "required": {"type": "boolean"},
+        "observation_key": {"type": "string"},
+        "rule": {"type": "string"},
+        "source_refs": {"$ref": "#/$defs/sourceRefs"},
+        "accepted_values": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

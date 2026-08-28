@@ -1,0 +1,233 @@
+{
+  "contract_schema_version": "1.0.0",
+  "contract_id": "tmlr-research-paper-observed-2026-08-28",
+  "venue": {
+    "id": "tmlr",
+    "name": "Transactions on Machine Learning Research",
+    "aliases": ["TMLR"]
+  },
+  "article_type": {
+    "id": "research-paper",
+    "name": "Research Paper",
+    "aliases": ["research article", "paper"]
+  },
+  "stages": ["initial_submission", "peer_review", "revision"],
+  "policy_validity": {
+    "effective_from": null,
+    "effective_until": null,
+    "effective_date_basis": "The official pages did not state a policy start date; this snapshot is supported only from the observed-active date and must not be back-cast.",
+    "observed_active_at": "2026-08-28",
+    "reviewed_at": "2026-08-28",
+    "next_review_due": "2026-11-28"
+  },
+  "provenance": {
+    "resolution_mode": "maintained_exact_profile",
+    "sources": [
+      {
+        "source_id": "tmlr-acceptance-criteria",
+        "authority": "official_venue",
+        "title": "TMLR Acceptance Criteria",
+        "url": "https://jmlr.org/tmlr/acceptance-criteria.html",
+        "accessed_at": "2026-08-28",
+        "stated_effective_date": null,
+        "supports": [
+          "acceptance_objective",
+          "claim_evidence_gate",
+          "audience_interest_gate",
+          "burden_of_doubt",
+          "claim_narrowing",
+          "novelty_impact_breadth_not_acceptance_gates",
+          "certification_separation"
+        ]
+      },
+      {
+        "source_id": "tmlr-editorial-policies",
+        "authority": "official_venue",
+        "title": "TMLR Submission Guidelines and Editorial Policies",
+        "url": "https://jmlr.org/tmlr/editorial-policies.html",
+        "accessed_at": "2026-08-28",
+        "stated_effective_date": null,
+        "supports": [
+          "scope",
+          "originality",
+          "review_model",
+          "acceptance_states",
+          "author_llm_policy",
+          "certifications"
+        ]
+      },
+      {
+        "source_id": "tmlr-reviewer-guide",
+        "authority": "official_venue",
+        "title": "TMLR Guidelines for Reviewers",
+        "url": "https://jmlr.org/tmlr/reviewer-guide.html",
+        "accessed_at": "2026-08-28",
+        "stated_effective_date": null,
+        "supports": ["reviewer_llm_policy", "review_timing", "reviewer_recommendations"]
+      }
+    ],
+    "unresolved_conflicts": [
+      "The reviewed pages do not state a general confidentiality rule for reviewers using external LLM services; double-blind and staged public-review requirements still apply, so live confidentiality checking remains required before processing unpublished content."
+    ]
+  },
+  "fallback_profile_id": "rigor-first",
+  "decision_contract": {
+    "acceptance_objective": {
+      "id": "evidence_plus_some_audience_interest",
+      "scope": "non_universal",
+      "rule": "Claims must be supported by accurate, convincing, clear evidence and at least some TMLR audience members should be interested in what was learned.",
+      "source_refs": ["tmlr-acceptance-criteria"]
+    },
+    "scientific_gates": [
+      {
+        "id": "scope_eligibility",
+        "observation_key": "in_scope",
+        "required": true,
+        "rule": "The work must contribute to understanding computational or mathematical principles enabling intelligence through learning within TMLR's stated scope.",
+        "source_refs": ["tmlr-editorial-policies"]
+      },
+      {
+        "id": "original_contribution",
+        "observation_key": "original_work",
+        "required": true,
+        "rule": "The submission must be an original archival contribution under TMLR's dual-submission and reuse policy; this is distinct from requiring a novel method.",
+        "source_refs": ["tmlr-editorial-policies"]
+      },
+      {
+        "id": "claims_supported",
+        "observation_key": "evidence_supports_claims",
+        "required": true,
+        "rule": "Claims are supported by accurate, convincing evidence.",
+        "source_refs": ["tmlr-acceptance-criteria"]
+      },
+      {
+        "id": "clear_narrative_and_argument",
+        "observation_key": "clear_narrative",
+        "required": true,
+        "rule": "The narrative and arguments are clear enough to establish the claims.",
+        "source_refs": ["tmlr-acceptance-criteria"]
+      }
+    ],
+    "novelty_gate": {
+      "required": false,
+      "observation_key": "novelty",
+      "rule": "Novelty of the studied method is not a necessary acceptance criterion; incorrect novelty claims can still violate accuracy or originality requirements.",
+      "source_refs": ["tmlr-acceptance-criteria", "tmlr-editorial-policies"]
+    },
+    "impact_gate": {
+      "required": false,
+      "observation_key": "impact",
+      "rule": "Significance, impact, and new state-of-the-art performance are not acceptance gates.",
+      "source_refs": ["tmlr-acceptance-criteria"]
+    },
+    "breadth_gate": {
+      "required": false,
+      "observation_key": "breadth",
+      "rule": "Broad significance is handled by optional certifications, not ordinary acceptance.",
+      "source_refs": ["tmlr-acceptance-criteria", "tmlr-editorial-policies"]
+    },
+    "audience_interest_gate": {
+      "required": true,
+      "observation_key": "audience_interest",
+      "accepted_values": ["some", "field", "interdisciplinary", "broad"],
+      "rule": "It is enough that some individuals in TMLR's audience would be interested in what the paper teaches.",
+      "source_refs": ["tmlr-acceptance-criteria"]
+    },
+    "burden_of_doubt": {
+      "default": "criterion_remains_unresolved_unless_an_exact_rule_says_otherwise",
+      "overrides": {"audience_interest": "assume_satisfied"},
+      "rule": "A reviewer unsure whether the audience-interest criterion is satisfied should generally assume that it is.",
+      "source_refs": ["tmlr-acceptance-criteria"]
+    },
+    "allowed_repair_routes": [
+      {
+        "route": "add_evidence",
+        "policy_status": "explicitly_allowed",
+        "constraint": "Add only evidence needed to support the stated claim; more experiments are not automatic.",
+        "source_refs": ["tmlr-acceptance-criteria"]
+      },
+      {
+        "route": "narrow_claim",
+        "policy_status": "explicitly_allowed",
+        "constraint": "Reduce the claim until the existing accurate evidence supports it.",
+        "source_refs": ["tmlr-acceptance-criteria"]
+      },
+      {
+        "route": "clarify_argument",
+        "policy_status": "explicitly_allowed",
+        "constraint": "Clarity repair cannot substitute for missing evidence.",
+        "source_refs": ["tmlr-acceptance-criteria"]
+      },
+      {
+        "route": "revise_and_resubmit_after_rejection",
+        "policy_status": "conditionally_allowed",
+        "constraint": "A significantly revised paper is a new submission linked to the rejected submission; revealing author identity on the rejected record precludes that route.",
+        "source_refs": ["tmlr-editorial-policies"]
+      }
+    ],
+    "review_model": {
+      "model": "open_review_double_blind",
+      "triage": "An Action Editor may desk reject with Editor-in-Chief approval or assign at least three reviewers.",
+      "review_independence": "Reviews stay hidden from the public and other reviewers until all initial reviews are submitted; discussion then becomes public.",
+      "decision_owner": "action_editor",
+      "vote_rule": "Reviewer recommendations inform but do not mechanically determine the Action Editor decision.",
+      "revision_model": "Authors may respond and update the paper during discussion; rejected papers may be revised and resubmitted as new linked submissions.",
+      "source_refs": ["tmlr-editorial-policies", "tmlr-reviewer-guide"]
+    },
+    "ai_confidentiality_policy": {
+      "author_ai_use": "LLMs may be assistive general-purpose tools, cannot be authors, and do not transfer author responsibility for plagiarism, fabrication, correctness, or integrity.",
+      "reviewer_ai_use": "Reviewers may use LLMs as assistance but must read the paper, form their own understanding and opinion, take responsibility, and write a review reflecting that opinion.",
+      "confidentiality": "No general external-LLM confidentiality permission was located in the reviewed exact pages; double-blind and staged public-review rules apply, so unpublished content processing remains unresolved pending a live check.",
+      "live_check_required": true,
+      "source_refs": ["tmlr-editorial-policies", "tmlr-reviewer-guide"]
+    },
+    "acceptance_states": {
+      "criteria_satisfied": "contract_criteria_satisfied",
+      "scientific_failure": "scientific_gates_not_met",
+      "target_failure": "target_objective_not_met",
+      "actual_decisions": ["accept_as_is", "accept_with_minor_revision", "reject", "withdrawn", "retracted"]
+    },
+    "certification_layer": {
+      "separate_from_acceptance": true,
+      "schemes": [
+        {
+          "id": "outstanding",
+          "relationship_to_acceptance": "post_acceptance_annotation_not_required_for_acceptance",
+          "rule": "Editorial-board certification for exceptionally high-quality, broadly significant papers; it may be awarded well after publication.",
+          "source_refs": ["tmlr-editorial-policies"]
+        },
+        {
+          "id": "featured",
+          "relationship_to_acceptance": "selective_annotation_not_required_for_acceptance",
+          "rule": "Certification for very high-quality, significant, novel, well-explained and well-supported papers.",
+          "source_refs": ["tmlr-editorial-policies"]
+        },
+        {
+          "id": "reproducibility",
+          "relationship_to_acceptance": "purpose_specific_annotation_not_required_for_acceptance",
+          "rule": "Certification for reproduction-focused papers adding substantial baselines, analysis, ablations, or insights beyond verification.",
+          "source_refs": ["tmlr-editorial-policies"]
+        },
+        {
+          "id": "survey",
+          "relationship_to_acceptance": "purpose_specific_annotation_not_required_for_acceptance",
+          "rule": "Certification for accepted survey papers that are exceptionally thorough or insightful.",
+          "source_refs": ["tmlr-editorial-policies"]
+        },
+        {
+          "id": "journal_to_conference",
+          "relationship_to_acceptance": "presentation_eligibility_annotation_not_required_for_acceptance",
+          "rule": "Certification based on reviewer and Action Editor responses for eligibility to participating NeurIPS, ICLR, or ICML journal-to-conference tracks.",
+          "source_refs": ["tmlr-editorial-policies", "tmlr-reviewer-guide"]
+        },
+        {
+          "id": "expert",
+          "relationship_to_acceptance": "author_service_annotation_not_required_for_acceptance",
+          "rule": "Certification recognizing accepted papers authored by highly rated TMLR reviewers; it is not a manuscript acceptance criterion.",
+          "source_refs": ["tmlr-editorial-policies", "tmlr-reviewer-guide"]
+        }
+      ],
+      "notes": "Do not import certification-level novelty, impact, or breadth into the ordinary acceptance objective."
+    }
+  }
+}

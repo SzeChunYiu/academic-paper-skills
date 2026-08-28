@@ -1,5 +1,5 @@
 name: nature-shared
-version: 2.2.0
+version: 2.3.0
 description: >
   Declarative manifest for shared academic-paper reference modules. This package
   is not a standalone workflow; installed skills load exact shared core,
@@ -63,6 +63,8 @@ journal_formats:
   on_demand:
     - condition: resolving the exact target journal, article type, stage, and output component before applying journal-specific rules
       path: journal-formats/journal-resolution.md
+    - condition: resolving a target-specific acceptance objective, scientific and target gates, burden-of-doubt rule, repair routes, review model, AI/confidentiality policy, acceptance states, certification layer, or time-versioned official-source provenance
+      path: journal-formats/venue-decision-contract.md
     - condition: a non-exact publisher/venue/discipline family profile is needed as a fallback
       path: journal-formats/journal-family-profiles.md
     - condition: resolving whether the target uses selective broad-interest, field-advancement, rigor-first, clinical/policy-priority, evidence-assessment, or deadline-constrained editorial decision logic

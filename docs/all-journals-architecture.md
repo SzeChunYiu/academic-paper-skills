@@ -2,7 +2,7 @@
 
 The repository keeps the historical `nature-*` skill names for compatibility, but the core academic workflows do **not** infer the target journal, evidence standard, writing style, or publication objective from those names.
 
-Last architecture review: 2026-08-22.
+Last architecture review: 2026-08-28.
 
 ## Design goal
 
@@ -27,6 +27,16 @@ The governing hierarchy is:
 
 Exact journal rules are resolved at use time when needed.
 
+Decision rules are represented separately as a time-versioned tuple:
+
+`exact venue × article type × stage × effective/as-of date`
+
+The machine-readable contract preserves scientific gates,
+novelty/impact/breadth/audience-interest gates, burden-of-doubt rules, repair
+routes, review model, AI/confidentiality policy, acceptance states,
+certification, and official-source provenance without creating a universal
+acceptance score.
+
 ## Full manuscript lifecycle
 
 A serious manuscript workflow can now be represented as:
@@ -50,6 +60,12 @@ Resolution priority:
 5. generic scholarly default.
 
 The live exact guide is required for submission-critical numeric/mechanical rules.
+
+`skills/nature-shared/journal-formats/venue-decision-contract.md` and
+`decision-contracts/` add the decision layer. Live official-source contracts
+outrank maintained exact snapshots. Unknown, stale, conflicting, historically
+unsupported, and future-effective tuples fail to a live-resolution request;
+fallback publication profiles never certify exact venue policy.
 
 ## Family profiles
 

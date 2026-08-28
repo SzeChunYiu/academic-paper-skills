@@ -1,5 +1,5 @@
 name: academic-writing
-version: 1.1.0
+version: 1.2.0
 description: >
   Canonical journal-agnostic academic manuscript writing router. The historical
   nature-writing directory remains a compatibility/reference implementation
@@ -35,6 +35,8 @@ references:
       path: ../nature-shared/core/author-voice-profile.md
     - condition: target journal/venue, article type, stage, or exact current compliance requirements matter
       path: ../nature-shared/journal-formats/journal-resolution.md
+    - condition: target-specific editorial/reviewer criteria, acceptance objective, repair route, review model, AI/confidentiality policy, policy date, or decision readiness matters
+      path: ../nature-shared/journal-formats/venue-decision-contract.md
     - condition: target publication model needs fallback classification for editor/reviewer preflight
       path: ../nature-shared/journal-formats/editorial-decision-profiles.md
     - condition: pre-submission editor/reviewer decision logic or minimum-sufficient repair planning is needed

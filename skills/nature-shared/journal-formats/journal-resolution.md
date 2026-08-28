@@ -2,15 +2,23 @@
 
 > Shared contract for `nature-writing`, `nature-polishing`, `nature-figure`, citation workflows, and any future academic-paper skill that must work beyond Nature Portfolio.
 >
-> Last reviewed: 2026-08-19.
+> Last reviewed: 2026-08-28.
 
 ## Core principle
 
 A publisher family is **not** a manuscript format. A journal name is still not enough when the journal publishes multiple article types, and the same article can have different requirements at initial submission, revision, accepted-in-principle, and production stages.
 
-For exact compliance, resolve this tuple before applying house rules:
+For exact compliance and decision modeling, resolve this tuple before applying
+house rules or acceptance objectives:
+
+`exact journal -> article/content type -> submission stage -> effective/as-of date -> output component`
+
+The backward-compatible house-style/mechanics projection remains:
 
 `exact journal -> article/content type -> submission stage -> output component`
+
+The decision-contract layer adds the effective/as-of date; it does not remove
+the established output-component route.
 
 Examples of output components are title, abstract, main text, references, figure, table, graphical abstract, supplementary file, cover letter, data/code statement, and response-to-reviewers package.
 
@@ -28,9 +36,18 @@ Use when the user names a journal, asks whether a manuscript is submission-ready
 2. Identify the article/content type. Do not assume `Article`/`Research Article` exists or means the same thing everywhere.
 3. Identify the stage: `planning`, `initial-submission`, `revision`, `accepted`, or `production`.
 4. Open the current official journal instructions, template, or author portal.
-5. Record the page title and access date in the working notes when exact compliance matters.
-6. Apply only rules that are explicitly supported by that source.
-7. If the official pages conflict, prefer the page that is both more specific to the exact journal/content type and more specific to the current stage. Flag unresolved conflicts instead of guessing.
+5. For decision readiness, also open official editor/reviewer criteria, ethics,
+   AI-use, and confidentiality policies rather than treating the author guide
+   as the whole acceptance model.
+6. Record page title, URL, access date, stated effective date, or an explicit
+   `effective date not stated` status.
+7. Materialize the result using
+   [venue-decision-contract.md](venue-decision-contract.md) when exact decision
+   criteria matter.
+8. Apply only rules that are explicitly supported by the recorded sources.
+9. If official pages conflict, prefer the page that is both more specific to
+   the exact journal/content type and more specific to the current stage. Flag
+   unresolved conflicts instead of guessing.
 
 Do not rely on search snippets for exact limits when the official page itself is available.
 
@@ -40,9 +57,18 @@ Use a versioned file in `journal-formats/` only when one exists for the exact ta
 
 Current exact profiles in this repository include flagship Nature, Nature Communications, and Nature Machine Intelligence.
 
+Maintained machine-readable **decision** profiles additionally include bounded
+snapshots for TMLR Research Papers, flagship Nature Articles, and PLOS ONE
+Research Articles. A future-effective profile is never activated early, and an
+observed-active snapshot is never back-cast before its observation date.
+
 ### Level 3 — publisher/venue family profile
 
 Use `journal-family-profiles.md` for writing stance, likely workflow, template behavior, citation-family hints, and questions to check. Family profiles are **fallbacks**, not submission contracts.
+
+Likewise, publication-model fallbacks in `editorial-decision-profiles.md` and
+`decision-contracts/fallback-profiles.json` are not exact journal policy and
+must trigger live official-source resolution for an exact readiness claim.
 
 ### Level 4 — discipline/reporting profile
 

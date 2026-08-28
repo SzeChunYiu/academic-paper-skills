@@ -71,6 +71,14 @@ class AcademicWritingCanonicalTests(unittest.TestCase):
         self.assertIn("$academic-paper-pipeline", skill)
         self.assertIn("academic-paper-pipeline", readme)
 
+    def test_exact_venue_decision_contract_is_routed_by_tuple_and_date(self) -> None:
+        skill = read(SKILL / "SKILL.md")
+        manifest = read(SKILL / "manifest.yaml")
+        self.assertIn("venue-decision-contract.md", manifest)
+        self.assertIn("exact venue × article type × stage × effective date", skill)
+        self.assertIn("live official-source resolution", skill)
+        self.assertIn("fallback profile is not exact journal policy", skill)
+
 
 if __name__ == "__main__":
     unittest.main()
