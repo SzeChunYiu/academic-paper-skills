@@ -412,14 +412,20 @@ def evaluate_study_contract(
     confirmatory = any(
         claim.get("evidential_status") == "confirmatory" for claim in claims
     )
-    if confirmatory and relation not in {
-        "before_data_access",
-        "after_data_before_outcome_access",
-    }:
+    outcome_blind_timing_verified = (
+        relation == "after_data_before_outcome_access"
+        and first_outcome is not None
+        and protocol_frozen is not None
+        and plan_frozen is not None
+        and max(protocol_frozen, plan_frozen) < first_outcome
+    )
+    if confirmatory and not (
+        relation == "before_data_access" or outcome_blind_timing_verified
+    ):
         block(
             "confirmatory_label_not_supported",
-            "At least one claim is labeled confirmatory although the protocol was not frozen before data access.",
-            "reclassify the analysis as exploratory/post hoc, narrow the claim to what the record supports, or conduct a new prospective study; never backdate or fabricate prespecification.",
+            "At least one claim is labeled confirmatory without verified protocol and analysis-plan timing before data or outcome access.",
+            "Verify the freeze and access timestamps from authoritative records; otherwise reclassify the analysis as exploratory/post hoc, narrow the claim to what the record supports, or conduct a new prospective study; never backdate or fabricate prespecification.",
         )
 
     ethics = contract.get("ethics_governance", {})

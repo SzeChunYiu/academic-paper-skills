@@ -85,7 +85,9 @@ data and outcome access. A false prospective label blocks. Existing-data work
 can retain an outcome-blind confirmatory status when the data existed but the
 relevant outcomes were not accessed and both protocol and analysis plan were
 frozen before outcome access. The record must distinguish this from a plan
-frozen before any data access; neither label is inferred from prose.
+frozen before any data access; neither label is inferred from prose. A relation
+label without the outcome-access timestamp needed to verify the ordering does
+not license a confirmatory claim.
 
 **Transfer limit:** not all science is confirmatory, and not every qualitative,
 descriptive, discovery, theory, or emergency study should be forced through the

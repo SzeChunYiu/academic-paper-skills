@@ -88,7 +88,9 @@ tense. Do not erase a deviation by updating the final protocol text.
 For pre-existing data, distinguish `after_data_before_outcome_access` from
 `after_outcome_access`. The former can support an outcome-blind confirmatory
 status only when both protocol and analysis plan precede outcome access; it must
-not be relabeled `before_data_access`.
+not be relabeled `before_data_access`. The relation label alone is insufficient:
+the contract must include an authoritative outcome-access timestamp against
+which both freezes can be checked.
 
 ## Automatic blockers
 

@@ -249,6 +249,24 @@ class StudyProtocolContractTests(unittest.TestCase):
         self.assertNotIn("confirmatory_label_not_supported", result["blocker_codes"])
         self.assertNotIn("false_prospective_status", result["blocker_codes"])
 
+    def test_outcome_blind_confirmatory_status_requires_outcome_access_receipt(self) -> None:
+        contract = fixture()
+        contract["protocol"]["frozen_at"] = "2026-02-10T09:00:00Z"
+        contract["analysis_plan"]["frozen_at"] = "2026-02-11T09:00:00Z"
+        contract["data_timing"]["protocol_freeze_relation"] = (
+            "after_data_before_outcome_access"
+        )
+        contract["data_timing"]["outcomes_first_observed_at"] = None
+        result = self.evaluate(contract)
+        self.assertIn("confirmatory_label_not_supported", result["blocker_codes"])
+        repair = next(
+            item
+            for item in result["repair_routes"]
+            if item["code"] == "confirmatory_label_not_supported"
+        )
+        self.assertIn("verify", repair["route"].lower())
+        self.assertIn("reclassify", repair["route"].lower())
+
     def test_exclusions_reconcile_separately_before_and_after_assignment(self) -> None:
         contract = fixture()
         contract["conduct"]["enrollment"]["planned"] = 102
