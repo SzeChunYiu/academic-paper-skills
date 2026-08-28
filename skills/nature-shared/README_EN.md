@@ -21,6 +21,8 @@ always_load:
 | `core/study-protocol-conduct-contract.md` | `academic-writing`, `academic-paper-pipeline` |
 | `core/data-integrity-stewardship-contract.md` | `academic-writing`, `academic-paper-pipeline`, and downstream data/figure/review workflows |
 | `data-contracts/` + `scripts/resolve_data_integrity.py` | machine-readable data lifecycle, non-universal adapters, evidence provenance, and bounded evaluation |
+| `core/statistical-inference-uncertainty-contract.md` | `academic-writing`, `academic-paper-pipeline`, `nature-statistics`, and downstream display/review workflows |
+| `analysis-contracts/` + `scripts/resolve_statistical_inference.py` | machine-readable estimand/execution/uncertainty/surface lifecycle, composable non-universal adapters, time-versioned evidence, and bounded evaluation |
 | `core/terminology-ledger.md` | `nature-polishing`, `nature-writing`, `nature-reader`, `nature-paper2ppt` |
 | `core/consistency-sweep.md` | `nature-polishing`, `nature-reviewer`, `nature-response`, `nature-statistics` |
 | `core/main-text-discipline.md` | `nature-writing`, `nature-polishing`, `nature-response` |
@@ -39,6 +41,16 @@ modalities and exact institutional, legal, funder, repository, licence, consent,
 or community policies require live competent-source resolution. Passing bounded
 checks does not certify accuracy, completeness, representativeness, privacy,
 legal compliance, reproducibility, scientific truth, or acceptance.
+
+`core/statistical-inference-uncertainty-contract.md` preserves the chain from
+question and estimand through independent unit/dependence, analysis population,
+plan, immutable input, execution, diagnostics/sensitivity, typed uncertainty,
+and every table/display/caption/prose binding to a bounded claim. Its maintained
+adapters return applicable obligations, never a universal best test, model,
+prior, interval, threshold, or frequentist template. Unmatched domains and
+exact regulator/venue rules require live, date-aware source resolution. Passing
+does not certify model adequacy, causal identification, adequate precision,
+external validity, scientific truth, or acceptance.
 
 `scripts/check_consistency.py` provides a mechanical first pass for terminology variants, equal values reported at different precision, and equivalent lengths expressed in different units. `scripts/audit_manuscript_surface.py` adds target-aware abstract, terminology, placeholder, and rendered-surface diagnostics. Script output is triage evidence for contextual review, never a substitute for the atomic verification ledger.
 

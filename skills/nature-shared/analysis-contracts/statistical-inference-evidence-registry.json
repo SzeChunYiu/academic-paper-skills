@@ -1,0 +1,1315 @@
+{
+  "registry_schema_version": "1.0.0",
+  "registry_id": "statistical-inference-evidence-registry-2026-08-28",
+  "reviewed_at": "2026-08-28",
+  "search_protocol": {
+    "providers": [
+      "Europe PMC REST API",
+      "Crossref REST API",
+      "publisher and official issuing-body sources"
+    ],
+    "search_log_file": "../research/statistical-inference-uncertainty-search-log-2026-08-28.json",
+    "queries_executed": 16,
+    "records_screened": 128,
+    "selection": "Purposeful triangulation of full-text methods, empirical meta-research, reporting guidelines, regulatory standards, official policies, and abstract-level boundary evidence. Inclusion supports only named contract decisions.",
+    "completeness_claim": "targeted_reconciled_not_systematic_or_exhaustive"
+  },
+  "generalization_rule": "Enforce cross-domain identity, provenance, unit, disclosure, and cross-surface contradictions only when recorded facts support them. Activate analysis-specific obligations through matching maintained adapters and live exact-domain resolution. Never infer model adequacy, causal validity, power, generalization, scientific truth, or acceptance from reporting completeness or a passing contract.",
+  "sources": [
+    {
+      "source_id": "ich-e9-r1",
+      "title": "E9(R1) Addendum on Estimands and Sensitivity Analysis in Clinical Trials",
+      "url": "https://database.ich.org/sites/default/files/E9-R1_Step4_Guideline_2019_1203.pdf",
+      "source_type": "official_guideline",
+      "read_depth": "official_guideline",
+      "published_at": "2019-11-20",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "estimand_attributes",
+        "estimator_estimate_distinction",
+        "same_estimand_sensitivity"
+      ],
+      "limits": [
+        "Clinical regulatory scope; non-trial domains require adapted targets."
+      ],
+      "contradictions_or_tensions": [],
+      "policy_validity": {
+        "effective_from": "2019-11-20",
+        "effective_until": null,
+        "effective_date_basis": "explicit_issuer_date",
+        "observed_active_at": "2026-08-28"
+      }
+    },
+    {
+      "source_id": "ich-e9-1998",
+      "title": "ICH E9 Statistical Principles for Clinical Trials",
+      "url": "https://database.ich.org/sites/default/files/E9_Guideline.pdf",
+      "source_type": "official_guideline",
+      "read_depth": "official_guideline",
+      "published_at": "1998-02-05",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "primary_contrast_test_and_null",
+        "estimates_and_intervals",
+        "multiplicity_and_equivalence_reporting"
+      ],
+      "limits": [
+        "Confirmatory clinical-trial guidance is not a universal analysis recipe."
+      ],
+      "contradictions_or_tensions": [
+        "Confirmatory error-control and threshold requirements can be operationally mandatory in regulated trials, while ASA/meta-research sources reject treating a threshold as complete scientific interpretation."
+      ],
+      "policy_validity": {
+        "effective_from": "1998-02-05",
+        "effective_until": null,
+        "effective_date_basis": "explicit_issuer_date",
+        "observed_active_at": "2026-08-28"
+      }
+    },
+    {
+      "source_id": "fda-multiple-endpoints-2022",
+      "title": "Multiple Endpoints in Clinical Trials: Guidance for Industry",
+      "url": "https://www.fda.gov/media/162416/download",
+      "source_type": "official_guideline",
+      "read_depth": "official_guideline",
+      "published_at": "2022-10",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "prospective_endpoint_family",
+        "confirmatory_error_control",
+        "primary_secondary_exploratory_hierarchy"
+      ],
+      "limits": [
+        "United States drug-development guidance; exploratory and non-regulatory objectives differ."
+      ],
+      "contradictions_or_tensions": [
+        "Regulatory confirmatory family-wise error control does not transfer to every exploratory or false-discovery objective."
+      ],
+      "policy_validity": {
+        "effective_from": "2022-10-01",
+        "effective_until": null,
+        "effective_date_basis": "explicit_issuer_date",
+        "observed_active_at": "2026-08-28"
+      }
+    },
+    {
+      "source_id": "fda-noninferiority-2016",
+      "title": "Non-Inferiority Clinical Trials to Establish Effectiveness: Guidance for Industry",
+      "url": "https://www.fda.gov/media/78504/download",
+      "source_type": "official_guideline",
+      "read_depth": "official_guideline",
+      "published_at": "2016-11",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "prespecified_noninferiority_margin",
+        "interval_direction_and_decision",
+        "assay_sensitivity"
+      ],
+      "limits": [
+        "Drug-regulatory scope; margins and interval conventions do not transfer automatically."
+      ],
+      "contradictions_or_tensions": [],
+      "policy_validity": {
+        "effective_from": "2016-11-01",
+        "effective_until": null,
+        "effective_date_basis": "explicit_issuer_date",
+        "observed_active_at": "2026-08-28"
+      }
+    },
+    {
+      "source_id": "cochrane-handbook-ch10",
+      "title": "Cochrane Handbook for Systematic Reviews of Interventions, Chapter 10: Analysing data and undertaking meta-analyses",
+      "url": "https://www.cochrane.org/authors/handbooks-and-manuals/handbook/current/chapter-10",
+      "source_type": "official_guideline",
+      "read_depth": "official_guideline",
+      "published_at": "2026",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "meta_analysis_model_and_heterogeneity",
+        "prediction_intervals",
+        "missing_summary_statistics_and_sensitivity"
+      ],
+      "limits": [
+        "Living intervention-review handbook; exact version must be date-pinned."
+      ],
+      "contradictions_or_tensions": [],
+      "policy_validity": {
+        "effective_from": null,
+        "effective_until": null,
+        "effective_date_basis": "observed_active_not_backcastable",
+        "observed_active_at": "2026-08-28"
+      }
+    },
+    {
+      "source_id": "nasem-2019-reproducibility",
+      "title": "Reproducibility and Replicability in Science",
+      "url": "https://doi.org/10.17226/25303",
+      "source_type": "technical_standard",
+      "read_depth": "full_text",
+      "published_at": "2019",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "same_data_computational_reproducibility",
+        "new_data_replicability",
+        "classification_of_receipts"
+      ],
+      "limits": [
+        "Terminology varies by field and failed replication does not by itself establish misconduct."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "sampl-2013",
+      "title": "Basic Statistical Reporting for Articles Published in Biomedical Journals: The SAMPL Guidelines",
+      "url": "https://www.equator-network.org/wp-content/uploads/2013/07/SAMPL-Guidelines-6-27-13.pdf",
+      "source_type": "official_guideline",
+      "read_depth": "official_guideline",
+      "published_at": "2013",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "effect_interval_and_n_reporting",
+        "exact_method_and_test_definition",
+        "missingness_multiplicity_and_model_validation_reporting"
+      ],
+      "limits": [
+        "Biomedical reporting guidance; not a formal universal consensus or validity certificate."
+      ],
+      "contradictions_or_tensions": [],
+      "policy_validity": {
+        "effective_from": null,
+        "effective_until": null,
+        "effective_date_basis": "observed_active_not_backcastable",
+        "observed_active_at": "2026-08-28"
+      }
+    },
+    {
+      "source_id": "nature-reporting-standards",
+      "title": "Nature Portfolio reporting standards and availability policies",
+      "url": "https://www.nature.com/nature-portfolio/editorial-policies/reporting-standards",
+      "source_type": "official_policy",
+      "read_depth": "official_policy",
+      "published_at": "2026",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "analysis_and_reporting_transparency",
+        "source_data_and_reporting_summaries",
+        "current_venue_policy_resolution"
+      ],
+      "limits": [
+        "Venue-family policy; exact journal, article type, stage and effective date still govern."
+      ],
+      "contradictions_or_tensions": [],
+      "policy_validity": {
+        "effective_from": null,
+        "effective_until": null,
+        "effective_date_basis": "observed_active_not_backcastable",
+        "observed_active_at": "2026-08-28"
+      }
+    },
+    {
+      "source_id": "asa-pvalue-2016",
+      "title": "The ASA Statement on p-Values: Context, Process, and Purpose",
+      "url": "https://doi.org/10.1080/00031305.2016.1154108",
+      "source_type": "professional_statement",
+      "read_depth": "full_text",
+      "published_at": "2016",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "p_value_not_truth_probability",
+        "threshold_not_sufficient",
+        "full_reporting_and_context"
+      ],
+      "limits": [
+        "Does not ban P-values or prescribe one replacement framework."
+      ],
+      "contradictions_or_tensions": [
+        "P values can be one evidential component when design and model are appropriate; the statement rejects threshold-only conclusions, not all use of P values."
+      ]
+    },
+    {
+      "source_id": "wasserstein-2019-beyond",
+      "title": "Moving to a World Beyond p < 0.05",
+      "url": "https://doi.org/10.1080/00031305.2019.1583913",
+      "source_type": "peer_reviewed_editorial",
+      "read_depth": "full_text",
+      "published_at": "2019",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "avoid_bright_line_inference",
+        "uncertainty_and_context",
+        "transparent_reporting"
+      ],
+      "limits": [
+        "Normative synthesis, not a universal decision algorithm."
+      ],
+      "contradictions_or_tensions": [
+        "Recommendation to move beyond bright-line significance must coexist with exact prespecified regulatory decision rules where those rules govern a trial."
+      ]
+    },
+    {
+      "source_id": "greenland-2016-misinterpretations",
+      "title": "Statistical tests, P values, confidence intervals, and power: a guide to misinterpretations",
+      "url": "https://doi.org/10.1007/s10654-016-0149-3",
+      "source_type": "peer_reviewed_methods",
+      "read_depth": "full_text",
+      "published_at": "2016",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "prohibited_p_value_and_ci_interpretations",
+        "model_conditional_inference",
+        "observed_power_not_new_evidence"
+      ],
+      "limits": [
+        "Broad frequentist focus; does not select one philosophical framework."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "mcshane-2019-abandon",
+      "title": "Abandon Statistical Significance",
+      "url": "https://doi.org/10.1080/00031305.2018.1527253",
+      "source_type": "peer_reviewed_methods",
+      "read_depth": "full_text",
+      "published_at": "2019",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "anti_dichotomization",
+        "holistic_evidence",
+        "visible_uncertainty"
+      ],
+      "limits": [
+        "Normative proposal; defined contextual thresholds may still be legitimate."
+      ],
+      "contradictions_or_tensions": [
+        "Abandoning significance declarations is a scientific-interpretation recommendation, not authority to ignore an exact regulator decision rule."
+      ]
+    },
+    {
+      "source_id": "lakens-2022-sample-size",
+      "title": "Sample Size Justification",
+      "url": "https://doi.org/10.1525/collabra.33267",
+      "source_type": "peer_reviewed_tutorial",
+      "read_depth": "full_text",
+      "published_at": "2022",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "goal_specific_sample_size_justification",
+        "precision_or_power_or_resource_constraints",
+        "transparent_no_justification_state"
+      ],
+      "limits": [
+        "A stated justification does not guarantee informative data."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "gelman-carlin-2014",
+      "title": "Beyond Power Calculations: Assessing Type S and Type M Errors",
+      "url": "https://doi.org/10.1177/1745691614551642",
+      "source_type": "peer_reviewed_methods",
+      "read_depth": "full_text",
+      "published_at": "2014",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "prospective_sign_and_magnitude_error",
+        "plausible_effect_scenarios",
+        "post_result_power_not_repair"
+      ],
+      "limits": [
+        "Requires defensible scenario effects and sampling assumptions."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "lazic-2018-what-is-n",
+      "title": "What exactly is N in cell culture and animal experiments?",
+      "url": "https://doi.org/10.1371/journal.pbio.2005282",
+      "source_type": "peer_reviewed_methods",
+      "read_depth": "full_text",
+      "published_at": "2018",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "experimental_unit",
+        "technical_vs_biological_replication",
+        "pseudoreplication_blocker"
+      ],
+      "limits": [
+        "Examples are laboratory studies; hierarchy transfers but remedies remain design-specific."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "lazic-2010-pseudoreplication",
+      "title": "The problem of pseudoreplication in neuroscientific studies: is it affecting your analysis?",
+      "url": "https://doi.org/10.1186/1471-2202-11-5",
+      "source_type": "peer_reviewed_methods",
+      "read_depth": "full_text",
+      "published_at": "2010",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "independent_unit",
+        "nested_dependence",
+        "aggregation_or_hierarchical_model_repairs"
+      ],
+      "limits": [
+        "Neuroscience examples do not determine the correct model in every field."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "cumming-2007-error-bars",
+      "title": "Error bars in experimental biology",
+      "url": "https://doi.org/10.1083/jcb.200611141",
+      "source_type": "peer_reviewed_tutorial",
+      "read_depth": "full_text",
+      "published_at": "2007",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "sd_se_ci_distinction",
+        "interval_definition_in_legend",
+        "independent_n"
+      ],
+      "limits": [
+        "Simple designs; no universal bar-overlap rule."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "belia-2005-ci-misunderstanding",
+      "title": "Researchers Misunderstand Confidence Intervals and Standard Error Bars",
+      "url": "https://doi.org/10.1037/1082-989X.10.4.389",
+      "source_type": "peer_reviewed_empirical",
+      "read_depth": "abstract",
+      "published_at": "2005",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "interval_semantics_need_explicit_labels",
+        "bar_overlap_misinterpretation"
+      ],
+      "limits": [
+        "Selected communities and a web judgment task; abstract-level support only."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "hoekstra-2014-ci",
+      "title": "Robust misinterpretation of confidence intervals",
+      "url": "https://doi.org/10.3758/s13423-013-0572-3",
+      "source_type": "peer_reviewed_empirical",
+      "read_depth": "abstract",
+      "published_at": "2014",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "frequentist_ci_not_posterior_probability",
+        "explicit_interval_interpretation"
+      ],
+      "limits": [
+        "Psychology sample and statement task; abstract-level support only."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "hoekstra-2012-assumptions",
+      "title": "Are Assumptions of Well-Known Statistical Techniques Checked, and Why (Not)?",
+      "url": "https://doi.org/10.3389/fpsyg.2012.00137",
+      "source_type": "peer_reviewed_empirical",
+      "read_depth": "full_text",
+      "published_at": "2012",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "assumption_and_diagnostic_record",
+        "diagnostic_target",
+        "consequence_of_violation"
+      ],
+      "limits": [
+        "Small psychology sample; documents failure modes rather than universal diagnostics."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "gelman-stern-2006",
+      "title": "The Difference Between Significant and Not Significant is not Itself Statistically Significant",
+      "url": "https://doi.org/10.1198/000313006X152649",
+      "source_type": "peer_reviewed_methods",
+      "read_depth": "full_text",
+      "published_at": "2006",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "direct_contrast_for_group_difference",
+        "interaction_uncertainty"
+      ],
+      "limits": [
+        "Exact contrast depends on design and can remain imprecise or misspecified."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "noble-2009-multiple-testing",
+      "title": "How does multiple testing correction work?",
+      "url": "https://doi.org/10.1038/nbt1209-1135",
+      "source_type": "peer_reviewed_tutorial",
+      "read_depth": "full_text",
+      "published_at": "2009",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "hypothesis_family",
+        "fwer_vs_fdr",
+        "dependence_and_objective"
+      ],
+      "limits": [
+        "Genomics tutorial; no single correction is universal."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "benjamini-hochberg-1995",
+      "title": "Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing",
+      "url": "https://doi.org/10.1111/j.2517-6161.1995.tb02031.x",
+      "source_type": "peer_reviewed_methods",
+      "read_depth": "metadata",
+      "published_at": "1995",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "false_discovery_rate_objective",
+        "multiple_testing_procedure"
+      ],
+      "limits": [
+        "Metadata-level use; BH assumptions and objectives do not fit every family."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "sterne-2009-multiple-imputation",
+      "title": "Multiple imputation for missing data in epidemiological and clinical research: potential and pitfalls",
+      "url": "https://doi.org/10.1136/bmj.b2393",
+      "source_type": "peer_reviewed_tutorial",
+      "read_depth": "full_text",
+      "published_at": "2009",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "missingness_counts_and_assumptions",
+        "imputation_model_and_pooling",
+        "mnar_sensitivity"
+      ],
+      "limits": [
+        "Multiple imputation is not universal and MAR is not empirically proven."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "little-2012-missing",
+      "title": "The Prevention and Treatment of Missing Data in Clinical Trials",
+      "url": "https://doi.org/10.1056/NEJMsr1203730",
+      "source_type": "peer_reviewed_consensus",
+      "read_depth": "full_text",
+      "published_at": "2012",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "prevent_missingness",
+        "post_discontinuation_followup",
+        "unverifiable_assumptions_and_sensitivity"
+      ],
+      "limits": [
+        "Randomized-trial focus; exact follow-up and estimand logic differs elsewhere."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "lee-2021-tarmos",
+      "title": "Framework for the treatment and reporting of missing data in observational studies: The TARMOS framework",
+      "url": "https://doi.org/10.1016/j.jclinepi.2021.01.008",
+      "source_type": "peer_reviewed_framework",
+      "read_depth": "full_text",
+      "published_at": "2021",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "prespecified_missing_data_plan",
+        "missingness_pattern_examination",
+        "imputation_and_sensitivity_reporting"
+      ],
+      "limits": [
+        "Observational-study focus; method choice remains estimand and context specific."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "thabane-2013-sensitivity",
+      "title": "A tutorial on sensitivity analyses in clinical trials: the what, why, when and how",
+      "url": "https://doi.org/10.1186/1471-2288-13-92",
+      "source_type": "peer_reviewed_tutorial",
+      "read_depth": "full_text",
+      "published_at": "2013",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "sensitivity_rationale_and_status",
+        "assumption_varied",
+        "primary_result_preservation"
+      ],
+      "limits": [
+        "Trial tutorial; prioritize material assumptions instead of ritual variants."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "steegen-2016-multiverse",
+      "title": "Increasing Transparency Through a Multiverse Analysis",
+      "url": "https://doi.org/10.1177/1745691616658637",
+      "source_type": "peer_reviewed_methods",
+      "read_depth": "full_text",
+      "published_at": "2016",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "reasonable_analysis_universe",
+        "fragile_vs_stable_results",
+        "hinge_choices"
+      ],
+      "limits": [
+        "Reasonable alternatives are not equally credible and multiverse analysis does not replace design."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "nosek-2018-preregistration",
+      "title": "The preregistration revolution",
+      "url": "https://doi.org/10.1073/pnas.1708274114",
+      "source_type": "peer_reviewed_perspective",
+      "read_depth": "full_text",
+      "published_at": "2018",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "confirmatory_vs_exploratory_timing",
+        "versioned_deviations",
+        "exploration_is_valid_when_labeled"
+      ],
+      "limits": [
+        "Preregistration does not guarantee correct design, analysis or truth."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "munafo-2017-manifesto",
+      "title": "A manifesto for reproducible science",
+      "url": "https://doi.org/10.1038/s41562-016-0021",
+      "source_type": "peer_reviewed_review",
+      "read_depth": "full_text",
+      "published_at": "2017",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "transparent_methods_and_receipts",
+        "replication_and_collaboration",
+        "multi_layer_reproducibility"
+      ],
+      "limits": [
+        "Complementary practices; no one checkbox certifies reproducibility."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "lakens-2017-equivalence",
+      "title": "Equivalence Tests: A Practical Primer for t Tests, Correlations, and Meta-Analyses",
+      "url": "https://doi.org/10.1177/1948550617697177",
+      "source_type": "peer_reviewed_tutorial",
+      "read_depth": "full_text",
+      "published_at": "2017",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "nonsignificance_not_equivalence",
+        "smallest_effect_bounds",
+        "tost_and_interval_logic"
+      ],
+      "limits": [
+        "Simple examples; equivalence bounds require domain justification."
+      ],
+      "contradictions_or_tensions": [
+        "TOST is one implementation of an equivalence objective; interval conventions, margins, and analysis populations remain domain-specific."
+      ]
+    },
+    {
+      "source_id": "lakens-2018-equivalence",
+      "title": "Equivalence Testing for Psychological Research: A Tutorial",
+      "url": "https://doi.org/10.1177/2515245918770963",
+      "source_type": "peer_reviewed_tutorial",
+      "read_depth": "full_text",
+      "published_at": "2018",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "absence_claim_requires_bound",
+        "equivalence_decision_states",
+        "post_hoc_bound_is_exploratory"
+      ],
+      "limits": [
+        "Psychology examples and frequentist focus; no universal standardized margin."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "altman-bland-1995",
+      "title": "Absence of evidence is not evidence of absence",
+      "url": "https://doi.org/10.1136/bmj.311.7003.485",
+      "source_type": "peer_reviewed_note",
+      "read_depth": "full_text",
+      "published_at": "1995",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "nonsignificance_not_no_effect",
+        "precision_and_interval"
+      ],
+      "limits": [
+        "Short didactic note; operational equivalence requires additional methods."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "consort-2025",
+      "title": "CONSORT 2025 statement: updated guideline for reporting randomised trials",
+      "url": "https://doi.org/10.1136/bmj-2024-081123",
+      "source_type": "peer_reviewed_reporting_guideline",
+      "read_depth": "full_text",
+      "published_at": "2025-04-14",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "analysis_population",
+        "primary_secondary_harms",
+        "effect_precision_multiplicity_and_deviations"
+      ],
+      "limits": [
+        "Reporting completeness does not prove trial or analysis validity."
+      ],
+      "contradictions_or_tensions": [
+        "Reporting-guideline completion improves visibility but does not prove design validity, unbiased execution, or journal acceptance."
+      ]
+    },
+    {
+      "source_id": "consort-harms-2022",
+      "title": "CONSORT Harms 2022 statement, explanation, and elaboration",
+      "url": "https://doi.org/10.1136/bmj-2022-073725",
+      "source_type": "peer_reviewed_reporting_guideline",
+      "read_depth": "full_text",
+      "published_at": "2023",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "harm_ascertainment_and_window",
+        "denominators_withdrawals_exclusions",
+        "adverse_result_preservation"
+      ],
+      "limits": [
+        "Randomized-trial scope; other designs need adapted ascertainment."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "weissgerber-2015",
+      "title": "Beyond Bar and Line Graphs: Time for a New Data Presentation Paradigm",
+      "url": "https://doi.org/10.1371/journal.pbio.1002128",
+      "source_type": "peer_reviewed_empirical",
+      "read_depth": "full_text",
+      "published_at": "2015",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "raw_observation_and_distribution_visibility",
+        "paired_display",
+        "small_n_design_aware_plots"
+      ],
+      "limits": [
+        "Small-n physiology corpus; does not ban every aggregate or bar chart."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "lord-2020-superplots",
+      "title": "SuperPlots: Communicating reproducibility and variability in cell biology",
+      "url": "https://doi.org/10.1083/jcb.202001064",
+      "source_type": "peer_reviewed_methods",
+      "read_depth": "full_text",
+      "published_at": "2020",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "biological_vs_subsample_variation",
+        "replicate_hierarchy",
+        "paired_runs"
+      ],
+      "limits": [
+        "Cell-biology candidate display, not a universal chart."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "hullman-2015-hops",
+      "title": "Hypothetical Outcome Plots Outperform Error Bars and Violin Plots for Inferences about Reliability of Variable Ordering",
+      "url": "https://doi.org/10.1371/journal.pone.0142444",
+      "source_type": "peer_reviewed_empirical",
+      "read_depth": "full_text",
+      "published_at": "2015",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "task_conditioned_uncertainty_display",
+        "probability_judgment"
+      ],
+      "limits": [
+        "Animated/task-specific experiments; some tasks did not improve."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "van-calster-2019-calibration",
+      "title": "Calibration: the Achilles heel of predictive analytics",
+      "url": "https://doi.org/10.1186/s12916-019-1466-7",
+      "source_type": "peer_reviewed_methods",
+      "read_depth": "full_text",
+      "published_at": "2019",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "discrimination_not_calibration",
+        "calibration_curve_intercept_slope",
+        "validation_context"
+      ],
+      "limits": [
+        "Clinical risk prediction; no universal binning or sample threshold."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "vickers-elkin-2006",
+      "title": "Decision Curve Analysis: A Novel Method for Evaluating Prediction Models",
+      "url": "https://doi.org/10.1177/0272989X06295361",
+      "source_type": "peer_reviewed_methods",
+      "read_depth": "full_text",
+      "published_at": "2006",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "threshold_probability",
+        "net_benefit",
+        "treat_all_and_treat_none_comparators"
+      ],
+      "limits": [
+        "Utility depends on meaningful thresholds, harms and valid evaluation."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "tripod-ai-2024",
+      "title": "TRIPOD+AI statement: updated guidance for reporting clinical prediction models that use regression or machine learning methods",
+      "url": "https://doi.org/10.1136/bmj-2023-078378",
+      "source_type": "peer_reviewed_reporting_guideline",
+      "read_depth": "full_text",
+      "published_at": "2024",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "prediction_target_and_validation_data",
+        "calibration_discrimination_utility",
+        "fairness_and_uncertainty_reporting"
+      ],
+      "limits": [
+        "Clinical prediction reporting; does not certify model quality or all ML tasks."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "saito-rehmsmeier-2015",
+      "title": "The precision-recall plot is more informative than the ROC plot when evaluating binary classifiers on imbalanced datasets",
+      "url": "https://doi.org/10.1371/journal.pone.0118432",
+      "source_type": "peer_reviewed_methods",
+      "read_depth": "full_text",
+      "published_at": "2015",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "class_imbalance_and_metric_choice",
+        "precision_recall_vs_roc"
+      ],
+      "limits": [
+        "Classification setting; metric choice still follows the reader decision and prevalence."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "kmunicate-2019",
+      "title": "Proposals on Kaplan-Meier plots in medical research and a survey of stakeholder views: KMunicate",
+      "url": "https://doi.org/10.1136/bmjopen-2019-030215",
+      "source_type": "peer_reviewed_empirical",
+      "read_depth": "full_text",
+      "published_at": "2019",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "risk_set_and_censor_visibility",
+        "curve_uncertainty",
+        "late_followup_caution"
+      ],
+      "limits": [
+        "Preference survey dominated by statisticians and clinicians; not universal comprehension proof."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "austin-2016-competing",
+      "title": "Introduction to the Analysis of Survival Data in the Presence of Competing Risks",
+      "url": "https://doi.org/10.1161/CIRCULATIONAHA.115.017719",
+      "source_type": "peer_reviewed_tutorial",
+      "read_depth": "full_text",
+      "published_at": "2016",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "competing_event_semantics",
+        "cumulative_incidence_vs_one_minus_km",
+        "estimand_specific_survival_method"
+      ],
+      "limits": [
+        "Clinical examples; cause-specific and cumulative-incidence targets answer different questions."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "pocock-2002-survival",
+      "title": "Survival plots of time-to-event outcomes in clinical trials: good practice and pitfalls",
+      "url": "https://doi.org/10.1016/S0140-6736(02)08594-X",
+      "source_type": "peer_reviewed_methods",
+      "read_depth": "metadata",
+      "published_at": "2002",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "risk_tables",
+        "censoring_display",
+        "survival_curve_interpretation"
+      ],
+      "limits": [
+        "Metadata-level use; plot/reporting focus is not a full survival standard."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "lewis-clarke-2001-forest",
+      "title": "Forest plots: trying to see the wood and the trees",
+      "url": "https://doi.org/10.1136/bmj.322.7300.1479",
+      "source_type": "peer_reviewed_tutorial",
+      "read_depth": "full_text",
+      "published_at": "2001",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "study_estimates_and_intervals",
+        "pooled_estimate",
+        "visible_between_study_variation"
+      ],
+      "limits": [
+        "Introductory; does not settle whether pooling is valid."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "guddat-2012-prediction",
+      "title": "A note on the graphical presentation of prediction intervals in random-effects meta-analyses",
+      "url": "https://doi.org/10.1186/2046-4053-1-34",
+      "source_type": "peer_reviewed_methods",
+      "read_depth": "full_text",
+      "published_at": "2012",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "pooled_ci_vs_prediction_interval",
+        "forest_prediction_interval"
+      ],
+      "limits": [
+        "One proposed form; interval validity depends on model and number of studies."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "inthout-2016-prediction",
+      "title": "Plea for routinely presenting prediction intervals in meta-analysis",
+      "url": "https://doi.org/10.1136/bmjopen-2015-010247",
+      "source_type": "peer_reviewed_empirical",
+      "read_depth": "full_text",
+      "published_at": "2016",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "future_setting_inference",
+        "heterogeneous_random_effects_prediction_interval"
+      ],
+      "limits": [
+        "Empirical Cochrane sample and model-dependent intervals; not required for every average-effect claim."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "higgins-2003-i2",
+      "title": "Measuring inconsistency in meta-analyses",
+      "url": "https://doi.org/10.1136/bmj.327.7414.557",
+      "source_type": "peer_reviewed_methods",
+      "read_depth": "full_text",
+      "published_at": "2003",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "heterogeneity_quantification",
+        "study_variation"
+      ],
+      "limits": [
+        "I-squared is context- and precision-dependent and not a universal pooling decision."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "dwan-2014-selective",
+      "title": "Evidence for the Selective Reporting of Analyses and Discrepancies in Clinical Trials",
+      "url": "https://doi.org/10.1371/journal.pmed.1001666",
+      "source_type": "peer_reviewed_systematic_review",
+      "read_depth": "full_text",
+      "published_at": "2014",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "analysis_plan_result_discrepancy",
+        "selective_analysis_reporting",
+        "versioned_deviation"
+      ],
+      "limits": [
+        "Clinical-trial cohorts were heterogeneous; bias magnitude is not universal."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "cole-2015-discrepancies",
+      "title": "Difficulty in detecting discrepancies in a clinical trial report: 260-reader evaluation",
+      "url": "https://doi.org/10.1093/ije/dyv114",
+      "source_type": "peer_reviewed_empirical",
+      "read_depth": "full_text",
+      "published_at": "2015",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "cross_surface_numeric_binding",
+        "reader_miss_rate_for_discrepancies"
+      ],
+      "limits": [
+        "One discrepancy-rich report and convenience reader sample."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "morris-2019-simulation",
+      "title": "Using simulation studies to evaluate statistical methods",
+      "url": "https://doi.org/10.1002/sim.8086",
+      "source_type": "peer_reviewed_tutorial",
+      "read_depth": "full_text",
+      "published_at": "2019",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "ademp_simulation_structure",
+        "monte_carlo_error",
+        "failed_run_reporting"
+      ],
+      "limits": [
+        "Statistical-method simulations; system benchmarks need additional compute and fairness fields."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "koehler-2009-monte-carlo",
+      "title": "On the Assessment of Monte Carlo Error in Simulation-Based Statistical Analyses",
+      "url": "https://doi.org/10.1198/tast.2009.0030",
+      "source_type": "peer_reviewed_methods",
+      "read_depth": "metadata",
+      "published_at": "2009",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "monte_carlo_error_quantification"
+      ],
+      "limits": [
+        "Metadata-level support; not a complete simulation design standard."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "bouthillier-2021-variance",
+      "title": "Accounting for Variance in Machine Learning Benchmarks",
+      "url": "https://proceedings.mlsys.org/paper_files/paper/2021/hash/0184b0cd3cfb185989f858a1d9f5c1eb-Abstract.html",
+      "source_type": "peer_reviewed_proceeding",
+      "read_depth": "abstract",
+      "published_at": "2021",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "benchmark_variance_sources",
+        "multiple_trials",
+        "comparison_error"
+      ],
+      "limits": [
+        "ML benchmarks only; abstract-level support."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "pineau-2021-reproducibility",
+      "title": "Improving Reproducibility in Machine Learning Research",
+      "url": "https://jmlr.org/papers/v22/20-303.html",
+      "source_type": "peer_reviewed_methods",
+      "read_depth": "abstract",
+      "published_at": "2021",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "code_data_and_checklist",
+        "robust_ml_workflow"
+      ],
+      "limits": [
+        "Reproducibility practices do not certify validity or generalization; article landing/abstract-level use."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "kruschke-2021-barg",
+      "title": "Bayesian Analysis Reporting Guidelines",
+      "url": "https://doi.org/10.1038/s41562-021-01177-7",
+      "source_type": "peer_reviewed_reporting_guideline",
+      "read_depth": "full_text",
+      "published_at": "2021",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "priors_likelihood_and_posterior",
+        "computation_diagnostics",
+        "posterior_predictive_and_sensitivity_reporting"
+      ],
+      "limits": [
+        "Reporting guideline; does not endorse the selected Bayesian model."
+      ],
+      "contradictions_or_tensions": [
+        "Bayesian posterior uncertainty is not interchangeable with frequentist confidence semantics; neither framework is universal."
+      ]
+    },
+    {
+      "source_id": "vehtari-2021-rhat",
+      "title": "Rank-Normalization, Folding, and Localization: An Improved R-hat for Assessing Convergence of MCMC",
+      "url": "https://doi.org/10.1214/20-BA1221",
+      "source_type": "peer_reviewed_methods",
+      "read_depth": "abstract",
+      "published_at": "2021",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "mcmc_convergence",
+        "effective_sample_size",
+        "rank_normalized_rhat"
+      ],
+      "limits": [
+        "MCMC-specific and abstract-level in this review; convergence diagnostics do not prove model adequacy."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "gabry-2019-bayes-viz",
+      "title": "Visualization in Bayesian Workflow",
+      "url": "https://doi.org/10.1111/rssa.12378",
+      "source_type": "peer_reviewed_methods",
+      "read_depth": "abstract",
+      "published_at": "2019",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "prior_and_posterior_predictive_checks",
+        "iterative_model_diagnostics"
+      ],
+      "limits": [
+        "Bayesian workflow focus and abstract-level use; no universal visual check."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "prisma-2020",
+      "title": "The PRISMA 2020 statement: an updated guideline for reporting systematic reviews",
+      "url": "https://doi.org/10.1136/bmj.n71",
+      "source_type": "peer_reviewed_reporting_guideline",
+      "read_depth": "full_text",
+      "published_at": "2021",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "effect_measure_and_synthesis",
+        "heterogeneity_and_sensitivity",
+        "protocol_and_deviations"
+      ],
+      "limits": [
+        "Reporting completeness does not establish search or synthesis validity."
+      ],
+      "contradictions_or_tensions": [
+        "Reporting synthesis methods and deviations does not establish search completeness, exchangeability, or absence of publication bias."
+      ]
+    },
+    {
+      "source_id": "strobe-2007",
+      "title": "The STROBE statement: guidelines for reporting observational studies",
+      "url": "https://doi.org/10.1371/journal.pmed.0040296",
+      "source_type": "peer_reviewed_reporting_guideline",
+      "read_depth": "full_text",
+      "published_at": "2007",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "participant_and_variable_flow",
+        "bias_confounding_and_missingness",
+        "generalisability_reporting"
+      ],
+      "limits": [
+        "Reporting guidance is not a design or causal-validity certificate."
+      ],
+      "contradictions_or_tensions": [
+        "Transparent observational reporting does not by itself establish causal identification."
+      ]
+    },
+    {
+      "source_id": "stard-2015",
+      "title": "STARD 2015: an updated list of essential items for reporting diagnostic accuracy studies",
+      "url": "https://doi.org/10.1136/bmj.h5527",
+      "source_type": "peer_reviewed_reporting_guideline",
+      "read_depth": "full_text",
+      "published_at": "2015",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "index_and_reference_test",
+        "cutoffs_and_indeterminate_results",
+        "diagnostic_estimates_and_precision"
+      ],
+      "limits": [
+        "Diagnostic accuracy reporting; not clinical utility or all diagnostic designs."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "arrive-2020",
+      "title": "The ARRIVE guidelines 2.0: Updated guidelines for reporting animal research",
+      "url": "https://doi.org/10.1371/journal.pbio.3000410",
+      "source_type": "peer_reviewed_reporting_guideline",
+      "read_depth": "full_text",
+      "published_at": "2020",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "experimental_unit_and_group_size",
+        "exclusions_randomization_blinding",
+        "sample_size_and_outcomes"
+      ],
+      "limits": [
+        "Animal reporting; does not prove ethical or statistical validity."
+      ],
+      "contradictions_or_tensions": [
+        "Reporting experimental units, allocation, and sample-size rationale does not prove that the design or analysis is valid."
+      ]
+    },
+    {
+      "source_id": "leek-2010-batch",
+      "title": "Tackling the widespread and critical impact of batch effects in high-throughput data",
+      "url": "https://doi.org/10.1038/nrg2825",
+      "source_type": "peer_reviewed_review",
+      "read_depth": "abstract",
+      "published_at": "2010",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "batch_provenance",
+        "batch_outcome_confounding",
+        "design_and_correction"
+      ],
+      "limits": [
+        "High-throughput context and abstract-level use; not an assay-specific checklist."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "obrien-2014-srqr",
+      "title": "Standards for Reporting Qualitative Research: A Synthesis of Recommendations",
+      "url": "https://doi.org/10.1097/ACM.0000000000000388",
+      "source_type": "peer_reviewed_reporting_guideline",
+      "read_depth": "abstract",
+      "published_at": "2014",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "qualitative_method_and_reflexivity",
+        "sampling_context_and_analysis",
+        "bounded_transferability"
+      ],
+      "limits": [
+        "Broad qualitative reporting and abstract-level use; not universal validity certification."
+      ],
+      "contradictions_or_tensions": [
+        "A synthesized reporting standard cannot be treated as a universal validity checklist across qualitative traditions."
+      ]
+    },
+    {
+      "source_id": "tong-2007-coreq",
+      "title": "Consolidated criteria for reporting qualitative research (COREQ)",
+      "url": "https://doi.org/10.1093/intqhc/mzm042",
+      "source_type": "peer_reviewed_reporting_guideline",
+      "read_depth": "abstract",
+      "published_at": "2007",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Title, identifier, source status, and declared read depth were checked against the publisher, Europe PMC/Crossref, an issuing-body artifact, or a publication-matched manuscript during the 2026-08-28 review.",
+      "supports": [
+        "interview_focus_group_reflexivity",
+        "coding_theme_derivation",
+        "supporting_quotations"
+      ],
+      "limits": [
+        "Interviews/focus groups only and abstract-level use."
+      ],
+      "contradictions_or_tensions": []
+    }
+  ],
+  "update_policy": {
+    "scheduled_review_on": "2027-02-28",
+    "triggers": [
+      "official guidance superseded or corrected",
+      "new analysis family or domain standard encountered",
+      "hard blocker or repair route challenged by stronger evidence",
+      "new journal/regulatory requirement becomes consequential"
+    ]
+  }
+}

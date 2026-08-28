@@ -1,0 +1,1326 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/SzeChunYiu/academic-paper-skills/schemas/statistical-inference-uncertainty-contract.schema.json",
+  "title": "Statistical inference and uncertainty engineering contract",
+  "description": "A strict record of estimands, analysis execution, typed uncertainty, result-to-surface bindings, deviations, and time-versioned exact-policy resolution. Schema validity is not scientific validity.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "contract_schema_version": {
+      "const": "1.0.0"
+    },
+    "contract_id": {
+      "type": "string"
+    },
+    "stage": {
+      "enum": [
+        "planning",
+        "analysis",
+        "draft",
+        "revision",
+        "final",
+        "submission"
+      ]
+    },
+    "as_of_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "analysis_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "study_archetypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "analysis_families": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "design_tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "inference_modes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "study_archetypes",
+        "analysis_families",
+        "design_tags",
+        "inference_modes"
+      ]
+    },
+    "source_provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "adapter_catalog_id": {
+          "type": "string"
+        },
+        "evidence_registry_id": {
+          "type": "string"
+        },
+        "resolved_adapter_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resolved_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "adapter_catalog_id",
+        "evidence_registry_id",
+        "resolved_adapter_ids",
+        "resolved_at"
+      ]
+    },
+    "upstream_bindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "study_protocol": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "contract_id": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            },
+            "analysis_plan_id": {
+              "type": "string"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "contract_id",
+            "status",
+            "analysis_plan_id",
+            "sha256"
+          ]
+        },
+        "data_integrity": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "contract_id": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            },
+            "analysis_ready_snapshot_id": {
+              "type": "string"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "contract_id",
+            "status",
+            "analysis_ready_snapshot_id",
+            "sha256"
+          ]
+        },
+        "analysis_input": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "snapshot_id": {
+              "type": "string"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "snapshot_id",
+            "sha256"
+          ]
+        }
+      },
+      "required": [
+        "study_protocol",
+        "data_integrity",
+        "analysis_input"
+      ]
+    },
+    "questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "question_id": {
+            "type": "string"
+          },
+          "claim_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "role": {
+            "type": "string"
+          },
+          "objective": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "question_id",
+          "claim_ids",
+          "role",
+          "objective"
+        ]
+      },
+      "minItems": 1
+    },
+    "estimands": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "estimand_id": {
+            "type": "string"
+          },
+          "question_id": {
+            "type": "string"
+          },
+          "population": {
+            "type": "string"
+          },
+          "condition_a": {
+            "type": "string"
+          },
+          "condition_b": {
+            "type": "string"
+          },
+          "outcome": {
+            "type": "string"
+          },
+          "time_horizon": {
+            "type": "string"
+          },
+          "summary_measure": {
+            "type": "string"
+          },
+          "effect_measure": {
+            "type": "string"
+          },
+          "scale": {
+            "type": "string"
+          },
+          "direction": {
+            "type": "string"
+          },
+          "intercurrent_event_strategy": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "estimand_id",
+          "question_id",
+          "population",
+          "condition_a",
+          "condition_b",
+          "outcome",
+          "time_horizon",
+          "summary_measure",
+          "effect_measure",
+          "scale",
+          "direction",
+          "intercurrent_event_strategy"
+        ]
+      },
+      "minItems": 1
+    },
+    "units_and_dependence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "observation_unit": {
+          "type": "string"
+        },
+        "assignment_unit": {
+          "type": "string"
+        },
+        "analysis_unit": {
+          "type": "string"
+        },
+        "independent_unit": {
+          "type": "string"
+        },
+        "dependence_structure": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "observation_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "independent_unit_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "reported_n": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "cluster_count": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "dependence_handling": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "status": {
+              "type": "string"
+            },
+            "method": {
+              "type": "string"
+            },
+            "receipt": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "status",
+            "method",
+            "receipt"
+          ]
+        }
+      },
+      "required": [
+        "observation_unit",
+        "assignment_unit",
+        "analysis_unit",
+        "independent_unit",
+        "dependence_structure",
+        "observation_count",
+        "independent_unit_count",
+        "reported_n",
+        "cluster_count",
+        "dependence_handling"
+      ]
+    },
+    "analysis_populations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "population_id": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "planned_count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "entered_count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "analyzed_count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "missing_outcome_count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "excluded_count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "group_counts": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "exclusion_decision_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "population_id",
+          "role",
+          "planned_count",
+          "entered_count",
+          "analyzed_count",
+          "missing_outcome_count",
+          "excluded_count",
+          "group_counts",
+          "exclusion_decision_ids"
+        ]
+      },
+      "minItems": 1
+    },
+    "analysis_plans": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "plan_id": {
+            "type": "string"
+          },
+          "frozen_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "classification": {
+            "type": "string"
+          },
+          "primary_result_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "estimand_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "population_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "analysis_family": {
+            "type": "string"
+          },
+          "estimator": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string"
+          },
+          "independent_unit": {
+            "type": "string"
+          },
+          "dependence_handling": {
+            "type": "string"
+          },
+          "sample_size": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "justification_type": {
+                "type": "string"
+              },
+              "planned_n": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 0
+              },
+              "rationale": {
+                "type": "string"
+              },
+              "receipt": {
+                "type": "string"
+              },
+              "observed_power_used_for_inference": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "justification_type",
+              "planned_n",
+              "rationale",
+              "receipt",
+              "observed_power_used_for_inference"
+            ]
+          },
+          "multiplicity": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "applicability": {
+                "type": "string"
+              },
+              "family_id": {
+                "type": "string"
+              },
+              "planned_hypothesis_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "executed_hypothesis_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "error_criterion": {
+                "type": "string"
+              },
+              "method": {
+                "type": "string"
+              },
+              "threshold": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "receipt": {
+                "type": "string"
+              },
+              "rationale": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "applicability",
+              "family_id",
+              "planned_hypothesis_ids",
+              "executed_hypothesis_ids",
+              "error_criterion",
+              "method",
+              "threshold",
+              "receipt",
+              "rationale"
+            ]
+          },
+          "missing_data": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "applicability": {
+                "type": "string"
+              },
+              "planned_strategy": {
+                "type": "string"
+              },
+              "realized_strategy": {
+                "type": "string"
+              },
+              "assumptions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "handling_receipt": {
+                "type": "string"
+              },
+              "sensitivity_required": {
+                "type": "boolean"
+              },
+              "sensitivity_result_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "applicability",
+              "planned_strategy",
+              "realized_strategy",
+              "assumptions",
+              "handling_receipt",
+              "sensitivity_required",
+              "sensitivity_result_ids"
+            ]
+          }
+        },
+        "required": [
+          "plan_id",
+          "frozen_at",
+          "classification",
+          "primary_result_ids",
+          "estimand_ids",
+          "population_ids",
+          "analysis_family",
+          "estimator",
+          "model",
+          "independent_unit",
+          "dependence_handling",
+          "sample_size",
+          "multiplicity",
+          "missing_data"
+        ]
+      },
+      "minItems": 1
+    },
+    "analysis_executions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "analysis_id": {
+            "type": "string"
+          },
+          "plan_id": {
+            "type": "string"
+          },
+          "executed_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "input_snapshot_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "code_receipt": {
+            "type": "string"
+          },
+          "environment_receipt": {
+            "type": "string"
+          },
+          "estimator": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string"
+          },
+          "independent_unit": {
+            "type": "string"
+          },
+          "dependence_handling": {
+            "type": "string"
+          },
+          "population_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "convergence_status": {
+            "type": "string"
+          },
+          "diagnostics": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "diagnostic_id": {
+                  "type": "string"
+                },
+                "dimension": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "method": {
+                  "type": "string"
+                },
+                "receipt": {
+                  "type": "string"
+                },
+                "consequence": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "diagnostic_id",
+                "dimension",
+                "status",
+                "method",
+                "receipt",
+                "consequence"
+              ]
+            }
+          },
+          "missing_data_strategy": {
+            "type": "string"
+          },
+          "multiplicity_method": {
+            "type": "string"
+          },
+          "result_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "analysis_id",
+          "plan_id",
+          "executed_at",
+          "input_snapshot_sha256",
+          "code_receipt",
+          "environment_receipt",
+          "estimator",
+          "model",
+          "independent_unit",
+          "dependence_handling",
+          "population_ids",
+          "convergence_status",
+          "diagnostics",
+          "missing_data_strategy",
+          "multiplicity_method",
+          "result_ids"
+        ]
+      }
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "result_id": {
+            "type": "string"
+          },
+          "analysis_id": {
+            "type": "string"
+          },
+          "estimand_id": {
+            "type": "string"
+          },
+          "population_id": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "claim_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "selection_status": {
+            "type": "string"
+          },
+          "estimate": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "type": "number"
+              },
+              "scale": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "value",
+              "scale",
+              "unit"
+            ]
+          },
+          "uncertainty": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "interval_id": {
+                "type": "string"
+              },
+              "kind": {
+                "type": "string"
+              },
+              "target": {
+                "type": "string"
+              },
+              "level": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "sidedness": {
+                "type": "string"
+              },
+              "method": {
+                "type": "string"
+              },
+              "lower": {
+                "type": "number"
+              },
+              "upper": {
+                "type": "number"
+              },
+              "unit": {
+                "type": "string"
+              },
+              "transformation": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "interval_id",
+              "kind",
+              "target",
+              "level",
+              "sidedness",
+              "method",
+              "lower",
+              "upper",
+              "unit",
+              "transformation"
+            ]
+          },
+          "test": {
+            "anyOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "framework": {
+                    "type": "string"
+                  },
+                  "hypothesis_id": {
+                    "type": "string"
+                  },
+                  "null_value": {
+                    "type": "number"
+                  },
+                  "alternative": {
+                    "type": "string"
+                  },
+                  "statistic_name": {
+                    "type": "string"
+                  },
+                  "statistic_value": {
+                    "type": "number"
+                  },
+                  "degrees_of_freedom": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "p_value": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "adjusted_p_value": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "threshold": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  }
+                },
+                "required": [
+                  "framework",
+                  "hypothesis_id",
+                  "null_value",
+                  "alternative",
+                  "statistic_name",
+                  "statistic_value",
+                  "degrees_of_freedom",
+                  "p_value",
+                  "adjusted_p_value",
+                  "threshold"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "decision": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "objective": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string"
+              },
+              "comparison_basis": {
+                "type": "string"
+              },
+              "margin": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "margin_unit": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "margin_provenance": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "objective",
+              "state",
+              "comparison_basis",
+              "margin",
+              "margin_unit",
+              "margin_provenance"
+            ]
+          },
+          "analyzed_n": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "independent_n": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "adverse_harmful_null_or_failed": {
+            "type": "boolean"
+          },
+          "analysis_receipt_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "specialist_metrics": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "metric_id": {
+                  "type": "string"
+                },
+                "kind": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "number"
+                },
+                "uncertainty_interval_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "receipt": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "metric_id",
+                "kind",
+                "name",
+                "value",
+                "uncertainty_interval_id",
+                "receipt"
+              ]
+            }
+          }
+        },
+        "required": [
+          "result_id",
+          "analysis_id",
+          "estimand_id",
+          "population_id",
+          "role",
+          "claim_ids",
+          "selection_status",
+          "estimate",
+          "uncertainty",
+          "test",
+          "decision",
+          "analyzed_n",
+          "independent_n",
+          "adverse_harmful_null_or_failed",
+          "analysis_receipt_sha256",
+          "specialist_metrics"
+        ]
+      }
+    },
+    "sensitivity_analyses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "sensitivity_id": {
+            "type": "string"
+          },
+          "primary_result_id": {
+            "type": "string"
+          },
+          "target_estimand_id": {
+            "type": "string"
+          },
+          "assumption_varied": {
+            "type": "string"
+          },
+          "scenario": {
+            "type": "string"
+          },
+          "plausibility_basis": {
+            "type": "string"
+          },
+          "result_id": {
+            "type": "string"
+          },
+          "receipt": {
+            "type": "string"
+          },
+          "decision_changed": {
+            "type": "boolean"
+          },
+          "claimed_as_same_estimand_robustness": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "sensitivity_id",
+          "primary_result_id",
+          "target_estimand_id",
+          "assumption_varied",
+          "scenario",
+          "plausibility_basis",
+          "result_id",
+          "receipt",
+          "decision_changed",
+          "claimed_as_same_estimand_robustness"
+        ]
+      }
+    },
+    "claim_links": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "claim_id": {
+            "type": "string"
+          },
+          "claim_class": {
+            "type": "string"
+          },
+          "requested_inference": {
+            "type": "string"
+          },
+          "result_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "state": {
+            "type": "string"
+          },
+          "comparison_basis": {
+            "type": "string"
+          },
+          "boundary": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "claim_id",
+          "claim_class",
+          "requested_inference",
+          "result_ids",
+          "state",
+          "comparison_basis",
+          "boundary"
+        ]
+      }
+    },
+    "surface_bindings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "surface_id": {
+            "type": "string"
+          },
+          "surface_type": {
+            "type": "string"
+          },
+          "result_id": {
+            "type": "string"
+          },
+          "analysis_receipt_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "reported_estimate": {
+            "type": "number"
+          },
+          "reported_interval_kind": {
+            "type": "string"
+          },
+          "reported_interval_level": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "reported_lower": {
+            "type": "number"
+          },
+          "reported_upper": {
+            "type": "number"
+          },
+          "reported_p_value": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "reported_n": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "rounding": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "decimal_places": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "absolute_tolerance": {
+                "type": "number",
+                "minimum": 0
+              },
+              "method": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "decimal_places",
+              "absolute_tolerance",
+              "method"
+            ]
+          }
+        },
+        "required": [
+          "surface_id",
+          "surface_type",
+          "result_id",
+          "analysis_receipt_sha256",
+          "reported_estimate",
+          "reported_interval_kind",
+          "reported_interval_level",
+          "reported_lower",
+          "reported_upper",
+          "reported_p_value",
+          "reported_n",
+          "rounding"
+        ]
+      }
+    },
+    "deviations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "deviation_id": {
+            "type": "string"
+          },
+          "classification": {
+            "type": "string"
+          },
+          "from_object_id": {
+            "type": "string"
+          },
+          "to_object_id": {
+            "type": "string"
+          },
+          "detected_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "consequence": {
+            "type": "string"
+          },
+          "affected_result_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "affected_claim_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "status": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "deviation_id",
+          "classification",
+          "from_object_id",
+          "to_object_id",
+          "detected_at",
+          "reason",
+          "consequence",
+          "affected_result_ids",
+          "affected_claim_ids",
+          "status"
+        ]
+      }
+    },
+    "exact_policy_resolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "policy_as_of_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "policies": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "policy_id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "issuer": {
+                "type": "string"
+              },
+              "applicability": {
+                "type": "string"
+              },
+              "resolution_status": {
+                "type": "string"
+              },
+              "source_url": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "uri"
+              },
+              "reviewed_at": {
+                "type": "string",
+                "format": "date"
+              },
+              "effective_from": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date"
+              },
+              "effective_until": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date"
+              },
+              "effective_date_basis": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "policy_id",
+              "title",
+              "issuer",
+              "applicability",
+              "resolution_status",
+              "source_url",
+              "reviewed_at",
+              "effective_from",
+              "effective_until",
+              "effective_date_basis"
+            ]
+          }
+        }
+      },
+      "required": [
+        "policy_as_of_date",
+        "policies"
+      ]
+    }
+  },
+  "required": [
+    "contract_schema_version",
+    "contract_id",
+    "stage",
+    "as_of_date",
+    "analysis_context",
+    "source_provenance",
+    "upstream_bindings",
+    "questions",
+    "estimands",
+    "units_and_dependence",
+    "analysis_populations",
+    "analysis_plans",
+    "analysis_executions",
+    "results",
+    "sensitivity_analyses",
+    "claim_links",
+    "surface_bindings",
+    "deviations",
+    "exact_policy_resolution"
+  ]
+}

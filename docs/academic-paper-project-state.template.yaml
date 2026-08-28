@@ -337,6 +337,197 @@ data_integrity_contract:
     does_not_certify_scientific_truth: true
     does_not_certify_journal_acceptance: true
 
+statistical_inference_contract:
+  id: "stat-contract:sc-001"
+  contract_schema_version: "1.0.0"
+  state_version: 1
+  stage: "planning"  # planning | analysis | draft | revision | final | submission
+  as_of_date: null
+  analysis_context:
+    study_archetypes: []
+    analysis_families: []
+    design_tags: []
+    inference_modes: []
+  resolution:
+    selection_mode: "applicable_obligations_not_universal_method"
+    adapter_catalog_id: "statistical-inference-maintained-adapters-2026-08-28"
+    evidence_registry_id: "statistical-inference-evidence-registry-2026-08-28"
+    evidence_reviewed_at: "2026-08-28"
+    resolved_adapter_ids: []
+    obligations: []
+    hard_checks: []
+    source_refs: []
+    transfer_limits: []
+    unmatched_analysis_domains: []
+    live_exact_domain_resolution_required: true
+  upstream_bindings:
+    study_protocol_contract_id: "study-contract:sc-001"
+    study_protocol_status: "unresolved"
+    analysis_plan_id: "analysis-plan:ap-001"
+    data_integrity_contract_id: "data-contract:dc-001"
+    data_integrity_status: "unresolved"
+    analysis_ready_snapshot_id: "data-snapshot:analysis-001"
+    analysis_ready_snapshot_sha256: null
+  questions:
+    - id: "question:q-001"
+      role: "primary"
+      objective: "REPLACE_ME"
+      claim_ids:
+        - "claim:c1"
+  estimands:
+    - id: "estimand:e-001"
+      question_id: "question:q-001"
+      population: "REPLACE_ME"
+      conditions_or_comparator: "REPLACE_ME"
+      outcome_or_target: "REPLACE_ME"
+      time_horizon: "REPLACE_ME"
+      summary_and_effect_measure: "REPLACE_ME"
+      scale_and_direction: "REPLACE_ME"
+      intercurrent_event_strategy: null
+  units_and_dependence:
+    observation_unit: "REPLACE_ME"
+    assignment_unit: "REPLACE_ME"
+    analysis_unit: "REPLACE_ME"
+    independent_unit: "REPLACE_ME"
+    observation_count: null
+    independent_unit_count: null
+    reported_n: null
+    cluster_count: null
+    dependence_structure: []
+    dependence_handling:
+      status: "unresolved"  # modeled | aggregated | design_based | not_applicable | unresolved | ignored
+      method: null
+      receipt_id: null
+  analysis_populations:
+    - id: "population:primary"
+      role: "primary"
+      planned_count: null
+      entered_count: null
+      analyzed_count: null
+      missing_outcome_count: null
+      excluded_count: null
+      group_counts: {}
+      exclusion_decision_ids: []
+  plan_execution_bindings:
+    - plan_id: "analysis-plan:ap-001"
+      analysis_id: "analysis:a-001"
+      plan_frozen_at: null
+      classification: "unresolved"  # confirmatory | exploratory | post_hoc | descriptive | not_applicable | unresolved
+      analysis_family: null
+      estimator_or_model: null
+      independent_unit: null
+      missing_data_plan: null
+      realized_missing_data_strategy: null
+      multiplicity_family_ids: []
+      multiplicity_objective_and_method: null
+      sample_size_rationale_and_receipt: null
+      input_snapshot_sha256: null
+      code_receipt_id: null
+      environment_receipt_id: null
+      convergence_status: "not_checked"
+      diagnostic_receipt_ids: []
+      produced_result_ids:
+        - "result:r-001"
+      execution_status: "not_run"
+  statistical_result_bindings:
+    - result_id: "result:r-001"
+      analysis_id: "analysis:a-001"
+      estimand_id: "estimand:e-001"
+      population_id: "population:primary"
+      claim_ids:
+        - "claim:c1"
+      role: "primary"
+      selection_status: "unresolved"  # prespecified | deviation | exploratory | post_hoc | unresolved
+      estimate:
+        value: null
+        scale: null
+        unit: null
+      uncertainty:
+        kind: null  # confidence_interval | credible_interval | prediction_interval | bootstrap_interval | compatibility_interval | other
+        target: null
+        level: null
+        sidedness: null
+        method: null
+        lower: null
+        upper: null
+        unit: null
+      test: null
+      decision:
+        objective: null
+        state: "not_evaluated"  # supported | not_supported | inconclusive | descriptive_only | not_evaluated
+        comparison_basis: null
+        margin: null
+        margin_unit: null
+        margin_provenance: null
+      analyzed_n: null
+      independent_n: null
+      adverse_harmful_null_or_failed: false
+      analysis_receipt_sha256: null
+  statistical_surface_bindings:
+    - surface_id: "surface:results-001"
+      surface_type: "manuscript_results"
+      result_id: "result:r-001"
+      analysis_receipt_sha256: null
+      reported_estimate: null
+      reported_interval_kind: null
+      reported_interval_level: null
+      reported_lower: null
+      reported_upper: null
+      reported_p_value: null
+      reported_n: null
+      rounding_method: null
+      absolute_tolerance: null
+      status: "unverified"
+  sensitivity_analyses:
+    - id: "sensitivity:s-001"
+      applicability: "unresolved"
+      primary_result_id: "result:r-001"
+      target_estimand_id: "estimand:e-001"
+      assumption_varied: null
+      scenario_and_plausibility_basis: null
+      result_id: null
+      receipt_id: null
+      decision_changed: null
+      claimed_as_same_estimand_robustness: null
+  deviations: []
+  exact_policy_resolution:
+    policy_as_of_date: null
+    policies:
+      - policy_id: null
+        issuer: null
+        title: null
+        applicability: "unresolved"  # required | optional | not_applicable | unresolved
+        resolution_status: "unresolved"  # resolved | unresolved | conflicting | not_applicable
+        source_url: null
+        reviewed_at: null
+        effective_from: null
+        effective_until: null
+        effective_date_basis: "unresolved"  # official_explicit | observed_active_not_backcastable | unresolved
+  statistical_inference_contract_status: "unresolved"  # pass | blocked | unresolved
+  blocker_codes: []
+  unresolved_research_codes:
+    - "required_exact_analysis_policy_unresolved"
+  policy_date_states: []  # may include future_effective_analysis_policy | historical_analysis_policy_not_backcastable | expired_analysis_policy
+  visible_deviation_classes: []
+  allowed_repair_routes:
+    - "resolve the independent unit and rerun from the bound snapshot"
+    - "version and disclose a deviation or reclassify exploratory work"
+    - "correct every dependent statistical surface"
+    - "narrow or remove an inference that outruns executed evidence"
+  certification:
+    schema_valid: false
+    identity_and_fixity_checks: "unchecked"
+    analysis_and_surface_consistency_checks: "unchecked"
+    inference_boundary_checks: "unchecked"
+    does_not_certify_model_adequacy_or_assumption_truth: true
+    does_not_certify_causal_identification: true
+    does_not_certify_absence_of_bias: true
+    does_not_certify_measurement_validity: true
+    does_not_certify_adequate_power_or_precision: true
+    does_not_certify_external_validity_or_generalization: true
+    does_not_certify_scientific_truth: true
+    does_not_certify_journal_acceptance: true
+
 protocols:
   - id: "protocol:p-001"
     study_contract_id: "study-contract:sc-001"
@@ -703,6 +894,13 @@ assurance_profile:
   data_governance_resolution: "unresolved"
   data_release_resolution: "unresolved"
   data_provenance: "incomplete"
+  statistical_inference_contract_status: "unresolved"
+  estimand_and_population_binding: "unchecked"
+  independent_unit_and_dependence: "unchecked"
+  analysis_plan_execution_alignment: "unchecked"
+  statistical_uncertainty_semantics: "unchecked"
+  statistical_result_surface_bindings: "unchecked"
+  exact_analysis_policy_resolution: "unresolved"
   computation: "not_run"
   independent_verification: "none"
   external_replication_or_triangulation: "none"

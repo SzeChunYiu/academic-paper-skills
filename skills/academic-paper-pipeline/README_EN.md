@@ -16,6 +16,7 @@ The pipeline keeps one persistent manuscript state across rounds:
 - figure ledger;
 - source/research ledger;
 - data integrity, lineage, governance, and release ledger;
+- statistical inference, uncertainty semantics, execution, and result-surface ledger;
 - stable reviewer-concern IDs;
 - editor must-address conditions;
 - revision delta;
@@ -78,6 +79,34 @@ privacy protection, a receipt, or a real deposit. A passing data contract is not
 an accuracy, completeness, representativeness, privacy, reproducibility,
 scientific-truth, or acceptance certificate.
 
+## Statistical Inference And Uncertainty State
+
+After the immutable analysis-ready snapshot is fixed and before quantitative
+Results, displays, captions, claims, review, or readiness, the pipeline loads
+`../nature-shared/core/statistical-inference-uncertainty-contract.md` and binds:
+
+```text
+question/claim -> estimand -> independent unit/dependence -> population
+-> missingness/multiplicity/decision plan -> immutable input
+-> executed analysis + diagnostics/sensitivity -> estimate + typed uncertainty
+-> table/display/caption/prose bindings -> bounded claim
+```
+
+Composable maintained adapters return applicable obligations rather than a
+universal best method. Unknown domains and exact regulator/venue analysis rules
+stay explicit live research. The layer blocks recorded pseudoreplication,
+ignored dependence, silent plan/execution or missing-data changes, unresolved
+confirmatory multiplicity, nonconvergence, missing execution/diagnostic
+receipts, invalid significance/absence/equivalence shortcuts, omitted planned
+null/adverse/failed results, stale numeric surfaces, and unsupported
+calibration, utility, robustness, or future-setting claims.
+
+Claim narrowing is a valid repair for overreach, but cannot manufacture an
+analysis, independent observations, convergence, prespecification, missing-data
+work, a margin, or policy authority. Passing certifies recorded bounded
+invariants only—not model adequacy, causal identification, adequate precision,
+truth, generalization, or acceptance.
+
 ## Scientific Display State
 
 The persistent figure ledger now carries a scientific display decision contract
@@ -99,6 +128,7 @@ target + paper archetype
 -> evidence/source intake
 -> protocol + conduct + deviation resolution
 -> data integrity + stewardship + release resolution
+-> statistical inference + uncertainty + result-surface resolution
 -> research calibration
 -> argument + claim/evidence architecture
 -> content/figure/statistics planning

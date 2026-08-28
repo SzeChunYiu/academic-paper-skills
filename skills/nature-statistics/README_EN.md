@@ -2,7 +2,7 @@
 
 [中文说明](README.md)
 
-`nature-statistics` audits, rewrites, or drafts statistical reporting for Nature / high-impact journal submissions, focusing on transparency, reproducibility, and alignment with study design rather than only whether p values are significant.
+`nature-statistics` audits, rewrites, or drafts statistical reporting for Nature / high-impact journal submissions, focusing on transparency, traceability, and alignment with study design rather than only whether p values are significant. Analysis-backed work uses the shared `../nature-shared/core/statistical-inference-uncertainty-contract.md` before turning numbers into prose.
 
 ## What To Use It For
 
@@ -12,6 +12,11 @@
 - Identify pseudoreplication, nested data, multiple comparisons, interaction interpretation, overinterpreted correlations, and significance abuse.
 - Cross-check numeric precision, units, and statistical terminology for the same statistic across the abstract, text, tables, and conclusion.
 - Draft conservative responses or revision suggestions for reviewer statistics comments.
+- Bind estimands, independent units/dependence, immutable analysis inputs,
+  executions, diagnostics/sensitivity, typed uncertainty, and every
+  table/display/caption/prose value to current result receipts.
+- Resolve composable analysis obligations without pretending there is a
+  universal best test, model, prior, interval, threshold, or frequentist route.
 - Check the flagship `Nature Article` requirements for test tails, exact n, repeat counts, significant and non-significant P values, ANOVA F/df, and t-test t/df.
 - Check `Nature Machine Intelligence` (NMI) legend-level n/error/test definitions, source data, applicable Reporting Summaries, and the separate initial versus final requirements.
 
@@ -40,6 +45,12 @@
 - The skill does not invent sample sizes, replicate counts, p values, effect sizes, model assumptions, or test names.
 - It does not replace a statistician or a full reanalysis; raw-data modeling requires the original data and analysis code.
 - Experimental units and independent replicates cannot be inferred from figures alone and need author confirmation.
+- Passing the contract certifies only recorded bounded invariants, not model
+  adequacy, assumption truth, causal identification, adequate precision,
+  external validity, scientific truth, or journal acceptance.
+- Claim narrowing can repair overreach, but cannot manufacture execution,
+  independent observations, convergence, prespecification, missing-data work,
+  a decision margin, or policy authority.
 
 ## Related Skills
 

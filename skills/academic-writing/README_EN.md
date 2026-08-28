@@ -15,6 +15,7 @@ The older `skills/nature-writing/` directory remains only as a compatibility/ref
 - checks whether ideas are explained deeply enough for the intended reader;
 - makes sentence-to-sentence logic explicit;
 - binds raw, validated, analysis-ready, analysis-input, and release data objects before drafting downstream claims;
+- binds estimands, independent units, executed analyses, typed uncertainty, and every reported numeric surface before quantitative claims;
 - plans what evidence and figures the paper actually needs;
 - decides what belongs in main text, Methods, SI, availability, artifact docs, or nowhere;
 - preserves a recognizable author voice while avoiding generic AI-like prose;
@@ -85,6 +86,41 @@ lifecycle invariants—not measurement accuracy, completeness,
 representativeness, privacy, legal compliance, reproducibility, scientific
 truth, or acceptance.
 
+## Statistical Inference And Uncertainty Contracts
+
+After the analysis-ready snapshot is fixed and before quantitative Results,
+tables, plots, captions, or claims become authoritative, the skill loads
+`../nature-shared/core/statistical-inference-uncertainty-contract.md` and binds:
+
+```text
+question/claim -> estimand -> independent unit/dependence -> population
+-> missingness/multiplicity/decision plan -> immutable analysis input
+-> executed analysis + diagnostics/sensitivity -> estimate + typed uncertainty
+-> table/display/caption/prose bindings -> bounded claim
+```
+
+Fourteen composable maintained adapters cover major analysis families and an
+explicit non-quantitative boundary. They return applicable obligations—not a
+universal best test, model, interval, prior, threshold, or frequentist
+template. Unmatched methods and consequential exact domain/regulator/venue
+rules remain live, time-versioned source-research tasks.
+
+Behavior checks detect pseudoreplication, ignored dependence, plan/execution or
+missing-data drift, unresolved confirmatory multiplicity, post-result observed
+power as evidence, nonconvergence, missing diagnostic/execution receipts,
+nonsignificance-as-absence, unjustified equivalence, interval/numeric drift
+across surfaces, hidden planned/null/adverse/failed results, and claims that
+outrun calibration, utility, robustness, or prediction evidence. Claim
+narrowing can repair overreach, but cannot create analysis execution,
+independent observations, convergence, prespecification, missing-data work, a
+valid margin, or policy authority.
+
+The evidence base contains 65 reconciled sources, including 46 full-text
+readings and 8 official guideline/policy/technical sources, plus 16 frozen
+queries and 128 metadata-screened records. Passing certifies bounded recorded
+invariants—not model adequacy, assumption truth, causal identification,
+adequate precision, external validity, scientific truth, or acceptance.
+
 ## Scientific Display Decision Contracts
 
 Every evidence-bearing plot, figure, table, image plate, or diagram can now be
@@ -116,6 +152,7 @@ scientific evidence
 -> paper archetype
 -> protocol + analysis plan + executed conduct + deviations
 -> raw snapshot + QC + transformations + analysis-ready/release bindings
+-> estimand + independent unit + executed analysis + typed uncertainty + surface bindings
 -> question / contribution
 -> claim/evidence/boundary map
 -> content selection
