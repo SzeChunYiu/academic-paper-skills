@@ -33,6 +33,20 @@ Live official-source contracts outrank maintained exact snapshots. A generic
 or publication-model fallback can guide planning, but cannot close exact target
 readiness or be attributed to the journal.
 
+## Scientific Display State
+
+The persistent figure ledger now carries a scientific display decision contract
+for every evidence-bearing figure, plot, table, image plate, and diagram. It
+binds the reader task and estimand to the statistical unit, representation and
+inference boundary, then binds the display to immutable data, analysis, render,
+and source-data receipts. Candidate adapters do not declare a universal best
+chart.
+
+A required display with pairing, denominator, provenance, uncertainty,
+omission, inference-boundary, caption, or accessibility blockers prevents
+simulated readiness until the evidence is reconciled, the representation is
+repaired, or the claim is appropriately narrowed.
+
 ## Iteration Model
 
 ```text
@@ -41,6 +55,7 @@ target + paper archetype
 -> research calibration
 -> argument + claim/evidence architecture
 -> content/figure/statistics planning
+-> scientific display contract resolution
 -> academic writing
 -> technical/reporting/surface QA
 -> editor triage

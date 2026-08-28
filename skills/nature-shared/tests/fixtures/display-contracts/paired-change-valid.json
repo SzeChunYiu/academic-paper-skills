@@ -1,0 +1,99 @@
+{
+  "contract_schema_version": "1.0.0",
+  "contract_id": "display-paired-change-example-v1",
+  "display_id": "figure:2b",
+  "stage": "final",
+  "display_kind": "data_figure",
+  "reader_task": {
+    "id": "compare_change",
+    "question": "How does the outcome change within the same participants?"
+  },
+  "scientific_object": {
+    "estimand": "mean paired change from baseline",
+    "statistical_unit": "participant",
+    "data_structure": ["paired", "repeated_measure"],
+    "population_denominator": {
+      "label": "participants with paired measurements",
+      "value": 24
+    }
+  },
+  "claim_links": [
+    {
+      "claim_id": "C-PAIRED-CHANGE",
+      "claim_type": "comparative",
+      "allowed_inferences": ["paired_change"],
+      "prohibited_inferences": ["causal_effect", "population_equivalence"]
+    }
+  ],
+  "evidence_links": {
+    "data_snapshot": {
+      "artifact_id": "data-paired-v3",
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "analysis_receipt": {
+      "artifact_id": "analysis-paired-v5",
+      "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "input_data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "render_receipt": {
+      "artifact_id": "render-figure-2b-v2",
+      "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "input_analysis_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    },
+    "source_data": {
+      "artifact_id": "source-data-figure-2b",
+      "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "input_data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  },
+  "representation": {
+    "family": "connected_points",
+    "rationale": "Connections preserve the within-participant comparison that defines the estimand; the companion interval exposes uncertainty in the paired difference.",
+    "channels": [
+      {"variable": "participant", "channel": "connection"},
+      {"variable": "condition", "channel": "x_position"},
+      {"variable": "outcome", "channel": "y_position"}
+    ],
+    "transformations": [],
+    "uncertainty": {
+      "shown": true,
+      "kind": "confidence_interval",
+      "level": 0.95,
+      "unit": "paired_difference"
+    },
+    "scales": [
+      {
+        "axis": "y",
+        "type": "linear",
+        "limits_source": "data_or_prespecified",
+        "truncated": false,
+        "disclosed": true
+      }
+    ],
+    "observed_groups": ["baseline", "followup"],
+    "plotted_groups": ["baseline", "followup"],
+    "omission_disclosures": []
+  },
+  "caption": {
+    "denominator": {
+      "label": "participants with paired measurements",
+      "value": 24
+    },
+    "statistical_unit": "participant",
+    "uncertainty_definition": "95% confidence interval for the mean paired difference",
+    "transformation_disclosures": []
+  },
+  "accessibility": {
+    "color_only_encoding": false,
+    "redundant_channels": ["position", "connection"],
+    "alt_text": "Connected points show each participant's baseline and follow-up outcome, with the paired-change estimate and its 95% confidence interval.",
+    "long_description": "Twenty-four paired observations are shown. Connections preserve within-participant identity; the summary interval describes the mean paired difference."
+  },
+  "placement": {
+    "location": "main_text",
+    "reason": "The paired change is necessary for the central comparative claim."
+  },
+  "known_risks": [
+    "The display does not by itself establish a causal treatment effect."
+  ]
+}

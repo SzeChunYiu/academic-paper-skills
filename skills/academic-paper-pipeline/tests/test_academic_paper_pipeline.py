@@ -113,6 +113,29 @@ class AcademicPaperPipelineTests(unittest.TestCase):
         self.assertIn("no universal acceptance objective", skill)
         self.assertIn("certification is separate from acceptance", skill)
 
+    def test_pipeline_requires_display_contract_closure_before_readiness(self) -> None:
+        skill = read(PIPELINE / "SKILL.md")
+        manifest = read(PIPELINE / "manifest.yaml")
+        state = read(PIPELINE.parents[1] / "docs" / "academic-paper-project-state.template.yaml")
+        self.assertIn("scientific-display-decision-contract.md", manifest)
+        self.assertIn("display contract", skill.lower())
+        self.assertIn("display-contract blocker", skill.lower())
+        for marker in (
+            "display_contract_id",
+            "reader_task",
+            "estimand",
+            "data_snapshot_sha256",
+            "analysis_receipt_sha256",
+            "render_receipt_sha256",
+            "source_data_sha256",
+            "representation_family",
+            "allowed_inferences",
+            "prohibited_inferences",
+            "display_contract_status",
+            "display_blocker_codes",
+        ):
+            self.assertIn(marker, state)
+
 
 if __name__ == "__main__":
     unittest.main()

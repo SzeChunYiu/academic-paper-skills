@@ -1,0 +1,137 @@
+{
+  "catalog_schema_version": "1.0.0",
+  "catalog_id": "scientific-display-maintained-adapters-2026-08-28",
+  "reviewed_at": "2026-08-28",
+  "selection_mode": "candidate_set_not_universal_best",
+  "scope": "Evidence-informed starting points. The actual reader task, estimand, design, data, uncertainty, and inferential boundary control the final representation.",
+  "sources": [
+    {
+      "source_id": "cleveland-mcgill-1984",
+      "title": "Graphical Perception: Theory, Experimentation, and Application to the Development of Graphical Methods",
+      "url": "https://doi.org/10.1080/01621459.1984.10478080",
+      "accessed_at": "2026-08-28",
+      "supports": ["perceptual encoding hierarchy", "position and length judgments"]
+    },
+    {
+      "source_id": "weissgerber-2015",
+      "title": "Beyond Bar and Line Graphs: Time for a New Data Presentation Paradigm",
+      "url": "https://doi.org/10.1371/journal.pbio.1002128",
+      "accessed_at": "2026-08-28",
+      "supports": ["raw data visibility", "paired and distribution structure"]
+    },
+    {
+      "source_id": "rougier-2014",
+      "title": "Ten Simple Rules for Better Figures",
+      "url": "https://doi.org/10.1371/journal.pcbi.1003833",
+      "accessed_at": "2026-08-28",
+      "supports": ["audience and message first", "clarity over decoration"]
+    },
+    {
+      "source_id": "nature-methods-visualization",
+      "title": "Points of View, anew",
+      "url": "https://www.nature.com/articles/s41592-026-03143-5",
+      "accessed_at": "2026-08-28",
+      "supports": ["task-matched visualization", "uncertainty and complex plot design"]
+    },
+    {
+      "source_id": "wcag-1-4-1",
+      "title": "WCAG 2.2 Success Criterion 1.4.1 Use of Color",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html",
+      "accessed_at": "2026-08-28",
+      "supports": ["redundant non-color encoding"]
+    }
+  ],
+  "profiles": [
+    {
+      "adapter_id": "paired-change",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "reader_tasks": ["compare_change"],
+        "any_data_structures": ["paired", "repeated_measure"]
+      },
+      "candidate_families": ["connected_points", "paired_difference", "slopegraph", "repeated_measure_trajectory"],
+      "disallowed_families": ["independent_mean_bar"],
+      "obligations": [
+        "Preserve the within-unit pairing in the visual encoding.",
+        "Define the paired estimand and uncertainty unit.",
+        "Do not visually treat repeated measurements as independent observations."
+      ],
+      "source_refs": ["weissgerber-2015"]
+    },
+    {
+      "adapter_id": "distribution",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "reader_tasks": ["inspect_distribution"],
+        "any_data_structures": ["continuous", "count", "ordinal"]
+      },
+      "candidate_families": ["raw_points_with_interval", "ecdf", "histogram", "density", "box_or_violin_with_points"],
+      "disallowed_families": [],
+      "obligations": [
+        "Expose observations when aggregation would hide decision-relevant shape, pairing, or outliers.",
+        "Treat binning and smoothing as transformations that require parameters and justification."
+      ],
+      "source_refs": ["cleveland-mcgill-1984", "weissgerber-2015"]
+    },
+    {
+      "adapter_id": "classification-decision",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "reader_tasks": ["evaluate_classifier", "choose_operating_point"],
+        "any_data_structures": ["classification", "probabilistic_prediction"]
+      },
+      "candidate_families": ["roc_curve", "precision_recall_curve", "calibration_curve", "threshold_operating_points", "decision_curve"],
+      "disallowed_families": [],
+      "obligations": [
+        "Choose discrimination, calibration, threshold, and utility displays from the actual decision question.",
+        "Do not treat AUC alone as sufficient for a deployment or calibrated-risk claim."
+      ],
+      "source_refs": ["rougier-2014", "nature-methods-visualization"]
+    },
+    {
+      "adapter_id": "high-dimensional-embedding",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "reader_tasks": ["orient_high_dimensional_structure"],
+        "any_data_structures": ["high_dimensional"]
+      },
+      "candidate_families": ["embedding", "matrix", "small_multiple_embedding"],
+      "disallowed_families": [],
+      "obligations": [
+        "Record preprocessing, distance, algorithm, parameters, seed, and stability checks.",
+        "Use independent quantitative or experimental evidence for separation, causal, or mechanistic claims."
+      ],
+      "source_refs": ["rougier-2014", "nature-methods-visualization"]
+    },
+    {
+      "adapter_id": "workflow-semantics",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "reader_tasks": ["explain_workflow"],
+        "any_data_structures": ["process"]
+      },
+      "candidate_families": ["workflow_diagram", "timeline", "participant_flow"],
+      "disallowed_families": [],
+      "obligations": [
+        "Encode operations and sequence, not unsupported causal or mechanistic relations.",
+        "Use a causal DAG or bounded mechanism diagram only when its distinct assumptions and evidence are declared."
+      ],
+      "source_refs": ["rougier-2014"]
+    },
+    {
+      "adapter_id": "exact-value-lookup",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "reader_tasks": ["lookup_exact_values"],
+        "any_data_structures": ["tabular"]
+      },
+      "candidate_families": ["table", "aligned_interval_table"],
+      "disallowed_families": [],
+      "obligations": [
+        "Use a table when exact lookup is the reader task and visual pattern is secondary.",
+        "Keep units, denominators, missing values, and precision definitions recoverable."
+      ],
+      "source_refs": ["cleveland-mcgill-1984", "rougier-2014"]
+    }
+  ]
+}

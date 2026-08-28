@@ -160,6 +160,18 @@ reader question
 -> main/support/omit
 ```
 
+Then materialize the shared scientific display decision contract for every
+evidence-bearing figure, plot, table, image plate, diagram, or mixed display.
+Record the reader task, estimand, statistical unit, candidate representation,
+allowed/prohibited inferences, data snapshot, analysis receipt, render receipt,
+source-data object, caption denominator, uncertainty meaning, transformations,
+group coverage, accessibility, and placement. There is no universal best chart.
+
+A display-contract blocker is a manuscript-state blocker when the display is
+required for a headline claim. Repair it by reconciling/re-rendering from real
+evidence, changing representation, adding a traceable companion display, or
+narrowing the claim—not by inventing evidence.
+
 Use scientific diagram backends for workflows/mechanisms/flowcharts rather than forcing everything through a plotting grammar.
 
 ### 5. Draft/rewrite
@@ -292,6 +304,7 @@ Use it only when:
 - central alternatives/boundaries are visible;
 - methods/statistics/reporting are adequate;
 - figures/diagrams expose the needed evidence;
+- every required display contract is bound to the current data/analysis/render/source-data objects and has no display-contract blocker;
 - contents are rich enough to understand without filler;
 - sentence-to-sentence and paragraph logic are coherent;
 - author voice is natural rather than generic/AI-like;

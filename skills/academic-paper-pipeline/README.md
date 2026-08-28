@@ -33,6 +33,18 @@ Live official-source contract 高于 maintained exact snapshot。Generic 或
 publication-model fallback 只能辅助 planning，不能关闭 exact target readiness，
 也不能被描述成该期刊的真实 policy。
 
+## Scientific display state
+
+Persistent figure ledger 现在会为每个承担 evidence 的 figure、plot、table、image
+plate 与 diagram 保存 scientific display decision contract。它把 reader task 与
+estimand 绑定到 statistical unit、representation 和 inference boundary，再绑定到
+immutable data、analysis、render 与 source-data receipts。Candidate adapters 不会
+宣称存在 universal best chart。
+
+Required display 如果仍有 pairing、denominator、provenance、uncertainty、omission、
+inference-boundary、caption 或 accessibility blocker，就不能进入 simulated
+readiness；必须从真实 evidence 修复 representation/provenance，或合理缩窄 claim。
+
 ## Iteration model
 
 ```text
@@ -41,6 +53,7 @@ target + paper archetype
 -> research calibration
 -> argument + claim/evidence architecture
 -> content/figure/statistics planning
+-> scientific display contract resolution
 -> academic writing
 -> technical/reporting/surface QA
 -> editor triage

@@ -1,0 +1,257 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/SzeChunYiu/academic-paper-skills/scientific-display-contract.schema.json",
+  "title": "Scientific display decision contract",
+  "description": "A claim-linked, provenance-bound contract for a scientific figure, plot, table, image plate, or diagram.",
+  "type": "object",
+  "required": [
+    "contract_schema_version",
+    "contract_id",
+    "display_id",
+    "stage",
+    "display_kind",
+    "reader_task",
+    "scientific_object",
+    "claim_links",
+    "evidence_links",
+    "representation",
+    "caption",
+    "accessibility",
+    "placement",
+    "known_risks"
+  ],
+  "properties": {
+    "contract_schema_version": {"const": "1.0.0"},
+    "contract_id": {"type": "string", "minLength": 1},
+    "display_id": {"type": "string", "minLength": 1},
+    "stage": {
+      "enum": ["planning", "draft", "review", "final", "production", "post_publication"]
+    },
+    "display_kind": {
+      "enum": ["data_figure", "image_plate", "diagram", "table", "mixed_figure"]
+    },
+    "reader_task": {
+      "type": "object",
+      "required": ["id", "question"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "question": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "scientific_object": {
+      "type": "object",
+      "required": ["estimand", "statistical_unit", "data_structure", "population_denominator"],
+      "properties": {
+        "estimand": {"type": "string", "minLength": 1},
+        "statistical_unit": {"type": "string", "minLength": 1},
+        "data_structure": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "population_denominator": {"$ref": "#/$defs/denominator"}
+      },
+      "additionalProperties": false
+    },
+    "claim_links": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["claim_id", "claim_type", "allowed_inferences", "prohibited_inferences"],
+        "properties": {
+          "claim_id": {"type": "string", "minLength": 1},
+          "claim_type": {"type": "string", "minLength": 1},
+          "allowed_inferences": {"$ref": "#/$defs/stringSet"},
+          "prohibited_inferences": {"$ref": "#/$defs/stringSet"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "evidence_links": {
+      "type": "object",
+      "required": ["data_snapshot", "analysis_receipt", "render_receipt", "source_data"],
+      "properties": {
+        "data_snapshot": {"$ref": "#/$defs/artifact"},
+        "analysis_receipt": {
+          "allOf": [
+            {"$ref": "#/$defs/artifact"},
+            {
+              "type": "object",
+              "required": ["input_data_sha256"],
+              "properties": {"input_data_sha256": {"$ref": "#/$defs/sha256"}}
+            }
+          ]
+        },
+        "render_receipt": {
+          "allOf": [
+            {"$ref": "#/$defs/artifact"},
+            {
+              "type": "object",
+              "required": ["input_analysis_sha256"],
+              "properties": {"input_analysis_sha256": {"$ref": "#/$defs/sha256"}}
+            }
+          ]
+        },
+        "source_data": {
+          "allOf": [
+            {"$ref": "#/$defs/artifact"},
+            {
+              "type": "object",
+              "required": ["input_data_sha256"],
+              "properties": {"input_data_sha256": {"$ref": "#/$defs/sha256"}}
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "representation": {
+      "type": "object",
+      "required": [
+        "family",
+        "rationale",
+        "channels",
+        "transformations",
+        "uncertainty",
+        "scales",
+        "observed_groups",
+        "plotted_groups",
+        "omission_disclosures"
+      ],
+      "properties": {
+        "family": {"type": "string", "minLength": 1},
+        "rationale": {"type": "string", "minLength": 1},
+        "channels": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["variable", "channel"],
+            "properties": {
+              "variable": {"type": "string", "minLength": 1},
+              "channel": {"type": "string", "minLength": 1}
+            },
+            "additionalProperties": false
+          }
+        },
+        "transformations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "parameters", "justification"],
+            "properties": {
+              "id": {"type": "string", "minLength": 1},
+              "parameters": {"type": "object"},
+              "justification": {"type": "string", "minLength": 1}
+            },
+            "additionalProperties": false
+          }
+        },
+        "uncertainty": {
+          "type": "object",
+          "required": ["shown", "kind", "level", "unit"],
+          "properties": {
+            "shown": {"type": "boolean"},
+            "kind": {"type": ["string", "null"]},
+            "level": {"type": ["number", "null"], "exclusiveMinimum": 0, "exclusiveMaximum": 1},
+            "unit": {"type": ["string", "null"]}
+          },
+          "additionalProperties": false
+        },
+        "scales": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["axis", "type", "limits_source", "truncated", "disclosed"],
+            "properties": {
+              "axis": {"type": "string", "minLength": 1},
+              "type": {"type": "string", "minLength": 1},
+              "limits_source": {"type": "string", "minLength": 1},
+              "truncated": {"type": "boolean"},
+              "disclosed": {"type": "boolean"}
+            },
+            "additionalProperties": false
+          }
+        },
+        "observed_groups": {"$ref": "#/$defs/stringSet"},
+        "plotted_groups": {"$ref": "#/$defs/stringSet"},
+        "omission_disclosures": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["group", "reason"],
+            "properties": {
+              "group": {"type": "string", "minLength": 1},
+              "reason": {"type": "string", "minLength": 1}
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "caption": {
+      "type": "object",
+      "required": ["denominator", "statistical_unit", "uncertainty_definition", "transformation_disclosures"],
+      "properties": {
+        "denominator": {"$ref": "#/$defs/denominator"},
+        "statistical_unit": {"type": "string"},
+        "uncertainty_definition": {"type": "string"},
+        "transformation_disclosures": {"$ref": "#/$defs/stringSet"}
+      },
+      "additionalProperties": false
+    },
+    "accessibility": {
+      "type": "object",
+      "required": ["color_only_encoding", "redundant_channels", "alt_text", "long_description"],
+      "properties": {
+        "color_only_encoding": {"type": "boolean"},
+        "redundant_channels": {"$ref": "#/$defs/stringSet"},
+        "alt_text": {"type": "string"},
+        "long_description": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "placement": {
+      "type": "object",
+      "required": ["location", "reason"],
+      "properties": {
+        "location": {"enum": ["main_text", "extended_data", "supplement", "repository", "not_displayed"]},
+        "reason": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "known_risks": {"$ref": "#/$defs/stringSet"}
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+    "stringSet": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "denominator": {
+      "type": "object",
+      "required": ["label", "value"],
+      "properties": {
+        "label": {"type": "string", "minLength": 1},
+        "value": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "artifact": {
+      "type": "object",
+      "required": ["artifact_id", "sha256"],
+      "properties": {
+        "artifact_id": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "input_data_sha256": {"$ref": "#/$defs/sha256"},
+        "input_analysis_sha256": {"$ref": "#/$defs/sha256"}
+      },
+      "additionalProperties": false
+    }
+  }
+}

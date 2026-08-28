@@ -32,6 +32,24 @@ review model、AI/confidentiality policy、acceptance states 与 certification l
 或有冲突的 target 必须走 live official-source resolution；fallback profile 永远不能
 当成 exact journal policy。
 
+## Scientific display decision contract
+
+每个承担 evidence 的 plot、figure、table、image plate 或 diagram 都可以绑定到
+machine-readable contract：
+
+```text
+reader question -> estimand/scientific object -> statistical unit/data structure
+-> candidate representation -> allowed/prohibited inference
+-> data snapshot -> analysis receipt -> render receipt -> source data
+-> caption/accessibility -> final-size review
+```
+
+Maintained adapters 只返回 candidate families 与 scientific obligations，不宣称存在
+universal best chart。Behavioral checks 会 fail closed 于 hidden pairing、denominator
+drift、stale analysis/render lineage、undefined uncertainty、undisclosed group
+omission、embedding/workflow overclaim、color-only encoding 与 final-stage alt-text
+缺失。
+
 ## Writing model
 
 ```text
@@ -42,6 +60,7 @@ scientific evidence
 -> content selection
 -> broad corpus + close analogues（需要时）
 -> figure/statistics plan
+-> scientific display decision contracts
 -> section moves
 -> paragraph dependencies
 -> sentence dependencies

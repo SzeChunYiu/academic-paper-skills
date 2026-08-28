@@ -9,6 +9,7 @@
 - Decide whether a claim needs a figure at all, or whether prose/table is clearer.
 - Resolve whether the paper is primarily mechanism/discovery, randomized intervention, observational, computational/ML, method/tool/software, resource/dataset, theory/proof, qualitative, review/synthesis, or hybrid before proposing a full figure sequence.
 - Build a claim-driven figure plan: `claim -> reader question -> statistical unit -> estimand -> data structure -> uncertainty/alternative explanation -> plot -> main/support placement`.
+- Materialize a scientific display decision contract linking each display to its reader task, estimand, statistical unit, allowed/prohibited inference, immutable data/analysis/render/source-data chain, caption, and accessibility state.
 - Suggest plot families for distributions, paired effects, trajectories, associations, agreement, calibration, classification, survival, heterogeneity, sensitivity, benchmarks, ablations, imaging, high-dimensional data, null results, and more.
 - Study a broad corpus for conditional visual tendencies and a few close analogue papers for **figure roles and evidence expectations** without copying layout, palette, normalization, or visual identity.
 - Decide which evidence belongs in main figures versus Extended Data/SI using the shared manuscript-content-selection logic.
@@ -35,6 +36,7 @@ paper archetype
 -> data structure
 -> alternative explanation / uncertainty
 -> representation
+-> scientific display decision contract
 -> panel/evidence sequence
 -> main vs support
 -> broad-corpus / close-analogue calibration when useful
@@ -48,6 +50,8 @@ Important rules:
 
 - **Planning-only tasks do not require choosing Python or R.** Backend selection begins when plotting/rendering starts.
 - There is no universal ideal number of figures or universal `Fig. 1 -> Fig. N` sequence.
+- There is no universal best chart: maintained adapters return candidate families and obligations, and unmatched tasks require domain research.
+- Denominator, group, transformation, data snapshot, analysis receipt, render receipt, source data, and caption must not drift independently.
 - A chart's popularity in a top journal or analogue set is never sufficient justification.
 - Small-sample continuous data often need visible individual observations/distributions rather than mean bars alone.
 - Paired data should expose pairing when pairing is the estimand.

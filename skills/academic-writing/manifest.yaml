@@ -1,5 +1,5 @@
 name: academic-writing
-version: 1.2.0
+version: 1.3.0
 description: >
   Canonical journal-agnostic academic manuscript writing router. The historical
   nature-writing directory remains a compatibility/reference implementation
@@ -17,6 +17,7 @@ always_load:
   - ../nature-shared/core/explanatory-sufficiency.md
   - ../nature-shared/core/manuscript-content-selection.md
   - ../nature-shared/core/figure-evidence-planning.md
+  - ../nature-shared/core/scientific-display-decision-contract.md
   - ../nature-shared/core/manuscript-surface-qa.md
 
 references:

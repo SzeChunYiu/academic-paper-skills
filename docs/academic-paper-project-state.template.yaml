@@ -1,4 +1,4 @@
-schema_version: "0.2.0"
+schema_version: "0.3.0"
 project:
   id: "project:REPLACE_ME"
   title_working: "REPLACE_ME"
@@ -319,6 +319,42 @@ figures_and_tables:
       long_description: "REPLACE_ME"
       machine_generated: false
       human_verified: false
+    display_contract:
+      display_contract_id: "display-contract:f1-v1"
+      contract_schema_version: "1.0.0"
+      stage: "planning"  # planning | draft | review | final | production | post_publication
+      reader_task:
+        id: "compare_groups"
+        question: "REPLACE_ME"
+      scientific_object:
+        estimand: "REPLACE_ME"
+        statistical_unit: "REPLACE_ME"
+        data_structure: []
+        denominator_label: "REPLACE_ME"
+        denominator_value: null
+      inference_boundary:
+        allowed_inferences: []
+        prohibited_inferences: []
+      representation:
+        representation_family: null
+        representation_rationale: null
+        candidate_families: []
+        matched_adapter_ids: []
+        selection_mode: "candidate_set_not_universal_best"
+        transformations: []
+        uncertainty_definition: null
+        observed_groups: []
+        plotted_groups: []
+        omission_disclosures: []
+      provenance:
+        data_snapshot_sha256: null
+        analysis_receipt_sha256: null
+        render_receipt_sha256: null
+        source_data_sha256: null
+      display_contract_status: "unresolved"  # unresolved | blocked | pass
+      display_blocker_codes: []
+      validated_at: null
+      human_final_size_reviewed: false
 
 section_contracts:
   - section_id: "abstract"

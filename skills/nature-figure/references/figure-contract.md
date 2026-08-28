@@ -41,10 +41,30 @@ Statistics needed:
 Source data needed:
 Image-integrity notes:
 Reviewer risk:
+Scientific display decision contract:
+  reader question:
+  scientific object / estimand:
+  statistical unit and denominator:
+  data/dependence structure:
+  candidate representation and rationale:
+  allowed inference:
+  prohibited inference:
+  data snapshot:
+  analysis receipt:
+  render receipt:
+  source data:
+  uncertainty and transformations:
+  accessibility:
 ```
 
 Do not start from a favorite template. Start from the conclusion, then choose the
 minimum set of panels that make the conclusion clear and defensible.
+
+For an evidence-bearing final display, materialize the shared machine-readable
+contract in `../../nature-shared/core/scientific-display-decision-contract.md`.
+The minimum provenance chain is data snapshot -> analysis receipt -> render
+receipt, with source data bound to the same snapshot. Do not keep an old caption
+after any denominator, group, transform, analysis, or render change.
 
 Do not start by mapping each input table to a figure. First group tables, metrics,
 and experiments by the scientific claims they can support. Several source tables
