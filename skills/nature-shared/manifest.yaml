@@ -60,6 +60,8 @@ research:
   on_demand:
     - condition: recent stratified cross-archetype examples are needed to challenge a local paper/figure/writing assumption across mechanism, trial, computational, resource, qualitative, theory and review papers
       path: research/stratified-paper-reading-2025-2026.md
+    - condition: the empirical and methodological basis, transfer boundary, contradiction, or unresolved research gap behind a scientific display adapter or automatic display blocker must be inspected
+      path: research/scientific-display-evidence-ledger-2026-08.md
 
 journal_formats:
   on_demand:

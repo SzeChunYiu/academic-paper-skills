@@ -51,6 +51,7 @@ Important rules:
 - **Planning-only tasks do not require choosing Python or R.** Backend selection begins when plotting/rendering starts.
 - There is no universal ideal number of figures or universal `Fig. 1 -> Fig. N` sequence.
 - There is no universal best chart: maintained adapters return candidate families and obligations, and unmatched tasks require domain research.
+- Adapter rules are linked to a 39-source evidence registry with read depth, supported decisions, contradictions, and transfer limits rather than an unattributed bibliography.
 - Denominator, group, transformation, data snapshot, analysis receipt, render receipt, source data, and caption must not drift independently.
 - A chart's popularity in a top journal or analogue set is never sufficient justification.
 - Small-sample continuous data often need visible individual observations/distributions rather than mean bars alone.

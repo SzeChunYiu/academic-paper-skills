@@ -52,6 +52,10 @@ denominator drift, stale analysis/render lineage, undefined uncertainty,
 undisclosed group omission, embedding/workflow overclaims, color-only encoding,
 and missing final-stage alt text.
 
+The initial evidence registry contains 39 reconciled sources (20 full text, 18
+abstract-level, one official standard), with search provenance, read depth,
+supported decisions, transfer limits, contradictions, and update triggers.
+
 ## Writing Model
 
 For substantial work:

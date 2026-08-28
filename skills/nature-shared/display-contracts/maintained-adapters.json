@@ -4,134 +4,395 @@
   "reviewed_at": "2026-08-28",
   "selection_mode": "candidate_set_not_universal_best",
   "scope": "Evidence-informed starting points. The actual reader task, estimand, design, data, uncertainty, and inferential boundary control the final representation.",
-  "sources": [
-    {
-      "source_id": "cleveland-mcgill-1984",
-      "title": "Graphical Perception: Theory, Experimentation, and Application to the Development of Graphical Methods",
-      "url": "https://doi.org/10.1080/01621459.1984.10478080",
-      "accessed_at": "2026-08-28",
-      "supports": ["perceptual encoding hierarchy", "position and length judgments"]
-    },
-    {
-      "source_id": "weissgerber-2015",
-      "title": "Beyond Bar and Line Graphs: Time for a New Data Presentation Paradigm",
-      "url": "https://doi.org/10.1371/journal.pbio.1002128",
-      "accessed_at": "2026-08-28",
-      "supports": ["raw data visibility", "paired and distribution structure"]
-    },
-    {
-      "source_id": "rougier-2014",
-      "title": "Ten Simple Rules for Better Figures",
-      "url": "https://doi.org/10.1371/journal.pcbi.1003833",
-      "accessed_at": "2026-08-28",
-      "supports": ["audience and message first", "clarity over decoration"]
-    },
-    {
-      "source_id": "nature-methods-visualization",
-      "title": "Points of View, anew",
-      "url": "https://www.nature.com/articles/s41592-026-03143-5",
-      "accessed_at": "2026-08-28",
-      "supports": ["task-matched visualization", "uncertainty and complex plot design"]
-    },
-    {
-      "source_id": "wcag-1-4-1",
-      "title": "WCAG 2.2 Success Criterion 1.4.1 Use of Color",
-      "url": "https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html",
-      "accessed_at": "2026-08-28",
-      "supports": ["redundant non-color encoding"]
-    }
-  ],
   "profiles": [
     {
       "adapter_id": "paired-change",
       "profile_is_not_universal_rule": true,
       "applies_when": {
-        "reader_tasks": ["compare_change"],
-        "any_data_structures": ["paired", "repeated_measure"]
+        "reader_tasks": [
+          "compare_change"
+        ],
+        "any_data_structures": [
+          "paired",
+          "repeated_measure"
+        ]
       },
-      "candidate_families": ["connected_points", "paired_difference", "slopegraph", "repeated_measure_trajectory"],
-      "disallowed_families": ["independent_mean_bar"],
+      "candidate_families": [
+        "connected_points",
+        "paired_difference",
+        "slopegraph",
+        "repeated_measure_trajectory"
+      ],
+      "disallowed_families": [
+        "independent_mean_bar"
+      ],
       "obligations": [
-        "Preserve the within-unit pairing in the visual encoding.",
+        "Preserve within-unit pairing in the visual encoding.",
         "Define the paired estimand and uncertainty unit.",
         "Do not visually treat repeated measurements as independent observations."
       ],
-      "source_refs": ["weissgerber-2015"]
+      "source_refs": [
+        "weissgerber-2015",
+        "belia-2005",
+        "cumming-2005",
+        "weissgerber-2019"
+      ]
     },
     {
       "adapter_id": "distribution",
       "profile_is_not_universal_rule": true,
       "applies_when": {
-        "reader_tasks": ["inspect_distribution"],
-        "any_data_structures": ["continuous", "count", "ordinal"]
+        "reader_tasks": [
+          "inspect_distribution"
+        ],
+        "any_data_structures": [
+          "continuous",
+          "count",
+          "ordinal"
+        ]
       },
-      "candidate_families": ["raw_points_with_interval", "ecdf", "histogram", "density", "box_or_violin_with_points"],
+      "candidate_families": [
+        "raw_points_with_interval",
+        "ecdf",
+        "histogram",
+        "density",
+        "box_or_violin_with_points",
+        "raincloud"
+      ],
       "disallowed_families": [],
       "obligations": [
         "Expose observations when aggregation would hide decision-relevant shape, pairing, or outliers.",
-        "Treat binning and smoothing as transformations that require parameters and justification."
+        "Treat binning and smoothing as transformations that require parameters and justification.",
+        "Choose detail and aggregation from sample size, overplotting, and the actual reader task."
       ],
-      "source_refs": ["cleveland-mcgill-1984", "weissgerber-2015"]
+      "source_refs": [
+        "cleveland-mcgill-1984",
+        "kim-heer-2018",
+        "saket-2018",
+        "weissgerber-2015",
+        "raincloud-2019"
+      ]
+    },
+    {
+      "adapter_id": "uncertainty-judgment",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "reader_tasks": [
+          "compare_uncertain_estimates",
+          "assess_probability",
+          "make_decision_under_uncertainty"
+        ],
+        "any_data_structures": [
+          "estimated",
+          "posterior",
+          "predictive_distribution",
+          "simulation"
+        ]
+      },
+      "candidate_families": [
+        "effect_interval",
+        "confidence_or_credible_band",
+        "quantile_dotplot",
+        "cdf",
+        "hypothetical_outcome_plot"
+      ],
+      "disallowed_families": [
+        "unspecified_error_bar"
+      ],
+      "obligations": [
+        "Name the uncertainty quantity, level or construction, and inferential unit.",
+        "Choose the display from the judgment or decision the reader must make.",
+        "Do not assume interval overlap has one universal significance interpretation."
+      ],
+      "source_refs": [
+        "belia-2005",
+        "cumming-2005",
+        "correll-gleicher-2014",
+        "hullman-2015",
+        "fernandes-2018",
+        "krzywinski-2013"
+      ]
     },
     {
       "adapter_id": "classification-decision",
       "profile_is_not_universal_rule": true,
       "applies_when": {
-        "reader_tasks": ["evaluate_classifier", "choose_operating_point"],
-        "any_data_structures": ["classification", "probabilistic_prediction"]
+        "reader_tasks": [
+          "evaluate_classifier",
+          "choose_operating_point"
+        ],
+        "any_data_structures": [
+          "classification",
+          "probabilistic_prediction"
+        ]
       },
-      "candidate_families": ["roc_curve", "precision_recall_curve", "calibration_curve", "threshold_operating_points", "decision_curve"],
+      "candidate_families": [
+        "roc_curve",
+        "precision_recall_curve",
+        "calibration_curve",
+        "threshold_operating_points",
+        "decision_curve"
+      ],
       "disallowed_families": [],
       "obligations": [
         "Choose discrimination, calibration, threshold, and utility displays from the actual decision question.",
-        "Do not treat AUC alone as sufficient for a deployment or calibrated-risk claim."
+        "Do not treat AUC alone as sufficient for a deployment or calibrated-risk claim.",
+        "Record prevalence, positive class, threshold semantics, and uncertainty."
       ],
-      "source_refs": ["rougier-2014", "nature-methods-visualization"]
+      "source_refs": [
+        "saito-2015",
+        "vancalster-2019",
+        "niculescu-2005"
+      ]
+    },
+    {
+      "adapter_id": "time-to-event",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "reader_tasks": [
+          "compare_time_to_event",
+          "inspect_survival"
+        ],
+        "any_data_structures": [
+          "censored",
+          "time_to_event",
+          "competing_risk"
+        ]
+      },
+      "candidate_families": [
+        "kaplan_meier_with_risk_table",
+        "cumulative_incidence",
+        "effect_interval",
+        "restricted_mean_survival_time"
+      ],
+      "disallowed_families": [
+        "generic_line_without_risk_set"
+      ],
+      "obligations": [
+        "Expose changing risk sets, censoring semantics, follow-up horizon, and uncertainty.",
+        "Use cumulative-incidence rather than one-minus-Kaplan-Meier when competing-risk logic requires it.",
+        "Do not visually extend inference beyond supported follow-up."
+      ],
+      "source_refs": [
+        "pocock-2002",
+        "kmunicate-2019"
+      ]
     },
     {
       "adapter_id": "high-dimensional-embedding",
       "profile_is_not_universal_rule": true,
       "applies_when": {
-        "reader_tasks": ["orient_high_dimensional_structure"],
-        "any_data_structures": ["high_dimensional"]
+        "reader_tasks": [
+          "orient_high_dimensional_structure"
+        ],
+        "any_data_structures": [
+          "high_dimensional"
+        ]
       },
-      "candidate_families": ["embedding", "matrix", "small_multiple_embedding"],
+      "candidate_families": [
+        "embedding",
+        "matrix",
+        "small_multiple_embedding"
+      ],
       "disallowed_families": [],
       "obligations": [
         "Record preprocessing, distance, algorithm, parameters, seed, and stability checks.",
-        "Use independent quantitative or experimental evidence for separation, causal, or mechanistic claims."
+        "Use independent quantitative or experimental evidence for separation, causal, or mechanistic claims.",
+        "Treat global distances, cluster sizes, and apparent gaps as method-dependent unless separately validated."
       ],
-      "source_refs": ["rougier-2014", "nature-methods-visualization"]
+      "source_refs": [
+        "wattenberg-2016",
+        "kobak-2019",
+        "chari-2023"
+      ]
     },
     {
       "adapter_id": "workflow-semantics",
       "profile_is_not_universal_rule": true,
       "applies_when": {
-        "reader_tasks": ["explain_workflow"],
-        "any_data_structures": ["process"]
+        "reader_tasks": [
+          "explain_workflow"
+        ],
+        "any_data_structures": [
+          "process"
+        ]
       },
-      "candidate_families": ["workflow_diagram", "timeline", "participant_flow"],
+      "candidate_families": [
+        "workflow_diagram",
+        "timeline",
+        "participant_flow",
+        "review_flow"
+      ],
       "disallowed_families": [],
       "obligations": [
         "Encode operations and sequence, not unsupported causal or mechanistic relations.",
-        "Use a causal DAG or bounded mechanism diagram only when its distinct assumptions and evidence are declared."
+        "Make denominators, exclusions, branches, and terminal states recoverable when they affect evidence.",
+        "Use a causal DAG only when its distinct assumptions and analytical consequences are declared."
       ],
-      "source_refs": ["rougier-2014"]
+      "source_refs": [
+        "consort-2010",
+        "prisma-2020",
+        "rougier-2014"
+      ]
+    },
+    {
+      "adapter_id": "causal-dag",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "reader_tasks": [
+          "declare_causal_assumptions"
+        ],
+        "any_data_structures": [
+          "causal_graph"
+        ]
+      },
+      "candidate_families": [
+        "causal_dag",
+        "selection_diagram",
+        "time_ordered_causal_dag"
+      ],
+      "disallowed_families": [
+        "workflow_diagram"
+      ],
+      "obligations": [
+        "State the target estimand and causal question.",
+        "Expose measured and unmeasured nodes, temporal assumptions, and the adjustment set implied by the graph.",
+        "Treat edges as assumptions to scrutinize, not facts established by drawing them."
+      ],
+      "source_refs": [
+        "tennant-2020",
+        "strobe-2007"
+      ]
+    },
+    {
+      "adapter_id": "scientific-color",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "reader_tasks": [
+          "read_color_encoded_quantity",
+          "compare_categories_by_color"
+        ],
+        "any_data_structures": [
+          "spatial",
+          "matrix",
+          "continuous_field",
+          "categorical"
+        ]
+      },
+      "candidate_families": [
+        "perceptually_uniform_sequential",
+        "perceptually_uniform_diverging",
+        "cyclic_colormap",
+        "categorical_palette_with_redundant_encoding"
+      ],
+      "disallowed_families": [
+        "rainbow_heatmap",
+        "red_green_only_heatmap"
+      ],
+      "obligations": [
+        "Match sequential, diverging, cyclic, or categorical color semantics to the data.",
+        "Use perceptually ordered/uniform maps for quantitative gradients.",
+        "Do not rely on color alone; preserve grayscale and color-vision accessibility where information is critical."
+      ],
+      "source_refs": [
+        "crameri-2020",
+        "nunez-2018",
+        "wcag-color-2023",
+        "rougier-2014"
+      ]
+    },
+    {
+      "adapter_id": "image-based-evidence",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "reader_tasks": [
+          "inspect_image_evidence",
+          "compare_image_morphology"
+        ],
+        "any_data_structures": [
+          "image",
+          "microscopy",
+          "clinical_image",
+          "blot"
+        ]
+      },
+      "candidate_families": [
+        "image_plate_with_quantification",
+        "registered_overlay",
+        "representative_image_with_traceable_sampling",
+        "image_montage"
+      ],
+      "disallowed_families": [
+        "unquantified_representative_image"
+      ],
+      "obligations": [
+        "Preserve original files and acquisition/processing provenance.",
+        "Disclose crops, composites, global adjustments, pseudocoloring, and scale.",
+        "Bind representative images to sampling logic and the correct quantitative unit."
+      ],
+      "source_refs": [
+        "rossner-2004",
+        "cromey-2010",
+        "jambor-2021"
+      ]
+    },
+    {
+      "adapter_id": "accessible-description",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "reader_tasks": [
+          "access_display_nonvisually"
+        ],
+        "any_data_structures": [
+          "visual_display"
+        ]
+      },
+      "candidate_families": [
+        "semantic_alt_text",
+        "long_description",
+        "structured_data_companion"
+      ],
+      "disallowed_families": [
+        "caption_filename_repeat"
+      ],
+      "obligations": [
+        "Describe purpose, construction only as needed, important patterns, and bounded domain meaning.",
+        "Do not merely repeat the caption or list visual marks without the scientific point.",
+        "Preserve access to exact values through source data or a structured companion when needed."
+      ],
+      "source_refs": [
+        "lee-2022",
+        "lundgard-2021",
+        "wcag-color-2023"
+      ]
     },
     {
       "adapter_id": "exact-value-lookup",
       "profile_is_not_universal_rule": true,
       "applies_when": {
-        "reader_tasks": ["lookup_exact_values"],
-        "any_data_structures": ["tabular"]
+        "reader_tasks": [
+          "lookup_exact_values"
+        ],
+        "any_data_structures": [
+          "tabular"
+        ]
       },
-      "candidate_families": ["table", "aligned_interval_table"],
+      "candidate_families": [
+        "table",
+        "aligned_interval_table"
+      ],
       "disallowed_families": [],
       "obligations": [
         "Use a table when exact lookup is the reader task and visual pattern is secondary.",
-        "Keep units, denominators, missing values, and precision definitions recoverable."
+        "Keep units, denominators, missing values, and precision definitions recoverable.",
+        "Do not use a dense plot merely because plots appear more sophisticated."
       ],
-      "source_refs": ["cleveland-mcgill-1984", "rougier-2014"]
+      "source_refs": [
+        "cleveland-mcgill-1984",
+        "saket-2018",
+        "rougier-2014"
+      ]
     }
-  ]
+  ],
+  "evidence_registry_file": "display-evidence-registry.json"
 }

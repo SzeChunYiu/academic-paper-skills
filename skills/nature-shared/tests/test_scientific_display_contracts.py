@@ -13,6 +13,7 @@ SHARED = Path(__file__).parents[1]
 DISPLAY_ROOT = SHARED / "display-contracts"
 SCHEMA_PATH = DISPLAY_ROOT / "scientific-display-contract.schema.json"
 ADAPTERS_PATH = DISPLAY_ROOT / "maintained-adapters.json"
+EVIDENCE_REGISTRY_PATH = DISPLAY_ROOT / "display-evidence-registry.json"
 RESOLVER_PATH = SHARED / "scripts" / "resolve_scientific_display.py"
 VALID_FIXTURE = (
     Path(__file__).parent
@@ -53,6 +54,47 @@ class ScientificDisplayContractTests(unittest.TestCase):
         for source in self.adapters["sources"]:
             self.assertIn("accessed_at", source)
             self.assertTrue(source["supports"])
+
+    def test_display_rules_have_a_substantial_auditable_research_base(self) -> None:
+        registry = json.loads(EVIDENCE_REGISTRY_PATH.read_text(encoding="utf-8"))
+        sources = registry["sources"]
+        self.assertGreaterEqual(len(sources), 30)
+        self.assertGreaterEqual(registry["search_protocol"]["records_screened"], 80)
+        source_by_id = {source["source_id"]: source for source in sources}
+        self.assertEqual(len(sources), len(source_by_id))
+        self.assertGreaterEqual(len(self.adapters["profiles"]), 10)
+        for source in sources:
+            for field in (
+                "source_type",
+                "read_depth",
+                "supports",
+                "limits",
+                "url",
+                "accessed_at",
+                "metadata_verification",
+            ):
+                self.assertTrue(source.get(field), (source.get("source_id"), field))
+        for profile in self.adapters["profiles"]:
+            refs = profile["source_refs"]
+            self.assertGreaterEqual(len(refs), 2, profile["adapter_id"])
+            self.assertTrue(set(refs).issubset(source_by_id), profile["adapter_id"])
+        ledger = SHARED / "research" / "scientific-display-evidence-ledger-2026-08.md"
+        text = ledger.read_text(encoding="utf-8")
+        self.assertIn("Search and screening protocol", text)
+        self.assertIn("Descriptive frequency is not a normative rule", text)
+        self.assertIn("Contradictions and transfer limits", text)
+        search_log = json.loads(
+            (
+                SHARED
+                / "research"
+                / "scientific-display-search-log-2026-08-28.json"
+            ).read_text(encoding="utf-8")
+        )
+        self.assertGreaterEqual(len(search_log["queries"]), 12)
+        self.assertEqual(
+            registry["search_protocol"]["records_screened"],
+            sum(len(query["records"]) for query in search_log["queries"]),
+        )
 
     def test_incomplete_contract_fails_closed_before_semantic_evaluation(self) -> None:
         contract = fixture()

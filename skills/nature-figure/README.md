@@ -45,6 +45,7 @@ claim
 
 - **只做 figure/plot planning 时不需要先选 Python 或 R。** 真正开始 plotting/rendering 才进入 backend gate。
 - 不存在 universal best chart：maintained adapters 只返回 candidate families 与 obligations；unmatched task 需要 domain research。
+- Adapter rules 连接到 39-source evidence registry，其中记录 read depth、supported decisions、contradictions 与 transfer limits，而不是只给无来源 bibliography。
 - Denominator、group、transformation、data snapshot、analysis receipt、render receipt、source data 与 caption 不得各自漂移。
 - 某个 chart 在顶刊或 analogue papers 中很常见，不构成使用它的充分理由。
 - 小样本 continuous data 往往需要显示 individual observations/distribution，而不是只有 mean bar。

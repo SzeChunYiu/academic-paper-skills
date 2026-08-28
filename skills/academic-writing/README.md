@@ -50,6 +50,10 @@ drift、stale analysis/render lineage、undefined uncertainty、undisclosed grou
 omission、embedding/workflow overclaim、color-only encoding 与 final-stage alt-text
 缺失。
 
+初始 evidence registry 包含 39 个已核对 sources（20 个 full text、18 个
+abstract-level、1 个 official standard），并记录 search provenance、read depth、
+supported decisions、transfer limits、contradictions 与 update triggers。
+
 ## Writing model
 
 ```text

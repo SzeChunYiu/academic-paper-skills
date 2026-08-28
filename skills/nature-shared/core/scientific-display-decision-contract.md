@@ -49,7 +49,15 @@ acceptance.
 
 - Schema: `../display-contracts/scientific-display-contract.schema.json`
 - Maintained adapters: `../display-contracts/maintained-adapters.json`
+- Evidence registry: `../display-contracts/display-evidence-registry.json`
+- Research synthesis: `../research/scientific-display-evidence-ledger-2026-08.md`
 - Resolver/evaluator: `../scripts/resolve_scientific_display.py`
+
+The first evidence registry contains 39 reconciled sources: 20 read in full,
+18 read at abstract level, and one official accessibility standard read
+directly. Search queries, screening counts, inclusion/exclusion criteria,
+stopping rule, source-specific support, transfer limits, and update triggers are
+recorded rather than hidden behind a bibliography.
 
 The maintained catalog is intentionally incomplete. If no adapter matches, the
 resolver returns an unresolved research requirement rather than forcing a

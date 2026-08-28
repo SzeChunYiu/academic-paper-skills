@@ -23,7 +23,13 @@ DEFAULT_SCHEMA = HERE / "display-contracts" / "scientific-display-contract.schem
 
 
 def load_adapter_catalog(path: str | Path = DEFAULT_ADAPTERS) -> dict[str, Any]:
-    catalog = json.loads(Path(path).read_text(encoding="utf-8"))
+    catalog_path = Path(path)
+    catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
+    registry_file = catalog.get("evidence_registry_file")
+    if registry_file:
+        registry = json.loads((catalog_path.parent / registry_file).read_text(encoding="utf-8"))
+        catalog["evidence_registry"] = registry
+        catalog["sources"] = registry.get("sources", [])
     errors = validate_adapter_catalog(catalog)
     if errors:
         raise ValueError("invalid display adapter catalog: " + "; ".join(errors))
@@ -38,7 +44,6 @@ def validate_adapter_catalog(catalog: dict[str, Any]) -> list[str]:
         "reviewed_at",
         "selection_mode",
         "scope",
-        "sources",
         "profiles",
     }
     missing = sorted(required - catalog.keys())
@@ -47,14 +52,42 @@ def validate_adapter_catalog(catalog: dict[str, Any]) -> list[str]:
     if catalog.get("selection_mode") != "candidate_set_not_universal_best":
         errors.append("selection_mode must be candidate_set_not_universal_best")
 
+    if not catalog.get("evidence_registry_file") and not catalog.get("sources"):
+        errors.append("evidence_registry_file or embedded sources is required")
+    registry = catalog.get("evidence_registry", {})
+    if catalog.get("evidence_registry_file"):
+        for field in (
+            "registry_schema_version",
+            "registry_id",
+            "reviewed_at",
+            "search_protocol",
+            "sources",
+            "generalization_rule",
+            "update_policy",
+        ):
+            if not registry.get(field):
+                errors.append(f"evidence_registry.{field} is required")
+
     sources = catalog.get("sources", [])
     source_ids = {source.get("source_id") for source in sources}
     if None in source_ids or not source_ids:
         errors.append("every source requires source_id")
     for index, source in enumerate(sources):
-        for field in ("source_id", "title", "url", "accessed_at", "supports"):
+        for field in (
+            "source_id",
+            "title",
+            "url",
+            "source_type",
+            "read_depth",
+            "accessed_at",
+            "metadata_verification",
+            "supports",
+            "limits",
+        ):
             if not source.get(field):
                 errors.append(f"sources[{index}].{field} is required")
+        if source.get("read_depth") not in {"full_text", "abstract", "official_standard"}:
+            errors.append(f"sources[{index}].read_depth is invalid")
     seen: set[str] = set()
     for index, profile in enumerate(catalog.get("profiles", [])):
         adapter_id = profile.get("adapter_id")
@@ -78,6 +111,8 @@ def validate_adapter_catalog(catalog: dict[str, Any]) -> list[str]:
         for source_ref in profile.get("source_refs", []):
             if source_ref not in source_ids:
                 errors.append(f"{adapter_id}: unknown source_ref {source_ref}")
+        if len(profile.get("source_refs", [])) < 2:
+            errors.append(f"{adapter_id}: at least two source_refs are required")
     return errors
 
 
