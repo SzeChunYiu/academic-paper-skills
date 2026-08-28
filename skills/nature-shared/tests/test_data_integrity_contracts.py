@@ -223,6 +223,20 @@ class DataIntegrityContractTests(unittest.TestCase):
         result = self.evaluate(contract)
         self.assertIn("semantic_schema_drift_unlogged", result["blocker_codes"])
 
+    def test_multi_input_removals_require_unit_level_decisions(self) -> None:
+        contract = self.make_multi_input(fixture())
+        contract["snapshots"][2]["record_count"] = 99
+        transformation = contract["transformations"][1]
+        transformation["records_removed"] = 1
+        transformation["multi_input_reconciliation"] = {
+            "combination_rule": "keyed_join",
+            "expected_output_record_count": 99,
+            "receipt_id": "receipt:multi-input-reconciliation",
+            "field_conflict_policy_recorded": True,
+        }
+        result = self.evaluate(contract)
+        self.assertIn("record_count_lineage_mismatch", result["blocker_codes"])
+
     def test_reconciled_multi_input_transformation_can_pass(self) -> None:
         contract = self.make_multi_input(fixture())
         contract["transformations"][1]["multi_input_reconciliation"] = {

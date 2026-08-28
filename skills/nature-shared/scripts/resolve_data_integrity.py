@@ -434,6 +434,17 @@ def evaluate_data_contract(
                 "Locate the actual receipt/parameters or rerun the transformation from the authoritative input; otherwise mark the derived object unverified and narrow or remove dependent claims.",
             )
         output = snapshot_by_id[output_id]
+        removal_decisions = sum(
+            decision["transformation_id"] == transformation_id
+            and decision["action"] in {"exclude", "deduplicate", "quarantine"}
+            for decision in contract["data_decisions"]
+        )
+        if removal_decisions != transformation["records_removed"]:
+            block(
+                "record_count_lineage_mismatch",
+                f"Transformation {transformation_id} records_removed does not reconcile with its visible unit-level removal decisions.",
+                "Reconcile every excluded, deduplicated, or quarantined unit to a visible decision and rerun affected outputs; never hide adverse, null, harmful, or inconvenient observations inside an aggregate count.",
+            )
         if len(input_ids) == 1:
             input_snapshot = snapshot_by_id[input_ids[0]]
             expected_count = (
@@ -441,18 +452,10 @@ def evaluate_data_contract(
                 - transformation["records_removed"]
                 + transformation["records_added"]
             )
-            removal_decisions = sum(
-                decision["transformation_id"] == transformation_id
-                and decision["action"] in {"exclude", "deduplicate", "quarantine"}
-                for decision in contract["data_decisions"]
-            )
-            if (
-                output["record_count"] != expected_count
-                or removal_decisions != transformation["records_removed"]
-            ):
+            if output["record_count"] != expected_count:
                 block(
                     "record_count_lineage_mismatch",
-                    f"Transformation {transformation_id} record counts do not reconcile with its input, output, and unit-level removal decisions.",
+                    f"Transformation {transformation_id} record counts do not reconcile with its input, output, removal, and addition counts.",
                     "Reconcile unit identities and counts, restore omitted records or decisions, and rerun affected outputs; never delete adverse, null, harmful, or inconvenient observations silently.",
                 )
         else:
