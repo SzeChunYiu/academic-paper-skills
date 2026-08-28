@@ -1,0 +1,361 @@
+{
+  "contract_schema_version": "1.0.0",
+  "contract_id": "data-contract:valid-tabular-001",
+  "study_id": "study:s1",
+  "state_version": 1,
+  "as_of_date": "2026-08-28",
+  "data_context": {
+    "modalities": [
+      "tabular"
+    ],
+    "study_contexts": [
+      "observational_association"
+    ],
+    "sensitivity_tags": [
+      "non_sensitive"
+    ],
+    "intended_uses": [
+      "primary_analysis",
+      "figure_source_data"
+    ],
+    "scientific_unit": "participant",
+    "planned_missingness_handling": {
+      "plan_id": "analysis-plan:ap-001",
+      "method": "not_applicable"
+    }
+  },
+  "source_records": [
+    {
+      "source_record_id": "source-record:primary",
+      "kind": "primary_collected",
+      "source_name": "study instrument export",
+      "version": "2026-05-01",
+      "acquired_at": "2026-05-01T10:00:00Z",
+      "rights_status": "verified",
+      "authority_or_licence_ids": [
+        "ethics:approval-001"
+      ]
+    }
+  ],
+  "snapshots": [
+    {
+      "snapshot_id": "snapshot:raw",
+      "role": "raw",
+      "version": "1.0.0",
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "record_count": 100,
+      "byte_count": 4096,
+      "created_at": "2026-05-01T10:05:00Z",
+      "immutable": true,
+      "source_record_ids": [
+        "source-record:primary"
+      ],
+      "schema_id": "schema:tabular-v1",
+      "fields": [
+        {
+          "field_id": "field:participant",
+          "semantic_name": "participant identifier",
+          "data_type": "string",
+          "unit": "identifier",
+          "missing_code": "NA",
+          "is_primary_key": true
+        },
+        {
+          "field_id": "field:group",
+          "semantic_name": "study group",
+          "data_type": "string",
+          "unit": "category",
+          "missing_code": "NA",
+          "is_primary_key": false
+        },
+        {
+          "field_id": "field:outcome",
+          "semantic_name": "primary outcome score",
+          "data_type": "number",
+          "unit": "score",
+          "missing_code": "NA",
+          "is_primary_key": false
+        }
+      ],
+      "missingness": [
+        {
+          "field_id": "field:participant",
+          "missing_count": 0,
+          "denominator": 100
+        },
+        {
+          "field_id": "field:group",
+          "missing_count": 0,
+          "denominator": 100
+        },
+        {
+          "field_id": "field:outcome",
+          "missing_count": 0,
+          "denominator": 100
+        }
+      ],
+      "adverse_or_null_record_count": 4
+    },
+    {
+      "snapshot_id": "snapshot:validated",
+      "role": "validated",
+      "version": "1.0.0",
+      "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "record_count": 100,
+      "byte_count": 4096,
+      "created_at": "2026-05-02T10:00:00Z",
+      "immutable": true,
+      "source_record_ids": [
+        "source-record:primary"
+      ],
+      "schema_id": "schema:tabular-v1",
+      "fields": [
+        {
+          "field_id": "field:participant",
+          "semantic_name": "participant identifier",
+          "data_type": "string",
+          "unit": "identifier",
+          "missing_code": "NA",
+          "is_primary_key": true
+        },
+        {
+          "field_id": "field:group",
+          "semantic_name": "study group",
+          "data_type": "string",
+          "unit": "category",
+          "missing_code": "NA",
+          "is_primary_key": false
+        },
+        {
+          "field_id": "field:outcome",
+          "semantic_name": "primary outcome score",
+          "data_type": "number",
+          "unit": "score",
+          "missing_code": "NA",
+          "is_primary_key": false
+        }
+      ],
+      "missingness": [
+        {
+          "field_id": "field:participant",
+          "missing_count": 0,
+          "denominator": 100
+        },
+        {
+          "field_id": "field:group",
+          "missing_count": 0,
+          "denominator": 100
+        },
+        {
+          "field_id": "field:outcome",
+          "missing_count": 0,
+          "denominator": 100
+        }
+      ],
+      "adverse_or_null_record_count": 4
+    },
+    {
+      "snapshot_id": "snapshot:analysis",
+      "role": "analysis_ready",
+      "version": "1.0.0",
+      "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "record_count": 100,
+      "byte_count": 4096,
+      "created_at": "2026-05-03T10:00:00Z",
+      "immutable": true,
+      "source_record_ids": [
+        "source-record:primary"
+      ],
+      "schema_id": "schema:tabular-v1",
+      "fields": [
+        {
+          "field_id": "field:participant",
+          "semantic_name": "participant identifier",
+          "data_type": "string",
+          "unit": "identifier",
+          "missing_code": "NA",
+          "is_primary_key": true
+        },
+        {
+          "field_id": "field:group",
+          "semantic_name": "study group",
+          "data_type": "string",
+          "unit": "category",
+          "missing_code": "NA",
+          "is_primary_key": false
+        },
+        {
+          "field_id": "field:outcome",
+          "semantic_name": "primary outcome score",
+          "data_type": "number",
+          "unit": "score",
+          "missing_code": "NA",
+          "is_primary_key": false
+        }
+      ],
+      "missingness": [
+        {
+          "field_id": "field:participant",
+          "missing_count": 0,
+          "denominator": 100
+        },
+        {
+          "field_id": "field:group",
+          "missing_count": 0,
+          "denominator": 100
+        },
+        {
+          "field_id": "field:outcome",
+          "missing_count": 0,
+          "denominator": 100
+        }
+      ],
+      "adverse_or_null_record_count": 4
+    }
+  ],
+  "quality_controls": [
+    {
+      "qc_id": "qc:schema",
+      "target_snapshot_id": "snapshot:validated",
+      "dimension": "schema_conformance",
+      "applicability": "required",
+      "status": "passed",
+      "criteria": "All fields conform to schema:tabular-v1.",
+      "receipt_id": "receipt:qc-schema",
+      "checked_at": "2026-05-02T10:05:00Z",
+      "outcome": "0 violations"
+    },
+    {
+      "qc_id": "qc:uniqueness",
+      "target_snapshot_id": "snapshot:validated",
+      "dimension": "unit_uniqueness",
+      "applicability": "required",
+      "status": "passed",
+      "criteria": "participant identifier is unique.",
+      "receipt_id": "receipt:qc-unique",
+      "checked_at": "2026-05-02T10:06:00Z",
+      "outcome": "0 duplicates"
+    },
+    {
+      "qc_id": "qc:missingness",
+      "target_snapshot_id": "snapshot:analysis",
+      "dimension": "missingness",
+      "applicability": "required",
+      "status": "passed",
+      "criteria": "Missingness summary reconciles to schema and plan.",
+      "receipt_id": "receipt:qc-missing",
+      "checked_at": "2026-05-03T10:05:00Z",
+      "outcome": "0 missing values"
+    }
+  ],
+  "transformations": [
+    {
+      "transformation_id": "transform:validate",
+      "input_snapshot_ids": [
+        "snapshot:raw"
+      ],
+      "output_snapshot_id": "snapshot:validated",
+      "kind": "validation_and_non_destructive_normalization",
+      "procedure_or_code_id": "code:validate-v1",
+      "procedure_version": "1.0.0",
+      "executed_at": "2026-05-02T10:00:00Z",
+      "execution_receipt_id": "receipt:transform-validate",
+      "parameters_recorded": true,
+      "actor_id": "agent:data-steward",
+      "records_removed": 0,
+      "records_added": 0,
+      "declared_semantic_changes": []
+    },
+    {
+      "transformation_id": "transform:analysis-ready",
+      "input_snapshot_ids": [
+        "snapshot:validated"
+      ],
+      "output_snapshot_id": "snapshot:analysis",
+      "kind": "analysis_derivation",
+      "procedure_or_code_id": "code:derive-v1",
+      "procedure_version": "1.0.0",
+      "executed_at": "2026-05-03T10:00:00Z",
+      "execution_receipt_id": "receipt:transform-analysis",
+      "parameters_recorded": true,
+      "actor_id": "agent:analyst",
+      "records_removed": 0,
+      "records_added": 0,
+      "declared_semantic_changes": []
+    }
+  ],
+  "data_decisions": [],
+  "realized_missingness_handling": {
+    "method": "not_applicable",
+    "output_snapshot_ids": [
+      "snapshot:analysis"
+    ],
+    "receipt_id": "receipt:qc-missing"
+  },
+  "analysis_bindings": [
+    {
+      "analysis_id": "analysis:a1",
+      "input_snapshot_id": "snapshot:analysis",
+      "input_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "result_ids": [
+        "result:r1"
+      ],
+      "display_ids": [
+        "display:d1"
+      ]
+    }
+  ],
+  "governance": {
+    "sensitivity_class": "non_sensitive",
+    "direct_identifiers_present": false,
+    "indirect_reidentification_risk": "low",
+    "consent_or_authority_requirement": "not_required",
+    "consent_or_authority_status": "not_required",
+    "consent_or_authority_ids": [],
+    "collective_authority_required": false,
+    "collective_authority_status": "not_required",
+    "third_party_rights_status": "not_required",
+    "public_release_permitted": true,
+    "exact_policy_resolution": {
+      "applicability": "not_required",
+      "status": "not_applicable",
+      "as_of_date": "2026-08-28",
+      "authorities": [],
+      "unresolved_items": []
+    }
+  },
+  "release": {
+    "applicability": "required",
+    "route": "public_repository",
+    "status": "verified",
+    "snapshot_id": "snapshot:analysis",
+    "snapshot_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "persistent_id": "https://doi.org/10.0000/example-data-v1",
+    "locator": "https://example.org/datasets/example-data-v1",
+    "version": "1.0.0",
+    "licence": "CC-BY-4.0",
+    "access_conditions": "open",
+    "resolved_at": "2026-08-28T10:00:00Z",
+    "peer_review_access": "not_required"
+  },
+  "deviations": [],
+  "claims": [
+    {
+      "claim_id": "claim:c1",
+      "data_snapshot_ids": [
+        "snapshot:analysis"
+      ],
+      "evidential_status": "bounded_observational",
+      "requires_complete_unit_lineage": true,
+      "release_statement": "The exact analysis dataset is deposited under the declared version."
+    }
+  ],
+  "source_provenance": {
+    "adapter_catalog_id": "data-integrity-maintained-adapters-2026-08-28",
+    "evidence_registry_id": "data-integrity-evidence-registry-2026-08-28",
+    "evidence_reviewed_at": "2026-08-28",
+    "resolved_adapter_ids": [
+      "general-tabular-observational"
+    ]
+  }
+}

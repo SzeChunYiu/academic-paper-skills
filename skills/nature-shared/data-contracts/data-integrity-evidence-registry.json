@@ -1,0 +1,865 @@
+{
+  "registry_schema_version": "1.0.0",
+  "registry_id": "data-integrity-evidence-registry-2026-08-28",
+  "reviewed_at": "2026-08-28",
+  "search_protocol": {
+    "provider": "OpenAlex",
+    "search_log_file": "../research/data-integrity-stewardship-search-log-2026-08-28.json",
+    "queries_executed": 12,
+    "records_screened": 84,
+    "selection": "Purposeful triangulation of peer-reviewed methods, empirical meta-research, community standards, technical specifications, publisher policies, and official guidance. Inclusion supports only named contract decisions.",
+    "completeness_claim": "targeted_reconciled_not_systematic_or_exhaustive"
+  },
+  "generalization_rule": "Use cross-domain invariants only for machine-checkable identity, lineage, disclosure, and governance contradictions. Apply modality and exact-domain obligations only through matching adapters and current official-source resolution. Never infer accuracy, completeness, fitness, privacy, or scientific validity from documentation, FAIRness, checksums, repository deposit, or a passing contract.",
+  "sources": [
+    {
+      "source_id": "wilkinson-2016-fair",
+      "title": "The FAIR Guiding Principles for scientific data management and stewardship",
+      "url": "https://doi.org/10.1038/sdata.2016.18",
+      "source_type": "peer_reviewed_principles",
+      "read_depth": "full_text",
+      "published_at": "2016-03-15",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "DOI metadata verified with Crossref/OpenAlex and content read from the linked publisher, PMC, preprint, or official page.",
+      "supports": [
+        "findable_accessible_interoperable_reusable_metadata",
+        "machine_actionable_metadata",
+        "licence_consent_and_provenance_context",
+        "workflow_objects_are_in_scope"
+      ],
+      "limits": [
+        "FAIR guides stewardship and reuse; it does not certify measurement accuracy, scientific validity, ethics, or universal openness."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "carroll-2020-care",
+      "title": "The CARE Principles for Indigenous Data Governance",
+      "url": "https://doi.org/10.5334/dsj-2020-043",
+      "source_type": "peer_reviewed_principles",
+      "read_depth": "full_text",
+      "published_at": "2020",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "DOI metadata verified with Crossref/OpenAlex and content read from the linked publisher, PMC, preprint, or official page.",
+      "supports": [
+        "collective_benefit",
+        "authority_to_control",
+        "responsibility",
+        "ethics",
+        "people_and_purpose_governance"
+      ],
+      "limits": [
+        "CARE applies specifically to Indigenous data governance and must be resolved with relevant rights-holders; it is not a generic substitute for all privacy policy."
+      ],
+      "contradictions_or_tensions": [
+        "Open-by-default and FAIR-only framings can conflict with collective authority, benefit, and sovereignty."
+      ]
+    },
+    {
+      "source_id": "lin-2020-trust",
+      "title": "The TRUST Principles for digital repositories",
+      "url": "https://doi.org/10.1038/s41597-020-0486-7",
+      "source_type": "peer_reviewed_principles",
+      "read_depth": "full_text",
+      "published_at": "2020-05-14",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "DOI metadata verified with Crossref/OpenAlex and content read from the linked publisher, PMC, preprint, or official page.",
+      "supports": [
+        "repository_transparency_responsibility_user_focus_sustainability_technology",
+        "repository_quality_claims_need_evidence_and_audit",
+        "preservation_and_sensitive_data_capability"
+      ],
+      "limits": [
+        "TRUST evaluates repository stewardship, not the truth or fitness of each deposited dataset."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "w3c-prov-overview",
+      "title": "PROV-Overview: An Overview of the PROV Family of Documents",
+      "url": "https://www.w3.org/TR/prov-overview/",
+      "source_type": "technical_standard",
+      "read_depth": "official_standard",
+      "published_at": "2013-04-30",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "W3C Working Group Note and publication date verified on the official W3C page.",
+      "supports": [
+        "entity_activity_agent_lineage",
+        "derivation_versioning_and_responsibility",
+        "interoperable_provenance"
+      ],
+      "limits": [
+        "PROV supplies a model and interchange vocabulary; provenance presence alone does not prove that the recorded process was correct."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "datacite-metadata",
+      "title": "DataCite Metadata Schema",
+      "url": "https://schema.datacite.org/",
+      "source_type": "technical_standard",
+      "read_depth": "official_standard",
+      "published_at": "2026",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Current schema landing page read on the official DataCite domain; version-specific fields require live re-checking.",
+      "supports": [
+        "persistent_identifier_and_dataset_citation_metadata",
+        "resource_version_rights_related_identifiers",
+        "findability_and_citation"
+      ],
+      "limits": [
+        "DataCite metadata identifies and describes resources; it does not validate file contents or scientific claims."
+      ],
+      "contradictions_or_tensions": [],
+      "policy_validity": {
+        "effective_from": null,
+        "effective_until": null,
+        "effective_date_basis": "observed_active_not_backcastable",
+        "observed_active_at": "2026-08-28"
+      }
+    },
+    {
+      "source_id": "force11-data-citation",
+      "title": "Joint Declaration of Data Citation Principles",
+      "url": "https://force11.org/info/joint-declaration-of-data-citation-principles-final/",
+      "source_type": "community_principles",
+      "read_depth": "official_standard",
+      "published_at": "2014",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "DOI metadata verified with Crossref/OpenAlex and content read from the linked publisher, PMC, preprint, or official page.",
+      "supports": [
+        "data_as_citable_evidence",
+        "persistent_specific_and_verifiable_citation",
+        "version_timeslice_fixity_and_provenance"
+      ],
+      "limits": [
+        "The principles deliberately avoid a single implementation and are not a complete stewardship standard."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "rfc8493-bagit",
+      "title": "RFC 8493: The BagIt File Packaging Format",
+      "url": "https://www.rfc-editor.org/rfc/rfc8493.html",
+      "source_type": "technical_standard",
+      "read_depth": "official_standard",
+      "published_at": "2018-10",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "DOI metadata verified with Crossref/OpenAlex and content read from the linked publisher, PMC, preprint, or official page.",
+      "supports": [
+        "payload_manifest_and_checksum_fixity",
+        "complete_vs_valid_package",
+        "reliable_storage_and_transfer"
+      ],
+      "limits": [
+        "BagIt treats payload bytes as opaque; checksum validity detects change/corruption but not semantic or scientific correctness."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "ro-crate-1-1",
+      "title": "RO-Crate Metadata Specification 1.1",
+      "url": "https://www.researchobject.org/ro-crate/specification/1.1/",
+      "source_type": "technical_standard",
+      "read_depth": "official_standard",
+      "published_at": "2023-04-26",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "DOI metadata verified with Crossref/OpenAlex and content read from the linked publisher, PMC, preprint, or official page.",
+      "supports": [
+        "research_object_metadata",
+        "data_context_workflow_and_provenance_packaging",
+        "versioned_specification"
+      ],
+      "limits": [
+        "RO-Crate is a packaging and metadata approach, not a mandatory format for every discipline or proof that a workflow executed successfully."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "frictionless-table-schema",
+      "title": "Frictionless Data Table Schema",
+      "url": "https://specs.frictionlessdata.io/table-schema/",
+      "source_type": "technical_standard",
+      "read_depth": "official_standard",
+      "published_at": "2024",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Specification content read on the official Frictionless Data specifications site; reviewed version is the page observed on the access date.",
+      "supports": [
+        "field_types_constraints_missing_value_codes_primary_and_foreign_keys",
+        "physical_vs_logical_representation",
+        "machine_checkable_tabular_schema"
+      ],
+      "limits": [
+        "Useful for tabular conformance; it does not define domain meaning, measurement validity, or a universal file format."
+      ],
+      "contradictions_or_tensions": [],
+      "policy_validity": {
+        "effective_from": null,
+        "effective_until": null,
+        "effective_date_basis": "observed_active_not_backcastable",
+        "observed_active_at": "2026-08-28"
+      }
+    },
+    {
+      "source_id": "dcc-dmp-guidance",
+      "title": "How to Develop a Data Management and Sharing Plan",
+      "url": "https://www.dcc.ac.uk/guidance/how-guides/develop-data-plan",
+      "source_type": "official_guidance",
+      "read_depth": "official_guidance",
+      "published_at": "2026",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Official Digital Curation Centre guidance page read on access date.",
+      "supports": [
+        "lifecycle_planning_roles_storage_security_quality_metadata_sharing_and_preservation",
+        "living_data_management_plan"
+      ],
+      "limits": [
+        "Planning guidance must be adapted to funder, institution, law, discipline, and data sensitivity; a plan is not execution evidence."
+      ],
+      "contradictions_or_tensions": [],
+      "policy_validity": {
+        "effective_from": null,
+        "effective_until": null,
+        "effective_date_basis": "observed_active_not_backcastable",
+        "observed_active_at": "2026-08-28"
+      }
+    },
+    {
+      "source_id": "nature-reporting-standards",
+      "title": "Reporting standards and availability of data, materials, code and protocols",
+      "url": "https://www.nature.com/nature-portfolio/editorial-policies/reporting-standards",
+      "source_type": "publisher_policy",
+      "read_depth": "official_policy",
+      "published_at": "2026",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Official Nature Portfolio policy page read on access date; page contains some explicit historical policy dates but no single global effective date.",
+      "supports": [
+        "minimum_dataset_access",
+        "repository_and_reviewer_access",
+        "restrictions_and_third_party_disclosure",
+        "data_citation_and_permissions",
+        "source_data_and_provenance"
+      ],
+      "limits": [
+        "Nature Portfolio policy is venue-family specific and must not be treated as a universal journal rule; exact journal, article type, stage, and effective date still govern."
+      ],
+      "contradictions_or_tensions": [],
+      "policy_validity": {
+        "effective_from": null,
+        "effective_until": null,
+        "effective_date_basis": "observed_active_not_backcastable",
+        "observed_active_at": "2026-08-28"
+      }
+    },
+    {
+      "source_id": "scientific-data-policies",
+      "title": "Scientific Data: Data Policies",
+      "url": "https://www.nature.com/sdata/policies/data-policies",
+      "source_type": "publisher_policy",
+      "read_depth": "official_policy",
+      "published_at": "2026",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Official Scientific Data policy page read on access date; current requirements are observed-active and not backcast without explicit dates.",
+      "supports": [
+        "community_relative_rawness",
+        "repository_and_review_access",
+        "human_data_risk_routes",
+        "preservation_static_version_and_updates",
+        "source_level_provenance_and_rights"
+      ],
+      "limits": [
+        "Scientific Data is a specialized data journal; its repository, rawness, retention, and version-of-record requirements are not universal acceptance gates."
+      ],
+      "contradictions_or_tensions": [],
+      "policy_validity": {
+        "effective_from": null,
+        "effective_until": null,
+        "effective_date_basis": "observed_active_not_backcastable",
+        "observed_active_at": "2026-08-28"
+      }
+    },
+    {
+      "source_id": "springer-sensitive-data",
+      "title": "Springer Nature Sensitive Data guidance",
+      "url": "https://www.springernature.com/gp/authors/research-data-policy/sensitive-data",
+      "source_type": "publisher_guidance",
+      "read_depth": "official_guidance",
+      "published_at": "2026",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Official Springer Nature guidance page read on access date.",
+      "supports": [
+        "controlled_access_trusted_environment_and_metadata_only_routes",
+        "participant_consent_and_reidentification_risk",
+        "third_party_rights_separate_from_sensitivity"
+      ],
+      "limits": [
+        "Publisher guidance does not replace competent legal, ethics, Indigenous-governance, or institutional review."
+      ],
+      "contradictions_or_tensions": [],
+      "policy_validity": {
+        "effective_from": null,
+        "effective_until": null,
+        "effective_date_basis": "observed_active_not_backcastable",
+        "observed_active_at": "2026-08-28"
+      }
+    },
+    {
+      "source_id": "ukds-anonymisation",
+      "title": "Anonymising data and protecting participants",
+      "url": "https://ukdataservice.ac.uk/learning-hub/research-data-management/ethical-issues/anonymisation/",
+      "source_type": "official_guidance",
+      "read_depth": "official_guidance",
+      "published_at": "2026",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Official UK Data Service guidance page read on access date.",
+      "supports": [
+        "privacy_planned_across_lifecycle",
+        "participant_communication_technical_protection_and_access_governance",
+        "direct_and_indirect_identifier_risk"
+      ],
+      "limits": [
+        "Guidance is centered on social-science data and cannot certify that a particular release is anonymous or legally compliant."
+      ],
+      "contradictions_or_tensions": [],
+      "policy_validity": {
+        "effective_from": null,
+        "effective_until": null,
+        "effective_date_basis": "observed_active_not_backcastable",
+        "observed_active_at": "2026-08-28"
+      }
+    },
+    {
+      "source_id": "fda-2018-data-integrity",
+      "title": "Data Integrity and Compliance With Drug CGMP: Questions and Answers",
+      "url": "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/data-integrity-and-compliance-drug-cgmp-questions-and-answers-guidance-industry",
+      "source_type": "regulatory_guidance",
+      "read_depth": "official_guidance",
+      "published_at": "2018-12",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Official FDA final guidance landing page, docket, issue date, and scope read on access date.",
+      "supports": [
+        "risk_based_prevention_and_detection_of_data_integrity_lapses",
+        "reliability_accuracy_and_process_understanding"
+      ],
+      "limits": [
+        "This guidance applies to drug CGMP and is not a universal research-data rule. It supports a regulated-data adapter only."
+      ],
+      "contradictions_or_tensions": [],
+      "policy_validity": {
+        "effective_from": "2018-12-13",
+        "effective_until": null,
+        "effective_date_basis": "official_explicit",
+        "observed_active_at": "2026-08-28"
+      }
+    },
+    {
+      "source_id": "gorgolewski-2016-bids",
+      "title": "The brain imaging data structure, a format for organizing and describing outputs of neuroimaging experiments",
+      "url": "https://doi.org/10.1038/sdata.2016.44",
+      "source_type": "peer_reviewed_standard",
+      "read_depth": "full_text",
+      "published_at": "2016-06-21",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "DOI metadata verified with Crossref/OpenAlex and content read from the linked publisher, PMC, preprint, or official page.",
+      "supports": [
+        "community_specific_file_and_metadata_standard",
+        "raw_derived_separation",
+        "validation_and_missing_metadata_detection",
+        "stable_subject_identity_and_machine_readability"
+      ],
+      "limits": [
+        "BIDS covers neuroimaging modalities and versions evolve; unmatched imaging types need current extension/specification research."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "sarkans-2021-rembi",
+      "title": "REMBI: Recommended Metadata for Biological Images—enabling reuse of microscopy data in biology",
+      "url": "https://doi.org/10.1038/s41592-021-01166-8",
+      "source_type": "peer_reviewed_standard",
+      "read_depth": "full_text",
+      "published_at": "2021-05-21",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "DOI metadata verified with Crossref/OpenAlex and content read from the linked publisher, PMC, preprint, or official page.",
+      "supports": [
+        "biological_image_metadata_acquisition_sample_and_processing_context",
+        "community_extension_and_reuse"
+      ],
+      "limits": [
+        "REMBI is a draft/recommended microscopy metadata framework, not a universal image-quality threshold."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "brazma-2001-miame",
+      "title": "Minimum information about a microarray experiment (MIAME)—toward standards for microarray data",
+      "url": "https://doi.org/10.1038/ng1201-365",
+      "source_type": "peer_reviewed_standard",
+      "read_depth": "abstract",
+      "published_at": "2001-12-01",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "DOI metadata verified with Crossref/OpenAlex and content read from the linked publisher, PMC, preprint, or official page.",
+      "supports": [
+        "minimum_information_for_interpretation_and_independent_verification",
+        "experiment_and_processing_metadata"
+      ],
+      "limits": [
+        "Microarray-specific and read at abstract level; current assay/repository requirements require live community-standard resolution."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "moore-2021-ome-ngff",
+      "title": "OME-NGFF: a next-generation file format for expanding bioimaging data-access strategies",
+      "url": "https://doi.org/10.1038/s41592-021-01326-w",
+      "source_type": "peer_reviewed_standard",
+      "read_depth": "full_text",
+      "published_at": "2021-11-29",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "DOI metadata verified with Crossref/OpenAlex and content read from the linked publisher, PMC, preprint, or official page.",
+      "supports": [
+        "open_image_formats_metadata_interoperability",
+        "original_and_derived_image_provenance",
+        "format_tradeoffs_at_scale"
+      ],
+      "limits": [
+        "Format choice is use-case dependent; the paper does not establish one universally best imaging container."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "leek-2010-batch",
+      "title": "Tackling the widespread and critical impact of batch effects in high-throughput data",
+      "url": "https://doi.org/10.1038/nrg2825",
+      "source_type": "peer_reviewed_method",
+      "read_depth": "full_text",
+      "published_at": "2010-09-14",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "DOI metadata verified with Crossref/OpenAlex and content read from the linked publisher, PMC, preprint, or official page.",
+      "supports": [
+        "batch_metadata_and_design",
+        "batch_outcome_confounding",
+        "normalization_not_equivalent_to_batch_control",
+        "recording_technical_context"
+      ],
+      "limits": [
+        "High-throughput biology focus; appropriate detection/correction depends on design and modality and cannot be inferred from a generic batch label."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "broadhurst-2022-mqacc",
+      "title": "Quality assurance and quality control reporting in untargeted metabolic phenotyping: mQACC recommendations for analytical quality management",
+      "url": "https://doi.org/10.1007/s11306-022-01926-3",
+      "source_type": "peer_reviewed_reporting_guidance",
+      "read_depth": "full_text",
+      "published_at": "2022",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "DOI metadata verified with Crossref/OpenAlex and content read from the linked publisher, PMC, preprint, or official page.",
+      "supports": [
+        "qa_prevention_vs_qc_measurement",
+        "calibration_reference_blank_replicate_and_acceptance_receipts",
+        "report_actual_qc_criteria_and_results"
+      ],
+      "limits": [
+        "Untargeted metabolomics focus; it explicitly distinguishes reporting recommendations from a universal best QC practice or fixed acceptance threshold."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "alfaro-2018-ukb-qc",
+      "title": "Image processing and Quality Control for the first 10,000 brain imaging datasets from UK Biobank",
+      "url": "https://doi.org/10.1016/j.neuroimage.2017.10.034",
+      "source_type": "peer_reviewed_case_study",
+      "read_depth": "full_text",
+      "published_at": "2018",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "DOI metadata verified with Crossref/OpenAlex and content read from the linked publisher, PMC, preprint, or official page.",
+      "supports": [
+        "automated_imaging_pipeline_and_qc_receipts",
+        "large_scale_modality_specific_qc",
+        "raw_and_processed_release"
+      ],
+      "limits": [
+        "One large neuroimaging resource; its pipeline and thresholds are not transferable to all imaging studies."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "kahn-2016-dq",
+      "title": "A Harmonized Data Quality Assessment Terminology and Framework for the Secondary Use of Electronic Health Record Data",
+      "url": "https://doi.org/10.13063/2327-9214.1244",
+      "source_type": "peer_reviewed_framework",
+      "read_depth": "full_text",
+      "published_at": "2016",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "DOI metadata verified with Crossref/OpenAlex and content read from the linked publisher, PMC, preprint, or official page.",
+      "supports": [
+        "conformance_completeness_plausibility",
+        "verification_vs_external_validation",
+        "context_and_intended_use",
+        "dictionary_relational_and_computational_checks"
+      ],
+      "limits": [
+        "Developed for secondary EHR data; quality dimensions and thresholds are not universal, and conformance does not imply accurate representation of the intended concept."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "weiskopf-2013-ehr-dq",
+      "title": "Methods and dimensions of electronic health record data quality assessment: enabling reuse for clinical research",
+      "url": "https://doi.org/10.1136/amiajnl-2011-000681",
+      "source_type": "peer_reviewed_review",
+      "read_depth": "full_text",
+      "published_at": "2013",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "DOI metadata verified with Crossref/OpenAlex and content read from the linked publisher, PMC, preprint, or official page.",
+      "supports": [
+        "completeness_correctness_concordance_plausibility_currency",
+        "multiple_assessment_methods_and_fit_for_use"
+      ],
+      "limits": [
+        "EHR reuse review; terminology varies across domains and no single assessment establishes all data-quality dimensions."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "van-den-broeck-2005-cleaning",
+      "title": "Data Cleaning: Detecting, Diagnosing, and Editing Data Abnormalities",
+      "url": "https://doi.org/10.1371/journal.pmed.0020267",
+      "source_type": "peer_reviewed_method",
+      "read_depth": "full_text",
+      "published_at": "2005",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "DOI metadata verified with Crossref/OpenAlex and content read from the linked publisher, PMC, preprint, or official page.",
+      "supports": [
+        "planned_screen_diagnose_edit_cycle",
+        "append_only_correction_and_deletion_reporting",
+        "outliers_missingness_and_error_provenance",
+        "study_specific_cleaning"
+      ],
+      "limits": [
+        "Clinical epidemiology focus and acknowledged evidence gaps; cleaning cannot cure poor design and automatic outlier deletion is not licensed."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "zuur-2010-exploration",
+      "title": "A protocol for data exploration to avoid common statistical problems",
+      "url": "https://doi.org/10.1111/j.2041-210X.2009.00001.x",
+      "source_type": "peer_reviewed_method",
+      "read_depth": "abstract",
+      "published_at": "2009",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "DOI metadata verified with Crossref/OpenAlex and content read from the linked publisher, PMC, preprint, or official page.",
+      "supports": [
+        "exploration_for_outliers_heterogeneity_collinearity_dependence_and_zero_structure",
+        "diagnostics_before_modeling"
+      ],
+      "limits": [
+        "Ecology-focused protocol read at abstract level; diagnostics and remedies must match the analysis and study design."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "sterne-2009-missing",
+      "title": "Multiple imputation for missing data in epidemiological and clinical research: potential and pitfalls",
+      "url": "https://doi.org/10.1136/bmj.b2393",
+      "source_type": "peer_reviewed_method",
+      "read_depth": "full_text",
+      "published_at": "2009",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "DOI metadata verified with Crossref/OpenAlex and content read from the linked publisher, PMC, preprint, or official page.",
+      "supports": [
+        "missingness_can_bias_and_reduce_precision",
+        "missingness_mechanism_assumptions",
+        "sensitivity_for_unidentifiable_missing_not_at_random",
+        "imputation_requires_uncertainty_and_reporting"
+      ],
+      "limits": [
+        "Medical/epidemiological framing; no missing-data method is universally correct and missingness mechanisms cannot generally be identified from observed data alone."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "wilson-2017-good-enough",
+      "title": "Good enough practices in scientific computing",
+      "url": "https://doi.org/10.1371/journal.pcbi.1005510",
+      "source_type": "peer_reviewed_practice",
+      "read_depth": "full_text",
+      "published_at": "2017",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "DOI metadata verified with Crossref/OpenAlex and content read from the linked publisher, PMC, preprint, or official page.",
+      "supports": [
+        "retain_raw_data",
+        "record_every_processing_step",
+        "unique_record_identifiers",
+        "separate_raw_intermediate_and_results",
+        "version_control_and_repository_deposit"
+      ],
+      "limits": [
+        "Pragmatic entry-level guidance; specific storage, backup, workflow, and repository choices depend on scale, regulation, and institution."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "goodman-2014-data-care",
+      "title": "Ten Simple Rules for the Care and Feeding of Scientific Data",
+      "url": "https://doi.org/10.1371/journal.pcbi.1003542",
+      "source_type": "peer_reviewed_practice",
+      "read_depth": "full_text",
+      "published_at": "2014",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "DOI metadata verified with Crossref/OpenAlex and content read from the linked publisher, PMC, preprint, or official page.",
+      "supports": [
+        "integrated_data_metadata_and_narrative",
+        "stable_identifiers_backup_validation_and_archive",
+        "lifecycle_responsibility"
+      ],
+      "limits": [
+        "Broad practice guidance rather than a validation study or universal domain standard."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "gebru-2021-datasheets",
+      "title": "Datasheets for datasets",
+      "url": "https://doi.org/10.1145/3458723",
+      "source_type": "peer_reviewed_framework",
+      "read_depth": "full_text",
+      "published_at": "2021",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "DOI metadata verified with Crossref/OpenAlex and content read from the linked publisher, PMC, preprint, or official page.",
+      "supports": [
+        "dataset_motivation_composition_collection_preprocessing_distribution_and_maintenance_documentation",
+        "bias_limitations_and_responsible_use_context"
+      ],
+      "limits": [
+        "Developed for datasets in machine learning; documentation increases transparency but does not itself remove bias or validate data."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "pushkarna-2022-data-cards",
+      "title": "Data Cards: Purposeful and Transparent Dataset Documentation for Responsible AI",
+      "url": "https://doi.org/10.1145/3531146.3533231",
+      "source_type": "peer_reviewed_framework",
+      "read_depth": "full_text",
+      "published_at": "2022",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "DOI metadata verified with Crossref/OpenAlex and content read from the linked publisher, PMC, preprint, or official page.",
+      "supports": [
+        "audience_specific_lifecycle_documentation",
+        "collection_cleaning_missingness_bias_and_maintenance_context",
+        "documentation_is_not_dataset_quality"
+      ],
+      "limits": [
+        "Industry/ML case studies; the authors emphasize contextual, modular documentation rather than one universal template."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "rocher-2019-reidentification",
+      "title": "Estimating the success of re-identifications in incomplete datasets using generative models",
+      "url": "https://doi.org/10.1038/s41467-019-10933-3",
+      "source_type": "peer_reviewed_empirical",
+      "read_depth": "full_text",
+      "published_at": "2019-07-23",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "DOI metadata verified with Crossref/OpenAlex and content read from the linked publisher, PMC, preprint, or official page.",
+      "supports": [
+        "deidentification_and_sampling_do_not_guarantee_anonymity",
+        "attribute_combination_reidentification_risk",
+        "controlled_release_boundary"
+      ],
+      "limits": [
+        "The reported model, populations, and headline estimates do not certify risk for every dataset; competent contextual privacy assessment remains necessary."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "wallach-2018-transparency",
+      "title": "Reproducible research practices, transparency, and open access data in the biomedical literature, 2015–2017",
+      "url": "https://doi.org/10.1371/journal.pbio.2006930",
+      "source_type": "empirical_meta_research",
+      "read_depth": "full_text",
+      "published_at": "2018",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "DOI metadata verified with Crossref/OpenAlex and content read from the linked publisher, PMC, preprint, or official page.",
+      "supports": [
+        "raw_data_and_protocol_availability_remain_limited",
+        "availability_is_distinct_from_replication_and_reproducibility"
+      ],
+      "limits": [
+        "Random sample of 149 biomedical articles in a fixed period; estimates are not universal or current prevalence."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "federer-2018-statements",
+      "title": "Data sharing in PLOS ONE: An analysis of Data Availability Statements",
+      "url": "https://doi.org/10.1371/journal.pone.0194768",
+      "source_type": "empirical_meta_research",
+      "read_depth": "full_text",
+      "published_at": "2018",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "DOI metadata verified with Crossref/OpenAlex and content read from the linked publisher, PMC, preprint, or official page.",
+      "supports": [
+        "availability_statement_does_not_guarantee_locatable_data",
+        "repository_identifier_and_access_route_checks",
+        "policy_effective_date_matters"
+      ],
+      "limits": [
+        "One journal and 2014–2016 policy period; statement categories do not directly test scientific quality of deposited files."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "stodden-2018-policy",
+      "title": "An empirical analysis of journal policy effectiveness for computational reproducibility",
+      "url": "https://doi.org/10.1073/pnas.1708290115",
+      "source_type": "empirical_meta_research",
+      "read_depth": "full_text",
+      "published_at": "2018",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "DOI metadata verified with Crossref/OpenAlex and content read from the linked publisher, PMC, preprint, or official page.",
+      "supports": [
+        "upon_request_policy_is_insufficient",
+        "data_code_workflow_and_parameters_needed",
+        "artifact_availability_separate_from_reproduction"
+      ],
+      "limits": [
+        "Random sample of computational Science articles from 2011–2012; results do not establish current rates or transfer to every field."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "hardwicke-2021-analytic",
+      "title": "Analytic reproducibility in articles receiving open data badges at the journal Psychological Science: an observational study",
+      "url": "https://doi.org/10.1098/rsos.201494",
+      "source_type": "empirical_meta_research",
+      "read_depth": "full_text",
+      "published_at": "2021",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "DOI metadata verified with Crossref/OpenAlex and content read from the linked publisher, PMC, preprint, or official page.",
+      "supports": [
+        "open_data_alone_does_not_certify_analytic_reproducibility",
+        "unclear_processing_and_analysis_documentation_causes_failures",
+        "specific_analysis_dataset_binding"
+      ],
+      "limits": [
+        "Small selected sample of 25 psychology articles with open-data badges; findings do not estimate all disciplines or all open datasets."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "vines-2014-availability",
+      "title": "The Availability of Research Data Declines Rapidly with Article Age",
+      "url": "https://doi.org/10.1016/j.cub.2013.11.014",
+      "source_type": "empirical_meta_research",
+      "read_depth": "abstract",
+      "published_at": "2014",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "DOI metadata verified with Crossref/OpenAlex and content read from the linked publisher, PMC, preprint, or official page.",
+      "supports": [
+        "durable_repository_and_retention_need",
+        "person_dependent_request_routes_decay"
+      ],
+      "limits": [
+        "Read at metadata/abstract level; field, period, and study sampling limit transfer and exact effect estimates are not used as universal constants."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "hesse-2023-qualitative-sharing",
+      "title": "Data sharing in qualitative research",
+      "url": "https://doi.org/10.1111/nae2.12049",
+      "source_type": "peer_reviewed_commentary",
+      "read_depth": "abstract",
+      "published_at": "2023",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "DOI metadata verified with Crossref/OpenAlex and content read from the linked publisher, PMC, preprint, or official page.",
+      "supports": [
+        "qualitative_context_consent_misuse_and_identifiability",
+        "non_universal_open_release"
+      ],
+      "limits": [
+        "Commentary read at abstract level; it frames arguments rather than certifying a single ethical sharing route."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "kuula-luumi-2020-participants",
+      "title": "Research Participant Views regarding Qualitative Data Sharing",
+      "url": "https://doi.org/10.1002/eahr.500044",
+      "source_type": "peer_reviewed_empirical",
+      "read_depth": "abstract",
+      "published_at": "2020",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "DOI metadata verified with Crossref/OpenAlex and content read from the linked publisher, PMC, preprint, or official page.",
+      "supports": [
+        "participant_expectations_confidentiality_and_secondary_use",
+        "deidentification_and_researcher_only_access_preferences"
+      ],
+      "limits": [
+        "Interview sample of 30 participants in sensitive qualitative studies; context and sample size prevent universal consent conclusions."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "boeckhout-2018-fair-enough",
+      "title": "The FAIR guiding principles for data stewardship: fair enough?",
+      "url": "https://doi.org/10.1038/s41431-018-0160-0",
+      "source_type": "peer_reviewed_commentary",
+      "read_depth": "abstract",
+      "published_at": "2018",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "DOI metadata verified with Crossref/OpenAlex and content read from the linked publisher, PMC, preprint, or official page.",
+      "supports": [
+        "fair_requires_ethical_methodological_and_organizational_context",
+        "fairness_not_equal_to_open_or_ethically_sufficient"
+      ],
+      "limits": [
+        "Commentary read at abstract level; it identifies limits rather than supplying operational legal rules."
+      ],
+      "contradictions_or_tensions": []
+    },
+    {
+      "source_id": "datacite-versioning",
+      "title": "DataCite Support: Versioning",
+      "url": "https://support.datacite.org/docs/versioning",
+      "source_type": "technical_guidance",
+      "read_depth": "official_guidance",
+      "published_at": "2026",
+      "accessed_at": "2026-08-28",
+      "metadata_verification": "Official DataCite support page read on access date; page update timestamp observed but no historical effective interval is asserted.",
+      "supports": [
+        "major_minor_version_relationships",
+        "dynamic_dataset_citation_and_version_specificity",
+        "related_identifiers"
+      ],
+      "limits": [
+        "Repository/versioning practices vary; DataCite guidance does not establish which changes are scientifically major for every dataset."
+      ],
+      "contradictions_or_tensions": [],
+      "policy_validity": {
+        "effective_from": null,
+        "effective_until": null,
+        "effective_date_basis": "observed_active_not_backcastable",
+        "observed_active_at": "2026-08-28"
+      }
+    }
+  ],
+  "update_policy": {
+    "next_review_due": "2027-02-28",
+    "triggers": [
+      "official policy or specification version changes",
+      "new evidence invalidates a blocker or repair route",
+      "new data modality lacks a maintained adapter",
+      "a source is corrected retracted or superseded",
+      "an exact institutional legal funder repository or community rule is needed"
+    ],
+    "time_rule": "Use explicit effective dates when an authority supplies them. Observed-current pages without an explicit effective date cannot be backcast to earlier projects.",
+    "live_resolution_rule": "Maintained adapters are not a complete legal, institutional, funder, repository, or disciplinary rulebook. Resolve exact applicable authorities from current official sources and preserve unresolved status when that cannot be done."
+  }
+}

@@ -1,5 +1,5 @@
 name: nature-shared
-version: 2.5.0
+version: 2.6.0
 description: >
   Declarative manifest for shared academic-paper reference modules. This package
   is not a standalone workflow; installed skills load exact shared core,
@@ -49,6 +49,8 @@ core:
       path: core/scientific-display-decision-contract.md
     - condition: binding a study to versioned protocol and analysis-plan timing, executed conduct, deviations, ethics/governance, raw-data/analysis receipts, and claim-status boundaries before Methods/Results drafting or readiness assessment
       path: core/study-protocol-conduct-contract.md
+    - condition: binding scientific data from source/acquisition through immutable raw, validated and analysis-ready snapshots, QC and transformation receipts, analysis/display inputs, governance, release, deviations, and bounded claims before downstream writing or readiness assessment
+      path: core/data-integrity-stewardship-contract.md
     - condition: final manuscript-facing QA after drafting, including a last-mile scrub for filenames, file paths, script/helper/class names, CLI flags, repository/developer history, raw project links, output filenames, figure-legend leakage, punctuation/spacing/bracket defects, range/minus/hyphen review, and target-aware scientific copy-editing
       path: core/manuscript-surface-qa.md
     - condition: auditing an existing or multi-round-revised manuscript for accumulated drift — terminology/unit/number variants, headline counts that do not reconcile with the Methods, claims contradicted by the paper's own tables, over- or under-claiming, tense parallelism, and prose that restates displays
@@ -66,6 +68,8 @@ research:
       path: research/scientific-display-evidence-ledger-2026-08.md
     - condition: the empirical, methodological, or reporting-standard basis behind a study protocol/conduct adapter, automatic blocker, repair route, or non-universal transfer boundary must be inspected
       path: research/study-protocol-conduct-evidence-ledger-2026-08.md
+    - condition: the empirical, standard, governance, or policy basis behind a data integrity/stewardship adapter, automatic blocker, repair boundary, exact-domain obligation, or release route must be inspected
+      path: research/data-integrity-stewardship-evidence-ledger-2026-08.md
 
 journal_formats:
   on_demand:
@@ -100,3 +104,7 @@ quality_tools:
   study_protocol_schema: study-contracts/study-protocol-conduct-contract.schema.json
   study_protocol_adapters: study-contracts/maintained-study-adapters.json
   study_protocol_purpose: return study-type obligations rather than a universal best design, then fail closed on high-risk timing, outcome, execution, deviation, leakage, ethics, and claim-status contradictions
+  data_integrity_script: scripts/resolve_data_integrity.py
+  data_integrity_schema: data-contracts/data-integrity-stewardship-contract.schema.json
+  data_integrity_adapters: data-contracts/maintained-data-adapters.json
+  data_integrity_purpose: return modality/governance obligations rather than a universal data-quality score, then fail closed on high-risk raw-snapshot, lineage, QC, analysis-input, decision, authority, rights, and release contradictions

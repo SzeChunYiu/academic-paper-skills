@@ -15,6 +15,7 @@ Pipeline 在所有轮次维持同一个 persistent manuscript state：
 - claim/evidence ledger；
 - figure ledger；
 - source/research ledger；
+- data integrity、lineage、governance 与 release ledger；
 - stable reviewer concern IDs；
 - editor must-address conditions；
 - revision delta；
@@ -53,6 +54,30 @@ versioned sensitivity analysis、把 work 重分类为 exploratory/post-hoc、�
 或请求新的 prospective study。Registration、reporting completion、traceability、
 scientific validity 与 acceptance 保持独立。
 
+## Data integrity 与 stewardship state
+
+Persistent state 现在保留：
+
+```text
+source/acquisition record -> immutable raw or exact external-reference origin -> validation/QC receipts
+-> versioned transformations -> immutable analysis-ready snapshot
+-> analysis/display inputs -> governed release -> bounded claims
+```
+
+Non-universal modality/governance adapters 只暴露适用 obligations；unmatched domain
+以及 exact institution、law、funder、repository、consent、licence 与 community
+requirement 在 live competent official source 检查前保持 unresolved。Mutable raw
+snapshot、broken lineage、未验证 transformations/QC/calibration、analysis hash
+mismatch、隐藏 adverse/null exclusion、count/unit drift、authority/rights gap、
+unauthorized release 与 false availability/version claim 会阻断所有 dependent state
+objects。
+
+Repair 必须保留历史并 rerun downstream analyses/displays。Claim narrowing 可修复
+evidence-scope mismatch，但不能创造 data、authority、rights、privacy protection、
+receipt 或真实 deposit。Passing data contract 不是 accuracy、completeness、
+representativeness、privacy、reproducibility、scientific truth 或 acceptance
+certificate。
+
 ## Scientific display state
 
 Persistent figure ledger 现在会为每个承担 evidence 的 figure、plot、table、image
@@ -71,6 +96,7 @@ readiness；必须从真实 evidence 修复 representation/provenance，或合�
 target + paper archetype
 -> evidence/source intake
 -> protocol + conduct + deviation resolution
+-> data integrity + stewardship + release resolution
 -> research calibration
 -> argument + claim/evidence architecture
 -> content/figure/statistics planning

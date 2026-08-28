@@ -111,7 +111,36 @@ records, disclosing/versioning a deviation, rerunning from valid evidence,
 reclassifying an analysis, narrowing a claim, or conducting a new prospective
 study—never by backdating or inventing an approval/receipt.
 
-## 5. Build the argument before prose
+## 5. Resolve data integrity and stewardship before analysis prose
+
+When scientific data are in scope, load
+`../nature-shared/core/data-integrity-stewardship-contract.md` after the study
+conduct contract and before statistics, Results, displays, claims, availability,
+or readiness language.
+
+Preserve this authority chain:
+
+`source/acquisition record -> immutable raw or exact external-reference origin -> validation/QC receipts -> versioned transformations -> immutable analysis-ready snapshot -> analysis/display bindings -> governed release -> bounded claim`.
+
+Resolve obligations from data modality, study context, sensitivity/governance
+tags, and policy as-of date. Maintained adapters are non-universal; an unmatched
+modality or unresolved exact institutional, legal, funder, repository, licence,
+consent, or community policy remains a live official-source research obligation.
+
+Block downstream objects on mutable raw snapshots, broken lineage, missing
+execution/QC/calibration receipts, analysis-input hash mismatch, hidden
+adverse/null exclusions, unreconciled counts, semantic/unit drift, undisclosed
+missingness changes, missing authority/rights, unauthorized release, or a false
+release/version claim. Repair by preserving and versioning the record, rerunning
+from valid evidence, using an authorized access route, withdrawing/replacing a
+release, or narrowing/removing affected claims. Claim narrowing cannot create
+source data, consent, rights, privacy protection, calibration, or a receipt.
+
+Passing certifies only recorded lifecycle invariants—not measurement accuracy,
+completeness, representativeness, absence of bias, privacy/anonymity, legal
+compliance, reproducibility, scientific truth, or journal acceptance.
+
+## 6. Build the argument before prose
 
 Use the argument spine:
 
@@ -133,7 +162,7 @@ that the located warrant entails the proposition at its stated scope.
 
 Do not manufacture a `gap` merely to make the paper sound important.
 
-## 6. Make the content rich enough to understand
+## 7. Make the content rich enough to understand
 
 Use `../nature-shared/core/explanatory-sufficiency.md` and `../nature-shared/core/manuscript-content-selection.md` together.
 
@@ -154,7 +183,7 @@ For central ideas/results, ensure the intended reader receives the necessary sub
 
 Do not delete reasoning merely to make prose short. Do not add textbook filler merely to make prose long.
 
-## 7. Keep project artifacts out of the paper
+## 8. Keep project artifacts out of the paper
 
 Before drafting and again before release, separate scientific content from repository/developer detail.
 
@@ -170,7 +199,7 @@ Never expose filenames, paths, helper names, temporary output files, branches, P
 
 Use `../nature-shared/core/manuscript-surface-qa.md` as the final release gate.
 
-## 8. Study papers at two scales
+## 9. Study papers at two scales
 
 ### Broad corpus
 
@@ -199,7 +228,7 @@ Learn:
 
 Do not copy sentences, distinctive paragraph architecture, layouts, palettes, or visual identity.
 
-## 9. Plan figures before prose becomes rigid
+## 10. Plan figures before prose becomes rigid
 
 Use `../nature-shared/core/figure-evidence-planning.md`, then create a
 **scientific display decision contract** from
@@ -233,7 +262,7 @@ artifact hashes must remain bound to the current display contract.
 
 Route rendering and detailed diagram design to the scientific-figure capability.
 
-## 10. Build section and paragraph logic
+## 11. Build section and paragraph logic
 
 Use the relevant compatibility fragments under `../nature-writing/static/` and references under `../nature-writing/references/` as needed.
 
@@ -249,7 +278,7 @@ Each paragraph needs a nucleus plus only the satellites required for:
 - implication;
 - bridge.
 
-## 11. Make every sentence logically connected
+## 12. Make every sentence logically connected
 
 Use `../nature-shared/core/sentence-logic-and-cohesion.md`.
 
@@ -275,7 +304,7 @@ Then check:
 
 A connective cannot manufacture logic.
 
-## 12. Humanize by improving scholarly control, not detector evasion
+## 13. Humanize by improving scholarly control, not detector evasion
 
 Use `../nature-shared/core/natural-scholarly-prose.md` and `../nature-shared/core/author-voice-profile.md` when appropriate.
 
@@ -292,7 +321,7 @@ Natural scholarly writing should show:
 
 Do not use AI-word blacklists, random sentence lengths, deliberate errors, fake informality, or detector optimization.
 
-## 13. Apply exact target rules and decision contract last
+## 14. Apply exact target rules and decision contract last
 
 Scientific validity and reader logic come first.
 
@@ -322,7 +351,7 @@ exact profile is versioned local knowledge. A fallback profile is not exact jour
 conflicting, mark it unresolved and run live official-source resolution rather
 than attributing a generic objective to the journal.
 
-## 14. Editor/reviewer preflight
+## 15. Editor/reviewer preflight
 
 For submission readiness, use the shared editor/reviewer decision engine or `$academic-paper-pipeline` for repeated closed-loop review/revision.
 
@@ -339,7 +368,7 @@ Distinguish:
 
 More experiments are not automatically the right repair.
 
-## 15. Final release gate
+## 16. Final release gate
 
 Before returning manuscript-facing text:
 

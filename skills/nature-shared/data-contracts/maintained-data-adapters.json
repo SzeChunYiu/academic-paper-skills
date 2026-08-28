@@ -1,0 +1,442 @@
+{
+  "catalog_schema_version": "1.0.0",
+  "catalog_id": "data-integrity-maintained-adapters-2026-08-28",
+  "reviewed_at": "2026-08-28",
+  "selection_mode": "applicable_obligations_not_universal_quality_model",
+  "scope": "Maintained cross-domain and modality-specific obligations for data identity, integrity, lineage, quality-control traceability, governance, and release. This catalog is not a complete legal, institutional, funder, repository, or disciplinary rulebook.",
+  "evidence_registry_file": "data-integrity-evidence-registry.json",
+  "profiles": [
+    {
+      "adapter_id": "general-tabular-observational",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "any_modalities": [
+          "tabular",
+          "relational_database",
+          "survey"
+        ],
+        "any_study_contexts": [
+          "observational_association",
+          "observational_causal"
+        ],
+        "any_sensitivity_tags": []
+      },
+      "obligations": [
+        "Preserve raw and analysis-ready snapshots with a data dictionary, scientific-unit key, units, missing-value codes, denominators, and versioned cleaning decisions.",
+        "Assess conformance, completeness/missingness, uniqueness, and context-specific plausibility without collapsing them into one quality score."
+      ],
+      "required_qc_dimensions": [
+        "schema_conformance",
+        "unit_uniqueness",
+        "missingness"
+      ],
+      "hard_checks": [
+        "raw_fixity",
+        "transformation_lineage",
+        "analysis_binding",
+        "data_decision_visibility",
+        "semantic_schema",
+        "quality_receipts",
+        "record_count_lineage",
+        "release_integrity"
+      ],
+      "source_refs": [
+        "kahn-2016-dq",
+        "weiskopf-2013-ehr-dq",
+        "frictionless-table-schema",
+        "van-den-broeck-2005-cleaning"
+      ],
+      "transfer_limits": [
+        "No universal completeness or plausibility threshold; secondary operational data need source- and use-specific validation."
+      ]
+    },
+    {
+      "adapter_id": "human-clinical-sensitive",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "any_modalities": [],
+        "any_study_contexts": [
+          "clinical",
+          "human_participant",
+          "administrative_health"
+        ],
+        "any_sensitivity_tags": [
+          "identifiable_human",
+          "pseudonymous_human",
+          "sensitive_human"
+        ]
+      },
+      "obligations": [
+        "Resolve consent/authority, direct and indirect identifier risk, missingness/attrition, and an authorized release or controlled-access route.",
+        "Keep participant communication, technical de-identification, access governance, and legal/ethical authority separate."
+      ],
+      "required_qc_dimensions": [
+        "missingness",
+        "identifier_risk_assessment"
+      ],
+      "hard_checks": [
+        "raw_fixity",
+        "transformation_lineage",
+        "analysis_binding",
+        "data_decision_visibility",
+        "semantic_schema",
+        "quality_receipts",
+        "record_count_lineage",
+        "release_integrity",
+        "data_authority",
+        "sensitive_release"
+      ],
+      "source_refs": [
+        "springer-sensitive-data",
+        "ukds-anonymisation",
+        "rocher-2019-reidentification",
+        "sterne-2009-missing"
+      ],
+      "transfer_limits": [
+        "Exact law, consent, ethics approval, institution, and data-access authority must be resolved live; this adapter does not certify anonymization or compliance."
+      ]
+    },
+    {
+      "adapter_id": "indigenous-community-governed",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "any_modalities": [],
+        "any_study_contexts": [
+          "indigenous_research",
+          "community_governed"
+        ],
+        "any_sensitivity_tags": [
+          "indigenous_or_collective",
+          "collective_authority"
+        ]
+      },
+      "obligations": [
+        "Resolve collective benefit, authority to control, responsibility, ethics, attribution, and reuse conditions with the actual rights-holders."
+      ],
+      "required_qc_dimensions": [
+        "governance_authority"
+      ],
+      "hard_checks": [
+        "raw_fixity",
+        "transformation_lineage",
+        "analysis_binding",
+        "data_decision_visibility",
+        "semantic_schema",
+        "quality_receipts",
+        "record_count_lineage",
+        "release_integrity",
+        "collective_authority",
+        "sensitive_release"
+      ],
+      "source_refs": [
+        "carroll-2020-care",
+        "wilkinson-2016-fair"
+      ],
+      "transfer_limits": [
+        "CARE is specific to Indigenous data governance and cannot be reduced to a generic public-versus-private switch."
+      ]
+    },
+    {
+      "adapter_id": "qualitative-interpretive-sensitive",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "any_modalities": [
+          "interview_transcript",
+          "focus_group",
+          "field_note",
+          "audio",
+          "video",
+          "qualitative_corpus"
+        ],
+        "any_study_contexts": [
+          "qualitative_interpretive"
+        ],
+        "any_sensitivity_tags": []
+      },
+      "obligations": [
+        "Preserve source-to-code/redaction/adjudication lineage and assess contextual identifiability, voice/text risk, consent, and secondary-use boundaries."
+      ],
+      "required_qc_dimensions": [
+        "redaction_or_disclosure_review",
+        "coding_or_adjudication_traceability"
+      ],
+      "hard_checks": [
+        "raw_fixity",
+        "transformation_lineage",
+        "analysis_binding",
+        "data_decision_visibility",
+        "semantic_schema",
+        "quality_receipts",
+        "record_count_lineage",
+        "release_integrity",
+        "data_authority",
+        "sensitive_release"
+      ],
+      "source_refs": [
+        "hesse-2023-qualitative-sharing",
+        "kuula-luumi-2020-participants",
+        "ukds-anonymisation"
+      ],
+      "transfer_limits": [
+        "Open transcript release is not universal; redaction can remove analytic context and must be documented."
+      ]
+    },
+    {
+      "adapter_id": "computational-ml-benchmark",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "any_modalities": [
+          "benchmark_dataset",
+          "training_dataset",
+          "evaluation_dataset",
+          "machine_learning_corpus"
+        ],
+        "any_study_contexts": [
+          "computational_ml",
+          "benchmark"
+        ],
+        "any_sensitivity_tags": []
+      },
+      "obligations": [
+        "Record upstream source/version, scientific unit, split membership, deduplication, preprocessing/labeling lineage, intended uses, subgroup coverage, and known limitations."
+      ],
+      "required_qc_dimensions": [
+        "unit_uniqueness",
+        "split_integrity",
+        "dataset_documentation"
+      ],
+      "hard_checks": [
+        "raw_fixity",
+        "transformation_lineage",
+        "analysis_binding",
+        "data_decision_visibility",
+        "semantic_schema",
+        "quality_receipts",
+        "record_count_lineage",
+        "release_integrity"
+      ],
+      "source_refs": [
+        "gebru-2021-datasheets",
+        "pushkarna-2022-data-cards",
+        "hardwicke-2021-analytic"
+      ],
+      "transfer_limits": [
+        "Documentation does not certify absence of bias, leakage, label error, representativeness, robustness, or generalization."
+      ]
+    },
+    {
+      "adapter_id": "high-throughput-omics-metabolomics",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "any_modalities": [
+          "omics",
+          "metabolomics",
+          "proteomics",
+          "sequencing",
+          "microarray"
+        ],
+        "any_study_contexts": [
+          "high_throughput_assay"
+        ],
+        "any_sensitivity_tags": []
+      },
+      "obligations": [
+        "Record sample preparation, instrument/operator/reagent lot and batch, reference/blank/replicate materials, calibration/system suitability, acceptance criteria, and actual QC outcomes.",
+        "Resolve the current assay metadata and repository standard."
+      ],
+      "required_qc_dimensions": [
+        "batch_assessment",
+        "reference_or_blank_qc",
+        "calibration_or_system_suitability"
+      ],
+      "hard_checks": [
+        "raw_fixity",
+        "transformation_lineage",
+        "analysis_binding",
+        "data_decision_visibility",
+        "semantic_schema",
+        "quality_receipts",
+        "record_count_lineage",
+        "release_integrity",
+        "batch_qc_receipts"
+      ],
+      "source_refs": [
+        "leek-2010-batch",
+        "broadhurst-2022-mqacc",
+        "brazma-2001-miame"
+      ],
+      "transfer_limits": [
+        "Assay, platform, and community versions determine thresholds and repositories; normalization is not proof that batch effects are absent."
+      ]
+    },
+    {
+      "adapter_id": "biological-neuro-imaging",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "any_modalities": [
+          "biological_image",
+          "microscopy",
+          "neuroimaging",
+          "medical_image"
+        ],
+        "any_study_contexts": [
+          "imaging"
+        ],
+        "any_sensitivity_tags": []
+      },
+      "obligations": [
+        "Preserve acquisition metadata, raw/derivative separation, transformations, masks/annotations, modality-specific QC, and current community-format/validator information."
+      ],
+      "required_qc_dimensions": [
+        "imaging_metadata",
+        "image_quality_or_artifact_qc"
+      ],
+      "hard_checks": [
+        "raw_fixity",
+        "transformation_lineage",
+        "analysis_binding",
+        "data_decision_visibility",
+        "semantic_schema",
+        "quality_receipts",
+        "record_count_lineage",
+        "release_integrity",
+        "imaging_qc_receipts"
+      ],
+      "source_refs": [
+        "gorgolewski-2016-bids",
+        "sarkans-2021-rembi",
+        "moore-2021-ome-ngff",
+        "alfaro-2018-ukb-qc"
+      ],
+      "transfer_limits": [
+        "BIDS, REMBI, OME-NGFF, and UK Biobank checks cover different modalities and versions; no universal image QC threshold exists."
+      ]
+    },
+    {
+      "adapter_id": "sensor-field-instrument",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "any_modalities": [
+          "sensor_stream",
+          "instrument_timeseries",
+          "environmental_sensor",
+          "field_measurement"
+        ],
+        "any_study_contexts": [
+          "field_measurement",
+          "instrument_measurement"
+        ],
+        "any_sensitivity_tags": []
+      },
+      "obligations": [
+        "Record instrument identity, calibration validity, units, clock/time zone, location/environment, sampling gaps, drift checks, and raw stream preservation."
+      ],
+      "required_qc_dimensions": [
+        "calibration"
+      ],
+      "hard_checks": [
+        "raw_fixity",
+        "transformation_lineage",
+        "analysis_binding",
+        "data_decision_visibility",
+        "semantic_schema",
+        "quality_receipts",
+        "record_count_lineage",
+        "release_integrity",
+        "calibration_receipt"
+      ],
+      "source_refs": [
+        "broadhurst-2022-mqacc",
+        "van-den-broeck-2005-cleaning",
+        "wilson-2017-good-enough"
+      ],
+      "transfer_limits": [
+        "Exact calibration interval, reference material, drift threshold, and environmental correction require the instrument and domain authority."
+      ]
+    },
+    {
+      "adapter_id": "simulation-synthetic",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "any_modalities": [
+          "simulation_output",
+          "synthetic_data"
+        ],
+        "any_study_contexts": [
+          "simulation",
+          "theory_computation"
+        ],
+        "any_sensitivity_tags": []
+      },
+      "obligations": [
+        "Bind generator/model version, code/environment, parameters, seeds or stochastic replicate identity, input snapshot, and output lineage.",
+        "Keep synthetic-data privacy and realism claims separate from file provenance."
+      ],
+      "required_qc_dimensions": [
+        "generator_reexecution_or_conformance"
+      ],
+      "hard_checks": [
+        "raw_fixity",
+        "transformation_lineage",
+        "analysis_binding",
+        "data_decision_visibility",
+        "semantic_schema",
+        "quality_receipts",
+        "record_count_lineage",
+        "release_integrity"
+      ],
+      "source_refs": [
+        "w3c-prov-overview",
+        "wilson-2017-good-enough",
+        "force11-data-citation"
+      ],
+      "transfer_limits": [
+        "Traceability does not validate the model, parameterization, numerical convergence, privacy, or realism of synthetic observations."
+      ]
+    },
+    {
+      "adapter_id": "shared-data-resource-repository",
+      "profile_is_not_universal_rule": true,
+      "applies_when": {
+        "any_modalities": [
+          "shared_dataset",
+          "data_resource",
+          "repository_deposit",
+          "living_dataset"
+        ],
+        "any_study_contexts": [
+          "resource_dataset",
+          "data_descriptor"
+        ],
+        "any_sensitivity_tags": []
+      },
+      "obligations": [
+        "Use persistent identity, formal dataset citation, rights/access metadata, preservation route, exact reviewed version, update log, and correction/withdrawal relations."
+      ],
+      "required_qc_dimensions": [
+        "release_package_fixity",
+        "repository_metadata"
+      ],
+      "hard_checks": [
+        "raw_fixity",
+        "transformation_lineage",
+        "analysis_binding",
+        "data_decision_visibility",
+        "semantic_schema",
+        "quality_receipts",
+        "record_count_lineage",
+        "release_integrity"
+      ],
+      "source_refs": [
+        "lin-2020-trust",
+        "scientific-data-policies",
+        "datacite-metadata",
+        "datacite-versioning",
+        "rfc8493-bagit"
+      ],
+      "transfer_limits": [
+        "Exact repository, retention, rawness, licence, and venue requirements are not universal and require live official-source resolution."
+      ]
+    }
+  ]
+}

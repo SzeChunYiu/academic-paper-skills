@@ -14,6 +14,7 @@
 - 用 broad stratified corpus + 3–6 篇 close analogue papers 学习，但不复制 prose/figure identity；
 - 检查 central ideas 是否解释到目标读者真正能理解；
 - 强化 sentence-to-sentence logical flow；
+- 在下游 claims 前绑定 raw、validated、analysis-ready、analysis-input 与 release data objects；
 - 规划论文真正需要的 evidence 与 figures；
 - 决定内容进入 main text、Methods、SI、availability、artifact docs 还是删除；
 - 保留 author voice，同时避免 generic AI-like prose；
@@ -53,6 +54,32 @@ confirmatory status、broken data lineage 与缺失的 required ethics authority
 transfer limits 与 frozen 84-record search log。通过只代表 bounded traceability，
 不是 scientific-validity certificate，也不是 journal-acceptance prediction。
 
+## Data integrity 与 stewardship contract
+
+在 statistics、Results、displays、claims、availability statements 或 readiness
+判断之前，skill 会绑定：
+
+```text
+source/acquisition record -> immutable raw or exact external-reference origin -> validation/QC receipts
+-> versioned transformations -> immutable analysis-ready snapshot
+-> analysis/display inputs -> governed release -> bounded claim
+```
+
+10 个 maintained modality/governance adapters 只激活相关 obligations，不宣称存在
+universal data-quality score，也不假装所有 discipline、law、institution、funder、
+repository、licence 或 community policy 都已 hard-code。Unmatched 与 exact-policy
+case 必须保留为 live official-source research duty。Behavioral checks 会 fail
+closed 于 mutable raw data、broken lineage、缺失 execution/QC/calibration evidence、
+input hash/count mismatch、隐藏 adverse/null exclusion、unit/semantic drift、
+unauthorized sensitive release、missing authority/rights 与 false release/version
+claim。
+
+41-source evidence base 包含 22 个 peer-reviewed full-text studies、13 个 official
+standards/guidance/policies 与 6 个 abstract-level reads，并冻结 12 个 queries 与
+84 个 screened metadata records。通过只证明已记录 lifecycle invariants，不证明
+measurement accuracy、completeness、representativeness、privacy、legal compliance、
+reproducibility、scientific truth 或 acceptance。
+
 ## Scientific display decision contract
 
 每个承担 evidence 的 plot、figure、table、image plate 或 diagram 都可以绑定到
@@ -81,6 +108,7 @@ supported decisions、transfer limits、contradictions 与 update triggers。
 scientific evidence
 -> paper archetype
 -> protocol + analysis plan + executed conduct + deviations
+-> raw snapshot + QC + transformations + analysis-ready/release bindings
 -> question / contribution
 -> claim/evidence/boundary map
 -> content selection

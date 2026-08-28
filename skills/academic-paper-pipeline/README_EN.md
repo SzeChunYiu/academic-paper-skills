@@ -15,6 +15,7 @@ The pipeline keeps one persistent manuscript state across rounds:
 - claim/evidence ledger;
 - figure ledger;
 - source/research ledger;
+- data integrity, lineage, governance, and release ledger;
 - stable reviewer-concern IDs;
 - editor must-address conditions;
 - revision delta;
@@ -53,6 +54,30 @@ valid evidence, add sensitivity analysis, reclassify exploratory/post-hoc work,
 narrow claims, or request a new prospective study. Registration, reporting
 completion, traceability, scientific validity, and acceptance remain separate.
 
+## Data Integrity And Stewardship State
+
+Persistent state now preserves:
+
+```text
+source/acquisition record -> immutable raw or exact external-reference origin -> validation/QC receipts
+-> versioned transformations -> immutable analysis-ready snapshot
+-> analysis/display inputs -> governed release -> bounded claims
+```
+
+Non-universal modality/governance adapters expose applicable obligations while
+unmatched domains and exact institutional, legal, funder, repository, consent,
+licence, and community requirements remain unresolved until checked from live
+competent sources. Mutable raw snapshots, broken lineage, unverified
+transformations/QC/calibration, analysis hash mismatch, hidden adverse/null
+exclusions, count/unit drift, authority or rights gaps, unauthorized release,
+and false availability/version claims block every dependent state object.
+
+Repairs preserve history and rerun downstream analyses/displays. Claim narrowing
+is valid for evidence-scope mismatch, but cannot create data, authority, rights,
+privacy protection, a receipt, or a real deposit. A passing data contract is not
+an accuracy, completeness, representativeness, privacy, reproducibility,
+scientific-truth, or acceptance certificate.
+
 ## Scientific Display State
 
 The persistent figure ledger now carries a scientific display decision contract
@@ -73,6 +98,7 @@ repaired, or the claim is appropriately narrowed.
 target + paper archetype
 -> evidence/source intake
 -> protocol + conduct + deviation resolution
+-> data integrity + stewardship + release resolution
 -> research calibration
 -> argument + claim/evidence architecture
 -> content/figure/statistics planning
