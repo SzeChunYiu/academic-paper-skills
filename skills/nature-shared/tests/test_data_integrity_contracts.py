@@ -52,6 +52,17 @@ class DataIntegrityContractTests(unittest.TestCase):
     def evaluate(self, contract: dict) -> dict:
         return self.resolver.evaluate_data_contract(contract, self.adapters)
 
+    def make_multi_input(self, contract: dict) -> dict:
+        external = json.loads(json.dumps(contract["snapshots"][0]))
+        external["snapshot_id"] = "snapshot:external"
+        external["role"] = "external_reference"
+        external["sha256"] = "f" * 64
+        contract["snapshots"].append(external)
+        contract["transformations"][1]["input_snapshot_ids"].append(
+            "snapshot:external"
+        )
+        return contract
+
     def test_required_contract_artifacts_exist(self) -> None:
         for path in (SCHEMA_PATH, ADAPTERS_PATH, REGISTRY_PATH, RESOLVER_PATH):
             self.assertTrue(path.exists(), path)
@@ -192,6 +203,37 @@ class DataIntegrityContractTests(unittest.TestCase):
         result = self.evaluate(contract)
         self.assertIn("transformation_execution_unverified", result["blocker_codes"])
 
+    def test_multi_input_transformation_requires_explicit_reconciliation(self) -> None:
+        contract = self.make_multi_input(fixture())
+        result = self.evaluate(contract)
+        self.assertIn(
+            "multi_input_transformation_reconciliation_missing",
+            result["blocker_codes"],
+        )
+
+    def test_multi_input_transformation_checks_every_input_for_semantic_drift(self) -> None:
+        contract = self.make_multi_input(fixture())
+        contract["snapshots"][-1]["fields"][2]["unit"] = "percentile"
+        contract["transformations"][1]["multi_input_reconciliation"] = {
+            "combination_rule": "keyed_join",
+            "expected_output_record_count": 100,
+            "receipt_id": "receipt:multi-input-reconciliation",
+            "field_conflict_policy_recorded": True,
+        }
+        result = self.evaluate(contract)
+        self.assertIn("semantic_schema_drift_unlogged", result["blocker_codes"])
+
+    def test_reconciled_multi_input_transformation_can_pass(self) -> None:
+        contract = self.make_multi_input(fixture())
+        contract["transformations"][1]["multi_input_reconciliation"] = {
+            "combination_rule": "keyed_join",
+            "expected_output_record_count": 100,
+            "receipt_id": "receipt:multi-input-reconciliation",
+            "field_conflict_policy_recorded": True,
+        }
+        result = self.evaluate(contract)
+        self.assertEqual("pass", result["status"])
+
     def test_analysis_input_hash_must_match_declared_snapshot(self) -> None:
         contract = fixture()
         contract["analysis_bindings"][0]["input_sha256"] = "d" * 64
@@ -283,7 +325,45 @@ class DataIntegrityContractTests(unittest.TestCase):
         contract["governance"]["direct_identifiers_present"] = True
         contract["governance"]["public_release_permitted"] = False
         result = self.evaluate(contract)
-        self.assertIn("unauthorized_sensitive_public_release", result["blocker_codes"])
+        self.assertIn("unauthorized_public_release", result["blocker_codes"])
+        self.assertIn(
+            "public_release_contains_direct_identifiers", result["blocker_codes"]
+        )
+
+    def test_governed_sensitive_release_is_not_blocked_by_classification_alone(self) -> None:
+        contract = fixture()
+        contract["data_context"]["sensitivity_tags"] = ["sensitive_human"]
+        contract["source_provenance"]["resolved_adapter_ids"] = [
+            "general-tabular-observational",
+            "human-clinical-sensitive",
+        ]
+        governance = contract["governance"]
+        governance["sensitivity_class"] = "restricted_human"
+        governance["direct_identifiers_present"] = False
+        governance["indirect_reidentification_risk"] = "low"
+        governance["consent_or_authority_requirement"] = "required"
+        governance["consent_or_authority_status"] = "verified"
+        governance["consent_or_authority_ids"] = ["authority:public-release"]
+        governance["public_release_permitted"] = True
+        contract["quality_controls"].append(
+            {
+                "qc_id": "qc:identifier-risk",
+                "target_snapshot_id": "snapshot:analysis",
+                "dimension": "identifier_risk_assessment",
+                "applicability": "required",
+                "status": "passed",
+                "criteria": "Declared release was reviewed for direct and indirect identifier risk.",
+                "receipt_id": "receipt:identifier-risk",
+                "checked_at": "2026-08-28T09:00:00Z",
+                "outcome": "No direct identifiers; governed release authorized.",
+            }
+        )
+        result = self.evaluate(contract)
+        self.assertEqual("pass", result["status"])
+        self.assertNotIn("unauthorized_public_release", result["blocker_codes"])
+        self.assertNotIn(
+            "public_release_contains_direct_identifiers", result["blocker_codes"]
+        )
 
     def test_missing_required_authority_is_not_repaired_by_claim_narrowing(self) -> None:
         contract = fixture()

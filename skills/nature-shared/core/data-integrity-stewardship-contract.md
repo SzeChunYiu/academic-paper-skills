@@ -82,6 +82,11 @@ semantic changes, operators/instruments/environments where material, rights,
 authority, sensitivity, access conditions, retention, licences, identifiers,
 and append-only deviations.
 
+A multi-input join, concatenation, or alignment additionally records the
+combination rule, expected output count, field-conflict policy, and a
+version-bound reconciliation receipt. Every input is checked for undeclared
+semantic, type, unit, and missing-code drift.
+
 The raw snapshot is an immutable observation boundary. When a competent remote
 database or physical authority cannot appropriately be copied locally, record an
 exact externally versioned origin instead: query, source version, retrieval time,
@@ -116,6 +121,8 @@ The evaluator fails closed on recorded contradictions including:
   lineage graph, or a cyclic/competing derivation history;
 - a declared transformation without an execution receipt;
 - an analysis hash that differs from its declared input snapshot;
+- a multi-input transformation without explicit count/join and field-conflict
+  reconciliation, or with an output count that contradicts its receipt;
 - record-count changes not reconciled to declared unit decisions;
 - hidden exclusions or adverse/null decisions;
 - semantic, schema, code, or unit drift not declared as a transformation;
@@ -126,7 +133,7 @@ The evaluator fails closed on recorded contradictions including:
 - realized missingness handling that differs from the plan without a deviation;
 - missing required consent, authority, collective governance, or third-party
   rights;
-- unauthorized public release of sensitive or restricted data;
+- public release without authorization or while direct identifiers remain;
 - a verified release claim without a resolvable identifier or locator;
 - a released hash that does not match the declared snapshot;
 - structural schema failure.

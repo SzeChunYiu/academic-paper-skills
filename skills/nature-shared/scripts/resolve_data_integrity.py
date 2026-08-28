@@ -455,12 +455,45 @@ def evaluate_data_contract(
                     f"Transformation {transformation_id} record counts do not reconcile with its input, output, and unit-level removal decisions.",
                     "Reconcile unit identities and counts, restore omitted records or decisions, and rerun affected outputs; never delete adverse, null, harmful, or inconvenient observations silently.",
                 )
+        else:
+            reconciliation = transformation.get("multi_input_reconciliation")
+            if not reconciliation or not reconciliation[
+                "field_conflict_policy_recorded"
+            ]:
+                block(
+                    "multi_input_transformation_reconciliation_missing",
+                    f"Multi-input transformation {transformation_id} lacks a version-bound count/join reconciliation and field-conflict policy.",
+                    "Record the combination rule, expected output count, field-conflict policy, and execution-bound reconciliation receipt, then rerun the join/concatenation/merge and every dependent object.",
+                )
+            else:
+                if output["record_count"] != reconciliation[
+                    "expected_output_record_count"
+                ]:
+                    block(
+                        "record_count_lineage_mismatch",
+                        f"Multi-input transformation {transformation_id} output count differs from its reconciled expected count.",
+                        "Reconcile key cardinality, duplicate handling, row addition/removal, and the exact output snapshot from a version-bound receipt, then rerun downstream work.",
+                    )
+                if reconciliation["combination_rule"] == "row_concatenation":
+                    concatenated_count = (
+                        sum(snapshot_by_id[item]["record_count"] for item in input_ids)
+                        - transformation["records_removed"]
+                        + transformation["records_added"]
+                    )
+                    if reconciliation["expected_output_record_count"] != concatenated_count:
+                        block(
+                            "record_count_lineage_mismatch",
+                            f"Row-concatenation transformation {transformation_id} does not reconcile input, removal, addition, and expected output counts.",
+                            "Reconcile every input unit and declared addition/removal, correct the version-bound receipt, and rerun the output and all descendants.",
+                        )
 
-            declared_changes = set(transformation["declared_semantic_changes"])
+        declared_changes = set(transformation["declared_semantic_changes"])
+        output_fields = {field["field_id"]: field for field in output["fields"]}
+        for input_id in input_ids:
+            input_snapshot = snapshot_by_id[input_id]
             input_fields = {
                 field["field_id"]: field for field in input_snapshot["fields"]
             }
-            output_fields = {field["field_id"]: field for field in output["fields"]}
             for field_id in input_fields.keys() & output_fields.keys():
                 changed = any(
                     input_fields[field_id][key] != output_fields[field_id][key]
@@ -646,16 +679,17 @@ def evaluate_data_contract(
 
     release = contract["release"]
     public_route = release["route"] in {"public_repository", "within_article"}
-    sensitive_class = governance["sensitivity_class"] not in {"non_sensitive"}
-    if public_route and (
-        not governance["public_release_permitted"]
-        or governance["direct_identifiers_present"]
-        or sensitive_class
-    ):
+    if public_route and not governance["public_release_permitted"]:
         block(
-            "unauthorized_sensitive_public_release",
-            "The contract routes sensitive or identifiable data to public release without a verified permission basis.",
+            "unauthorized_public_release",
+            "The contract routes data to public release without a verified permission basis.",
             "Stop public release and resolve consent, community authority, re-identification risk, law, and institutional policy; use a valid controlled-access, trusted-environment, safe-output, synthetic/representative, or metadata-only route where authorized.",
+        )
+    if public_route and governance["direct_identifiers_present"]:
+        block(
+            "public_release_contains_direct_identifiers",
+            "The contract routes data containing direct identifiers to public release.",
+            "Stop public release, resolve whether any disclosure is validly authorized, and use an evidence-backed de-identification and disclosure-risk review or a controlled/trusted route; a public-release flag does not itself remove identifiers.",
         )
 
     policy = governance["exact_policy_resolution"]

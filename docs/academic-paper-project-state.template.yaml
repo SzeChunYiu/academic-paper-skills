@@ -238,6 +238,7 @@ data_integrity_contract:
       execution_receipt_id: null
       parameters_recorded: false
       declared_semantic_changes: []
+      multi_input_reconciliation: null
       status: "not_run"  # not_run | executed_unverified | verified | failed
     - id: "data-transform:analysis-ready-001"
       input_snapshot_ids:
@@ -249,6 +250,7 @@ data_integrity_contract:
       execution_receipt_id: null
       parameters_recorded: false
       declared_semantic_changes: []
+      multi_input_reconciliation: null
       status: "not_run"
   quality_controls:
     - id: "data-qc:qc-001"

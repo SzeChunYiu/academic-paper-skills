@@ -308,7 +308,31 @@
         "actor_id": {"$ref": "#/$defs/id"},
         "records_removed": {"type": "integer", "minimum": 0},
         "records_added": {"type": "integer", "minimum": 0},
-        "declared_semantic_changes": {"$ref": "#/$defs/stringArray"}
+        "declared_semantic_changes": {"$ref": "#/$defs/stringArray"},
+        "multi_input_reconciliation": {
+          "anyOf": [
+            {"$ref": "#/$defs/multiInputReconciliation"},
+            {"type": "null"}
+          ]
+        }
+      }
+    },
+    "multiInputReconciliation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "combination_rule",
+        "expected_output_record_count",
+        "receipt_id",
+        "field_conflict_policy_recorded"
+      ],
+      "properties": {
+        "combination_rule": {
+          "enum": ["keyed_join", "row_concatenation", "aligned_merge", "other"]
+        },
+        "expected_output_record_count": {"type": "integer", "minimum": 0},
+        "receipt_id": {"$ref": "#/$defs/id"},
+        "field_conflict_policy_recorded": {"type": "boolean"}
       }
     },
     "dataDecision": {

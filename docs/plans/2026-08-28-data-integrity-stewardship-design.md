@@ -63,9 +63,9 @@ contradictions, including raw-snapshot mutation, broken lineage, analysis-input
 hash mismatch, undocumented transformations/corrections, unreconciled unit
 counts, hidden exclusions or adverse/null records, semantic/unit drift, required
 QC represented as passing without a receipt, required calibration not verified,
-unresolved uniqueness collisions, plan/realized missingness conflict, prohibited
-public release of sensitive data, absent third-party rights, and false release
-or version claims.
+unresolved uniqueness collisions, plan/realized missingness conflict,
+unauthorized or directly identifiable public release, absent third-party rights,
+and false release or version claims.
 
 Allowed repairs preserve history: restore an authoritative snapshot, quarantine
 invalid material, append a correction/deviation, rerun transformations and
