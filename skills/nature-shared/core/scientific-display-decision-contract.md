@@ -5,7 +5,7 @@
 > display is needed and before rendering or treating the display as support for
 > manuscript prose.
 
-Last reviewed: 2026-08-28.
+Last reviewed: 2026-08-29.
 
 ## Principle
 
@@ -16,6 +16,7 @@ order:
 reader question
 -> scientific object / estimand
 -> evidence and dependence structure
+-> text vs table vs figure vs mixed display
 -> candidate representations
 -> perceptual and inferential risks
 -> allowed and prohibited inferences
@@ -32,9 +33,13 @@ quality rule.
 
 ## Authority and boundaries
 
-This contract complements `figure-evidence-planning.md`:
+This contract complements `figure-evidence-planning.md` and
+`visual-evidence-atlas.md`:
 
 - figure planning decides whether a display is needed and its evidence role;
+- the visual evidence atlas decides whether the reader task is best served by
+  text, a table, a figure, or a mixed display and provides researched plot/table
+  families and failure modes;
 - this contract binds one display to the scientific object, representation,
   inference boundary, and immutable provenance chain;
 - `nature-figure` renders and visually inspects it;
@@ -51,6 +56,9 @@ acceptance.
 - Maintained adapters: `../display-contracts/maintained-adapters.json`
 - Evidence registry: `../display-contracts/display-evidence-registry.json`
 - Research synthesis: `../research/scientific-display-evidence-ledger-2026-08.md`
+- Practical visual atlas: `visual-evidence-atlas.md`
+- Targeted visual-evidence research tranche:
+  `../research/visual-evidence-atlas-research-2026-08-29.md`
 - Resolver/evaluator: `../scripts/resolve_scientific_display.py`
 
 The first evidence registry contains 39 reconciled sources: 20 read in full,
@@ -59,10 +67,67 @@ directly. Search queries, screening counts, inclusion/exclusion criteria,
 stopping rule, source-specific support, transfer limits, and update triggers are
 recorded rather than hidden behind a bibliography.
 
+The 2026-08-29 visual-evidence tranche adds targeted research on table-vs-figure
+selection, effect/forest/funnel displays, longitudinal data, prediction utility,
+heatmaps/clustering, compositional data, geospatial maps, and qualitative
+displays. These additions expand the human/agent decision atlas immediately;
+they become hard machine adapters only after source-registry reconciliation and
+behavioral fixtures.
+
 The maintained catalog is intentionally incomplete. If no adapter matches, the
 resolver returns an unresolved research requirement rather than forcing a
 generic plot. Domain-specific adapters may be added only with evidence,
 provenance, and behavioral fixtures.
+
+## Figure vs table vs text gate
+
+Before selecting a chart family, state what the reader must do.
+
+### Text
+
+Use when one or two values or observations are sufficient and a display adds no
+new pattern, structure, or decision value.
+
+### Table
+
+Use when exact lookup, many related estimates, denominators, units, reference
+levels, multiple outcomes, model variants, or precise cross-comparison is the
+primary task.
+
+A table must preserve exact values, units, denominators, missingness, and
+uncertainty where relevant. It should not be a rasterized spreadsheet.
+
+### Figure
+
+Use when shape, distribution, trajectory, association, uncertainty,
+heterogeneity, spatial structure, mechanism, flow, or another visual pattern is
+the scientific object.
+
+### Mixed display
+
+Use when a figure exposes the pattern but exact values or metadata must remain
+recoverable—for example a forest plot with aligned study/effect values, a
+representative image plus quantitative evidence, or a prediction curve plus a
+compact metric table.
+
+### Non-duplication rule
+
+Do not repeat the same evidence in text, table, and figure without a distinct
+reader function.
+
+Use:
+
+```text
+figure = pattern
+ table = exactness/detail
+  text = interpretation + the most important observations
+```
+
+Current ICMJE guidance supports this separation: tables/figures should be
+restricted to what is needed to explain the argument and assess the evidence,
+and the text should not repeat all displayed data.
+
+For the researched task-by-task rules, load `visual-evidence-atlas.md`.
 
 ## Required object model
 
@@ -113,14 +178,21 @@ python skills/nature-shared/scripts/resolve_scientific_display.py \
   path/to/display-contract.json --pretty
 ```
 
-The first maintained adapters cover paired change, distribution inspection,
-classification decisions, high-dimensional embeddings, workflow semantics, and
-exact-value lookup. They are starting points, not an exhaustive chart taxonomy.
+The maintained adapters cover paired change, distribution inspection,
+uncertainty, classification decisions, time-to-event data, high-dimensional
+embeddings, workflow/causal semantics, scientific color, image evidence,
+accessibility, and exact-value lookup. They are starting points, not an
+exhaustive chart taxonomy.
+
+When a scientifically relevant family exists in `visual-evidence-atlas.md` but
+not in the machine adapter catalog, record the manual representation rationale
+and research basis rather than pretending the resolver certified it.
 
 ## Perceptual and statistical checks
 
 Before rendering, resolve:
 
+- whether text, table, figure, or mixed display best fits the reader task;
 - position/length/area/color channel suitability for the reader task;
 - axis type, domain, truncation, zero baseline relevance, and transformations;
 - binning, smoothing, interpolation, normalization, aggregation, ordering, and
@@ -133,6 +205,7 @@ Before rendering, resolve:
 - whether adverse, null, harmful, failure-boundary, or contradictory evidence is
   visible or traceably allocated elsewhere;
 - whether a table better serves exact lookup than a plot;
+- whether a figure needs a table/source-data companion for exact primary results;
 - whether the main/support placement matches claim importance rather than visual
   attractiveness.
 
@@ -141,6 +214,8 @@ Before rendering, resolve:
 - A visual association does not establish causation.
 - An embedding alone does not establish quantitative separation, discrete
   natural clusters, mechanism, or causality.
+- A clustered heatmap/dendrogram alone does not establish stable or natural
+  clusters; normalization, distance, linkage, ordering, and stability matter.
 - A workflow diagram records operations/sequence; it is not a causal DAG or
   mechanism model.
 - A mechanism diagram must distinguish observed, inferred, assumed, and
@@ -151,6 +226,11 @@ Before rendering, resolve:
   automatically establish mechanism.
 - AUC alone does not establish calibration, threshold utility, or deployment
   value.
+- Funnel-plot asymmetry alone does not establish publication bias.
+- A relative/compositional change does not establish an absolute abundance
+  change.
+- A raw-count choropleth does not establish geographic risk when denominators
+  differ.
 - `P > 0.05` does not establish equivalence or absence of effect.
 
 ## Diagram semantic types
@@ -171,21 +251,23 @@ Declare one primary semantic type before choosing the drawing backend:
 
 ### Planning
 
-The reader question, scientific object, claim link, candidate family, and
-unresolved evidence needs may remain provisional. Unknowns must be explicit.
+The reader question, scientific object, claim link, display-medium choice,
+candidate family, and unresolved evidence needs may remain provisional. Unknowns
+must be explicit.
 
 ### Draft/review
 
 Data/analysis/render lineage, denominator, unit, uncertainty, transformations,
-group coverage, and inference boundaries must be checkable. Review should attack
-the contract, not merely aesthetics.
+group coverage, exact-value companion needs, and inference boundaries must be
+checkable. Review should attack the contract, not merely aesthetics.
 
 ### Final/production
 
 No display-contract blocker may remain. Alt text is required; color cannot be
 the only information channel; captions and source data must match the bound
-snapshot; every display must be inspected at final physical size and in the
-assembled manuscript.
+snapshot; exact primary values must remain recoverable when required by the
+scientific/reporting contract; every display must be inspected at final physical
+size and in the assembled manuscript.
 
 ### Post-publication
 
@@ -196,13 +278,17 @@ version and relation to the old object; it does not erase the prior state.
 
 | Failure | Minimum valid repair |
 |---|---|
+| wrong display medium for reader task | move to text/table/figure/mixed representation that exposes the needed pattern or exactness |
 | hidden paired/repeated structure | expose within-unit structure or narrow/change the estimand |
 | denominator/unit drift | reconcile against source data and version affected claims/captions |
 | snapshot/receipt mismatch | re-run or re-render from the declared immutable upstream object |
 | undefined uncertainty | name kind, level/method, and inferential unit, or remove unsupported bars |
 | undisclosed transformation/scale | disclose and justify it or re-render without it |
 | omitted adverse/null/group evidence | restore it or provide a traceable, justified companion placement |
-| embedding/workflow overclaim | add independent evidence or narrow the claim to what the representation supports |
+| embedding/workflow/heatmap overclaim | add independent evidence or narrow the claim to what the representation supports |
+| classifier metric overclaim | add calibration/threshold/utility evidence required by the claim or narrow the claim |
+| compositional absolute-change overclaim | add absolute evidence or restate the claim as relative/compositional |
+| map denominator/uncertainty omission | restore denominator/rate/uncertainty semantics or change the spatial display |
 | color-only or missing alternative text | add redundant encoding and semantic text, then visually re-check |
 
 Repairs must never invent data, analyses, sample sizes, groups, uncertainty, or
@@ -213,12 +299,16 @@ mechanisms merely to make the contract pass.
 A display is closed only when:
 
 1. the schema-valid contract is bound to current artifacts;
-2. the resolver has either matched an evidence-informed adapter or recorded a
-   completed domain-specific representation rationale;
-3. all semantic/provenance/accessibility blockers are closed;
-4. visual inspection at final size is complete;
-5. the manuscript claim stays within the declared inference boundary;
-6. exact venue packaging is independently resolved for the current stage.
+2. the text/table/figure/mixed choice is justified by the reader task;
+3. the resolver has either matched an evidence-informed adapter or recorded a
+   completed domain-specific representation rationale using the visual atlas and
+   specialist research;
+4. all semantic/provenance/accessibility blockers are closed;
+5. exact-value/table/source-data companions required by the scientific or
+   reporting contract exist;
+6. visual inspection at final size is complete;
+7. the manuscript claim stays within the declared inference boundary;
+8. exact venue packaging is independently resolved for the current stage.
 
 ## Research basis
 
@@ -230,9 +320,17 @@ A display is closed only when:
   <https://doi.org/10.1371/journal.pcbi.1003833>
 - Nature Methods, *Points of View, anew*:
   <https://www.nature.com/articles/s41592-026-03143-5>
+- ICMJE current manuscript-preparation recommendations:
+  <https://www.icmje.org/recommendations/browse/manuscript-preparation/preparing-for-submission.html>
+- JAMA Network Open current Tables and Figures instructions:
+  <https://jamanetwork.com/journals/jamanetworkopen/pages/instructions-for-authors>
+- Cochrane Handbook, forest/funnel and synthesis display guidance:
+  <https://training.cochrane.org/handbook/current/chapter-iii>
+  <https://training.cochrane.org/handbook/current/chapter-13>
 - W3C WCAG 2.2, use of color:
   <https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html>
 
 These sources support maintained starting points. Plot-specific statistical and
 domain decisions still require the actual study design, evidence, reporting
-standard, and current specialist guidance.
+standard, and current specialist guidance. Load `visual-evidence-atlas.md` and
+its dated research ledger for the expanded task-by-task visual rules.
