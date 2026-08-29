@@ -2,14 +2,15 @@
 name: academic-paper-pipeline
 description: >-
   Orchestrate an academic manuscript through repeated research, evidence/claim
-  planning, academic writing, statistics, figure/diagram design, independent
-  reviewer simulation, editor synthesis, revision, and targeted re-review until
-  a simulated editor judges it publication-ready for the resolved target or a
-  real blocker remains. Use for end-to-end paper workflows, repeated review and
-  revision, publishability hardening, reviewer-driven iteration, or self-research
+  planning, academic writing, statistics, figure/diagram design, journal
+  acceptance-readiness, independent reviewer simulation, editor synthesis,
+  revision, and targeted re-review until a simulated editor judges it
+  publication-ready for the resolved target or a real blocker remains. Use for
+  end-to-end paper workflows, repeated review and revision, publishability
+  hardening, reviewer-driven iteration, target/editorial triage, or self-research
   when a paper type or venue is not already covered. The pipeline is journal-
   agnostic; Nature is only one optional target adapter. It never fabricates
-  results or treats reviewer votes as acceptance.
+  results, predicts acceptance probability, or treats reviewer votes as acceptance.
 ---
 
 # Academic Paper Pipeline
@@ -27,6 +28,7 @@ The core lifecycle is defined by:
 - `../nature-shared/core/academic-paper-iteration-pipeline.md`;
 - `../nature-shared/core/atomic-claim-verification.md`;
 - `../nature-shared/core/editor-reviewer-decision-engine.md`;
+- `../nature-shared/core/journal-acceptance-readiness.md`;
 - `../nature-shared/core/paper-archetype-atlas.md`;
 - `../nature-shared/core/unknown-paper-research-protocol.md`;
 - `../nature-shared/core/sentence-logic-and-cohesion.md`;
@@ -40,6 +42,7 @@ Use the installed specialist capabilities as roles in one pipeline:
 - **academic writing** — canonical `$academic-writing` capability (legacy repository directory: `skills/nature-writing`);
 - **statistics/analysis** — statistical design, analysis and reporting capability;
 - **figures/diagrams** — scientific figure capability, including data plots and diagram-specific backends;
+- **acceptance readiness** — exact target, editorial triage, expertise routing, reviewer coverage and retargeting;
 - **review** — independent editor/reviewer simulation;
 - **revision response** — editor/reviewer concern closure and response-package logic.
 
@@ -59,6 +62,8 @@ secondary archetypes
 intended reader
 available manuscript/data/figures/sources
 real-world constraints on new experiments/analysis
+editor/team routing relevance
+submission-system editor/reviewer suggestion or exclusion rules
 ```
 
 If a target/archetype is unclear but the current task can proceed safely, build a generic rigorous profile and research the uncertainty instead of repeatedly asking the user.
@@ -69,112 +74,86 @@ When a target-specific readiness or revision decision matters, resolve:
 
 `exact venue × article type × stage × effective date`
 
-Load `../nature-shared/journal-formats/venue-decision-contract.md`. There is no universal acceptance objective. Keep scientific assurance, target-objective
-fit, real journal decision state, and any certification layer as separate state
-objects.
+Load `../nature-shared/journal-formats/venue-decision-contract.md`. There is no universal acceptance objective. Keep scientific assurance, target-objective fit, real journal decision state, and any certification layer as separate state objects.
 
-The resolution order is live official-source contract, active maintained exact
-snapshot, then an explicitly non-exact fallback. A fallback never becomes the
-journal's policy. Future-effective rules do not apply early, and an observed
-snapshot cannot be back-cast before its observation date.
+The resolution order is live official-source contract, active maintained exact snapshot, then an explicitly non-exact fallback. A fallback never becomes the journal's policy. Future-effective rules do not apply early, and an observed snapshot cannot be back-cast before its observation date.
 
-The contract must expose scientific gates; novelty/impact/breadth/audience
-interest gates; burden-of-doubt rules; allowed repair routes; review model;
-AI/confidentiality policy; acceptance states; certification layer; and source
-plus effective-date provenance. Journal certification is separate from acceptance:
-neither a journal annotation nor a resolver/source certification predicts the
-real editorial outcome.
+The contract must expose scientific gates; novelty/impact/breadth/audience interest gates; burden-of-doubt rules; allowed repair routes; review model; AI/confidentiality policy; acceptance states; certification layer; and source plus effective-date provenance. Journal certification is separate from acceptance: neither a journal annotation nor a resolver/source certification predicts the real editorial outcome.
+
+## Journal acceptance-readiness and editor routing
+
+Always apply `../nature-shared/core/journal-acceptance-readiness.md` when the user is preparing a target submission or asking how to improve publication prospects.
+
+Model acceptance as separate gates:
+
+```text
+science/integrity
+-> target scope/article type
+-> editorial triage
+-> editor/expertise routing
+-> reviewer coverage
+-> evidence maturity
+-> editor synthesis
+-> revision closure
+-> final compliance
+```
+
+Do not output a numeric acceptance probability.
+
+Run several independent non-biographical editorial lenses before submission: scope/article type, contribution/positioning, evidence maturity, readership/objective, and routing clarity. Freeze each assessment before synthesis; do not count votes. A plausible desk-rejection argument remains a risk item until its underlying reason is repaired or shown not to apply.
+
+When public editor identities, teams or sections matter, load `../nature-shared/core/editor-expertise-routing.md`. Use official professional information only for subject/expertise coverage, conflict checks, section routing, or an editor suggestion explicitly permitted by the exact submission workflow. Never infer leniency, personality, ideology, citation preferences or acceptance propensity, and never simulate a real named editor's psychology.
+
+Maintain uncontrollable editorial context separately from manuscript state: simultaneous overlapping work, portfolio competition, reviewer availability, legitimate editor disagreement and confidential information may affect a real decision without creating a valid manuscript repair.
 
 ## Self-research rule
 
-If the current paper type, writing convention, reporting standard, figure grammar, or target criterion is materially uncertain, **research before guessing**.
+If the current paper type, writing convention, reporting standard, figure grammar, target criterion, or editorial routing rule is materially uncertain, **research before guessing**.
 
 Use the unknown-paper protocol to inspect:
 
 1. current official target guidance;
 2. relevant reporting/methodological standards;
-3. roughly 8–15 comparable recent papers for a quick profile when useful;
-4. 3–6 nearest-neighbor papers for deep reasoning;
-5. counterexamples to any apparent convention.
+3. official editor/team/section and submission-routing information when useful;
+4. roughly 8–15 comparable recent papers for a quick profile when useful;
+5. 3–6 nearest-neighbor papers for deep reasoning;
+6. counterexamples to any apparent convention.
 
-Create a temporary manuscript-specific archetype profile.
+Create a temporary manuscript-specific archetype/profile.
 
 Do not copy wording or layouts.
 
 ## Study protocol and conduct contract
 
-Before manuscript-state claims are treated as scientific evidence, materialize
-the shared **study protocol/conduct decision contract** from
-`../nature-shared/core/study-protocol-conduct-contract.md`.
+Before manuscript-state claims are treated as scientific evidence, materialize the shared **study protocol/conduct decision contract** from `../nature-shared/core/study-protocol-conduct-contract.md`.
 
 Resolve the study archetype and applicable obligations, then bind:
 
 `protocol version -> analysis-plan version -> conduct receipt -> deviation ledger -> analysis/result -> claim`.
 
-Keep planned, executed, verified, unknown, not done, and not applicable distinct.
-A protocol/conduct blocker is a manuscript-state blocker when it affects an
-in-scope claim. Valid repairs preserve history: reconcile authoritative records,
-append a dated deviation, rerun from a valid snapshot/split, add a versioned
-sensitivity analysis, reclassify exploratory/post-hoc work, narrow the claim, or
-request a new prospective study. Never backdate, overwrite adverse/null evidence,
-or infer ethics/randomization/blinding execution from prose.
+Keep planned, executed, verified, unknown, not done, and not applicable distinct. A protocol/conduct blocker is a manuscript-state blocker when it affects an in-scope claim. Valid repairs preserve history: reconcile authoritative records, append a dated deviation, rerun from a valid snapshot/split, add a versioned sensitivity analysis, reclassify exploratory/post-hoc work, narrow the claim, or request a new prospective study. Never backdate, overwrite adverse/null evidence, or infer ethics/randomization/blinding execution from prose.
 
-Schema/registration/reporting completion, protocol/conduct traceability,
-scientific validity, and journal acceptance remain separate state layers.
+Schema/registration/reporting completion, protocol/conduct traceability, scientific validity, and journal acceptance remain separate state layers.
 
 ## Data integrity and stewardship contract
 
-After protocol/conduct resolution and before analysis, display, claim,
-availability, or readiness work, materialize
-`../nature-shared/core/data-integrity-stewardship-contract.md`.
+After protocol/conduct resolution and before analysis, display, claim, availability, or readiness work, materialize `../nature-shared/core/data-integrity-stewardship-contract.md`.
 
-Bind `source/acquisition record -> immutable raw or exact external-reference
-origin -> validation/QC receipts -> versioned transformations -> immutable
-analysis-ready snapshot -> analysis/display inputs -> governed release ->
-bounded claim`. Resolve maintained
-modality/governance adapters without treating them as universal or exact local
-policy. Preserve unmatched domains and exact institutional, legal, funder,
-repository, licence, consent, and community obligations as live official-source
-research requirements.
+Bind `source/acquisition record -> immutable raw or exact external-reference origin -> validation/QC receipts -> versioned transformations -> immutable analysis-ready snapshot -> analysis/display inputs -> governed release -> bounded claim`. Resolve maintained modality/governance adapters without treating them as universal or exact local policy. Preserve unmatched domains and exact institutional, legal, funder, repository, licence, consent, and community obligations as live official-source research requirements.
 
-A mutable raw snapshot, broken lineage, unreceipted transformation/QC/calibration,
-analysis hash mismatch, hidden adverse/null exclusion, count or unit drift,
-undisclosed missingness change, absent authority/rights, unauthorized release,
-or false repository/version statement blocks every dependent state object.
-Repairs must preserve history and rerun downstream work where necessary. Claim
-narrowing can repair an evidence-scope mismatch, but cannot create consent,
-rights, privacy, observations, calibration, execution, or release evidence.
-Passing does not certify accuracy, completeness, representativeness, privacy,
-legal compliance, reproducibility, scientific truth, or acceptance.
+A mutable raw snapshot, broken lineage, unreceipted transformation/QC/calibration, analysis hash mismatch, hidden adverse/null exclusion, count or unit drift, undisclosed missingness change, absent authority/rights, unauthorized release, or false repository/version statement blocks every dependent state object. Repairs must preserve history and rerun downstream work where necessary. Claim narrowing can repair an evidence-scope mismatch, but cannot create consent, rights, privacy, observations, calibration, execution, or release evidence. Passing does not certify accuracy, completeness, representativeness, privacy, legal compliance, reproducibility, scientific truth, or acceptance.
 
 ## Statistical inference and uncertainty contract
 
-After the analysis-ready data snapshot is fixed and before quantitative
-Results, displays, captions, claims, review, or readiness work, materialize
-`../nature-shared/core/statistical-inference-uncertainty-contract.md`.
+After the analysis-ready data snapshot is fixed and before quantitative Results, displays, captions, claims, review, or readiness work, materialize `../nature-shared/core/statistical-inference-uncertainty-contract.md`.
 
-Bind `question/claim -> estimand -> independent unit/dependence -> analysis
-population -> missingness/multiplicity/decision plan -> immutable input ->
-executed analysis + diagnostics/sensitivity -> estimate + typed uncertainty ->
-table/display/caption/prose bindings -> bounded claim`.
+Bind `question/claim -> estimand -> independent unit/dependence -> analysis population -> missingness/multiplicity/decision plan -> immutable input -> executed analysis + diagnostics/sensitivity -> estimate + typed uncertainty -> table/display/caption/prose bindings -> bounded claim`.
 
-Resolve composable maintained adapters plus live exact-domain/regulator/venue
-policy. Never force a universal best test, model, interval, prior, threshold, or
-frequentist template. Preserve Bayesian, descriptive, exploratory,
-non-quantitative, adverse, harmful, null, failed, and deviating routes.
+Resolve composable maintained adapters plus live exact-domain/regulator/venue policy. Never force a universal best test, model, interval, prior, threshold, or frequentist template. Preserve Bayesian, descriptive, exploratory, non-quantitative, adverse, harmful, null, failed, and deviating routes.
 
-Block recorded pseudoreplication, unhandled dependence, plan/execution drift,
-missing-data drift, unresolved confirmatory multiplicity, post-result observed
-power as evidence, nonconvergence, unreceipted diagnostics, invalid
-significance/absence/equivalence shortcuts, stale or semantically changed
-surface bindings, omitted planned results, and claims that outrun available
-calibration, prediction, or same-estimand sensitivity evidence. Claim narrowing
-can repair overreach but cannot create execution, independent observations,
-convergence, prespecification, a margin, missing-data work, or policy authority.
+Block recorded pseudoreplication, unhandled dependence, plan/execution drift, missing-data drift, unresolved confirmatory multiplicity, post-result observed power as evidence, nonconvergence, unreceipted diagnostics, invalid significance/absence/equivalence shortcuts, stale or semantically changed surface bindings, omitted planned results, and claims that outrun available calibration, prediction, or same-estimand sensitivity evidence. Claim narrowing can repair overreach but cannot create execution, independent observations, convergence, prespecification, a margin, missing-data work, or policy authority.
 
-Passing certifies only recorded bounded invariants—not model adequacy,
-assumption truth, causal identification, absence of bias, adequate precision,
-external validity, scientific truth, or acceptance.
+Passing certifies only recorded bounded invariants—not model adequacy, assumption truth, causal identification, absence of bias, adequate precision, external validity, scientific truth, or acceptance.
 
 ## Iterative loop
 
@@ -195,32 +174,15 @@ Never invent new study results.
 
 ### 2. Materialize protocol and conduct state
 
-For each in-scope study, resolve the maintained adapter or an explicit unresolved
-domain research requirement. Evaluate protocol/SAP timing, registration
-applicability, executed assignment/blinding/fidelity, outcomes, stopping,
-exclusions/attrition, harms, raw-data/analysis lineage, deviations, and
-ethics/governance before licensing confirmatory or causal claim status.
+For each in-scope study, resolve the maintained adapter or an explicit unresolved domain research requirement. Evaluate protocol/SAP timing, registration applicability, executed assignment/blinding/fidelity, outcomes, stopping, exclusions/attrition, harms, raw-data/analysis lineage, deviations, and ethics/governance before licensing confirmatory or causal claim status.
 
 ### 3. Resolve the data lifecycle
 
-For each in-scope data object, resolve applicable adapters and exact policies,
-then evaluate source/acquisition identity, raw/validated/analysis-ready snapshots,
-hashes and counts, QC/calibration, transformations, decisions and deviations,
-missingness, analysis/display bindings, authority/rights, sensitivity, access,
-retention, and release. Keep blockers, unresolved items, and certification
-exclusions explicit; never substitute an availability sentence for a verified
-release object.
+For each in-scope data object, resolve applicable adapters and exact policies, then evaluate source/acquisition identity, raw/validated/analysis-ready snapshots, hashes and counts, QC/calibration, transformations, decisions and deviations, missingness, analysis/display bindings, authority/rights, sensitivity, access, retention, and release. Keep blockers, unresolved items, and certification exclusions explicit; never substitute an availability sentence for a verified release object.
 
 ### 4. Resolve statistical inference and uncertainty
 
-For each in-scope quantitative result, resolve the analysis context and
-applicable adapters, then evaluate estimand/population bindings, independent
-unit and dependence, plan/input/execution identity, missingness, multiplicity,
-sample-size rationale, diagnostics, convergence, typed uncertainty,
-sensitivity, deviations, adverse/null/failed-result visibility, and every
-table/display/caption/prose numeric binding. Resolve consequential exact
-analysis policies as of the state date; preserve unmatched, future-effective,
-historical-not-backcastable, or conflicting rules as unresolved research.
+For each in-scope quantitative result, resolve the analysis context and applicable adapters, then evaluate estimand/population bindings, independent unit and dependence, plan/input/execution identity, missingness, multiplicity, sample-size rationale, diagnostics, convergence, typed uncertainty, sensitivity, deviations, adverse/null/failed-result visibility, and every table/display/caption/prose numeric binding. Resolve consequential exact analysis policies as of the state date; preserve unmatched, future-effective, historical-not-backcastable, or conflicting rules as unresolved research.
 
 ### 5. Research and positioning
 
@@ -231,19 +193,14 @@ Research enough to establish:
 - methodological/reporting norms;
 - nearest paper archetype;
 - local evidence/figure expectations;
-- target criteria when known.
+- target criteria when known;
+- editor/team expertise coverage and submission-routing rules when relevant.
 
-Resolve the exact venue decision contract from current official sources or an
-active maintained snapshot. If only a fallback is available, keep target-policy
-status unresolved while useful science and drafting work continues.
+Resolve the exact venue decision contract from current official sources or an active maintained snapshot. If only a fallback is available, keep target-policy status unresolved while useful science and drafting work continues.
 
 ### 6. Build manuscript state
 
-Maintain one row per atomic content item in the atomic-claim ledger, together
-with evidence, figure, source and concern ledgers. Split every
-scientific assertion while preserving scope, qualifiers, negation, comparators,
-quantifiers, and conditions. Verify whether the located warrant actually entails
-the assertion.
+Maintain one row per atomic content item in the atomic-claim ledger, together with evidence, figure, source and concern ledgers. Split every scientific assertion while preserving scope, qualifiers, negation, comparators, quantifiers, and conditions. Verify whether the located warrant actually entails the assertion.
 
 Build:
 
@@ -264,17 +221,9 @@ reader question
 -> main/support/omit
 ```
 
-Then materialize the shared scientific display decision contract for every
-evidence-bearing figure, plot, table, image plate, diagram, or mixed display.
-Record the reader task, estimand, statistical unit, candidate representation,
-allowed/prohibited inferences, data snapshot, analysis receipt, render receipt,
-source-data object, caption denominator, uncertainty meaning, transformations,
-group coverage, accessibility, and placement. There is no universal best chart.
+Then materialize the shared scientific display decision contract for every evidence-bearing figure, plot, table, image plate, diagram, or mixed display. Record the reader task, estimand, statistical unit, candidate representation, allowed/prohibited inferences, data snapshot, analysis receipt, render receipt, source-data object, caption denominator, uncertainty meaning, transformations, group coverage, accessibility, and placement. There is no universal best chart.
 
-A display-contract blocker is a manuscript-state blocker when the display is
-required for a headline claim. Repair it by reconciling/re-rendering from real
-evidence, changing representation, adding a traceable companion display, or
-narrowing the claim—not by inventing evidence.
+A display-contract blocker is a manuscript-state blocker when the display is required for a headline claim. Repair it by reconciling/re-rendering from real evidence, changing representation, adding a traceable companion display, or narrowing the claim—not by inventing evidence.
 
 Use scientific diagram backends for workflows/mechanisms/flowcharts rather than forcing everything through a plotting grammar.
 
@@ -300,8 +249,7 @@ Before simulated review, check:
 
 - claim/evidence consistency;
 - protocol/conduct/deviation/claim-status consistency;
-- statistical-inference contract status, typed uncertainty, and current
-  result-to-surface bindings;
+- statistical-inference contract status, typed uncertainty, and current result-to-surface bindings;
 - complete atomic-claim coverage and definition/proof/source entailment;
 - statistics/reporting;
 - figure adequacy;
@@ -311,11 +259,12 @@ Before simulated review, check:
 - main/support allocation;
 - artifact leakage;
 - punctuation/typography;
-- exact target compliance.
+- exact target compliance;
+- journal acceptance-readiness across scope, triage, routing and reviewer coverage.
 
 ### 10. Editorial triage
 
-The simulated editor decides whether the manuscript should proceed to review or whether a target/science/readiness blocker should be repaired first.
+Run the multi-editor preflight from the acceptance-readiness contract. The simulated editor synthesis decides whether the manuscript should proceed to review or whether a target/science/readiness blocker should be repaired first. Do not simulate the psychology of a named real editor.
 
 ### 11. Independent review
 
@@ -357,6 +306,7 @@ Do every valid repair possible with available material/tools:
 - correct reporting/punctuation;
 - relocate project artifacts;
 - narrow/remove unsupported claims;
+- repair title/abstract/keywords/routing clarity;
 - recommend retargeting when fit is the issue.
 
 If a real new experiment/data collection is required, mark it blocked and state the minimum resolution test. Do not fabricate it.
@@ -401,16 +351,13 @@ Use it only when:
 
 - no integrity/compliance blocker;
 - no unresolved publication-criteria blocker;
-- the exact target tuple/date is resolved by a supported contract, not a
-  fallback presented as policy;
+- the exact target tuple/date is resolved by a supported contract, not a fallback presented as policy;
+- journal acceptance-readiness has no known repairable blocker across scope, contribution/readership, evidence maturity, editorial routing, reviewer coverage, editor synthesis, revision closure, or compliance;
+- public editor information, if used, is bounded to professional routing and exact submission permissions rather than preference targeting;
 - no unresolved technical blocker to a headline claim;
-- every required statistical-inference contract passes bounded checks, exact
-  required analysis policy is resolved for the as-of date, and all reported
-  numbers/interval semantics bind to current analysis receipts;
+- every required statistical-inference contract passes bounded checks, exact required analysis policy is resolved for the as-of date, and all reported numbers/interval semantics bind to current analysis receipts;
 - headline claims are established or appropriately narrowed;
-- every in-scope atomic assertion has an allowed release status and zero
-  `SUPPORTED_INTERNAL`, `UNRESOLVED`, `CONTRADICTED`, `BLOCKED`, or in-scope
-  `NOT_ASSESSABLE` manuscript assertions remain;
+- every in-scope atomic assertion has an allowed release status and zero `SUPPORTED_INTERNAL`, `UNRESOLVED`, `CONTRADICTED`, `BLOCKED`, or in-scope `NOT_ASSESSABLE` manuscript assertions remain;
 - central alternatives/boundaries are visible;
 - methods/statistics/reporting are adequate;
 - figures/diagrams expose the needed evidence;
@@ -420,16 +367,13 @@ Use it only when:
 - author voice is natural rather than generic/AI-like;
 - citations/prior work are fair and sufficiently verified;
 - main/support allocation is appropriate;
-- every standalone surface is locally intelligible, every display in the abstract
-  has a target-resolved disposition, and no unexplained private term/symbol or
-  unresolved surface-review item remains;
+- every standalone surface is locally intelligible, every display in the abstract has a target-resolved disposition, and no unexplained private term/symbol or unresolved surface-review item remains;
 - no release placeholder remains in manuscript-facing text;
-- rendered artifacts, when present, pass every-page layout, metadata,
-  accessibility, and final-page/spill review;
+- rendered artifacts, when present, pass every-page layout, metadata, accessibility, and final-page/spill review;
 - manuscript surfaces are free of project leakage and punctuation defects;
 - remaining requests are optional enrichment or production copyedit.
 
-This is a **simulation of readiness**, not a promise of real acceptance.
+This is a **simulation of readiness**, not a promise of real acceptance. Uncontrollable editorial context remains outside the certification.
 
 ## Blocked states
 
@@ -438,7 +382,8 @@ Return one of these instead of pretending readiness:
 - `blocked_on_author_evidence`;
 - `scientifically_sound_but_target_mismatch`;
 - `current_claims_not_established`;
-- `blocked_by_integrity_or_compliance`.
+- `blocked_by_integrity_or_compliance`;
+- `decision_ready_but_editorial_outcome_uncertain` when no repairable blocker remains but the real outcome is inherently unknowable.
 
 For every block, specify the cheapest valid path forward.
 
@@ -453,6 +398,7 @@ Must-address concerns open
 Closed this round
 Research/analysis/figures/writing added
 Claims narrowed/removed
+Acceptance-readiness/routing state
 Surface QA
 Next revision action
 ```
@@ -465,7 +411,8 @@ Never:
 
 - count reviewer votes as an editorial decision;
 - fabricate data/experiments;
-- manipulate reviewer selection/citations;
+- manipulate editor/reviewer selection or citations;
+- profile named editors for personality, ideology, leniency or acceptance propensity;
 - hide negative evidence;
 - add cosmetic experiments;
 - optimize an acceptance probability score;
