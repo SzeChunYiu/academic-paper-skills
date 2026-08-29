@@ -48,7 +48,7 @@ For full target-specific submission optimization, load `journal-acceptance-readi
 - clarifying editor/reviewer expertise needed for fair routing;
 - closing decision-relevant concerns during revision.
 
-It does **not** mean gaming reviewers, exaggerating novelty, hiding limitations, strategically omitting competitors, flattering likely editors/reviewers with citations, suggesting friendly reviewers to obtain favorable recommendations, profiling editor personality/leniency, or adding cosmetic experiments that do not discriminate between interpretations.
+It does **not** mean gaming reviewers, exaggerating novelty, hiding limitations, strategically omitting competitors, flattering likely editors/reviewers with citations, suggesting reviewers because they are expected to be favorable, suggesting editors because they are expected to be favorable, profiling editor personality/leniency, or adding cosmetic experiments that do not discriminate between interpretations.
 
 Optimize decisionability and scientific credibility, not persuasion independent of evidence.
 
@@ -291,7 +291,8 @@ Never optimize acceptance by:
 - omitting adverse or contradictory evidence;
 - hiding a close competitor or misdescribing prior work;
 - citing a potential editor/reviewer merely to influence them;
-- suggesting editors/reviewers because they are expected to be favorable;
+- suggesting reviewers because they are expected to be favorable;
+- suggesting editors because they are expected to be favorable;
 - exploiting author-suggested-reviewer effects;
 - profiling editor personality, ideology, leniency, or presumed decision tendency;
 - adding irrelevant citations requested for reviewer self-interest;
