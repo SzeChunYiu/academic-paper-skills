@@ -1,5 +1,5 @@
 name: nature-shared
-version: 2.8.0
+version: 2.9.0
 description: >
   Declarative manifest for shared academic-paper reference modules. This package
   is not a standalone workflow; installed skills load exact shared core,
@@ -63,6 +63,10 @@ core:
       path: core/main-text-discipline.md
     - condition: optimizing a scientifically honest paper for a specific journal's real decision process across target fit, editorial triage, expertise routing, reviewer coverage, evidence maturity, editor synthesis, revision closure, cover letter, or retargeting without predicting acceptance
       path: core/journal-acceptance-readiness.md
+    - condition: maximizing legitimate publication opportunity across research-question design, publication route, evidence maturation, target selection, desk rejection, submission packaging, review, revision, rejection triage and retargeting using evidence-graded levers rather than acceptance folklore or individual targeting
+      path: core/acceptance-optimization-protocol.md
+    - condition: studying public Nature Communications/PLOS/eLife/TMLR/OpenReview review histories to learn concern-to-repair patterns, revision deltas, claim narrowing, evidence additions, figure/table changes or editor/reviewer closure while explicitly controlling survivorship bias and never inferring causal acceptance effects
+      path: core/public-review-history-calibration.md
     - condition: using public editor identities, teams, sections, subject coverage, or professional expertise to check journal routing, permitted editor suggestions, reviewer expertise coverage, or conflicts without profiling individual preferences or acceptance propensity
       path: core/editor-expertise-routing.md
     - condition: pre-submission editor/reviewer simulation, rejection-risk engineering, decision-proof construction, major-revision planning, or deciding whether to add evidence versus narrow/remove a claim
@@ -78,6 +82,8 @@ research:
       path: research/visual-evidence-atlas-research-2026-08-29.md
     - condition: current editorial criteria, desk-triage behavior, editor expertise routing, cover-letter boundaries, reviewer disagreement, novelty/acceptance evidence, or anti-gaming limits behind journal acceptance-readiness guidance must be inspected
       path: research/journal-acceptance-editorial-decision-research-2026-08-29.md
+    - condition: evidence grade, causal boundary, rejection-report basis, Registered Report route, revision evidence, public review-history limitation, statistical-review evidence, novelty/conventionality result, or target-selection rationale behind acceptance optimization must be inspected
+      path: research/acceptance-optimization-evidence-ledger-2026-08-29.md
     - condition: the empirical, methodological, or reporting-standard basis behind a study protocol/conduct adapter, automatic blocker, repair route, or non-universal transfer boundary must be inspected
       path: research/study-protocol-conduct-evidence-ledger-2026-08.md
     - condition: the empirical, standard, governance, or policy basis behind a data integrity/stewardship adapter, automatic blocker, repair boundary, exact-domain obligation, or release route must be inspected
@@ -117,6 +123,9 @@ quality_tools:
   editorial_routing_script: scripts/validate_editorial_routing_profile.py
   editorial_routing_schema: editorial-contracts/editorial-routing-profile.schema.json
   editorial_routing_purpose: validate expertise-based editor routing and permitted suggestions while rejecting acceptance-probability, leniency, personality, political, citation-preference, and friendly-editor targeting fields
+  acceptance_optimization_script: scripts/validate_acceptance_optimization_plan.py
+  acceptance_optimization_schema: acceptance-contracts/acceptance-optimization-plan.schema.json
+  acceptance_optimization_purpose: validate evidence-graded publication-opportunity plans, Registered Report routes, target ladders, public-review-history survivorship safeguards and decision-ready blockers while rejecting acceptance probabilities, prestige scoring, editor/reviewer favorability and strategic citation targeting
   study_protocol_script: scripts/resolve_study_protocol.py
   study_protocol_schema: study-contracts/study-protocol-conduct-contract.schema.json
   study_protocol_adapters: study-contracts/maintained-study-adapters.json
