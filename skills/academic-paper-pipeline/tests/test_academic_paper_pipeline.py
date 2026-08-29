@@ -75,8 +75,25 @@ class AcademicPaperPipelineTests(unittest.TestCase):
             "manuscript-content-selection.md",
             "figure-evidence-planning.md",
             "manuscript-surface-qa.md",
+            "acceptance-optimization-protocol.md",
         ):
             self.assertIn(marker, manifest)
+
+    def test_pipeline_integrates_early_acceptance_optimization(self) -> None:
+        skill = read(PIPELINE / "SKILL.md")
+        for marker in (
+            "Acceptance-by-design and publication-route check",
+            "Registered Report",
+            "Fit-first target ladder",
+            "Evidence-maturation red team",
+            "Acceptance optimization and desk-rejection stress test",
+            "Rejection / transfer / retargeting loop",
+            "acceptance_optimized_decision_ready_for_target",
+        ):
+            self.assertIn(marker, skill)
+        self.assertIn("validate_acceptance_optimization_plan.py", skill)
+        self.assertIn("public review histories", skill.lower())
+        self.assertIn("survivorship", skill.lower())
 
     def test_pipeline_closes_every_atomic_content_item_before_readiness(self) -> None:
         skill = read(PIPELINE / "SKILL.md")
@@ -110,8 +127,8 @@ class AcademicPaperPipelineTests(unittest.TestCase):
             "effective_date_basis",
         ):
             self.assertIn(marker, state)
-        self.assertIn("no universal acceptance objective", skill)
-        self.assertIn("certification is separate from acceptance", skill)
+        self.assertIn("no universal acceptance objective", skill.lower())
+        self.assertIn("certification is separate from acceptance", skill.lower())
 
     def test_pipeline_requires_display_contract_closure_before_readiness(self) -> None:
         skill = read(PIPELINE / "SKILL.md")
