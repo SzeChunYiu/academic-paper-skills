@@ -90,7 +90,7 @@ class JournalAcceptanceReadinessTests(unittest.TestCase):
             self.assertIn(marker, text)
 
     def test_irreducible_editorial_uncertainty_is_separate_from_repairable_state(self) -> None:
-        text = read(ACCEPTANCE).lower()
+        text = read(ACCEPTANCE).lower().replace("**", "")
         self.assertIn("uncontrollable editorial context", text)
         self.assertIn("simultaneous or just-accepted overlapping work", text)
         self.assertIn("competition among multiple strong submissions", text)
