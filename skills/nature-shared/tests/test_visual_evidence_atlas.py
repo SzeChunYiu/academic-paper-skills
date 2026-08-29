@@ -85,7 +85,7 @@ class VisualEvidenceAtlasTests(unittest.TestCase):
         self.assertIn("what the figure resolves", atlas)
         self.assertIn("main paper vs supplement", atlas)
         self.assertIn("do not hide a result in the supplement merely because it is unfavorable", atlas)
-        self.assertNotIn("universal `figure 1 schematic", atlas.replace("do not create a ", ""))
+        self.assertIn("do not create a universal `figure 1 schematic", atlas)
 
     def test_unknown_visual_problem_triggers_research_not_cargo_cult(self) -> None:
         atlas = read(ATLAS).lower()
