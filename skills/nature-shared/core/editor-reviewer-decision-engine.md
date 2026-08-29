@@ -290,7 +290,8 @@ Never optimize acceptance by:
 
 - omitting adverse or contradictory evidence;
 - hiding a close competitor or misdescribing prior work;
-- citing a potential editor/reviewer merely to influence them;
+- citing a potential reviewer merely to influence them;
+- citing a potential editor merely to influence them;
 - suggesting reviewers because they are expected to be favorable;
 - suggesting editors because they are expected to be favorable;
 - exploiting author-suggested-reviewer effects;
