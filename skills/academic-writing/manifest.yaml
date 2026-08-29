@@ -1,11 +1,11 @@
 name: academic-writing
-version: 1.6.0
+version: 1.7.0
 description: >
   Canonical journal-agnostic academic manuscript writing router. The historical
   nature-writing directory remains a compatibility/reference implementation
   layer, while this public skill resolves archetype, evidence, writing logic,
-  figures, research, author voice, target adaptation, and final surface QA
-  independently from Nature.
+  figures/tables/visual representation, research, author voice, target
+  adaptation, and final surface QA independently from Nature.
 
 always_load:
   - ../nature-shared/core/reader-workflow.md
@@ -29,6 +29,10 @@ references:
       path: ../nature-shared/core/atomic-claim-verification.md
     - condition: current paper type, target, reporting norm, writing convention, figure grammar, or review expectation is unfamiliar/uncertain and research is needed before imposing a template
       path: ../nature-shared/core/unknown-paper-research-protocol.md
+    - condition: decide whether scientific evidence belongs in text, a table, a figure, or a mixed display; choose a plot/table family; plan exact-value tables; or audit forest/funnel, survival, prediction, longitudinal, heatmap, compositional, map, qualitative, image, or diagram representation
+      path: ../nature-shared/core/visual-evidence-atlas.md
+    - condition: inspect the targeted 2026-08-29 research, source-specific support, transfer limits, and reasoning behind the visual-evidence atlas
+      path: ../nature-shared/research/visual-evidence-atlas-research-2026-08-29.md
     - condition: substantial manuscript work should study a few genuinely close papers for argument/evidence/figure/explanation/local-convention calibration without copying wording or visual identity
       path: ../nature-shared/core/analogue-paper-calibration.md
     - condition: recent cross-archetype direct-reading examples are needed to test whether a proposed writing/figure rule is actually transferable

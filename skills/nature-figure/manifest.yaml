@@ -1,13 +1,14 @@
 name: nature-figure
-version: 3.5.0
+version: 3.6.0
 description: >
-  Declarative manifest for journal-aware scientific figure design. The legacy
-  skill name is retained for compatibility. Data plotting, scientific diagrams,
-  and AI graphical abstracts are separate routes. Claim-driven planning maps
-  reader questions and estimands to evidence before rendering; paper-archetype
-  calibration prevents one universal figure sequence; analogue study calibrates
-  evidence roles without copying visual identity; and final manuscript-facing
-  legends/captions receive artifact-leakage and punctuation QA.
+  Declarative manifest for journal-aware scientific figure and table/visual
+  evidence design. The legacy skill name is retained for compatibility. Data
+  plotting, table-vs-figure decisions, scientific diagrams, and AI graphical
+  abstracts are separate routes. Claim-driven planning maps reader questions
+  and estimands to evidence before rendering; paper-archetype calibration
+  prevents one universal figure sequence; analogue study calibrates evidence
+  roles without copying visual identity; and final manuscript-facing legends/
+  captions receive artifact-leakage and punctuation QA.
 
 always_load:
   - static/core/contract.md
@@ -79,6 +80,10 @@ references:
       path: ../nature-shared/core/paper-archetype-atlas.md
     - condition: decide what figures or plots a paper needs from its claims, reader questions, estimands, data structures, uncertainty, alternative explanations, contribution type, and main-versus-support evidence role before rendering
       path: ../nature-shared/core/figure-evidence-planning.md
+    - condition: decide whether evidence should be text, a table, a figure, or a mixed display; choose table contents or plot family; design a figure sequence; or audit continuous, paired, longitudinal, forest/funnel, survival, prediction, heatmap, compositional, map, qualitative, image, or diagram representation
+      path: ../nature-shared/core/visual-evidence-atlas.md
+    - condition: inspect the targeted 2026-08-29 visual-representation research, source-specific support, contradictions, or transfer limits behind atlas guidance
+      path: ../nature-shared/research/visual-evidence-atlas-research-2026-08-29.md
     - condition: bind a plot, figure, table, image plate, diagram, or mixed display to the scientific object, evidence lineage, representation rationale, inference boundary, caption, accessibility, and stage-specific blockers before rendering or final delivery
       path: ../nature-shared/core/scientific-display-decision-contract.md
       schema: ../nature-shared/display-contracts/scientific-display-contract.schema.json
