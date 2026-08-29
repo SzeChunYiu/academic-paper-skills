@@ -40,11 +40,12 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["url", "source_type", "official"],
+        "required": ["url", "source_type", "official", "accessed_at"],
         "properties": {
           "url": {"type": "string", "minLength": 1},
           "source_type": {"enum": ["official_editor_page", "official_board_page", "official_submission_policy", "orcid", "institutional_profile", "publication_record"]},
-          "official": {"type": "boolean"}
+          "official": {"type": "boolean"},
+          "accessed_at": {"type": "string", "format": "date"}
         }
       }
     },
