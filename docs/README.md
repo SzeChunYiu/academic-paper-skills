@@ -16,6 +16,7 @@
 
 - [All-journals Academic-Paper Architecture](all-journals-architecture.md) — journal resolution、writing、analogue calibration、natural prose、author voice、figures、citations、review 与 revision lifecycle。
 - [Editor–Reviewer Decision Architecture](editor-reviewer-decision-architecture.md) — target-aware editorial triage、independent review、editor synthesis、decision proof 与 revision closure。
+- [期刊接收准备度：编辑、审稿人、路由与修稿](journal-acceptance-readiness.md) — 把 acceptance 拆成 target fit、editorial triage、editor expertise routing、reviewer coverage、evidence maturity、revision closure 与不可控制 editorial context；公开 editor identity 只用于专业路由，不用于个人化 manipulation。
 
 ## 教程与接入
 
@@ -35,5 +36,5 @@
 9. Figure choice 来自 claims、estimands、data structure、uncertainty 与 alternative explanations。
 10. Repository/artifact documentation 除非具有科学功能，否则不应泄漏进 scientific narrative；最终所有 manuscript-facing surface 都要再做一次 leakage scrub。
 11. Punctuation 与 scientific typography 是 final copy-editing QA，不是任意 style decoration。
-12. Editor/reviewer engineering 指 decisionability 与 valid evidence，不是 manipulation。
+12. Acceptance/editor/reviewer engineering 指 decisionability、target fit、expertise routing 与 valid evidence，不是 manipulation；不输出 acceptance probability，也不根据公开 editor identity 推断 leniency/personality/ideology。
 13. 写作/评审规则应来自 empirical corpora、stratified direct reading、official guidance、counterexamples 与 regression tests。
