@@ -16,6 +16,7 @@ The repository has grown from a collection of Nature-oriented skills into a broa
 
 - [All-journals Academic-Paper Architecture](all-journals-architecture.md) — journal resolution, writing, analogue calibration, natural prose, author voice, figures, citations, review, and revision lifecycle.
 - [Editor–Reviewer Decision Architecture](editor-reviewer-decision-architecture.md) — target-aware editorial triage, independent review, editor synthesis, decision proofs, and revision closure.
+- [Journal Acceptance Readiness: Editors, Reviewers, Routing, and Revision](journal-acceptance-readiness_EN.md) — separates target fit, editorial triage, editor-expertise routing, reviewer coverage, evidence maturity, revision closure, and uncontrollable editorial context; public editor identities are used only for professional routing, never personalized manipulation.
 
 ## Tutorials and Integration
 
@@ -35,5 +36,5 @@ The repository has grown from a collection of Nature-oriented skills into a broa
 9. Figure choice comes from claims, estimands, data structure, uncertainty and alternative explanations.
 10. Repository/artifact documentation stays out of scientific narrative unless it performs a scientific function; every final manuscript surface gets a leakage scrub.
 11. Punctuation and scientific typography are final copy-editing QA, not arbitrary style decoration.
-12. Editor/reviewer engineering means decisionability and valid evidence, not manipulation.
+12. Acceptance/editor/reviewer engineering means decisionability, target fit, expertise routing and valid evidence—not manipulation; never output an acceptance probability or infer editor leniency/personality/ideology from public identity.
 13. Research rules come from empirical corpora, stratified direct reading, official guidance, counterexamples and regression tests.
