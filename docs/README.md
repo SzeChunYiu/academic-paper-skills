@@ -12,11 +12,12 @@
 - [论文到底应该写什么、哪些内容不该进正文，以及应该画什么图？](manuscript-content-and-figures.md) — content admission、repository-to-manuscript leakage、main/Methods/SI/availability allocation、figure roles 与 plot suggestions。
 - [深度论文校准：学习科学任务，而不是模仿顶刊表面](deep-paper-calibration.md) — paper archetypes、2025–2026 cross-archetype direct reading、broad corpus vs close analogue、可扩展 figure/caption inventory、最终 artifact-leakage scrub 与 punctuation QA。
 
-## 架构
+## 架构与发表策略
 
 - [All-journals Academic-Paper Architecture](all-journals-architecture.md) — journal resolution、writing、analogue calibration、natural prose、author voice、figures、citations、review 与 revision lifecycle。
 - [Editor–Reviewer Decision Architecture](editor-reviewer-decision-architecture.md) — target-aware editorial triage、independent review、editor synthesis、decision proof 与 revision closure。
 - [期刊接收准备度：编辑、审稿人、路由与修稿](journal-acceptance-readiness.md) — 把 acceptance 拆成 target fit、editorial triage、editor expertise routing、reviewer coverage、evidence maturity、revision closure 与不可控制 editorial context；公开 editor identity 只用于专业路由，不用于个人化 manipulation。
+- [证据分级的论文接收机会优化](acceptance-optimization.md) — 从写 manuscript 之前就开始：research-question/design、Registered Report screening、claim-backward evidence maturation、fit-first target ladder、desk-rejection stress test、statistical/reporting red team、public-review-history calibration、revision delta、rejection triage、transfer 与 retargeting。每一个 acceptance lever 都标 evidence grade；accepted-case pattern 永远保留 survivorship-bias 边界。
 
 ## 教程与接入
 
@@ -37,4 +38,6 @@
 10. Repository/artifact documentation 除非具有科学功能，否则不应泄漏进 scientific narrative；最终所有 manuscript-facing surface 都要再做一次 leakage scrub。
 11. Punctuation 与 scientific typography 是 final copy-editing QA，不是任意 style decoration。
 12. Acceptance/editor/reviewer engineering 指 decisionability、target fit、expertise routing 与 valid evidence，不是 manipulation；不输出 acceptance probability，也不根据公开 editor identity 推断 leniency/personality/ideology。
-13. 写作/评审规则应来自 empirical corpora、stratified direct reading、official guidance、counterexamples 与 regression tests。
+13. Publication optimization 要尽可能从 research-question / design 阶段开始，用 evidence-graded lever，并在 prospective 且 eligible 时检查 Registered Report 等 alternative route；target ladder 以 fit 为先，不以 prestige 为先。
+14. Public peer-review history 用来学习 concern → repair pattern，而不是 causal acceptance trick；accepted histories 必须明确 survivorship selection，并和 rejection evidence 一起看，才能讨论是否能提升为 reusable rule。
+15. 写作/评审规则应来自 empirical corpora、stratified direct reading、official guidance、counterexamples 与 regression tests。
