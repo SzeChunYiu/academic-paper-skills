@@ -215,7 +215,8 @@ class AcceptanceOptimizationProtocolTests(unittest.TestCase):
     def test_history_protocol_is_survivorship_aware_and_learns_repairs_not_phrases(self) -> None:
         text = read(HISTORY).lower()
         for marker in (
-            "survivorship-biased",
+            "strong selection effects",
+            "survivorship/selection warning",
             "repair grammar",
             "reviewer_requested",
             "editor_required",
@@ -239,8 +240,8 @@ class AcceptanceOptimizationProtocolTests(unittest.TestCase):
         ):
             self.assertIn(marker, text)
         self.assertIn("does not justify numeric acceptance probabilities", text)
-        self.assertIn("quality improvement", text)
-        self.assertIn("not proof of a causal acceptance increase", text)
+        self.assertIn("improved overall manuscript quality", text)
+        self.assertIn("not a clean causal increase in acceptance probability", text)
 
     def test_top_level_skills_route_acceptance_optimization_layers(self) -> None:
         manifests = (
