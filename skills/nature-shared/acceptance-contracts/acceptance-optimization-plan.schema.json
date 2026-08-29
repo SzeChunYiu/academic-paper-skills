@@ -1,0 +1,246 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://academic-paper-skills.local/schemas/acceptance-optimization-plan.schema.json",
+  "title": "Acceptance optimization plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "objective",
+    "study_state",
+    "target",
+    "levers",
+    "blockers",
+    "uncontrollable_context",
+    "release_state"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "objective": {
+      "enum": [
+        "fixed_target_decision_readiness",
+        "successful_publication",
+        "registered_report_stage1",
+        "revision_closure",
+        "retargeting"
+      ]
+    },
+    "study_state": {
+      "enum": [
+        "question_design",
+        "protocol_design",
+        "data_collection",
+        "analysis",
+        "manuscript_draft",
+        "pre_submission",
+        "submitted",
+        "revision",
+        "rejected",
+        "transfer_or_resubmission"
+      ]
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["exact_venue", "article_type", "stage", "as_of_date", "route", "policy_state"],
+      "properties": {
+        "exact_venue": {"type": "string", "minLength": 1},
+        "article_type": {"type": "string", "minLength": 1},
+        "stage": {"type": "string", "minLength": 1},
+        "as_of_date": {"type": "string", "format": "date"},
+        "route": {
+          "enum": [
+            "standard_article",
+            "registered_report_stage1",
+            "registered_report_stage2",
+            "transfer",
+            "resubmission",
+            "unknown"
+          ]
+        },
+        "policy_state": {"enum": ["resolved_current", "requires_live_research", "unknown"]},
+        "official_policy_urls": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "uniqueItems": true
+        }
+      }
+    },
+    "registered_report": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["availability", "eligibility", "official_policy_url"],
+      "properties": {
+        "availability": {"enum": ["available", "unavailable", "unknown", "not_applicable"]},
+        "eligibility": {"enum": ["eligible", "not_eligible", "unknown", "not_applicable"]},
+        "official_policy_url": {"type": ["string", "null"]},
+        "stage1_quality_controls_defined": {"type": ["boolean", "null"]},
+        "notes": {"type": "string"}
+      }
+    },
+    "levers": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "stage",
+          "decision_axis",
+          "action",
+          "evidence_grade",
+          "source_urls",
+          "enforcement",
+          "scientific_effect",
+          "status",
+          "closure_test"
+        ],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[A-Za-z0-9._-]+$"},
+          "stage": {
+            "enum": [
+              "question_design",
+              "publication_route",
+              "study_design",
+              "evidence_maturation",
+              "target_fit",
+              "desk_preflight",
+              "submission_package",
+              "review",
+              "revision",
+              "rejection_triage",
+              "retargeting"
+            ]
+          },
+          "decision_axis": {
+            "enum": [
+              "science_integrity",
+              "scope",
+              "contribution_novelty",
+              "significance_utility_readership",
+              "design_identification",
+              "measurement",
+              "statistics_uncertainty",
+              "evidence_maturity",
+              "reporting_compliance",
+              "visual_evidence",
+              "writing_explanation",
+              "editorial_routing",
+              "reviewer_coverage",
+              "cover_letter_submission_metadata",
+              "revision_closure",
+              "retargeting"
+            ]
+          },
+          "action": {"type": "string", "minLength": 1},
+          "evidence_grade": {"enum": ["A", "B", "C", "D", "E", "H", "MANUSCRIPT_INTERNAL"]},
+          "source_urls": {
+            "type": "array",
+            "items": {"type": "string", "minLength": 1},
+            "uniqueItems": true
+          },
+          "enforcement": {"enum": ["hard_gate", "soft_gate", "heuristic", "context_only"]},
+          "scientific_effect": {
+            "enum": [
+              "strengthens_evidence",
+              "corrects_error",
+              "clarifies_existing_evidence",
+              "improves_target_fit",
+              "improves_reporting",
+              "improves_visual_evidence",
+              "improves_routing",
+              "closes_revision_concern",
+              "narrows_or_removes_claim",
+              "changes_publication_route",
+              "retargets",
+              "context_only"
+            ]
+          },
+          "status": {"enum": ["open", "in_progress", "satisfied", "blocked", "not_applicable", "uncertain"]},
+          "closure_test": {"type": "string", "minLength": 1},
+          "transfer_limit": {"type": "string"},
+          "notes": {"type": "string"}
+        }
+      }
+    },
+    "blockers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "class", "status", "resolution_test"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[A-Za-z0-9._-]+$"},
+          "class": {
+            "enum": [
+              "scientific_blocker",
+              "target_mismatch",
+              "manuscript_visibility",
+              "policy_compliance",
+              "review_disagreement",
+              "integrity_ethics",
+              "uncontrollable_editorial_context"
+            ]
+          },
+          "status": {"enum": ["open", "closed", "uncertain", "not_applicable"]},
+          "resolution_test": {"type": "string", "minLength": 1},
+          "notes": {"type": "string"}
+        }
+      }
+    },
+    "target_ladder": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["venue", "article_type", "fit_class", "fit_rationale", "policy_state"],
+        "properties": {
+          "venue": {"type": "string", "minLength": 1},
+          "article_type": {"type": "string", "minLength": 1},
+          "fit_class": {"enum": ["stretch_but_compatible", "best_fit", "robust_fit", "specialist_fallback", "alternative_article_type"]},
+          "fit_rationale": {"type": "string", "minLength": 1},
+          "policy_state": {"enum": ["resolved_current", "requires_live_research", "unknown"]},
+          "notes": {"type": "string"}
+        }
+      }
+    },
+    "public_review_history": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["used", "accepted_case_count", "rejected_or_rejection_evidence_count", "survivorship_warning_recorded"],
+      "properties": {
+        "used": {"type": "boolean"},
+        "accepted_case_count": {"type": "integer", "minimum": 0},
+        "rejected_or_rejection_evidence_count": {"type": "integer", "minimum": 0},
+        "survivorship_warning_recorded": {"type": "boolean"},
+        "notes": {"type": "string"}
+      }
+    },
+    "uncontrollable_context": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["factor", "state"],
+        "properties": {
+          "factor": {"type": "string", "minLength": 1},
+          "state": {"enum": ["unknown", "known_contextual_risk", "not_applicable"]},
+          "source_url": {"type": ["string", "null"]},
+          "notes": {"type": "string"}
+        }
+      }
+    },
+    "release_state": {
+      "enum": [
+        "planning",
+        "not_decision_ready",
+        "acceptance_optimized_decision_ready_for_target",
+        "decision_ready_but_editorial_outcome_uncertain",
+        "blocked_on_author_evidence",
+        "scientifically_sound_but_target_mismatch",
+        "blocked_by_integrity_or_compliance"
+      ]
+    }
+  }
+}
