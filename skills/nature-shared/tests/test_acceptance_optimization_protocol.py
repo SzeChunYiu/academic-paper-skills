@@ -141,6 +141,17 @@ class AcceptanceOptimizationProtocolTests(unittest.TestCase):
         self.assertTrue(any("pair accepted-case learning with rejection evidence" in error for error in errors))
         self.assertTrue(any("survivorship warning" in error for error in errors))
 
+    def test_declared_public_history_use_cannot_bypass_safeguards_without_h_lever(self) -> None:
+        plan = valid_plan()
+        plan["levers"] = [lever for lever in plan["levers"] if lever["evidence_grade"] != "H"]
+        plan["public_review_history"]["accepted_case_count"] = 0
+        plan["public_review_history"]["rejected_or_rejection_evidence_count"] = 0
+        plan["public_review_history"]["survivorship_warning_recorded"] = False
+        errors = mod.validate_plan(plan, SCHEMA)
+        self.assertTrue(any("survivorship warning" in error for error in errors))
+        self.assertTrue(any("at least one annotated public case" in error for error in errors))
+        self.assertTrue(any("pair accepted-case learning with rejection evidence" in error for error in errors))
+
     def test_target_specific_official_gate_must_cite_registered_target_policy(self) -> None:
         plan = valid_plan()
         plan["levers"][1]["source_urls"] = ["https://example.org/editorial-opinion"]
