@@ -27,6 +27,8 @@ def read(path: Path) -> str:
 
 
 def valid_profile() -> dict:
+    policy_url = "https://journals.plos.org/plosone/s/submit-now"
+    board_url = "https://journals.plos.org/plosone/static/editorial-board"
     return {
         "schema_version": "1.0.0",
         "exact_venue": "PLOS ONE",
@@ -40,20 +42,27 @@ def valid_profile() -> dict:
         },
         "suggestion_policy": {
             "state": "permitted",
-            "source_url": "https://journals.plos.org/plosone/s/submit-now",
+            "source_url": policy_url,
             "notes": "Current workflow asks for qualified Academic Editor recommendations.",
         },
         "exclusion_policy": {
             "state": "permitted",
-            "source_url": "https://journals.plos.org/plosone/s/submit-now",
+            "source_url": policy_url,
             "notes": "Current workflow permits opposed Editors/reviewers with reasons.",
         },
         "editor_sources": [
             {
-                "url": "https://journals.plos.org/plosone/static/editorial-board",
+                "url": policy_url,
+                "source_type": "official_submission_policy",
+                "official": True,
+                "accessed_at": "2026-08-29",
+            },
+            {
+                "url": board_url,
                 "source_type": "official_board_page",
                 "official": True,
-            }
+                "accessed_at": "2026-08-29",
+            },
         ],
         "candidates": [
             {
@@ -61,7 +70,7 @@ def valid_profile() -> dict:
                 "role": "Academic Editor",
                 "section_or_team": "Computational Biology",
                 "expertise_evidence": ["official board subject coverage"],
-                "source_urls": ["https://journals.plos.org/plosone/static/editorial-board"],
+                "source_urls": [board_url],
                 "conflict_status": "clear",
                 "routing_fit": "strong",
                 "intended_use": "suggest_if_permitted",
@@ -133,6 +142,21 @@ class JournalAcceptanceReadinessTests(unittest.TestCase):
         errors = mod.validate_profile(profile, SCHEMA)
         self.assertTrue(any("resolved permission state requires a current policy source" in error for error in errors))
 
+    def test_permission_source_must_be_registered_official_submission_policy(self) -> None:
+        profile = valid_profile()
+        profile["suggestion_policy"]["source_url"] = "https://example.org/unregistered"
+        errors = mod.validate_profile(profile, SCHEMA)
+        self.assertTrue(any("policy source must be registered" in error for error in errors))
+
+        profile = valid_profile()
+        policy_url = profile["suggestion_policy"]["source_url"]
+        policy_source = next(source for source in profile["editor_sources"] if source["url"] == policy_url)
+        policy_source["official"] = False
+        policy_source["source_type"] = "publication_record"
+        errors = mod.validate_profile(profile, SCHEMA)
+        self.assertTrue(any("resolved permission requires an official source" in error for error in errors))
+        self.assertTrue(any("official_submission_policy" in error for error in errors))
+
     def test_conflicted_editor_cannot_be_suggested(self) -> None:
         profile = valid_profile()
         profile["candidates"][0]["conflict_status"] = "conflict"
@@ -149,17 +173,32 @@ class JournalAcceptanceReadinessTests(unittest.TestCase):
         self.assertTrue(any("prohibited editor-targeting field" in error for error in errors))
         self.assertTrue(any("additional properties" in error.lower() for error in errors))
 
-    def test_named_candidates_require_official_editor_or_board_source(self) -> None:
+    def test_named_candidate_must_directly_cite_official_editor_or_board_source(self) -> None:
         profile = valid_profile()
-        profile["editor_sources"][0]["official"] = False
+        secondary_url = "https://orcid.org/0000-0000-0000-0000"
+        profile["editor_sources"].append(
+            {
+                "url": secondary_url,
+                "source_type": "orcid",
+                "official": False,
+                "accessed_at": "2026-08-29",
+            }
+        )
+        profile["candidates"][0]["source_urls"] = [secondary_url]
         errors = mod.validate_profile(profile, SCHEMA)
-        self.assertTrue(any("official editor or editorial-board source" in error for error in errors))
+        self.assertTrue(any("must cite an official editor or editorial-board source directly" in error for error in errors))
 
     def test_candidate_source_must_be_registered(self) -> None:
         profile = valid_profile()
         profile["candidates"][0]["source_urls"] = ["https://example.org/unregistered"]
         errors = mod.validate_profile(profile, SCHEMA)
         self.assertTrue(any("sources not present in editor_sources" in error for error in errors))
+
+    def test_editor_source_requires_access_date(self) -> None:
+        profile = valid_profile()
+        profile["editor_sources"][0].pop("accessed_at")
+        errors = mod.validate_profile(profile, SCHEMA)
+        self.assertTrue(any("accessed_at" in error for error in errors))
 
     def test_exclusion_requires_permission_and_conflict_rationale(self) -> None:
         profile = valid_profile()
