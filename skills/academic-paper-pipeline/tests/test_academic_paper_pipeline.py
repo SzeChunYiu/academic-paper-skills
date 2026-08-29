@@ -109,7 +109,8 @@ class AcademicPaperPipelineTests(unittest.TestCase):
 
     def test_skill_is_journal_agnostic(self) -> None:
         skill = read(PIPELINE / "SKILL.md")
-        self.assertIn("Nature is only one optional target adapter", skill)
+        normalized_skill = " ".join(skill.split())
+        self.assertIn("Nature is only one optional target adapter", normalized_skill)
         self.assertIn("The editor, not reviewer vote count, controls convergence", read(PIPELINE / "README_EN.md"))
 
     def test_pipeline_keeps_science_target_objective_and_certification_separate(self) -> None:
