@@ -69,6 +69,7 @@ Editorial routing state
 Peer-review risk state
 Revision closure state
 Compliance/production state
+Uncontrollable editorial context
 
 Blocked criteria
 Uncertain criteria
@@ -314,6 +315,24 @@ Do not rank journals solely by prestige or impact factor.
 
 Treat editor identity as **routing metadata**, never as a persuasion target.
 
+## Uncontrollable editorial context
+
+Even a decision-ready manuscript can be rejected for reasons the package cannot validly engineer away.
+
+Record, when known or plausible:
+
+- simultaneous or just-accepted overlapping work;
+- competition among multiple strong submissions for limited editorial attention or space;
+- reviewer availability or inability to secure suitable expertise;
+- editorial disagreement on soft priority/novelty judgments;
+- timing/topicality that is not part of the scientific validity of the work;
+- confidential information unavailable to authors;
+- legitimate editorial discretion not reducible to published criteria.
+
+Do not invent facts about these factors. Mark them as `unknown` unless supported.
+
+A rejection in this bucket should **not** automatically trigger more experiments, more hype, or personalized editor targeting. The valid next step may be appeal under an exact policy, transfer, or retargeting.
+
 ## Acceptance-readiness exit state
 
 A manuscript may be labelled:
@@ -332,7 +351,8 @@ only when:
 - editorial routing is clear;
 - reviewer expertise coverage is identifiable;
 - cover letter/submission metadata are accurate and non-manipulative;
-- no known publication-criteria blocker remains.
+- no known publication-criteria blocker remains;
+- uncontrollable editorial context is kept separate from repairable manuscript state.
 
 This state means **ready for a fair editorial decision**, not "likely accepted".
 
