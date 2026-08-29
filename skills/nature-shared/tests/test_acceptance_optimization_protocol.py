@@ -27,6 +27,7 @@ def read(path: Path) -> str:
 
 def valid_plan() -> dict:
     plos_criteria = "https://journals.plos.org/plosone/s/criteria-for-publication"
+    public_history = "https://elifesciences.org/articles/108399/peer-reviews"
     return {
         "schema_version": "1.0.0",
         "objective": "fixed_target_decision_readiness",
@@ -78,7 +79,7 @@ def valid_plan() -> dict:
                 "decision_axis": "revision_closure",
                 "action": "Use close public histories to compare evidence addition versus claim narrowing.",
                 "evidence_grade": "H",
-                "source_urls": ["https://www.jmlr.org/tmlr/acceptance-criteria.html"],
+                "source_urls": [public_history],
                 "enforcement": "heuristic",
                 "scientific_effect": "context_only",
                 "status": "satisfied",
