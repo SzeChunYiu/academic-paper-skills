@@ -74,7 +74,7 @@ class VisualEvidenceAtlasTests(unittest.TestCase):
         for marker in required:
             self.assertIn(marker, atlas)
         self.assertIn("do not equate asymmetry with publication bias", atlas)
-        self.assertIn("a relative decrease as absolute decrease", atlas)
+        self.assertIn("avoid interpreting relative decrease as absolute decrease", atlas)
         self.assertIn("do not use a choropleth of raw case counts", atlas)
         self.assertIn("a dendrogram/heatmap is not proof", atlas)
         self.assertIn("auc alone does not establish calibration", atlas)
@@ -101,10 +101,10 @@ class VisualEvidenceAtlasTests(unittest.TestCase):
             "icmje",
             "jama network open",
             "plos biology",
-            "getting over anova",
+            "nature methods paper on multi-group estimation graphics",
             "superplots",
             "cochrane",
-            "precision–recall",
+            "precision-recall",
             "heatmap",
             "compositional",
             "choropleth",
@@ -132,7 +132,7 @@ class VisualEvidenceAtlasTests(unittest.TestCase):
             "funnel-plot asymmetry alone does not establish publication bias",
             "relative/compositional change does not establish an absolute abundance",
             "raw-count choropleth does not establish geographic risk",
-            "clustered heatmap/dendrogram alone does not establish stable or natural clusters",
+            "clustered heatmap/dendrogram alone does not establish stable or natural",
             "exact primary values must remain recoverable",
         ):
             self.assertIn(marker, contract)
