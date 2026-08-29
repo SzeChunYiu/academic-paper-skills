@@ -1,5 +1,5 @@
 name: nature-shared
-version: 2.7.0
+version: 2.8.0
 description: >
   Declarative manifest for shared academic-paper reference modules. This package
   is not a standalone workflow; installed skills load exact shared core,
@@ -47,6 +47,8 @@ core:
       path: core/figure-evidence-planning.md
     - condition: binding a plot, figure, table, image plate, diagram, or mixed display to its reader task, estimand, statistical unit, candidate representation, inference boundary, data/analysis/render/source-data provenance, caption, accessibility, and stage-specific exit tests
       path: core/scientific-display-decision-contract.md
+    - condition: deciding whether evidence should be text, table, figure, or mixed display; choosing researched plot/table families; or handling forest/funnel, survival, prediction, longitudinal, heatmap, compositional, geospatial, qualitative, image, diagram, and figure-sequence decisions
+      path: core/visual-evidence-atlas.md
     - condition: binding a study to versioned protocol and analysis-plan timing, executed conduct, deviations, ethics/governance, raw-data/analysis receipts, and claim-status boundaries before Methods/Results drafting or readiness assessment
       path: core/study-protocol-conduct-contract.md
     - condition: binding scientific data from source/acquisition through immutable raw, validated and analysis-ready snapshots, QC and transformation receipts, analysis/display inputs, governance, release, deviations, and bounded claims before downstream writing or readiness assessment
@@ -59,6 +61,10 @@ core:
       path: core/consistency-sweep.md
     - condition: drafting, restructuring, compressing, or reviewer-revising scientific main text — classify results as core/support/qualification/robustness/heterogeneity/provenance/alternative inference/edge case; allocate evidence across main text, captions, and SI; run paragraph-necessity, deletion, statistics-location, and claim-repetition checks
       path: core/main-text-discipline.md
+    - condition: optimizing a scientifically honest paper for a specific journal's real decision process across target fit, editorial triage, expertise routing, reviewer coverage, evidence maturity, editor synthesis, revision closure, cover letter, or retargeting without predicting acceptance
+      path: core/journal-acceptance-readiness.md
+    - condition: using public editor identities, teams, sections, subject coverage, or professional expertise to check journal routing, permitted editor suggestions, reviewer expertise coverage, or conflicts without profiling individual preferences or acceptance propensity
+      path: core/editor-expertise-routing.md
     - condition: pre-submission editor/reviewer simulation, rejection-risk engineering, decision-proof construction, major-revision planning, or deciding whether to add evidence versus narrow/remove a claim
       path: core/editor-reviewer-decision-engine.md
 
@@ -68,6 +74,10 @@ research:
       path: research/stratified-paper-reading-2025-2026.md
     - condition: the empirical and methodological basis, transfer boundary, contradiction, or unresolved research gap behind a scientific display adapter or automatic display blocker must be inspected
       path: research/scientific-display-evidence-ledger-2026-08.md
+    - condition: targeted 2026-08-29 evidence behind text/table/figure selection, effect/forest/funnel plots, longitudinal displays, prediction, heatmaps, compositional data, maps, qualitative displays, color, or visual-transfer boundaries must be inspected
+      path: research/visual-evidence-atlas-research-2026-08-29.md
+    - condition: current editorial criteria, desk-triage behavior, editor expertise routing, cover-letter boundaries, reviewer disagreement, novelty/acceptance evidence, or anti-gaming limits behind journal acceptance-readiness guidance must be inspected
+      path: research/journal-acceptance-editorial-decision-research-2026-08-29.md
     - condition: the empirical, methodological, or reporting-standard basis behind a study protocol/conduct adapter, automatic blocker, repair route, or non-universal transfer boundary must be inspected
       path: research/study-protocol-conduct-evidence-ledger-2026-08.md
     - condition: the empirical, standard, governance, or policy basis behind a data integrity/stewardship adapter, automatic blocker, repair boundary, exact-domain obligation, or release route must be inspected
@@ -104,6 +114,9 @@ quality_tools:
   scientific_display_schema: display-contracts/scientific-display-contract.schema.json
   scientific_display_adapters: display-contracts/maintained-adapters.json
   scientific_display_purpose: return evidence-informed candidate representations rather than a universal best chart, then fail closed on high-risk provenance, inference-boundary, omission, caption, uncertainty, and accessibility defects
+  editorial_routing_script: scripts/validate_editorial_routing_profile.py
+  editorial_routing_schema: editorial-contracts/editorial-routing-profile.schema.json
+  editorial_routing_purpose: validate expertise-based editor routing and permitted suggestions while rejecting acceptance-probability, leniency, personality, political, citation-preference, and friendly-editor targeting fields
   study_protocol_script: scripts/resolve_study_protocol.py
   study_protocol_schema: study-contracts/study-protocol-conduct-contract.schema.json
   study_protocol_adapters: study-contracts/maintained-study-adapters.json
