@@ -1,16 +1,17 @@
 name: academic-paper-pipeline
-version: 1.7.0
+version: 1.8.0
 description: >
   Declarative manifest for the journal-agnostic iterative academic-paper
   orchestration workflow. It coordinates research, writing, figures/tables/
-  visual representation, statistics, independent review, editor synthesis,
-  revision and re-review until simulated publication readiness or an explicit
-  real-world blocker.
+  visual representation, statistics, journal acceptance-readiness, independent
+  review, editor synthesis, revision and re-review until simulated publication
+  readiness or an explicit real-world blocker.
 
 always_load:
   - ../nature-shared/core/academic-paper-iteration-pipeline.md
   - ../nature-shared/core/atomic-claim-verification.md
   - ../nature-shared/core/editor-reviewer-decision-engine.md
+  - ../nature-shared/core/journal-acceptance-readiness.md
   - ../nature-shared/core/paper-archetype-atlas.md
   - ../nature-shared/core/unknown-paper-research-protocol.md
   - ../nature-shared/core/sentence-logic-and-cohesion.md
@@ -31,6 +32,10 @@ references:
       path: ../nature-shared/journal-formats/venue-decision-contract.md
     - condition: exact target publication objective needs fallback classification across selective broad-interest, field-advancement, rigor-first, clinical/policy-priority, evidence-assessment, or deadline-constrained models
       path: ../nature-shared/journal-formats/editorial-decision-profiles.md
+    - condition: public editor identities, sections, teams, professional expertise, conflicts, or a target-permitted editor suggestion are relevant to routing; use only professional expertise and official workflow rules, never inferred favorability
+      path: ../nature-shared/core/editor-expertise-routing.md
+    - condition: inspect the current official/editorial and meta-research evidence behind journal triage, editor routing, reviewer disagreement, cover letters, novelty, desk rejection, and anti-gaming boundaries
+      path: ../nature-shared/research/journal-acceptance-editorial-decision-research-2026-08-29.md
     - condition: the manuscript needs a text-vs-table-vs-figure decision, exact-value table design, plot-family selection, visual evidence sequencing, or review of forest/funnel, longitudinal, survival, prediction, heatmap, compositional, geospatial, qualitative, image, or diagram displays
       path: ../nature-shared/core/visual-evidence-atlas.md
     - condition: source-specific visual-representation evidence or transfer limits from the 2026-08-29 research tranche need inspection before a revision or reviewer response
