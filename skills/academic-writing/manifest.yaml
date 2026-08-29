@@ -1,12 +1,12 @@
 name: academic-writing
-version: 1.8.0
+version: 1.9.0
 description: >
   Canonical journal-agnostic academic manuscript writing router. The historical
   nature-writing directory remains a compatibility/reference implementation
   layer, while this public skill resolves archetype, evidence, writing logic,
   figures/tables/visual representation, research, author voice, target
-  adaptation, editorial decision readiness, and final surface QA independently
-  from Nature.
+  adaptation, evidence-graded publication optimization, editorial decision
+  readiness, and final surface QA independently from Nature.
 
 always_load:
   - ../nature-shared/core/reader-workflow.md
@@ -54,6 +54,12 @@ references:
       path: ../nature-shared/journal-formats/venue-decision-contract.md
     - condition: submission strategy needs journal-specific acceptance-readiness across scope, editorial triage, contribution/readership fit, evidence maturity, cover letter, reviewer expertise coverage, editor synthesis, revision closure, or retargeting without predicting acceptance
       path: ../nature-shared/core/journal-acceptance-readiness.md
+    - condition: user wants to maximize legitimate publication opportunity, reduce preventable rejection, decide what can be engineered before versus after the study, compare Registered Report/standard routes, build a fit-first target ladder, or prioritize evidence-backed acceptance levers without numeric acceptance prediction
+      path: ../nature-shared/core/acceptance-optimization-protocol.md
+    - condition: learn how comparable accepted/revised papers actually changed during review by studying public Nature Communications, PLOS, eLife, TMLR/OpenReview histories, while pairing them with rejection evidence and treating visible revisions as non-causal heuristics
+      path: ../nature-shared/core/public-review-history-calibration.md
+    - condition: inspect evidence grades and source-specific support behind acceptance optimization, including rejection analyses, novelty/conventionality, statistical review, reporting review, Registered Reports, revision trajectories, review disagreement, cover letters and public-history limitations
+      path: ../nature-shared/research/acceptance-optimization-evidence-ledger-2026-08-29.md
     - condition: public editor identities, teams, sections, subject coverage, or professional expertise are relevant to journal routing, conflicts, or a permitted editor suggestion; use only for expertise routing, never individual preference targeting
       path: ../nature-shared/core/editor-expertise-routing.md
     - condition: inspect current official/editorial and meta-research evidence behind desk triage, editor expertise routing, reviewer disagreement, cover-letter boundaries, novelty/acceptance, and anti-gaming safeguards
