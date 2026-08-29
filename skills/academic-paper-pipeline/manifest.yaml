@@ -1,10 +1,11 @@
 name: academic-paper-pipeline
-version: 1.6.0
+version: 1.7.0
 description: >
   Declarative manifest for the journal-agnostic iterative academic-paper
-  orchestration workflow. It coordinates research, writing, figures/statistics,
-  independent review, editor synthesis, revision and re-review until simulated
-  publication readiness or an explicit real-world blocker.
+  orchestration workflow. It coordinates research, writing, figures/tables/
+  visual representation, statistics, independent review, editor synthesis,
+  revision and re-review until simulated publication readiness or an explicit
+  real-world blocker.
 
 always_load:
   - ../nature-shared/core/academic-paper-iteration-pipeline.md
@@ -30,6 +31,10 @@ references:
       path: ../nature-shared/journal-formats/venue-decision-contract.md
     - condition: exact target publication objective needs fallback classification across selective broad-interest, field-advancement, rigor-first, clinical/policy-priority, evidence-assessment, or deadline-constrained models
       path: ../nature-shared/journal-formats/editorial-decision-profiles.md
+    - condition: the manuscript needs a text-vs-table-vs-figure decision, exact-value table design, plot-family selection, visual evidence sequencing, or review of forest/funnel, longitudinal, survival, prediction, heatmap, compositional, geospatial, qualitative, image, or diagram displays
+      path: ../nature-shared/core/visual-evidence-atlas.md
+    - condition: source-specific visual-representation evidence or transfer limits from the 2026-08-29 research tranche need inspection before a revision or reviewer response
+      path: ../nature-shared/research/visual-evidence-atlas-research-2026-08-29.md
     - condition: a few close papers should be studied deeply for current evidence, writing, explanation, figure and main-versus-support expectations
       path: ../nature-shared/core/analogue-paper-calibration.md
     - condition: author voice should be preserved through repeated rewrite rounds
