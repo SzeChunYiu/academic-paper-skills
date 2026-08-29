@@ -1,9 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
-import json
 import sys
-import tempfile
 import unittest
 from pathlib import Path
 
@@ -44,6 +42,11 @@ def valid_profile() -> dict:
             "state": "permitted",
             "source_url": "https://journals.plos.org/plosone/s/submit-now",
             "notes": "Current workflow asks for qualified Academic Editor recommendations.",
+        },
+        "exclusion_policy": {
+            "state": "permitted",
+            "source_url": "https://journals.plos.org/plosone/s/submit-now",
+            "notes": "Current workflow permits opposed Editors/reviewers with reasons.",
         },
         "editor_sources": [
             {
@@ -86,6 +89,13 @@ class JournalAcceptanceReadinessTests(unittest.TestCase):
         ):
             self.assertIn(marker, text)
 
+    def test_irreducible_editorial_uncertainty_is_separate_from_repairable_state(self) -> None:
+        text = read(ACCEPTANCE).lower()
+        self.assertIn("uncontrollable editorial context", text)
+        self.assertIn("simultaneous or just-accepted overlapping work", text)
+        self.assertIn("competition among multiple strong submissions", text)
+        self.assertIn("should not automatically trigger more experiments", text)
+
     def test_multi_editor_preflight_is_independent_and_not_vote_counting(self) -> None:
         text = read(ACCEPTANCE).lower()
         engine = read(ENGINE).lower()
@@ -117,6 +127,12 @@ class JournalAcceptanceReadinessTests(unittest.TestCase):
         errors = mod.validate_profile(profile, SCHEMA)
         self.assertTrue(any("editor suggestion is not permitted" in error for error in errors))
 
+    def test_resolved_permission_requires_source(self) -> None:
+        profile = valid_profile()
+        profile["suggestion_policy"]["source_url"] = None
+        errors = mod.validate_profile(profile, SCHEMA)
+        self.assertTrue(any("resolved permission state requires a current policy source" in error for error in errors))
+
     def test_conflicted_editor_cannot_be_suggested(self) -> None:
         profile = valid_profile()
         profile["candidates"][0]["conflict_status"] = "conflict"
@@ -133,17 +149,25 @@ class JournalAcceptanceReadinessTests(unittest.TestCase):
         self.assertTrue(any("prohibited editor-targeting field" in error for error in errors))
         self.assertTrue(any("additional properties" in error.lower() for error in errors))
 
-    def test_named_candidates_require_official_journal_source(self) -> None:
+    def test_named_candidates_require_official_editor_or_board_source(self) -> None:
         profile = valid_profile()
         profile["editor_sources"][0]["official"] = False
         errors = mod.validate_profile(profile, SCHEMA)
-        self.assertTrue(any("require at least one official journal source" in error for error in errors))
+        self.assertTrue(any("official editor or editorial-board source" in error for error in errors))
 
-    def test_exclusion_requires_conflict_rationale(self) -> None:
+    def test_candidate_source_must_be_registered(self) -> None:
+        profile = valid_profile()
+        profile["candidates"][0]["source_urls"] = ["https://example.org/unregistered"]
+        errors = mod.validate_profile(profile, SCHEMA)
+        self.assertTrue(any("sources not present in editor_sources" in error for error in errors))
+
+    def test_exclusion_requires_permission_and_conflict_rationale(self) -> None:
         profile = valid_profile()
         profile["candidates"][0]["intended_use"] = "exclude_if_permitted"
         profile["candidates"][0]["conflict_status"] = "clear"
+        profile["exclusion_policy"]["state"] = "not_permitted"
         errors = mod.validate_profile(profile, SCHEMA)
+        self.assertTrue(any("editor exclusion is not permitted" in error for error in errors))
         self.assertTrue(any("exclusion needs a conflict-based rationale" in error for error in errors))
 
     def test_research_basis_includes_current_editorial_and_meta_research(self) -> None:
