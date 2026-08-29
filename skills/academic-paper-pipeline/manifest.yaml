@@ -1,17 +1,19 @@
 name: academic-paper-pipeline
-version: 1.8.0
+version: 1.9.0
 description: >
   Declarative manifest for the journal-agnostic iterative academic-paper
   orchestration workflow. It coordinates research, writing, figures/tables/
-  visual representation, statistics, journal acceptance-readiness, independent
-  review, editor synthesis, revision and re-review until simulated publication
-  readiness or an explicit real-world blocker.
+  visual representation, statistics, evidence-graded acceptance optimization,
+  journal acceptance-readiness, independent review, editor synthesis, revision
+  and re-review until simulated publication readiness or an explicit real-world
+  blocker.
 
 always_load:
   - ../nature-shared/core/academic-paper-iteration-pipeline.md
   - ../nature-shared/core/atomic-claim-verification.md
   - ../nature-shared/core/editor-reviewer-decision-engine.md
   - ../nature-shared/core/journal-acceptance-readiness.md
+  - ../nature-shared/core/acceptance-optimization-protocol.md
   - ../nature-shared/core/paper-archetype-atlas.md
   - ../nature-shared/core/unknown-paper-research-protocol.md
   - ../nature-shared/core/sentence-logic-and-cohesion.md
@@ -32,6 +34,12 @@ references:
       path: ../nature-shared/journal-formats/venue-decision-contract.md
     - condition: exact target publication objective needs fallback classification across selective broad-interest, field-advancement, rigor-first, clinical/policy-priority, evidence-assessment, or deadline-constrained models
       path: ../nature-shared/journal-formats/editorial-decision-profiles.md
+    - condition: current project is prospective and the pipeline should test whether an exact target offers a Registered Report or another early-review publication route before results are known
+      path: ../nature-shared/core/acceptance-optimization-protocol.md
+    - condition: close public review histories should be studied for concern-to-repair patterns, revision deltas, claim narrowing, evidence additions, figure/table changes or persistent objections, with accepted histories paired against rejection evidence
+      path: ../nature-shared/core/public-review-history-calibration.md
+    - condition: source-specific evidence grades, causal limits, rejection analyses, Registered Report evidence, revision trajectories, statistical-review evidence, novelty/conventionality findings or public-history limitations behind acceptance optimization need inspection
+      path: ../nature-shared/research/acceptance-optimization-evidence-ledger-2026-08-29.md
     - condition: public editor identities, sections, teams, professional expertise, conflicts, or a target-permitted editor suggestion are relevant to routing; use only professional expertise and official workflow rules, never inferred favorability
       path: ../nature-shared/core/editor-expertise-routing.md
     - condition: inspect the current official/editorial and meta-research evidence behind journal triage, editor routing, reviewer disagreement, cover letters, novelty, desk rejection, and anti-gaming boundaries
