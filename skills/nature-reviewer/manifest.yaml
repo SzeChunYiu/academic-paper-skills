@@ -1,14 +1,15 @@
 name: nature-reviewer
-version: 2.5.0
+version: 2.6.0
 description: >
   Declarative manifest for journal-aware pre-submission editor/reviewer
   simulation. The legacy skill name remains for compatibility; review criteria
   are resolved from the exact target journal/publication model rather than
   assuming flagship Nature. Close analogue papers may inform field-specific
   evidence expectations but never substitute for official criteria or manuscript facts.
-  Review also checks archetype-appropriate evidence/figure architecture,
-  explanation sufficiency, manuscript/artifact allocation, and final manuscript-
-  surface leakage/punctuation hygiene without confusing copy-editing with science.
+  Review also checks journal acceptance-readiness, editorial routing/expertise,
+  archetype-appropriate evidence/figure architecture, explanation sufficiency,
+  manuscript/artifact allocation, and final manuscript-surface leakage/punctuation
+  hygiene without confusing copy-editing with science.
 
 always_load:
   - references/source-basis.md
@@ -34,6 +35,12 @@ references:
       path: ../nature-shared/core/analogue-paper-calibration.md
     - condition: target journal/venue is named, journal fit or desk-review risk is being assessed, or exact publication criteria matter
       path: ../nature-shared/journal-formats/journal-resolution.md
+    - condition: target-specific decision readiness should be audited across science/integrity, scope, contribution/readership, evidence maturity, editorial triage, reviewer coverage, editor synthesis, revision closure, cover letter, and retargeting without acceptance prediction
+      path: ../nature-shared/core/journal-acceptance-readiness.md
+    - condition: public editor identities, teams, sections, professional expertise, conflicts, or permitted editor suggestions are relevant to routing; use only professional expertise and official workflow rules, never presumed leniency or favorability
+      path: ../nature-shared/core/editor-expertise-routing.md
+    - condition: source-specific evidence is needed for editorial triage, desk-rejection variability, editor expertise routing, reviewer disagreement, cover-letter boundaries, novelty/acceptance, or anti-gaming safeguards
+      path: ../nature-shared/research/journal-acceptance-editorial-decision-research-2026-08-29.md
     - condition: target publication model must be resolved as selective broad-interest, field-advancement, rigor-first, clinical/policy-priority, evidence-assessment, or deadline-constrained
       path: ../nature-shared/journal-formats/editorial-decision-profiles.md
     - condition: exact target is flagship Nature or the user explicitly asks for Nature editorial/referee criteria

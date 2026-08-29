@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://academic-paper-skills.local/schemas/editorial-routing-profile.schema.json",
+  "title": "Editorial routing profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "exact_venue",
+    "article_type",
+    "as_of_date",
+    "manuscript",
+    "suggestion_policy",
+    "exclusion_policy",
+    "editor_sources",
+    "candidates",
+    "routing_state"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "exact_venue": {"type": "string", "minLength": 1},
+    "article_type": {"type": "string", "minLength": 1},
+    "as_of_date": {"type": "string", "format": "date"},
+    "manuscript": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["domain_tags", "method_tags", "contribution_class", "reviewer_expertise_needed"],
+      "properties": {
+        "domain_tags": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "method_tags": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "contribution_class": {"type": "string", "minLength": 1},
+        "reviewer_expertise_needed": {"type": "array", "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "suggestion_policy": {"$ref": "#/$defs/permissionPolicy"},
+    "exclusion_policy": {"$ref": "#/$defs/permissionPolicy"},
+    "editor_sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["url", "source_type", "official", "accessed_at"],
+        "properties": {
+          "url": {"type": "string", "minLength": 1},
+          "source_type": {"enum": ["official_editor_page", "official_board_page", "official_submission_policy", "orcid", "institutional_profile", "publication_record"]},
+          "official": {"type": "boolean"},
+          "accessed_at": {"type": "string", "format": "date"}
+        }
+      }
+    },
+    "candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "role", "section_or_team", "expertise_evidence", "source_urls", "conflict_status", "routing_fit", "intended_use"],
+        "properties": {
+          "name": {"type": "string", "minLength": 1},
+          "role": {"type": "string", "minLength": 1},
+          "section_or_team": {"type": ["string", "null"]},
+          "expertise_evidence": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+          "source_urls": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+          "conflict_status": {"enum": ["clear", "possible_conflict", "conflict", "unknown"]},
+          "routing_fit": {"enum": ["strong", "plausible", "weak", "conflict", "unknown"]},
+          "intended_use": {"enum": ["coverage_only", "section_routing", "suggest_if_permitted", "exclude_if_permitted"]},
+          "notes": {"type": "string"}
+        }
+      }
+    },
+    "routing_state": {"enum": ["strong_coverage", "mixed_coverage", "weak_coverage", "conflict", "unknown"]},
+    "routing_ambiguity": {"type": "array", "items": {"type": "string"}},
+    "submission_metadata_repairs": {"type": "array", "items": {"type": "string"}}
+  },
+  "$defs": {
+    "permissionPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "source_url"],
+      "properties": {
+        "state": {"enum": ["permitted", "not_permitted", "unknown"]},
+        "source_url": {"type": ["string", "null"]},
+        "notes": {"type": "string"}
+      }
+    }
+  }
+}

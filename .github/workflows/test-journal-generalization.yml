@@ -55,14 +55,15 @@ jobs:
       - name: Install focused contract and figure test dependencies
         run: python -m pip install --disable-pip-version-check numpy jsonschema==4.26.0
 
-      - name: Compile citation, corpus, and manuscript QA scripts
+      - name: Compile citation, corpus, manuscript QA, and editorial routing scripts
         run: |
           python -m py_compile \
             skills/nature-citation/scripts/nature_citation.py \
             skills/nature-citation/scripts/academic_citation_search.py \
             skills/nature-writing/scripts/corpus_structure_stats.py \
             skills/nature-writing/scripts/corpus_figure_inventory.py \
-            skills/nature-shared/scripts/audit_manuscript_surface.py
+            skills/nature-shared/scripts/audit_manuscript_surface.py \
+            skills/nature-shared/scripts/validate_editorial_routing_profile.py
 
       - name: Test citation search and exports
         run: python -m unittest discover -s skills/nature-citation/tests -p 'test_*.py' -v
