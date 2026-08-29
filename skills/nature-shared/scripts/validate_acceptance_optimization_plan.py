@@ -162,15 +162,23 @@ def validate_plan(plan: dict[str, Any], schema_path: Path = DEFAULT_SCHEMA) -> l
                     f"levers.{index}.source_urls: target-specific Grade D lever must cite a registered exact target policy source"
                 )
 
-    if has_h_lever:
-        if not public_history.get("used"):
-            errors.append("public_review_history.used: Grade H lever requires an explicit public-history calibration record")
+    public_history_used = public_history.get("used") is True
+    if has_h_lever and not public_history_used:
+        errors.append("public_review_history.used: Grade H lever requires an explicit public-history calibration record")
+
+    # Any declared use of public peer-review histories—not only an explicit Grade H
+    # lever—must carry the same survivorship and rejected-case safeguards. This
+    # prevents a caller from bypassing the Grade H boundary by setting `used` while
+    # omitting or misclassifying the corresponding lever.
+    if has_h_lever or public_history_used:
         if not public_history.get("survivorship_warning_recorded"):
             errors.append(
                 "public_review_history.survivorship_warning_recorded: accepted/public histories require an explicit survivorship warning"
             )
         if int(public_history.get("accepted_case_count", 0) or 0) < 1:
-            errors.append("public_review_history.accepted_case_count: Grade H use requires at least one annotated public case")
+            errors.append(
+                "public_review_history.accepted_case_count: public-history use requires at least one annotated public case"
+            )
         if int(public_history.get("rejected_or_rejection_evidence_count", 0) or 0) < 1:
             errors.append(
                 "public_review_history.rejected_or_rejection_evidence_count: pair accepted-case learning with rejection evidence"
