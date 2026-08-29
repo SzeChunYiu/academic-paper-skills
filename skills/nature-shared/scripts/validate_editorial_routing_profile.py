@@ -48,13 +48,27 @@ def _walk_keys(value: Any, path: str = "$") -> list[tuple[str, str]]:
     return found
 
 
-def _permission_errors(profile: dict[str, Any], field: str) -> list[str]:
+def _permission_errors(
+    profile: dict[str, Any], field: str, source_by_url: dict[str, dict[str, Any]]
+) -> list[str]:
     policy = profile.get(field, {})
     state = policy.get("state")
     source_url = policy.get("source_url")
-    if state in {"permitted", "not_permitted"} and not source_url:
+    if state not in {"permitted", "not_permitted"}:
+        return []
+    if not source_url:
         return [f"{field}.source_url: resolved permission state requires a current policy source"]
-    return []
+    source = source_by_url.get(source_url)
+    if source is None:
+        return [f"{field}.source_url: policy source must be registered in editor_sources"]
+    errors: list[str] = []
+    if not source.get("official"):
+        errors.append(f"{field}.source_url: resolved permission requires an official source")
+    if source.get("source_type") != "official_submission_policy":
+        errors.append(
+            f"{field}.source_url: resolved permission must cite an official_submission_policy source"
+        )
+    return errors
 
 
 def validate_profile(profile: dict[str, Any], schema_path: Path = DEFAULT_SCHEMA) -> list[str]:
@@ -69,19 +83,19 @@ def validate_profile(profile: dict[str, Any], schema_path: Path = DEFAULT_SCHEMA
         if key.lower() in PROHIBITED_KEYS:
             errors.append(f"{path}: prohibited editor-targeting field")
 
-    errors.extend(_permission_errors(profile, "suggestion_policy"))
-    errors.extend(_permission_errors(profile, "exclusion_policy"))
+    sources = profile.get("editor_sources", [])
+    source_by_url = {
+        source.get("url"): source
+        for source in sources
+        if isinstance(source, dict) and source.get("url")
+    }
+    source_urls = set(source_by_url)
+
+    errors.extend(_permission_errors(profile, "suggestion_policy", source_by_url))
+    errors.extend(_permission_errors(profile, "exclusion_policy", source_by_url))
 
     suggestion_state = profile.get("suggestion_policy", {}).get("state")
     exclusion_state = profile.get("exclusion_policy", {}).get("state")
-
-    sources = profile.get("editor_sources", [])
-    source_urls = {source.get("url") for source in sources}
-    has_official_editor_source = any(
-        source.get("official")
-        and source.get("source_type") in {"official_editor_page", "official_board_page"}
-        for source in sources
-    )
 
     for index, candidate in enumerate(profile.get("candidates", [])):
         intended = candidate.get("intended_use")
@@ -116,10 +130,20 @@ def validate_profile(profile: dict[str, Any], schema_path: Path = DEFAULT_SCHEMA
                 + ", ".join(unknown_sources)
             )
 
-    if profile.get("candidates") and not has_official_editor_source:
-        errors.append(
-            "editor_sources: named editor candidates require an official editor or editorial-board source"
+        registered_candidate_sources = [
+            source_by_url[url]
+            for url in candidate_sources
+            if url in source_by_url
+        ]
+        has_own_official_editor_source = any(
+            source.get("official")
+            and source.get("source_type") in {"official_editor_page", "official_board_page"}
+            for source in registered_candidate_sources
         )
+        if not has_own_official_editor_source:
+            errors.append(
+                f"candidates.{index}.source_urls: named editor candidate must cite an official editor or editorial-board source directly"
+            )
 
     return errors
 
