@@ -4,12 +4,24 @@
   "title": "Research Integrity Verification Ledger",
   "type": "object",
   "additionalProperties": true,
-  "required": ["schema_version", "manuscript_id", "sources", "claims", "evidence_receipts", "citation_usages", "release"],
+  "required": [
+    "schema_version",
+    "manuscript_id",
+    "manuscript_fingerprint",
+    "coverage_check",
+    "sources",
+    "claims",
+    "evidence_receipts",
+    "citation_usages",
+    "release"
+  ],
   "properties": {
     "schema_version": {"const": "1.0"},
     "manuscript_id": {"type": "string", "minLength": 1},
+    "manuscript_fingerprint": {"type": "string", "pattern": "^sha256:[0-9a-fA-F]{64}$"},
     "authoring_agent_id": {"type": "string"},
     "verification_scope": {"enum": ["full_manuscript", "partial"]},
+    "coverage_check": {"$ref": "#/$defs/coverageCheck"},
     "sources": {"type": "array", "items": {"$ref": "#/$defs/source"}},
     "claims": {"type": "array", "items": {"$ref": "#/$defs/claim"}},
     "evidence_receipts": {"type": "array", "items": {"$ref": "#/$defs/evidenceReceipt"}},
@@ -31,6 +43,17 @@
       "properties": {
         "scheme": {"enum": ["doi", "datacite_doi", "pmid", "pmcid", "arxiv", "isbn", "url", "handle", "other"]},
         "value": {"type": "string", "minLength": 1}
+      }
+    },
+    "coverageCheck": {
+      "type": "object",
+      "required": ["status", "verifier_id", "verification_method", "checked_at"],
+      "properties": {
+        "status": {"enum": ["PASS", "FAIL", "NOT_DONE"]},
+        "verifier_id": {"type": "string", "minLength": 1},
+        "verification_method": {"enum": ["human_review", "independent_model_with_retrieved_source"]},
+        "checked_at": {"type": "string", "minLength": 1},
+        "notes": {"type": "string"}
       }
     },
     "sourceIdentityCheck": {
@@ -118,7 +141,7 @@
     },
     "evidenceReceipt": {
       "type": "object",
-      "required": ["receipt_id", "claim_id", "warrant_type", "verification_method", "support_status"],
+      "required": ["receipt_id", "claim_id", "warrant_type", "verification_method", "support_status", "scope_match", "verifier_id"],
       "properties": {
         "receipt_id": {"type": "string", "pattern": "^E[0-9A-Za-z_.:-]+$"},
         "claim_id": {"type": "string"},
@@ -130,7 +153,7 @@
         "verification_method": {"enum": ["registry_lookup", "publisher_or_primary_record", "fulltext_span_check", "deterministic_recompute", "deterministic_derivation", "human_review", "independent_model_with_retrieved_source", "authoritative_project_record"]},
         "support_status": {"enum": ["ENTAILS", "BOUNDS", "PARTIAL", "CONTRADICTS", "NOT_CHECKED"]},
         "scope_match": {"enum": ["MATCH", "NARROWER", "BROADER", "MISMATCH", "NOT_CHECKED"]},
-        "verifier_id": {"type": "string"},
+        "verifier_id": {"type": "string", "minLength": 1},
         "notes": {"type": "string"}
       }
     },
