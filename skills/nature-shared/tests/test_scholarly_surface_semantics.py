@@ -32,6 +32,7 @@ Under \texttt{ANY_OPTIMAL_ACTION} semantics the rule is deterministic.
     assert "inline_bold_review" in found
     assert "monospace_semantics_review" in found
     assert "internal_enum_token_review" in found
+    assert "raw_math_token" not in found
 
 
 def test_flags_backticks_and_internal_ci_status_vocabulary() -> None:
@@ -40,6 +41,7 @@ def test_flags_backticks_and_internal_ci_status_vocabulary() -> None:
     assert "inline_code_semantics_review" in found
     assert "internal_enum_token_review" in found
     assert "internal_status_vocabulary_review" in found
+    assert "raw_math_token" not in found
 
 
 def test_flags_raw_math_source_tokens_outside_math_mode() -> None:
@@ -50,6 +52,15 @@ def test_flags_raw_math_source_tokens_outside_math_mode() -> None:
 def test_proper_math_mode_is_not_raw_math_leakage() -> None:
     found = kinds(r"The premium $C_{\mathrm{dyn}}^*-C_{\mathrm{stat}}^*$ is one bit.")
     assert "raw_math_token" not in found
+
+
+def test_latex_display_math_is_not_scanned_as_raw_source_prose() -> None:
+    text = r"""The quantities are defined below.
+\begin{equation}
+C_{\mathrm{dyn}}^* = C_{\mathrm{stat}}^* + 1.
+\end{equation}
+"""
+    assert "raw_math_token" not in kinds(text)
 
 
 def test_flags_dashboard_like_all_caps_labels() -> None:
@@ -74,6 +85,11 @@ def test_table_number_gaps_and_duplicates_are_detected() -> None:
     duplicate = kinds("Table 1: First\nTable 1: Again\n")
     assert "table_number_gap" in gap
     assert "duplicate_table_number" in duplicate
+
+
+def test_body_table_callout_is_not_mistaken_for_caption() -> None:
+    text = "Table 1 shows the results.\nTable 1: Summary of results.\n"
+    assert "duplicate_table_number" not in kinds(text)
 
 
 def test_overfull_renderer_log_is_reviewed() -> None:
@@ -111,6 +127,8 @@ def test_contract_covers_semantic_and_formal_failure_classes() -> None:
 def test_writing_and_pipeline_route_semantics_gate_and_scanner() -> None:
     writing = WRITING_MANIFEST.read_text(encoding="utf-8")
     pipeline = PIPELINE_MANIFEST.read_text(encoding="utf-8")
+    assert "version: 1.11.0" in writing
+    assert "version: 1.12.0" in pipeline
     assert "../nature-shared/core/scholarly-surface-semantics.md" in writing
     assert "../nature-shared/core/scholarly-surface-semantics.md" in pipeline
     assert "../nature-shared/scripts/audit_scholarly_surface_semantics.py" in writing
