@@ -1,13 +1,13 @@
 name: academic-writing
-version: 1.10.0
+version: 1.11.0
 description: >
   Canonical journal-agnostic academic manuscript writing router. The historical
   nature-writing directory remains a compatibility/reference implementation
   layer, while this public skill resolves archetype, evidence, writing logic,
   figures/tables/visual representation, research, author voice, target
-  adaptation, formal-spine preservation, evidence-graded publication
-  optimization, editorial decision readiness, and final surface QA
-  independently from Nature.
+  adaptation, formal-spine preservation, scholarly surface semantics,
+  evidence-graded publication optimization, editorial decision readiness, and
+  final surface QA independently from Nature.
 
 always_load:
   - ../nature-shared/core/reader-workflow.md
@@ -24,10 +24,13 @@ always_load:
   - ../nature-shared/core/statistical-inference-uncertainty-contract.md
   - ../nature-shared/core/figure-evidence-planning.md
   - ../nature-shared/core/scientific-display-decision-contract.md
+  - ../nature-shared/core/scholarly-surface-semantics.md
   - ../nature-shared/core/manuscript-surface-qa.md
 
 references:
   on_demand:
+    - condition: manuscript-facing source needs a conservative scan for chat-style inline bold, code/monospace semantic leakage, internal enum/status labels, raw source-like math outside math mode, table numbering/caption anomalies, or overfull render-log signals
+      path: ../nature-shared/scripts/audit_scholarly_surface_semantics.py
     - condition: full manuscript, theory/proof section, formal bound, public-posting/submission readiness, or decision-relevant rewrite needs fail-closed atomic claim, definition, proof, source, number, availability, and cross-section verification
       path: ../nature-shared/core/atomic-claim-verification.md
     - condition: current paper type, target, reporting norm, writing convention, figure grammar, or review expectation is unfamiliar/uncertain and research is needed before imposing a template
