@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from pathlib import Path
 
 
@@ -9,6 +10,12 @@ CONTRACT = SHARED / "core" / "formal-spine-preservation.md"
 WRITING_MANIFEST = SKILLS / "academic-writing" / "manifest.yaml"
 PIPELINE_MANIFEST = SKILLS / "academic-paper-pipeline" / "manifest.yaml"
 ARCHETYPE = SHARED / "core" / "paper-archetype-atlas.md"
+
+
+def manifest_version(text: str) -> tuple[int, int, int]:
+    match = re.search(r"^version:\s*(\d+)\.(\d+)\.(\d+)\s*$", text, re.MULTILINE)
+    assert match, "manifest must contain a semantic version"
+    return tuple(int(x) for x in match.groups())
 
 
 def test_formal_spine_contract_covers_overcompression_regression() -> None:
@@ -56,14 +63,14 @@ def test_contract_does_not_reward_equation_density() -> None:
 
 def test_academic_writing_always_loads_formal_spine_contract() -> None:
     manifest = WRITING_MANIFEST.read_text(encoding="utf-8")
-    assert "version: 1.10.0" in manifest
+    assert manifest_version(manifest) >= (1, 10, 0)
     assert "../nature-shared/core/formal-spine-preservation.md" in manifest
     assert "formal-spine preservation" in manifest
 
 
 def test_iteration_pipeline_always_loads_formal_spine_contract() -> None:
     manifest = PIPELINE_MANIFEST.read_text(encoding="utf-8")
-    assert "version: 1.11.0" in manifest
+    assert manifest_version(manifest) >= (1, 11, 0)
     assert "../nature-shared/core/formal-spine-preservation.md" in manifest
     assert "formal-spine preservation" in manifest
 
