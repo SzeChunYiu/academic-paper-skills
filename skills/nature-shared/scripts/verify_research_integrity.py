@@ -24,14 +24,23 @@ SUPPORT_PASS = {"ENTAILS", "BOUNDS"}
 SOURCE_WARRANTS = {"source", "literature"}
 INTERNAL_WARRANTS = {"author_data", "analysis", "proof", "method_record"}
 VERIFICATION_METHODS = {
-    "registry_lookup", "publisher_or_primary_record", "fulltext_span_check",
-    "deterministic_recompute", "deterministic_derivation", "human_review",
-    "independent_model_with_retrieved_source", "authoritative_project_record",
+    "registry_lookup",
+    "publisher_or_primary_record",
+    "fulltext_span_check",
+    "deterministic_recompute",
+    "deterministic_derivation",
+    "human_review",
+    "independent_model_with_retrieved_source",
+    "authoritative_project_record",
 }
 SELF_ATTEST_METHODS = {"model_self_report", "authoring_model_judgment", "title_only", "metadata_only"}
 HIGH_RISK_CLASSES = {
-    "causal", "clinical_or_safety", "novelty_or_priority", "quantitative_result",
-    "legal_or_policy", "availability_or_compliance",
+    "causal",
+    "clinical_or_safety",
+    "novelty_or_priority",
+    "quantitative_result",
+    "legal_or_policy",
+    "availability_or_compliance",
 }
 STATUS_BLOCKING = {"RETRACTED", "WITHDRAWN"}
 STATUS_WARNING = {"CORRECTED", "EXPRESSION_OF_CONCERN", "UNKNOWN"}
@@ -48,6 +57,31 @@ def title_similarity(a: str, b: str) -> float:
     if not a or not b:
         return 0.0
     return 1.0 if a == b else SequenceMatcher(a=a, b=b).ratio()
+
+
+def author_family(value: str) -> str:
+    """Return a normalized family name from common scholarly name renderings."""
+    raw = unicodedata.normalize("NFKC", value or "").strip()
+    if not raw:
+        return ""
+    if "," in raw:
+        family = raw.split(",", 1)[0].strip()
+        return norm_text(family)
+    normalized = norm_text(raw)
+    return normalized.split()[-1] if normalized else ""
+
+
+def datacite_creator_name(creator: dict[str, Any]) -> str:
+    """Normalize DataCite creator metadata to Given Family when possible."""
+    given = str(creator.get("givenName", "")).strip()
+    family = str(creator.get("familyName", "")).strip()
+    if given or family:
+        return " ".join(x for x in (given, family) if x)
+    rendered = str(creator.get("name", "")).strip()
+    if "," in rendered:
+        family_part, given_part = (x.strip() for x in rendered.split(",", 1))
+        return " ".join(x for x in (given_part, family_part) if x)
+    return rendered
 
 
 def get_identifier(source: dict[str, Any], *schemes: str) -> str | None:
@@ -99,9 +133,15 @@ def request_json(url: str, timeout: float, user_agent: str) -> dict[str, Any]:
 
 def crossref_lookup(doi: str, *, timeout: float, user_agent: str, mailto: str | None) -> dict[str, Any]:
     suffix = f"?mailto={urllib.parse.quote(mailto)}" if mailto else ""
-    payload = request_json(f"https://api.crossref.org/works/{urllib.parse.quote(doi, safe='')}{suffix}", timeout, user_agent)
+    payload = request_json(
+        f"https://api.crossref.org/works/{urllib.parse.quote(doi, safe='')}{suffix}", timeout, user_agent
+    )
     message = payload.get("message", {})
-    updates = [norm_text(str(x.get("type", ""))) for x in (message.get("updated-by") or []) if isinstance(x, dict)]
+    updates = [
+        norm_text(str(x.get("type", "")))
+        for x in (message.get("updated-by") or [])
+        if isinstance(x, dict)
+    ]
     status = "ACTIVE"
     if any("retract" in x or "withdraw" in x for x in updates):
         status = "RETRACTED"
@@ -111,22 +151,33 @@ def crossref_lookup(doi: str, *, timeout: float, user_agent: str, mailto: str | 
         status = "CORRECTED"
     issued = message.get("issued", {}).get("date-parts", [[None]])
     return {
-        "provider": "crossref", "found": True, "doi": message.get("DOI", doi),
+        "provider": "crossref",
+        "found": True,
+        "doi": message.get("DOI", doi),
         "title": (message.get("title") or [""])[0],
-        "authors": [" ".join(filter(None, [a.get("given", ""), a.get("family", "")])).strip() for a in message.get("author", [])],
+        "authors": [
+            " ".join(filter(None, [a.get("given", ""), a.get("family", "")])).strip()
+            for a in message.get("author", [])
+        ],
         "year": issued[0][0] if issued and issued[0] else None,
-        "status": status, "raw_update_types": updates,
+        "status": status,
+        "raw_update_types": updates,
     }
 
 
 def datacite_lookup(doi: str, *, timeout: float, user_agent: str) -> dict[str, Any]:
-    payload = request_json(f"https://api.datacite.org/dois/{urllib.parse.quote(doi, safe='')}", timeout, user_agent)
+    payload = request_json(
+        f"https://api.datacite.org/dois/{urllib.parse.quote(doi, safe='')}", timeout, user_agent
+    )
     attrs = payload.get("data", {}).get("attributes", {})
     titles, creators = attrs.get("titles") or [], attrs.get("creators") or []
     return {
-        "provider": "datacite", "found": True, "doi": attrs.get("doi", doi),
+        "provider": "datacite",
+        "found": True,
+        "doi": attrs.get("doi", doi),
         "title": (titles[0].get("title") if titles else "") or "",
-        "authors": [c.get("name", "") for c in creators], "year": attrs.get("publicationYear"),
+        "authors": [datacite_creator_name(c) for c in creators],
+        "year": attrs.get("publicationYear"),
         "status": "ACTIVE" if attrs.get("isActive", True) else "UNKNOWN",
     }
 
@@ -138,9 +189,11 @@ def openalex_status(doi: str, *, timeout: float, user_agent: str) -> dict[str, A
         return {"provider": "openalex", "found": False, "status": "UNKNOWN"}
     work = results[0]
     return {
-        "provider": "openalex", "found": True,
+        "provider": "openalex",
+        "found": True,
         "doi": (work.get("doi") or "").removeprefix("https://doi.org/"),
-        "title": work.get("title") or "", "year": work.get("publication_year"),
+        "title": work.get("title") or "",
+        "year": work.get("publication_year"),
         "status": "RETRACTED" if work.get("is_retracted") else "ACTIVE",
     }
 
@@ -160,16 +213,27 @@ def pubmed_lookup(pmid: str, *, timeout: float, user_agent: str) -> dict[str, An
     pub_types = ["".join(x.itertext()) for x in article.findall(".//PublicationType")]
     authors = []
     for author in article.findall(".//Author"):
-        name = " ".join(x for x in ((author.findtext("ForeName") or "").strip(), (author.findtext("LastName") or "").strip()) if x)
+        name = " ".join(
+            x
+            for x in (
+                (author.findtext("ForeName") or "").strip(),
+                (author.findtext("LastName") or "").strip(),
+            )
+            if x
+        )
         if name:
             authors.append(name)
     year_node = article.find(".//PubDate/Year")
     return {
-        "provider": "pubmed", "found": True, "pmid": pmid,
+        "provider": "pubmed",
+        "found": True,
+        "pmid": pmid,
         "title": "".join(title_node.itertext()) if title_node is not None else "",
         "authors": authors,
         "year": int(year_node.text) if year_node is not None and (year_node.text or "").isdigit() else None,
-        "status": "RETRACTED" if any(norm_text(x) == "retracted publication" for x in pub_types) else "ACTIVE",
+        "status": "RETRACTED"
+        if any(norm_text(x) == "retracted publication" for x in pub_types)
+        else "ACTIVE",
         "publication_types": pub_types,
     }
 
@@ -183,15 +247,19 @@ def compare_identity(source: dict[str, Any], record: dict[str, Any]) -> tuple[bo
             problems.append(f"title mismatch (similarity={score:.3f})")
     if expected.get("year") and record.get("year") and int(expected["year"]) != int(record["year"]):
         problems.append(f"year mismatch ({expected['year']} != {record['year']})")
-    ea = [norm_text(str(x)) for x in expected.get("authors", []) if str(x).strip()]
-    aa = [norm_text(str(x)) for x in record.get("authors", []) if str(x).strip()]
-    if ea and aa and ea[0].split()[-1] != aa[0].split()[-1]:
-        problems.append(f"first-author mismatch ({ea[0].split()[-1]} != {aa[0].split()[-1]})")
+    expected_authors = [str(x) for x in expected.get("authors", []) if str(x).strip()]
+    actual_authors = [str(x) for x in record.get("authors", []) if str(x).strip()]
+    if expected_authors and actual_authors:
+        expected_family = author_family(expected_authors[0])
+        actual_family = author_family(actual_authors[0])
+        if expected_family and actual_family and expected_family != actual_family:
+            problems.append(f"first-author mismatch ({expected_family} != {actual_family})")
     return not problems, problems
 
 
 def live_verify_source(source: dict[str, Any], args: argparse.Namespace) -> dict[str, Any]:
-    doi, pmid = get_identifier(source, "doi", "datacite_doi"), get_identifier(source, "pmid")
+    doi = get_identifier(source, "doi", "datacite_doi")
+    pmid = get_identifier(source, "pmid")
     records: list[dict[str, Any]] = []
     errors: list[str] = []
     if doi:
@@ -220,11 +288,28 @@ def live_verify_source(source: dict[str, Any], args: argparse.Namespace) -> dict
     for record in found:
         ok, problems = compare_identity(source, record)
         identity.append({"provider": record.get("provider"), "match": ok, "problems": problems})
-    statuses = {str(x.get("status", "UNKNOWN")) for x in found}
-    status = next((x for x in ("RETRACTED", "CORRECTED", "EXPRESSION_OF_CONCERN", "ACTIVE") if x in statuses), "UNKNOWN")
+    statuses = {str(x.get("status", "UNKNOWN")).upper() for x in found}
+    status = next(
+        (
+            x
+            for x in (
+                "RETRACTED",
+                "WITHDRAWN",
+                "EXPRESSION_OF_CONCERN",
+                "CORRECTED",
+                "ACTIVE",
+            )
+            if x in statuses
+        ),
+        "UNKNOWN",
+    )
     return {
-        "source_id": source.get("source_id"), "verifiable_online": True,
-        "records": records, "identity_matches": identity, "status": status, "errors": errors,
+        "source_id": source.get("source_id"),
+        "verifiable_online": True,
+        "records": records,
+        "identity_matches": identity,
+        "status": status,
+        "errors": errors,
     }
 
 
@@ -239,12 +324,24 @@ def validate_ledger(ledger: dict[str, Any], *, live: bool, args: argparse.Namesp
     warnings: list[str] = []
     require_keys(
         ledger,
-        ("schema_version", "manuscript_id", "manuscript_fingerprint", "coverage_check", "claims", "sources", "evidence_receipts", "citation_usages"),
-        "ledger", errors,
+        (
+            "schema_version",
+            "manuscript_id",
+            "manuscript_fingerprint",
+            "coverage_check",
+            "claims",
+            "sources",
+            "evidence_receipts",
+            "citation_usages",
+        ),
+        "ledger",
+        errors,
     )
     sources = {str(x.get("source_id")): x for x in ledger.get("sources", []) if x.get("source_id")}
     claims = {str(x.get("claim_id")): x for x in ledger.get("claims", []) if x.get("claim_id")}
-    receipts = {str(x.get("receipt_id")): x for x in ledger.get("evidence_receipts", []) if x.get("receipt_id")}
+    receipts = {
+        str(x.get("receipt_id")): x for x in ledger.get("evidence_receipts", []) if x.get("receipt_id")
+    }
     author = str(ledger.get("authoring_agent_id", "")).strip()
     release_requested = str(ledger.get("release", {}).get("requested_state", "draft")) in RELEASE_STATES
 
@@ -269,8 +366,13 @@ def validate_ledger(ledger: dict[str, Any], *, live: bool, args: argparse.Namesp
         errors.append("ledger: coverage_check missing verifier_id")
     elif author and coverage_verifier == author:
         errors.append("ledger: coverage verifier must differ from authoring agent")
-    if str(coverage.get("verification_method", "")) not in {"human_review", "independent_model_with_retrieved_source"}:
-        errors.append(f"ledger: coverage_check uses inadmissible verification_method {coverage.get('verification_method')!r}")
+    if str(coverage.get("verification_method", "")) not in {
+        "human_review",
+        "independent_model_with_retrieved_source",
+    }:
+        errors.append(
+            f"ledger: coverage_check uses inadmissible verification_method {coverage.get('verification_method')!r}"
+        )
 
     for label, items, key in (
         ("source", ledger.get("sources", []), "source_id"),
@@ -286,29 +388,75 @@ def validate_ledger(ledger: dict[str, Any], *, live: bool, args: argparse.Namesp
     live_results: list[dict[str, Any]] = []
     max_age = int(getattr(args, "max_status_age_days", 30))
     for sid, source in sources.items():
-        require_keys(source, ("source_id", "source_type", "identifiers", "bibliographic"), f"source {sid}", errors)
-        if not any(str(x.get("value", "")).strip() for x in source.get("identifiers", []) if isinstance(x, dict)):
+        require_keys(
+            source,
+            ("source_id", "source_type", "identifiers", "bibliographic"),
+            f"source {sid}",
+            errors,
+        )
+        if not any(
+            str(x.get("value", "")).strip()
+            for x in source.get("identifiers", [])
+            if isinstance(x, dict)
+        ):
             errors.append(f"source {sid}: no stable or explicit identifier")
         require_keys(source.get("bibliographic", {}), ("title",), f"source {sid}.bibliographic", errors)
-        declared = str(source.get("declared_publication_status", "UNKNOWN"))
+
+        adjudicated = source.get("status_adjudication", {}).get("status") == "PASS"
+        declared = str(source.get("declared_publication_status", "UNKNOWN")).upper()
         if declared in STATUS_BLOCKING:
             errors.append(f"source {sid}: publication status is {declared}")
         elif declared in STATUS_WARNING:
             message = f"source {sid}: publication status is {declared}; dependent claims require explicit adjudication"
-            (errors if release_requested and source.get("status_adjudication", {}).get("status") != "PASS" else warnings).append(message)
+            (errors if release_requested and not adjudicated else warnings).append(message)
 
-        identity_checks, status_checks = source.get("identity_checks", []), source.get("status_checks", [])
+        identity_checks = source.get("identity_checks", [])
+        status_checks = source.get("status_checks", [])
         for check in [*identity_checks, *status_checks]:
-            require_keys(check, ("provider", "status", "checked_at", "verification_method", "verifier_id"), f"source {sid} check", errors)
+            require_keys(
+                check,
+                ("provider", "status", "checked_at", "verification_method", "verifier_id"),
+                f"source {sid} check",
+                errors,
+            )
             method = str(check.get("verification_method", ""))
             if method in SELF_ATTEST_METHODS or method not in VERIFICATION_METHODS:
                 errors.append(f"source {sid}: untrusted source-check verification_method {method!r}")
-        identity_pass = any(str(x.get("status")) == "MATCH" for x in identity_checks)
-        status_pass = any(str(x.get("status")) in {"ACTIVE", "CORRECTED"} and status_check_is_fresh(x, max_age) for x in status_checks)
-        if release_requested and status_checks and not status_pass and not live:
-            errors.append(f"source {sid}: stored publication-status check is invalid or older than {max_age} days")
 
-        live_identity = live_status = False
+        identity_pass = any(str(x.get("status", "")).upper() == "MATCH" for x in identity_checks)
+        all_statuses = {str(x.get("status", "UNKNOWN")).upper() for x in status_checks}
+        fresh_statuses = {
+            str(x.get("status", "UNKNOWN")).upper()
+            for x in status_checks
+            if status_check_is_fresh(x, max_age)
+        }
+        stored_blockers = sorted(all_statuses & STATUS_BLOCKING)
+        stored_adverse = sorted(all_statuses & {"CORRECTED", "EXPRESSION_OF_CONCERN"})
+        if stored_blockers:
+            errors.append(
+                f"source {sid}: stored publication-status check reports blocking status {', '.join(stored_blockers)}"
+            )
+        if stored_adverse:
+            message = (
+                f"source {sid}: stored publication-status check reports {', '.join(stored_adverse)}; "
+                "requires explicit adjudication"
+            )
+            (errors if release_requested and not adjudicated else warnings).append(message)
+
+        has_current_positive = "ACTIVE" in fresh_statuses or (
+            "CORRECTED" in fresh_statuses and adjudicated
+        )
+        unresolved_adverse = bool(stored_blockers) or (
+            bool(all_statuses & {"CORRECTED", "EXPRESSION_OF_CONCERN"}) and not adjudicated
+        )
+        status_pass = has_current_positive and not unresolved_adverse
+        if release_requested and status_checks and not status_pass and not live:
+            errors.append(
+                f"source {sid}: stored publication-status check is invalid or older than {max_age} days"
+            )
+
+        live_identity = False
+        live_status_pass = False
         if live:
             result = live_verify_source(source, args)
             live_results.append(result)
@@ -316,25 +464,42 @@ def validate_ledger(ledger: dict[str, Any], *, live: bool, args: argparse.Namesp
                 found = [x for x in result.get("records", []) if x.get("found")]
                 if not found:
                     errors.append(f"source {sid}: identifier not resolved by configured live registries")
-                live_identity = bool(result.get("identity_matches")) and any(x.get("match") for x in result["identity_matches"])
+                live_identity = bool(result.get("identity_matches")) and any(
+                    x.get("match") for x in result["identity_matches"]
+                )
                 if result.get("identity_matches") and not live_identity:
-                    problems = "; ".join(", ".join(x.get("problems", [])) for x in result["identity_matches"])
+                    problems = "; ".join(
+                        ", ".join(x.get("problems", [])) for x in result["identity_matches"]
+                    )
                     errors.append(f"source {sid}: live metadata mismatch: {problems}")
-                current = str(result.get("status", "UNKNOWN"))
-                live_status = current in {"ACTIVE", "CORRECTED"}
+                current = str(result.get("status", "UNKNOWN")).upper()
                 if current in STATUS_BLOCKING:
                     errors.append(f"source {sid}: live status is {current}")
                 elif current in STATUS_WARNING:
                     message = f"source {sid}: live status is {current}; requires explicit adjudication"
-                    (errors if release_requested and source.get("status_adjudication", {}).get("status") != "PASS" else warnings).append(message)
+                    (errors if release_requested and not adjudicated else warnings).append(message)
+                live_status_pass = current == "ACTIVE" or (current == "CORRECTED" and adjudicated)
 
         if release_requested and not (live_identity or identity_pass):
             errors.append(f"source {sid}: release requires a resolved identity check")
-        if release_requested and not (live_status or status_pass):
+        if release_requested and not (live_status_pass or status_pass):
             errors.append(f"source {sid}: release requires a current publication-status check")
 
     for rid, receipt in receipts.items():
-        require_keys(receipt, ("receipt_id", "claim_id", "warrant_type", "verification_method", "support_status", "scope_match", "verifier_id"), f"receipt {rid}", errors)
+        require_keys(
+            receipt,
+            (
+                "receipt_id",
+                "claim_id",
+                "warrant_type",
+                "verification_method",
+                "support_status",
+                "scope_match",
+                "verifier_id",
+            ),
+            f"receipt {rid}",
+            errors,
+        )
         cid = str(receipt.get("claim_id", ""))
         if cid not in claims:
             errors.append(f"receipt {rid}: unknown claim_id {cid}")
@@ -343,12 +508,14 @@ def validate_ledger(ledger: dict[str, Any], *, live: bool, args: argparse.Namesp
             errors.append(f"receipt {rid}: untrusted verification_method {method!r}")
         warrant = str(receipt.get("warrant_type", ""))
         if warrant in SOURCE_WARRANTS:
-            sid = str(receipt.get("source_id", ""))
-            if sid not in sources:
-                errors.append(f"receipt {rid}: source warrant points to unknown source {sid}")
+            source_id = str(receipt.get("source_id", ""))
+            if source_id not in sources:
+                errors.append(f"receipt {rid}: source warrant points to unknown source {source_id}")
             if not str(receipt.get("locator", "")).strip():
                 errors.append(f"receipt {rid}: source warrant requires an exact locator")
-            if not re.fullmatch(r"sha256:[0-9a-fA-F]{64}", str(receipt.get("evidence_fingerprint", ""))):
+            if not re.fullmatch(
+                r"sha256:[0-9a-fA-F]{64}", str(receipt.get("evidence_fingerprint", ""))
+            ):
                 errors.append(f"receipt {rid}: source warrant requires sha256 evidence_fingerprint")
         elif warrant in INTERNAL_WARRANTS:
             if not str(receipt.get("artifact_pointer", "")).strip():
@@ -361,17 +528,33 @@ def validate_ledger(ledger: dict[str, Any], *, live: bool, args: argparse.Namesp
         by_claim.setdefault(str(receipt.get("claim_id", "")), []).append(receipt)
 
     for cid, claim in claims.items():
-        require_keys(claim, ("claim_id", "location", "text", "claim_class", "risk", "release_status", "independent_check"), f"claim {cid}", errors)
-        status = str(claim.get("release_status", ""))
-        if status in FAIL_CLOSED or status not in ALLOWED_RELEASE:
-            errors.append(f"claim {cid}: non-closing release_status {status!r}")
+        require_keys(
+            claim,
+            (
+                "claim_id",
+                "location",
+                "text",
+                "claim_class",
+                "risk",
+                "release_status",
+                "independent_check",
+            ),
+            f"claim {cid}",
+            errors,
+        )
+        release_status = str(claim.get("release_status", ""))
+        if release_status in FAIL_CLOSED or release_status not in ALLOWED_RELEASE:
+            errors.append(f"claim {cid}: non-closing release_status {release_status!r}")
         claim_receipts = by_claim.get(cid, [])
-        if status != "NOT_APPLICABLE" and not claim_receipts:
+        if release_status != "NOT_APPLICABLE" and not claim_receipts:
             errors.append(f"claim {cid}: no evidence receipt")
-        if claim_receipts and not any(str(x.get("support_status")) in SUPPORT_PASS for x in claim_receipts):
+        if claim_receipts and not any(
+            str(x.get("support_status")) in SUPPORT_PASS for x in claim_receipts
+        ):
             errors.append(f"claim {cid}: no receipt with ENTAILS/BOUNDS support")
         if any(str(x.get("support_status")) == "CONTRADICTS" for x in claim_receipts):
             errors.append(f"claim {cid}: contradictory evidence receipt present")
+
         independent = claim.get("independent_check", {})
         if independent.get("status") != "PASS":
             errors.append(f"claim {cid}: independent_check must PASS")
@@ -380,27 +563,37 @@ def validate_ledger(ledger: dict[str, Any], *, live: bool, args: argparse.Namesp
             errors.append(f"claim {cid}: independent_check missing verifier_id")
         elif author and verifier == author:
             errors.append(f"claim {cid}: independent verifier must differ from authoring agent")
+
         claim_class = str(claim.get("claim_class", ""))
         if str(claim.get("risk", "")) == "high" or claim_class in HIGH_RISK_CLASSES:
             if claim.get("counterevidence_search", {}).get("status") not in {"DONE", "NOT_APPLICABLE"}:
-                errors.append(f"claim {cid}: high-risk claim requires counterevidence_search DONE/NOT_APPLICABLE")
-            if claim_class in {"causal", "clinical_or_safety", "novelty_or_priority", "legal_or_policy"} and not any(str(x.get("warrant_type")) in SOURCE_WARRANTS for x in claim_receipts):
+                errors.append(
+                    f"claim {cid}: high-risk claim requires counterevidence_search DONE/NOT_APPLICABLE"
+                )
+            if claim_class in {
+                "causal",
+                "clinical_or_safety",
+                "novelty_or_priority",
+                "legal_or_policy",
+            } and not any(str(x.get("warrant_type")) in SOURCE_WARRANTS for x in claim_receipts):
                 errors.append(f"claim {cid}: high-risk external claim requires source evidence")
 
     for index, citation in enumerate(ledger.get("citation_usages", []), 1):
         prefix = f"citation_usage[{index}]"
         require_keys(citation, ("citation_id", "source_id", "location", "claim_ids"), prefix, errors)
-        sid = str(citation.get("source_id", ""))
-        if sid not in sources:
-            errors.append(f"{prefix}: unknown source_id {sid}")
+        source_id = str(citation.get("source_id", ""))
+        if source_id not in sources:
+            errors.append(f"{prefix}: unknown source_id {source_id}")
         claim_ids = [str(x) for x in citation.get("claim_ids", [])]
         if not claim_ids:
             errors.append(f"{prefix}: citation is not mapped to any atomic claim")
         for cid in claim_ids:
             if cid not in claims:
                 errors.append(f"{prefix}: unknown claim_id {cid}")
-            elif not any(str(x.get("source_id", "")) == sid for x in by_claim.get(cid, [])):
-                errors.append(f"{prefix}: source {sid} has no evidence receipt for claim {cid}")
+            elif not any(
+                str(x.get("source_id", "")) == source_id for x in by_claim.get(cid, [])
+            ):
+                errors.append(f"{prefix}: source {source_id} has no evidence receipt for claim {cid}")
 
     cited = {str(x.get("source_id", "")) for x in ledger.get("citation_usages", [])}
     for sid, source in sources.items():
@@ -409,10 +602,15 @@ def validate_ledger(ledger: dict[str, Any], *, live: bool, args: argparse.Namesp
 
     return {
         "decision": "BLOCKED" if errors else "PASS",
-        "error_count": len(errors), "warning_count": len(warnings),
-        "errors": errors, "warnings": warnings, "live_source_checks": live_results,
+        "error_count": len(errors),
+        "warning_count": len(warnings),
+        "errors": errors,
+        "warnings": warnings,
+        "live_source_checks": live_results,
         "summary": {
-            "claims": len(claims), "sources": len(sources), "evidence_receipts": len(receipts),
+            "claims": len(claims),
+            "sources": len(sources),
+            "evidence_receipts": len(receipts),
             "citation_usages": len(ledger.get("citation_usages", [])),
         },
     }
@@ -421,8 +619,12 @@ def validate_ledger(ledger: dict[str, Any], *, live: bool, args: argparse.Namesp
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Validate a fail-closed research-integrity ledger.")
     parser.add_argument("ledger", type=Path)
-    parser.add_argument("--manuscript", type=Path, help="Exact final manuscript/artifact whose SHA-256 must match the ledger")
-    parser.add_argument("--online", action="store_true", help="Refresh DOI/PMID identity and retraction/status checks")
+    parser.add_argument(
+        "--manuscript", type=Path, help="Exact final manuscript/artifact whose SHA-256 must match the ledger"
+    )
+    parser.add_argument(
+        "--online", action="store_true", help="Refresh DOI/PMID identity and retraction/status checks"
+    )
     parser.add_argument("--max-status-age-days", type=int, default=30)
     parser.add_argument("--mailto", help="Contact email for Crossref polite-pool requests")
     parser.add_argument("--timeout", type=float, default=15.0)
@@ -437,7 +639,10 @@ def main() -> int:
     try:
         ledger = json.loads(args.ledger.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
-        print(json.dumps({"decision": "BLOCKED", "errors": [f"cannot read ledger: {exc}"]}), file=sys.stderr)
+        print(
+            json.dumps({"decision": "BLOCKED", "errors": [f"cannot read ledger: {exc}"]}),
+            file=sys.stderr,
+        )
         return 2
     report = validate_ledger(ledger, live=args.online, args=args)
     rendered = json.dumps(report, ensure_ascii=False, indent=2 if args.pretty else None)
