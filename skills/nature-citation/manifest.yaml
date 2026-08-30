@@ -1,5 +1,5 @@
 name: nature-citation
-version: 3.0.0
+version: 3.1.0
 description: >
   Declarative manifest for journal-agnostic evidence discovery plus optional
   explicit Nature/Science/Cell-family filtering. The legacy skill name is
@@ -10,11 +10,13 @@ always_load:
   - static/core/principles.md
   - static/core/chinese-mode.md
   - static/core/workflow.md
+  - ../nature-shared/core/research-integrity-verification.md
 
 runtime:
   default_scope: best-evidence
   general_script: scripts/academic_citation_search.py
   legacy_family_script: scripts/nature_citation.py
+  integrity_verifier: ../nature-shared/scripts/verify_research_integrity.py
   behavior: |
     General requests for references, citation support, or literature use
     best-evidence and MUST NOT silently inherit a Nature/CNS filter from the
@@ -22,10 +24,15 @@ runtime:
     the user explicitly requests Nature Portfolio, Science family, Cell Press,
     CNS/sister journals, or flagship-only sources. A named target journal affects
     citation rendering/compliance; it restricts evidence search only when the
-    user asks for same-journal or journal-filtered sources.
+    user asks for same-journal or journal-filtered sources. For manuscript-facing
+    citations, candidate discovery is not verification: bind each cited atomic
+    claim to inspected evidence and run the shared research-integrity gate before
+    any submission/publication-ready state.
 
 references:
   on_demand:
+    - condition: manuscript-facing citations need machine-checkable claim-to-source receipts, source identity/status verification, independent checking, or release gating
+      path: ../nature-shared/analysis-contracts/research-integrity-ledger.schema.json
     - condition: any named target journal or citation style needs submission-ready rendering or exact reference-format compliance
       path: ../nature-shared/journal-formats/journal-resolution.md
     - condition: a target publisher/venue family needs fallback context before an exact guide is available
