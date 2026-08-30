@@ -1,12 +1,13 @@
 name: academic-writing
-version: 1.9.0
+version: 1.10.0
 description: >
   Canonical journal-agnostic academic manuscript writing router. The historical
   nature-writing directory remains a compatibility/reference implementation
   layer, while this public skill resolves archetype, evidence, writing logic,
   figures/tables/visual representation, research, author voice, target
-  adaptation, evidence-graded publication optimization, editorial decision
-  readiness, and final surface QA independently from Nature.
+  adaptation, formal-spine preservation, evidence-graded publication
+  optimization, editorial decision readiness, and final surface QA
+  independently from Nature.
 
 always_load:
   - ../nature-shared/core/reader-workflow.md
@@ -17,6 +18,7 @@ always_load:
   - ../nature-shared/core/sentence-logic-and-cohesion.md
   - ../nature-shared/core/explanatory-sufficiency.md
   - ../nature-shared/core/manuscript-content-selection.md
+  - ../nature-shared/core/formal-spine-preservation.md
   - ../nature-shared/core/study-protocol-conduct-contract.md
   - ../nature-shared/core/data-integrity-stewardship-contract.md
   - ../nature-shared/core/statistical-inference-uncertainty-contract.md
