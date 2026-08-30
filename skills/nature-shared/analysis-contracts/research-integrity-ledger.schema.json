@@ -33,6 +33,30 @@
         "value": {"type": "string", "minLength": 1}
       }
     },
+    "sourceIdentityCheck": {
+      "type": "object",
+      "required": ["provider", "status", "checked_at", "verification_method", "verifier_id"],
+      "properties": {
+        "provider": {"type": "string", "minLength": 1},
+        "status": {"enum": ["MATCH", "PARTIAL", "MISMATCH", "NOT_FOUND", "UNAVAILABLE"]},
+        "checked_at": {"type": "string", "minLength": 1},
+        "verification_method": {"enum": ["registry_lookup", "publisher_or_primary_record", "human_review", "authoritative_project_record"]},
+        "verifier_id": {"type": "string", "minLength": 1},
+        "notes": {"type": "string"}
+      }
+    },
+    "sourceStatusCheck": {
+      "type": "object",
+      "required": ["provider", "status", "checked_at", "verification_method", "verifier_id"],
+      "properties": {
+        "provider": {"type": "string", "minLength": 1},
+        "status": {"enum": ["ACTIVE", "CORRECTED", "RETRACTED", "WITHDRAWN", "EXPRESSION_OF_CONCERN", "UNKNOWN"]},
+        "checked_at": {"type": "string", "minLength": 1},
+        "verification_method": {"enum": ["registry_lookup", "publisher_or_primary_record", "human_review", "authoritative_project_record"]},
+        "verifier_id": {"type": "string", "minLength": 1},
+        "notes": {"type": "string"}
+      }
+    },
     "source": {
       "type": "object",
       "required": ["source_id", "source_type", "identifiers", "bibliographic"],
@@ -50,8 +74,15 @@
             "venue": {"type": "string"}
           }
         },
-        "declared_publication_status": {
-          "enum": ["ACTIVE", "CORRECTED", "RETRACTED", "WITHDRAWN", "EXPRESSION_OF_CONCERN", "UNKNOWN"]
+        "declared_publication_status": {"enum": ["ACTIVE", "CORRECTED", "RETRACTED", "WITHDRAWN", "EXPRESSION_OF_CONCERN", "UNKNOWN"]},
+        "identity_checks": {"type": "array", "items": {"$ref": "#/$defs/sourceIdentityCheck"}},
+        "status_checks": {"type": "array", "items": {"$ref": "#/$defs/sourceStatusCheck"}},
+        "status_adjudication": {
+          "type": "object",
+          "properties": {
+            "status": {"enum": ["PASS", "BLOCKED", "NOT_DONE"]},
+            "notes": {"type": "string"}
+          }
         },
         "bibliography_only": {"type": "boolean"}
       }
@@ -72,20 +103,9 @@
         "claim_id": {"type": "string", "pattern": "^C[0-9A-Za-z_.:-]+$"},
         "location": {"type": "string", "minLength": 1},
         "text": {"type": "string", "minLength": 1},
-        "claim_class": {
-          "enum": [
-            "definition", "empirical_result", "formal_claim", "method", "interpretation", "literature_fact",
-            "figure_or_table", "statistics", "availability_or_compliance", "causal", "clinical_or_safety",
-            "novelty_or_priority", "quantitative_result", "legal_or_policy", "quotation", "other"
-          ]
-        },
+        "claim_class": {"enum": ["definition", "empirical_result", "formal_claim", "method", "interpretation", "literature_fact", "figure_or_table", "statistics", "availability_or_compliance", "causal", "clinical_or_safety", "novelty_or_priority", "quantitative_result", "legal_or_policy", "quotation", "other"]},
         "risk": {"enum": ["normal", "high"]},
-        "release_status": {
-          "enum": [
-            "VERIFIED", "BOUNDED_INFERENCE", "COHERENT_DEFINITION", "NOT_APPLICABLE", "SUPPORTED_INTERNAL",
-            "UNRESOLVED", "CONTRADICTED", "BLOCKED", "NOT_ASSESSABLE"
-          ]
-        },
+        "release_status": {"enum": ["VERIFIED", "BOUNDED_INFERENCE", "COHERENT_DEFINITION", "NOT_APPLICABLE", "SUPPORTED_INTERNAL", "UNRESOLVED", "CONTRADICTED", "BLOCKED", "NOT_ASSESSABLE"]},
         "independent_check": {"$ref": "#/$defs/independentCheck"},
         "counterevidence_search": {
           "type": "object",
@@ -107,12 +127,7 @@
         "locator": {"type": "string"},
         "evidence_fingerprint": {"type": "string", "pattern": "^sha256:[0-9a-fA-F]{64}$"},
         "artifact_pointer": {"type": "string"},
-        "verification_method": {
-          "enum": [
-            "registry_lookup", "publisher_or_primary_record", "fulltext_span_check", "deterministic_recompute",
-            "deterministic_derivation", "human_review", "independent_model_with_retrieved_source", "authoritative_project_record"
-          ]
-        },
+        "verification_method": {"enum": ["registry_lookup", "publisher_or_primary_record", "fulltext_span_check", "deterministic_recompute", "deterministic_derivation", "human_review", "independent_model_with_retrieved_source", "authoritative_project_record"]},
         "support_status": {"enum": ["ENTAILS", "BOUNDS", "PARTIAL", "CONTRADICTS", "NOT_CHECKED"]},
         "scope_match": {"enum": ["MATCH", "NARROWER", "BROADER", "MISMATCH", "NOT_CHECKED"]},
         "verifier_id": {"type": "string"},
