@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import re
 import sys
 from pathlib import Path
 
@@ -21,6 +22,12 @@ spec.loader.exec_module(mod)
 
 def kinds(text: str) -> set[str]:
     return {f.kind for f in mod.audit_text(text)}
+
+
+def manifest_version(text: str) -> tuple[int, int, int]:
+    match = re.search(r"^version:\s*(\d+)\.(\d+)\.(\d+)\s*$", text, re.MULTILINE)
+    assert match, "manifest must contain a semantic version"
+    return tuple(int(x) for x in match.groups())
 
 
 def test_flags_chat_style_bold_and_monospace_semantic_leakage() -> None:
@@ -127,8 +134,8 @@ def test_contract_covers_semantic_and_formal_failure_classes() -> None:
 def test_writing_and_pipeline_route_semantics_gate_and_scanner() -> None:
     writing = WRITING_MANIFEST.read_text(encoding="utf-8")
     pipeline = PIPELINE_MANIFEST.read_text(encoding="utf-8")
-    assert "version: 1.11.0" in writing
-    assert "version: 1.12.0" in pipeline
+    assert manifest_version(writing) >= (1, 11, 0)
+    assert manifest_version(pipeline) >= (1, 12, 0)
     assert "../nature-shared/core/scholarly-surface-semantics.md" in writing
     assert "../nature-shared/core/scholarly-surface-semantics.md" in pipeline
     assert "../nature-shared/scripts/audit_scholarly_surface_semantics.py" in writing
