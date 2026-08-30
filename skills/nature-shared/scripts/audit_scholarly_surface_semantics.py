@@ -41,16 +41,19 @@ ALL_CAPS_MULTIWORD = re.compile(
     r"\b[A-Z][A-Z0-9-]{3,}(?:\s+[A-Z][A-Z0-9/-]{2,}){1,5}\b"
 )
 # Raw source-like math that commonly leaks from Markdown/code into prose. The
-# line is masked for inline/display math and code before this regex is applied.
+# line is masked for inline/display math and literal code before this regex is applied.
 RAW_MATH_TOKEN = re.compile(
     r"\b[A-Za-z][A-Za-z0-9]*(?:_[A-Za-z0-9{}]+)+(?:\^\{?[-+*A-Za-z0-9]+\}?)?"
     r"|\b[A-Za-z][A-Za-z0-9]*\^\{?[*A-Za-z0-9+-]+\}?"
 )
 OVERFULL_BOX = re.compile(r"Overfull \\(?:hbox|vbox)")
-TABLE_CAPTION = re.compile(r"\bTable\s+(?P<num>\d+)\s*[:.]", re.IGNORECASE)
+TABLE_CAPTION = re.compile(r"^\s*(?:#+\s*)?Table\s+(?P<num>\d+)\s*[:.]", re.IGNORECASE)
 LATEX_TABLE_BEGIN = re.compile(r"\\begin\{table\*?\}")
 LATEX_TABLE_END = re.compile(r"\\end\{table\*?\}")
 LATEX_CAPTION = re.compile(r"\\caption(?:\[[^\]]*\])?\{")
+LATEX_DISPLAY_BEGIN = re.compile(
+    r"\\begin\{(?P<env>displaymath|equation\*?|align\*?|gather\*?|multline\*?)\}"
+)
 
 
 def _mask_spans(line: str) -> str:
@@ -64,6 +67,8 @@ def _mask_spans(line: str) -> str:
         re.compile(r"\\\[.*?\\\]"),
         re.compile(r"\\\(.*?\\\)"),
         re.compile(r"`[^`\n]*`"),
+        re.compile(r"\\texttt\{[^{}]*\}"),
+        re.compile(r"\\verb(?P<delim>[^A-Za-z0-9\s])[^\n]*?(?P=delim)"),
     )
     for pattern in patterns:
         masked = pattern.sub(lambda m: " " * len(m.group(0)), masked)
@@ -134,7 +139,8 @@ def _audit_latex_tables(findings: list[Finding], lines: list[str]) -> None:
 def _audit_table_numbering(findings: list[Finding], lines: list[str]) -> None:
     captions: list[tuple[int, int]] = []
     for idx, line in enumerate(lines, 1):
-        for match in TABLE_CAPTION.finditer(line):
+        match = TABLE_CAPTION.search(line)
+        if match:
             captions.append((idx, int(match.group("num"))))
     if not captions:
         return
@@ -186,8 +192,22 @@ def audit_text(text: str) -> list[Finding]:
         )
 
         if in_display_math is not None:
-            if (in_display_math == "$$" and "$$" in line) or (in_display_math == "\\[" and "\\]" in line):
+            if (
+                (in_display_math == "$$" and "$$" in line)
+                or (in_display_math == "\\[" and "\\]" in line)
+                or (
+                    in_display_math.startswith("env:")
+                    and re.search(rf"\\end\{{{re.escape(in_display_math[4:])}\}}", line)
+                )
+            ):
                 in_display_math = None
+            continue
+
+        display_begin = LATEX_DISPLAY_BEGIN.search(line)
+        if display_begin:
+            env = display_begin.group("env")
+            if not re.search(rf"\\end\{{{re.escape(env)}\}}", line[display_begin.end():]):
+                in_display_math = f"env:{env}"
             continue
         if line.count("$$") % 2 == 1:
             in_display_math = "$$"
