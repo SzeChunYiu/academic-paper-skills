@@ -113,6 +113,12 @@ def section_spans(text: str) -> list[tuple[str, int, int]]:
     return spans
 
 
+def normalize_section_title(title: str) -> str:
+    value = title.casefold().strip()
+    value = re.sub(r"^\d+(?:\.\d+)*[.)]?\s+", "", value)
+    return " ".join(value.split())
+
+
 def audit(text: str) -> dict[str, Any]:
     findings: list[dict[str, Any]] = []
     body = body_before_references(text)
@@ -176,7 +182,8 @@ def audit(text: str) -> dict[str, Any]:
             detail=f"{defensive_total} matches; {defensive_per_1000:.2f} per 1000 words",
         )
 
-    opaque_counts: Counter[str] = Counter(match.group(0) for match in OPAQUE_ID_RE.finditer(body))
+    opaque_matches = list(OPAQUE_ID_RE.finditer(body))
+    opaque_counts: Counter[str] = Counter(match.group(0) for match in opaque_matches)
     if len(opaque_counts) >= 6 or sum(opaque_counts.values()) >= 18:
         add_finding(
             findings,
@@ -189,25 +196,47 @@ def audit(text: str) -> dict[str, Any]:
             detail=", ".join(f"{key}×{value}" for key, value in opaque_counts.most_common(12)),
         )
 
-    for title, start, end in section_spans(body):
-        normalized = " ".join(title.casefold().split())
-        if any(name in normalized for name in SETUP_TITLES):
-            content = body[start:end]
-            count = len(words(content))
-            if count < 140:
-                add_finding(
-                    findings,
-                    code="short_setup_section_review",
-                    severity="review",
-                    message=(
-                        "A central setup/formulation section is very short. Do not expand by quota; verify instead that every object, target, assumption, comparator role, and experimental dependency used later is already defined or activated."
-                    ),
-                    text=text,
-                    start=start,
-                    end=min(end, start + 120),
-                    token=title,
-                    detail=f"approximately {count} words",
-                )
+    spans = section_spans(body)
+    results_start: int | None = None
+    for title, start, _end in spans:
+        normalized = normalize_section_title(title)
+        if normalized == "results" or normalized.startswith("results "):
+            results_start = start
+            break
+
+    first_opaque: dict[str, int] = {}
+    for match in opaque_matches:
+        first_opaque.setdefault(match.group(0), match.start())
+    result_first_ids = sorted(
+        token for token, position in first_opaque.items() if results_start is not None and position >= results_start
+    )
+
+    # Shortness by itself is never a warning: that would be a disguised word-count
+    # quota. We only raise this review signal when a compact setup is followed by
+    # paper-private IDs whose first occurrence is already inside Results, which is
+    # concrete evidence that reader-state activation may have been deferred too far.
+    if result_first_ids:
+        for title, start, end in spans:
+            normalized = normalize_section_title(title)
+            if not any(name in normalized for name in SETUP_TITLES):
+                continue
+            count = len(words(body[start:end]))
+            if count >= 140:
+                continue
+            add_finding(
+                findings,
+                code="short_setup_section_review",
+                severity="review",
+                message=(
+                    "A compact setup/formulation section is followed by paper-private identifiers first introduced in Results. Do not expand by quota; verify whether the missing reader-state activation, definitions, comparator roles, or experiment rationale belong before the result-bearing use."
+                ),
+                text=text,
+                start=start,
+                end=min(end, start + 120),
+                token=title,
+                detail=f"approximately {count} words; first-in-Results IDs: {', '.join(result_first_ids[:12])}",
+            )
+            break
 
     counts = Counter(item["severity"] for item in findings)
     return {
@@ -220,10 +249,12 @@ def audit(text: str) -> dict[str, Any]:
             "defensive_phrase_count": defensive_total,
             "defensive_phrases_per_1000_words": round(defensive_per_1000, 3),
             "opaque_id_occurrences": sum(opaque_counts.values()),
+            "opaque_ids_first_seen_in_results": result_first_ids,
         },
         "notes": [
             "All findings are conservative review signals; section sufficiency, necessary caveats, and justified precision require contextual scientific judgment.",
             "The scanner does not impose a universal word count, significant-figure rule, or ban on caveats/experiment IDs.",
+            "Short setup sections are not flagged solely for length; the setup review requires a downstream reader-activation signal.",
         ],
     }
 
