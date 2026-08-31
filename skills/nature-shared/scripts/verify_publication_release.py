@@ -413,7 +413,11 @@ def _validate_zip_package(
 
     try:
         with zipfile.ZipFile(path) as archive:
-            infos = [info for info in archive.infolist() if not info.is_dir()]
+            # Exact package membership covers every central-directory entry.  Do
+            # not trust ``ZipInfo.is_dir()`` as a reason to skip an entry: it is
+            # inferred only from a trailing slash, and such an entry may still
+            # carry undeclared bytes.
+            infos = archive.infolist()
             actual_names = [info.filename for info in infos]
             for name, count in Counter(actual_names).items():
                 if count > 1:
