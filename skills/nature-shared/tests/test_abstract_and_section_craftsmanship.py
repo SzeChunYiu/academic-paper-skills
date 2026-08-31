@@ -192,7 +192,7 @@ def test_excellence_gate_mandates_abstract_and_section_craftsmanship() -> None:
     text = EXCELLENCE.read_text(encoding="utf-8").lower()
     for marker in (
         "mandatory contract loading",
-        "abstract information budget",
+        "abstract-information-budget.md",
         "section-function and craftsmanship map",
         "during abstract drafting and finalization",
         "q0",
@@ -208,18 +208,19 @@ def test_excellence_gate_mandates_abstract_and_section_craftsmanship() -> None:
         "all e1–e9 applicable gates pass",
     ):
         assert marker in text, marker
+    assert "abstract regime and information budget" in text
 
 
-def test_existing_skill_manifests_route_through_mandatory_excellence_gate() -> None:
+def test_manifests_directly_load_new_contracts_and_tools() -> None:
     writing = WRITING.read_text(encoding="utf-8")
     pipeline = PIPELINE.read_text(encoding="utf-8")
     reviewer = REVIEWER.read_text(encoding="utf-8")
-    gate = "../nature-shared/core/manuscript-excellence-release-gate.md"
     for text in (writing, pipeline, reviewer):
-        assert gate in text
-    # This change intentionally uses the already-always-loaded excellence gate as
-    # the transitive mandatory router instead of duplicating four new entries in
-    # three manifests. Existing version floors still guarantee that routing layer.
-    assert _version(writing) >= (1, 14, 0)
-    assert _version(pipeline) >= (1, 16, 0)
-    assert _version(reviewer) >= (3, 1, 0)
+        assert "../nature-shared/core/manuscript-excellence-release-gate.md" in text
+        assert "../nature-shared/core/abstract-information-budget.md" in text
+        assert "../nature-shared/core/manuscript-section-craftsmanship.md" in text
+        assert "../nature-shared/scripts/audit_abstract_information.py" in text
+        assert "../nature-shared/research/section-specific-academic-writing-evidence-2026-08-31.md" in text
+    assert _version(writing) >= (1, 15, 0)
+    assert _version(pipeline) >= (1, 17, 0)
+    assert _version(reviewer) >= (3, 2, 0)
