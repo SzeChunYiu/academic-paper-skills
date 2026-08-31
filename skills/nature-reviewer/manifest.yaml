@@ -1,5 +1,5 @@
 name: nature-reviewer
-version: 3.1.0
+version: 3.2.0
 description: >
   Declarative manifest for journal-aware pre-submission editor/reviewer
   simulation. The legacy skill name remains for compatibility; review criteria
@@ -8,7 +8,8 @@ description: >
   evidence expectations but never substitute for official criteria or manuscript facts.
   Review also checks evidence-graded acceptance optimization, journal acceptance-
   readiness, adversarial falsification and confirmation-bias control, whole-paper
-  argument architecture, section functional sufficiency, reader-state activation,
+  argument architecture, abstract information budgeting, section-specific
+  craftsmanship and functional sufficiency, reader-state activation,
   venue-constrained section/display allocation and manuscript budget efficiency,
   discussion depth, epistemic-rhetorical calibration, numerical display precision,
   standalone zero-context reader comprehension, terminology/definition independence,
@@ -22,6 +23,8 @@ always_load:
   - ../nature-shared/core/editor-reviewer-decision-engine.md
   - ../nature-shared/core/adversarial-review-bias-control.md
   - ../nature-shared/core/manuscript-excellence-release-gate.md
+  - ../nature-shared/core/abstract-information-budget.md
+  - ../nature-shared/core/manuscript-section-craftsmanship.md
   - ../nature-shared/core/venue-constrained-manuscript-budget.md
   - ../nature-shared/core/manuscript-narrative-architecture.md
   - ../nature-shared/core/epistemic-rhetoric-and-qualification.md
@@ -31,6 +34,10 @@ always_load:
 
 references:
   on_demand:
+    - condition: reviewer/editor should conservatively audit whether an abstract is overloaded with numerical substories, raw formatter precision, private experiment/version IDs, inferential-detail stacks or defensive boundaries; or should apply an exact supplied abstract word/reference rule while preserving reporting-mandated quantitative completeness
+      path: ../nature-shared/scripts/audit_abstract_information.py
+    - condition: reviewer/editor needs section-specific evidence and transfer limits for titles/abstracts, Introductions, Methods, Results, Discussion, displays, formal surfaces, references, support and availability, including cross-disciplinary genre variation and AI-abstract failure evidence
+      path: ../nature-shared/research/section-specific-academic-writing-evidence-2026-08-31.md
     - condition: reviewer/editor needs to inspect a target-specific word/page/display/reference/legend budget ledger and determine whether central reader/evidence functions are underfunded or secondary positioning/provenance material is overweight
       path: ../nature-shared/analysis-contracts/manuscript-budget.schema.json
     - condition: reviewer/editor needs deterministic budget validation for hard-limit excess, unresolved page measurement, underdeveloped P0-P3 sections, soft-allocation excess, or revision-reserve exhaustion
