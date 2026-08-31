@@ -72,6 +72,7 @@ Load as applicable:
 
 - `manuscript-narrative-architecture.md`
 - `manuscript-section-craftsmanship.md`
+- `manuscript-element-justification.md`
 - `explanatory-sufficiency.md`
 - `terminology-ledger.md`
 - `manuscript-content-selection.md`
@@ -83,6 +84,7 @@ Produce/freeze:
 
 - question -> bounded answer -> evidence progression -> alternative/boundary -> meaning;
 - section-function map;
+- hierarchical element-justification map at least through the paragraph level for substantial manuscript architecture;
 - reader-state activation map;
 - main-versus-support allocation;
 - target budget snapshot if applicable.
@@ -103,6 +105,7 @@ Load only relevant detailed contracts, for example:
 
 - `abstract-information-budget.md` for abstract;
 - `manuscript-section-craftsmanship.md` for the active section;
+- `manuscript-element-justification.md` for substantial paragraph drafting or whenever a paragraph/sentence/citation/equation/display must justify its necessity, placement, representation, or opportunity cost;
 - `sentence-logic-and-cohesion.md` only when local flow is difficult;
 - `natural-scholarly-prose.md` / `author-voice-profile.md` during prose realization after scientific logic is fixed;
 - `numerical-reporting-precision.md` when rendering claim-bearing numbers;
@@ -120,6 +123,7 @@ Load the contract(s) corresponding to the question being audited, plus the small
 
 Examples:
 
+- element necessity/placement/redundancy -> `manuscript-element-justification.md` + its ledger/verifier when a machine-checkable audit is useful;
 - abstract density -> `abstract-information-budget.md` + `audit_abstract_information.py`;
 - reader independence -> `standalone-manuscript-reader-contract.md` + `audit_standalone_manuscript.py`;
 - surface leakage -> `scholarly-surface-semantics.md` + scanner;
@@ -139,6 +143,7 @@ Load:
 - concern IDs and resolution tests;
 - changed evidence/results;
 - local section craftsmanship/narrative contract;
+- `manuscript-element-justification.md` when adding, deleting, moving, merging, compressing, or replacing manuscript material;
 - any scientific contract directly implicated by the concern.
 
 Avoid loading unrelated closed concerns and full historical reviewer prose.
@@ -157,6 +162,7 @@ Load:
 - `paper-archetype-atlas.md` so evidence, explanation and display expectations are judged against the actual paper class;
 - `standalone-manuscript-reader-contract.md` for zero-context reader judgment;
 - `manuscript-section-craftsmanship.md` when section-function quality is in scope;
+- `manuscript-element-justification.md` for paragraph-level necessity and targeted sentence/citation/equation/display deletion challenges;
 - target decision contract/publication model;
 - `manuscript-excellence-release-gate.md` for global communication/readiness checks;
 - atomic/integrity/statistics/formal contracts when the reviewer is actually evaluating those claims.
@@ -170,6 +176,7 @@ Use only when the current manuscript is being considered final/submission/public
 Load all applicable final gates, including:
 
 - `manuscript-excellence-release-gate.md`;
+- `manuscript-element-justification.md` with at least full paragraph-level coverage and targeted sentence-level escalation for risky/central passages;
 - `atomic-claim-verification.md`;
 - `research-integrity-verification.md`;
 - `consistency-sweep.md`;
@@ -182,6 +189,20 @@ Load all applicable final gates, including:
 This is intentionally the widest context mode.
 
 ## 3. Task-specific bundles
+
+### ELEMENT JUSTIFICATION task
+
+Trigger when deciding whether manuscript material should exist, where it belongs, whether it is redundant, whether a paragraph/sentence/formal/citation/display element earns scarce space, or whether a revision should replace rather than append.
+
+Load:
+
+- `manuscript-element-justification.md`
+- `manuscript-content-selection.md` when destination is in question
+- `sentence-logic-and-cohesion.md` when the issue is local dependency/cohesion
+- `manuscript-budget-utilization.md` when opportunity cost under a venue limit matters
+- the relevant specialized contract for citations, formal elements, statistics, or displays when the element is claim-bearing
+
+Use paragraph-level auditing by default for substantial prose; escalate to sentence/clause level only when risk or ambiguity justifies the extra context.
 
 ### FORMAL task
 
@@ -282,6 +303,7 @@ The full manuscript is justified for:
 
 - macro-argument architecture;
 - clean-reader self-containment review;
+- paragraph-level element-justification coverage;
 - terminology/number/claim consistency;
 - global section allocation;
 - editor/reviewer simulation;
@@ -331,8 +353,9 @@ If the checkpoint conflicts with the current manuscript/evidence artifacts, the 
 Do not turn context routing into a bureaucracy that costs more than it saves.
 
 - Short one-off edits can use a minimal local packet without creating every ledger.
-- Machine-checkable checkpoints are most useful for long, multi-session, multi-review manuscripts.
+- Machine-checkable checkpoints and element ledgers are most useful for long, multi-session, multi-review manuscripts and final paragraph-level audits.
 - Do not create a new bundle for every minor prose issue.
 - Do not load a contract solely because its name sounds related; use its trigger.
+- The universal element-justification invariant does **not** require a clause-level ledger for ordinary fluent prose; audit depth is proportional to risk.
 
 The optimization target is **scientific correctness per unit of active context and session effort**, not minimum token count in isolation.
