@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import importlib.util
+import io
 import json
 import re
 import sys
@@ -58,6 +59,26 @@ ARTIFACT_KEYS = {"artifact_id", "role", "path", "sha256", "byte_count"}
 ZIP_PACKAGE_KEYS = {"format", "path", "sha256", "byte_count", "members"}
 FILE_SET_PACKAGE_KEYS = {"format", "members"}
 PACKAGE_MEMBER_KEYS = {"member_path", "artifact_id"}
+LOCAL_ABSOLUTE_PATH_PATTERNS = (
+    (
+        "POSIX user-home path",
+        re.compile(
+            rb"(?<![A-Za-z0-9])/(?:Users|home)/[A-Za-z0-9._-]+"
+            rb"(?:/|(?=[\x00\s\"'}>,:]))"
+        ),
+    ),
+    (
+        "macOS private temporary path",
+        re.compile(rb"(?<![A-Za-z0-9])/private/var/folders/"),
+    ),
+    (
+        "Windows user-home path",
+        re.compile(
+            rb"(?i)(?<![A-Za-z0-9])[A-Z]:[\\/]+Users[\\/]+[A-Za-z0-9._-]+"
+            rb"(?:[\\/]|(?=[\x00\s\"'}>,:]))"
+        ),
+    ),
+)
 
 
 def _sha256(data: bytes) -> str:
@@ -113,6 +134,32 @@ def _check_digest(value: object, label: str, errors: list[str]) -> None:
         errors.append(f"{label}: sha256 must be sha256:<64 hex>")
 
 
+def _scan_local_absolute_paths(data: bytes, label: str, errors: list[str]) -> None:
+    """Reject high-confidence workstation paths without echoing private values."""
+    for family, pattern in LOCAL_ABSOLUTE_PATH_PATTERNS:
+        if pattern.search(data):
+            errors.append(f"{label}: payload contains local absolute path ({family})")
+
+
+def _scan_artifact_payload(
+    path: Path, data: bytes, artifact_id: str, errors: list[str]
+) -> None:
+    _scan_local_absolute_paths(data, artifact_id, errors)
+    if path.suffix.casefold() != ".zip":
+        return
+    try:
+        with zipfile.ZipFile(io.BytesIO(data)) as archive:
+            for info in archive.infolist():
+                if info.is_dir() and not archive.read(info):
+                    continue
+                member_data = archive.read(info)
+                _scan_local_absolute_paths(
+                    member_data, f"{artifact_id}!{info.filename}", errors
+                )
+    except (zipfile.BadZipFile, RuntimeError, OSError) as exc:
+        errors.append(f"{artifact_id}: cannot inspect ZIP artifact payload: {exc}")
+
+
 def _read_artifact(
     artifact: dict[str, Any], root: Path, errors: list[str]
 ) -> tuple[Path | None, bytes | None]:
@@ -143,6 +190,7 @@ def _read_artifact(
         errors.append(
             f"{artifact_id}: byte_count mismatch ({len(data)} != {expected_bytes})"
         )
+    _scan_artifact_payload(path, data, artifact_id, errors)
     return path, data
 
 
