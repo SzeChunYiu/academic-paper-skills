@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/SzeChunYiu/academic-paper-skills/schemas/manuscript-element-justification-ledger.schema.json",
+  "title": "Manuscript element justification ledger",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "manuscript_id", "stage", "scope", "elements", "release"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "manuscript_id": {"type": "string", "minLength": 1},
+    "stage": {"enum": ["planning", "draft", "review", "final", "production"]},
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["surface", "coverage"],
+      "properties": {
+        "surface": {"type": "string", "minLength": 1},
+        "coverage": {"enum": ["targeted", "all_sections", "all_paragraphs", "all_sentences", "full_manuscript_mixed"]},
+        "notes": {"type": "string"}
+      }
+    },
+    "elements": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/element"}
+    },
+    "release": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["decision"],
+      "properties": {
+        "decision": {"enum": ["PASS", "REVIEW", "UNRESOLVED", "BLOCKED"]},
+        "notes": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  },
+  "$defs": {
+    "element": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "element_id",
+        "element_type",
+        "parent_id",
+        "importance",
+        "location",
+        "reader_question",
+        "functions",
+        "incoming_dependency",
+        "contribution",
+        "outgoing_dependency",
+        "deletion_consequence",
+        "placement",
+        "placement_reason",
+        "representation_reason",
+        "redundancy",
+        "protected_by",
+        "status"
+      ],
+      "properties": {
+        "element_id": {"type": "string", "minLength": 1},
+        "element_type": {
+          "enum": [
+            "paper", "section", "subsection", "paragraph", "sentence", "clause",
+            "equation", "definition", "theorem", "proof_step", "citation", "example",
+            "caveat", "figure", "panel", "table", "caption", "heading", "transition",
+            "methods_detail", "supplement", "availability", "other"
+          ]
+        },
+        "parent_id": {"type": ["string", "null"]},
+        "importance": {"enum": ["central", "support", "scaffolding", "mandatory"]},
+        "location": {"type": "string", "minLength": 1},
+        "reader_question": {"type": "string", "minLength": 1},
+        "functions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": ["orient", "define", "motivate", "connect", "evidence", "quantify", "interpret", "compare", "bound", "exemplify", "reproduce", "comply", "synthesize", "navigate"]
+          }
+        },
+        "incoming_dependency": {"type": "string", "minLength": 1},
+        "contribution": {"type": "string", "minLength": 1},
+        "outgoing_dependency": {"type": "string", "minLength": 1},
+        "deletion_consequence": {"type": "string", "minLength": 1},
+        "reader_state": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["before", "after", "remaining_uncertainty"],
+          "properties": {
+            "before": {"type": "string", "minLength": 1},
+            "after": {"type": "string", "minLength": 1},
+            "remaining_uncertainty": {"type": "string", "minLength": 1}
+          }
+        },
+        "claim_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "evidence_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "placement": {"enum": ["main_text", "methods", "display", "caption", "supplement", "appendix", "availability", "repository", "response_letter", "omit"]},
+        "placement_reason": {"type": "string", "minLength": 1},
+        "representation_reason": {"type": "string", "minLength": 1},
+        "redundancy": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "reason"],
+          "properties": {
+            "status": {"enum": ["unique", "partially_redundant", "redundant", "unresolved"]},
+            "reason": {"type": "string", "minLength": 1}
+          }
+        },
+        "protected_by": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "status": {"enum": ["keep", "compress", "merge", "move", "replace", "delete", "unresolved"]}
+      }
+    }
+  }
+}
