@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/SzeChunYiu/academic-paper-skills/skills/nature-shared/analysis-contracts/ai-session-checkpoint.schema.json",
+  "title": "Academic-paper AI session checkpoint",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "manuscript_id",
+    "session_mode",
+    "primary_operation",
+    "paper",
+    "active_scope",
+    "hard_constraints",
+    "open_blockers",
+    "reader_state",
+    "context",
+    "next_action",
+    "stop_condition",
+    "updated_at"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "manuscript_id": {"type": "string", "minLength": 1},
+    "session_mode": {
+      "enum": ["BOOTSTRAP", "RESEARCH", "ARCHITECT", "COMPOSE", "AUDIT", "REVISE", "REVIEW", "RELEASE"]
+    },
+    "primary_operation": {"type": "string", "minLength": 1},
+    "target": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "venue": {"type": ["string", "null"]},
+        "article_type": {"type": ["string", "null"]},
+        "stage": {"type": ["string", "null"]},
+        "rules_verified_as_of": {"type": ["string", "null"]}
+      }
+    },
+    "paper": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["intended_reader", "dominant_archetype", "central_question", "bounded_answer"],
+      "properties": {
+        "intended_reader": {"type": "string", "minLength": 1},
+        "dominant_archetype": {"type": "string", "minLength": 1},
+        "central_question": {"type": "string", "minLength": 1},
+        "bounded_answer": {"type": "string", "minLength": 1}
+      }
+    },
+    "active_scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["surface", "claim_ids", "evidence_ids"],
+      "properties": {
+        "surface": {"type": ["string", "null"]},
+        "claim_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "evidence_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      }
+    },
+    "hard_constraints": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "open_blockers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "summary", "resolution_test"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "summary": {"type": "string", "minLength": 1},
+          "resolution_test": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "reader_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["terms_active", "terms_pending"],
+      "properties": {
+        "terms_active": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "terms_pending": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      }
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required_contracts", "loaded_contracts"],
+      "properties": {
+        "required_contracts": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "loaded_contracts": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      }
+    },
+    "budget_snapshot": {"type": ["string", "null"]},
+    "deliberately_not_done": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "next_action": {"type": "string", "minLength": 1},
+    "stop_condition": {"type": "string", "minLength": 1},
+    "updated_at": {"type": "string", "minLength": 1}
+  }
+}

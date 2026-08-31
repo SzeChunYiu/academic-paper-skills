@@ -1,115 +1,147 @@
 name: academic-writing
-version: 1.15.1
+version: 1.16.0
 description: >
-  Canonical journal-agnostic academic manuscript writing router. The historical
-  nature-writing directory remains a compatibility/reference implementation
-  layer, while this public skill resolves archetype, evidence, whole-paper
-  narrative architecture, section-specific craftsmanship and functional sufficiency,
-  reader-state activation, abstract information budgeting, venue-constrained
-  manuscript budgeting and section/display allocation, writing logic, discussion
-  depth, epistemic rhetoric, numerical display precision, figures/tables/visual
-  representation, research, author voice, target adaptation, standalone zero-context
-  reader independence, literature version and source quality, formal-spine
-  preservation, scholarly surface semantics, evidence-graded publication
-  optimization, editorial decision readiness, and final surface QA independently
-  from Nature.
+  Journal-agnostic academic manuscript writing router optimized for long-running
+  AI sessions. A compact execution kernel and context router are always loaded;
+  detailed scientific, section, statistics, figure, review, target and release
+  contracts are progressively disclosed only when the active operation needs
+  them. This preserves research-integrity and standalone-reader invariants while
+  reducing instruction competition, stale context and defensive over-writing.
 
 always_load:
-  - ../nature-shared/core/reader-workflow.md
-  - ../nature-shared/core/paper-type-taxonomy.md
-  - ../nature-shared/core/paper-archetype-atlas.md
+  - ../nature-shared/core/ai-session-execution-kernel.md
+  - ../nature-shared/core/ai-session-context-routing.md
   - ../nature-shared/core/ethics.md
-  - ../nature-shared/core/terminology-ledger.md
-  - ../nature-shared/core/standalone-manuscript-reader-contract.md
-  - ../nature-shared/core/abstract-information-budget.md
-  - ../nature-shared/core/manuscript-section-craftsmanship.md
-  - ../nature-shared/core/manuscript-narrative-architecture.md
-  - ../nature-shared/core/epistemic-rhetoric-and-qualification.md
-  - ../nature-shared/core/numerical-reporting-precision.md
-  - ../nature-shared/core/manuscript-excellence-release-gate.md
-  - ../nature-shared/core/venue-constrained-manuscript-budget.md
-  - ../nature-shared/core/literature-version-and-source-quality.md
-  - ../nature-shared/core/sentence-logic-and-cohesion.md
-  - ../nature-shared/core/explanatory-sufficiency.md
-  - ../nature-shared/core/manuscript-content-selection.md
-  - ../nature-shared/core/formal-spine-preservation.md
-  - ../nature-shared/core/study-protocol-conduct-contract.md
-  - ../nature-shared/core/data-integrity-stewardship-contract.md
-  - ../nature-shared/core/statistical-inference-uncertainty-contract.md
-  - ../nature-shared/core/figure-evidence-planning.md
-  - ../nature-shared/core/scientific-display-decision-contract.md
-  - ../nature-shared/core/scholarly-surface-semantics.md
-  - ../nature-shared/core/manuscript-surface-qa.md
 
 references:
   on_demand:
-    - condition: an abstract needs a conservative scan for excessive numerical density, multiple quantitative substories, raw long-decimal formatter output, private experiment/version identifiers, inferential-detail stacking, defensive-boundary density, a supplied hard abstract word limit, or a target rule disallowing references
-      path: ../nature-shared/scripts/audit_abstract_information.py
-    - condition: inspect the 2026-08-31 section-specific editorial, reporting, genre, numerical-presentation, readability, and AI-abstract evidence behind title, abstract, Introduction, Methods, Results, Discussion, display, formal and support-section craftsmanship rules
-      path: ../nature-shared/research/section-specific-academic-writing-evidence-2026-08-31.md
-    - condition: target venue/article type imposes or recommends word/page/character/display/reference/legend limits, or a substantial revision needs a machine-checkable manuscript budget ledger and section/display reallocation audit
-      path: ../nature-shared/analysis-contracts/manuscript-budget.schema.json
-    - condition: a manuscript budget ledger must be checked for hard-limit overflow, unresolved rendered-page measurement, underdeveloped central sections, overweight secondary sections, or exhausted revision reserve
-      path: ../nature-shared/scripts/verify_manuscript_budget.py
-    - condition: inspect the 2026-08-31 official venue evidence and transfer limits behind target-specific manuscript budgeting, display opportunity cost, revision reserve, and no-universal-section-percentage rules
-      path: ../nature-shared/research/venue-constrained-manuscript-budget-evidence-2026-08-31.md
-    - condition: substantial manuscript or major rewrite needs a conservative scan for excessive decimal precision, fixed-width metric output, defensive qualification density, experiment/version-ID narrative density, or a suspiciously short setup/formulation section before manual narrative review
-      path: ../nature-shared/scripts/audit_narrative_precision.py
-    - condition: inspect the 2026-08-31 editorial, scientific-writing, statistical-reporting, and AI-academic-writing evidence behind narrative architecture, discussion, stance, and numerical-precision rules
-      path: ../nature-shared/research/excellent-academic-writing-ai-failure-evidence-2026-08-31.md
-    - condition: manuscript-facing source needs a conservative scan for project/private vocabulary, opaque experiment/version identifiers, machine terminal strings, repository paths/CLI commands, paper-series dependencies, or preprint concentration before a zero-context reader audit
-      path: ../nature-shared/scripts/audit_standalone_manuscript.py
-    - condition: manuscript-facing source needs a conservative scan for chat-style inline bold, code/monospace semantic leakage, internal enum/status labels, raw source-like math outside math mode, table numbering/caption anomalies, or overfull render-log signals
-      path: ../nature-shared/scripts/audit_scholarly_surface_semantics.py
+    - condition: long-running or multi-session manuscript work needs a compact resumable state with one primary operation, live blockers, active claims/evidence, loaded contracts, next action and stop condition
+      path: ../nature-shared/analysis-contracts/ai-session-checkpoint.schema.json
+    - condition: a saved AI-session checkpoint should be checked for structural completeness, missing required contracts, missing active surface, or unresolved release target
+      path: ../nature-shared/scripts/verify_ai_session_checkpoint.py
+    - condition: inspect the evidence and transfer limits behind progressive disclosure, lean context, externalized state, delta-first revision and stage-specific AI-session routing
+      path: ../nature-shared/research/ai-session-context-engineering-evidence-2026-08-31.md
+    - condition: bootstrap or reader-oriented planning needs the paper-reading workflow
+      path: ../nature-shared/core/reader-workflow.md
+    - condition: paper/content type must be classified before imposing structure
+      path: ../nature-shared/core/paper-type-taxonomy.md
+    - condition: paper archetype, evidence architecture or genre-specific writing expectation must be resolved
+      path: ../nature-shared/core/paper-archetype-atlas.md
+    - condition: terminology, symbol, abbreviation or reader-facing naming state must be managed
+      path: ../nature-shared/core/terminology-ledger.md
+    - condition: standalone zero-context reader independence or project/private vocabulary is being assessed
+      path: ../nature-shared/core/standalone-manuscript-reader-contract.md
+    - condition: an abstract is being drafted, revised or audited for information allocation, numerical salience, self-containment or target-specific abstract rules
+      path: ../nature-shared/core/abstract-information-budget.md
+    - condition: a title, Introduction, Related Work, formulation, Methods, Results, Discussion, limitations, Conclusion, display, formal surface, reference, supplement or availability section needs section-specific craftsmanship guidance
+      path: ../nature-shared/core/manuscript-section-craftsmanship.md
+    - condition: whole-paper argument structure, reader-state activation, result sequencing or Discussion dependency is being designed or repaired
+      path: ../nature-shared/core/manuscript-narrative-architecture.md
+    - condition: claim stance, qualification density, positive-claim visibility or defensive prose must be calibrated
+      path: ../nature-shared/core/epistemic-rhetoric-and-qualification.md
+    - condition: claim-bearing numbers, significant figures, decimals, intervals, P values, exact fractions or cross-surface rounding are being rendered
+      path: ../nature-shared/core/numerical-reporting-precision.md
+    - condition: pre-review or final whole-paper excellence/readability readiness is being evaluated
+      path: ../nature-shared/core/manuscript-excellence-release-gate.md
+    - condition: target venue/article type imposes or recommends word/page/character/display/reference/legend limits or section/display allocation must be planned
+      path: ../nature-shared/core/venue-constrained-manuscript-budget.md
+    - condition: manuscript-facing literature needs publication-version resolution, version-of-record preference or source-maturity assessment
+      path: ../nature-shared/core/literature-version-and-source-quality.md
+    - condition: local prose has a real sentence-to-sentence or paragraph dependency problem after scientific logic is fixed
+      path: ../nature-shared/core/sentence-logic-and-cohesion.md
+    - condition: a central scientific object, rationale, mechanism, evidence-to-claim bridge or boundary is too compressed for the intended reader
+      path: ../nature-shared/core/explanatory-sufficiency.md
+    - condition: decide main text versus Methods/SI/artifact/omit or remove repository-shaped content from the paper
+      path: ../nature-shared/core/manuscript-content-selection.md
+    - condition: contribution-defining equations, definitions, operators, bounds, non-implications or formal hierarchy could be lost during rewrite/compression
+      path: ../nature-shared/core/formal-spine-preservation.md
+    - condition: study protocol/conduct requirements materially govern the manuscript or evidence
+      path: ../nature-shared/core/study-protocol-conduct-contract.md
+    - condition: data provenance, governance, integrity or stewardship materially governs the manuscript or evidence
+      path: ../nature-shared/core/data-integrity-stewardship-contract.md
+    - condition: statistical inference, uncertainty, estimands, multiplicity, equivalence, interval semantics or quantitative reporting govern a claim
+      path: ../nature-shared/core/statistical-inference-uncertainty-contract.md
+    - condition: major claims need figure-evidence architecture or missing visual evidence must be identified
+      path: ../nature-shared/core/figure-evidence-planning.md
+    - condition: decide whether evidence belongs in text, table, figure or mixed display and whether the display earns scarce manuscript space
+      path: ../nature-shared/core/scientific-display-decision-contract.md
+    - condition: manuscript-facing typography, code/markup leakage, enum/status leakage, raw math tokens, table-caption numbering or rendered-surface semantics need review
+      path: ../nature-shared/core/scholarly-surface-semantics.md
+    - condition: final manuscript source/render needs punctuation, layout, clipping, artifact leakage or other publication-surface QA
+      path: ../nature-shared/core/manuscript-surface-qa.md
     - condition: full manuscript, theory/proof section, formal bound, public-posting/submission readiness, or decision-relevant rewrite needs fail-closed atomic claim, definition, proof, source, number, availability, and cross-section verification
       path: ../nature-shared/core/atomic-claim-verification.md
-    - condition: submission, public posting, publication release, or exact mirroring needs one canonical manuscript authority and exact claim-ledger-to-reader-artifact-to-package byte binding
+    - condition: manuscript-facing external claims/citations or final release need fail-closed source identity/status and citation-entailment verification
+      path: ../nature-shared/core/research-integrity-verification.md
+    - condition: submission, public posting, publication release, or exact mirroring needs one canonical manuscript authority and exact reader-artifact/package binding
       path: ../nature-shared/core/publication-release-integrity.md
-    - condition: a publication release manifest must be built or structurally inspected before exact package verification
-      path: ../nature-shared/release-contracts/publication-release-manifest.schema.json
-    - condition: final submission, public-posting, publication-release, or exact-mirror bytes must be checked against the canonical authority, fail-closed research-integrity ledger, and exact file-set or ZIP membership
-      path: ../nature-shared/scripts/verify_publication_release.py
-    - condition: current paper type, target, reporting norm, writing convention, figure grammar, or review expectation is unfamiliar/uncertain and research is needed before imposing a template
+    - condition: current paper type, target, reporting norm, writing convention, figure grammar or review expectation is unfamiliar or uncertain
       path: ../nature-shared/core/unknown-paper-research-protocol.md
-    - condition: decide whether scientific evidence belongs in text, a table, a figure, or a mixed display; choose a plot/table family; plan exact-value tables; or audit forest/funnel, survival, prediction, longitudinal, heatmap, compositional, map, qualitative, image, or diagram representation
+    - condition: a visual representation choice needs a broader plot/table/diagram evidence atlas
       path: ../nature-shared/core/visual-evidence-atlas.md
-    - condition: inspect the targeted 2026-08-29 research, source-specific support, transfer limits, and reasoning behind the visual-evidence atlas
+    - condition: source-specific visual-representation evidence or transfer limits behind the visual-evidence atlas need inspection
       path: ../nature-shared/research/visual-evidence-atlas-research-2026-08-29.md
-    - condition: substantial manuscript work should study a few genuinely close papers for argument/evidence/figure/explanation/local-convention calibration without copying wording or visual identity
+    - condition: substantial manuscript work needs a few genuinely close papers for argument/evidence/figure/explanation/section-proportion calibration without copying wording or visual identity
       path: ../nature-shared/core/analogue-paper-calibration.md
-    - condition: recent cross-archetype direct-reading examples are needed to test whether a proposed writing/figure rule is actually transferable
+    - condition: recent cross-archetype direct-reading examples are needed to test whether a writing or figure rule transfers beyond one publication ecology
       path: ../nature-shared/research/stratified-paper-reading-2025-2026.md
-    - condition: inspect the evidence, transfer limits, contradictions, or unresolved domain gaps behind a maintained study protocol/conduct adapter or blocker
-      path: ../nature-shared/research/study-protocol-conduct-evidence-ledger-2026-08.md
-    - condition: inspect the evidence, transfer limits, contradictions, or unresolved exact-domain gaps behind a data integrity/stewardship adapter, blocker, governance rule, or release route
-      path: ../nature-shared/research/data-integrity-stewardship-evidence-ledger-2026-08.md
-    - condition: inspect the evidence, contradictions, transfer limits, exact-policy boundary, or repair route behind a statistical inference/uncertainty adapter or blocker
-      path: ../nature-shared/research/statistical-inference-uncertainty-evidence-ledger-2026-08.md
-    - condition: prose feels generic, formulaic, machine-like, connector-heavy, repetitive, weakly authorial, or over-smoothed after the scientific logic is stable
+    - condition: prose feels generic, formulaic, repetitive, machine-like or over-smoothed after scientific logic is stable
       path: ../nature-shared/core/natural-scholarly-prose.md
-    - condition: representative author prose exists and a recognizable manuscript-level voice should survive restructuring
+    - condition: representative author prose exists and a recognizable manuscript-level voice should survive rewriting
       path: ../nature-shared/core/author-voice-profile.md
-    - condition: target journal/venue, article type, stage, or exact current compliance requirements matter
+    - condition: exact target journal/venue, article type, stage or current author instructions matter
       path: ../nature-shared/journal-formats/journal-resolution.md
-    - condition: target-specific editorial/reviewer criteria, acceptance objective, repair route, review model, AI/confidentiality policy, policy date, or decision readiness matters
+    - condition: target-specific editorial/reviewer criteria, policy date, review model, decision readiness or AI/confidentiality policy matters
       path: ../nature-shared/journal-formats/venue-decision-contract.md
-    - condition: submission strategy needs journal-specific acceptance-readiness across scope, editorial triage, contribution/readership fit, evidence maturity, cover letter, reviewer expertise coverage, editor synthesis, revision closure, or retargeting without predicting acceptance
-      path: ../nature-shared/core/journal-acceptance-readiness.md
-    - condition: user wants to maximize legitimate publication opportunity, reduce preventable rejection, decide what can be engineered before versus after the study, compare Registered Report/standard routes, build a fit-first target ladder, or prioritize evidence-backed acceptance levers without numeric acceptance prediction
-      path: ../nature-shared/core/acceptance-optimization-protocol.md
-    - condition: learn how comparable accepted/revised papers actually changed during review by studying public Nature Communications, PLOS, eLife, TMLR/OpenReview histories, while pairing them with rejection evidence and treating visible revisions as non-causal heuristics
-      path: ../nature-shared/core/public-review-history-calibration.md
-    - condition: inspect evidence grades and source-specific support behind acceptance optimization, including rejection analyses, novelty/conventionality, statistical review, reporting review, Registered Reports, revision trajectories, review disagreement, cover letters and public-history limitations
-      path: ../nature-shared/research/acceptance-optimization-evidence-ledger-2026-08-29.md
-    - condition: public editor identities, teams, sections, subject coverage, or professional expertise are relevant to journal routing, conflicts, or a permitted editor suggestion; use only for expertise routing, never individual preference targeting
-      path: ../nature-shared/core/editor-expertise-routing.md
-    - condition: inspect current official/editorial and meta-research evidence behind desk triage, editor expertise routing, reviewer disagreement, cover-letter boundaries, novelty/acceptance, and anti-gaming safeguards
-      path: ../nature-shared/research/journal-acceptance-editorial-decision-research-2026-08-29.md
-    - condition: target publication model needs fallback classification for editor/reviewer preflight
+    - condition: target publication model needs fallback classification when exact editorial decision rules are unavailable
       path: ../nature-shared/journal-formats/editorial-decision-profiles.md
+    - condition: submission strategy needs target-specific acceptance-readiness, fit, triage, evidence maturity, reviewer coverage, revision closure or retargeting without acceptance prediction
+      path: ../nature-shared/core/journal-acceptance-readiness.md
+    - condition: legitimate publication opportunity should be optimized using evidence-backed pre-study/post-study levers without gaming reviewers or predicting acceptance
+      path: ../nature-shared/core/acceptance-optimization-protocol.md
+    - condition: comparable public review histories should be studied for concern-to-repair patterns; pair accepted histories with rejection evidence and control survivorship bias
+      path: ../nature-shared/core/public-review-history-calibration.md
+    - condition: source-specific evidence grades or causal limits behind acceptance optimization and public review-history calibration need inspection
+      path: ../nature-shared/research/acceptance-optimization-evidence-ledger-2026-08-29.md
+    - condition: public editor identities, teams, sections, professional expertise, conflicts or permitted editor suggestions matter; use expertise only, never presumed leniency or favorability
+      path: ../nature-shared/core/editor-expertise-routing.md
+    - condition: evidence behind desk triage, editor expertise routing, reviewer disagreement, cover letters, novelty and anti-gaming safeguards needs inspection
+      path: ../nature-shared/research/journal-acceptance-editorial-decision-research-2026-08-29.md
     - condition: pre-submission editor/reviewer decision logic or minimum-sufficient repair planning is needed
       path: ../nature-shared/core/editor-reviewer-decision-engine.md
-    - condition: Results/main-text work needs shortest-sufficient evidence chain, main-versus-support allocation, or revision-accretion control
+    - condition: Results/main-text work needs shortest-sufficient evidence chain, main-versus-support allocation or revision-accretion control
       path: ../nature-shared/core/main-text-discipline.md
     - condition: full or multi-round manuscript needs terminology/unit/number/claim consistency checking
       path: ../nature-shared/core/consistency-sweep.md
+    - condition: inspect the evidence or transfer limits behind a study protocol/conduct adapter or blocker
+      path: ../nature-shared/research/study-protocol-conduct-evidence-ledger-2026-08.md
+    - condition: inspect the evidence or transfer limits behind a data integrity/stewardship adapter or blocker
+      path: ../nature-shared/research/data-integrity-stewardship-evidence-ledger-2026-08.md
+    - condition: inspect the evidence or transfer limits behind a statistical inference/uncertainty adapter or blocker
+      path: ../nature-shared/research/statistical-inference-uncertainty-evidence-ledger-2026-08.md
+    - condition: an abstract needs a conservative scan for excessive numerical density, multiple quantitative substories, formatter precision, private IDs, inferential-detail stacking or target-rule violations
+      path: ../nature-shared/scripts/audit_abstract_information.py
+    - condition: substantial manuscript or rewrite needs a conservative scan for decimal precision, defensive qualification density, experiment/version-ID narrative density or deferred reader activation
+      path: ../nature-shared/scripts/audit_narrative_precision.py
+    - condition: manuscript-facing source needs a conservative scan for project/private vocabulary, opaque identifiers, terminal strings, repository paths/commands, paper-series dependencies or preprint concentration
+      path: ../nature-shared/scripts/audit_standalone_manuscript.py
+    - condition: manuscript-facing source needs a conservative scan for chat-style bold, code/monospace semantic leakage, enum/status labels, raw source-like math, table anomalies or render-log signals
+      path: ../nature-shared/scripts/audit_scholarly_surface_semantics.py
+    - condition: target-specific manuscript budget ledger must be structurally validated
+      path: ../nature-shared/analysis-contracts/manuscript-budget.schema.json
+    - condition: target-specific manuscript budget must be checked for hard overflow, unresolved page measurement, underdeveloped central sections or exhausted reserve
+      path: ../nature-shared/scripts/verify_manuscript_budget.py
+    - condition: full release needs machine-checkable research-integrity provenance
+      path: ../nature-shared/analysis-contracts/research-integrity-ledger.schema.json
+    - condition: research-integrity ledger needs validation or source status refresh
+      path: ../nature-shared/scripts/verify_research_integrity.py
+    - condition: publication release manifest must be built or structurally inspected
+      path: ../nature-shared/release-contracts/publication-release-manifest.schema.json
+    - condition: final reader/package bytes must be verified against canonical authority and declared file membership
+      path: ../nature-shared/scripts/verify_publication_release.py
+    - condition: inspect the 2026-08-31 section-specific academic-writing evidence behind title, abstract, section, numerical and display craftsmanship
+      path: ../nature-shared/research/section-specific-academic-writing-evidence-2026-08-31.md
+    - condition: inspect the 2026-08-31 evidence behind narrative architecture, discussion, stance and numerical precision
+      path: ../nature-shared/research/excellent-academic-writing-ai-failure-evidence-2026-08-31.md
+    - condition: inspect current official venue evidence behind target-specific manuscript budgeting
+      path: ../nature-shared/research/venue-constrained-manuscript-budget-evidence-2026-08-31.md
