@@ -1,5 +1,5 @@
 name: nature-reviewer
-version: 2.7.0
+version: 2.8.0
 description: >
   Declarative manifest for journal-aware pre-submission editor/reviewer
   simulation. The legacy skill name remains for compatibility; review criteria
@@ -7,14 +7,15 @@ description: >
   assuming flagship Nature. Close analogue papers may inform field-specific
   evidence expectations but never substitute for official criteria or manuscript facts.
   Review also checks evidence-graded acceptance optimization, journal acceptance-
-  readiness, editorial routing/expertise, archetype-appropriate evidence/figure
-  architecture, explanation sufficiency, manuscript/artifact allocation, and
-  final manuscript-surface leakage/punctuation hygiene without confusing copy-
-  editing with science.
+  readiness, adversarial falsification and confirmation-bias control, editorial
+  routing/expertise, archetype-appropriate evidence/figure architecture,
+  explanation sufficiency, manuscript/artifact allocation, and final manuscript-
+  surface leakage/punctuation hygiene without confusing copy-editing with science.
 
 always_load:
   - references/source-basis.md
   - ../nature-shared/core/editor-reviewer-decision-engine.md
+  - ../nature-shared/core/adversarial-review-bias-control.md
 
 references:
   on_demand:

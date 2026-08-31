@@ -1,13 +1,13 @@
 name: academic-paper-pipeline
-version: 1.12.0
+version: 1.13.0
 description: >
   Declarative manifest for the journal-agnostic iterative academic-paper
   orchestration workflow. It coordinates research, writing, figures/tables/
   visual representation, statistics, formal-spine preservation, scholarly
   surface semantics, evidence-graded acceptance optimization, journal
-  acceptance-readiness, independent review, editor synthesis, revision and
-  re-review until simulated publication readiness or an explicit real-world
-  blocker.
+  acceptance-readiness, adversarial confirmation-bias-controlled review, editor
+  synthesis, revision and re-review until simulated publication readiness or an
+  explicit real-world blocker.
 
 always_load:
   - ../nature-shared/core/academic-paper-iteration-pipeline.md
@@ -15,6 +15,7 @@ always_load:
   - ../nature-shared/core/research-integrity-verification.md
   - ../nature-shared/core/formal-spine-preservation.md
   - ../nature-shared/core/editor-reviewer-decision-engine.md
+  - ../nature-shared/core/adversarial-review-bias-control.md
   - ../nature-shared/core/journal-acceptance-readiness.md
   - ../nature-shared/core/acceptance-optimization-protocol.md
   - ../nature-shared/core/paper-archetype-atlas.md
