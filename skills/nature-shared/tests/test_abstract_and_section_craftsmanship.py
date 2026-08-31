@@ -188,6 +188,35 @@ Text.
     assert any(item["code"] == "abstract_reference_disallowed" for item in result["findings"])
 
 
+def test_scanner_accepts_colon_same_line_abstract_and_stops_at_bare_introduction() -> None:
+    scanner = _load_scanner()
+    sample = """
+Abstract: We establish a compact formal result with one decisive comparison.
+The result remains scoped to the declared evidence process.
+
+Introduction
+This long introduction should not count toward an abstract word limit. """ + "outside " * 100
+    result = scanner.audit(sample, max_words=40)
+    assert result["decision"] == "PASS"
+    assert result["metrics"]["abstract_word_count"] < 40
+    abstract, _start, _end = scanner.extract_abstract(sample)
+    assert abstract is not None
+    assert "long introduction" not in abstract.lower()
+
+
+def test_scanner_counts_spaced_p_value_markers() -> None:
+    scanner = _load_scanner()
+    sample = """
+Abstract: On one benchmark, group A scored 0.72 and group B 0.61 (p = 0.03). On a second benchmark, the scores were 0.80 and 0.55 (p < 0.001). The paired difference was 0.18 with 95% CI 0.10 to 0.26 across 120 cases.
+
+Introduction
+Text.
+"""
+    result = scanner.audit(sample)
+    assert result["metrics"]["inferential_marker_count"] >= 4
+    assert any(item["code"] == "abstract_inferential_detail_stack" for item in result["findings"])
+
+
 def test_excellence_gate_mandates_abstract_and_section_craftsmanship() -> None:
     text = EXCELLENCE.read_text(encoding="utf-8").lower()
     for marker in (
