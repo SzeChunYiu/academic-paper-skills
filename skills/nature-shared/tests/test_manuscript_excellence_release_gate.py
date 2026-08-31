@@ -131,13 +131,16 @@ The result should not be read as population evidence. The wider question remains
 This does not authorize a causal conclusion.
 """
     result = scanner.audit(sample)
-    codes = {item["code"] for item in result["findings"]}
+    by_code = {item["code"]: item for item in result["findings"]}
     assert result["decision"] == "REVIEW"
-    assert "excessive_decimal_precision" in codes
-    assert "fixed_width_perfect_metric" in codes
-    assert "defensive_qualification_density" in codes
-    assert "short_setup_section_review" in codes
+    assert "excessive_decimal_precision" in by_code
+    assert "fixed_width_perfect_metric" in by_code
+    assert "defensive_qualification_density" in by_code
+    assert "short_setup_section_review" in by_code
     assert result["metrics"]["opaque_ids_first_seen_in_results"] == ["D1"]
+    assert "repeated fixed-width" in (by_code["fixed_width_perfect_metric"]["detail"] or "")
+    assert "matches" in (by_code["defensive_qualification_density"]["detail"] or "")
+    assert "first-in-Results IDs: D1" in (by_code["short_setup_section_review"]["detail"] or "")
 
 
 def test_scanner_does_not_turn_shortness_into_a_word_count_quota() -> None:
@@ -156,6 +159,25 @@ The result separates missing information from missing computation in this finite
     assert result["decision"] == "PASS"
     assert result["counts"] == {"error": 0, "review": 0}
     assert result["metrics"]["opaque_ids_first_seen_in_results"] == []
+
+
+def test_setup_span_includes_child_subsections_before_judging_compactness() -> None:
+    scanner = _load_scanner()
+    subsection_body = " ".join(["definition"] * 150)
+    sample = f"""
+# Problem formulation
+The main object is introduced here.
+
+## Observable state
+{subsection_body}
+
+# Results
+D1 reaches 0.75 on the held-out comparison.
+"""
+    result = scanner.audit(sample)
+    codes = {item["code"] for item in result["findings"]}
+    assert "short_setup_section_review" not in codes
+    assert result["metrics"]["opaque_ids_first_seen_in_results"] == ["D1"]
 
 
 def test_writing_pipeline_and_reviewer_always_load_excellence_contracts() -> None:
