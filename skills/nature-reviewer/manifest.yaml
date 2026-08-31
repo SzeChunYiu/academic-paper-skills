@@ -3,9 +3,9 @@ version: 3.3.0
 description: >
   Journal-aware pre-submission editor/reviewer simulation optimized for focused
   AI review sessions. The reviewer always carries a compact execution kernel,
-  context router, source-basis, decision engine and adversarial-bias controls;
-  detailed abstract, section, statistics, formal, target and release contracts
-  are loaded only when the review question requires them.
+  context router, source-basis, decision engine and adversarial confirmation-bias
+  controls; detailed abstract, section, statistics, formal, target and release
+  contracts are loaded only when the review question requires them.
 
 always_load:
   - ../nature-shared/core/ai-session-execution-kernel.md
@@ -32,6 +32,8 @@ references:
       path: ../nature-shared/core/paper-archetype-atlas.md
     - condition: reviewer/editor must judge target-specific word/page/display/reference allocation or opportunity cost
       path: ../nature-shared/core/venue-constrained-manuscript-budget.md
+    - condition: reviewer/editor needs the target manuscript-budget ledger schema for structured section/display allocation review
+      path: ../nature-shared/analysis-contracts/manuscript-budget.schema.json
     - condition: reviewer/editor must judge whole-paper argument dependency, reader-state activation, Results ordering or Discussion architecture
       path: ../nature-shared/core/manuscript-narrative-architecture.md
     - condition: reviewer/editor must judge claim stance, defensive qualification or positive-claim visibility
