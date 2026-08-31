@@ -100,7 +100,7 @@ def test_excellence_gate_is_mandatory_before_review_and_release() -> None:
     for marker in (
         "mandatory stage integration",
         "whole-paper argument graph",
-        "section-function map",
+        "section-function",
         "reader-state activation map",
         "headline result -> interpretation matrix",
         "pre-review excellence qa",
@@ -115,6 +115,9 @@ def test_excellence_gate_is_mandatory_before_review_and_release() -> None:
         "publication-ready terminal extension",
     ):
         assert marker in text, marker
+    # The map can evolve from a section-function map into a richer
+    # section-function-and-craftsmanship map without breaking the invariant.
+    assert "craftsmanship map" in text
 
 
 def test_scanner_flags_overprecision_defensiveness_and_deferred_reader_activation() -> None:

@@ -1,17 +1,18 @@
 name: academic-writing
-version: 1.14.0
+version: 1.15.0
 description: >
   Canonical journal-agnostic academic manuscript writing router. The historical
   nature-writing directory remains a compatibility/reference implementation
   layer, while this public skill resolves archetype, evidence, whole-paper
-  narrative architecture, section functional sufficiency, reader-state
-  activation, venue-constrained manuscript budgeting and section/display
-  allocation, writing logic, discussion depth, epistemic rhetoric, numerical
-  display precision, figures/tables/visual representation, research, author
-  voice, target adaptation, standalone zero-context reader independence,
-  literature version and source quality, formal-spine preservation, scholarly
-  surface semantics, evidence-graded publication optimization, editorial
-  decision readiness, and final surface QA independently from Nature.
+  narrative architecture, section-specific craftsmanship and functional sufficiency,
+  reader-state activation, abstract information budgeting, venue-constrained
+  manuscript budgeting and section/display allocation, writing logic, discussion
+  depth, epistemic rhetoric, numerical display precision, figures/tables/visual
+  representation, research, author voice, target adaptation, standalone zero-context
+  reader independence, literature version and source quality, formal-spine
+  preservation, scholarly surface semantics, evidence-graded publication
+  optimization, editorial decision readiness, and final surface QA independently
+  from Nature.
 
 always_load:
   - ../nature-shared/core/reader-workflow.md
@@ -20,6 +21,8 @@ always_load:
   - ../nature-shared/core/ethics.md
   - ../nature-shared/core/terminology-ledger.md
   - ../nature-shared/core/standalone-manuscript-reader-contract.md
+  - ../nature-shared/core/abstract-information-budget.md
+  - ../nature-shared/core/manuscript-section-craftsmanship.md
   - ../nature-shared/core/manuscript-narrative-architecture.md
   - ../nature-shared/core/epistemic-rhetoric-and-qualification.md
   - ../nature-shared/core/numerical-reporting-precision.md
@@ -40,6 +43,10 @@ always_load:
 
 references:
   on_demand:
+    - condition: an abstract needs a conservative scan for excessive numerical density, multiple quantitative substories, raw long-decimal formatter output, private experiment/version identifiers, inferential-detail stacking, defensive-boundary density, a supplied hard abstract word limit, or a target rule disallowing references
+      path: ../nature-shared/scripts/audit_abstract_information.py
+    - condition: inspect the 2026-08-31 section-specific editorial, reporting, genre, numerical-presentation, readability, and AI-abstract evidence behind title, abstract, Introduction, Methods, Results, Discussion, display, formal and support-section craftsmanship rules
+      path: ../nature-shared/research/section-specific-academic-writing-evidence-2026-08-31.md
     - condition: target venue/article type imposes or recommends word/page/character/display/reference/legend limits, or a substantial revision needs a machine-checkable manuscript budget ledger and section/display reallocation audit
       path: ../nature-shared/analysis-contracts/manuscript-budget.schema.json
     - condition: a manuscript budget ledger must be checked for hard-limit overflow, unresolved rendered-page measurement, underdeveloped central sections, overweight secondary sections, or exhausted revision reserve

@@ -1,22 +1,24 @@
 name: academic-paper-pipeline
-version: 1.16.0
+version: 1.17.0
 description: >
   Declarative manifest for the journal-agnostic iterative academic-paper
   orchestration workflow. It coordinates research, writing, whole-paper argument
-  architecture, section functional sufficiency, reader-state activation,
-  venue-constrained manuscript budgeting and section/display allocation,
-  discussion depth, epistemic rhetoric, numerical display precision,
-  figures/tables/visual representation, statistics, standalone zero-context
-  reader independence, terminology/definition control, literature version and
-  source quality, formal-spine preservation, scholarly surface semantics,
-  evidence-graded acceptance optimization, journal acceptance-readiness,
-  adversarial confirmation-bias-controlled review, editor synthesis, revision
-  and re-review until simulated publication readiness or an explicit real-world
-  blocker.
+  architecture, abstract information budgeting, section-specific craftsmanship
+  and functional sufficiency, reader-state activation, venue-constrained
+  manuscript budgeting and section/display allocation, discussion depth,
+  epistemic rhetoric, numerical display precision, figures/tables/visual
+  representation, statistics, standalone zero-context reader independence,
+  terminology/definition control, literature version and source quality,
+  formal-spine preservation, scholarly surface semantics, evidence-graded
+  acceptance optimization, journal acceptance-readiness, adversarial
+  confirmation-bias-controlled review, editor synthesis, revision and re-review
+  until simulated publication readiness or an explicit real-world blocker.
 
 always_load:
   - ../nature-shared/core/academic-paper-iteration-pipeline.md
   - ../nature-shared/core/manuscript-excellence-release-gate.md
+  - ../nature-shared/core/abstract-information-budget.md
+  - ../nature-shared/core/manuscript-section-craftsmanship.md
   - ../nature-shared/core/venue-constrained-manuscript-budget.md
   - ../nature-shared/core/manuscript-narrative-architecture.md
   - ../nature-shared/core/epistemic-rhetoric-and-qualification.md
@@ -46,6 +48,10 @@ always_load:
 
 references:
   on_demand:
+    - condition: an abstract needs a conservative scan for excessive numerical density, multiple quantitative substories, raw long-decimal formatter output, private experiment/version identifiers, inferential-detail stacking, defensive-boundary density, a supplied hard abstract word limit, or a target rule disallowing references
+      path: ../nature-shared/scripts/audit_abstract_information.py
+    - condition: inspect the 2026-08-31 section-specific editorial, reporting, genre, numerical-presentation, readability, and AI-abstract evidence behind title, abstract, Introduction, Methods, Results, Discussion, display, formal and support-section craftsmanship rules
+      path: ../nature-shared/research/section-specific-academic-writing-evidence-2026-08-31.md
     - condition: exact target/article type has finite word/page/character/display/reference/legend constraints or a revision needs a machine-checkable manuscript budget and reallocation ledger
       path: ../nature-shared/analysis-contracts/manuscript-budget.schema.json
     - condition: manuscript budget must be checked for hard-limit overflow, unresolved rendered-page measurement, underdeveloped P0-P3 functions, overweight secondary sections, guideline excess, or exhausted revision reserve
@@ -84,7 +90,7 @@ references:
       path: ../nature-shared/core/visual-evidence-atlas.md
     - condition: source-specific visual-representation evidence or transfer limits from the 2026-08-29 research tranche need inspection before a revision or reviewer response
       path: ../nature-shared/research/visual-evidence-atlas-research-2026-08-29.md
-    - condition: a few close papers should be studied deeply for current evidence, writing, explanation, figure, section-proportion, and main-versus-support expectations
+    - condition: a few close papers should be studied deeply for current evidence, writing, explanation, figure, section-proportion, abstract-information, and main-versus-support expectations
       path: ../nature-shared/core/analogue-paper-calibration.md
     - condition: author voice should be preserved through repeated rewrite rounds
       path: ../nature-shared/core/author-voice-profile.md
