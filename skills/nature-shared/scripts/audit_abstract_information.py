@@ -16,12 +16,29 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
-ABSTRACT_HEADING_RE = re.compile(
-    r"(?im)^\s*(?:#{1,6}\s*)?(?:\\begin\{abstract\}\s*)?abstract\s*(?:\})?\s*$"
+# Accept common plain-text / Markdown forms:
+#   Abstract
+#   Abstract:
+#   Abstract: Same-line abstract text...
+#   ## Abstract
+# The optional inline payload is captured separately so it can be joined with
+# following lines until the first recognized post-abstract boundary.
+ABSTRACT_LINE_RE = re.compile(
+    r"(?im)^\s*(?:#{1,6}\s*)?abstract\s*(?::|[-—])?\s*(?P<inline>[^\n]*)$"
 )
 LATEX_ABSTRACT_RE = re.compile(r"(?is)\\begin\{abstract\}(.*?)\\end\{abstract\}")
+
+# Conservative, high-confidence boundaries after a plain-text/Markdown abstract.
+# Structured-abstract labels such as Background:/Methods:/Results: are deliberately
+# NOT treated as boundaries because they may occur inside the abstract itself.
 STOP_HEADING_RE = re.compile(
-    r"(?im)^\s*(?:keywords?\s*:|#{1,6}\s+|\\(?:section|chapter)\*?\{|\d+(?:\.\d+)*[.)]?\s+[A-Z])"
+    r"(?im)^\s*(?:"
+    r"keywords?\s*:|key\s+words?\s*:|index\s+terms?\s*:|"
+    r"#{1,6}\s+|"
+    r"\\(?:section|chapter)\*?\{|\\keywords\b|"
+    r"\d+(?:\.\d+)*[.)]?\s+[A-Z][^\n]{0,120}$|"
+    r"(?:introduction|references|bibliography|acknowledg(?:e)?ments?)\s*$"
+    r")"
 )
 NUMBER_RE = re.compile(
     r"(?<![\w])[-+]?(?:\d+(?:\.\d+)?|\.\d+)(?:\s*%|/\d+)?(?![\w])"
@@ -36,8 +53,14 @@ RESULT_CONTEXT_RE = re.compile(
     r"\b(?:battery|batteries|holdout|corpus|corpora|benchmark|contracts?|cases?|cohort|dataset|domain|test|programme|program|sample)\b",
     re.IGNORECASE,
 )
+# Do not wrap the whole alternation in a trailing word boundary: a p-value marker
+# such as "p = 0.03" ends on punctuation (=/<), where a \b assertion is false.
 INFERENTIAL_RE = re.compile(
-    r"\b(?:confidence interval|credible interval|bootstrap interval|\bCI\b|p\s*[=<>]|paired difference|effect size)\b",
+    r"(?:"
+    r"\bconfidence interval\b|\bcredible interval\b|\bbootstrap interval\b|"
+    r"\bCI\b|\bp\s*(?:=|<|>|≤|≥)|"
+    r"\bpaired difference\b|\beffect size\b"
+    r")",
     re.IGNORECASE,
 )
 DEFENSIVE_RE = re.compile(
@@ -61,24 +84,43 @@ def _sentences(text: str) -> list[str]:
     return [s.strip() for s in re.split(r"(?<=[.!?])\s+(?=[A-Z0-9])", compact) if s.strip()]
 
 
+def _join_inline_and_following(inline: str, following: str) -> str:
+    parts = []
+    if inline.strip():
+        parts.append(inline.strip())
+    if following.strip():
+        parts.append(following.strip())
+    return "\n".join(parts)
+
+
 def extract_abstract(text: str) -> tuple[str | None, int | None, int | None]:
     latex = LATEX_ABSTRACT_RE.search(text)
     if latex:
         return latex.group(1).strip(), latex.start(1), latex.end(1)
 
-    heading = ABSTRACT_HEADING_RE.search(text)
+    heading = ABSTRACT_LINE_RE.search(text)
     if not heading:
-        # Accept common one-line LaTeX form: \abstract{...} only when braces close
-        inline = re.search(r"(?is)\\abstract\{(.{20,20000}?)\}\s*(?=\\(?:keywords|section)|$)", text)
-        if inline:
-            return inline.group(1).strip(), inline.start(1), inline.end(1)
+        # Accept common one-line LaTeX form: \abstract{...} only when braces close.
+        inline_latex = re.search(
+            r"(?is)\\abstract\{(.{20,20000}?)\}\s*(?=\\(?:keywords|section)|$)",
+            text,
+        )
+        if inline_latex:
+            return inline_latex.group(1).strip(), inline_latex.start(1), inline_latex.end(1)
         return None, None, None
 
-    start = heading.end()
-    rest = text[start:]
+    inline = heading.group("inline") or ""
+    following_start = heading.end()
+    rest = text[following_start:]
     stop = STOP_HEADING_RE.search(rest)
-    end = start + (stop.start() if stop else len(rest))
-    return text[start:end].strip(), start, end
+    following_end = following_start + (stop.start() if stop else len(rest))
+    following = text[following_start:following_end]
+    abstract = _join_inline_and_following(inline, following)
+
+    # Point the abstract start at the same-line payload when present; otherwise at
+    # the first following character. End remains the post-abstract boundary.
+    start = heading.start("inline") if inline.strip() else following_start
+    return abstract.strip(), start, following_end
 
 
 def _finding(
