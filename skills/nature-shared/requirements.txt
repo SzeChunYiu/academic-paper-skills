@@ -1,0 +1,2 @@
+# Python runtime for deterministic nature-shared validators and resolvers.
+jsonschema>=4.0.0,<5.0.0

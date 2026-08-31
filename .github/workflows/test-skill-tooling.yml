@@ -57,6 +57,7 @@ jobs:
             skills/nature-academic-search/mcp-server/requirements.txt
             skills/nature-downloader/requirements.txt
             skills/nature-image2ppt/requirements.txt
+            skills/nature-shared/requirements.txt
 
       - name: Install Image2PPT system dependencies
         run: |
@@ -70,7 +71,8 @@ jobs:
             pytest \
             -r skills/nature-academic-search/mcp-server/requirements.txt \
             -r skills/nature-downloader/requirements.txt \
-            -r skills/nature-image2ppt/requirements.txt
+            -r skills/nature-image2ppt/requirements.txt \
+            -r skills/nature-shared/requirements.txt
 
       - name: Test nature-academic-search
         working-directory: skills/nature-academic-search/mcp-server
@@ -103,6 +105,34 @@ jobs:
       - name: Test nature-shared consistency tooling
         working-directory: skills/nature-shared
         run: python -m pytest -q tests
+
+  nature-shared-declared-runtime:
+    name: Nature-shared declared runtime
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: |
+            .github/requirements-ci.txt
+            skills/nature-shared/requirements.txt
+
+      - name: Install only the shared test runtime
+        run: >-
+          python -m pip install
+          -c .github/requirements-ci.txt
+          pytest
+          -r skills/nature-shared/requirements.txt
+
+      - name: Test AI-session checkpoint routing in the declared runtime
+        run: >-
+          python -m pytest -q
+          skills/nature-shared/tests/test_ai_session_context_routing.py
 
   image2ppt-portable-core:
     name: Image2PPT portable core (${{ matrix.os }}, Python ${{ matrix.python }})

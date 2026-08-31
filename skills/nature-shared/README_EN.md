@@ -54,6 +54,22 @@ external validity, scientific truth, or acceptance.
 
 `scripts/check_consistency.py` provides a mechanical first pass for terminology variants, equal values reported at different precision, and equivalent lengths expressed in different units. `scripts/audit_manuscript_surface.py` adds target-aware abstract, terminology, placeholder, and rendered-surface diagnostics. Script output is triage evidence for contextual review, never a substitute for the atomic verification ledger.
 
+## Python Tooling
+
+From the repository root, install the declared shared runtime before using the deterministic validators and resolvers:
+
+```bash
+python -m pip install -r skills/nature-shared/requirements.txt
+```
+
+For example, validate a compact AI-session checkpoint with:
+
+```bash
+python skills/nature-shared/scripts/verify_ai_session_checkpoint.py path/to/checkpoint.json --pretty
+```
+
+The verifier checks checkpoint structure and execution invariants only; a passing result does not establish manuscript truth or publication readiness.
+
 ## When to Put Files Here
 
 Only place a file here when two or more skills need to reuse the same content. If the content serves only one skill, keep it in that skill's own `static/` or `references/` directory.
