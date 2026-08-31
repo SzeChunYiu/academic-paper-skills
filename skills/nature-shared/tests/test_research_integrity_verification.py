@@ -313,3 +313,27 @@ def test_contract_schema_and_pipeline_routing_are_present() -> None:
         SKILLS / "nature-citation" / "manifest.yaml",
     ):
         assert "research-integrity-verification.md" in path.read_text(encoding="utf-8"), str(path)
+
+
+def test_review_fingerprint_is_reviewer_originated_not_author_rebinding() -> None:
+    schema = json.loads(SCHEMA.read_text(encoding="utf-8"))
+    field = schema["$defs"]["coverageCheck"]["properties"][
+        "reviewed_manuscript_fingerprint"
+    ]
+    description = field.get("description", "").lower()
+    for marker in (
+        "independent reviewer",
+        "exact reviewed artifact",
+        "copied verbatim",
+        "must not be rebound",
+    ):
+        assert marker in description
+
+    contract = " ".join(CONTRACT.read_text(encoding="utf-8").lower().split())
+    for marker in (
+        "reviewer computes the sha-256 directly",
+        "copy that reviewer-produced value verbatim",
+        "self-updated equality field is not evidence of independent review",
+        "consistency, not cryptographic reviewer authenticity",
+    ):
+        assert marker in contract

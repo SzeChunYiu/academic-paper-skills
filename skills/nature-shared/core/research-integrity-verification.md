@@ -96,6 +96,20 @@ so a review of an earlier candidate cannot be relabeled as review of a later
 build. This prevents a writer from certifying only the claims it chose to
 inventory or replaying a clean audit after a later edit.
 
+The independent reviewer computes the SHA-256 directly from the exact artifact
+it reviewed and records that digest in the frozen reviewer output. The author or
+release builder may only copy that reviewer-produced value verbatim into
+`reviewed_manuscript_fingerprint`; it must not be rebound, recomputed from a
+later build, or edited merely to restore equality. A self-updated equality field
+is not evidence of independent review.
+
+The validator establishes digest consistency, not cryptographic reviewer
+authenticity. It cannot prove who computed the digest, whether the claimed
+reviewer was independent, or whether an unsigned review output is genuine. When
+those custody properties matter, preserve the immutable reviewer output and use
+the project's authenticated signature, attestation, or independent-custody
+mechanism in addition to this consistency check.
+
 Validate a working/review ledger with:
 
 ```bash

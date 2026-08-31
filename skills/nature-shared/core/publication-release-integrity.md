@@ -73,7 +73,10 @@ Its `manuscript_id` must equal the selected authority, and its
 `manuscript_fingerprint` must equal the canonical reader-manuscript SHA-256.
 Its independent `coverage_check.reviewed_manuscript_fingerprint` must also equal
 that same digest; co-location of an old review record inside a newly rehashed
-ledger is not review of the final build.
+ledger is not review of the final build. This value must be copied from the
+frozen independent reviewer output, not generated or rebound by the release
+builder. Digest equality is a consistency check, not authentication of reviewer
+identity or independence.
 The publication-release verifier re-runs the fail-closed research-integrity
 verifier against those exact reader-manuscript bytes; a matching fingerprint
 alone is insufficient. `public_posting_ready` is a release state and receives
