@@ -1,11 +1,13 @@
 name: academic-paper-pipeline
-version: 1.14.0
+version: 1.15.0
 description: >
   Declarative manifest for the journal-agnostic iterative academic-paper
-  orchestration workflow. It coordinates research, writing, figures/tables/
-  visual representation, statistics, standalone zero-context reader
-  independence, terminology/definition control, literature version and source
-  quality, formal-spine preservation, scholarly surface semantics,
+  orchestration workflow. It coordinates research, writing, whole-paper argument
+  architecture, section functional sufficiency, reader-state activation,
+  discussion depth, epistemic rhetoric, numerical display precision,
+  figures/tables/visual representation, statistics, standalone zero-context
+  reader independence, terminology/definition control, literature version and
+  source quality, formal-spine preservation, scholarly surface semantics,
   evidence-graded acceptance optimization, journal acceptance-readiness,
   adversarial confirmation-bias-controlled review, editor synthesis, revision
   and re-review until simulated publication readiness or an explicit real-world
@@ -13,6 +15,10 @@ description: >
 
 always_load:
   - ../nature-shared/core/academic-paper-iteration-pipeline.md
+  - ../nature-shared/core/manuscript-excellence-release-gate.md
+  - ../nature-shared/core/manuscript-narrative-architecture.md
+  - ../nature-shared/core/epistemic-rhetoric-and-qualification.md
+  - ../nature-shared/core/numerical-reporting-precision.md
   - ../nature-shared/core/atomic-claim-verification.md
   - ../nature-shared/core/research-integrity-verification.md
   - ../nature-shared/core/terminology-ledger.md
@@ -38,6 +44,10 @@ always_load:
 
 references:
   on_demand:
+    - condition: substantial manuscript, pre-review, or final release needs a conservative signal scan for excessive decimal precision, fixed-width metric output, defensive qualification density, experiment/version-ID narrative density, or suspiciously short setup/formulation sections before manual excellence review
+      path: ../nature-shared/scripts/audit_narrative_precision.py
+    - condition: inspect the 2026-08-31 editorial, scientific-writing, statistical-reporting, and AI-academic-writing evidence behind narrative architecture, discussion, stance, and numerical-precision rules
+      path: ../nature-shared/research/excellent-academic-writing-ai-failure-evidence-2026-08-31.md
     - condition: manuscript-facing source needs a conservative scan for project/private vocabulary, opaque experiment/version identifiers, machine terminal strings, repository paths/CLI commands, paper-series dependencies, or preprint concentration before zero-context clean-reader review
       path: ../nature-shared/scripts/audit_standalone_manuscript.py
     - condition: manuscript-facing source needs a conservative scan for chat-style inline bold, code/monospace semantic leakage, internal enum/status labels, raw source-like math outside math mode, table numbering/caption anomalies, or overfull render-log signals
