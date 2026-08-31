@@ -21,6 +21,11 @@ REFERENCE_START_RE = re.compile(r"^\s*(?:References|Bibliography)\s*$", re.IGNOR
 LONG_DECIMAL_RE = re.compile(r"(?<![\w./-])[-+]?\d+\.\d{5,}(?![\w/])")
 PERFECT_FIXED_RE = re.compile(r"(?<![\w.])(?:0|1)\.0{5,}(?!\d)")
 OPAQUE_ID_RE = re.compile(r"\b(?:D|M|A|V|P|H)\d+(?:[-.][A-Z0-9]+)*\b")
+MARKDOWN_HEADING_RE = re.compile(r"^(?P<marks>#{1,6})\s+(?P<title>.+?)\s*$", re.MULTILINE)
+LATEX_HEADING_RE = re.compile(
+    r"^\\(?P<kind>section|subsection|subsubsection)\*?\{(?P<title>[^}]+)\}\s*$",
+    re.MULTILINE,
+)
 
 DEFENSIVE_PHRASES = (
     "we do not claim",
@@ -39,11 +44,6 @@ DEFENSIVE_PHRASES = (
     "withdrawn rather than",
 )
 
-SECTION_PATTERNS = (
-    re.compile(r"^#{1,6}\s+(?P<title>.+?)\s*$", re.MULTILINE),
-    re.compile(r"^\\(?:section|subsection|subsubsection)\*?\{(?P<title>[^}]+)\}\s*$", re.MULTILINE),
-)
-
 SETUP_TITLES = (
     "problem formulation",
     "problem definition",
@@ -53,6 +53,8 @@ SETUP_TITLES = (
     "task definition",
     "model formulation",
 )
+
+LATEX_LEVEL = {"section": 1, "subsection": 2, "subsubsection": 3}
 
 
 def line_number(text: str, offset: int) -> int:
@@ -87,6 +89,7 @@ def add_finding(
             "token": token,
             "message": message,
             "excerpt": excerpt(text, start, end or start) if start is not None else detail,
+            "detail": detail,
         }
     )
 
@@ -100,16 +103,33 @@ def words(value: str) -> list[str]:
     return re.findall(r"\b[\w'-]+\b", value, flags=re.UNICODE)
 
 
-def section_spans(text: str) -> list[tuple[str, int, int]]:
-    matches: list[tuple[str, int]] = []
-    for pattern in SECTION_PATTERNS:
-        for match in pattern.finditer(text):
-            matches.append((match.group("title").strip(), match.start()))
-    matches.sort(key=lambda item: item[1])
-    spans: list[tuple[str, int, int]] = []
-    for index, (title, start) in enumerate(matches):
-        end = matches[index + 1][1] if index + 1 < len(matches) else len(text)
-        spans.append((title, start, end))
+def section_headings(text: str) -> list[tuple[str, int, int]]:
+    """Return headings as (title, start, hierarchy level)."""
+    headings: list[tuple[str, int, int]] = []
+    for match in MARKDOWN_HEADING_RE.finditer(text):
+        headings.append((match.group("title").strip(), match.start(), len(match.group("marks"))))
+    for match in LATEX_HEADING_RE.finditer(text):
+        headings.append((match.group("title").strip(), match.start(), LATEX_LEVEL[match.group("kind")]))
+    headings.sort(key=lambda item: item[1])
+    return headings
+
+
+def section_spans(text: str) -> list[tuple[str, int, int, int]]:
+    """Return section spans, keeping child subsections inside their parent span.
+
+    A heading ends at the next heading of the same or higher rank, not at the
+    next child heading. This avoids measuring a parent Theory/Problem section as
+    only its lead-in before the first subsection.
+    """
+    headings = section_headings(text)
+    spans: list[tuple[str, int, int, int]] = []
+    for index, (title, start, level) in enumerate(headings):
+        end = len(text)
+        for _next_title, next_start, next_level in headings[index + 1 :]:
+            if next_level <= level:
+                end = next_start
+                break
+        spans.append((title, start, end, level))
     return spans
 
 
@@ -198,7 +218,7 @@ def audit(text: str) -> dict[str, Any]:
 
     spans = section_spans(body)
     results_start: int | None = None
-    for title, start, _end in spans:
+    for title, start, _end, _level in spans:
         normalized = normalize_section_title(title)
         if normalized == "results" or normalized.startswith("results "):
             results_start = start
@@ -216,7 +236,7 @@ def audit(text: str) -> dict[str, Any]:
     # paper-private IDs whose first occurrence is already inside Results, which is
     # concrete evidence that reader-state activation may have been deferred too far.
     if result_first_ids:
-        for title, start, end in spans:
+        for title, start, end, _level in spans:
             normalized = normalize_section_title(title)
             if not any(name in normalized for name in SETUP_TITLES):
                 continue
@@ -255,6 +275,7 @@ def audit(text: str) -> dict[str, Any]:
             "All findings are conservative review signals; section sufficiency, necessary caveats, and justified precision require contextual scientific judgment.",
             "The scanner does not impose a universal word count, significant-figure rule, or ban on caveats/experiment IDs.",
             "Short setup sections are not flagged solely for length; the setup review requires a downstream reader-activation signal.",
+            "Section-length checks include child subsections rather than truncating the parent at the next lower-level heading.",
         ],
     }
 
