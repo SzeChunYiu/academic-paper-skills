@@ -124,11 +124,53 @@ def test_valid_release_ledger_passes(tmp_path: Path) -> None:
     assert report["error_count"] == 0
 
 
+def test_public_posting_is_a_fail_closed_release_state(tmp_path: Path) -> None:
+    manuscript = tmp_path / "paper.md"
+    manuscript.write_bytes(b"")
+    ledger = valid_ledger("public_posting_ready")
+    ledger["claims"][0]["release_status"] = "SUPPORTED_INTERNAL"
+    report = validate(ledger, manuscript)
+    assert report["decision"] == "BLOCKED"
+    assert any("non-closing release_status" in x for x in report["errors"])
+
+
 def test_release_is_bound_to_exact_manuscript(tmp_path: Path) -> None:
     manuscript = tmp_path / "paper.md"
     manuscript.write_text("changed", encoding="utf-8")
     report = validate(valid_ledger("submission_ready"), manuscript)
     assert any("fingerprint does not match" in x for x in report["errors"])
+
+
+def test_release_requires_full_manuscript_verification_scope(tmp_path: Path) -> None:
+    manuscript = tmp_path / "paper.md"
+    manuscript.write_bytes(b"")
+    ledger = valid_ledger("submission_ready")
+    ledger["verification_scope"] = "partial"
+    report = validate(ledger, manuscript)
+    assert report["decision"] == "BLOCKED"
+    assert any("full_manuscript verification_scope" in x for x in report["errors"])
+
+
+def test_release_requires_the_supported_ledger_schema_version(
+    tmp_path: Path,
+) -> None:
+    manuscript = tmp_path / "paper.md"
+    manuscript.write_bytes(b"")
+    ledger = valid_ledger("submission_ready")
+    ledger["schema_version"] = "0.0"
+    report = validate(ledger, manuscript)
+    assert report["decision"] == "BLOCKED"
+    assert any("schema_version must be 1.0" in x for x in report["errors"])
+
+
+def test_release_support_must_match_the_claim_scope(tmp_path: Path) -> None:
+    manuscript = tmp_path / "paper.md"
+    manuscript.write_bytes(b"")
+    ledger = valid_ledger("submission_ready")
+    ledger["evidence_receipts"][0]["scope_match"] = "NARROWER"
+    report = validate(ledger, manuscript)
+    assert report["decision"] == "BLOCKED"
+    assert any("scope-matched receipt" in x for x in report["errors"])
 
 
 def test_model_self_report_is_not_verification() -> None:
@@ -211,6 +253,7 @@ def test_metadata_identity_comparison_rejects_wrong_source() -> None:
 def test_contract_schema_and_pipeline_routing_are_present() -> None:
     schema = json.loads(SCHEMA.read_text(encoding="utf-8"))
     assert schema["title"] == "Research Integrity Verification Ledger"
+    assert "verification_scope" in schema["required"]
     for marker in ("manuscript_fingerprint", "coverage_check", "evidence_fingerprint"):
         assert marker in SCHEMA.read_text(encoding="utf-8")
 
@@ -222,6 +265,8 @@ def test_contract_schema_and_pipeline_routing_are_present() -> None:
         "evidence fingerprint",
         "independent verifier",
         "counterevidence",
+        "verification_scope == full_manuscript",
+        "scope_match == match",
     ):
         assert marker in contract
 

@@ -1,5 +1,5 @@
 name: academic-paper-pipeline
-version: 1.17.0
+version: 1.17.1
 description: >
   Declarative manifest for the journal-agnostic iterative academic-paper
   orchestration workflow. It coordinates research, writing, whole-paper argument
@@ -25,6 +25,7 @@ always_load:
   - ../nature-shared/core/numerical-reporting-precision.md
   - ../nature-shared/core/atomic-claim-verification.md
   - ../nature-shared/core/research-integrity-verification.md
+  - ../nature-shared/core/publication-release-integrity.md
   - ../nature-shared/core/terminology-ledger.md
   - ../nature-shared/core/standalone-manuscript-reader-contract.md
   - ../nature-shared/core/literature-version-and-source-quality.md
@@ -70,6 +71,10 @@ references:
       path: ../nature-shared/analysis-contracts/research-integrity-ledger.schema.json
     - condition: a research-integrity ledger must be validated or DOI/PMID identity and retraction/status signals should be refreshed before release
       path: ../nature-shared/scripts/verify_research_integrity.py
+    - condition: a submission, public-posting, publication-release, or exact-mirror package needs a machine-checkable one-authority manifest and exact artifact/member inventory
+      path: ../nature-shared/release-contracts/publication-release-manifest.schema.json
+    - condition: the final release must re-run fail-closed research-integrity checks and bind one canonical reader manuscript plus every declared file-set or ZIP member to exact hashes and byte counts
+      path: ../nature-shared/scripts/verify_publication_release.py
     - condition: exact target journal/venue, article type, submission stage, editorial model or live author instructions matter
       path: ../nature-shared/journal-formats/journal-resolution.md
     - condition: exact target decision criteria, policy effective date, burden-of-doubt rule, repair routes, review model, AI/confidentiality policy, acceptance states, or certification layer matters

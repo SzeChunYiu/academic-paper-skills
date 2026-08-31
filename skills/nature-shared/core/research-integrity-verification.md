@@ -99,7 +99,7 @@ Validate a working/review ledger with:
 python ../scripts/verify_research_integrity.py research-integrity-ledger.json --pretty
 ```
 
-Before submission/publication readiness, bind the exact final artifact and
+Before submission, public-posting, or publication readiness, bind the exact final artifact and
 refresh resolvable source identity/status signals when network access is allowed:
 
 ```bash
@@ -286,10 +286,12 @@ A full verification claim may pass only when:
 
 ```text
 all in-scope atomic claims inventoried
++ verification_scope == full_manuscript
 + independent coverage_check == PASS
 + coverage verifier != authoring agent
 + ledger manuscript_fingerprint == exact final artifact SHA-256
 + every claim has an admissible warrant or explicit NOT_APPLICABLE disposition
++ every closing warrant has scope_match == MATCH
 + every citation maps to at least one atomic claim
 + every source warrant has an exact locator and evidence fingerprint
 + no metadata-only/title-only/model-self-report receipt is treated as verification
@@ -307,6 +309,14 @@ The verifier should emit `BLOCKED` rather than silently downgrade a failed check
 A passing ledger means the required checks were completed and no recorded blocker
 remains. It does **not** mean reality has been proven with 100% certainty. State
 this distinction whenever reporting integrity results.
+
+For submission, public posting, release, or an exact mirror, this ledger is only
+one link in the delivery chain. Load `publication-release-integrity.md` and run
+`../scripts/verify_publication_release.py`. The research-integrity verifier binds
+one audited manuscript; it does not resolve competing manuscript/package
+authority, prove that the final reader-facing PDF is that manuscript, or inspect
+an upload/ZIP member set. Release integrity must bind the claim-ledger fingerprint
+to the canonical reader manuscript and then to the exact package bytes.
 
 ## Pipeline placement
 

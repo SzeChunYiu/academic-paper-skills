@@ -578,6 +578,19 @@ Use it only when:
 
 This is a **simulation of readiness**, not a promise of real acceptance. Uncontrollable editorial context remains outside the certification.
 
+### Delivery and exact-mirror terminal
+
+`simulated_publication_ready_for_target` does not by itself certify submission
+or mirrored bytes. Before `submission_ready`, `public_posting_ready`,
+`publication_ready`, release, or an `exact mirror` claim, load
+`../nature-shared/core/publication-release-integrity.md` and require a fresh
+`verify_publication_release.py` `PASS`. The release must resolve exactly one
+canonical reader manuscript, re-run the fail-closed research-integrity ledger
+against that artifact, bind every declared upload or ZIP member by SHA-256 and
+byte count, and pass again in the mirror/delivery location. A directory named
+`final`, matching branch names, or a free-standing checksum file is not this
+terminal.
+
 ## Blocked states
 
 Return one of these instead of pretending readiness:

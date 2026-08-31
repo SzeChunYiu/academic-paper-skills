@@ -420,7 +420,11 @@ Before returning manuscript-facing text:
     release placeholders in manuscript-facing text;
 12. every-page rendered-artifact, metadata, accessibility, and final-page/spill
     review when a PDF or equivalent final artifact exists;
-13. exact target compliance when known.
+13. exact target compliance when known;
+14. for submission, public posting, release, or an exact mirror, load
+    `../nature-shared/core/publication-release-integrity.md` and bind one
+    canonical manuscript authority plus the current claim ledger to every exact
+    upload/package byte with `verify_publication_release.py`.
 
 Do not describe a full manuscript as publication/submission/public-posting ready
 while any in-scope atomic item is `SUPPORTED_INTERNAL`, `UNRESOLVED`,
