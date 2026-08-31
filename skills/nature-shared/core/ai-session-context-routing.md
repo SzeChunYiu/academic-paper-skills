@@ -154,6 +154,9 @@ Load:
 - current full manuscript when global evaluation is required;
 - `editor-reviewer-decision-engine.md`;
 - `adversarial-review-bias-control.md`;
+- `paper-archetype-atlas.md` so evidence, explanation and display expectations are judged against the actual paper class;
+- `standalone-manuscript-reader-contract.md` for zero-context reader judgment;
+- `manuscript-section-craftsmanship.md` when section-function quality is in scope;
 - target decision contract/publication model;
 - `manuscript-excellence-release-gate.md` for global communication/readiness checks;
 - atomic/integrity/statistics/formal contracts when the reviewer is actually evaluating those claims.
