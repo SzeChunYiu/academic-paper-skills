@@ -1,11 +1,13 @@
 name: nature-reviewer
-version: 3.4.0
+version: 3.5.0
 description: >
   Journal-aware pre-submission editor/reviewer simulation optimized for focused
   AI review sessions. The reviewer always carries a compact execution kernel,
   context router, source-basis, decision engine and adversarial confirmation-bias
-  controls; detailed abstract, section, statistics, formal, target and release
-  contracts are loaded only when the review question requires them.
+  controls; detailed abstract, section, statistics, formal, target, visual and
+  release contracts are loaded only when the review question requires them.
+  Claim-bearing displays can be challenged counterfactually: why the figure
+  exists, what it hides, and why its representation beats plausible alternatives.
 
 always_load:
   - ../nature-shared/core/ai-session-execution-kernel.md
@@ -56,6 +58,12 @@ references:
       path: ../nature-shared/core/manuscript-content-selection.md
     - condition: reviewer/editor must judge figure/evidence architecture or identify missing visual evidence
       path: ../nature-shared/core/figure-evidence-planning.md
+    - condition: reviewer/editor must challenge a claim-bearing display's scientific purpose, reader-state transition, plausible alternative representations, hidden information, perceptual/inferential risks, main/support status or clean-reader/final-size closure
+      path: ../nature-shared/core/figure-purpose-representation-optimization.md
+      schema: ../nature-shared/display-contracts/figure-representation-decision.schema.json
+      script: ../nature-shared/scripts/verify_figure_representation_decision.py
+    - condition: reviewer/editor needs evidence separating broad figure-corpus practice, controlled graphical-perception/cognition findings and deep real-paper figure-role/sequence analysis before treating a visual convention as good practice
+      path: ../nature-shared/research/figure-purpose-representation-evidence-2026-09-01.md
     - condition: reviewer/editor needs close-paper evidence/explanation/figure/section-proportion calibration; use analogues as context only, not publication policy
       path: ../nature-shared/core/analogue-paper-calibration.md
     - condition: reviewer/editor needs recent cross-archetype counterexamples before treating one field or venue pattern as universal

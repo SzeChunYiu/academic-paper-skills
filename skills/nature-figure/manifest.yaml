@@ -1,14 +1,15 @@
 name: nature-figure
-version: 3.6.0
+version: 3.7.0
 description: >
   Declarative manifest for journal-aware scientific figure and table/visual
   evidence design. The legacy skill name is retained for compatibility. Data
   plotting, table-vs-figure decisions, scientific diagrams, and AI graphical
   abstracts are separate routes. Claim-driven planning maps reader questions
-  and estimands to evidence before rendering; paper-archetype calibration
-  prevents one universal figure sequence; analogue study calibrates evidence
-  roles without copying visual identity; and final manuscript-facing legends/
-  captions receive artifact-leakage and punctuation QA.
+  and estimands to evidence before rendering; counterfactual representation
+  tournaments require claim-bearing displays to justify why the chosen visual
+  preserves the needed information better than plausible alternatives; paper-
+  archetype calibration prevents one universal figure sequence; and final
+  manuscript-facing legends/captions receive artifact-leakage and punctuation QA.
 
 always_load:
   - static/core/contract.md
@@ -80,6 +81,12 @@ references:
       path: ../nature-shared/core/paper-archetype-atlas.md
     - condition: decide what figures or plots a paper needs from its claims, reader questions, estimands, data structures, uncertainty, alternative explanations, contribution type, and main-versus-support evidence role before rendering
       path: ../nature-shared/core/figure-evidence-planning.md
+    - condition: a claim-bearing figure/table/mixed display needs an explicit purpose, reader-state transition, counterfactual comparison among plausible representations, information-loss audit, perceptual/inferential stress tests, figure-sequence rationale, clean-reader check or final-size justification
+      path: ../nature-shared/core/figure-purpose-representation-optimization.md
+      schema: ../nature-shared/display-contracts/figure-representation-decision.schema.json
+      script: ../nature-shared/scripts/verify_figure_representation_decision.py
+    - condition: inspect the 2026-09-01 research separating broad figure-corpus prevalence, controlled graphical-perception evidence and deep real-paper figure-role/sequence reading behind representation optimization
+      path: ../nature-shared/research/figure-purpose-representation-evidence-2026-09-01.md
     - condition: decide whether evidence should be text, a table, a figure, or a mixed display; choose table contents or plot family; design a figure sequence; or audit continuous, paired, longitudinal, forest/funnel, survival, prediction, heatmap, compositional, map, qualitative, image, or diagram representation
       path: ../nature-shared/core/visual-evidence-atlas.md
     - condition: inspect the targeted 2026-08-29 visual-representation research, source-specific support, contradictions, or transfer limits behind atlas guidance

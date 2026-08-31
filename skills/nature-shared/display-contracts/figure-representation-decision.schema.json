@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/SzeChunYiu/academic-paper-skills/figure-representation-decision.schema.json",
+  "title": "Scientific figure representation decision",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "display_id",
+    "stage",
+    "reader_question",
+    "reader_state_transition",
+    "claim_ids",
+    "scientific_object",
+    "statistical_unit",
+    "dependence_structure",
+    "alternative_explanation",
+    "representation_mandate",
+    "candidates",
+    "chosen_representation",
+    "chosen_reason",
+    "information_loss",
+    "uncertainty_encoding",
+    "exact_value_companion",
+    "placement",
+    "inference_boundary",
+    "clean_reader_status",
+    "final_size_status",
+    "release"
+  ],
+  "properties": {
+    "schema_version": {"type": "string", "const": "1.0.0"},
+    "display_id": {"type": "string", "minLength": 1},
+    "stage": {"enum": ["planning", "draft", "review", "final", "production"]},
+    "reader_question": {"type": "string", "minLength": 1},
+    "reader_state_transition": {
+      "type": "object",
+      "required": ["before", "after", "remaining_uncertainty"],
+      "properties": {
+        "before": {"type": "string", "minLength": 1},
+        "after": {"type": "string", "minLength": 1},
+        "remaining_uncertainty": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "claim_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "scientific_object": {"type": "string", "minLength": 1},
+    "statistical_unit": {"type": "string", "minLength": 1},
+    "dependence_structure": {"type": "string", "minLength": 1},
+    "alternative_explanation": {"type": "string", "minLength": 1},
+    "representation_mandate": {
+      "type": "object",
+      "required": ["status", "reason"],
+      "properties": {
+        "status": {"enum": ["not_mandated", "mandated"]},
+        "reason": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "candidates": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/candidate"}
+    },
+    "chosen_representation": {"type": "string", "minLength": 1},
+    "chosen_reason": {"type": "string", "minLength": 1},
+    "information_loss": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "uncertainty_encoding": {"type": "string", "minLength": 1},
+    "exact_value_companion": {"type": "string", "minLength": 1},
+    "placement": {"enum": ["main", "support", "methods", "repository", "omit"]},
+    "inference_boundary": {"type": "string", "minLength": 1},
+    "clean_reader_status": {"enum": ["pass", "pending", "limited", "not_applicable"]},
+    "final_size_status": {"enum": ["pass", "pending", "limited", "not_applicable"]},
+    "release": {
+      "type": "object",
+      "required": ["decision", "notes"],
+      "properties": {
+        "decision": {"enum": ["PASS", "REVIEW", "BLOCKED", "UNRESOLVED"]},
+        "notes": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "candidate": {
+      "type": "object",
+      "required": [
+        "family",
+        "reader_task_fit",
+        "information_preserved",
+        "information_hidden",
+        "perceptual_task",
+        "dependence_visibility",
+        "uncertainty_visibility",
+        "heterogeneity_failure_visibility",
+        "exact_value_recovery",
+        "transformations",
+        "inference_risks",
+        "space_attention_cost",
+        "accessibility_risks",
+        "decision",
+        "rationale"
+      ],
+      "properties": {
+        "family": {"type": "string", "minLength": 1},
+        "reader_task_fit": {"type": "string", "minLength": 1},
+        "information_preserved": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "information_hidden": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "perceptual_task": {"type": "string", "minLength": 1},
+        "dependence_visibility": {"type": "string", "minLength": 1},
+        "uncertainty_visibility": {"type": "string", "minLength": 1},
+        "heterogeneity_failure_visibility": {"type": "string", "minLength": 1},
+        "exact_value_recovery": {"type": "string", "minLength": 1},
+        "transformations": {"type": "array", "items": {"type": "string"}},
+        "inference_risks": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "space_attention_cost": {"type": "string", "minLength": 1},
+        "accessibility_risks": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "decision": {"enum": ["chosen", "rejected", "retained_alternative"]},
+        "rationale": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    }
+  }
+}
