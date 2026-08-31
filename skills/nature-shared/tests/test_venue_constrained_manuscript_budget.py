@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import importlib.util
-from copy import deepcopy
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -144,9 +143,14 @@ def test_contract_treats_space_as_target_specific_scientific_resource() -> None:
         "page-limited manuscripts were measured in the official rendered template",
     ):
         assert marker in text, marker
+
+    # Lock the actual anti-quota examples and derivation rule rather than exact
+    # Markdown emphasis around the word "not".
     assert "introduction must be 15%" in text
     assert "related work must be 20%" in text
-    assert "do not encode rules such as" in text
+    assert "official target constraints" in text
+    assert "the current paper's argument/claim dependency graph" in text
+    assert "analogue proportions are descriptive priors, not quotas" in text
 
 
 def test_contract_protects_core_science_from_positioning_overweight() -> None:
@@ -156,7 +160,7 @@ def test_contract_protects_core_science_from_positioning_overweight() -> None:
         "claim-subtraction ledger",
         "a long related work section is followed by a one-paragraph formulation",
         "discussion spends more effort restating nearest work than interpreting the paper's findings",
-        "do not move to support",
+        "evidence that changes the headline claim",
         "a definition required to understand the main result",
         "the contribution-defining formal spine",
     ):
