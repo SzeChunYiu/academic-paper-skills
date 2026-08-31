@@ -17,7 +17,7 @@ from pathlib import Path
 from typing import Any
 
 
-MACHINE_TERMINAL_RE = re.compile(r"\b[A-Z][A-Z0-9]*(?:_[A-Z0-9]+){2,}\b")
+MACHINE_TERMINAL_RE = re.compile(r"\b[A-Z][A-Z0-9]*(?:_+[A-Z0-9]+){2,}\b")
 OPAQUE_ID_RE = re.compile(r"\b(?:D|M|A|V|P|H)\d+(?:[-.][A-Z0-9]+)*\b")
 PATH_RE = re.compile(
     r"(?<![\w.-])(?:src|protocol|evidence|development|research|papers|host|gold|figures|reproducibility|literature)/"
