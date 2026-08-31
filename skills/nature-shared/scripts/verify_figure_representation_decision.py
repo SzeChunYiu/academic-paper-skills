@@ -173,10 +173,10 @@ def validate(record: dict[str, Any]) -> dict[str, Any]:
             if key in candidate and (not isinstance(value, list) or len(value) == 0):
                 findings.append(finding("candidate_audit_empty", "error", f"Candidate {key} must contain at least one audit entry", f"{ptr}.{key}"))
 
-        decision = candidate.get("decision")
-        if decision not in VALID_DECISIONS:
-            findings.append(finding("invalid_candidate_decision", "error", f"Unsupported candidate decision: {decision}", f"{ptr}.decision"))
-        if decision == "chosen":
+        candidate_decision = candidate.get("decision")
+        if candidate_decision not in VALID_DECISIONS:
+            findings.append(finding("invalid_candidate_decision", "error", f"Unsupported candidate decision: {candidate_decision}", f"{ptr}.decision"))
+        if candidate_decision == "chosen":
             chosen_count += 1
             if family != chosen_family:
                 findings.append(
