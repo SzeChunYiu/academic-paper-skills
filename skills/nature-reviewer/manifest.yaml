@@ -1,5 +1,5 @@
 name: nature-reviewer
-version: 2.8.0
+version: 2.9.0
 description: >
   Declarative manifest for journal-aware pre-submission editor/reviewer
   simulation. The legacy skill name remains for compatibility; review criteria
@@ -7,18 +7,24 @@ description: >
   assuming flagship Nature. Close analogue papers may inform field-specific
   evidence expectations but never substitute for official criteria or manuscript facts.
   Review also checks evidence-graded acceptance optimization, journal acceptance-
-  readiness, adversarial falsification and confirmation-bias control, editorial
-  routing/expertise, archetype-appropriate evidence/figure architecture,
-  explanation sufficiency, manuscript/artifact allocation, and final manuscript-
-  surface leakage/punctuation hygiene without confusing copy-editing with science.
+  readiness, adversarial falsification and confirmation-bias control, standalone
+  zero-context reader comprehension, terminology/definition independence,
+  literature version/source maturity, editorial routing/expertise,
+  archetype-appropriate evidence/figure architecture, explanation sufficiency,
+  manuscript/artifact allocation, and final manuscript-surface leakage/punctuation
+  hygiene without confusing copy-editing with science.
 
 always_load:
   - references/source-basis.md
   - ../nature-shared/core/editor-reviewer-decision-engine.md
   - ../nature-shared/core/adversarial-review-bias-control.md
+  - ../nature-shared/core/standalone-manuscript-reader-contract.md
+  - ../nature-shared/core/literature-version-and-source-quality.md
 
 references:
   on_demand:
+    - condition: reviewer/editor should conservatively scan for opaque project IDs, paper-series dependencies, machine terminal strings, repository paths/commands, private claim-subtraction/donor vocabulary, development-version density, or preprint concentration before a clean-reader decision
+      path: ../nature-shared/scripts/audit_standalone_manuscript.py
     - condition: full manuscript or theory/proof claim needs a coverage-complete inventory of atomic assertions, definitions, proof dependencies, numerical/source/availability claims, contradictions, and fail-closed release statuses; each blind reviewer must perform this independently rather than receiving a shared adjudicated ledger
       path: ../nature-shared/core/atomic-claim-verification.md
     - condition: reviewer/editor should resolve the dominant paper archetype and ask whether evidence, explanation depth and main-figure roles fit a mechanism/discovery, trial/intervention, observational, computational/ML, method/tool/software, resource/dataset, theory/proof, qualitative, review/synthesis or hybrid scientific promise

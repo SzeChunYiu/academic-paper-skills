@@ -1,16 +1,17 @@
 name: nature-citation
-version: 3.1.0
+version: 3.2.0
 description: >
   Declarative manifest for journal-agnostic evidence discovery plus optional
   explicit Nature/Science/Cell-family filtering. The legacy skill name is
-  retained for backward compatibility. Evidence scope and bibliography
-  rendering style are separate decisions.
+  retained for backward compatibility. Evidence scope, publication-version
+  quality, and bibliography rendering style are separate decisions.
 
 always_load:
   - static/core/principles.md
   - static/core/chinese-mode.md
   - static/core/workflow.md
   - ../nature-shared/core/research-integrity-verification.md
+  - ../nature-shared/core/literature-version-and-source-quality.md
 
 runtime:
   default_scope: best-evidence
@@ -27,7 +28,10 @@ runtime:
     user asks for same-journal or journal-filtered sources. For manuscript-facing
     citations, candidate discovery is not verification: bind each cited atomic
     claim to inspected evidence and run the shared research-integrity gate before
-    any submission/publication-ready state.
+    any submission/publication-ready state. Before retaining a preprint, audit
+    whether a peer-reviewed version of record or proceedings version of the same
+    work exists; prefer that formal version whenever appropriate while preserving
+    legitimate frontier-preprint and field-specific conference exceptions.
 
 references:
   on_demand:

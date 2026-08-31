@@ -1,18 +1,23 @@
 name: academic-paper-pipeline
-version: 1.13.0
+version: 1.14.0
 description: >
   Declarative manifest for the journal-agnostic iterative academic-paper
   orchestration workflow. It coordinates research, writing, figures/tables/
-  visual representation, statistics, formal-spine preservation, scholarly
-  surface semantics, evidence-graded acceptance optimization, journal
-  acceptance-readiness, adversarial confirmation-bias-controlled review, editor
-  synthesis, revision and re-review until simulated publication readiness or an
-  explicit real-world blocker.
+  visual representation, statistics, standalone zero-context reader
+  independence, terminology/definition control, literature version and source
+  quality, formal-spine preservation, scholarly surface semantics,
+  evidence-graded acceptance optimization, journal acceptance-readiness,
+  adversarial confirmation-bias-controlled review, editor synthesis, revision
+  and re-review until simulated publication readiness or an explicit real-world
+  blocker.
 
 always_load:
   - ../nature-shared/core/academic-paper-iteration-pipeline.md
   - ../nature-shared/core/atomic-claim-verification.md
   - ../nature-shared/core/research-integrity-verification.md
+  - ../nature-shared/core/terminology-ledger.md
+  - ../nature-shared/core/standalone-manuscript-reader-contract.md
+  - ../nature-shared/core/literature-version-and-source-quality.md
   - ../nature-shared/core/formal-spine-preservation.md
   - ../nature-shared/core/editor-reviewer-decision-engine.md
   - ../nature-shared/core/adversarial-review-bias-control.md
@@ -33,6 +38,8 @@ always_load:
 
 references:
   on_demand:
+    - condition: manuscript-facing source needs a conservative scan for project/private vocabulary, opaque experiment/version identifiers, machine terminal strings, repository paths/CLI commands, paper-series dependencies, or preprint concentration before zero-context clean-reader review
+      path: ../nature-shared/scripts/audit_standalone_manuscript.py
     - condition: manuscript-facing source needs a conservative scan for chat-style inline bold, code/monospace semantic leakage, internal enum/status labels, raw source-like math outside math mode, table numbering/caption anomalies, or overfull render-log signals
       path: ../nature-shared/scripts/audit_scholarly_surface_semantics.py
     - condition: a full-manuscript, submission-ready, publication-ready, or other release decision needs machine-checkable claim/source provenance, citation entailment receipts, source identity/status refresh, or hallucination/adversarial verification
