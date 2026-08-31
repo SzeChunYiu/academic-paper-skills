@@ -1,0 +1,157 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/SzeChunYiu/academic-paper-skills/manuscript-budget.schema.json",
+  "title": "Venue-constrained manuscript budget ledger",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "manuscript_id",
+    "target",
+    "constraints",
+    "sections",
+    "reserve",
+    "release"
+  ],
+  "properties": {
+    "schema_version": {"type": "string", "const": "1.0.0"},
+    "manuscript_id": {"type": "string", "minLength": 1},
+    "target": {
+      "type": "object",
+      "required": ["venue", "article_type", "stage", "as_of", "budget_basis"],
+      "properties": {
+        "venue": {"type": "string", "minLength": 1},
+        "article_type": {"type": "string", "minLength": 1},
+        "stage": {
+          "enum": ["planning", "initial_submission", "peer_review", "revision", "accepted", "production"]
+        },
+        "as_of": {"type": "string", "format": "date"},
+        "budget_basis": {
+          "enum": ["words", "pages", "mixed", "advisory_length"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "constraints": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/constraint"}
+    },
+    "sections": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/section"}
+    },
+    "reserve": {
+      "type": "object",
+      "required": ["unit", "planned", "actual", "expected_revision", "rationale"],
+      "properties": {
+        "unit": {"enum": ["words", "pages", "characters", "items", "none"]},
+        "planned": {"type": ["number", "null"], "minimum": 0},
+        "actual": {"type": ["number", "null"]},
+        "expected_revision": {"type": "boolean"},
+        "rationale": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source_id", "title", "url", "accessed_at", "supports"],
+        "properties": {
+          "source_id": {"type": "string"},
+          "title": {"type": "string"},
+          "url": {"type": "string", "format": "uri"},
+          "accessed_at": {"type": "string", "format": "date"},
+          "supports": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "release": {
+      "type": "object",
+      "required": ["decision", "reviewed_at", "notes"],
+      "properties": {
+        "decision": {"enum": ["PASS", "REVIEW", "BLOCKED", "UNRESOLVED"]},
+        "reviewed_at": {"type": "string", "format": "date-time"},
+        "notes": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "constraint": {
+      "type": "object",
+      "required": [
+        "constraint_id",
+        "surface",
+        "unit",
+        "strength",
+        "limit",
+        "actual",
+        "count_rule",
+        "source_ref",
+        "status"
+      ],
+      "properties": {
+        "constraint_id": {"type": "string", "minLength": 1},
+        "surface": {"type": "string", "minLength": 1},
+        "unit": {"enum": ["words", "pages", "characters", "items", "references", "display_items"]},
+        "strength": {"enum": ["hard", "guideline", "none_stated"]},
+        "limit": {"type": ["number", "null"], "minimum": 0},
+        "actual": {"type": ["number", "null"], "minimum": 0},
+        "count_rule": {"type": "string"},
+        "source_ref": {"type": ["string", "null"]},
+        "status": {"enum": ["within", "over", "unmeasured", "unresolved_rule", "not_applicable"]}
+      },
+      "additionalProperties": false
+    },
+    "section": {
+      "type": "object",
+      "required": [
+        "section_id",
+        "title",
+        "reader_question",
+        "scientific_function",
+        "priority",
+        "unit",
+        "soft_min",
+        "soft_max",
+        "actual",
+        "status",
+        "overflow_route"
+      ],
+      "properties": {
+        "section_id": {"type": "string", "minLength": 1},
+        "title": {"type": "string", "minLength": 1},
+        "reader_question": {"type": "string"},
+        "scientific_function": {"type": "string", "minLength": 1},
+        "priority": {"enum": ["P0", "P1", "P2", "P3", "P4", "P5", "P6"]},
+        "unit": {"enum": ["words", "pages", "characters", "items", "not_measured"]},
+        "soft_min": {"type": ["number", "null"], "minimum": 0},
+        "soft_max": {"type": ["number", "null"], "minimum": 0},
+        "actual": {"type": ["number", "null"], "minimum": 0},
+        "status": {
+          "enum": [
+            "within_budget",
+            "underdeveloped",
+            "overweight",
+            "over_limit",
+            "needs_render_measurement",
+            "unresolved_target_rule",
+            "reallocate"
+          ]
+        },
+        "claim_ids": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "overflow_route": {"type": "string"},
+        "variance_reason": {"type": "string"}
+      },
+      "additionalProperties": false
+    }
+  }
+}
