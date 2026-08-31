@@ -1,13 +1,15 @@
 name: academic-paper-pipeline
-version: 1.19.0
+version: 1.20.0
 description: >
   Journal-agnostic iterative academic-paper orchestration optimized for long-
   horizon AI sessions. The pipeline keeps a compact execution kernel, stage
   router, lifecycle map and ethics contract always active, while progressively
   loading detailed research, architecture, drafting, audit, adversarial
   confirmation-bias-controlled review and release rules only when their triggers
-  apply. Sessions persist compact checkpoints and use delta-first revision
-  instead of replaying the full work history.
+  apply. Claim-bearing figure work can invoke counterfactual representation
+  tournaments rather than accepting software defaults or published-paper habits.
+  Sessions persist compact checkpoints and use delta-first revision instead of
+  replaying the full work history.
 
 always_load:
   - ../nature-shared/core/ai-session-execution-kernel.md
@@ -89,12 +91,18 @@ references:
       path: ../nature-shared/core/statistical-inference-uncertainty-contract.md
     - condition: figure set/evidence architecture is being planned or audited
       path: ../nature-shared/core/figure-evidence-planning.md
+    - condition: a claim-bearing figure/table/mixed display needs a purpose/reader-state transition, counterfactual representation comparison, information-loss/perceptual/inferential audit, main/support rationale or final clean-reader/final-size closure
+      path: ../nature-shared/core/figure-purpose-representation-optimization.md
+      schema: ../nature-shared/display-contracts/figure-representation-decision.schema.json
+      script: ../nature-shared/scripts/verify_figure_representation_decision.py
     - condition: evidence representation must be chosen among text/table/figure/mixed display
       path: ../nature-shared/core/scientific-display-decision-contract.md
     - condition: a broader plot/table/diagram evidence atlas is needed for a representation decision
       path: ../nature-shared/core/visual-evidence-atlas.md
     - condition: source-specific visual-representation evidence or transfer limits behind the visual-evidence atlas need inspection
       path: ../nature-shared/research/visual-evidence-atlas-research-2026-08-29.md
+    - condition: evidence behind counterfactual representation choice is needed, including broad published-figure corpora, graphical-perception/cognition research and deep real-paper figure-role/sequence reading
+      path: ../nature-shared/research/figure-purpose-representation-evidence-2026-09-01.md
     - condition: a few close papers should be studied deeply for evidence, writing, explanation, figure, section-proportion and main-versus-support expectations
       path: ../nature-shared/core/analogue-paper-calibration.md
     - condition: recent cross-archetype direct-reading examples are needed to test whether a proposed rule transfers
