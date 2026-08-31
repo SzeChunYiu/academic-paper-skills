@@ -1,5 +1,5 @@
 name: academic-writing
-version: 1.16.0
+version: 1.17.0
 description: >
   Journal-agnostic academic manuscript writing router optimized for long-running
   AI sessions. A compact execution kernel and context router are always loaded;
@@ -45,6 +45,8 @@ references:
       path: ../nature-shared/core/manuscript-excellence-release-gate.md
     - condition: target venue/article type imposes or recommends word/page/character/display/reference/legend limits or section/display allocation must be planned
       path: ../nature-shared/core/venue-constrained-manuscript-budget.md
+    - condition: a hard word/page limit is known and the manuscript is materially under the ceiling, close to the ceiling, being compressed, or allocating remaining space among competing scientific functions
+      path: ../nature-shared/core/manuscript-budget-utilization.md
     - condition: manuscript-facing literature needs publication-version resolution, version-of-record preference or source-maturity assessment
       path: ../nature-shared/core/literature-version-and-source-quality.md
     - condition: local prose has a real sentence-to-sentence or paragraph dependency problem after scientific logic is fixed

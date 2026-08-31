@@ -1,5 +1,5 @@
 name: academic-paper-pipeline
-version: 1.18.0
+version: 1.19.0
 description: >
   Journal-agnostic iterative academic-paper orchestration optimized for long-
   horizon AI sessions. The pipeline keeps a compact execution kernel, stage
@@ -31,6 +31,8 @@ references:
       path: ../nature-shared/core/manuscript-section-craftsmanship.md
     - condition: target venue/article type imposes finite word/page/display/reference/legend constraints or section allocation must be planned
       path: ../nature-shared/core/venue-constrained-manuscript-budget.md
+    - condition: a hard word/page limit is known and the manuscript is materially under the ceiling, close to the ceiling, being compressed, or allocating remaining space among competing scientific functions
+      path: ../nature-shared/core/manuscript-budget-utilization.md
     - condition: whole-paper question/answer/evidence progression, reader-state activation or Discussion architecture must be designed or repaired
       path: ../nature-shared/core/manuscript-narrative-architecture.md
     - condition: claim stance, qualification density or positive-claim visibility requires calibration
@@ -129,7 +131,7 @@ references:
       path: ../nature-shared/scripts/audit_scholarly_surface_semantics.py
     - condition: target-specific manuscript budget ledger must be structurally validated
       path: ../nature-shared/analysis-contracts/manuscript-budget.schema.json
-    - condition: target-specific manuscript budget must be checked for hard overflow, unresolved page measurement, underdeveloped central functions or exhausted reserve
+    - condition: target-specific manuscript budget must be checked for hard overflow, unresolved page measurement, underdeveloped central functions, utilization diagnostics or exhausted reserve
       path: ../nature-shared/scripts/verify_manuscript_budget.py
     - condition: release needs machine-checkable research-integrity provenance
       path: ../nature-shared/analysis-contracts/research-integrity-ledger.schema.json

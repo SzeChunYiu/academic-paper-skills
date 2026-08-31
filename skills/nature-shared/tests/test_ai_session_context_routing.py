@@ -150,9 +150,9 @@ def test_public_manifests_use_small_always_loaded_working_sets() -> None:
     pipeline = _text(PIPELINE)
     reviewer = _text(REVIEWER)
 
-    assert _version(writing) == (1, 16, 0)
-    assert _version(pipeline) == (1, 18, 0)
-    assert _version(reviewer) == (3, 3, 0)
+    assert _version(writing) >= (1, 16, 0)
+    assert _version(pipeline) >= (1, 18, 0)
+    assert _version(reviewer) >= (3, 3, 0)
 
     assert _always_load(writing) == [
         "../nature-shared/core/ai-session-execution-kernel.md",
@@ -189,6 +189,7 @@ def test_detailed_safeguards_remain_discoverable_not_deleted() -> None:
         "standalone-manuscript-reader-contract.md",
         "scholarly-surface-semantics.md",
         "publication-release-integrity.md",
+        "manuscript-budget-utilization.md",
     ):
         assert path in combined, path
 

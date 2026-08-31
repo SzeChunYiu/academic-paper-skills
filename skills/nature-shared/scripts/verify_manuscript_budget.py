@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """Validate a venue-constrained manuscript budget ledger.
 
-The verifier is intentionally conservative. It does not invent section budgets
-or convert words to pages. It checks the budget decisions already resolved by
-the writing pipeline and fails closed when a binding target measurement is
-missing or a central section is explicitly marked underdeveloped.
+The verifier is intentionally conservative. It does not invent section budgets,
+convert words to pages, or treat using more of a word limit as intrinsically
+better. It checks the budget decisions already resolved by the writing pipeline,
+fails closed when a binding target measurement is missing or a central section
+is explicitly underdeveloped, and emits non-blocking utilization diagnostics for
+hard main-text word limits.
 """
 
 from __future__ import annotations
@@ -20,10 +22,29 @@ from typing import Any
 REQUIRED_TOP = ("schema_version", "manuscript_id", "target", "constraints", "sections", "reserve", "release")
 POST_PLANNING_STAGES = {"initial_submission", "peer_review", "revision", "accepted", "production"}
 CENTRAL_PRIORITIES = {"P0", "P1", "P2", "P3"}
+LOW_UTILIZATION_REVIEW_FRACTION = 0.85
+HIGH_UTILIZATION_HEADROOM_FRACTION = 0.95
 
 
 def finding(code: str, severity: str, message: str, pointer: str | None = None) -> dict[str, Any]:
     return {"code": code, "severity": severity, "message": message, "pointer": pointer}
+
+
+def _hard_main_word_constraint(constraints: list[dict[str, Any]]) -> tuple[int, dict[str, Any]] | None:
+    candidates: list[tuple[int, dict[str, Any]]] = []
+    for index, item in enumerate(constraints):
+        surface = str(item.get("surface") or "").lower()
+        if (
+            item.get("strength") == "hard"
+            and item.get("unit") == "words"
+            and item.get("limit") not in (None, 0)
+            and item.get("actual") is not None
+            and ("main" in surface or "article text" in surface)
+        ):
+            candidates.append((index, item))
+    if not candidates:
+        return None
+    return max(candidates, key=lambda pair: float(pair[1].get("limit") or 0))
 
 
 def validate(ledger: dict[str, Any]) -> dict[str, Any]:
@@ -143,6 +164,39 @@ def validate(ledger: dict[str, Any]) -> dict[str, Any]:
                 )
             )
 
+    utilization: dict[str, Any] | None = None
+    main_word = _hard_main_word_constraint(constraints)
+    if main_word is not None:
+        index, item = main_word
+        limit = float(item["limit"])
+        actual = float(item["actual"])
+        fraction = actual / limit if limit else 0.0
+        utilization = {
+            "surface": item.get("surface"),
+            "actual": actual,
+            "limit": limit,
+            "fraction": fraction,
+            "percent": fraction * 100.0,
+        }
+        if stage in POST_PLANNING_STAGES and fraction < LOW_UTILIZATION_REVIEW_FRACTION:
+            findings.append(
+                finding(
+                    "main_text_low_utilization_diagnostic",
+                    "info",
+                    f"Main-text utilization is {fraction * 100:.1f}% of the hard word limit. Check whether the manuscript is efficiently complete or whether a central scientific function is underdeveloped; do not pad merely to use the allowance.",
+                    f"constraints[{index}]",
+                )
+            )
+        elif stage in POST_PLANNING_STAGES and fraction > HIGH_UTILIZATION_HEADROOM_FRACTION:
+            findings.append(
+                finding(
+                    "main_text_high_utilization_diagnostic",
+                    "info",
+                    f"Main-text utilization is {fraction * 100:.1f}% of the hard word limit. Inspect revision headroom and the lowest-value material; do not compress merely to hit a numerical utilization target.",
+                    f"constraints[{index}]",
+                )
+            )
+
     sections = ledger.get("sections") or []
     seen_sections: set[str] = set()
     for index, section in enumerate(sections):
@@ -234,6 +288,16 @@ def validate(ledger: dict[str, Any]) -> dict[str, Any]:
     if expected_revision and has_hard_constraint and reserve_actual is None:
         findings.append(finding("reserve_unmeasured", "review", "Revision reserve is not measured for a hard-constrained manuscript", "reserve"))
 
+    if utilization is not None and expected_revision and utilization["fraction"] > HIGH_UTILIZATION_HEADROOM_FRACTION:
+        findings.append(
+            finding(
+                "thin_revision_headroom",
+                "review",
+                f"Main text already uses {utilization['percent']:.1f}% of the hard word limit while substantive revision is expected. Confirm that the remaining reserve is deliberate and identify lower-value material that can fund future clarification if needed.",
+                "reserve",
+            )
+        )
+
     computed = decision(findings)
     recorded = (ledger.get("release") or {}).get("decision")
     if recorded and recorded != computed:
@@ -247,7 +311,7 @@ def validate(ledger: dict[str, Any]) -> dict[str, Any]:
         )
         computed = decision(findings)
 
-    return summarize(findings, ledger, forced_decision=computed)
+    return summarize(findings, ledger, forced_decision=computed, utilization=utilization)
 
 
 def decision(findings: list[dict[str, Any]]) -> str:
@@ -262,7 +326,10 @@ def decision(findings: list[dict[str, Any]]) -> str:
 
 
 def summarize(
-    findings: list[dict[str, Any]], ledger: dict[str, Any], forced_decision: str | None = None
+    findings: list[dict[str, Any]],
+    ledger: dict[str, Any],
+    forced_decision: str | None = None,
+    utilization: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     counts = Counter(item["severity"] for item in findings)
     return {
@@ -273,11 +340,15 @@ def summarize(
             "review": counts["review"],
         },
         "target": ledger.get("target"),
+        "utilization": utilization,
         "findings": findings,
         "notes": [
             "Soft section ranges are manuscript-specific planning constraints, not universal section quotas.",
             "Page-constrained targets require rendered measurement; the verifier never converts words to pages.",
             "A central section explicitly marked underdeveloped blocks readiness even when total length is compliant.",
+            "85–95% of a hard word limit is only a diagnostic planning band for some mature manuscripts, never a fill target or quality score.",
+            "Low utilization asks whether scientific functions are missing; it must never trigger padding by itself.",
+            "High utilization asks about revision headroom and marginal-value compression; it does not require trimming to a preset percentage.",
         ],
     }
 
