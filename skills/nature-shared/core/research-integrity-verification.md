@@ -90,8 +90,11 @@ For full-manuscript or release work, materialize a ledger conforming to:
 
 The ledger must bind verification to the exact audited manuscript with a
 `sha256:` manuscript fingerprint and must include an independent atomic-claim
-coverage check. This prevents a writer from certifying only the claims it chose
-to inventory or replaying a clean audit after a later edit.
+coverage check. That coverage check must record
+`reviewed_manuscript_fingerprint`, equal to the ledger's manuscript fingerprint,
+so a review of an earlier candidate cannot be relabeled as review of a later
+build. This prevents a writer from certifying only the claims it chose to
+inventory or replaying a clean audit after a later edit.
 
 Validate a working/review ledger with:
 
@@ -288,6 +291,7 @@ A full verification claim may pass only when:
 all in-scope atomic claims inventoried
 + verification_scope == full_manuscript
 + independent coverage_check == PASS
++ coverage_check.reviewed_manuscript_fingerprint == manuscript_fingerprint
 + coverage verifier != authoring agent
 + ledger manuscript_fingerprint == exact final artifact SHA-256
 + every claim has an admissible warrant or explicit NOT_APPLICABLE disposition
@@ -338,5 +342,7 @@ source discovery
 
 If a later edit changes a claim's meaning, scope, number, citation or source
 version, invalidate the affected receipt and re-run all dependent checks. Any
-change to the final artifact also invalidates its manuscript fingerprint and
-therefore blocks reuse of the prior release decision.
+change or rebuild of the reviewed artifact changes its manuscript fingerprint,
+invalidates the independent coverage check, and blocks reuse of the prior review
+or release decision. Freeze candidate bytes before independent review; after
+review, either release those exact bytes or create and re-review a new candidate.

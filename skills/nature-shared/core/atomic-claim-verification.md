@@ -124,6 +124,11 @@ revise, qualify, remove, or obtain the missing warrant. Never invent a bridge.
 ### Definitions and terminology
 
 - State the denotation, domain, and scientific role before claim-bearing use.
+- For a proof-bearing rule, operator, grammar, feasible family, objective, or
+  derivation system, define its admissible inputs, output or conclusion
+  semantics, side conditions, composition/transition rule, and any support,
+  feasibility, cost, or length measure used later. A name, symbol, terminal
+  state, or type signature alone is not a semantic definition.
 - Check that later specializations satisfy the original definition.
 - Treat the abstract, highlights, legends, and table notes as standalone surfaces;
   a body definition does not satisfy their first-use requirement.
@@ -152,9 +157,36 @@ For every formal statement:
 10. define sequence operators such as `subword`, `subsequence`, `factor`, and
     `deletion` precisely. Never let a proof silently switch between contiguous
     factors and arbitrary not-necessarily-contiguous subsequences.
+11. for a least/shortest derivable, provable, representable, or computable
+    quantity, separate the construction from the non-derivability obligation. A
+    terminal normal form is by itself only an existence or upper witness in a
+    minimization claim. The lower bound must exclude all shorter derivations by
+    an invariant, adversary/model argument, or exhaustive proof over the stated
+    derivation system. Terminality supplies that lower bound only after soundness
+    and completeness, the conclusion semantics, and the relevant measure's
+    preservation have been established.
 
 If a bounded executable oracle is useful, treat it as a counterexample/sanity
 check, not as a replacement for an all-size proof.
+
+## Epistemic-status transitions and historical negatives
+
+An unresolved, indeterminate, `CANNOT_CHECK`, or equivalent record is a dated
+finding about a stated evidence boundary. It is not an immutable scientific
+outcome. Re-audit it when evidence availability, parsing, or derivability changes.
+
+If already-frozen evidence now permits the stated check, perform the smallest
+deterministic reconstruction needed to resolve it. This is defect correction,
+not optional new science, and it does not authorize a broader experiment,
+retuning, or claim expansion.
+
+Do not silently erase the old status or leave it active. Create an explicit
+correction or supersession record that names the old finding, its evidence
+boundary, the newly usable evidence and method, the corrected result, and the
+result's scope. Preserve the original finding and raw evidence as provenance,
+then update every current-authority surface that still describes the check as
+unavailable. Retain any adverse or null corrected result; resolution of
+checkability is not conversion into a positive result.
 
 ### Empirical, numerical, and statistical claims
 

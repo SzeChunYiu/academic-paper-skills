@@ -42,6 +42,7 @@ def valid_ledger(requested_state: str = "review") -> dict:
             "verifier_id": "coverage-agent",
             "verification_method": "independent_model_with_retrieved_source",
             "checked_at": now,
+            "reviewed_manuscript_fingerprint": EMPTY_SHA,
         },
         "sources": [
             {
@@ -139,6 +140,36 @@ def test_release_is_bound_to_exact_manuscript(tmp_path: Path) -> None:
     manuscript.write_text("changed", encoding="utf-8")
     report = validate(valid_ledger("submission_ready"), manuscript)
     assert any("fingerprint does not match" in x for x in report["errors"])
+
+
+def test_release_requires_coverage_fingerprint_for_exact_reviewed_manuscript(
+    tmp_path: Path,
+) -> None:
+    manuscript = tmp_path / "paper.md"
+    manuscript.write_bytes(b"")
+    ledger = valid_ledger("submission_ready")
+    ledger["coverage_check"].pop("reviewed_manuscript_fingerprint")
+    report = validate(ledger, manuscript)
+    assert report["decision"] == "BLOCKED"
+    assert any(
+        "coverage_check reviewed_manuscript_fingerprint" in x
+        for x in report["errors"]
+    )
+
+
+def test_release_blocks_review_receipt_from_an_older_candidate(tmp_path: Path) -> None:
+    manuscript = tmp_path / "paper.md"
+    manuscript.write_bytes(b"")
+    ledger = valid_ledger("submission_ready")
+    ledger["coverage_check"]["reviewed_manuscript_fingerprint"] = (
+        "sha256:" + "1" * 64
+    )
+    report = validate(ledger, manuscript)
+    assert report["decision"] == "BLOCKED"
+    assert any(
+        "coverage_check reviewed_manuscript_fingerprint does not match" in x
+        for x in report["errors"]
+    )
 
 
 def test_release_requires_full_manuscript_verification_scope(tmp_path: Path) -> None:
@@ -254,6 +285,13 @@ def test_contract_schema_and_pipeline_routing_are_present() -> None:
     schema = json.loads(SCHEMA.read_text(encoding="utf-8"))
     assert schema["title"] == "Research Integrity Verification Ledger"
     assert "verification_scope" in schema["required"]
+    coverage_schema = schema["$defs"]["coverageCheck"]
+    assert "reviewed_manuscript_fingerprint" in coverage_schema["properties"]
+    assert any(
+        item.get("then", {}).get("required")
+        == ["reviewed_manuscript_fingerprint"]
+        for item in coverage_schema["allOf"]
+    )
     for marker in ("manuscript_fingerprint", "coverage_check", "evidence_fingerprint"):
         assert marker in SCHEMA.read_text(encoding="utf-8")
 

@@ -37,6 +37,7 @@ def ledger_with_statuses(statuses: list[str]) -> dict:
             "verifier_id": "coverage-reviewer",
             "verification_method": "human_review",
             "checked_at": now,
+            "reviewed_manuscript_fingerprint": EMPTY_SHA,
         },
         "sources": [
             {
