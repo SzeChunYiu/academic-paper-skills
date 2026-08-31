@@ -3,8 +3,6 @@ from __future__ import annotations
 import importlib.util
 from pathlib import Path
 
-import yaml
-
 
 SHARED = Path(__file__).parents[1]
 SKILLS = SHARED.parent
@@ -26,8 +24,31 @@ def _load_verifier():
     return module
 
 
-def _manifest(path: Path) -> dict:
-    return yaml.safe_load(path.read_text(encoding="utf-8"))
+def _text(path: Path) -> str:
+    return path.read_text(encoding="utf-8")
+
+
+def _version(text: str) -> tuple[int, ...]:
+    for line in text.splitlines():
+        if line.startswith("version:"):
+            return tuple(int(part) for part in line.split(":", 1)[1].strip().split("."))
+    raise AssertionError("manifest version missing")
+
+
+def _always_load(text: str) -> list[str]:
+    lines = text.splitlines()
+    try:
+        start = lines.index("always_load:") + 1
+    except ValueError as exc:
+        raise AssertionError("always_load missing") from exc
+    values: list[str] = []
+    for line in lines[start:]:
+        if line and not line.startswith(" "):
+            break
+        stripped = line.strip()
+        if stripped.startswith("- "):
+            values.append(stripped[2:])
+    return values
 
 
 def _base_checkpoint() -> dict:
@@ -122,26 +143,26 @@ def test_router_has_stage_and_task_bundles() -> None:
 
 
 def test_public_manifests_use_small_always_loaded_working_sets() -> None:
-    writing = _manifest(WRITING)
-    pipeline = _manifest(PIPELINE)
-    reviewer = _manifest(REVIEWER)
+    writing = _text(WRITING)
+    pipeline = _text(PIPELINE)
+    reviewer = _text(REVIEWER)
 
-    assert writing["version"] == "1.16.0"
-    assert pipeline["version"] == "1.18.0"
-    assert reviewer["version"] == "3.3.0"
+    assert _version(writing) == (1, 16, 0)
+    assert _version(pipeline) == (1, 18, 0)
+    assert _version(reviewer) == (3, 3, 0)
 
-    assert writing["always_load"] == [
+    assert _always_load(writing) == [
         "../nature-shared/core/ai-session-execution-kernel.md",
         "../nature-shared/core/ai-session-context-routing.md",
         "../nature-shared/core/ethics.md",
     ]
-    assert pipeline["always_load"] == [
+    assert _always_load(pipeline) == [
         "../nature-shared/core/ai-session-execution-kernel.md",
         "../nature-shared/core/ai-session-context-routing.md",
         "../nature-shared/core/academic-paper-iteration-pipeline.md",
         "../nature-shared/core/ethics.md",
     ]
-    assert reviewer["always_load"] == [
+    assert _always_load(reviewer) == [
         "../nature-shared/core/ai-session-execution-kernel.md",
         "../nature-shared/core/ai-session-context-routing.md",
         "references/source-basis.md",
@@ -151,9 +172,7 @@ def test_public_manifests_use_small_always_loaded_working_sets() -> None:
 
 
 def test_detailed_safeguards_remain_discoverable_not_deleted() -> None:
-    combined = "\n".join(
-        path.read_text(encoding="utf-8") for path in (WRITING, PIPELINE, REVIEWER, ROUTER)
-    )
+    combined = "\n".join(_text(path) for path in (WRITING, PIPELINE, REVIEWER, ROUTER))
     for path in (
         "manuscript-excellence-release-gate.md",
         "abstract-information-budget.md",
