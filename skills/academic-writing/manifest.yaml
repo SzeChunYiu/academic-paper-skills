@@ -1,11 +1,12 @@
 name: academic-writing
-version: 1.11.0
+version: 1.12.0
 description: >
   Canonical journal-agnostic academic manuscript writing router. The historical
   nature-writing directory remains a compatibility/reference implementation
   layer, while this public skill resolves archetype, evidence, writing logic,
   figures/tables/visual representation, research, author voice, target
-  adaptation, formal-spine preservation, scholarly surface semantics,
+  adaptation, standalone zero-context reader independence, literature version
+  and source quality, formal-spine preservation, scholarly surface semantics,
   evidence-graded publication optimization, editorial decision readiness, and
   final surface QA independently from Nature.
 
@@ -15,6 +16,8 @@ always_load:
   - ../nature-shared/core/paper-archetype-atlas.md
   - ../nature-shared/core/ethics.md
   - ../nature-shared/core/terminology-ledger.md
+  - ../nature-shared/core/standalone-manuscript-reader-contract.md
+  - ../nature-shared/core/literature-version-and-source-quality.md
   - ../nature-shared/core/sentence-logic-and-cohesion.md
   - ../nature-shared/core/explanatory-sufficiency.md
   - ../nature-shared/core/manuscript-content-selection.md
@@ -29,6 +32,8 @@ always_load:
 
 references:
   on_demand:
+    - condition: manuscript-facing source needs a conservative scan for project/private vocabulary, opaque experiment/version identifiers, machine terminal strings, repository paths/CLI commands, paper-series dependencies, or preprint concentration before a zero-context reader audit
+      path: ../nature-shared/scripts/audit_standalone_manuscript.py
     - condition: manuscript-facing source needs a conservative scan for chat-style inline bold, code/monospace semantic leakage, internal enum/status labels, raw source-like math outside math mode, table numbering/caption anomalies, or overfull render-log signals
       path: ../nature-shared/scripts/audit_scholarly_surface_semantics.py
     - condition: full manuscript, theory/proof section, formal bound, public-posting/submission readiness, or decision-relevant rewrite needs fail-closed atomic claim, definition, proof, source, number, availability, and cross-section verification
