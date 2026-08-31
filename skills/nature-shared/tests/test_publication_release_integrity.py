@@ -1,0 +1,249 @@
+from __future__ import annotations
+
+import hashlib
+import importlib.util
+import json
+import zipfile
+from pathlib import Path
+
+
+SHARED = Path(__file__).parents[1]
+SCHEMA = SHARED / "release-contracts" / "publication-release-manifest.schema.json"
+CONTRACT = SHARED / "core" / "publication-release-integrity.md"
+SCRIPT = SHARED / "scripts" / "verify_publication_release.py"
+INTEGRITY = SHARED / "core" / "research-integrity-verification.md"
+ACADEMIC_WRITING = SHARED.parent / "academic-writing" / "SKILL.md"
+
+
+def _sha(data: bytes) -> str:
+    return "sha256:" + hashlib.sha256(data).hexdigest()
+
+
+def _load_verifier():
+    assert SCRIPT.exists(), "publication release verifier is missing"
+    spec = importlib.util.spec_from_file_location("verify_publication_release", SCRIPT)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def _write_release(tmp_path: Path) -> tuple[dict, Path]:
+    manuscript = b"final reader-facing manuscript bytes\n"
+    cover = b"final cover letter bytes\n"
+    (tmp_path / "paper.pdf").write_bytes(manuscript)
+    (tmp_path / "cover.pdf").write_bytes(cover)
+
+    ledger = {
+        "schema_version": "1.0",
+        "manuscript_id": "manuscript:orion-01-final",
+        "manuscript_fingerprint": _sha(manuscript),
+        "release": {"requested_state": "submission_ready"},
+    }
+    ledger_bytes = (json.dumps(ledger, sort_keys=True) + "\n").encode()
+    (tmp_path / "claim-ledger.json").write_bytes(ledger_bytes)
+
+    archive_path = tmp_path / "submission.zip"
+    with zipfile.ZipFile(archive_path, "w", compression=zipfile.ZIP_STORED) as archive:
+        archive.writestr("paper.pdf", manuscript)
+        archive.writestr("cover.pdf", cover)
+    archive_bytes = archive_path.read_bytes()
+
+    manifest = {
+        "schema_version": "1.0",
+        "release_id": "release:orion-01-final",
+        "canonical_paper_id": "ORION-01",
+        "requested_state": "submission_ready",
+        "authority": {
+            "manuscript_id": "manuscript:orion-01-final",
+            "manuscript_artifact_id": "artifact:paper",
+            "claim_ledger_artifact_id": "artifact:claim-ledger",
+        },
+        "manuscript_candidates": [
+            {
+                "manuscript_id": "manuscript:orion-01-final",
+                "artifact_id": "artifact:paper",
+                "sha256": _sha(manuscript),
+                "disposition": "authoritative",
+                "reason": "Current journal-facing manuscript selected for this release.",
+            },
+            {
+                "manuscript_id": "manuscript:orion-01-old",
+                "sha256": "sha256:" + "1" * 64,
+                "disposition": "superseded",
+                "superseded_by": "manuscript:orion-01-final",
+                "reason": "Earlier manuscript retained only as provenance.",
+            },
+        ],
+        "artifacts": [
+            {
+                "artifact_id": "artifact:paper",
+                "role": "reader_manuscript",
+                "path": "paper.pdf",
+                "sha256": _sha(manuscript),
+                "byte_count": len(manuscript),
+            },
+            {
+                "artifact_id": "artifact:cover",
+                "role": "submission_component",
+                "path": "cover.pdf",
+                "sha256": _sha(cover),
+                "byte_count": len(cover),
+            },
+            {
+                "artifact_id": "artifact:claim-ledger",
+                "role": "claim_ledger",
+                "path": "claim-ledger.json",
+                "sha256": _sha(ledger_bytes),
+                "byte_count": len(ledger_bytes),
+            },
+        ],
+        "package": {
+            "path": "submission.zip",
+            "format": "zip",
+            "sha256": _sha(archive_bytes),
+            "byte_count": len(archive_bytes),
+            "members": [
+                {"member_path": "paper.pdf", "artifact_id": "artifact:paper"},
+                {"member_path": "cover.pdf", "artifact_id": "artifact:cover"},
+            ],
+        },
+    }
+    manifest_path = tmp_path / "release-manifest.json"
+    manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+    return manifest, manifest_path
+
+
+def _validate(manifest: dict, manifest_path: Path) -> dict:
+    manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+    return _load_verifier().validate_release(manifest, manifest_path=manifest_path)
+
+
+def test_valid_release_binds_authority_ledger_artifacts_and_exact_zip(tmp_path: Path) -> None:
+    manifest, manifest_path = _write_release(tmp_path)
+    report = _validate(manifest, manifest_path)
+    assert report["decision"] == "PASS", report
+    assert report["verified_artifact_count"] == 3
+    assert report["verified_package_member_count"] == 2
+    assert report["release_manifest_sha256"] == _sha(manifest_path.read_bytes())
+    assert report["release_manifest_byte_count"] == len(manifest_path.read_bytes())
+
+
+def test_competing_manuscripts_require_exactly_one_authority(tmp_path: Path) -> None:
+    manifest, manifest_path = _write_release(tmp_path)
+    manifest["manuscript_candidates"][1]["disposition"] = "authoritative"
+    report = _validate(manifest, manifest_path)
+    assert any("exactly one authoritative" in error for error in report["errors"])
+
+
+def test_superseded_candidate_requires_reason_and_successor(tmp_path: Path) -> None:
+    manifest, manifest_path = _write_release(tmp_path)
+    old = manifest["manuscript_candidates"][1]
+    old.pop("reason")
+    old.pop("superseded_by")
+    report = _validate(manifest, manifest_path)
+    assert any("superseded candidate" in error and "reason" in error for error in report["errors"])
+    assert any("superseded candidate" in error and "superseded_by" in error for error in report["errors"])
+
+
+def test_claim_ledger_must_fingerprint_canonical_reader_manuscript(tmp_path: Path) -> None:
+    manifest, manifest_path = _write_release(tmp_path)
+    ledger_path = tmp_path / "claim-ledger.json"
+    ledger = json.loads(ledger_path.read_text(encoding="utf-8"))
+    ledger["manuscript_fingerprint"] = "sha256:" + "0" * 64
+    ledger_bytes = (json.dumps(ledger, sort_keys=True) + "\n").encode()
+    ledger_path.write_bytes(ledger_bytes)
+    claim_artifact = next(x for x in manifest["artifacts"] if x["artifact_id"] == "artifact:claim-ledger")
+    claim_artifact["sha256"] = _sha(ledger_bytes)
+    claim_artifact["byte_count"] = len(ledger_bytes)
+    report = _validate(manifest, manifest_path)
+    assert any("claim-ledger manuscript_fingerprint" in error for error in report["errors"])
+
+
+def test_final_artifact_mutation_blocks_release(tmp_path: Path) -> None:
+    manifest, manifest_path = _write_release(tmp_path)
+    (tmp_path / "paper.pdf").write_bytes(b"mutated after verification\n")
+    report = _validate(manifest, manifest_path)
+    assert any("artifact:paper" in error and "sha256 mismatch" in error for error in report["errors"])
+
+
+def test_exact_archive_byte_mutation_blocks_release(tmp_path: Path) -> None:
+    manifest, manifest_path = _write_release(tmp_path)
+    with (tmp_path / "submission.zip").open("ab") as handle:
+        handle.write(b"post-verification bytes")
+    report = _validate(manifest, manifest_path)
+    assert any("package sha256 mismatch" in error for error in report["errors"])
+    assert any("package byte_count mismatch" in error for error in report["errors"])
+
+
+def test_stale_or_extra_package_member_blocks_release(tmp_path: Path) -> None:
+    manifest, manifest_path = _write_release(tmp_path)
+    with zipfile.ZipFile(tmp_path / "submission.zip", "w", compression=zipfile.ZIP_STORED) as archive:
+        archive.writestr("paper.pdf", b"stale manuscript")
+        archive.writestr("cover.pdf", (tmp_path / "cover.pdf").read_bytes())
+        archive.writestr("old-paper.pdf", b"obsolete competing manuscript")
+    package_bytes = (tmp_path / "submission.zip").read_bytes()
+    manifest["package"]["sha256"] = _sha(package_bytes)
+    manifest["package"]["byte_count"] = len(package_bytes)
+    report = _validate(manifest, manifest_path)
+    assert any("unexpected package member" in error for error in report["errors"])
+    assert any("paper.pdf" in error and "sha256 mismatch" in error for error in report["errors"])
+
+
+def test_paths_cannot_escape_release_root(tmp_path: Path) -> None:
+    manifest, manifest_path = _write_release(tmp_path)
+    manifest["artifacts"][0]["path"] = "../paper.pdf"
+    report = _validate(manifest, manifest_path)
+    assert any("safe relative path" in error for error in report["errors"])
+
+
+def test_independent_file_upload_set_is_verified_without_forcing_a_zip(tmp_path: Path) -> None:
+    manifest, manifest_path = _write_release(tmp_path)
+    manifest["package"] = {
+        "format": "file_set",
+        "members": [
+            {"member_path": "paper.pdf", "artifact_id": "artifact:paper"},
+            {"member_path": "cover.pdf", "artifact_id": "artifact:cover"},
+        ],
+    }
+    report = _validate(manifest, manifest_path)
+    assert report["decision"] == "PASS", report
+    assert report["verified_package_member_count"] == 2
+
+
+def test_malformed_package_is_blocked_instead_of_crashing(tmp_path: Path) -> None:
+    manifest, manifest_path = _write_release(tmp_path)
+    manifest["package"] = None
+    report = _validate(manifest, manifest_path)
+    assert report["decision"] == "BLOCKED"
+    assert any("package must be an object" in error for error in report["errors"])
+
+
+def test_malformed_authority_is_blocked_instead_of_crashing(tmp_path: Path) -> None:
+    manifest, manifest_path = _write_release(tmp_path)
+    manifest["authority"] = []
+    report = _validate(manifest, manifest_path)
+    assert report["decision"] == "BLOCKED"
+    assert any("authority must be an object" in error for error in report["errors"])
+
+
+def test_contract_schema_and_transitive_pipeline_route_are_present() -> None:
+    assert SCHEMA.exists()
+    assert CONTRACT.exists()
+    schema = json.loads(SCHEMA.read_text(encoding="utf-8"))
+    assert schema["title"] == "Publication Release Integrity Manifest"
+    contract = CONTRACT.read_text(encoding="utf-8").lower()
+    for marker in (
+        "multiple manuscript/package authority",
+        "final-byte binding",
+        "claim-ledger -> canonical manuscript -> submission package",
+        "exactly one authoritative",
+        "sha-256 and byte count",
+        "unexpected package member",
+        "not a reproducible-build certificate",
+    ):
+        assert marker in contract, marker
+    integrity = INTEGRITY.read_text(encoding="utf-8")
+    assert "publication-release-integrity.md" in integrity
+    assert "verify_publication_release.py" in integrity
+    assert "publication-release-integrity.md" in ACADEMIC_WRITING.read_text(encoding="utf-8")

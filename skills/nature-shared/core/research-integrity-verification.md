@@ -308,6 +308,14 @@ A passing ledger means the required checks were completed and no recorded blocke
 remains. It does **not** mean reality has been proven with 100% certainty. State
 this distinction whenever reporting integrity results.
 
+For submission, public posting, release, or an exact mirror, this ledger is only
+one link in the delivery chain. Load `publication-release-integrity.md` and run
+`../scripts/verify_publication_release.py`. The research-integrity verifier binds
+one audited manuscript; it does not resolve competing manuscript/package
+authority, prove that the final reader-facing PDF is that manuscript, or inspect
+an upload/ZIP member set. Release integrity must bind the claim-ledger fingerprint
+to the canonical reader manuscript and then to the exact package bytes.
+
 ## Pipeline placement
 
 Run the gate at multiple boundaries rather than only at the end:
