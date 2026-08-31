@@ -8,6 +8,7 @@
     "schema_version",
     "manuscript_id",
     "manuscript_fingerprint",
+    "verification_scope",
     "coverage_check",
     "sources",
     "claims",

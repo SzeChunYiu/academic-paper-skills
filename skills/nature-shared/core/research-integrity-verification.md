@@ -286,10 +286,12 @@ A full verification claim may pass only when:
 
 ```text
 all in-scope atomic claims inventoried
++ verification_scope == full_manuscript
 + independent coverage_check == PASS
 + coverage verifier != authoring agent
 + ledger manuscript_fingerprint == exact final artifact SHA-256
 + every claim has an admissible warrant or explicit NOT_APPLICABLE disposition
++ every closing warrant has scope_match == MATCH
 + every citation maps to at least one atomic claim
 + every source warrant has an exact locator and evidence fingerprint
 + no metadata-only/title-only/model-self-report receipt is treated as verification

@@ -350,6 +350,11 @@ def validate_ledger(ledger: dict[str, Any], *, live: bool, args: argparse.Namesp
     author = str(ledger.get("authoring_agent_id", "")).strip()
     release_requested = str(ledger.get("release", {}).get("requested_state", "draft")) in RELEASE_STATES
 
+    if ledger.get("schema_version") != "1.0":
+        errors.append("ledger: schema_version must be 1.0")
+    if release_requested and ledger.get("verification_scope") != "full_manuscript":
+        errors.append("ledger: release requires full_manuscript verification_scope")
+
     fingerprint = str(ledger.get("manuscript_fingerprint", ""))
     if not re.fullmatch(r"sha256:[0-9a-fA-F]{64}", fingerprint):
         errors.append("ledger: manuscript_fingerprint must be sha256:<64 hex>")
@@ -554,9 +559,11 @@ def validate_ledger(ledger: dict[str, Any], *, live: bool, args: argparse.Namesp
         if release_status != "NOT_APPLICABLE" and not claim_receipts:
             errors.append(f"claim {cid}: no evidence receipt")
         if claim_receipts and not any(
-            str(x.get("support_status")) in SUPPORT_PASS for x in claim_receipts
+            str(x.get("support_status")) in SUPPORT_PASS
+            and str(x.get("scope_match")) == "MATCH"
+            for x in claim_receipts
         ):
-            errors.append(f"claim {cid}: no receipt with ENTAILS/BOUNDS support")
+            errors.append(f"claim {cid}: no scope-matched receipt with ENTAILS/BOUNDS support")
         if any(str(x.get("support_status")) == "CONTRADICTS" for x in claim_receipts):
             errors.append(f"claim {cid}: contradictory evidence receipt present")
 

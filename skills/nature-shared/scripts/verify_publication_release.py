@@ -172,6 +172,7 @@ def _validate_authority(
         for item in candidates
         if isinstance(item, dict)
     ]
+    candidate_ids = {candidate_id for candidate_id in ids if candidate_id}
     for candidate_id, count in Counter(ids).items():
         if not candidate_id:
             errors.append("manuscript candidate: missing required field manuscript_id")
@@ -214,6 +215,11 @@ def _validate_authority(
             _require_nonempty_string(
                 candidate.get("superseded_by"), f"{label}.superseded_by", errors
             )
+            successor = str(candidate.get("superseded_by", ""))
+            if successor not in candidate_ids:
+                errors.append(f"{label}: unknown superseded_by {successor!r}")
+            elif successor == str(candidate.get("manuscript_id", "")):
+                errors.append(f"{label}: superseded_by cannot reference itself")
 
     if len(authoritative) != 1:
         errors.append(
@@ -413,15 +419,23 @@ def _validate_zip_package(
 
     try:
         with zipfile.ZipFile(path) as archive:
-            # Exact package membership covers every central-directory entry.  Do
-            # not trust ``ZipInfo.is_dir()`` as a reason to skip an entry: it is
-            # inferred only from a trailing slash, and such an entry may still
-            # carry undeclared bytes.
+            # Exact content membership covers every non-directory entry.  A
+            # trailing slash is only directory syntax, so verify that such an
+            # entry is actually empty before treating it as archive metadata.
             infos = archive.infolist()
-            actual_names = [info.filename for info in infos]
-            for name, count in Counter(actual_names).items():
+            for name, count in Counter(info.filename for info in infos).items():
                 if count > 1:
                     errors.append(f"package: duplicate archive member {name}")
+            actual_names = []
+            for info in infos:
+                if info.is_dir():
+                    if archive.read(info):
+                        errors.append(
+                            f"unexpected package member {info.filename}: "
+                            "directory-style entry carries payload"
+                        )
+                    continue
+                actual_names.append(info.filename)
             actual = set(actual_names)
             for extra in sorted(actual - set(expected)):
                 errors.append(f"unexpected package member {extra}")

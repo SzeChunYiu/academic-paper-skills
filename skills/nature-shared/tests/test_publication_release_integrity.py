@@ -239,6 +239,14 @@ def test_superseded_candidate_requires_reason_and_successor(tmp_path: Path) -> N
     )
 
 
+def test_superseded_candidate_successor_must_exist_in_inventory(tmp_path: Path) -> None:
+    manifest, manifest_path = _write_release(tmp_path)
+    manifest["manuscript_candidates"][1]["superseded_by"] = "manuscript:missing"
+    report = _validate(manifest, manifest_path)
+    assert report["decision"] == "BLOCKED"
+    assert any("unknown superseded_by" in error for error in report["errors"])
+
+
 def test_claim_ledger_must_fingerprint_canonical_reader_manuscript(
     tmp_path: Path,
 ) -> None:
@@ -311,9 +319,24 @@ def test_extra_directory_named_zip_member_with_payload_blocks_release(
     report = _validate(manifest, manifest_path)
     assert report["decision"] == "BLOCKED", report
     assert any(
-        "unexpected package member undeclared/" in error
-        for error in report["errors"]
+        "unexpected package member undeclared/" in error for error in report["errors"]
     )
+
+
+def test_empty_zip_directory_entries_are_metadata_not_package_members(
+    tmp_path: Path,
+) -> None:
+    manifest, manifest_path = _write_release(tmp_path)
+    with zipfile.ZipFile(
+        tmp_path / "submission.zip", "a", compression=zipfile.ZIP_STORED
+    ) as archive:
+        archive.writestr("supplement/", b"")
+    package_bytes = (tmp_path / "submission.zip").read_bytes()
+    manifest["package"]["sha256"] = _sha(package_bytes)
+    manifest["package"]["byte_count"] = len(package_bytes)
+    report = _validate(manifest, manifest_path)
+    assert report["decision"] == "PASS", report
+    assert report["verified_package_member_count"] == 2
 
 
 def test_paths_cannot_escape_release_root(tmp_path: Path) -> None:
