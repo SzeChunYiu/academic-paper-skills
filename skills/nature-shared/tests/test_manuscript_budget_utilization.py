@@ -23,6 +23,7 @@ def _load_verifier():
 
 
 def _ledger(actual: int, limit: int = 4000, expected_revision: bool = False, release: str = "PASS") -> dict:
+    remaining = max(limit - actual, 0)
     return {
         "schema_version": "1.0.0",
         "manuscript_id": "budget-demo",
@@ -92,8 +93,8 @@ def _ledger(actual: int, limit: int = 4000, expected_revision: bool = False, rel
         ],
         "reserve": {
             "unit": "words",
-            "planned": 200,
-            "actual": max(limit - actual, 0),
+            "planned": min(200, remaining),
+            "actual": remaining,
             "expected_revision": expected_revision,
             "rationale": "preserve room for scientifically necessary clarification",
         },
@@ -107,7 +108,7 @@ def _ledger(actual: int, limit: int = 4000, expected_revision: bool = False, rel
 
 
 def test_contract_rejects_filling_to_a_percentage() -> None:
-    text = CONTRACT.read_text(encoding="utf-8").lower()
+    text = CONTRACT.read_text(encoding="utf-8").lower().replace("**", "")
     for marker in (
         "do not maximize words used",
         "85–95% utilization often deserves no special concern",
