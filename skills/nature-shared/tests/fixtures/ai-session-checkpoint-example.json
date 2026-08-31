@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0.0",
+  "manuscript_id": "example-paper",
+  "session_mode": "COMPOSE",
+  "primary_operation": "Draft the opening Results block for claim C1",
+  "target": {
+    "venue": "Example Journal",
+    "article_type": "Article",
+    "stage": "drafting",
+    "rules_verified_as_of": "2026-08-31"
+  },
+  "paper": {
+    "intended_reader": "field-competent reader with no project context",
+    "dominant_archetype": "computational / ML paper",
+    "central_question": "Does the representation preserve the decision-relevant distinction?",
+    "bounded_answer": "It does on the controlled benchmark under the declared conditions."
+  },
+  "active_scope": {
+    "surface": "Results / controlled benchmark",
+    "claim_ids": ["C1"],
+    "evidence_ids": ["E1"]
+  },
+  "hard_constraints": [
+    "Do not invent missing data",
+    "Use the reader-facing experiment name before any internal ID"
+  ],
+  "open_blockers": [],
+  "reader_state": {
+    "terms_active": ["representation"],
+    "terms_pending": ["prospective adequacy"]
+  },
+  "context": {
+    "required_contracts": ["manuscript-section-craftsmanship.md"],
+    "loaded_contracts": ["manuscript-section-craftsmanship.md"]
+  },
+  "budget_snapshot": "Results block remains within its manuscript-specific soft allocation.",
+  "deliberately_not_done": [
+    "No global reviewer simulation during composition",
+    "No release-package checks during drafting"
+  ],
+  "next_action": "Write one evidence-led Results block and explicit handoff.",
+  "stop_condition": "Stop when the local question is answered without introducing a new unsupported claim.",
+  "updated_at": "2026-08-31T00:00:00Z"
+}
