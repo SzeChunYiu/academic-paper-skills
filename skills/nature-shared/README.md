@@ -53,6 +53,22 @@ scientific truth 或 acceptance。
 
 `scripts/check_consistency.py` 为一致性扫描提供机械初筛，可报告术语变体、同值不同精度和等值长度单位混用。`scripts/audit_manuscript_surface.py` 补充面向目标期刊的摘要、术语、占位符与渲染表面诊断。脚本输出只用于分诊，不能代替原子核查台账。
 
+## Python 工具依赖
+
+从仓库根目录运行确定性校验器与解析器前，先安装共享运行时依赖：
+
+```bash
+python -m pip install -r skills/nature-shared/requirements.txt
+```
+
+例如，可按以下方式校验精简的 AI session checkpoint：
+
+```bash
+python skills/nature-shared/scripts/verify_ai_session_checkpoint.py path/to/checkpoint.json --pretty
+```
+
+该工具只校验 checkpoint 结构和执行不变量；通过不证明论文内容为真或已经达到投稿就绪状态。
+
 ## 什么时候把文件放到这里
 
 只有当**两个或更多技能**需要复用同一份内容时，才把文件放入 `nature-shared/`。如果内容只服务于一个技能，应保留在该技能自己的 `static/` 或 `references/` 目录中。

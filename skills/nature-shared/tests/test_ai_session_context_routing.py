@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import builtins
 import importlib.util
 from pathlib import Path
 
@@ -10,6 +11,8 @@ KERNEL = SHARED / "core" / "ai-session-execution-kernel.md"
 ROUTER = SHARED / "core" / "ai-session-context-routing.md"
 SCHEMA = SHARED / "analysis-contracts" / "ai-session-checkpoint.schema.json"
 VERIFIER = SHARED / "scripts" / "verify_ai_session_checkpoint.py"
+REQUIREMENTS = SHARED / "requirements.txt"
+README_EN = SHARED / "README_EN.md"
 EVIDENCE = SHARED / "research" / "ai-session-context-engineering-evidence-2026-08-31.md"
 WRITING = SKILLS / "academic-writing" / "manifest.yaml"
 PIPELINE = SKILLS / "academic-paper-pipeline" / "manifest.yaml"
@@ -202,6 +205,39 @@ def test_checkpoint_schema_and_verifier_are_present() -> None:
         "delta-first revision",
     ):
         assert marker in evidence, marker
+
+
+def test_checkpoint_verifier_declares_its_shared_runtime_dependency() -> None:
+    requirements = {
+        line.strip()
+        for line in REQUIREMENTS.read_text(encoding="utf-8").splitlines()
+        if line.strip() and not line.lstrip().startswith("#")
+    }
+    assert "jsonschema>=4.0.0,<5.0.0" in requirements
+
+    guidance = README_EN.read_text(encoding="utf-8")
+    assert "python -m pip install -r skills/nature-shared/requirements.txt" in guidance
+    assert "scripts/verify_ai_session_checkpoint.py" in guidance
+
+
+def test_checkpoint_verifier_reports_actionable_missing_dependency() -> None:
+    real_import = builtins.__import__
+
+    def import_without_jsonschema(name, *args, **kwargs):
+        if name == "jsonschema":
+            raise ModuleNotFoundError("No module named 'jsonschema'", name="jsonschema")
+        return real_import(name, *args, **kwargs)
+
+    builtins.__import__ = import_without_jsonschema
+    try:
+        try:
+            _load_verifier()
+        except ModuleNotFoundError as exc:
+            assert "skills/nature-shared/requirements.txt" in str(exc)
+        else:
+            raise AssertionError("missing jsonschema should block verifier import")
+    finally:
+        builtins.__import__ = real_import
 
 
 def test_valid_compose_checkpoint_passes() -> None:

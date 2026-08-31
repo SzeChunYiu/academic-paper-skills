@@ -15,7 +15,14 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
-import jsonschema
+try:
+    import jsonschema
+except ModuleNotFoundError as exc:
+    raise ModuleNotFoundError(
+        "verify_ai_session_checkpoint.py requires 'jsonschema'. Install the "
+        "declared shared runtime with: python -m pip install -r "
+        "skills/nature-shared/requirements.txt"
+    ) from exc
 
 SCHEMA = Path(__file__).parents[1] / "analysis-contracts" / "ai-session-checkpoint.schema.json"
 
