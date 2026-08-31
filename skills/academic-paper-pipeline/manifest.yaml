@@ -4,9 +4,10 @@ description: >
   Journal-agnostic iterative academic-paper orchestration optimized for long-
   horizon AI sessions. The pipeline keeps a compact execution kernel, stage
   router, lifecycle map and ethics contract always active, while progressively
-  loading detailed research, architecture, drafting, audit, review and release
-  rules only when their triggers apply. Sessions persist compact checkpoints and
-  use delta-first revision instead of replaying the full work history.
+  loading detailed research, architecture, drafting, audit, adversarial
+  confirmation-bias-controlled review and release rules only when their triggers
+  apply. Sessions persist compact checkpoints and use delta-first revision
+  instead of replaying the full work history.
 
 always_load:
   - ../nature-shared/core/ai-session-execution-kernel.md
