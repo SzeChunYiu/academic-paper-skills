@@ -463,6 +463,7 @@ def test_contract_schema_and_transitive_pipeline_route_are_present() -> None:
         "claim-ledger -> canonical manuscript -> submission package",
         "exactly one authoritative",
         "sha-256 and byte count",
+        "every central-directory entry whose name ends in `/` must be empty",
         "unexpected package member",
         "not a reproducible-build certificate",
     ):

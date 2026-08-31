@@ -96,6 +96,8 @@ Use `format: zip` when a ZIP is the actual delivered or mirrored object. Bind:
 
 - the ZIP's own SHA-256 and byte count;
 - the complete non-directory member-name set;
+- every central-directory entry whose name ends in `/` must be empty rather
+  than a payload-bearing member disguised as directory metadata;
 - each member to a declared artifact;
 - each member's decompressed SHA-256 and byte count.
 
