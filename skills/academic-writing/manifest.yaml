@@ -1,12 +1,15 @@
 name: academic-writing
-version: 1.17.0
+version: 1.18.0
 description: >
   Journal-agnostic academic manuscript writing router optimized for long-running
   AI sessions. A compact execution kernel and context router are always loaded;
   detailed scientific, section, statistics, figure, review, target and release
   contracts are progressively disclosed only when the active operation needs
-  them. This preserves research-integrity and standalone-reader invariants while
-  reducing instruction competition, stale context and defensive over-writing.
+  them. Figure work can invoke counterfactual representation optimization so a
+  claim-bearing display justifies why it exists and why its visual encoding is
+  preferable to plausible alternatives. This preserves research-integrity and
+  standalone-reader invariants while reducing instruction competition, stale
+  context and defensive over-writing.
 
 always_load:
   - ../nature-shared/core/ai-session-execution-kernel.md
@@ -65,6 +68,10 @@ references:
       path: ../nature-shared/core/statistical-inference-uncertainty-contract.md
     - condition: major claims need figure-evidence architecture or missing visual evidence must be identified
       path: ../nature-shared/core/figure-evidence-planning.md
+    - condition: a claim-bearing figure/table/mixed display needs its purpose, reader-state transition, plausible alternative representations, information loss, perceptual/inferential risks, main/support role or final clean-reader/final-size status justified before manuscript use
+      path: ../nature-shared/core/figure-purpose-representation-optimization.md
+      schema: ../nature-shared/display-contracts/figure-representation-decision.schema.json
+      script: ../nature-shared/scripts/verify_figure_representation_decision.py
     - condition: decide whether evidence belongs in text, table, figure or mixed display and whether the display earns scarce manuscript space
       path: ../nature-shared/core/scientific-display-decision-contract.md
     - condition: manuscript-facing typography, code/markup leakage, enum/status leakage, raw math tokens, table-caption numbering or rendered-surface semantics need review
@@ -83,6 +90,8 @@ references:
       path: ../nature-shared/core/visual-evidence-atlas.md
     - condition: source-specific visual-representation evidence or transfer limits behind the visual-evidence atlas need inspection
       path: ../nature-shared/research/visual-evidence-atlas-research-2026-08-29.md
+    - condition: inspect evidence separating broad scientific-figure corpus prevalence, controlled perceptual/cognitive studies and deep real-paper figure-role/sequence analysis before imposing a representation rule
+      path: ../nature-shared/research/figure-purpose-representation-evidence-2026-09-01.md
     - condition: substantial manuscript work needs a few genuinely close papers for argument/evidence/figure/explanation/section-proportion calibration without copying wording or visual identity
       path: ../nature-shared/core/analogue-paper-calibration.md
     - condition: recent cross-archetype direct-reading examples are needed to test whether a writing or figure rule transfers beyond one publication ecology
