@@ -51,13 +51,13 @@ def test_narrative_contract_enforces_macro_argument_and_reader_activation() -> N
         assert marker in text, marker
 
 
-def test_narrative_contract_catches_qwen_style_surprise_and_short_setup_without_quota() -> None:
+def test_narrative_contract_catches_surprise_entities_without_word_quota() -> None:
     text = NARRATIVE.read_text(encoding="utf-8").lower()
     assert "a model family suddenly appearing in results" in text
     assert "a dataset first appearing in a table row" in text
     assert "a hypothesis first appearing only when declared passed/failed" in text
-    assert "do not impose universal minimum word counts" in text
-    assert "missing dependencies, not length" not in text  # phrase belongs to orchestration gate, not this contract
+    assert "impose universal minimum word counts" in text
+    assert "a short section is sufficient when it discharges every downstream dependency" in text
 
 
 def test_rhetoric_contract_preserves_honesty_without_self_erasure() -> None:
@@ -90,7 +90,7 @@ def test_precision_contract_rejects_formatter_precision_without_fixed_sigfig_rul
         "significant figures should reflect uncertainty and resolution",
         "do not apply a universal `three significant figures everywhere` rule",
         "cross-surface consistency",
-        "reject fixed `%.6f`-style output" if "reject fixed `%.6f`-style output" in text else "fixed-width machine precision",
+        "software formatter used `%.6f`",
     ):
         assert marker in text, marker
 
@@ -117,14 +117,14 @@ def test_excellence_gate_is_mandatory_before_review_and_release() -> None:
         assert marker in text, marker
 
 
-def test_scanner_flags_overprecision_defensiveness_and_short_setup() -> None:
+def test_scanner_flags_overprecision_defensiveness_and_deferred_reader_activation() -> None:
     scanner = _load_scanner()
     sample = """
 # Problem formulation
 We define x as the visible state and y as the target.
 
 # Results
-Accuracy was 1.000000 on the first arm and 0.510417 on the second. A control was 0.906250.
+D1 reaches 1.000000 on the first arm and 0.510417 on the second. A control was 0.906250.
 A second exact arm was 1.000000.
 We do not claim universal superiority. This does not establish generality.
 The result should not be read as population evidence. The wider question remains undetermined.
@@ -137,9 +137,10 @@ This does not authorize a causal conclusion.
     assert "fixed_width_perfect_metric" in codes
     assert "defensive_qualification_density" in codes
     assert "short_setup_section_review" in codes
+    assert result["metrics"]["opaque_ids_first_seen_in_results"] == ["D1"]
 
 
-def test_scanner_leaves_normal_reader_facing_prose_clean() -> None:
+def test_scanner_does_not_turn_shortness_into_a_word_count_quota() -> None:
     scanner = _load_scanner()
     sample = """
 # Problem formulation
@@ -154,6 +155,7 @@ The result separates missing information from missing computation in this finite
     result = scanner.audit(sample)
     assert result["decision"] == "PASS"
     assert result["counts"] == {"error": 0, "review": 0}
+    assert result["metrics"]["opaque_ids_first_seen_in_results"] == []
 
 
 def test_writing_pipeline_and_reviewer_always_load_excellence_contracts() -> None:
