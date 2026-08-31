@@ -1,5 +1,5 @@
 name: nature-reviewer
-version: 3.3.0
+version: 3.4.0
 description: >
   Journal-aware pre-submission editor/reviewer simulation optimized for focused
   AI review sessions. The reviewer always carries a compact execution kernel,
@@ -32,6 +32,8 @@ references:
       path: ../nature-shared/core/paper-archetype-atlas.md
     - condition: reviewer/editor must judge target-specific word/page/display/reference allocation or opportunity cost
       path: ../nature-shared/core/venue-constrained-manuscript-budget.md
+    - condition: reviewer/editor must judge whether conspicuous unused space reflects efficient writing or missing scientific function, whether near-ceiling drafts have revision headroom, or whether compression is displacing higher-value science
+      path: ../nature-shared/core/manuscript-budget-utilization.md
     - condition: reviewer/editor needs the target manuscript-budget ledger schema for structured section/display allocation review
       path: ../nature-shared/analysis-contracts/manuscript-budget.schema.json
     - condition: reviewer/editor must judge whole-paper argument dependency, reader-state activation, Results ordering or Discussion architecture
@@ -88,7 +90,7 @@ references:
       path: ../nature-shared/scripts/audit_standalone_manuscript.py
     - condition: manuscript needs conservative scholarly-surface/markup/code-font/raw-math/table/render scanning
       path: ../nature-shared/scripts/audit_scholarly_surface_semantics.py
-    - condition: reviewer/editor needs deterministic target-budget validation
+    - condition: reviewer/editor needs deterministic target-budget validation including hard limits, underdeveloped sections, revision reserve and utilization diagnostics
       path: ../nature-shared/scripts/verify_manuscript_budget.py
     - condition: reviewer/editor needs section-specific academic-writing evidence and transfer limits
       path: ../nature-shared/research/section-specific-academic-writing-evidence-2026-08-31.md
