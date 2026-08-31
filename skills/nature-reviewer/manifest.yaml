@@ -1,102 +1,96 @@
 name: nature-reviewer
-version: 3.2.0
+version: 3.3.0
 description: >
-  Declarative manifest for journal-aware pre-submission editor/reviewer
-  simulation. The legacy skill name remains for compatibility; review criteria
-  are resolved from the exact target journal/publication model rather than
-  assuming flagship Nature. Close analogue papers may inform field-specific
-  evidence expectations but never substitute for official criteria or manuscript facts.
-  Review also checks evidence-graded acceptance optimization, journal acceptance-
-  readiness, adversarial falsification and confirmation-bias control, whole-paper
-  argument architecture, abstract information budgeting, section-specific
-  craftsmanship and functional sufficiency, reader-state activation,
-  venue-constrained section/display allocation and manuscript budget efficiency,
-  discussion depth, epistemic-rhetorical calibration, numerical display precision,
-  standalone zero-context reader comprehension, terminology/definition independence,
-  literature version/source maturity, editorial routing/expertise,
-  archetype-appropriate evidence/figure architecture, explanation sufficiency,
-  manuscript/artifact allocation, and final manuscript-surface leakage/punctuation
-  hygiene without confusing copy-editing with science.
+  Journal-aware pre-submission editor/reviewer simulation optimized for focused
+  AI review sessions. The reviewer always carries a compact execution kernel,
+  context router, source-basis, decision engine and adversarial-bias controls;
+  detailed abstract, section, statistics, formal, target and release contracts
+  are loaded only when the review question requires them.
 
 always_load:
+  - ../nature-shared/core/ai-session-execution-kernel.md
+  - ../nature-shared/core/ai-session-context-routing.md
   - references/source-basis.md
   - ../nature-shared/core/editor-reviewer-decision-engine.md
   - ../nature-shared/core/adversarial-review-bias-control.md
-  - ../nature-shared/core/manuscript-excellence-release-gate.md
-  - ../nature-shared/core/abstract-information-budget.md
-  - ../nature-shared/core/manuscript-section-craftsmanship.md
-  - ../nature-shared/core/venue-constrained-manuscript-budget.md
-  - ../nature-shared/core/manuscript-narrative-architecture.md
-  - ../nature-shared/core/epistemic-rhetoric-and-qualification.md
-  - ../nature-shared/core/numerical-reporting-precision.md
-  - ../nature-shared/core/standalone-manuscript-reader-contract.md
-  - ../nature-shared/core/literature-version-and-source-quality.md
 
 references:
   on_demand:
-    - condition: reviewer/editor should conservatively audit whether an abstract is overloaded with numerical substories, raw formatter precision, private experiment/version IDs, inferential-detail stacks or defensive boundaries; or should apply an exact supplied abstract word/reference rule while preserving reporting-mandated quantitative completeness
-      path: ../nature-shared/scripts/audit_abstract_information.py
-    - condition: reviewer/editor needs section-specific evidence and transfer limits for titles/abstracts, Introductions, Methods, Results, Discussion, displays, formal surfaces, references, support and availability, including cross-disciplinary genre variation and AI-abstract failure evidence
-      path: ../nature-shared/research/section-specific-academic-writing-evidence-2026-08-31.md
-    - condition: reviewer/editor needs to inspect a target-specific word/page/display/reference/legend budget ledger and determine whether central reader/evidence functions are underfunded or secondary positioning/provenance material is overweight
-      path: ../nature-shared/analysis-contracts/manuscript-budget.schema.json
-    - condition: reviewer/editor needs deterministic budget validation for hard-limit excess, unresolved page measurement, underdeveloped P0-P3 sections, soft-allocation excess, or revision-reserve exhaustion
-      path: ../nature-shared/scripts/verify_manuscript_budget.py
-    - condition: reviewer/editor needs the current official venue evidence and transfer limits behind manuscript budget allocation, display opportunity cost, selective nearest-work footprint, and no-universal-section-percentage rules
-      path: ../nature-shared/research/venue-constrained-manuscript-budget-evidence-2026-08-31.md
-    - condition: reviewer/editor should conservatively scan for excessive decimal precision, fixed-width metric output, defensive qualification density, experiment/version-ID narrative density, or suspiciously short setup/formulation sections before judging argument/readability readiness
-      path: ../nature-shared/scripts/audit_narrative_precision.py
-    - condition: reviewer/editor needs the 2026-08-31 evidence basis for whole-paper logic, section/discussion expectations, AI-writing rhetoric risks, or numerical precision guidance
-      path: ../nature-shared/research/excellent-academic-writing-ai-failure-evidence-2026-08-31.md
-    - condition: reviewer/editor should conservatively scan for opaque project IDs, paper-series dependencies, machine terminal strings, repository paths/commands, private claim-subtraction/donor vocabulary, development-version density, or preprint concentration before a clean-reader decision
-      path: ../nature-shared/scripts/audit_standalone_manuscript.py
-    - condition: full manuscript or theory/proof claim needs a coverage-complete inventory of atomic assertions, definitions, proof dependencies, numerical/source/availability claims, contradictions, and fail-closed release statuses; each blind reviewer must perform this independently rather than receiving a shared adjudicated ledger
+    - condition: long-running review/re-review needs a compact checkpoint with current scope, blocker IDs, resolution tests, required contracts, next action and stop condition
+      path: ../nature-shared/analysis-contracts/ai-session-checkpoint.schema.json
+    - condition: a reviewer/session checkpoint should be validated before resume or handoff
+      path: ../nature-shared/scripts/verify_ai_session_checkpoint.py
+    - condition: inspect evidence behind lean context, progressive disclosure, delta-first revision and stage-specific reviewer context routing
+      path: ../nature-shared/research/ai-session-context-engineering-evidence-2026-08-31.md
+    - condition: reviewer/editor needs whole-paper communication/readiness evaluation beyond technical validity
+      path: ../nature-shared/core/manuscript-excellence-release-gate.md
+    - condition: reviewer/editor is judging abstract self-containment, numerical salience, information density or abstract/body consistency
+      path: ../nature-shared/core/abstract-information-budget.md
+    - condition: reviewer/editor needs section-specific reader jobs, failure modes or exit tests
+      path: ../nature-shared/core/manuscript-section-craftsmanship.md
+    - condition: reviewer/editor must judge target-specific word/page/display/reference allocation or opportunity cost
+      path: ../nature-shared/core/venue-constrained-manuscript-budget.md
+    - condition: reviewer/editor must judge whole-paper argument dependency, reader-state activation, Results ordering or Discussion architecture
+      path: ../nature-shared/core/manuscript-narrative-architecture.md
+    - condition: reviewer/editor must judge claim stance, defensive qualification or positive-claim visibility
+      path: ../nature-shared/core/epistemic-rhetoric-and-qualification.md
+    - condition: reviewer/editor must judge numerical precision, significant figures, intervals, P values or cross-surface rounding
+      path: ../nature-shared/core/numerical-reporting-precision.md
+    - condition: reviewer/editor must judge standalone zero-context comprehension or project/private vocabulary leakage
+      path: ../nature-shared/core/standalone-manuscript-reader-contract.md
+    - condition: reviewer/editor must judge source maturity, preprint/version-of-record status or publication-version identity
+      path: ../nature-shared/core/literature-version-and-source-quality.md
+    - condition: reviewer/editor must independently inventory atomic claims, definitions, proof dependencies, numerical/source/availability claims or contradictions
       path: ../nature-shared/core/atomic-claim-verification.md
-    - condition: reviewer/editor should resolve the dominant paper archetype and ask whether evidence, explanation depth and main-figure roles fit a mechanism/discovery, trial/intervention, observational, computational/ML, method/tool/software, resource/dataset, theory/proof, qualitative, review/synthesis or hybrid scientific promise
-      path: ../nature-shared/core/paper-archetype-atlas.md
-    - condition: reviewer/editor should inspect recent cross-archetype counterexamples before treating one field/journal pattern as universal
-      path: ../nature-shared/research/stratified-paper-reading-2025-2026.md
-    - condition: reviewer/editor should assess whether a central idea, method, mechanism, result, equation, figure interpretation, or implication is under-explained; whether hidden premises prevent readers from reconstructing the evidence-to-claim chain; or whether the paper is so compressed that technically capable readers must guess rationale, meaning, or boundaries
+    - condition: reviewer/editor must judge contribution-defining formal objects, proofs, bounds, non-implications or formal hierarchy
+      path: ../nature-shared/core/formal-spine-preservation.md
+    - condition: reviewer/editor must judge explanatory sufficiency of a central idea, method, mechanism, result, equation or implication
       path: ../nature-shared/core/explanatory-sufficiency.md
-    - condition: reviewer/editor should assess whether source-code/repository/project details are cluttering the scientific narrative, whether decisive evidence is buried in Methods/SI, or whether content belongs in main text, figures, legends, Methods, availability, artifact docs, or should be omitted
+    - condition: reviewer/editor must judge main text versus Methods/SI/artifact allocation or repository-shaped narrative clutter
       path: ../nature-shared/core/manuscript-content-selection.md
-    - condition: reviewer/editor should assess whether filenames, script/helper names, file paths, raw repository links, CLI/developer residue, figure-caption artifact leakage, or punctuation/spacing/bracket defects remain on manuscript-facing surfaces; classify ordinary copy-editing as clarity/reporting unless it changes meaning or scientific identity
-      path: ../nature-shared/core/manuscript-surface-qa.md
-    - condition: reviewer/editor should assess whether the figure set actually supports headline claims, which plots/evidence roles are missing, whether pooled summaries hide heterogeneity/pairing/calibration/failure boundaries, or what visual evidence would close a decision-relevant concern
+    - condition: reviewer/editor must judge figure/evidence architecture or identify missing visual evidence
       path: ../nature-shared/core/figure-evidence-planning.md
-    - condition: user asks how comparable papers establish similar claims, what evidence/figures reviewers in this paper class may expect, or whether the manuscript's evidence architecture is unusual relative to close analogues; use as context only, not publication policy
+    - condition: reviewer/editor needs close-paper evidence/explanation/figure/section-proportion calibration
       path: ../nature-shared/core/analogue-paper-calibration.md
-    - condition: target journal/venue is named, journal fit or desk-review risk is being assessed, or exact publication criteria matter
+    - condition: exact target journal/venue/article type/stage or current author instructions matter
       path: ../nature-shared/journal-formats/journal-resolution.md
-    - condition: target-specific decision readiness should be audited across science/integrity, scope, contribution/readership, evidence maturity, editorial triage, reviewer coverage, editor synthesis, revision closure, cover letter, and retargeting without acceptance prediction
+    - condition: target-specific decision criteria, policy date, burden of doubt, review model or AI/confidentiality policy matters
+      path: ../nature-shared/journal-formats/venue-decision-contract.md
+    - condition: target-specific acceptance readiness, fit, triage, evidence maturity or retargeting is being assessed
       path: ../nature-shared/core/journal-acceptance-readiness.md
-    - condition: reviewer/editor should test whether the manuscript has been acceptance-optimized using evidence-graded levers from research-question design through evidence maturation, target fit, desk preflight, submission package, review, revision and retargeting, without numeric acceptance scoring or individual targeting
+    - condition: legitimate publication opportunity and evidence-backed acceptance levers are being reviewed without gaming or numeric acceptance prediction
       path: ../nature-shared/core/acceptance-optimization-protocol.md
-    - condition: reviewer/editor should learn from comparable public review histories how concerns were actually closed by evidence, reanalysis, claim narrowing, figure/table changes, explanation or rebuttal, while explicitly controlling survivorship bias and pairing accepted cases with rejection evidence
-      path: ../nature-shared/core/public-review-history-calibration.md
-    - condition: evidence grade, source-specific support, causal boundary, Registered Report route, rejection-report basis, novelty/conventionality association, statistical-review intervention, revision trajectory or public-history limitation behind an acceptance recommendation needs inspection
-      path: ../nature-shared/research/acceptance-optimization-evidence-ledger-2026-08-29.md
-    - condition: public editor identities, teams, sections, professional expertise, conflicts, or permitted editor suggestions are relevant to routing; use only professional expertise and official workflow rules, never presumed leniency or favorability
-      path: ../nature-shared/core/editor-expertise-routing.md
-    - condition: source-specific evidence is needed for editorial triage, desk-rejection variability, editor expertise routing, reviewer disagreement, cover-letter boundaries, novelty/acceptance, or anti-gaming safeguards
-      path: ../nature-shared/research/journal-acceptance-editorial-decision-research-2026-08-29.md
-    - condition: target publication model must be resolved as selective broad-interest, field-advancement, rigor-first, clinical/policy-priority, evidence-assessment, or deadline-constrained
-      path: ../nature-shared/journal-formats/editorial-decision-profiles.md
+    - condition: manuscript needs cross-section terminology/unit/number/claim consistency checking
+      path: ../nature-shared/core/consistency-sweep.md
+    - condition: manuscript needs final source/render publication-surface QA
+      path: ../nature-shared/core/manuscript-surface-qa.md
+    - condition: abstract needs conservative automated density/precision/private-ID/word-limit/reference scanning
+      path: ../nature-shared/scripts/audit_abstract_information.py
+    - condition: manuscript needs conservative narrative/precision/defensiveness/deferred-reader-activation scanning
+      path: ../nature-shared/scripts/audit_narrative_precision.py
+    - condition: manuscript needs conservative standalone/private-vocabulary/repository-leakage/preprint-concentration scanning
+      path: ../nature-shared/scripts/audit_standalone_manuscript.py
+    - condition: manuscript needs conservative scholarly-surface/markup/code-font/raw-math/table/render scanning
+      path: ../nature-shared/scripts/audit_scholarly_surface_semantics.py
+    - condition: reviewer/editor needs deterministic target-budget validation
+      path: ../nature-shared/scripts/verify_manuscript_budget.py
+    - condition: reviewer/editor needs section-specific academic-writing evidence and transfer limits
+      path: ../nature-shared/research/section-specific-academic-writing-evidence-2026-08-31.md
+    - condition: reviewer/editor needs evidence behind narrative architecture, discussion, AI-writing risks or numerical precision
+      path: ../nature-shared/research/excellent-academic-writing-ai-failure-evidence-2026-08-31.md
     - condition: exact target is flagship Nature or the user explicitly asks for Nature editorial/referee criteria
       path: references/editorial criteria and processes.md
-    - condition: executing the full editor-triage plus isolated-review workflow, preparing immutable reviewer inputs, or resolving assessment order
+    - condition: executing the full editor-triage plus isolated-review workflow or preparing immutable reviewer inputs
       path: references/reviewer-workflow.md
     - condition: weighting universal scientific axes and target-conditional originality/significance/readership/advancement/clinical-priority axes
       path: references/review-axes.md
-    - condition: building the internal concern ledger, calibrating Major/Minor severity and Blocking status, checking technical coverage, or anchoring concerns to manuscript claims and evidence locations
+    - condition: building the internal concern ledger, calibrating Major/Minor severity or checking blocking technical coverage
       path: references/technical-concern-taxonomy.md
-    - condition: manuscript is clearly in chemistry, engineering, materials, atmospheric science, climate-ecology, hydrology, or remote sensing
+    - condition: manuscript is clearly in chemistry, engineering, materials, atmospheric science, climate-ecology, hydrology or remote sensing
       path: references/domain-specific-review-gates.md
-    - condition: composing or auditing editorial triage, mutually blind reviewer reports, Blocking flags, editor synthesis, or the author-facing decision-engineering map
+    - condition: composing or auditing editorial triage, mutually blind reviewer reports, Blocking flags, editor synthesis or author-facing decision map
       path: references/report-structure.md
-    - condition: enforcing reviewer mutual blindness, separating simulated editor and reviewer authority, or preventing invented identities/hidden editorial knowledge
+    - condition: enforcing reviewer mutual blindness, simulated editor/reviewer authority boundaries or non-invention
       path: references/role-boundaries.md
-    - condition: final reviewer-isolation, severity, blocking, groundedness, target-criteria, non-invention, coverage, and decision-engineering QA before delivery
+    - condition: final reviewer-isolation, severity, groundedness, target-criteria and decision-engineering QA before delivery
       path: references/qa-checklist.md
-    - condition: checking the manuscript against itself — headline counts that do not reconcile with Methods, metric precision drift, claims contradicted by tables, or internal summaries that disagree
-      path: ../nature-shared/core/consistency-sweep.md
