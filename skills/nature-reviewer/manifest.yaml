@@ -28,6 +28,8 @@ references:
       path: ../nature-shared/core/abstract-information-budget.md
     - condition: reviewer/editor needs section-specific reader jobs, failure modes or exit tests
       path: ../nature-shared/core/manuscript-section-craftsmanship.md
+    - condition: reviewer/editor must resolve the dominant paper archetype and judge evidence, explanation depth and display roles against that scientific promise rather than a universal paper template
+      path: ../nature-shared/core/paper-archetype-atlas.md
     - condition: reviewer/editor must judge target-specific word/page/display/reference allocation or opportunity cost
       path: ../nature-shared/core/venue-constrained-manuscript-budget.md
     - condition: reviewer/editor must judge whole-paper argument dependency, reader-state activation, Results ordering or Discussion architecture
@@ -44,25 +46,37 @@ references:
       path: ../nature-shared/core/atomic-claim-verification.md
     - condition: reviewer/editor must judge contribution-defining formal objects, proofs, bounds, non-implications or formal hierarchy
       path: ../nature-shared/core/formal-spine-preservation.md
-    - condition: reviewer/editor must judge explanatory sufficiency of a central idea, method, mechanism, result, equation or implication
+    - condition: reviewer/editor must judge explanatory sufficiency when hidden premises prevent readers from reconstructing the evidence-to-claim chain or technically capable readers must guess rationale, mechanism, meaning or boundaries
       path: ../nature-shared/core/explanatory-sufficiency.md
     - condition: reviewer/editor must judge main text versus Methods/SI/artifact allocation or repository-shaped narrative clutter
       path: ../nature-shared/core/manuscript-content-selection.md
     - condition: reviewer/editor must judge figure/evidence architecture or identify missing visual evidence
       path: ../nature-shared/core/figure-evidence-planning.md
-    - condition: reviewer/editor needs close-paper evidence/explanation/figure/section-proportion calibration
+    - condition: reviewer/editor needs close-paper evidence/explanation/figure/section-proportion calibration; use analogues as context only, not publication policy
       path: ../nature-shared/core/analogue-paper-calibration.md
+    - condition: reviewer/editor needs recent cross-archetype counterexamples before treating one field or venue pattern as universal
+      path: ../nature-shared/research/stratified-paper-reading-2025-2026.md
     - condition: exact target journal/venue/article type/stage or current author instructions matter
       path: ../nature-shared/journal-formats/journal-resolution.md
     - condition: target-specific decision criteria, policy date, burden of doubt, review model or AI/confidentiality policy matters
       path: ../nature-shared/journal-formats/venue-decision-contract.md
+    - condition: target publication model needs fallback classification when exact editorial decision rules are unavailable
+      path: ../nature-shared/journal-formats/editorial-decision-profiles.md
     - condition: target-specific acceptance readiness, fit, triage, evidence maturity or retargeting is being assessed
       path: ../nature-shared/core/journal-acceptance-readiness.md
     - condition: legitimate publication opportunity and evidence-backed acceptance levers are being reviewed without gaming or numeric acceptance prediction
       path: ../nature-shared/core/acceptance-optimization-protocol.md
+    - condition: comparable public review histories should be studied for concern-to-repair patterns; pair accepted histories with rejection evidence and control survivorship bias
+      path: ../nature-shared/core/public-review-history-calibration.md
+    - condition: source-specific evidence grades or causal limits behind acceptance optimization and public review-history calibration need inspection
+      path: ../nature-shared/research/acceptance-optimization-evidence-ledger-2026-08-29.md
+    - condition: public editor identities, teams, sections, professional expertise, conflicts or permitted editor suggestions matter; use expertise only, never presumed leniency or favorability
+      path: ../nature-shared/core/editor-expertise-routing.md
+    - condition: evidence behind desk triage, editor expertise routing, reviewer disagreement, cover letters, novelty and anti-gaming safeguards needs inspection
+      path: ../nature-shared/research/journal-acceptance-editorial-decision-research-2026-08-29.md
     - condition: manuscript needs cross-section terminology/unit/number/claim consistency checking
       path: ../nature-shared/core/consistency-sweep.md
-    - condition: manuscript needs final source/render publication-surface QA
+    - condition: manuscript needs final source/render publication-surface QA; classify ordinary copy-editing as clarity/reporting unless it changes meaning or scientific identity
       path: ../nature-shared/core/manuscript-surface-qa.md
     - condition: abstract needs conservative automated density/precision/private-ID/word-limit/reference scanning
       path: ../nature-shared/scripts/audit_abstract_information.py
