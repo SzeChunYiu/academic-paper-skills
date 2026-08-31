@@ -1,5 +1,5 @@
 name: nature-reviewer
-version: 3.0.0
+version: 3.1.0
 description: >
   Declarative manifest for journal-aware pre-submission editor/reviewer
   simulation. The legacy skill name remains for compatibility; review criteria
@@ -9,6 +9,7 @@ description: >
   Review also checks evidence-graded acceptance optimization, journal acceptance-
   readiness, adversarial falsification and confirmation-bias control, whole-paper
   argument architecture, section functional sufficiency, reader-state activation,
+  venue-constrained section/display allocation and manuscript budget efficiency,
   discussion depth, epistemic-rhetorical calibration, numerical display precision,
   standalone zero-context reader comprehension, terminology/definition independence,
   literature version/source maturity, editorial routing/expertise,
@@ -21,6 +22,7 @@ always_load:
   - ../nature-shared/core/editor-reviewer-decision-engine.md
   - ../nature-shared/core/adversarial-review-bias-control.md
   - ../nature-shared/core/manuscript-excellence-release-gate.md
+  - ../nature-shared/core/venue-constrained-manuscript-budget.md
   - ../nature-shared/core/manuscript-narrative-architecture.md
   - ../nature-shared/core/epistemic-rhetoric-and-qualification.md
   - ../nature-shared/core/numerical-reporting-precision.md
@@ -29,6 +31,12 @@ always_load:
 
 references:
   on_demand:
+    - condition: reviewer/editor needs to inspect a target-specific word/page/display/reference/legend budget ledger and determine whether central reader/evidence functions are underfunded or secondary positioning/provenance material is overweight
+      path: ../nature-shared/analysis-contracts/manuscript-budget.schema.json
+    - condition: reviewer/editor needs deterministic budget validation for hard-limit excess, unresolved page measurement, underdeveloped P0-P3 sections, soft-allocation excess, or revision-reserve exhaustion
+      path: ../nature-shared/scripts/verify_manuscript_budget.py
+    - condition: reviewer/editor needs the current official venue evidence and transfer limits behind manuscript budget allocation, display opportunity cost, selective nearest-work footprint, and no-universal-section-percentage rules
+      path: ../nature-shared/research/venue-constrained-manuscript-budget-evidence-2026-08-31.md
     - condition: reviewer/editor should conservatively scan for excessive decimal precision, fixed-width metric output, defensive qualification density, experiment/version-ID narrative density, or suspiciously short setup/formulation sections before judging argument/readability readiness
       path: ../nature-shared/scripts/audit_narrative_precision.py
     - condition: reviewer/editor needs the 2026-08-31 evidence basis for whole-paper logic, section/discussion expectations, AI-writing rhetoric risks, or numerical precision guidance
