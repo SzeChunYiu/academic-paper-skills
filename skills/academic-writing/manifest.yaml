@@ -79,8 +79,12 @@ references:
       path: ../nature-shared/core/unknown-paper-research-protocol.md
     - condition: a visual representation choice needs a broader plot/table/diagram evidence atlas
       path: ../nature-shared/core/visual-evidence-atlas.md
+    - condition: source-specific visual-representation evidence or transfer limits behind the visual-evidence atlas need inspection
+      path: ../nature-shared/research/visual-evidence-atlas-research-2026-08-29.md
     - condition: substantial manuscript work needs a few genuinely close papers for argument/evidence/figure/explanation/section-proportion calibration without copying wording or visual identity
       path: ../nature-shared/core/analogue-paper-calibration.md
+    - condition: recent cross-archetype direct-reading examples are needed to test whether a writing or figure rule transfers beyond one publication ecology
+      path: ../nature-shared/research/stratified-paper-reading-2025-2026.md
     - condition: prose feels generic, formulaic, repetitive, machine-like or over-smoothed after scientific logic is stable
       path: ../nature-shared/core/natural-scholarly-prose.md
     - condition: representative author prose exists and a recognizable manuscript-level voice should survive rewriting
@@ -89,16 +93,32 @@ references:
       path: ../nature-shared/journal-formats/journal-resolution.md
     - condition: target-specific editorial/reviewer criteria, policy date, review model, decision readiness or AI/confidentiality policy matters
       path: ../nature-shared/journal-formats/venue-decision-contract.md
+    - condition: target publication model needs fallback classification when exact editorial decision rules are unavailable
+      path: ../nature-shared/journal-formats/editorial-decision-profiles.md
     - condition: submission strategy needs target-specific acceptance-readiness, fit, triage, evidence maturity, reviewer coverage, revision closure or retargeting without acceptance prediction
       path: ../nature-shared/core/journal-acceptance-readiness.md
     - condition: legitimate publication opportunity should be optimized using evidence-backed pre-study/post-study levers without gaming reviewers or predicting acceptance
       path: ../nature-shared/core/acceptance-optimization-protocol.md
+    - condition: comparable public review histories should be studied for concern-to-repair patterns; pair accepted histories with rejection evidence and control survivorship bias
+      path: ../nature-shared/core/public-review-history-calibration.md
+    - condition: source-specific evidence grades or causal limits behind acceptance optimization and public review-history calibration need inspection
+      path: ../nature-shared/research/acceptance-optimization-evidence-ledger-2026-08-29.md
+    - condition: public editor identities, teams, sections, professional expertise, conflicts or permitted editor suggestions matter; use expertise only, never presumed leniency or favorability
+      path: ../nature-shared/core/editor-expertise-routing.md
+    - condition: evidence behind desk triage, editor expertise routing, reviewer disagreement, cover letters, novelty and anti-gaming safeguards needs inspection
+      path: ../nature-shared/research/journal-acceptance-editorial-decision-research-2026-08-29.md
     - condition: pre-submission editor/reviewer decision logic or minimum-sufficient repair planning is needed
       path: ../nature-shared/core/editor-reviewer-decision-engine.md
     - condition: Results/main-text work needs shortest-sufficient evidence chain, main-versus-support allocation or revision-accretion control
       path: ../nature-shared/core/main-text-discipline.md
     - condition: full or multi-round manuscript needs terminology/unit/number/claim consistency checking
       path: ../nature-shared/core/consistency-sweep.md
+    - condition: inspect the evidence or transfer limits behind a study protocol/conduct adapter or blocker
+      path: ../nature-shared/research/study-protocol-conduct-evidence-ledger-2026-08.md
+    - condition: inspect the evidence or transfer limits behind a data integrity/stewardship adapter or blocker
+      path: ../nature-shared/research/data-integrity-stewardship-evidence-ledger-2026-08.md
+    - condition: inspect the evidence or transfer limits behind a statistical inference/uncertainty adapter or blocker
+      path: ../nature-shared/research/statistical-inference-uncertainty-evidence-ledger-2026-08.md
     - condition: an abstract needs a conservative scan for excessive numerical density, multiple quantitative substories, formatter precision, private IDs, inferential-detail stacking or target-rule violations
       path: ../nature-shared/scripts/audit_abstract_information.py
     - condition: substantial manuscript or rewrite needs a conservative scan for decimal precision, defensive qualification density, experiment/version-ID narrative density or deferred reader activation
