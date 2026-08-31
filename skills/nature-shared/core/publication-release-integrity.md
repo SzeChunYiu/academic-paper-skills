@@ -71,6 +71,12 @@ will read, not merely its LaTeX/Word/Markdown source. The `claim_ledger` artifac
 must be the ledger that already passed the independent research-integrity gate.
 Its `manuscript_id` must equal the selected authority, and its
 `manuscript_fingerprint` must equal the canonical reader-manuscript SHA-256.
+Its independent `coverage_check.reviewed_manuscript_fingerprint` must also equal
+that same digest; co-location of an old review record inside a newly rehashed
+ledger is not review of the final build. This value must be copied from the
+frozen independent reviewer output, not generated or rebound by the release
+builder. Digest equality is a consistency check, not authentication of reviewer
+identity or independence.
 The publication-release verifier re-runs the fail-closed research-integrity
 verifier against those exact reader-manuscript bytes; a matching fingerprint
 alone is insufficient. `public_posting_ready` is a release state and receives
@@ -140,7 +146,8 @@ The verifier checks:
 4. local artifact hashes and byte counts;
 5. claim-ledger manuscript ID/fingerprint/release-state synchronization;
 6. a fresh fail-closed research-integrity verification of that ledger against
-   the exact reader-manuscript bytes;
+   the exact reader-manuscript bytes, including independent-review fingerprint
+   identity;
 7. exact file-set or ZIP membership;
 8. canonical manuscript inclusion;
 9. ZIP wrapper hash/size and member hash/size equality.
@@ -164,8 +171,9 @@ scientific/atomic verification
 ```
 
 A missing candidate inventory, unresolved candidate, hash/size mismatch, stale
-claim-ledger fingerprint, incomplete package member set, extra package file, or
-post-verification mutation is `BLOCKED`. The repair is to resolve authority,
+claim-ledger fingerprint, review fingerprint from an older candidate, incomplete
+package member set, extra package file, or post-review/post-verification mutation
+is `BLOCKED`. The repair is to resolve authority,
 regenerate from the selected state where necessary, refresh the ledger, rebuild
 the package, and rerun the full binding—not to relabel an old artifact.
 

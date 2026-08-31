@@ -371,6 +371,18 @@ def validate_ledger(ledger: dict[str, Any], *, live: bool, args: argparse.Namesp
     coverage = ledger.get("coverage_check", {})
     if coverage.get("status") != "PASS":
         errors.append("ledger: independent atomic-claim coverage_check must PASS")
+    reviewed_fingerprint = str(
+        coverage.get("reviewed_manuscript_fingerprint", "")
+    ).strip()
+    if coverage.get("status") == "PASS":
+        if not re.fullmatch(r"sha256:[0-9a-fA-F]{64}", reviewed_fingerprint):
+            errors.append(
+                "ledger: coverage_check reviewed_manuscript_fingerprint must be sha256:<64 hex>"
+            )
+        elif reviewed_fingerprint.casefold() != fingerprint.casefold():
+            errors.append(
+                "ledger: coverage_check reviewed_manuscript_fingerprint does not match ledger manuscript_fingerprint"
+            )
     coverage_verifier = str(coverage.get("verifier_id", "")).strip()
     if not coverage_verifier:
         errors.append("ledger: coverage_check missing verifier_id")

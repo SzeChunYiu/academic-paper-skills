@@ -51,6 +51,7 @@ def _write_release(tmp_path: Path) -> tuple[dict, Path]:
             "verifier_id": "coverage-reviewer",
             "verification_method": "independent_model_with_retrieved_source",
             "checked_at": now,
+            "reviewed_manuscript_fingerprint": _sha(manuscript),
         },
         "sources": [
             {
@@ -273,6 +274,32 @@ def test_final_artifact_mutation_blocks_release(tmp_path: Path) -> None:
     report = _validate(manifest, manifest_path)
     assert any(
         "artifact:paper" in error and "sha256 mismatch" in error
+        for error in report["errors"]
+    )
+
+
+def test_final_build_cannot_reuse_independent_review_of_older_candidate(
+    tmp_path: Path,
+) -> None:
+    manifest, manifest_path = _write_release(tmp_path)
+    ledger_path = tmp_path / "claim-ledger.json"
+    ledger = json.loads(ledger_path.read_text(encoding="utf-8"))
+    ledger["coverage_check"]["reviewed_manuscript_fingerprint"] = (
+        "sha256:" + "1" * 64
+    )
+    ledger_bytes = (json.dumps(ledger, sort_keys=True) + "\n").encode()
+    ledger_path.write_bytes(ledger_bytes)
+    claim_artifact = next(
+        item
+        for item in manifest["artifacts"]
+        if item["artifact_id"] == "artifact:claim-ledger"
+    )
+    claim_artifact["sha256"] = _sha(ledger_bytes)
+    claim_artifact["byte_count"] = len(ledger_bytes)
+    report = _validate(manifest, manifest_path)
+    assert report["decision"] == "BLOCKED", report
+    assert any(
+        "coverage_check reviewed_manuscript_fingerprint does not match" in error
         for error in report["errors"]
     )
 

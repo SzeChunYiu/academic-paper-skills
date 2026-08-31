@@ -92,6 +92,35 @@ class AtomicClaimVerificationTests(unittest.TestCase):
             self.assertIn(marker, contract)
         self.assertIn("not necessarily a contiguous factor", normalized_contract)
 
+    def test_formal_semantics_and_non_derivability_require_real_proof_obligations(
+        self,
+    ) -> None:
+        contract = " ".join(read(CONTRACT).lower().split())
+        for marker in (
+            "name, symbol, terminal state, or type signature alone",
+            "admissible inputs",
+            "output or conclusion semantics",
+            "side conditions",
+            "non-derivability",
+            "terminal normal form",
+            "upper witness",
+            "all shorter derivations",
+            "soundness and completeness",
+        ):
+            self.assertIn(marker, contract)
+
+    def test_stale_unresolved_findings_require_explicit_status_transition(self) -> None:
+        contract = " ".join(read(CONTRACT).lower().split())
+        for marker in (
+            "epistemic-status transition",
+            "already-frozen evidence",
+            "explicit correction or supersession record",
+            "preserve the original finding",
+            "every current-authority surface",
+            "not optional new science",
+        ):
+            self.assertIn(marker, contract)
+
     def test_contiguous_factor_and_subsequence_invariants_are_not_conflated(self) -> None:
         e1, e2 = 0b01, 0b10
         word = (e1, e2, e1)

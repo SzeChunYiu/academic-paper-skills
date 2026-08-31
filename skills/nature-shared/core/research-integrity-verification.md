@@ -90,8 +90,25 @@ For full-manuscript or release work, materialize a ledger conforming to:
 
 The ledger must bind verification to the exact audited manuscript with a
 `sha256:` manuscript fingerprint and must include an independent atomic-claim
-coverage check. This prevents a writer from certifying only the claims it chose
-to inventory or replaying a clean audit after a later edit.
+coverage check. That coverage check must record
+`reviewed_manuscript_fingerprint`, equal to the ledger's manuscript fingerprint,
+so a review of an earlier candidate cannot be relabeled as review of a later
+build. This prevents a writer from certifying only the claims it chose to
+inventory or replaying a clean audit after a later edit.
+
+The independent reviewer computes the SHA-256 directly from the exact artifact
+it reviewed and records that digest in the frozen reviewer output. The author or
+release builder may only copy that reviewer-produced value verbatim into
+`reviewed_manuscript_fingerprint`; it must not be rebound, recomputed from a
+later build, or edited merely to restore equality. A self-updated equality field
+is not evidence of independent review.
+
+The validator establishes digest consistency, not cryptographic reviewer
+authenticity. It cannot prove who computed the digest, whether the claimed
+reviewer was independent, or whether an unsigned review output is genuine. When
+those custody properties matter, preserve the immutable reviewer output and use
+the project's authenticated signature, attestation, or independent-custody
+mechanism in addition to this consistency check.
 
 Validate a working/review ledger with:
 
@@ -288,6 +305,7 @@ A full verification claim may pass only when:
 all in-scope atomic claims inventoried
 + verification_scope == full_manuscript
 + independent coverage_check == PASS
++ coverage_check.reviewed_manuscript_fingerprint == manuscript_fingerprint
 + coverage verifier != authoring agent
 + ledger manuscript_fingerprint == exact final artifact SHA-256
 + every claim has an admissible warrant or explicit NOT_APPLICABLE disposition
@@ -338,5 +356,7 @@ source discovery
 
 If a later edit changes a claim's meaning, scope, number, citation or source
 version, invalidate the affected receipt and re-run all dependent checks. Any
-change to the final artifact also invalidates its manuscript fingerprint and
-therefore blocks reuse of the prior release decision.
+change or rebuild of the reviewed artifact changes its manuscript fingerprint,
+invalidates the independent coverage check, and blocks reuse of the prior review
+or release decision. Freeze candidate bytes before independent review; after
+review, either release those exact bytes or create and re-review a new candidate.
