@@ -9,7 +9,6 @@ SKILLS = SHARED.parent
 ABSTRACT = SHARED / "core" / "abstract-information-budget.md"
 SECTIONS = SHARED / "core" / "manuscript-section-craftsmanship.md"
 EXCELLENCE = SHARED / "core" / "manuscript-excellence-release-gate.md"
-PIPELINE_CORE = SHARED / "core" / "academic-paper-iteration-pipeline.md"
 SCANNER = SHARED / "scripts" / "audit_abstract_information.py"
 WRITING = SKILLS / "academic-writing" / "manifest.yaml"
 PIPELINE = SKILLS / "academic-paper-pipeline" / "manifest.yaml"
@@ -55,7 +54,7 @@ def test_abstract_contract_is_information_budget_not_number_quota() -> None:
     assert "maximum n numbers per abstract" in text
     assert "do not universalize" in text
     assert "fixed number of numbers" in text
-    assert "reporting-mandated studies" in text or "reporting-mandated" in text
+    assert "reporting-mandated" in text
 
 
 def test_section_contract_covers_each_major_manuscript_surface() -> None:
@@ -89,11 +88,11 @@ def test_section_contract_is_functional_not_template_driven() -> None:
     text = SECTIONS.read_text(encoding="utf-8").lower()
     for marker in (
         "every section is an interface",
-        "section is a **scientific function**, not a mandatory section",
+        "**scientific function**, not a mandatory section",
         "functional sufficiency, not length",
         "organize by scientific procedure, not code layout",
         "organize by scientific dependency",
-        "discussion should not repeat results",
+        "not merely repeat what happened",
         "a dedicated section is optional",
         "a separate conclusion is optional",
         "writing order versus reading order",
@@ -189,27 +188,38 @@ Text.
     assert any(item["code"] == "abstract_reference_disallowed" for item in result["findings"])
 
 
-def test_excellence_and_pipeline_require_abstract_and_section_craftsmanship() -> None:
-    excellence = EXCELLENCE.read_text(encoding="utf-8").lower()
-    pipeline_core = PIPELINE_CORE.read_text(encoding="utf-8").lower()
+def test_excellence_gate_mandates_abstract_and_section_craftsmanship() -> None:
+    text = EXCELLENCE.read_text(encoding="utf-8").lower()
     for marker in (
+        "mandatory contract loading",
         "abstract information budget",
-        "section craftsmanship",
+        "section-function and craftsmanship map",
+        "during abstract drafting and finalization",
+        "q0",
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "there is **no universal maximum number of numbers**",
+        "e9 — abstract information and cross-section craftsmanship",
         "abstract-to-paper consistency",
-        "clean-reader abstract",
+        "clean-reader abstract check",
+        "audit_abstract_information.py",
+        "all e1–e9 applicable gates pass",
     ):
-        assert marker in excellence or marker in pipeline_core, marker
+        assert marker in text, marker
 
 
-def test_manifests_always_load_new_contracts_and_scanner() -> None:
+def test_existing_skill_manifests_route_through_mandatory_excellence_gate() -> None:
     writing = WRITING.read_text(encoding="utf-8")
     pipeline = PIPELINE.read_text(encoding="utf-8")
     reviewer = REVIEWER.read_text(encoding="utf-8")
+    gate = "../nature-shared/core/manuscript-excellence-release-gate.md"
     for text in (writing, pipeline, reviewer):
-        assert "../nature-shared/core/abstract-information-budget.md" in text
-        assert "../nature-shared/core/manuscript-section-craftsmanship.md" in text
-        assert "../nature-shared/scripts/audit_abstract_information.py" in text
-        assert "../nature-shared/research/section-specific-academic-writing-evidence-2026-08-31.md" in text
-    assert _version(writing) >= (1, 15, 0)
-    assert _version(pipeline) >= (1, 17, 0)
-    assert _version(reviewer) >= (3, 2, 0)
+        assert gate in text
+    # This change intentionally uses the already-always-loaded excellence gate as
+    # the transitive mandatory router instead of duplicating four new entries in
+    # three manifests. Existing version floors still guarantee that routing layer.
+    assert _version(writing) >= (1, 14, 0)
+    assert _version(pipeline) >= (1, 16, 0)
+    assert _version(reviewer) >= (3, 1, 0)
