@@ -1,5 +1,5 @@
 name: nature-shared
-version: 2.9.0
+version: 2.9.1
 description: >
   Declarative manifest for shared academic-paper reference modules. This package
   is not a standalone workflow; installed skills load exact shared core,
@@ -31,6 +31,8 @@ core:
       path: core/reader-workflow.md
     - condition: full manuscript, theory/proof section, submission-ready deliverable, public posting, or decision-relevant revision requires a fail-closed inventory of every atomic scientific assertion, definition, proof dependency, numerical claim, source claim, availability statement, and cross-section restatement
       path: core/atomic-claim-verification.md
+    - condition: submission, public posting, publication release, or exact mirroring requires one canonical manuscript authority and exact binding from a passing claim ledger to the reader artifact and complete delivered package bytes
+      path: core/publication-release-integrity.md
     - condition: maintaining terminology consistency across paper reading, polishing, writing, or slide generation
       path: core/terminology-ledger.md
     - condition: rewriting or polishing substantial author-provided prose while preserving a recognizable authorial cadence, agency, terminology, stance, or manuscript-level voice

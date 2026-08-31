@@ -71,6 +71,11 @@ will read, not merely its LaTeX/Word/Markdown source. The `claim_ledger` artifac
 must be the ledger that already passed the independent research-integrity gate.
 Its `manuscript_id` must equal the selected authority, and its
 `manuscript_fingerprint` must equal the canonical reader-manuscript SHA-256.
+The publication-release verifier re-runs the fail-closed research-integrity
+verifier against those exact reader-manuscript bytes; a matching fingerprint
+alone is insufficient. `public_posting_ready` is a release state and receives
+the same non-closing-claim, independent-coverage, source-status and byte-binding
+checks as submission or publication readiness.
 
 Any edit, rebuild, metadata rewrite, linearization, signing step, archive rebuild,
 or file replacement changes bytes and invalidates the affected binding. Rehash,
@@ -119,9 +124,11 @@ The verifier checks:
 3. one canonical authority and explicit competing-candidate dispositions;
 4. local artifact hashes and byte counts;
 5. claim-ledger manuscript ID/fingerprint/release-state synchronization;
-6. exact file-set or ZIP membership;
-7. canonical manuscript inclusion;
-8. ZIP wrapper hash/size and member hash/size equality.
+6. a fresh fail-closed research-integrity verification of that ledger against
+   the exact reader-manuscript bytes;
+7. exact file-set or ZIP membership;
+8. canonical manuscript inclusion;
+9. ZIP wrapper hash/size and member hash/size equality.
 
 Run the verifier again on any exact mirror checkout or delivery directory. A
 shared manifest plus a fresh `PASS` demonstrates byte identity of the recorded

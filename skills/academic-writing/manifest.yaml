@@ -1,5 +1,5 @@
 name: academic-writing
-version: 1.15.0
+version: 1.15.1
 description: >
   Canonical journal-agnostic academic manuscript writing router. The historical
   nature-writing directory remains a compatibility/reference implementation
@@ -63,6 +63,12 @@ references:
       path: ../nature-shared/scripts/audit_scholarly_surface_semantics.py
     - condition: full manuscript, theory/proof section, formal bound, public-posting/submission readiness, or decision-relevant rewrite needs fail-closed atomic claim, definition, proof, source, number, availability, and cross-section verification
       path: ../nature-shared/core/atomic-claim-verification.md
+    - condition: submission, public posting, publication release, or exact mirroring needs one canonical manuscript authority and exact claim-ledger-to-reader-artifact-to-package byte binding
+      path: ../nature-shared/core/publication-release-integrity.md
+    - condition: a publication release manifest must be built or structurally inspected before exact package verification
+      path: ../nature-shared/release-contracts/publication-release-manifest.schema.json
+    - condition: final submission, public-posting, publication-release, or exact-mirror bytes must be checked against the canonical authority, fail-closed research-integrity ledger, and exact file-set or ZIP membership
+      path: ../nature-shared/scripts/verify_publication_release.py
     - condition: current paper type, target, reporting norm, writing convention, figure grammar, or review expectation is unfamiliar/uncertain and research is needed before imposing a template
       path: ../nature-shared/core/unknown-paper-research-protocol.md
     - condition: decide whether scientific evidence belongs in text, a table, a figure, or a mixed display; choose a plot/table family; plan exact-value tables; or audit forest/funnel, survival, prediction, longitudinal, heatmap, compositional, map, qualitative, image, or diagram representation

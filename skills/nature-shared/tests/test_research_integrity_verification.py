@@ -124,6 +124,16 @@ def test_valid_release_ledger_passes(tmp_path: Path) -> None:
     assert report["error_count"] == 0
 
 
+def test_public_posting_is_a_fail_closed_release_state(tmp_path: Path) -> None:
+    manuscript = tmp_path / "paper.md"
+    manuscript.write_bytes(b"")
+    ledger = valid_ledger("public_posting_ready")
+    ledger["claims"][0]["release_status"] = "SUPPORTED_INTERNAL"
+    report = validate(ledger, manuscript)
+    assert report["decision"] == "BLOCKED"
+    assert any("non-closing release_status" in x for x in report["errors"])
+
+
 def test_release_is_bound_to_exact_manuscript(tmp_path: Path) -> None:
     manuscript = tmp_path / "paper.md"
     manuscript.write_text("changed", encoding="utf-8")

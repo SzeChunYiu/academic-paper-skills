@@ -31,7 +31,7 @@
       "required": ["requested_state"],
       "properties": {
         "requested_state": {
-          "enum": ["draft", "review", "submission_ready", "publication_ready", "simulated_publication_ready_for_target"]
+          "enum": ["draft", "review", "submission_ready", "publication_ready", "public_posting_ready", "simulated_publication_ready_for_target"]
         }
       }
     }

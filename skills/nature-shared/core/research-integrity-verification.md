@@ -99,7 +99,7 @@ Validate a working/review ledger with:
 python ../scripts/verify_research_integrity.py research-integrity-ledger.json --pretty
 ```
 
-Before submission/publication readiness, bind the exact final artifact and
+Before submission, public-posting, or publication readiness, bind the exact final artifact and
 refresh resolvable source identity/status signals when network access is allowed:
 
 ```bash

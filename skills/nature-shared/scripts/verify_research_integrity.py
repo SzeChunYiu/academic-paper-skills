@@ -44,7 +44,12 @@ HIGH_RISK_CLASSES = {
 }
 STATUS_BLOCKING = {"RETRACTED", "WITHDRAWN"}
 STATUS_WARNING = {"CORRECTED", "EXPRESSION_OF_CONCERN", "UNKNOWN"}
-RELEASE_STATES = {"submission_ready", "publication_ready", "simulated_publication_ready_for_target"}
+RELEASE_STATES = {
+    "submission_ready",
+    "publication_ready",
+    "public_posting_ready",
+    "simulated_publication_ready_for_target",
+}
 
 
 def norm_text(value: str) -> str:
