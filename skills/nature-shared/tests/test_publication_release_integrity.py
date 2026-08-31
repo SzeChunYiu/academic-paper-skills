@@ -277,6 +277,70 @@ def test_final_artifact_mutation_blocks_release(tmp_path: Path) -> None:
     )
 
 
+def test_release_receipt_with_local_absolute_path_blocks_release(tmp_path: Path) -> None:
+    manifest, manifest_path = _write_release(tmp_path)
+    receipt = b'{"candidate":{"directory":"/Users/alice/private/candidate"}}\n'
+    (tmp_path / "cover.pdf").write_bytes(receipt)
+    artifact = next(
+        item
+        for item in manifest["artifacts"]
+        if item["artifact_id"] == "artifact:cover"
+    )
+    artifact["role"] = "release_receipt"
+    artifact["sha256"] = _sha(receipt)
+    artifact["byte_count"] = len(receipt)
+    manifest["package"] = {
+        "format": "file_set",
+        "members": [
+            {"member_path": "paper.pdf", "artifact_id": "artifact:paper"},
+            {"member_path": "cover.pdf", "artifact_id": "artifact:cover"},
+        ],
+    }
+    report = _validate(manifest, manifest_path)
+    assert report["decision"] == "BLOCKED", report
+    assert any(
+        "artifact:cover" in error and "local absolute path" in error
+        for error in report["errors"]
+    )
+
+
+def test_local_absolute_path_inside_zip_artifact_blocks_release(tmp_path: Path) -> None:
+    manifest, manifest_path = _write_release(tmp_path)
+    archive_path = tmp_path / "supplement.zip"
+    with zipfile.ZipFile(archive_path, "w", compression=zipfile.ZIP_STORED) as archive:
+        archive.writestr(
+            "review.json",
+            b'{"candidate":{"directory":"/home/alice/private/candidate"}}\n',
+        )
+    archive_bytes = archive_path.read_bytes()
+    artifact = next(
+        item
+        for item in manifest["artifacts"]
+        if item["artifact_id"] == "artifact:cover"
+    )
+    artifact.update(
+        {
+            "role": "reproducibility_component",
+            "path": "supplement.zip",
+            "sha256": _sha(archive_bytes),
+            "byte_count": len(archive_bytes),
+        }
+    )
+    manifest["package"] = {
+        "format": "file_set",
+        "members": [
+            {"member_path": "paper.pdf", "artifact_id": "artifact:paper"},
+            {"member_path": "supplement.zip", "artifact_id": "artifact:cover"},
+        ],
+    }
+    report = _validate(manifest, manifest_path)
+    assert report["decision"] == "BLOCKED", report
+    assert any(
+        "artifact:cover!review.json" in error and "local absolute path" in error
+        for error in report["errors"]
+    )
+
+
 def test_exact_archive_byte_mutation_blocks_release(tmp_path: Path) -> None:
     manifest, manifest_path = _write_release(tmp_path)
     with (tmp_path / "submission.zip").open("ab") as handle:
@@ -464,6 +528,7 @@ def test_contract_schema_and_transitive_pipeline_route_are_present() -> None:
         "exactly one authoritative",
         "sha-256 and byte count",
         "every central-directory entry whose name ends in `/` must be empty",
+        "local absolute path",
         "unexpected package member",
         "not a reproducible-build certificate",
     ):

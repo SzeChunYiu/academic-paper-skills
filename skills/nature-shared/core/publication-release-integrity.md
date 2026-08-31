@@ -106,6 +106,19 @@ or archive-byte mismatch blocks release. Do not include a competing manuscript
 in the archive merely to preserve provenance; keep provenance outside the
 submission package and record its disposition in the authority inventory.
 
+## Release-payload privacy gate
+
+Hash-safe paths in the manifest do not prove that delivered file contents are
+free of workstation disclosure. Inspect every declared artifact and every member
+of a declared ZIP artifact for high-confidence local absolute path families such
+as macOS, Linux, or Windows user-home paths. A signed review receipt can be valid
+repository-side provenance while still being unsuitable for delivery because it
+records the reviewer's private candidate directory. Keep that exact receipt
+outside the upload set and deliver only a sanitized digest plus a repository-
+relative locator. The verifier blocks these path families without printing the
+private value; this narrow gate is not a complete personal-data or anonymity
+audit.
+
 Persist the verifier-emitted release-manifest SHA-256 and byte count in the
 governing release record. This binds the control manifest itself without creating
 an impossible self-hash field inside that same manifest.
