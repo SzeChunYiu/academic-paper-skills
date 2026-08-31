@@ -6,7 +6,7 @@
 
 ## Why this kernel exists
 
-Academic-paper sessions accumulate research notes, manuscript text, formal rules, venue policies, reviewer histories, source extracts, figure guidance, statistics checks, and release requirements. Loading all of that at once wastes context and can make important instructions harder to retrieve.
+Academic-paper sessions accumulate research notes, manuscript text, formal rules, venue policies, reviewer histories, source extracts, figure guidance, statistics checks, and release requirements. Loading all of that at once wastes context and can make important instructions harder to retrieve. **Treat active context as a scarce execution resource.**
 
 Core rule:
 
