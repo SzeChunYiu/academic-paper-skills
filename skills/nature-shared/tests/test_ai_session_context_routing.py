@@ -163,6 +163,7 @@ def test_public_manifests_use_small_always_loaded_working_sets() -> None:
         "../nature-shared/core/ai-session-execution-kernel.md",
         "../nature-shared/core/ai-session-context-routing.md",
         "../nature-shared/core/academic-paper-iteration-pipeline.md",
+        "../nature-shared/core/paper-existence-scientific-mass-gate.md",
         "../nature-shared/core/ethics.md",
     ]
     assert _always_load(reviewer) == [
@@ -190,6 +191,7 @@ def test_detailed_safeguards_remain_discoverable_not_deleted() -> None:
         "scholarly-surface-semantics.md",
         "publication-release-integrity.md",
         "manuscript-budget-utilization.md",
+        "paper-existence-scientific-mass-gate.md",
     ):
         assert path in combined, path
 
