@@ -1,24 +1,29 @@
 name: academic-paper-pipeline
-version: 1.20.0
+version: 1.21.0
 description: >
   Journal-agnostic iterative academic-paper orchestration optimized for long-
   horizon AI sessions. The pipeline keeps a compact execution kernel, stage
-  router, lifecycle map and ethics contract always active, while progressively
-  loading detailed research, architecture, drafting, audit, adversarial
-  confirmation-bias-controlled review and release rules only when their triggers
-  apply. Claim-bearing figure work can invoke counterfactual representation
-  tournaments rather than accepting software defaults or published-paper habits.
-  Sessions persist compact checkpoints and use delta-first revision instead of
-  replaying the full work history.
+  router, lifecycle map, paper-existence/scientific-mass gate and ethics contract
+  always active, while progressively loading detailed research, architecture,
+  drafting, audit, adversarial confirmation-bias-controlled review and release
+  rules only when their triggers apply. Claim-bearing figure work can invoke
+  counterfactual representation tournaments rather than accepting software
+  defaults or published-paper habits. Sessions persist compact checkpoints and
+  use delta-first revision instead of replaying the full work history.
 
 always_load:
   - ../nature-shared/core/ai-session-execution-kernel.md
   - ../nature-shared/core/ai-session-context-routing.md
   - ../nature-shared/core/academic-paper-iteration-pipeline.md
+  - ../nature-shared/core/paper-existence-scientific-mass-gate.md
   - ../nature-shared/core/ethics.md
 
 references:
   on_demand:
+    - condition: a full-paper route, claim narrowing, portfolio triage, merge/note/kill decision or publication-readiness decision requires a fail-closed paper-existence and scientific-mass ledger
+      path: ../nature-shared/analysis-contracts/paper-existence-scientific-mass.schema.json
+    - condition: a paper-existence ledger must be checked for unsupported surviving claims, incomplete hostile review, effective-N inflation, validity/integrity substitution, sibling fragmentation or evidence-acquisition stop rules
+      path: ../nature-shared/scripts/verify_paper_existence_scientific_mass.py
     - condition: long-running, multi-session or multi-review work needs a compact resumable state with one primary operation, active scope, blockers, required contracts, next action and stop condition
       path: ../nature-shared/analysis-contracts/ai-session-checkpoint.schema.json
     - condition: a saved session checkpoint should be validated before resume, handoff or release
