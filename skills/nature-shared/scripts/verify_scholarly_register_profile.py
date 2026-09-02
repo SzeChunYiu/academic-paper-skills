@@ -226,7 +226,7 @@ def validate(record: dict[str, Any]) -> dict[str, Any]:
         sections = []
 
     seen_section_kinds: set[str] = set()
-    fingerprints: list[tuple[str, ...]] = []
+    fingerprint_rows: list[tuple[str, tuple[str, ...]]] = []
     unresolved_transfers = 0
     low_confidence = 0
 
@@ -293,7 +293,7 @@ def validate(record: dict[str, Any]) -> dict[str, Any]:
         elif confidence == "low":
             low_confidence += 1
 
-        fingerprints.append(_register_fingerprint(section))
+        fingerprint_rows.append((section_kind or f"section[{index}]", _register_fingerprint(section)))
 
     if mode == "whole_manuscript" and len(seen_section_kinds) < 3:
         findings.append(
@@ -305,12 +305,20 @@ def validate(record: dict[str, Any]) -> dict[str, Any]:
             )
         )
 
-    if len(fingerprints) >= 3 and len(set(fingerprints)) == 1:
+    fingerprint_counts = Counter(fingerprint for _, fingerprint in fingerprint_rows)
+    repeated_fingerprints = {fingerprint for fingerprint, count in fingerprint_counts.items() if count >= 3}
+    if repeated_fingerprints:
+        flattened_groups = [
+            [section_kind for section_kind, fingerprint in fingerprint_rows if fingerprint == repeated]
+            for repeated in repeated_fingerprints
+        ]
+        groups_text = "; ".join(", ".join(group) for group in flattened_groups)
         findings.append(
             _finding(
                 "uniform_register_across_sections",
                 "review",
-                "Three or more active sections have the same recorded register across rhetorical mode, tempo, agency, stance, syntax, list use, transitions, and closure. Verify that the manuscript has not been flattened into one generic prose template.",
+                "The same recorded register is reused across three or more manuscript surfaces "
+                f"({groups_text}). Verify that these sections genuinely share the same rhetorical mode, tempo, agency, stance, syntax, list use, transitions, and closure rather than being flattened into one generic prose template.",
                 "sections",
             )
         )
