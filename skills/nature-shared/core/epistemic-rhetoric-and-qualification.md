@@ -10,7 +10,7 @@ The manuscript should say the strongest statement the evidence warrants, no stro
 
 That means avoiding both:
 
-- **overclaiming** — carrying evidence beyond its design, population, assumptions, or uncertainty;
+- **overclaiming** — carrying evidence beyond its design, population, assumptions, uncertainty, or inferential state;
 - **underclaiming / defensive narration** — repeatedly weakening an established bounded result until the reader can no longer tell what the paper actually found.
 
 Use proposition-level calibration:
@@ -21,6 +21,8 @@ evidence state
 -> necessary qualification
 -> reader-facing wording
 ```
+
+For claim-bearing positive, null, adverse, failed, equivalence, heterogeneity, exploratory, control, or sensitivity results, load `scientific-rhetorical-act-and-result-state.md` before deciding the wording. Do not infer rhetoric from `significant/non-significant` alone.
 
 Do not translate the entire integrity/audit ledger into manuscript prose.
 
@@ -66,6 +68,8 @@ Better when supported:
 `On the frozen held-out domain, the typed relational representation outperformed the untyped comparator. Whether this advantage generalizes beyond the tested domain remains open.`
 
 The second version preserves the same boundary while making the scientific result legible.
+
+The same principle applies to adverse, negative, null, or failed findings: state the result clearly at the strength actually supported rather than surrounding it with ceremonial caution or turning it into an absence claim the analysis cannot establish.
 
 ## 3. One qualification should do one job
 
@@ -134,51 +138,63 @@ These phrases are sometimes exactly right.
 
 They become a writing problem when they:
 
-- outnumber direct positive scientific statements;
+- outnumber direct scientific statements about what was found;
 - repeat an already active boundary;
 - narrate project governance instead of science;
 - interrupt every result before the reader can integrate it;
 - turn the Discussion into a disclaimer ledger;
 - obscure the strongest surviving claim.
 
-Repair by consolidating boundaries and stating the positive bounded result first when scientifically appropriate.
+Repair by consolidating boundaries and stating the evidence-calibrated finding first when scientifically appropriate.
 
-## 6. Positive-claim visibility gate
+## 6. Headline-finding visibility gate
 
 For each headline finding, the reader should be able to underline one sentence that says what the study found.
 
-That sentence should contain:
+That sentence should contain, as applicable:
 
 - the object/comparison;
 - the direction or relation;
 - the relevant regime/population;
-- essential uncertainty/boundary when needed.
+- essential uncertainty/inferential state/boundary.
 
-If the only way to discover the result is to subtract several disclaimers from a paragraph, the rhetoric has failed.
+The sentence need not be favorable. A failed primary hypothesis, bounded absence finding, adverse effect, contradiction, or failure mode can be the paper's central result.
 
-## 7. Adverse and null results should be scientific, not ceremonial
+If the only way to discover the finding is to subtract several disclaimers from a paragraph, the rhetoric has failed.
 
-Do not hide failed hypotheses, null results, adverse controls, or contradictory evidence.
+## 7. Adverse, null, failed, and contradictory results should be scientific, not ceremonial
+
+Do not hide failed hypotheses, ordinary non-significant findings, evidence of absence, adverse controls, harms, or contradictory evidence.
 
 But do not present them as virtue-signalling audit events either.
 
-Instead ask:
+First classify the evidence state using `scientific-rhetorical-act-and-result-state.md`.
 
-> What does this adverse result change in the scientific interpretation?
+Then ask:
 
-Then write that consequence.
+> What does this result change in the scientific interpretation?
 
-Example:
+### Failed prediction without absence-capable evidence
 
 Instead of:
 
 `The registered monotone-scaling hypothesis is an authoritative negative and is retained exactly as written.`
 
-prefer, when accurate:
+prefer, when the analysis only fails to support the predicted increase:
 
-`The preregistered monotone-scaling hypothesis failed: larger models did not improve the targeted diagnostic under this protocol. This rules out model scale as the explanation for the observed separation in this experiment.`
+`The prespecified monotone-scaling prediction was not supported: performance did not increase detectably across the tested model sizes. Because the analysis was not designed to establish equivalence across sizes, small or heterogeneous scale effects remain unresolved.`
 
-If the failure has no bearing on the paper's central argument, move it to supporting material rather than elevating it merely because it was preregistered.
+This wording does **not** claim that model scale has been ruled out.
+
+### Bounded evidence of absence
+
+If an equivalence, Bayesian, posterior, or other justified analysis provides evidence against effects above a scientifically meaningful magnitude, a stronger statement is warranted, for example:
+
+`Across the tested sizes, the analysis provided evidence against monotone improvements of at least the prespecified effect magnitude. This weakens model scale as an explanation for the observed separation within the tested regime.`
+
+The strength comes from the absence-capable analysis and bounded effect region, not from a non-significant P value.
+
+If a failure has no bearing on the paper's central argument, move it to supporting material rather than elevating it merely because it was preregistered, subject to reporting obligations.
 
 ## 8. Integrity language is not automatically manuscript language
 
@@ -230,7 +246,7 @@ Use ordinary scholarly relations:
 - independently developed;
 - closely related.
 
-State the surviving contribution positively after crediting prior work.
+State the surviving contribution directly after crediting prior work.
 
 ## 10. AI-writing stance risks
 
@@ -300,9 +316,13 @@ finding
 
 A limitations paragraph is part of a Discussion, not a substitute for one.
 
+For null/inconclusive/equivalence/adverse/heterogeneous results, preserve the exact inferential state during Discussion synthesis. Do not let a more reflective register silently strengthen the result.
+
 ## 13. Abstract rhetoric
 
-The abstract must expose the positive scientific object and result early enough to be understood.
+The abstract must expose the central scientific object and principal result early enough to be understood.
+
+The principal result may be favorable, adverse, null/inconclusive, evidence of absence, contradictory, or a failure boundary.
 
 Avoid spending disproportionate abstract space on:
 
@@ -323,6 +343,8 @@ problem
 
 One precise limitation is often stronger than several generic cautions.
 
+Do not let the abstract become more favorable or certain than the primary Results evidence.
+
 ## 14. Rhetorical-economy test
 
 For every defensive sentence ask:
@@ -338,14 +360,18 @@ If no concrete reader error is prevented, compress or remove it.
 
 Before publication-ready status:
 
-- every headline result has a direct positive bounded statement;
+- every headline result has a direct evidence-calibrated statement;
+- ordinary non-significance is not written as absence/equivalence;
+- supported absence/equivalence/non-inferiority states preserve their inferential basis and meaningful region/margin;
+- failed hypotheses say what failed without automatically proving the strongest alternative;
 - necessary limitations remain visible;
 - repeated caveats have been consolidated;
-- adverse/null results are interpreted rather than ceremonially retained;
+- adverse/null/failed/contradictory results are interpreted rather than ceremonially retained or hidden;
 - project-governance vocabulary is absent unless scientifically necessary;
 - novelty is expressed as scholarly relation, not ownership bookkeeping;
 - stance is proposition-specific and internally coherent;
-- Discussion contains interpretation, not only qualification.
+- Discussion contains interpretation, not only qualification;
+- abstract/title/conclusion do not exhibit optimism drift relative to Results.
 
 ## Boundaries
 
@@ -354,6 +380,7 @@ Never use this contract to:
 - remove a limitation that changes the claim;
 - hide a failed preregistered primary outcome;
 - convert uncertainty into certainty;
+- convert ordinary non-significance into absence;
 - suppress adverse evidence;
 - oversell novelty or importance;
 - replace transparent deviations with polished ambiguity.
