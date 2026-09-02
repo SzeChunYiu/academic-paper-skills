@@ -261,6 +261,37 @@ def test_uniform_register_across_sections_requires_review() -> None:
     assert any(item["code"] == "uniform_register_across_sections" for item in result["findings"])
 
 
+def test_three_flattened_sections_are_caught_even_when_a_fourth_differs() -> None:
+    verifier = _load_verifier()
+    record = _record()
+
+    introduction = dict(_section("discussion"))
+    introduction["section_kind"] = "introduction"
+    record["sections"].append(introduction)
+
+    first = record["sections"][0]
+    for section in record["sections"][1:3]:
+        for field in (
+            "rhetorical_mode",
+            "argument_tempo",
+            "agency",
+            "stance",
+            "syntax_rhythm",
+            "list_box_use",
+            "transition_behavior",
+            "closing_handoff",
+        ):
+            section[field] = first[field]
+
+    record["release"]["decision"] = "REVIEW"
+    result = verifier.validate(record)
+    assert result["decision"] == "REVIEW"
+    finding = next(item for item in result["findings"] if item["code"] == "uniform_register_across_sections")
+    assert "abstract" in finding["message"]
+    assert "results" in finding["message"]
+    assert "discussion" in finding["message"]
+
+
 def test_missing_evidence_layer_is_review_not_fake_certainty() -> None:
     verifier = _load_verifier()
     record = _record()
