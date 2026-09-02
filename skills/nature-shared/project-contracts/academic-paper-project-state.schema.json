@@ -1,0 +1,1505 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/SzeChunYiu/academic-paper-skills/blob/main/skills/nature-shared/project-contracts/academic-paper-project-state.schema.json",
+  "title": "Academic paper project state (structural contract)",
+  "description": "Structural schema for docs/academic-paper-project-state.template.yaml instances. Enforces types, enum values exactly as documented in template inline comments, id-prefix integrity, and date formats. Deliberately structural: REPLACE_ME placeholders and documented template date placeholders are accepted because placeholder elimination is semantic work owned by the per-contract resolvers, not by this schema. Fields without a documented enum are typed but not enum-constrained; tighten only together with a template comment update and a schema_version bump.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "project", "agents", "research_contract", "classification",
+    "reporting_profile", "study_protocol_contract", "data_integrity_contract",
+    "statistical_inference_contract", "protocols", "analysis_plans", "deviations",
+    "search_runs", "sources", "source_passages", "data_assets", "validation_reports",
+    "analyses", "claims", "figures_and_tables", "section_contracts", "manuscript",
+    "declarations", "review", "assurance_profile", "target_projection", "release"
+  ],
+  "properties": {
+    "schema_version": {"const": "0.5.0"},
+    "project": {"$ref": "#/$defs/project"},
+    "agents": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/agent"}},
+    "research_contract": {"$ref": "#/$defs/researchContract"},
+    "classification": {"$ref": "#/$defs/classification"},
+    "reporting_profile": {"$ref": "#/$defs/reportingProfile"},
+    "study_protocol_contract": {"$ref": "#/$defs/studyProtocolContract"},
+    "data_integrity_contract": {"$ref": "#/$defs/dataIntegrityContract"},
+    "statistical_inference_contract": {"$ref": "#/$defs/statisticalInferenceContract"},
+    "protocols": {"type": "array", "items": {"$ref": "#/$defs/protocol"}},
+    "analysis_plans": {"type": "array", "items": {"$ref": "#/$defs/analysisPlan"}},
+    "deviations": {"type": "array", "items": {"$ref": "#/$defs/deviation"}},
+    "search_runs": {"type": "array", "items": {"$ref": "#/$defs/searchRun"}},
+    "sources": {"type": "array", "items": {"$ref": "#/$defs/source"}},
+    "source_passages": {"type": "array", "items": {"$ref": "#/$defs/sourcePassage"}},
+    "data_assets": {"type": "array", "items": {"$ref": "#/$defs/dataAsset"}},
+    "validation_reports": {"type": "array", "items": {"$ref": "#/$defs/validationReport"}},
+    "analyses": {"type": "array", "items": {"$ref": "#/$defs/analysis"}},
+    "claims": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/claim"}},
+    "figures_and_tables": {"type": "array", "items": {"$ref": "#/$defs/figureOrTable"}},
+    "section_contracts": {"type": "array", "items": {"$ref": "#/$defs/sectionContract"}},
+    "manuscript": {"$ref": "#/$defs/manuscript"},
+    "declarations": {"$ref": "#/$defs/declarations"},
+    "review": {"$ref": "#/$defs/review"},
+    "assurance_profile": {"$ref": "#/$defs/assuranceProfile"},
+    "target_projection": {"$ref": "#/$defs/targetProjection"},
+    "release": {"$ref": "#/$defs/release"}
+  },
+  "$defs": {
+    "nonEmpty": {"type": "string", "minLength": 1},
+    "nullableString": {"type": ["string", "null"]},
+    "stringArray": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "stringSet": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "nullableStringArray": {"type": ["array", "null"], "items": {"type": "string"}},
+    "nullableNumber": {"type": ["number", "null"]},
+    "positiveInteger": {"type": "integer", "minimum": 1},
+    "dateTime": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?(?:Z|[+-]\\d{2}:\\d{2})$"},
+    "templateDateTime": {"anyOf": [
+      {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?(?:Z|[+-]\\d{2}:\\d{2})$"},
+      {"const": "YYYY-MM-DDThh:mm:ssZ"}
+    ]},
+    "nullableTemplateDateTime": {"anyOf": [
+      {"type": "null"},
+      {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?(?:Z|[+-]\\d{2}:\\d{2})$"},
+      {"const": "YYYY-MM-DDThh:mm:ssZ"}
+    ]},
+    "date": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"},
+    "templateDate": {"anyOf": [{"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"}, {"const": "YYYY-MM-DD"}]},
+    "nullableTemplateDate": {"anyOf": [{"type": "null"}, {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"}, {"const": "YYYY-MM-DD"}]},
+    "checkStatus": {"type": "string", "minLength": 1},
+    "prefix": {
+      "project": {"type": "string", "pattern": "^project:[^\\s]+$"},
+      "agent": {"type": "string", "pattern": "^agent:[^\\s]+$"},
+      "hypothesis": {"type": "string", "pattern": "^hypothesis:[^\\s]+$"},
+      "claim": {"type": "string", "pattern": "^claim:[^\\s]+$"},
+      "study": {"type": "string", "pattern": "^study:[^\\s]+$"},
+      "resultType": {"type": "string", "pattern": "^result-type:[^\\s]+$"},
+      "reporting": {"type": "string", "pattern": "^reporting:[^\\s]+$"},
+      "adapter": {"type": "string", "pattern": "^adapter:[^\\s]+$"},
+      "studyContract": {"type": "string", "pattern": "^study-contract:[^\\s]+$"},
+      "dataContract": {"type": "string", "pattern": "^data-contract:[^\\s]+$"},
+      "statContract": {"type": "string", "pattern": "^stat-contract:[^\\s]+$"},
+      "protocol": {"type": "string", "pattern": "^protocol:[^\\s]+$"},
+      "analysisPlan": {"type": "string", "pattern": "^analysis-plan:[^\\s]+$"},
+      "analysis": {"type": "string", "pattern": "^analysis:[^\\s]+$"},
+      "result": {"type": "string", "pattern": "^result:[^\\s]+$"},
+      "data": {"type": "string", "pattern": "^data:[^\\s]+$"},
+      "dataSource": {"type": "string", "pattern": "^data-source:[^\\s]+$"},
+      "dataSnapshot": {"type": "string", "pattern": "^data-snapshot:[^\\s]+$"},
+      "dataTransform": {"type": "string", "pattern": "^data-transform:[^\\s]+$"},
+      "dataQc": {"type": "string", "pattern": "^data-qc:[^\\s]+$"},
+      "dataDecision": {"type": "string", "pattern": "^data-decision:[^\\s]+$"},
+      "question": {"type": "string", "pattern": "^question:[^\\s]+$"},
+      "estimand": {"type": "string", "pattern": "^estimand:[^\\s]+$"},
+      "population": {"type": "string", "pattern": "^population:[^\\s]+$"},
+      "sensitivity": {"type": "string", "pattern": "^sensitivity:[^\\s]+$"},
+      "surface": {"type": "string", "pattern": "^surface:[^\\s]+$"},
+      "search": {"type": "string", "pattern": "^search:[^\\s]+$"},
+      "source": {"type": "string", "pattern": "^source:[^\\s]+$"},
+      "passage": {"type": "string", "pattern": "^passage:[^\\s]+$"},
+      "validation": {"type": "string", "pattern": "^validation:[^\\s]+$"},
+      "figure": {"type": "string", "pattern": "^(figure|table):[^\\s]+$"},
+      "displayContract": {"type": "string", "pattern": "^display-contract:[^\\s]+$"},
+      "manuscript": {"type": "string", "pattern": "^manuscript:[^\\s]+$"},
+      "declaration": {"type": "string", "pattern": "^declaration:[^\\s]+$"},
+      "reviewPacket": {"type": "string", "pattern": "^review-packet:[^\\s]+$"},
+      "concern": {"type": "string", "pattern": "^concern:[^\\s]+$"},
+      "targetProjection": {"type": "string", "pattern": "^target-projection:[^\\s]+$"},
+      "deviation": {"type": "string", "pattern": "^deviation:[^\\s]+$"}
+    },
+    "project": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "title_working", "state_version", "created_at", "updated_at", "scientific_decision_owner_ids", "operating_mode", "confidentiality", "intended_outputs", "target"],
+      "properties": {
+        "id": {"$ref": "#/$defs/prefix/project"},
+        "title_working": {"$ref": "#/$defs/nonEmpty"},
+        "state_version": {"$ref": "#/$defs/positiveInteger"},
+        "created_at": {"$ref": "#/$defs/templateDateTime"},
+        "updated_at": {"$ref": "#/$defs/templateDateTime"},
+        "scientific_decision_owner_ids": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/prefix/agent"}},
+        "operating_mode": {"enum": ["manuscript_only", "proposal_to_paper", "full_research_to_release"]},
+        "confidentiality": {"$ref": "#/$defs/confidentiality"},
+        "intended_outputs": {"$ref": "#/$defs/stringSet"},
+        "target": {
+          "type": "object", "additionalProperties": false,
+          "required": ["journal_or_venue", "content_type", "stage", "policy_as_of_date"],
+          "properties": {
+            "journal_or_venue": {"$ref": "#/$defs/nullableString"},
+            "content_type": {"$ref": "#/$defs/nullableString"},
+            "stage": {"enum": ["planning", "drafting", "pre_submission", "revision", "post_publication"]},
+            "policy_as_of_date": {"$ref": "#/$defs/nullableTemplateDate"}
+          }
+        }
+      }
+    },
+    "confidentiality": {
+      "type": "object", "additionalProperties": false,
+      "required": ["classification", "external_ai_processing_allowed", "permitted_services", "prohibited_input_classes", "retention_requirements"],
+      "properties": {
+        "classification": {"enum": ["public", "internal", "confidential", "proprietary", "regulated"]},
+        "external_ai_processing_allowed": {"type": "boolean"},
+        "permitted_services": {"type": "array", "items": {"type": "string"}},
+        "prohibited_input_classes": {"type": "array", "items": {"type": "string"}},
+        "retention_requirements": {"$ref": "#/$defs/nonEmpty"}
+      }
+    },
+    "agent": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "type", "name", "roles"],
+      "properties": {
+        "id": {"$ref": "#/$defs/prefix/agent"},
+        "type": {"enum": ["person", "software"]},
+        "name": {"$ref": "#/$defs/nonEmpty"},
+        "version": {"$ref": "#/$defs/nullableString"},
+        "roles": {"$ref": "#/$defs/stringSet"},
+        "permitted_actions": {"type": "array", "items": {"type": "string"}},
+        "prohibited_actions": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "researchContract": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "version", "status", "live_question_or_tension", "contribution_class", "unit_of_observation", "unit_of_inference", "population_domain_or_corpus", "intervention_exposure_or_phenomenon", "comparator_or_alternative_account", "outcome_or_evidence_criterion", "estimand_or_target_quantity", "hypotheses_or_propositions", "intended_headline_claims", "claim_boundaries", "decisive_evidence_requirements", "narrow_reframe_or_abort_rules"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^contract:[^\\s]+$"},
+        "version": {"$ref": "#/$defs/positiveInteger"},
+        "status": {"enum": ["draft", "frozen", "amended", "superseded"]},
+        "live_question_or_tension": {"$ref": "#/$defs/nonEmpty"},
+        "contribution_class": {
+          "type": "object", "additionalProperties": false, "required": ["dominant", "secondary"],
+          "properties": {"dominant": {"$ref": "#/$defs/nonEmpty"}, "secondary": {"type": "array", "items": {"type": "string"}}}
+        },
+        "unit_of_observation": {"$ref": "#/$defs/nonEmpty"},
+        "unit_of_inference": {"$ref": "#/$defs/nonEmpty"},
+        "population_domain_or_corpus": {"$ref": "#/$defs/nonEmpty"},
+        "intervention_exposure_or_phenomenon": {"$ref": "#/$defs/nonEmpty"},
+        "comparator_or_alternative_account": {"$ref": "#/$defs/nonEmpty"},
+        "outcome_or_evidence_criterion": {"$ref": "#/$defs/nonEmpty"},
+        "estimand_or_target_quantity": {"$ref": "#/$defs/nullableString"},
+        "hypotheses_or_propositions": {"type": "array", "items": {
+          "type": "object", "additionalProperties": false, "required": ["id", "text", "status"],
+          "properties": {
+            "id": {"$ref": "#/$defs/prefix/hypothesis"},
+            "text": {"$ref": "#/$defs/nonEmpty"},
+            "status": {"enum": ["prespecified", "exploratory", "interpretive", "not_applicable"]}
+          }
+        }},
+        "intended_headline_claims": {"type": "array", "items": {"$ref": "#/$defs/prefix/claim"}},
+        "claim_boundaries": {"$ref": "#/$defs/stringArray"},
+        "decisive_evidence_requirements": {"$ref": "#/$defs/stringArray"},
+        "narrow_reframe_or_abort_rules": {"$ref": "#/$defs/stringArray"}
+      }
+    },
+    "classification": {
+      "type": "object", "additionalProperties": false,
+      "required": ["paper_archetype", "studies", "result_types"],
+      "properties": {
+        "paper_archetype": {
+          "type": "object", "additionalProperties": false, "required": ["dominant", "secondary"],
+          "properties": {"dominant": {"$ref": "#/$defs/nonEmpty"}, "secondary": {"type": "array", "items": {"type": "string"}}}
+        },
+        "studies": {"type": "array", "items": {
+          "type": "object", "additionalProperties": false, "required": ["id", "archetype", "design"],
+          "properties": {
+            "id": {"$ref": "#/$defs/prefix/study"},
+            "archetype": {"$ref": "#/$defs/nonEmpty"},
+            "design": {"$ref": "#/$defs/nonEmpty"}
+          }
+        }},
+        "result_types": {"type": "array", "items": {
+          "type": "object", "additionalProperties": false, "required": ["id", "type"],
+          "properties": {"id": {"$ref": "#/$defs/prefix/resultType"}, "type": {"$ref": "#/$defs/nonEmpty"}}
+        }}
+      }
+    },
+    "reportingProfile": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "resolved_at", "adapters", "exact_target_rules"],
+      "properties": {
+        "id": {"$ref": "#/$defs/prefix/reporting"},
+        "resolved_at": {"$ref": "#/$defs/templateDateTime"},
+        "adapters": {"type": "array", "items": {
+          "type": "object", "additionalProperties": false,
+          "required": ["id", "version_or_date", "authority", "reviewed_at", "applicability", "not_applicable_reason"],
+          "properties": {
+            "id": {"$ref": "#/$defs/prefix/adapter"},
+            "version_or_date": {"$ref": "#/$defs/nonEmpty"},
+            "authority": {"$ref": "#/$defs/nonEmpty"},
+            "reviewed_at": {"$ref": "#/$defs/templateDate"},
+            "applicability": {"enum": ["applicable", "partially_applicable", "not_applicable"]},
+            "not_applicable_reason": {"$ref": "#/$defs/nullableString"}
+          }
+        }},
+        "exact_target_rules": {
+          "type": "object", "additionalProperties": false, "required": ["resolved", "official_source_checked_at", "unresolved_items"],
+          "properties": {
+            "resolved": {"type": "boolean"},
+            "official_source_checked_at": {"$ref": "#/$defs/nullableTemplateDate"},
+            "unresolved_items": {"type": "array", "items": {"type": "string"}}
+          }
+        }
+      }
+    },
+    "studyProtocolContract": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "contract_schema_version", "study_id", "state_version", "study_archetype", "design_tags", "resolved_at", "protocol_adapter_ids", "adapter_catalog_id", "evidence_registry_id", "evidence_reviewed_at", "data_access_timing", "authoritative_object_ids", "deviation_classes_visible", "protocol_contract_status", "protocol_blocker_codes", "unresolved_domain_obligations", "certification"],
+      "properties": {
+        "id": {"$ref": "#/$defs/prefix/studyContract"},
+        "contract_schema_version": {"const": "1.0.0"},
+        "study_id": {"$ref": "#/$defs/prefix/study"},
+        "state_version": {"$ref": "#/$defs/positiveInteger"},
+        "study_archetype": {"$ref": "#/$defs/nonEmpty"},
+        "design_tags": {"type": "array", "items": {"type": "string"}},
+        "resolved_at": {"$ref": "#/$defs/nullableTemplateDateTime"},
+        "protocol_adapter_ids": {"type": "array", "items": {"type": "string"}},
+        "adapter_catalog_id": {"$ref": "#/$defs/nonEmpty"},
+        "evidence_registry_id": {"$ref": "#/$defs/nonEmpty"},
+        "evidence_reviewed_at": {"$ref": "#/$defs/templateDate"},
+        "data_access_timing": {
+          "type": "object", "additionalProperties": false,
+          "required": ["first_data_access_at", "outcomes_first_observed_at", "protocol_freeze_relation"],
+          "properties": {
+            "first_data_access_at": {"$ref": "#/$defs/nullableTemplateDateTime"},
+            "outcomes_first_observed_at": {"$ref": "#/$defs/nullableTemplateDateTime"},
+            "protocol_freeze_relation": {"enum": ["before_data_access", "after_data_before_outcome_access", "after_outcome_access", "unknown", "not_applicable"]}
+          }
+        },
+        "authoritative_object_ids": {
+          "type": "object", "additionalProperties": false,
+          "required": ["protocol_ids", "analysis_plan_ids", "raw_data_snapshot_ids", "execution_receipt_ids", "deviation_ids"],
+          "properties": {
+            "protocol_ids": {"type": "array", "items": {"$ref": "#/$defs/prefix/protocol"}},
+            "analysis_plan_ids": {"type": "array", "items": {"$ref": "#/$defs/prefix/analysisPlan"}},
+            "raw_data_snapshot_ids": {"type": "array", "items": {"type": "string"}},
+            "execution_receipt_ids": {"type": "array", "items": {"type": "string"}},
+            "deviation_ids": {"type": "array", "items": {"$ref": "#/$defs/prefix/deviation"}}
+          }
+        },
+        "deviation_classes_visible": {"type": "array", "items": {"type": "string"}},
+        "protocol_contract_status": {"enum": ["pass", "blocked", "unresolved"]},
+        "protocol_blocker_codes": {"type": "array", "items": {"type": "string"}},
+        "unresolved_domain_obligations": {"type": "array", "items": {"type": "string"}},
+        "certification": {
+          "type": "object", "additionalProperties": false,
+          "required": ["schema_valid", "protocol_traceability", "conduct_traceability", "outcome_alignment", "deviation_visibility", "does_not_certify_scientific_truth", "does_not_certify_absence_of_bias", "does_not_certify_reporting_completion", "does_not_certify_journal_acceptance"],
+          "properties": {
+            "schema_valid": {"type": "boolean"},
+            "protocol_traceability": {"$ref": "#/$defs/checkStatus"},
+            "conduct_traceability": {"$ref": "#/$defs/checkStatus"},
+            "outcome_alignment": {"$ref": "#/$defs/checkStatus"},
+            "deviation_visibility": {"$ref": "#/$defs/checkStatus"},
+            "does_not_certify_scientific_truth": {"const": true},
+            "does_not_certify_absence_of_bias": {"const": true},
+            "does_not_certify_reporting_completion": {"const": true},
+            "does_not_certify_journal_acceptance": {"const": true}
+          }
+        }
+      }
+    },
+    "dataIntegrityContract": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "contract_schema_version", "study_id", "state_version", "as_of_date", "data_context", "resolution", "exact_policy_resolution", "data_identities", "snapshots", "transformations", "quality_controls", "data_decisions", "missingness", "analysis_bindings", "governance", "data_release", "deviations", "data_integrity_status", "blocker_codes", "unresolved_items", "allowed_repair_routes", "certification"],
+      "properties": {
+        "id": {"$ref": "#/$defs/prefix/dataContract"},
+        "contract_schema_version": {"const": "1.0.0"},
+        "study_id": {"$ref": "#/$defs/prefix/study"},
+        "state_version": {"$ref": "#/$defs/positiveInteger"},
+        "as_of_date": {"$ref": "#/$defs/nullableTemplateDate"},
+        "data_context": {
+          "type": "object", "additionalProperties": false,
+          "required": ["modalities", "study_contexts", "sensitivity_tags", "intended_uses", "scientific_unit"],
+          "properties": {
+            "modalities": {"type": "array", "items": {"type": "string"}},
+            "study_contexts": {"$ref": "#/$defs/stringArray"},
+            "sensitivity_tags": {"type": "array", "items": {"type": "string"}},
+            "intended_uses": {"$ref": "#/$defs/stringArray"},
+            "scientific_unit": {"$ref": "#/$defs/nonEmpty"}
+          }
+        },
+        "resolution": {
+          "type": "object", "additionalProperties": false,
+          "required": ["selection_mode", "adapter_catalog_id", "evidence_registry_id", "evidence_reviewed_at", "resolved_adapter_ids", "unmatched_modalities", "live_exact_domain_resolution_required"],
+          "properties": {
+            "selection_mode": {"$ref": "#/$defs/nonEmpty"},
+            "adapter_catalog_id": {"$ref": "#/$defs/nonEmpty"},
+            "evidence_registry_id": {"$ref": "#/$defs/nonEmpty"},
+            "evidence_reviewed_at": {"$ref": "#/$defs/templateDate"},
+            "resolved_adapter_ids": {"type": "array", "items": {"type": "string"}},
+            "unmatched_modalities": {"type": "array", "items": {"type": "string"}},
+            "live_exact_domain_resolution_required": {"type": "boolean"}
+          }
+        },
+        "exact_policy_resolution": {
+          "type": "object", "additionalProperties": false,
+          "required": ["applicability", "status", "as_of_date", "authorities", "unresolved_items"],
+          "properties": {
+            "applicability": {"$ref": "#/$defs/checkStatus"},
+            "status": {"$ref": "#/$defs/checkStatus"},
+            "as_of_date": {"$ref": "#/$defs/nullableTemplateDate"},
+            "authorities": {"type": "array", "items": {
+              "type": "object", "additionalProperties": false,
+              "required": ["authority", "title", "url", "effective_from", "effective_until", "effective_date_basis", "reviewed_at"],
+              "properties": {
+                "authority": {"$ref": "#/$defs/nullableString"},
+                "title": {"$ref": "#/$defs/nullableString"},
+                "url": {"$ref": "#/$defs/nullableString"},
+                "effective_from": {"$ref": "#/$defs/nullableTemplateDate"},
+                "effective_until": {"$ref": "#/$defs/nullableTemplateDate"},
+                "effective_date_basis": {"enum": ["official_explicit", "observed_active_not_backcastable", "unresolved"]},
+                "reviewed_at": {"$ref": "#/$defs/nullableTemplateDate"}
+              }
+            }},
+            "unresolved_items": {"$ref": "#/$defs/stringArray"}
+          }
+        },
+        "data_identities": {
+          "type": "object", "additionalProperties": false,
+          "required": ["source_record_ids", "raw_snapshot_ids", "external_reference_snapshot_ids", "validated_snapshot_ids", "analysis_ready_snapshot_ids", "released_snapshot_ids"],
+          "properties": {
+            "source_record_ids": {"type": "array", "items": {"type": "string"}},
+            "raw_snapshot_ids": {"type": "array", "items": {"type": "string"}},
+            "external_reference_snapshot_ids": {"type": "array", "items": {"type": "string"}},
+            "validated_snapshot_ids": {"type": "array", "items": {"type": "string"}},
+            "analysis_ready_snapshot_ids": {"type": "array", "items": {"type": "string"}},
+            "released_snapshot_ids": {"type": "array", "items": {"type": "string"}}
+          }
+        },
+        "snapshots": {"type": "array", "items": {
+          "type": "object", "additionalProperties": false,
+          "required": ["id", "role", "version", "sha256", "record_count", "byte_count", "created_at", "immutable", "source_record_ids", "schema_or_codebook_id", "known_defects", "adverse_or_null_record_count"],
+          "properties": {
+            "id": {"$ref": "#/$defs/prefix/dataSnapshot"},
+            "role": {"enum": ["raw", "external_reference", "validated", "analysis_ready", "display_source", "released"]},
+            "version": {"$ref": "#/$defs/nonEmpty"},
+            "sha256": {"$ref": "#/$defs/nullableString"},
+            "record_count": {"type": ["integer", "null"], "minimum": 0},
+            "byte_count": {"type": ["integer", "null"], "minimum": 0},
+            "created_at": {"$ref": "#/$defs/nullableTemplateDateTime"},
+            "immutable": {"type": "boolean"},
+            "source_record_ids": {"type": "array", "items": {"type": "string"}},
+            "schema_or_codebook_id": {"$ref": "#/$defs/nullableString"},
+            "known_defects": {"type": "array", "items": {"type": "string"}},
+            "adverse_or_null_record_count": {"type": ["integer", "null"], "minimum": 0}
+          }
+        }},
+        "transformations": {"type": "array", "items": {
+          "type": "object", "additionalProperties": false,
+          "required": ["id", "input_snapshot_ids", "output_snapshot_id", "procedure_or_code_id", "procedure_version", "executed_at", "execution_receipt_id", "parameters_recorded", "declared_semantic_changes", "multi_input_reconciliation", "status"],
+          "properties": {
+            "id": {"$ref": "#/$defs/prefix/dataTransform"},
+            "input_snapshot_ids": {"type": "array", "items": {"type": "string"}},
+            "output_snapshot_id": {"type": "string"},
+            "procedure_or_code_id": {"$ref": "#/$defs/nullableString"},
+            "procedure_version": {"$ref": "#/$defs/nullableString"},
+            "executed_at": {"$ref": "#/$defs/nullableTemplateDateTime"},
+            "execution_receipt_id": {"$ref": "#/$defs/nullableString"},
+            "parameters_recorded": {"type": "boolean"},
+            "declared_semantic_changes": {"type": "array", "items": {"type": "string"}},
+            "multi_input_reconciliation": {"$ref": "#/$defs/nullableString"},
+            "status": {"enum": ["not_run", "executed_unverified", "verified", "failed"]}
+          }
+        }},
+        "quality_controls": {"type": "array", "items": {
+          "type": "object", "additionalProperties": false,
+          "required": ["id", "target_snapshot_id", "dimension", "applicability", "criteria", "receipt_id", "checked_at", "outcome", "status"],
+          "properties": {
+            "id": {"$ref": "#/$defs/prefix/dataQc"},
+            "target_snapshot_id": {"type": "string"},
+            "dimension": {"$ref": "#/$defs/nonEmpty"},
+            "applicability": {"enum": ["required", "optional", "not_applicable", "unresolved"]},
+            "criteria": {"$ref": "#/$defs/nullableString"},
+            "receipt_id": {"$ref": "#/$defs/nullableString"},
+            "checked_at": {"$ref": "#/$defs/nullableTemplateDateTime"},
+            "outcome": {"$ref": "#/$defs/nullableString"},
+            "status": {"enum": ["not_checked", "passed", "failed", "unresolved", "not_applicable"]}
+          }
+        }},
+        "data_decisions": {"type": "array", "items": {
+          "type": "object", "additionalProperties": false,
+          "required": ["id", "unit_id", "action", "reason", "source_evidence_id", "timing_status", "visible", "affects_adverse_or_null", "transformation_id"],
+          "properties": {
+            "id": {"$ref": "#/$defs/prefix/dataDecision"},
+            "unit_id": {"$ref": "#/$defs/nullableString"},
+            "action": {"$ref": "#/$defs/nullableString"},
+            "reason": {"$ref": "#/$defs/nullableString"},
+            "source_evidence_id": {"$ref": "#/$defs/nullableString"},
+            "timing_status": {"enum": ["prespecified", "before_outcome_access", "post_hoc", "unknown"]},
+            "visible": {"type": "boolean"},
+            "affects_adverse_or_null": {"type": "boolean"},
+            "transformation_id": {"$ref": "#/$defs/nullableString"}
+          }
+        }},
+        "missingness": {
+          "type": "object", "additionalProperties": false,
+          "required": ["planned_method", "realized_method", "receipt_id", "deviation_id", "status"],
+          "properties": {
+            "planned_method": {"$ref": "#/$defs/nonEmpty"},
+            "realized_method": {"$ref": "#/$defs/nullableString"},
+            "receipt_id": {"$ref": "#/$defs/nullableString"},
+            "deviation_id": {"$ref": "#/$defs/nullableString"},
+            "status": {"$ref": "#/$defs/checkStatus"}
+          }
+        },
+        "analysis_bindings": {"type": "array", "items": {
+          "type": "object", "additionalProperties": false,
+          "required": ["analysis_id", "input_snapshot_id", "input_sha256", "result_ids", "display_ids", "status"],
+          "properties": {
+            "analysis_id": {"$ref": "#/$defs/prefix/analysis"},
+            "input_snapshot_id": {"type": "string"},
+            "input_sha256": {"$ref": "#/$defs/nullableString"},
+            "result_ids": {"type": "array", "items": {"type": "string"}},
+            "display_ids": {"type": "array", "items": {"type": "string"}},
+            "status": {"$ref": "#/$defs/checkStatus"}
+          }
+        }},
+        "governance": {
+          "type": "object", "additionalProperties": false,
+          "required": ["sensitivity_class", "direct_identifiers_present", "indirect_reidentification_risk", "consent_or_authority_requirement", "consent_or_authority_status", "consent_or_authority_ids", "collective_authority_required", "collective_authority_status", "third_party_rights_status", "public_release_permitted", "retention_requirements"],
+          "properties": {
+            "sensitivity_class": {"$ref": "#/$defs/checkStatus"},
+            "direct_identifiers_present": {"type": ["boolean", "null"]},
+            "indirect_reidentification_risk": {"$ref": "#/$defs/checkStatus"},
+            "consent_or_authority_requirement": {"$ref": "#/$defs/checkStatus"},
+            "consent_or_authority_status": {"$ref": "#/$defs/checkStatus"},
+            "consent_or_authority_ids": {"type": "array", "items": {"type": "string"}},
+            "collective_authority_required": {"type": ["boolean", "null"]},
+            "collective_authority_status": {"$ref": "#/$defs/checkStatus"},
+            "third_party_rights_status": {"$ref": "#/$defs/checkStatus"},
+            "public_release_permitted": {"type": ["boolean", "null"]},
+            "retention_requirements": {"$ref": "#/$defs/nonEmpty"}
+          }
+        },
+        "data_release": {
+          "type": "object", "additionalProperties": false,
+          "required": ["applicability", "route", "status", "snapshot_id", "snapshot_sha256", "persistent_id", "locator", "version", "licence", "access_conditions", "resolved_at", "peer_review_access"],
+          "properties": {
+            "applicability": {"$ref": "#/$defs/checkStatus"},
+            "route": {"enum": ["public_repository", "controlled_access", "restricted", "metadata_only", "no_release", "not_resolved"]},
+            "status": {"enum": ["not_released", "planned", "deposited_unverified", "verified", "restricted", "withdrawn"]},
+            "snapshot_id": {"$ref": "#/$defs/nullableString"},
+            "snapshot_sha256": {"$ref": "#/$defs/nullableString"},
+            "persistent_id": {"$ref": "#/$defs/nullableString"},
+            "locator": {"$ref": "#/$defs/nullableString"},
+            "version": {"$ref": "#/$defs/nullableString"},
+            "licence": {"$ref": "#/$defs/nullableString"},
+            "access_conditions": {"$ref": "#/$defs/nullableString"},
+            "resolved_at": {"$ref": "#/$defs/nullableTemplateDateTime"},
+            "peer_review_access": {"$ref": "#/$defs/checkStatus"}
+          }
+        },
+        "deviations": {"type": "array", "items": {"type": "string"}},
+        "data_integrity_status": {"enum": ["pass", "blocked", "unresolved"]},
+        "blocker_codes": {"type": "array", "items": {"type": "string"}},
+        "unresolved_items": {"$ref": "#/$defs/stringArray"},
+        "allowed_repair_routes": {"type": "array", "items": {"type": "string"}},
+        "certification": {
+          "type": "object", "additionalProperties": false,
+          "required": ["schema_valid", "raw_snapshot_immutability", "transformation_traceability", "analysis_input_traceability", "quality_control_receipts", "decision_and_deviation_visibility", "governance_resolution", "release_resolution", "does_not_certify_measurement_accuracy", "does_not_certify_completeness_or_representativeness", "does_not_certify_absence_of_bias", "does_not_certify_privacy_or_anonymity", "does_not_certify_legal_or_policy_compliance", "does_not_certify_analytic_reproducibility", "does_not_certify_scientific_truth", "does_not_certify_journal_acceptance"],
+          "properties": {
+            "schema_valid": {"type": "boolean"},
+            "raw_snapshot_immutability": {"$ref": "#/$defs/checkStatus"},
+            "transformation_traceability": {"$ref": "#/$defs/checkStatus"},
+            "analysis_input_traceability": {"$ref": "#/$defs/checkStatus"},
+            "quality_control_receipts": {"$ref": "#/$defs/checkStatus"},
+            "decision_and_deviation_visibility": {"$ref": "#/$defs/checkStatus"},
+            "governance_resolution": {"$ref": "#/$defs/checkStatus"},
+            "release_resolution": {"$ref": "#/$defs/checkStatus"},
+            "does_not_certify_measurement_accuracy": {"const": true},
+            "does_not_certify_completeness_or_representativeness": {"const": true},
+            "does_not_certify_absence_of_bias": {"const": true},
+            "does_not_certify_privacy_or_anonymity": {"const": true},
+            "does_not_certify_legal_or_policy_compliance": {"const": true},
+            "does_not_certify_analytic_reproducibility": {"const": true},
+            "does_not_certify_scientific_truth": {"const": true},
+            "does_not_certify_journal_acceptance": {"const": true}
+          }
+        }
+      }
+    },
+    "statisticalInferenceContract": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "contract_schema_version", "state_version", "stage", "as_of_date", "analysis_context", "resolution", "upstream_bindings", "questions", "estimands", "units_and_dependence", "analysis_populations", "plan_execution_bindings", "statistical_result_bindings", "statistical_surface_bindings", "sensitivity_analyses", "deviations", "exact_policy_resolution", "statistical_inference_contract_status", "blocker_codes", "unresolved_research_codes", "policy_date_states", "visible_deviation_classes", "allowed_repair_routes", "certification"],
+      "properties": {
+        "id": {"$ref": "#/$defs/prefix/statContract"},
+        "contract_schema_version": {"const": "1.0.0"},
+        "state_version": {"$ref": "#/$defs/positiveInteger"},
+        "stage": {"enum": ["planning", "analysis", "draft", "revision", "final", "submission"]},
+        "as_of_date": {"$ref": "#/$defs/nullableTemplateDate"},
+        "analysis_context": {
+          "type": "object", "additionalProperties": false,
+          "required": ["study_archetypes", "analysis_families", "design_tags", "inference_modes"],
+          "properties": {
+            "study_archetypes": {"type": "array", "items": {"type": "string"}},
+            "analysis_families": {"type": "array", "items": {"type": "string"}},
+            "design_tags": {"type": "array", "items": {"type": "string"}},
+            "inference_modes": {"type": "array", "items": {"type": "string"}}
+          }
+        },
+        "resolution": {
+          "type": "object", "additionalProperties": false,
+          "required": ["selection_mode", "adapter_catalog_id", "evidence_registry_id", "evidence_reviewed_at", "resolved_adapter_ids", "obligations", "hard_checks", "source_refs", "transfer_limits", "unmatched_analysis_domains", "live_exact_domain_resolution_required"],
+          "properties": {
+            "selection_mode": {"$ref": "#/$defs/nonEmpty"},
+            "adapter_catalog_id": {"$ref": "#/$defs/nonEmpty"},
+            "evidence_registry_id": {"$ref": "#/$defs/nonEmpty"},
+            "evidence_reviewed_at": {"$ref": "#/$defs/templateDate"},
+            "resolved_adapter_ids": {"type": "array", "items": {"type": "string"}},
+            "obligations": {"type": "array", "items": {"type": "object"}},
+            "hard_checks": {"type": "array", "items": {"type": "object"}},
+            "source_refs": {"type": "array", "items": {"type": "object"}},
+            "transfer_limits": {"type": "array", "items": {"type": "object"}},
+            "unmatched_analysis_domains": {"type": "array", "items": {"type": "string"}},
+            "live_exact_domain_resolution_required": {"type": "boolean"}
+          }
+        },
+        "upstream_bindings": {
+          "type": "object", "additionalProperties": false,
+          "required": ["study_protocol_contract_id", "study_protocol_status", "analysis_plan_id", "data_integrity_contract_id", "data_integrity_status", "analysis_ready_snapshot_id", "analysis_ready_snapshot_sha256"],
+          "properties": {
+            "study_protocol_contract_id": {"$ref": "#/$defs/prefix/studyContract"},
+            "study_protocol_status": {"$ref": "#/$defs/checkStatus"},
+            "analysis_plan_id": {"$ref": "#/$defs/prefix/analysisPlan"},
+            "data_integrity_contract_id": {"$ref": "#/$defs/prefix/dataContract"},
+            "data_integrity_status": {"$ref": "#/$defs/checkStatus"},
+            "analysis_ready_snapshot_id": {"type": "string"},
+            "analysis_ready_snapshot_sha256": {"$ref": "#/$defs/nullableString"}
+          }
+        },
+        "questions": {"type": "array", "items": {
+          "type": "object", "additionalProperties": false, "required": ["id", "role", "objective", "claim_ids"],
+          "properties": {
+            "id": {"$ref": "#/$defs/prefix/question"},
+            "role": {"$ref": "#/$defs/nonEmpty"},
+            "objective": {"$ref": "#/$defs/nonEmpty"},
+            "claim_ids": {"type": "array", "items": {"$ref": "#/$defs/prefix/claim"}}
+          }
+        }},
+        "estimands": {"type": "array", "items": {
+          "type": "object", "additionalProperties": false,
+          "required": ["id", "question_id", "population", "conditions_or_comparator", "outcome_or_target", "time_horizon", "summary_and_effect_measure", "scale_and_direction", "intercurrent_event_strategy"],
+          "properties": {
+            "id": {"$ref": "#/$defs/prefix/estimand"},
+            "question_id": {"$ref": "#/$defs/prefix/question"},
+            "population": {"$ref": "#/$defs/nonEmpty"},
+            "conditions_or_comparator": {"$ref": "#/$defs/nonEmpty"},
+            "outcome_or_target": {"$ref": "#/$defs/nonEmpty"},
+            "time_horizon": {"$ref": "#/$defs/nonEmpty"},
+            "summary_and_effect_measure": {"$ref": "#/$defs/nonEmpty"},
+            "scale_and_direction": {"$ref": "#/$defs/nonEmpty"},
+            "intercurrent_event_strategy": {"$ref": "#/$defs/nullableString"}
+          }
+        }},
+        "units_and_dependence": {
+          "type": "object", "additionalProperties": false,
+          "required": ["observation_unit", "assignment_unit", "analysis_unit", "independent_unit", "observation_count", "independent_unit_count", "reported_n", "cluster_count", "dependence_structure", "dependence_handling"],
+          "properties": {
+            "observation_unit": {"$ref": "#/$defs/nonEmpty"},
+            "assignment_unit": {"$ref": "#/$defs/nonEmpty"},
+            "analysis_unit": {"$ref": "#/$defs/nonEmpty"},
+            "independent_unit": {"$ref": "#/$defs/nonEmpty"},
+            "observation_count": {"$ref": "#/$defs/nullableNumber"},
+            "independent_unit_count": {"$ref": "#/$defs/nullableNumber"},
+            "reported_n": {"$ref": "#/$defs/nullableNumber"},
+            "cluster_count": {"$ref": "#/$defs/nullableNumber"},
+            "dependence_structure": {"type": "array", "items": {"type": "string"}},
+            "dependence_handling": {
+              "type": "object", "additionalProperties": false, "required": ["status", "method", "receipt_id"],
+              "properties": {
+                "status": {"enum": ["modeled", "aggregated", "design_based", "not_applicable", "unresolved", "ignored"]},
+                "method": {"$ref": "#/$defs/nullableString"},
+                "receipt_id": {"$ref": "#/$defs/nullableString"}
+              }
+            }
+          }
+        },
+        "analysis_populations": {"type": "array", "items": {
+          "type": "object", "additionalProperties": false,
+          "required": ["id", "role", "planned_count", "entered_count", "analyzed_count", "missing_outcome_count", "excluded_count", "group_counts", "exclusion_decision_ids"],
+          "properties": {
+            "id": {"$ref": "#/$defs/prefix/population"},
+            "role": {"$ref": "#/$defs/nonEmpty"},
+            "planned_count": {"$ref": "#/$defs/nullableNumber"},
+            "entered_count": {"$ref": "#/$defs/nullableNumber"},
+            "analyzed_count": {"$ref": "#/$defs/nullableNumber"},
+            "missing_outcome_count": {"$ref": "#/$defs/nullableNumber"},
+            "excluded_count": {"$ref": "#/$defs/nullableNumber"},
+            "group_counts": {"type": "object", "additionalProperties": {"type": ["number", "string"]}},
+            "exclusion_decision_ids": {"type": "array", "items": {"type": "string"}}
+          }
+        }},
+        "plan_execution_bindings": {"type": "array", "items": {
+          "type": "object", "additionalProperties": false,
+          "required": ["plan_id", "analysis_id", "plan_frozen_at", "classification", "analysis_family", "estimator_or_model", "independent_unit", "missing_data_plan", "realized_missing_data_strategy", "multiplicity_family_ids", "multiplicity_objective_and_method", "sample_size_rationale_and_receipt", "input_snapshot_sha256", "code_receipt_id", "environment_receipt_id", "convergence_status", "diagnostic_receipt_ids", "produced_result_ids", "execution_status"],
+          "properties": {
+            "plan_id": {"$ref": "#/$defs/prefix/analysisPlan"},
+            "analysis_id": {"$ref": "#/$defs/prefix/analysis"},
+            "plan_frozen_at": {"$ref": "#/$defs/nullableTemplateDateTime"},
+            "classification": {"enum": ["confirmatory", "exploratory", "post_hoc", "descriptive", "not_applicable", "unresolved"]},
+            "analysis_family": {"$ref": "#/$defs/nullableString"},
+            "estimator_or_model": {"$ref": "#/$defs/nullableString"},
+            "independent_unit": {"$ref": "#/$defs/nullableString"},
+            "missing_data_plan": {"$ref": "#/$defs/nullableString"},
+            "realized_missing_data_strategy": {"$ref": "#/$defs/nullableString"},
+            "multiplicity_family_ids": {"type": "array", "items": {"type": "string"}},
+            "multiplicity_objective_and_method": {"$ref": "#/$defs/nullableString"},
+            "sample_size_rationale_and_receipt": {"$ref": "#/$defs/nullableString"},
+            "input_snapshot_sha256": {"$ref": "#/$defs/nullableString"},
+            "code_receipt_id": {"$ref": "#/$defs/nullableString"},
+            "environment_receipt_id": {"$ref": "#/$defs/nullableString"},
+            "convergence_status": {"$ref": "#/$defs/checkStatus"},
+            "diagnostic_receipt_ids": {"type": "array", "items": {"type": "string"}},
+            "produced_result_ids": {"type": "array", "items": {"$ref": "#/$defs/prefix/result"}},
+            "execution_status": {"$ref": "#/$defs/checkStatus"}
+          }
+        }},
+        "statistical_result_bindings": {"type": "array", "items": {
+          "type": "object", "additionalProperties": false,
+          "required": ["result_id", "analysis_id", "estimand_id", "population_id", "claim_ids", "role", "selection_status", "estimate", "uncertainty", "test", "decision", "analyzed_n", "independent_n", "adverse_harmful_null_or_failed", "analysis_receipt_sha256"],
+          "properties": {
+            "result_id": {"$ref": "#/$defs/prefix/result"},
+            "analysis_id": {"$ref": "#/$defs/prefix/analysis"},
+            "estimand_id": {"$ref": "#/$defs/prefix/estimand"},
+            "population_id": {"$ref": "#/$defs/prefix/population"},
+            "claim_ids": {"type": "array", "items": {"$ref": "#/$defs/prefix/claim"}},
+            "role": {"$ref": "#/$defs/nonEmpty"},
+            "selection_status": {"enum": ["prespecified", "deviation", "exploratory", "post_hoc", "unresolved"]},
+            "estimate": {
+              "type": "object", "additionalProperties": false, "required": ["value", "scale", "unit"],
+              "properties": {
+                "value": {"type": ["number", "string", "null"]},
+                "scale": {"$ref": "#/$defs/nullableString"},
+                "unit": {"$ref": "#/$defs/nullableString"}
+              }
+            },
+            "uncertainty": {
+              "type": "object", "additionalProperties": false,
+              "required": ["kind", "target", "level", "sidedness", "method", "lower", "upper", "unit"],
+              "properties": {
+                "kind": {"$ref": "#/$defs/nullableString"},
+                "target": {"$ref": "#/$defs/nullableString"},
+                "level": {"type": ["number", "string", "null"]},
+                "sidedness": {"$ref": "#/$defs/nullableString"},
+                "method": {"$ref": "#/$defs/nullableString"},
+                "lower": {"type": ["number", "string", "null"]},
+                "upper": {"type": ["number", "string", "null"]},
+                "unit": {"$ref": "#/$defs/nullableString"}
+              }
+            },
+            "test": {},
+            "decision": {
+              "type": "object", "additionalProperties": false,
+              "required": ["objective", "state", "comparison_basis", "margin", "margin_unit", "margin_provenance", "margin_rule"],
+              "properties": {
+                "objective": {"$ref": "#/$defs/nullableString"},
+                "state": {"enum": ["supported", "not_supported", "inconclusive", "descriptive_only", "not_evaluated"]},
+                "comparison_basis": {"$ref": "#/$defs/nullableString"},
+                "margin": {"type": ["number", "string", "null"]},
+                "margin_unit": {"$ref": "#/$defs/nullableString"},
+                "margin_provenance": {"$ref": "#/$defs/nullableString"},
+                "margin_rule": {}
+              }
+            },
+            "analyzed_n": {"$ref": "#/$defs/nullableNumber"},
+            "independent_n": {"$ref": "#/$defs/nullableNumber"},
+            "adverse_harmful_null_or_failed": {"type": "boolean"},
+            "analysis_receipt_sha256": {"$ref": "#/$defs/nullableString"}
+          }
+        }},
+        "statistical_surface_bindings": {"type": "array", "items": {
+          "type": "object", "additionalProperties": false,
+          "required": ["surface_id", "surface_type", "result_id", "analysis_receipt_sha256", "reported_estimate", "reported_interval_kind", "reported_interval_level", "reported_lower", "reported_upper", "reported_p_value", "reported_n", "rounding_method", "absolute_tolerance", "status"],
+          "properties": {
+            "surface_id": {"$ref": "#/$defs/prefix/surface"},
+            "surface_type": {"$ref": "#/$defs/nonEmpty"},
+            "result_id": {"$ref": "#/$defs/prefix/result"},
+            "analysis_receipt_sha256": {"$ref": "#/$defs/nullableString"},
+            "reported_estimate": {"type": ["number", "string", "null"]},
+            "reported_interval_kind": {"$ref": "#/$defs/nullableString"},
+            "reported_interval_level": {"type": ["number", "string", "null"]},
+            "reported_lower": {"type": ["number", "string", "null"]},
+            "reported_upper": {"type": ["number", "string", "null"]},
+            "reported_p_value": {"type": ["number", "string", "null"]},
+            "reported_n": {"$ref": "#/$defs/nullableNumber"},
+            "rounding_method": {"$ref": "#/$defs/nullableString"},
+            "absolute_tolerance": {"$ref": "#/$defs/nullableNumber"},
+            "status": {"$ref": "#/$defs/checkStatus"}
+          }
+        }},
+        "sensitivity_analyses": {"type": "array", "items": {
+          "type": "object", "additionalProperties": false,
+          "required": ["id", "applicability", "primary_result_id", "target_estimand_id", "assumption_varied", "scenario_and_plausibility_basis", "result_id", "receipt_id", "decision_changed", "claimed_as_same_estimand_robustness"],
+          "properties": {
+            "id": {"$ref": "#/$defs/prefix/sensitivity"},
+            "applicability": {"$ref": "#/$defs/checkStatus"},
+            "primary_result_id": {"$ref": "#/$defs/prefix/result"},
+            "target_estimand_id": {"$ref": "#/$defs/prefix/estimand"},
+            "assumption_varied": {"$ref": "#/$defs/nullableString"},
+            "scenario_and_plausibility_basis": {"$ref": "#/$defs/nullableString"},
+            "result_id": {"$ref": "#/$defs/nullableString"},
+            "receipt_id": {"$ref": "#/$defs/nullableString"},
+            "decision_changed": {"type": ["boolean", "null"]},
+            "claimed_as_same_estimand_robustness": {"type": ["boolean", "null"]}
+          }
+        }},
+        "deviations": {"type": "array", "items": {"type": "object"}},
+        "exact_policy_resolution": {
+          "type": "object", "additionalProperties": false,
+          "required": ["policy_as_of_date", "policies"],
+          "properties": {
+            "policy_as_of_date": {"$ref": "#/$defs/nullableTemplateDate"},
+            "policies": {"type": "array", "items": {
+              "type": "object", "additionalProperties": false,
+              "required": ["policy_id", "issuer", "title", "applicability", "resolution_status", "source_url", "reviewed_at", "effective_from", "effective_until", "effective_date_basis"],
+              "properties": {
+                "policy_id": {"$ref": "#/$defs/nullableString"},
+                "issuer": {"$ref": "#/$defs/nullableString"},
+                "title": {"$ref": "#/$defs/nullableString"},
+                "applicability": {"enum": ["required", "optional", "not_applicable", "unresolved"]},
+                "resolution_status": {"enum": ["resolved", "unresolved", "conflicting", "not_applicable"]},
+                "source_url": {"$ref": "#/$defs/nullableString"},
+                "reviewed_at": {"$ref": "#/$defs/nullableTemplateDate"},
+                "effective_from": {"$ref": "#/$defs/nullableTemplateDate"},
+                "effective_until": {"$ref": "#/$defs/nullableTemplateDate"},
+                "effective_date_basis": {"enum": ["official_explicit", "observed_active_not_backcastable", "unresolved"]}
+              }
+            }}
+          }
+        },
+        "statistical_inference_contract_status": {"enum": ["pass", "blocked", "unresolved"]},
+        "blocker_codes": {"type": "array", "items": {"type": "string"}},
+        "unresolved_research_codes": {"type": "array", "items": {"type": "string"}},
+        "policy_date_states": {"type": "array", "items": {"type": "string"}},
+        "visible_deviation_classes": {"type": "array", "items": {"type": "string"}},
+        "allowed_repair_routes": {"$ref": "#/$defs/stringArray"},
+        "certification": {
+          "type": "object", "additionalProperties": false,
+          "required": ["schema_valid", "identity_and_fixity_checks", "analysis_and_surface_consistency_checks", "inference_boundary_checks", "does_not_certify_model_adequacy_or_assumption_truth", "does_not_certify_causal_identification", "does_not_certify_absence_of_bias", "does_not_certify_measurement_validity", "does_not_certify_adequate_power_or_precision", "does_not_certify_external_validity_or_generalization", "does_not_certify_scientific_truth", "does_not_certify_journal_acceptance"],
+          "properties": {
+            "schema_valid": {"type": "boolean"},
+            "identity_and_fixity_checks": {"$ref": "#/$defs/checkStatus"},
+            "analysis_and_surface_consistency_checks": {"$ref": "#/$defs/checkStatus"},
+            "inference_boundary_checks": {"$ref": "#/$defs/checkStatus"},
+            "does_not_certify_model_adequacy_or_assumption_truth": {"const": true},
+            "does_not_certify_causal_identification": {"const": true},
+            "does_not_certify_absence_of_bias": {"const": true},
+            "does_not_certify_measurement_validity": {"const": true},
+            "does_not_certify_adequate_power_or_precision": {"const": true},
+            "does_not_certify_external_validity_or_generalization": {"const": true},
+            "does_not_certify_scientific_truth": {"const": true},
+            "does_not_certify_journal_acceptance": {"const": true}
+          }
+        }
+      }
+    },
+    "protocol": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "study_contract_id", "version", "status", "frozen_at", "registration", "study_id", "objectives", "sampling_or_corpus_plan", "variables_outcomes_or_coding_rules", "procedures_or_source_treatment", "quality_control", "ethics_and_governance_links", "analysis_plan_ids"],
+      "properties": {
+        "id": {"$ref": "#/$defs/prefix/protocol"},
+        "study_contract_id": {"$ref": "#/$defs/prefix/studyContract"},
+        "version": {"$ref": "#/$defs/positiveInteger"},
+        "status": {"enum": ["draft", "frozen", "amended", "superseded"]},
+        "frozen_at": {"$ref": "#/$defs/nullableTemplateDateTime"},
+        "registration": {
+          "type": "object", "additionalProperties": false, "required": ["status", "identifier", "registered_at"],
+          "properties": {
+            "status": {"enum": ["not_registered", "embargoed", "public"]},
+            "identifier": {"$ref": "#/$defs/nullableString"},
+            "registered_at": {"$ref": "#/$defs/nullableTemplateDate"}
+          }
+        },
+        "study_id": {"$ref": "#/$defs/prefix/study"},
+        "objectives": {"type": "array", "items": {"type": "string"}},
+        "sampling_or_corpus_plan": {"$ref": "#/$defs/nonEmpty"},
+        "variables_outcomes_or_coding_rules": {"$ref": "#/$defs/nonEmpty"},
+        "procedures_or_source_treatment": {"$ref": "#/$defs/nonEmpty"},
+        "quality_control": {"$ref": "#/$defs/nonEmpty"},
+        "ethics_and_governance_links": {"type": "array", "items": {"type": "string"}},
+        "analysis_plan_ids": {"type": "array", "items": {"$ref": "#/$defs/prefix/analysisPlan"}}
+      }
+    },
+    "analysisPlan": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "study_contract_id", "version", "status", "protocol_id", "question_or_estimand", "analysis_population_or_material", "variables_or_inputs", "model_test_proof_or_interpretive_method", "missingness_or_incomplete_evidence_plan", "multiplicity_or_model_selection_plan", "uncertainty_plan", "diagnostics_and_assumptions", "robustness_and_sensitivity", "status_relative_to_data_access"],
+      "properties": {
+        "id": {"$ref": "#/$defs/prefix/analysisPlan"},
+        "study_contract_id": {"$ref": "#/$defs/prefix/studyContract"},
+        "version": {"$ref": "#/$defs/positiveInteger"},
+        "status": {"enum": ["draft", "frozen", "amended", "superseded"]},
+        "protocol_id": {"$ref": "#/$defs/prefix/protocol"},
+        "question_or_estimand": {"$ref": "#/$defs/nonEmpty"},
+        "analysis_population_or_material": {"$ref": "#/$defs/nonEmpty"},
+        "variables_or_inputs": {"$ref": "#/$defs/nonEmpty"},
+        "model_test_proof_or_interpretive_method": {"$ref": "#/$defs/nonEmpty"},
+        "missingness_or_incomplete_evidence_plan": {"$ref": "#/$defs/nonEmpty"},
+        "multiplicity_or_model_selection_plan": {"$ref": "#/$defs/nonEmpty"},
+        "uncertainty_plan": {"$ref": "#/$defs/nonEmpty"},
+        "diagnostics_and_assumptions": {"$ref": "#/$defs/stringArray"},
+        "robustness_and_sensitivity": {"$ref": "#/$defs/stringArray"},
+        "status_relative_to_data_access": {"$ref": "#/$defs/nonEmpty"}
+      }
+    },
+    "deviation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "study_contract_id", "applies", "from_object_id", "detected_at", "actor_id", "description", "reason", "affected_claim_ids", "consequence_for_inference", "manuscript_disclosure_locations", "reconciliation_status"],
+      "properties": {
+        "id": {"$ref": "#/$defs/prefix/deviation"},
+        "study_contract_id": {"$ref": "#/$defs/prefix/studyContract"},
+        "applies": {"type": "boolean"},
+        "from_object_id": {"type": "string"},
+        "detected_at": {"$ref": "#/$defs/nullableTemplateDateTime"},
+        "actor_id": {"$ref": "#/$defs/nullableString"},
+        "description": {"$ref": "#/$defs/nullableString"},
+        "reason": {"$ref": "#/$defs/nullableString"},
+        "affected_claim_ids": {"type": "array", "items": {"type": "string"}},
+        "consequence_for_inference": {"$ref": "#/$defs/nullableString"},
+        "manuscript_disclosure_locations": {"type": "array", "items": {"type": "string"}},
+        "reconciliation_status": {"$ref": "#/$defs/checkStatus"}
+      }
+    },
+    "searchRun": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "mode", "question", "databases_sources_and_platforms", "exact_queries", "executed_at", "date_limits", "language_limits", "other_limits", "deduplication_method", "eligibility_criteria", "screening_record_location", "stopping_or_saturation_rule", "completeness_claim", "update_due_at"],
+      "properties": {
+        "id": {"$ref": "#/$defs/prefix/search"},
+        "mode": {"enum": ["background_context", "claim_support", "analogue_calibration", "systematic_evidence_synthesis", "living_update"]},
+        "question": {"$ref": "#/$defs/nonEmpty"},
+        "databases_sources_and_platforms": {"type": "array", "items": {"type": "string"}},
+        "exact_queries": {"type": "array", "items": {"type": "string"}},
+        "executed_at": {"$ref": "#/$defs/nullableTemplateDateTime"},
+        "date_limits": {"$ref": "#/$defs/nullableString"},
+        "language_limits": {"$ref": "#/$defs/nullableString"},
+        "other_limits": {"$ref": "#/$defs/nullableString"},
+        "deduplication_method": {"$ref": "#/$defs/nullableString"},
+        "eligibility_criteria": {"type": "array", "items": {"type": "string"}},
+        "screening_record_location": {"$ref": "#/$defs/nullableString"},
+        "stopping_or_saturation_rule": {"$ref": "#/$defs/nonEmpty"},
+        "completeness_claim": {"$ref": "#/$defs/nonEmpty"},
+        "update_due_at": {"$ref": "#/$defs/nullableTemplateDate"}
+      }
+    },
+    "source": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "work_identity", "version", "acquisition", "integrity", "extraction"],
+      "properties": {
+        "id": {"$ref": "#/$defs/prefix/source"},
+        "work_identity": {
+          "type": "object", "additionalProperties": false, "required": ["title", "doi_or_persistent_id", "publication_type"],
+          "properties": {
+            "title": {"$ref": "#/$defs/nonEmpty"},
+            "doi_or_persistent_id": {"$ref": "#/$defs/nullableString"},
+            "publication_type": {"$ref": "#/$defs/nonEmpty"}
+          }
+        },
+        "version": {
+          "type": "object", "additionalProperties": false, "required": ["label", "published_or_posted_at", "relation_to_other_versions"],
+          "properties": {
+            "label": {"$ref": "#/$defs/nonEmpty"},
+            "published_or_posted_at": {"$ref": "#/$defs/nullableTemplateDate"},
+            "relation_to_other_versions": {"type": "array", "items": {"type": "string"}}
+          }
+        },
+        "acquisition": {
+          "type": "object", "additionalProperties": false, "required": ["acquired_at", "checksum", "license_or_access_basis"],
+          "properties": {
+            "acquired_at": {"$ref": "#/$defs/nullableTemplateDateTime"},
+            "checksum": {"$ref": "#/$defs/nullableString"},
+            "license_or_access_basis": {"$ref": "#/$defs/nullableString"}
+          }
+        },
+        "integrity": {
+          "type": "object", "additionalProperties": false, "required": ["metadata_status", "correction_retraction_status"],
+          "properties": {
+            "metadata_status": {"$ref": "#/$defs/checkStatus"},
+            "correction_retraction_status": {"$ref": "#/$defs/checkStatus"}
+          }
+        },
+        "extraction": {
+          "type": "object", "additionalProperties": false, "required": ["design_specific_card_status", "extractor_ids", "adjudication_status"],
+          "properties": {
+            "design_specific_card_status": {"$ref": "#/$defs/checkStatus"},
+            "extractor_ids": {"type": "array", "items": {"type": "string"}},
+            "adjudication_status": {"$ref": "#/$defs/checkStatus"}
+          }
+        }
+      }
+    },
+    "sourcePassage": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "source_id", "locator_type", "locator", "excerpt_hash", "paraphrase", "locator_status", "extraction_actor_id"],
+      "properties": {
+        "id": {"$ref": "#/$defs/prefix/passage"},
+        "source_id": {"$ref": "#/$defs/prefix/source"},
+        "locator_type": {"enum": ["page", "section", "figure", "table", "theorem", "paragraph", "timestamp"]},
+        "locator": {"$ref": "#/$defs/nonEmpty"},
+        "excerpt_hash": {"$ref": "#/$defs/nullableString"},
+        "paraphrase": {"$ref": "#/$defs/nonEmpty"},
+        "locator_status": {"$ref": "#/$defs/checkStatus"},
+        "extraction_actor_id": {"type": "string"}
+      }
+    },
+    "dataAsset": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "name", "version", "owner_or_controller", "access_status", "access_reason", "license", "sensitivity", "consent_or_governance_constraints", "schema_or_dictionary_id", "units_and_keys", "acquisition_or_generation", "inclusion_exclusion_lineage", "transformation_parent_ids", "checksum", "immutable_snapshot_location", "validation_report_ids", "known_defects"],
+      "properties": {
+        "id": {"$ref": "#/$defs/prefix/data"},
+        "name": {"$ref": "#/$defs/nonEmpty"},
+        "version": {"$ref": "#/$defs/nonEmpty"},
+        "owner_or_controller": {"$ref": "#/$defs/nonEmpty"},
+        "access_status": {"enum": ["open", "restricted", "closed", "synthetic"]},
+        "access_reason": {"$ref": "#/$defs/nonEmpty"},
+        "license": {"$ref": "#/$defs/nullableString"},
+        "sensitivity": {"$ref": "#/$defs/nonEmpty"},
+        "consent_or_governance_constraints": {"$ref": "#/$defs/nonEmpty"},
+        "schema_or_dictionary_id": {"$ref": "#/$defs/nullableString"},
+        "units_and_keys": {"$ref": "#/$defs/nonEmpty"},
+        "acquisition_or_generation": {"$ref": "#/$defs/nonEmpty"},
+        "inclusion_exclusion_lineage": {"$ref": "#/$defs/nonEmpty"},
+        "transformation_parent_ids": {"type": "array", "items": {"type": "string"}},
+        "checksum": {"$ref": "#/$defs/nullableString"},
+        "immutable_snapshot_location": {"$ref": "#/$defs/nullableString"},
+        "validation_report_ids": {"type": "array", "items": {"type": "string"}},
+        "known_defects": {"$ref": "#/$defs/stringArray"}
+      }
+    },
+    "validationReport": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "asset_id", "executed_at", "validator_version", "rules_checked", "failures", "overrides", "status"],
+      "properties": {
+        "id": {"$ref": "#/$defs/prefix/validation"},
+        "asset_id": {"$ref": "#/$defs/prefix/data"},
+        "executed_at": {"$ref": "#/$defs/nullableTemplateDateTime"},
+        "validator_version": {"$ref": "#/$defs/nullableString"},
+        "rules_checked": {"type": "array", "items": {"type": "string"}},
+        "failures": {"type": "array", "items": {"type": "object"}},
+        "overrides": {"type": "array", "items": {"type": "object"}},
+        "status": {"$ref": "#/$defs/checkStatus"}
+      }
+    },
+    "analysis": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "version", "plan_id", "protocol_status", "question_or_estimand", "input_data_ids", "exclusions_or_filters", "code_or_workflow", "environment", "randomness", "method_specification", "diagnostics", "robustness_outputs", "exact_results", "execution_receipt", "assurance"],
+      "properties": {
+        "id": {"$ref": "#/$defs/prefix/analysis"},
+        "version": {"$ref": "#/$defs/positiveInteger"},
+        "plan_id": {"$ref": "#/$defs/prefix/analysisPlan"},
+        "protocol_status": {"enum": ["prespecified", "deviation", "exploratory", "post_hoc"]},
+        "question_or_estimand": {"$ref": "#/$defs/nonEmpty"},
+        "input_data_ids": {"type": "array", "items": {"type": "string"}},
+        "exclusions_or_filters": {"$ref": "#/$defs/nonEmpty"},
+        "code_or_workflow": {
+          "type": "object", "additionalProperties": false, "required": ["repository_or_location", "commit_or_version", "entrypoint"],
+          "properties": {
+            "repository_or_location": {"$ref": "#/$defs/nullableString"},
+            "commit_or_version": {"$ref": "#/$defs/nullableString"},
+            "entrypoint": {"$ref": "#/$defs/nullableString"}
+          }
+        },
+        "environment": {
+          "type": "object", "additionalProperties": false, "required": ["lockfile_or_image", "hardware_materially_relevant"],
+          "properties": {
+            "lockfile_or_image": {"$ref": "#/$defs/nullableString"},
+            "hardware_materially_relevant": {"$ref": "#/$defs/nullableString"}
+          }
+        },
+        "randomness": {
+          "type": "object", "additionalProperties": false, "required": ["seeds", "nondeterminism_notes"],
+          "properties": {
+            "seeds": {"type": "array", "items": {"type": ["integer", "string"]}},
+            "nondeterminism_notes": {"$ref": "#/$defs/nullableString"}
+          }
+        },
+        "method_specification": {"$ref": "#/$defs/nonEmpty"},
+        "diagnostics": {"type": "array", "items": {"type": "object"}},
+        "robustness_outputs": {"type": "array", "items": {"type": "object"}},
+        "exact_results": {"type": "array", "items": {
+          "type": "object", "additionalProperties": false, "required": ["id", "value", "unit", "uncertainty", "denominator_or_sample_unit"],
+          "properties": {
+            "id": {"$ref": "#/$defs/prefix/result"},
+            "value": {"type": ["number", "string", "null"]},
+            "unit": {"$ref": "#/$defs/nullableString"},
+            "uncertainty": {"$ref": "#/$defs/nullableString"},
+            "denominator_or_sample_unit": {"$ref": "#/$defs/nullableString"}
+          }
+        }},
+        "execution_receipt": {
+          "type": "object", "additionalProperties": false, "required": ["executed_at", "actor_id", "input_hashes", "output_hashes", "status"],
+          "properties": {
+            "executed_at": {"$ref": "#/$defs/nullableTemplateDateTime"},
+            "actor_id": {"$ref": "#/$defs/nullableString"},
+            "input_hashes": {"type": "array", "items": {"type": "string"}},
+            "output_hashes": {"type": "array", "items": {"type": "string"}},
+            "status": {"$ref": "#/$defs/checkStatus"}
+          }
+        },
+        "assurance": {
+          "type": "object", "additionalProperties": false,
+          "required": ["traceable", "rerun_same_environment", "rerun_clean_environment", "independently_reproduced"],
+          "properties": {
+            "traceable": {"type": "boolean"},
+            "rerun_same_environment": {"type": "boolean"},
+            "rerun_clean_environment": {"type": "boolean"},
+            "independently_reproduced": {"type": "boolean"}
+          }
+        }
+      }
+    },
+    "claim": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "text", "atomic", "claim_class", "scope", "evidence_status", "support_edges", "assumptions_and_boundaries", "contradicted_by", "manuscript_locations", "assurance_notes"],
+      "properties": {
+        "id": {"$ref": "#/$defs/prefix/claim"},
+        "text": {"$ref": "#/$defs/nonEmpty"},
+        "atomic": {"type": "boolean"},
+        "claim_class": {"enum": ["descriptive", "associational", "causal", "predictive", "mechanistic", "formal", "interpretive", "practical"]},
+        "scope": {
+          "type": "object", "additionalProperties": false,
+          "required": ["population_domain_or_corpus", "conditions", "comparator", "quantifier", "time"],
+          "properties": {
+            "population_domain_or_corpus": {"$ref": "#/$defs/nonEmpty"},
+            "conditions": {"type": "array", "items": {"type": "string"}},
+            "comparator": {"$ref": "#/$defs/nonEmpty"},
+            "quantifier": {"$ref": "#/$defs/nonEmpty"},
+            "time": {"$ref": "#/$defs/nonEmpty"}
+          }
+        },
+        "evidence_status": {"enum": ["supported", "partially_supported", "author_attested", "unresolved", "contradicted", "blocked", "not_assessable"]},
+        "support_edges": {"type": "array", "items": {
+          "type": "object", "additionalProperties": false, "required": ["type", "target_id", "entailment_status"],
+          "properties": {
+            "type": {"$ref": "#/$defs/nonEmpty"},
+            "target_id": {"type": "string"},
+            "entailment_status": {"$ref": "#/$defs/checkStatus"}
+          }
+        }},
+        "assumptions_and_boundaries": {"$ref": "#/$defs/stringArray"},
+        "contradicted_by": {"type": "array", "items": {"type": "string"}},
+        "manuscript_locations": {"type": "array", "items": {"type": "string"}},
+        "assurance_notes": {"$ref": "#/$defs/nonEmpty"}
+      }
+    },
+    "figureOrTable": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "type", "question_answered", "supported_claim_ids", "analysis_ids", "data_asset_ids", "statistical_or_sample_unit", "comparator_and_uncertainty", "render", "source_data_asset_id", "caption_status", "accessibility", "display_contract"],
+      "properties": {
+        "id": {"$ref": "#/$defs/prefix/figure"},
+        "type": {"$ref": "#/$defs/nonEmpty"},
+        "question_answered": {"$ref": "#/$defs/nonEmpty"},
+        "supported_claim_ids": {"type": "array", "items": {"$ref": "#/$defs/prefix/claim"}},
+        "analysis_ids": {"type": "array", "items": {"$ref": "#/$defs/prefix/analysis"}},
+        "data_asset_ids": {"type": "array", "items": {"type": "string"}},
+        "statistical_or_sample_unit": {"$ref": "#/$defs/nonEmpty"},
+        "comparator_and_uncertainty": {"$ref": "#/$defs/nonEmpty"},
+        "render": {
+          "type": "object", "additionalProperties": false, "required": ["code_version", "environment", "receipt_id"],
+          "properties": {
+            "code_version": {"$ref": "#/$defs/nullableString"},
+            "environment": {"$ref": "#/$defs/nullableString"},
+            "receipt_id": {"$ref": "#/$defs/nullableString"}
+          }
+        },
+        "source_data_asset_id": {"$ref": "#/$defs/nullableString"},
+        "caption_status": {"$ref": "#/$defs/checkStatus"},
+        "accessibility": {
+          "type": "object", "additionalProperties": false, "required": ["alt_text", "long_description", "machine_generated", "human_verified"],
+          "properties": {
+            "alt_text": {"$ref": "#/$defs/nonEmpty"},
+            "long_description": {"$ref": "#/$defs/nonEmpty"},
+            "machine_generated": {"type": "boolean"},
+            "human_verified": {"type": "boolean"}
+          }
+        },
+        "display_contract": {
+          "type": "object", "additionalProperties": false,
+          "required": ["display_contract_id", "contract_schema_version", "stage", "reader_task", "scientific_object", "inference_boundary", "representation", "provenance", "display_contract_status", "display_blocker_codes", "validated_at", "human_final_size_reviewed"],
+          "properties": {
+            "display_contract_id": {"$ref": "#/$defs/prefix/displayContract"},
+            "contract_schema_version": {"const": "1.0.0"},
+            "stage": {"enum": ["planning", "draft", "review", "final", "production", "post_publication"]},
+            "reader_task": {
+              "type": "object", "additionalProperties": false, "required": ["id", "question"],
+              "properties": {"id": {"$ref": "#/$defs/nonEmpty"}, "question": {"$ref": "#/$defs/nonEmpty"}}
+            },
+            "scientific_object": {
+              "type": "object", "additionalProperties": false, "required": ["estimand", "statistical_unit", "data_structure", "denominator_label", "denominator_value"],
+              "properties": {
+                "estimand": {"$ref": "#/$defs/nonEmpty"},
+                "statistical_unit": {"$ref": "#/$defs/nonEmpty"},
+                "data_structure": {"type": "array", "items": {"type": "string"}},
+                "denominator_label": {"$ref": "#/$defs/nonEmpty"},
+                "denominator_value": {"$ref": "#/$defs/nullableNumber"}
+              }
+            },
+            "inference_boundary": {
+              "type": "object", "additionalProperties": false, "required": ["allowed_inferences", "prohibited_inferences"],
+              "properties": {
+                "allowed_inferences": {"type": "array", "items": {"type": "string"}},
+                "prohibited_inferences": {"type": "array", "items": {"type": "string"}}
+              }
+            },
+            "representation": {
+              "type": "object", "additionalProperties": false,
+              "required": ["representation_family", "representation_rationale", "candidate_families", "matched_adapter_ids", "selection_mode", "transformations", "uncertainty_definition", "observed_groups", "plotted_groups", "omission_disclosures"],
+              "properties": {
+                "representation_family": {"$ref": "#/$defs/nullableString"},
+                "representation_rationale": {"$ref": "#/$defs/nullableString"},
+                "candidate_families": {"type": "array", "items": {"type": "string"}},
+                "matched_adapter_ids": {"type": "array", "items": {"type": "string"}},
+                "selection_mode": {"$ref": "#/$defs/nonEmpty"},
+                "transformations": {"type": "array", "items": {"type": "string"}},
+                "uncertainty_definition": {"$ref": "#/$defs/nullableString"},
+                "observed_groups": {"type": "array", "items": {"type": "string"}},
+                "plotted_groups": {"type": "array", "items": {"type": "string"}},
+                "omission_disclosures": {"type": "array", "items": {"type": "string"}}
+              }
+            },
+            "provenance": {
+              "type": "object", "additionalProperties": false,
+              "required": ["data_snapshot_sha256", "analysis_receipt_sha256", "render_receipt_sha256", "source_data_sha256"],
+              "properties": {
+                "data_snapshot_sha256": {"$ref": "#/$defs/nullableString"},
+                "analysis_receipt_sha256": {"$ref": "#/$defs/nullableString"},
+                "render_receipt_sha256": {"$ref": "#/$defs/nullableString"},
+                "source_data_sha256": {"$ref": "#/$defs/nullableString"}
+              }
+            },
+            "display_contract_status": {"enum": ["unresolved", "blocked", "pass"]},
+            "display_blocker_codes": {"type": "array", "items": {"type": "string"}},
+            "validated_at": {"$ref": "#/$defs/nullableTemplateDateTime"},
+            "human_final_size_reviewed": {"type": "boolean"}
+          }
+        }
+      }
+    },
+    "sectionContract": {
+      "type": "object", "additionalProperties": false,
+      "required": ["section_id", "reader_question", "required_input_ids", "allowed_claim_classes", "forbidden_moves", "reporting_hooks", "cross_section_invariants", "exit_tests", "status"],
+      "properties": {
+        "section_id": {"$ref": "#/$defs/nonEmpty"},
+        "reader_question": {"$ref": "#/$defs/nonEmpty"},
+        "required_input_ids": {"type": "array", "items": {"type": "string"}},
+        "allowed_claim_classes": {"type": "array", "items": {"type": "string"}},
+        "forbidden_moves": {"type": "array", "items": {"type": "string"}},
+        "reporting_hooks": {"type": "array", "items": {"type": "string"}},
+        "cross_section_invariants": {"type": "array", "items": {"type": "string"}},
+        "exit_tests": {"type": "array", "items": {"type": "string"}},
+        "status": {"$ref": "#/$defs/checkStatus"}
+      }
+    },
+    "manuscript": {
+      "type": "object", "additionalProperties": false,
+      "required": ["current_version_id", "versions"],
+      "properties": {
+        "current_version_id": {"$ref": "#/$defs/prefix/manuscript"},
+        "versions": {"type": "array", "minItems": 1, "items": {
+          "type": "object", "additionalProperties": false,
+          "required": ["id", "version", "location", "created_at", "parent_version_id", "claim_coverage", "semantic_delta_id"],
+          "properties": {
+            "id": {"$ref": "#/$defs/prefix/manuscript"},
+            "version": {"$ref": "#/$defs/positiveInteger"},
+            "location": {"$ref": "#/$defs/nullableString"},
+            "created_at": {"$ref": "#/$defs/nullableTemplateDateTime"},
+            "parent_version_id": {"$ref": "#/$defs/nullableString"},
+            "claim_coverage": {"$ref": "#/$defs/checkStatus"},
+            "semantic_delta_id": {"$ref": "#/$defs/nullableString"}
+          }
+        }}
+      }
+    },
+    "declarations": {
+      "type": "object", "additionalProperties": false,
+      "required": ["ethics", "contributions", "funding_and_conflicts", "ai_use"],
+      "properties": {
+        "ethics": {"type": "array", "items": {
+          "type": "object", "additionalProperties": false,
+          "required": ["id", "approval_or_waiver", "reviewing_body", "identifier", "date", "consent", "amendments"],
+          "properties": {
+            "id": {"$ref": "#/$defs/prefix/declaration"},
+            "approval_or_waiver": {"$ref": "#/$defs/nonEmpty"},
+            "reviewing_body": {"$ref": "#/$defs/nonEmpty"},
+            "identifier": {"$ref": "#/$defs/nonEmpty"},
+            "date": {"$ref": "#/$defs/templateDate"},
+            "consent": {"$ref": "#/$defs/nonEmpty"},
+            "amendments": {"type": "array", "items": {"type": "string"}}
+          }
+        }},
+        "contributions": {"type": "array", "items": {
+          "type": "object", "additionalProperties": false,
+          "required": ["contributor_id", "authorship_status", "roles", "confirmed_by_contributor"],
+          "properties": {
+            "contributor_id": {"$ref": "#/$defs/prefix/agent"},
+            "authorship_status": {"$ref": "#/$defs/nonEmpty"},
+            "roles": {"$ref": "#/$defs/stringArray"},
+            "confirmed_by_contributor": {"type": "boolean"}
+          }
+        }},
+        "funding_and_conflicts": {
+          "type": "object", "additionalProperties": false,
+          "required": ["funding_sources", "funder_roles", "financial_conflicts", "nonfinancial_conflicts", "confirmation_status"],
+          "properties": {
+            "funding_sources": {"type": "array", "items": {"type": "object"}},
+            "funder_roles": {"type": "array", "items": {"type": "object"}},
+            "financial_conflicts": {"type": "array", "items": {"type": "object"}},
+            "nonfinancial_conflicts": {"type": "array", "items": {"type": "object"}},
+            "confirmation_status": {"$ref": "#/$defs/checkStatus"}
+          }
+        },
+        "ai_use": {
+          "type": "object", "additionalProperties": false,
+          "required": ["used", "systems", "target_policy_checked"],
+          "properties": {
+            "used": {"type": "boolean"},
+            "systems": {"type": "array", "items": {
+              "type": "object", "additionalProperties": false,
+              "required": ["agent_id", "purpose", "confidential_inputs_processed", "human_verification", "disclosure_locations"],
+              "properties": {
+                "agent_id": {"$ref": "#/$defs/prefix/agent"},
+                "purpose": {"$ref": "#/$defs/stringArray"},
+                "confidential_inputs_processed": {"type": "boolean"},
+                "human_verification": {"$ref": "#/$defs/nonEmpty"},
+                "disclosure_locations": {"type": "array", "items": {"type": "string"}}
+              }
+            }},
+            "target_policy_checked": {"type": "boolean"}
+          }
+        }
+      }
+    },
+    "review": {
+      "type": "object", "additionalProperties": false,
+      "required": ["packets", "concerns"],
+      "properties": {
+        "packets": {"type": "array", "items": {
+          "type": "object", "additionalProperties": false,
+          "required": ["id", "manuscript_version_id", "included_artifact_ids", "excluded_context", "hash", "frozen_at"],
+          "properties": {
+            "id": {"$ref": "#/$defs/prefix/reviewPacket"},
+            "manuscript_version_id": {"$ref": "#/$defs/prefix/manuscript"},
+            "included_artifact_ids": {"type": "array", "items": {"type": "string"}},
+            "excluded_context": {"type": "array", "items": {"type": "string"}},
+            "hash": {"$ref": "#/$defs/nullableString"},
+            "frozen_at": {"$ref": "#/$defs/nullableTemplateDateTime"}
+          }
+        }},
+        "concerns": {"type": "array", "items": {
+          "type": "object", "additionalProperties": false,
+          "required": ["id", "reviewer_role", "severity", "claim_or_artifact_ids", "issue", "closure_route", "artifact_delta_ids", "reverification_status", "closure_status"],
+          "properties": {
+            "id": {"$ref": "#/$defs/prefix/concern"},
+            "reviewer_role": {"$ref": "#/$defs/nonEmpty"},
+            "severity": {"$ref": "#/$defs/nonEmpty"},
+            "claim_or_artifact_ids": {"type": "array", "items": {"type": "string"}},
+            "issue": {"$ref": "#/$defs/nonEmpty"},
+            "closure_route": {"$ref": "#/$defs/nullableString"},
+            "artifact_delta_ids": {"type": "array", "items": {"type": "string"}},
+            "reverification_status": {"$ref": "#/$defs/checkStatus"},
+            "closure_status": {"$ref": "#/$defs/checkStatus"}
+          }
+        }}
+      }
+    },
+    "assuranceProfile": {
+      "type": "object", "additionalProperties": false,
+      "required": ["assessed_at", "manuscript_version_id", "claim_coverage", "author_evidence_consistency", "source_metadata", "source_locators", "source_entailment", "protocol_traceability", "protocol_contract_status", "conduct_traceability", "deviation_transparency", "data_integrity_contract_status", "raw_snapshot_immutability", "transformation_traceability", "analysis_input_traceability", "data_governance_resolution", "data_release_resolution", "data_provenance", "statistical_inference_contract_status", "estimand_and_population_binding", "independent_unit_and_dependence", "analysis_plan_execution_alignment", "statistical_uncertainty_semantics", "statistical_result_surface_bindings", "exact_analysis_policy_resolution", "computation", "independent_verification", "external_replication_or_triangulation", "reporting_compliance", "accessibility", "confidentiality_and_ai_use", "summary_class", "blockers"],
+      "properties": {
+        "assessed_at": {"$ref": "#/$defs/nullableTemplateDateTime"},
+        "manuscript_version_id": {"$ref": "#/$defs/prefix/manuscript"},
+        "claim_coverage": {"$ref": "#/$defs/checkStatus"},
+        "author_evidence_consistency": {"$ref": "#/$defs/checkStatus"},
+        "source_metadata": {"$ref": "#/$defs/checkStatus"},
+        "source_locators": {"$ref": "#/$defs/checkStatus"},
+        "source_entailment": {"$ref": "#/$defs/checkStatus"},
+        "protocol_traceability": {"$ref": "#/$defs/checkStatus"},
+        "protocol_contract_status": {"$ref": "#/$defs/checkStatus"},
+        "conduct_traceability": {"$ref": "#/$defs/checkStatus"},
+        "deviation_transparency": {"$ref": "#/$defs/checkStatus"},
+        "data_integrity_contract_status": {"$ref": "#/$defs/checkStatus"},
+        "raw_snapshot_immutability": {"$ref": "#/$defs/checkStatus"},
+        "transformation_traceability": {"$ref": "#/$defs/checkStatus"},
+        "analysis_input_traceability": {"$ref": "#/$defs/checkStatus"},
+        "data_governance_resolution": {"$ref": "#/$defs/checkStatus"},
+        "data_release_resolution": {"$ref": "#/$defs/checkStatus"},
+        "data_provenance": {"$ref": "#/$defs/checkStatus"},
+        "statistical_inference_contract_status": {"$ref": "#/$defs/checkStatus"},
+        "estimand_and_population_binding": {"$ref": "#/$defs/checkStatus"},
+        "independent_unit_and_dependence": {"$ref": "#/$defs/checkStatus"},
+        "analysis_plan_execution_alignment": {"$ref": "#/$defs/checkStatus"},
+        "statistical_uncertainty_semantics": {"$ref": "#/$defs/checkStatus"},
+        "statistical_result_surface_bindings": {"$ref": "#/$defs/checkStatus"},
+        "exact_analysis_policy_resolution": {"$ref": "#/$defs/checkStatus"},
+        "computation": {"$ref": "#/$defs/checkStatus"},
+        "independent_verification": {"$ref": "#/$defs/checkStatus"},
+        "external_replication_or_triangulation": {"$ref": "#/$defs/checkStatus"},
+        "reporting_compliance": {"$ref": "#/$defs/checkStatus"},
+        "accessibility": {"$ref": "#/$defs/checkStatus"},
+        "confidentiality_and_ai_use": {"$ref": "#/$defs/checkStatus"},
+        "summary_class": {"type": "string", "pattern": "^A[0-5]$"},
+        "blockers": {"$ref": "#/$defs/stringArray"}
+      }
+    },
+    "targetProjection": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "target", "content_type", "instructions_checked_at", "venue_decision_contract", "acceptance_objective", "scientific_gate_status", "target_gate_status", "burden_of_doubt", "allowed_repair_routes", "review_model", "ai_confidentiality_policy", "acceptance_state", "resolution_certification", "journal_certification_layer", "reporting_items_status", "mechanics_status", "package_status", "readiness", "unresolved_items"],
+      "properties": {
+        "id": {"$ref": "#/$defs/prefix/targetProjection"},
+        "target": {"$ref": "#/$defs/nullableString"},
+        "content_type": {"$ref": "#/$defs/nullableString"},
+        "instructions_checked_at": {"$ref": "#/$defs/nullableTemplateDate"},
+        "venue_decision_contract": {
+          "type": "object", "additionalProperties": false,
+          "required": ["request", "resolution_mode", "contract_id", "contract_schema_version", "fallback_profile_id", "fallback_profile_is_not_exact_policy", "live_official_resolution_required", "policy_validity", "source_records", "unresolved_conflicts"],
+          "properties": {
+            "request": {
+              "type": "object", "additionalProperties": false,
+              "required": ["venue", "article_type", "normalized_stage", "as_of_date"],
+              "properties": {
+                "venue": {"$ref": "#/$defs/nullableString"},
+                "article_type": {"$ref": "#/$defs/nullableString"},
+                "normalized_stage": {"anyOf": [{"enum": ["planning", "initial_submission", "peer_review", "revision", "accepted", "production", "post_publication"]}, {"type": "null"}]},
+                "as_of_date": {"$ref": "#/$defs/nullableTemplateDate"}
+              }
+            },
+            "resolution_mode": {"enum": ["exact_live_official", "exact_contract_snapshot", "fallback_with_live_resolution_required", "unresolved"]},
+            "contract_id": {"$ref": "#/$defs/nullableString"},
+            "contract_schema_version": {"$ref": "#/$defs/nullableString"},
+            "fallback_profile_id": {"$ref": "#/$defs/nullableString"},
+            "fallback_profile_is_not_exact_policy": {"type": "boolean"},
+            "live_official_resolution_required": {"type": "boolean"},
+            "policy_validity": {
+              "type": "object", "additionalProperties": false,
+              "required": ["effective_from", "effective_until", "effective_date_basis", "observed_active_at", "reviewed_at", "next_review_due"],
+              "properties": {
+                "effective_from": {"$ref": "#/$defs/nullableTemplateDate"},
+                "effective_until": {"$ref": "#/$defs/nullableTemplateDate"},
+                "effective_date_basis": {"enum": ["official_explicit", "observed_active_not_backcastable", "unresolved"]},
+                "observed_active_at": {"$ref": "#/$defs/nullableTemplateDate"},
+                "reviewed_at": {"$ref": "#/$defs/nullableTemplateDate"},
+                "next_review_due": {"$ref": "#/$defs/nullableTemplateDate"}
+              }
+            },
+            "source_records": {"type": "array", "items": {
+              "type": "object", "additionalProperties": false,
+              "required": ["source_id", "authority", "page_title", "url", "accessed_at", "stated_effective_date", "supports_fields"],
+              "properties": {
+                "source_id": {"$ref": "#/$defs/nullableString"},
+                "authority": {"$ref": "#/$defs/nullableString"},
+                "page_title": {"$ref": "#/$defs/nullableString"},
+                "url": {"$ref": "#/$defs/nullableString"},
+                "accessed_at": {"$ref": "#/$defs/nullableTemplateDateTime"},
+                "stated_effective_date": {"$ref": "#/$defs/nullableTemplateDate"},
+                "supports_fields": {"type": "array", "items": {"type": "string"}}
+              }
+            }},
+            "unresolved_conflicts": {"type": "array", "items": {"type": "string"}}
+          }
+        },
+        "acceptance_objective": {
+          "type": "object", "additionalProperties": false, "required": ["id", "scope", "source_contract_id", "rule"],
+          "properties": {
+            "id": {"$ref": "#/$defs/nullableString"},
+            "scope": {"$ref": "#/$defs/nonEmpty"},
+            "source_contract_id": {"$ref": "#/$defs/nullableString"},
+            "rule": {"$ref": "#/$defs/nullableString"}
+          }
+        },
+        "scientific_gate_status": {
+          "type": "object", "additionalProperties": false, "required": ["status", "required_gate_ids", "failed_gate_ids", "unresolved_gate_ids"],
+          "properties": {
+            "status": {"enum": ["not_evaluated", "satisfied", "failed", "unresolved"]},
+            "required_gate_ids": {"type": "array", "items": {"type": "string"}},
+            "failed_gate_ids": {"type": "array", "items": {"type": "string"}},
+            "unresolved_gate_ids": {"type": "array", "items": {"type": "string"}}
+          }
+        },
+        "target_gate_status": {
+          "type": "object", "additionalProperties": false,
+          "required": ["novelty", "impact", "breadth", "audience_interest", "failed_gate_ids"],
+          "properties": {
+            "novelty": {"enum": ["required_satisfied", "required_failed", "not_a_gate", "unresolved", "not_evaluated"]},
+            "impact": {"enum": ["required_satisfied", "required_failed", "not_a_gate", "unresolved", "not_evaluated"]},
+            "breadth": {"enum": ["required_satisfied", "required_failed", "not_a_gate", "unresolved", "not_evaluated"]},
+            "audience_interest": {"enum": ["required_satisfied", "required_failed", "not_a_gate", "unresolved", "not_evaluated"]},
+            "failed_gate_ids": {"type": "array", "items": {"type": "string"}}
+          }
+        },
+        "burden_of_doubt": {
+          "type": "object", "additionalProperties": false, "required": ["default", "criterion_overrides", "applied_defaults"],
+          "properties": {
+            "default": {"$ref": "#/$defs/checkStatus"},
+            "criterion_overrides": {"type": "object"},
+            "applied_defaults": {"type": "array", "items": {"type": "string"}}
+          }
+        },
+        "allowed_repair_routes": {"type": "array", "items": {
+          "type": "object", "additionalProperties": false, "required": ["route", "policy_status", "source_ids", "constraint"],
+          "properties": {
+            "route": {"$ref": "#/$defs/nonEmpty"},
+            "policy_status": {"enum": ["explicitly_allowed", "conditionally_allowed", "not_resolved", "not_applicable"]},
+            "source_ids": {"type": "array", "items": {"type": "string"}},
+            "constraint": {"$ref": "#/$defs/nullableString"}
+          }
+        }},
+        "review_model": {
+          "type": "object", "additionalProperties": false, "required": ["model", "decision_owner", "vote_rule", "revision_model"],
+          "properties": {
+            "model": {"$ref": "#/$defs/nullableString"},
+            "decision_owner": {"$ref": "#/$defs/nullableString"},
+            "vote_rule": {"$ref": "#/$defs/nullableString"},
+            "revision_model": {"$ref": "#/$defs/nullableString"}
+          }
+        },
+        "ai_confidentiality_policy": {
+          "type": "object", "additionalProperties": false, "required": ["author_ai_use", "reviewer_ai_use", "confidentiality", "source_ids", "live_check_required"],
+          "properties": {
+            "author_ai_use": {"$ref": "#/$defs/checkStatus"},
+            "reviewer_ai_use": {"$ref": "#/$defs/checkStatus"},
+            "confidentiality": {"$ref": "#/$defs/checkStatus"},
+            "source_ids": {"type": "array", "items": {"type": "string"}},
+            "live_check_required": {"type": "boolean"}
+          }
+        },
+        "acceptance_state": {
+          "type": "object", "additionalProperties": false, "required": ["criteria_evaluation", "actual_journal_decision", "is_simulation_only"],
+          "properties": {
+            "criteria_evaluation": {"enum": ["contract_criteria_satisfied", "scientific_gates_not_met", "target_objective_not_met", "not_evaluated"]},
+            "actual_journal_decision": {"$ref": "#/$defs/nullableString"},
+            "is_simulation_only": {"type": "boolean"}
+          }
+        },
+        "resolution_certification": {
+          "type": "object", "additionalProperties": false, "required": ["level", "tuple_verified", "does_not_certify"],
+          "properties": {
+            "level": {"enum": ["live_official", "maintained_snapshot", "fallback_not_exact", "unresolved"]},
+            "tuple_verified": {"type": "boolean"},
+            "does_not_certify": {"$ref": "#/$defs/stringArray"}
+          }
+        },
+        "journal_certification_layer": {
+          "type": "object", "additionalProperties": false, "required": ["separate_from_acceptance", "schemes", "awarded_or_eligible"],
+          "properties": {
+            "separate_from_acceptance": {"type": "boolean"},
+            "schemes": {"type": "array", "items": {"type": "string"}},
+            "awarded_or_eligible": {"type": "array", "items": {"type": "string"}}
+          }
+        },
+        "reporting_items_status": {"$ref": "#/$defs/checkStatus"},
+        "mechanics_status": {"$ref": "#/$defs/checkStatus"},
+        "package_status": {"$ref": "#/$defs/checkStatus"},
+        "readiness": {"$ref": "#/$defs/checkStatus"},
+        "unresolved_items": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "release": {
+      "type": "object", "additionalProperties": false,
+      "required": ["release_id", "manuscript_version_id", "artifact_ids", "assurance_report_id", "target_projection_id", "release_manifest_hash", "released_at", "status", "supersedes_release_id", "correction_or_update_reason"],
+      "properties": {
+        "release_id": {"$ref": "#/$defs/nullableString"},
+        "manuscript_version_id": {"$ref": "#/$defs/prefix/manuscript"},
+        "artifact_ids": {"type": "array", "items": {"type": "string"}},
+        "assurance_report_id": {"$ref": "#/$defs/nullableString"},
+        "target_projection_id": {"$ref": "#/$defs/nullableString"},
+        "release_manifest_hash": {"$ref": "#/$defs/nullableString"},
+        "released_at": {"$ref": "#/$defs/nullableTemplateDateTime"},
+        "status": {"$ref": "#/$defs/checkStatus"},
+        "supersedes_release_id": {"$ref": "#/$defs/nullableString"},
+        "correction_or_update_reason": {"$ref": "#/$defs/nullableString"}
+      }
+    }
+  }
+}

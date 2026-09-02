@@ -1,5 +1,5 @@
 name: nature-shared
-version: 2.9.1
+version: 2.10.0
 description: >
   Declarative manifest for shared academic-paper reference modules. This package
   is not a standalone workflow; installed skills load exact shared core,
@@ -92,6 +92,8 @@ research:
       path: research/data-integrity-stewardship-evidence-ledger-2026-08.md
     - condition: the statistical, methodological, reporting, or policy basis behind an inference/uncertainty adapter, automatic blocker, repair boundary, exact-analysis obligation, or certification exclusion must be inspected
       path: research/statistical-inference-uncertainty-evidence-ledger-2026-08.md
+    - condition: the absence evidence, interface survey, or design decisions behind the executable project-state enforcement spine (structural schema, hash-chained event ledger, chained verifier runner, invalid-mutation corpus) must be inspected
+      path: research/project-state-execution-spine-evidence-ledger-2026-09-02.md
 
 journal_formats:
   on_demand:
@@ -140,3 +142,8 @@ quality_tools:
   statistical_inference_schema: analysis-contracts/statistical-inference-uncertainty-contract.schema.json
   statistical_inference_adapters: analysis-contracts/maintained-analysis-adapters.json
   statistical_inference_purpose: return applicable obligations rather than a universal best method, then fail closed on recorded unit/dependence, plan/execution, uncertainty, inference-boundary, cross-surface, policy-date, and receipt contradictions
+  project_state_schema: project-contracts/academic-paper-project-state.schema.json
+  project_state_validator_script: scripts/validate_project_state.py
+  project_state_ledger_script: scripts/project_state_ledger.py
+  project_state_runner_script: scripts/run_project_state_verifiers.py
+  project_state_purpose: structurally validate an academic-paper project state against its executable schema, maintain a tamper-evident hash-chained event ledger beside it, and run the registered verifier chain (schema, placeholder census, id integrity, ledger, stage-gated consistency and release-manifest checks) with PASS/FAIL/SKIPPED/CANNOT_CHECK separation and distinct exit codes
