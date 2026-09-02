@@ -163,7 +163,7 @@ def test_contract_models_multiple_section_registers_without_detector_cosplay() -
         "supplementary / extended data register",
         "point form, lists, boxes and structured elements",
         "functional variation, not burstiness engineering",
-        "first person is not a humanization toggle",
+        "there is no universal `avoid first person` rule",
         "citation integration is part of style",
         "numerical and formal density follow section purpose",
         "figures and tables change the prose register",
