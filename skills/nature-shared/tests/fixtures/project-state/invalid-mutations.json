@@ -1,0 +1,125 @@
+{
+  "description": "Invalid-mutation corpus for the academic-paper project-state schema. Each mutation is applied to a fresh copy of the untouched docs template and MUST produce at least one schema error whose first-reported location is expected_pointer and whose message contains expected_fragment — proving each defect fails for the right reason. Ops: set | del. Paths are lists of dict keys / list indices into the parsed template.",
+  "template": "docs/academic-paper-project-state.template.yaml",
+  "mutations": [
+    {
+      "name": "schema_version_not_const",
+      "path": ["schema_version"],
+      "op": "set",
+      "value": "0.4.0",
+      "expected_pointer": "/schema_version",
+      "expected_fragment": "'0.5.0' was expected"
+    },
+    {
+      "name": "project_id_wrong_prefix",
+      "path": ["project", "id"],
+      "op": "set",
+      "value": "proj-123",
+      "expected_pointer": "/project/id",
+      "expected_fragment": "does not match '^project:"
+    },
+    {
+      "name": "target_stage_not_in_enum",
+      "path": ["project", "target", "stage"],
+      "op": "set",
+      "value": "ideation",
+      "expected_pointer": "/project/target/stage",
+      "expected_fragment": "'ideation' is not one of"
+    },
+    {
+      "name": "missing_required_top_level_declarations",
+      "path": ["declarations"],
+      "op": "del",
+      "expected_pointer": "/",
+      "expected_fragment": "'declarations' is a required property"
+    },
+    {
+      "name": "project_extra_property",
+      "path": ["project", "bogus_key"],
+      "op": "set",
+      "value": true,
+      "expected_pointer": "/project",
+      "expected_fragment": "Additional properties are not allowed"
+    },
+    {
+      "name": "agents_min_items",
+      "path": ["agents"],
+      "op": "set",
+      "value": [],
+      "expected_pointer": "/agents",
+      "expected_fragment": "should be non-empty"
+    },
+    {
+      "name": "research_contract_status_not_in_enum",
+      "path": ["research_contract", "status"],
+      "op": "set",
+      "value": "wip",
+      "expected_pointer": "/research_contract/status",
+      "expected_fragment": "'wip' is not one of"
+    },
+    {
+      "name": "research_contract_id_wrong_prefix",
+      "path": ["research_contract", "id"],
+      "op": "set",
+      "value": "rc-001",
+      "expected_pointer": "/research_contract/id",
+      "expected_fragment": "does not match '^contract:"
+    },
+    {
+      "name": "intended_headline_claim_wrong_prefix",
+      "path": ["research_contract", "intended_headline_claims"],
+      "op": "set",
+      "value": ["claim:c1", "headline:1"],
+      "expected_pointer": "/research_contract/intended_headline_claims/1",
+      "expected_fragment": "does not match '^claim:"
+    },
+    {
+      "name": "created_at_bad_datetime_shape",
+      "path": ["project", "created_at"],
+      "op": "set",
+      "value": "31-12-2026T10:00:00",
+      "expected_pointer": "/project/created_at",
+      "expected_fragment": "not valid under any of the given schemas"
+    },
+    {
+      "name": "policy_as_of_date_bad_date_shape",
+      "path": ["project", "target", "policy_as_of_date"],
+      "op": "set",
+      "value": "31-12-2026",
+      "expected_pointer": "/project/target/policy_as_of_date",
+      "expected_fragment": "not valid under any of the given schemas"
+    },
+    {
+      "name": "claim_id_wrong_prefix",
+      "path": ["claims", 0, "id"],
+      "op": "set",
+      "value": "c1",
+      "expected_pointer": "/claims/0/id",
+      "expected_fragment": "does not match '^claim:"
+    },
+    {
+      "name": "manuscript_location_wrong_type",
+      "path": ["manuscript", "versions", 0, "location"],
+      "op": "set",
+      "value": 123,
+      "expected_pointer": "/manuscript/versions/0/location",
+      "expected_fragment": "is not of type 'string', 'null'"
+    },
+    {
+      "name": "certification_disclaimer_flipped_false",
+      "path": ["data_integrity_contract", "certification", "does_not_certify_scientific_truth"],
+      "op": "set",
+      "value": false,
+      "expected_pointer": "/data_integrity_contract/certification/does_not_certify_scientific_truth",
+      "expected_fragment": "True was expected"
+    },
+    {
+      "name": "assurance_summary_class_out_of_pattern",
+      "path": ["assurance_profile", "summary_class"],
+      "op": "set",
+      "value": "B2",
+      "expected_pointer": "/assurance_profile/summary_class",
+      "expected_fragment": "does not match '^A[0-5]$'"
+    }
+  ]
+}
