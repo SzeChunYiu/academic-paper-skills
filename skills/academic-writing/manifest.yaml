@@ -1,16 +1,18 @@
 name: academic-writing
-version: 1.19.0
+version: 1.20.0
 description: >
   Journal-agnostic academic manuscript writing router optimized for long-running
   AI sessions. A compact execution kernel and context router are always loaded;
-  detailed scientific, section, register/style, statistics, figure, review,
-  target and release contracts are progressively disclosed only when the active
-  operation needs them. Substantial prose work can calibrate section- and
-  archetype-specific scholarly registers so one author does not collapse into a
-  uniform AI cadence. Figure work can invoke counterfactual representation
-  optimization. This preserves research-integrity and standalone-reader
-  invariants while reducing instruction competition, stale context and defensive
-  over-writing.
+  detailed scientific, section, register/style, result-state rhetoric,
+  statistics, figure, review, target and release contracts are progressively
+  disclosed only when the active operation needs them. Claim-bearing results
+  can distinguish ordinary non-significance from inconclusive evidence,
+  bounded absence/equivalence, non-inferiority, harm, heterogeneity, failed
+  hypotheses, controls, sensitivities and exploratory findings before wording.
+  Substantial prose work can also calibrate section- and archetype-specific
+  scholarly registers so one author does not collapse into a uniform AI cadence.
+  This preserves research-integrity and standalone-reader invariants while
+  reducing instruction competition, stale context and defensive over-writing.
 
 always_load:
   - ../nature-shared/core/ai-session-execution-kernel.md
@@ -46,9 +48,15 @@ references:
       script: ../nature-shared/scripts/verify_scholarly_register_profile.py
     - condition: inspect the source-specific evidence and transfer limits behind section/archetype scholarly-register guidance, including corpus studies, top-journal/editorial guidance, AI-versus-human language research and deep recent-paper reading
       path: ../nature-shared/research/top-tier-section-register-style-evidence-2026-09-02.md
+    - condition: a claim-bearing result is ordinary non-significant, inconclusive, evidence-of-absence, equivalence, non-inferiority, harmful/adverse, a failed hypothesis/replication, contradictory, heterogeneous, robustness/sensitivity evidence, a positive/negative control, unexpected/exploratory, threshold-based or a failure boundary; or title/abstract/conclusion wording may be more favorable than the primary Results evidence
+      path: ../nature-shared/core/scientific-rhetorical-act-and-result-state.md
+      schema: ../nature-shared/analysis-contracts/scientific-rhetorical-act.schema.json
+      script: ../nature-shared/scripts/verify_scientific_rhetorical_act.py
+    - condition: inspect methodological, spin/meta-research, editorial and real-paper evidence behind fine-grained result-state rhetoric and well-written-versus-poorly-written article diagnostics
+      path: ../nature-shared/research/atomic-result-rhetoric-and-writing-quality-evidence-2026-09-02.md
     - condition: whole-paper argument structure, reader-state activation, result sequencing or Discussion dependency is being designed or repaired
       path: ../nature-shared/core/manuscript-narrative-architecture.md
-    - condition: claim stance, qualification density, positive-claim visibility or defensive prose must be calibrated
+    - condition: claim stance, qualification density, headline-finding visibility or defensive prose must be calibrated
       path: ../nature-shared/core/epistemic-rhetoric-and-qualification.md
     - condition: claim-bearing numbers, significant figures, decimals, intervals, P values, exact fractions or cross-surface rounding are being rendered
       path: ../nature-shared/core/numerical-reporting-precision.md
