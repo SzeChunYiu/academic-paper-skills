@@ -1,15 +1,16 @@
 name: nature-reviewer
-version: 3.6.0
+version: 3.7.0
 description: >
   Journal-aware pre-submission editor/reviewer simulation optimized for focused
   AI review sessions. The reviewer always carries a compact execution kernel,
   context router, source-basis, decision engine and adversarial confirmation-bias
-  controls; detailed abstract, section, scholarly-register, statistics, formal,
-  target, visual and release contracts are loaded only when the review question
-  requires them. Review can distinguish a legitimate theory/Methods/clinical
-  register from generic uniform AI prose rather than rewarding superficial
-  sentence variation. Claim-bearing displays can also be challenged
-  counterfactually.
+  controls; detailed abstract, section, scholarly-register, result-state rhetoric,
+  statistics, formal, target, visual and release contracts are loaded only when
+  the review question requires them. Review can distinguish ordinary
+  non-significance from bounded absence/equivalence, detect secondary-outcome
+  rescue, harms omission, heterogeneity misinterpretation, failed-hypothesis
+  overreach and abstract/conclusion optimism drift, while also judging whether
+  section-specific prose has collapsed into a uniform AI cadence.
 
 always_load:
   - ../nature-shared/core/ai-session-execution-kernel.md
@@ -39,6 +40,12 @@ references:
       script: ../nature-shared/scripts/verify_scholarly_register_profile.py
     - condition: reviewer/editor needs evidence behind scholarly-register expectations, including cross-disciplinary genre corpora, current editorial guidance, AI-versus-human language studies and deep recent-paper observations
       path: ../nature-shared/research/top-tier-section-register-style-evidence-2026-09-02.md
+    - condition: reviewer/editor must classify a claim-bearing result as ordinary non-significant, inconclusive, evidence-of-absence/equivalence, non-inferiority, harm, failed hypothesis/replication, contradiction, heterogeneity, robustness/sensitivity, control, exploratory/post hoc, threshold result or failure boundary before evaluating its rhetoric; also use when checking secondary-outcome rescue or title/abstract/conclusion optimism drift
+      path: ../nature-shared/core/scientific-rhetorical-act-and-result-state.md
+      schema: ../nature-shared/analysis-contracts/scientific-rhetorical-act.schema.json
+      script: ../nature-shared/scripts/verify_scientific_rhetorical_act.py
+    - condition: reviewer/editor needs methodological/reporting, spin/meta-research, editorial and real-paper evidence behind result-state rhetoric and well-written-versus-poorly-written manuscript diagnostics
+      path: ../nature-shared/research/atomic-result-rhetoric-and-writing-quality-evidence-2026-09-02.md
     - condition: reviewer/editor must resolve the dominant paper archetype and judge evidence, explanation depth and display roles against that scientific promise rather than a universal paper template
       path: ../nature-shared/core/paper-archetype-atlas.md
     - condition: reviewer/editor must judge target-specific word/page/display/reference allocation or opportunity cost
@@ -49,7 +56,7 @@ references:
       path: ../nature-shared/analysis-contracts/manuscript-budget.schema.json
     - condition: reviewer/editor must judge whole-paper argument dependency, reader-state activation, Results ordering or Discussion architecture
       path: ../nature-shared/core/manuscript-narrative-architecture.md
-    - condition: reviewer/editor must judge claim stance, defensive qualification or positive-claim visibility
+    - condition: reviewer/editor must judge claim stance, defensive qualification or headline-finding visibility
       path: ../nature-shared/core/epistemic-rhetoric-and-qualification.md
     - condition: reviewer/editor must judge numerical precision, significant figures, intervals, P values or cross-surface rounding
       path: ../nature-shared/core/numerical-reporting-precision.md
