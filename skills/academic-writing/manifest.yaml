@@ -1,15 +1,16 @@
 name: academic-writing
-version: 1.18.0
+version: 1.19.0
 description: >
   Journal-agnostic academic manuscript writing router optimized for long-running
   AI sessions. A compact execution kernel and context router are always loaded;
-  detailed scientific, section, statistics, figure, review, target and release
-  contracts are progressively disclosed only when the active operation needs
-  them. Figure work can invoke counterfactual representation optimization so a
-  claim-bearing display justifies why it exists and why its visual encoding is
-  preferable to plausible alternatives. This preserves research-integrity and
-  standalone-reader invariants while reducing instruction competition, stale
-  context and defensive over-writing.
+  detailed scientific, section, register/style, statistics, figure, review,
+  target and release contracts are progressively disclosed only when the active
+  operation needs them. Substantial prose work can calibrate section- and
+  archetype-specific scholarly registers so one author does not collapse into a
+  uniform AI cadence. Figure work can invoke counterfactual representation
+  optimization. This preserves research-integrity and standalone-reader
+  invariants while reducing instruction competition, stale context and defensive
+  over-writing.
 
 always_load:
   - ../nature-shared/core/ai-session-execution-kernel.md
@@ -38,6 +39,13 @@ references:
       path: ../nature-shared/core/abstract-information-budget.md
     - condition: a title, Introduction, Related Work, formulation, Methods, Results, Discussion, limitations, Conclusion, display, formal surface, reference, supplement or availability section needs section-specific craftsmanship guidance
       path: ../nature-shared/core/manuscript-section-craftsmanship.md
+    - condition: substantial drafting, rewriting or style audit needs section- and archetype-specific scholarly register guidance for agency, stance, tense, sentence rhythm, citations, numerical/formal density, point-form use, display interaction or transitions rather than one generic humanized prose style
+      path: ../nature-shared/core/section-register-and-human-scholarly-style.md
+    - condition: a long or multi-session manuscript needs a persistent copyright-safe record of observed section writing habits from corpus evidence, target guidance and close papers without storing source sentences or phrase templates
+      path: ../nature-shared/analysis-contracts/scholarly-register-profile.schema.json
+      script: ../nature-shared/scripts/verify_scholarly_register_profile.py
+    - condition: inspect the source-specific evidence and transfer limits behind section/archetype scholarly-register guidance, including corpus studies, top-journal/editorial guidance, AI-versus-human language research and deep recent-paper reading
+      path: ../nature-shared/research/top-tier-section-register-style-evidence-2026-09-02.md
     - condition: whole-paper argument structure, reader-state activation, result sequencing or Discussion dependency is being designed or repaired
       path: ../nature-shared/core/manuscript-narrative-architecture.md
     - condition: claim stance, qualification density, positive-claim visibility or defensive prose must be calibrated

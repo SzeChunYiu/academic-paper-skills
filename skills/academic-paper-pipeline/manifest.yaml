@@ -1,15 +1,16 @@
 name: academic-paper-pipeline
-version: 1.21.0
+version: 1.22.0
 description: >
   Journal-agnostic iterative academic-paper orchestration optimized for long-
   horizon AI sessions. The pipeline keeps a compact execution kernel, stage
   router, lifecycle map, paper-existence/scientific-mass gate and ethics contract
   always active, while progressively loading detailed research, architecture,
-  drafting, audit, adversarial confirmation-bias-controlled review and release
-  rules only when their triggers apply. Claim-bearing figure work can invoke
-  counterfactual representation tournaments rather than accepting software
-  defaults or published-paper habits. Sessions persist compact checkpoints and
-  use delta-first revision instead of replaying the full work history.
+  drafting, section-specific scholarly-register, audit, adversarial
+  confirmation-bias-controlled review and release rules only when their triggers
+  apply. Claim-bearing figure work can invoke counterfactual representation
+  tournaments rather than accepting software defaults or published-paper habits.
+  Sessions persist compact checkpoints and use delta-first revision instead of
+  replaying the full work history.
 
 always_load:
   - ../nature-shared/core/ai-session-execution-kernel.md
@@ -36,6 +37,13 @@ references:
       path: ../nature-shared/core/abstract-information-budget.md
     - condition: any major manuscript surface needs section-specific reader job, failure modes and exit test
       path: ../nature-shared/core/manuscript-section-craftsmanship.md
+    - condition: substantial drafting, rewriting, cross-section style calibration or language audit needs section- and archetype-specific scholarly registers for agency, stance, tense, syntax/rhythm, citation behavior, numerical/formal density, point-form use, display interaction and handoffs rather than one uniform academic cadence
+      path: ../nature-shared/core/section-register-and-human-scholarly-style.md
+    - condition: a long multi-section project needs a persistent copyright-safe register profile recording corpus/venue/deep-paper observations without source sentence or phrase-template storage
+      path: ../nature-shared/analysis-contracts/scholarly-register-profile.schema.json
+      script: ../nature-shared/scripts/verify_scholarly_register_profile.py
+    - condition: source-specific evidence and transfer limits are needed behind section/archetype language guidance, including genre corpora, editorial rules, AI-versus-human language studies and recent top-paper close reading
+      path: ../nature-shared/research/top-tier-section-register-style-evidence-2026-09-02.md
     - condition: target venue/article type imposes finite word/page/display/reference/legend constraints or section allocation must be planned
       path: ../nature-shared/core/venue-constrained-manuscript-budget.md
     - condition: a hard word/page limit is known and the manuscript is materially under the ceiling, close to the ceiling, being compressed, or allocating remaining space among competing scientific functions

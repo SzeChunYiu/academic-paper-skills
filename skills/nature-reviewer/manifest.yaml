@@ -1,13 +1,15 @@
 name: nature-reviewer
-version: 3.5.0
+version: 3.6.0
 description: >
   Journal-aware pre-submission editor/reviewer simulation optimized for focused
   AI review sessions. The reviewer always carries a compact execution kernel,
   context router, source-basis, decision engine and adversarial confirmation-bias
-  controls; detailed abstract, section, statistics, formal, target, visual and
-  release contracts are loaded only when the review question requires them.
-  Claim-bearing displays can be challenged counterfactually: why the figure
-  exists, what it hides, and why its representation beats plausible alternatives.
+  controls; detailed abstract, section, scholarly-register, statistics, formal,
+  target, visual and release contracts are loaded only when the review question
+  requires them. Review can distinguish a legitimate theory/Methods/clinical
+  register from generic uniform AI prose rather than rewarding superficial
+  sentence variation. Claim-bearing displays can also be challenged
+  counterfactually.
 
 always_load:
   - ../nature-shared/core/ai-session-execution-kernel.md
@@ -30,6 +32,13 @@ references:
       path: ../nature-shared/core/abstract-information-budget.md
     - condition: reviewer/editor needs section-specific reader jobs, failure modes or exit tests
       path: ../nature-shared/core/manuscript-section-craftsmanship.md
+    - condition: reviewer/editor must judge whether Abstract, theory/formulation, Methods, Results, Discussion, captions/tables and support material use section- and archetype-appropriate scholarly registers while preserving one authorial identity instead of a uniform AI cadence
+      path: ../nature-shared/core/section-register-and-human-scholarly-style.md
+    - condition: reviewer/editor needs a machine-checkable persistent register-calibration record and must verify evidence-layer coverage, section differentiation, copyright-safe abstraction or unresolved style-transfer decisions
+      path: ../nature-shared/analysis-contracts/scholarly-register-profile.schema.json
+      script: ../nature-shared/scripts/verify_scholarly_register_profile.py
+    - condition: reviewer/editor needs evidence behind scholarly-register expectations, including cross-disciplinary genre corpora, current editorial guidance, AI-versus-human language studies and deep recent-paper observations
+      path: ../nature-shared/research/top-tier-section-register-style-evidence-2026-09-02.md
     - condition: reviewer/editor must resolve the dominant paper archetype and judge evidence, explanation depth and display roles against that scientific promise rather than a universal paper template
       path: ../nature-shared/core/paper-archetype-atlas.md
     - condition: reviewer/editor must judge target-specific word/page/display/reference allocation or opportunity cost
