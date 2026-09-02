@@ -1,16 +1,17 @@
 name: academic-paper-pipeline
-version: 1.22.0
+version: 1.23.0
 description: >
   Journal-agnostic iterative academic-paper orchestration optimized for long-
   horizon AI sessions. The pipeline keeps a compact execution kernel, stage
   router, lifecycle map, paper-existence/scientific-mass gate and ethics contract
   always active, while progressively loading detailed research, architecture,
-  drafting, section-specific scholarly-register, audit, adversarial
-  confirmation-bias-controlled review and release rules only when their triggers
-  apply. Claim-bearing figure work can invoke counterfactual representation
-  tournaments rather than accepting software defaults or published-paper habits.
-  Sessions persist compact checkpoints and use delta-first revision instead of
-  replaying the full work history.
+  drafting, section-specific scholarly-register, fine-grained result-state
+  rhetoric, audit, adversarial confirmation-bias-controlled review and release
+  rules only when their triggers apply. Claim-bearing results can distinguish
+  ordinary non-significance, inconclusive evidence, bounded absence/equivalence,
+  harms, heterogeneity, failed hypotheses, controls and exploratory findings
+  before manuscript wording. Sessions persist compact checkpoints and use
+  delta-first revision instead of replaying the full work history.
 
 always_load:
   - ../nature-shared/core/ai-session-execution-kernel.md
@@ -44,13 +45,19 @@ references:
       script: ../nature-shared/scripts/verify_scholarly_register_profile.py
     - condition: source-specific evidence and transfer limits are needed behind section/archetype language guidance, including genre corpora, editorial rules, AI-versus-human language studies and recent top-paper close reading
       path: ../nature-shared/research/top-tier-section-register-style-evidence-2026-09-02.md
+    - condition: a claim-bearing result is ordinary non-significant, inconclusive, evidence-of-absence, equivalence, non-inferiority, harmful/adverse, a failed hypothesis/replication, contradictory, heterogeneous, robustness/sensitivity evidence, a positive/negative control, unexpected/exploratory, threshold-based or a failure boundary; or abstract/title/conclusion may be more favorable than the primary Results evidence
+      path: ../nature-shared/core/scientific-rhetorical-act-and-result-state.md
+      schema: ../nature-shared/analysis-contracts/scientific-rhetorical-act.schema.json
+      script: ../nature-shared/scripts/verify_scientific_rhetorical_act.py
+    - condition: methodological/reporting, spin/meta-research, editorial and real-paper evidence is needed behind fine-grained result-state rhetoric and well-written-versus-poorly-written article diagnostics
+      path: ../nature-shared/research/atomic-result-rhetoric-and-writing-quality-evidence-2026-09-02.md
     - condition: target venue/article type imposes finite word/page/display/reference/legend constraints or section allocation must be planned
       path: ../nature-shared/core/venue-constrained-manuscript-budget.md
     - condition: a hard word/page limit is known and the manuscript is materially under the ceiling, close to the ceiling, being compressed, or allocating remaining space among competing scientific functions
       path: ../nature-shared/core/manuscript-budget-utilization.md
     - condition: whole-paper question/answer/evidence progression, reader-state activation or Discussion architecture must be designed or repaired
       path: ../nature-shared/core/manuscript-narrative-architecture.md
-    - condition: claim stance, qualification density or positive-claim visibility requires calibration
+    - condition: claim stance, qualification density or headline-finding visibility requires calibration
       path: ../nature-shared/core/epistemic-rhetoric-and-qualification.md
     - condition: claim-bearing numbers or cross-surface numerical precision must be rendered consistently
       path: ../nature-shared/core/numerical-reporting-precision.md

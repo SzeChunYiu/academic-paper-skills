@@ -19,13 +19,14 @@ Core rule:
 3. **The paper is standalone.** Assume a qualified reader has no access to the project repository, prior papers in a series, internal ontology, hidden conversation, claim ledger, run IDs, or author explanation.
 4. **Reader-facing science is not project-management language.** Internal IDs, terminals, code/status vocabulary, version chronology, claim-subtraction machinery, file paths, and receipts stay private unless the paper independently defines and scientifically needs them.
 5. **Scientific identity is preserved.** Compression must not erase contribution-defining formal objects, assumptions, non-implications, evidence, or claim-changing boundaries.
-6. **No unsupported certainty and no self-erasing defensiveness.** State the strongest warranted positive result clearly, then the minimum boundary needed to prevent a concrete overreading.
+6. **No unsupported certainty and no self-erasing defensiveness.** State the strongest warranted finding clearly, then the minimum boundary needed to prevent a concrete overreading.
 7. **Target rules are resolved, not guessed.** When a venue/article type matters, verify current official requirements before treating them as binding.
 8. **Publication space is finite.** Allocate scarce words/pages/displays to reader prerequisites, decisive evidence, and interpretation before secondary positioning, provenance detail, or optional enrichment.
 9. **Every retained manuscript element must earn its place.** Be able to state why each section and paragraph exists; escalate to sentence/clause/citation/equation/display-level justification when the element is central, surprising, redundant, space-expensive, claim-bearing, or hard to follow. Ask why it is here, what it contributes, what later reasoning depends on it, and what would break if it were removed or represented differently. Load `manuscript-element-justification.md` for substantial architecture, composition, revision, or review.
 10. **One author, multiple scholarly registers.** Abstract, theory/formulation, Methods, Results, Discussion, captions/tables and support material should realize their different reader jobs rather than inherit one uniformly polished AI cadence. Preserve manuscript-level author identity while allowing section- and archetype-appropriate agency, stance, syntax, density, lists and display interaction. Load `section-register-and-human-scholarly-style.md` for substantial drafting, rewriting or style review.
-11. **Review is adversarial, not confirmatory.** A polished manuscript, prior positive review, or many completed revisions never counts as evidence that the paper is correct or publication-ready.
-12. **Release is different from drafting.** Full integrity, cross-section, typography, rendering, package, and citation checks happen before release; they should not all occupy drafting context continuously.
+11. **Evidence state before result rhetoric.** Do not write claim-bearing results from `positive`, `negative`, `null`, or significance-threshold labels alone. Distinguish directional support, ordinary non-significance, inconclusive evidence, bounded absence/equivalence, non-inferiority, harm, heterogeneity, failed hypotheses/replications, controls, sensitivity changes, exploratory findings, contradictions and boundaries before choosing wording. Load `scientific-rhetorical-act-and-result-state.md` when the evidence state can change the claim.
+12. **Review is adversarial, not confirmatory.** A polished manuscript, prior positive review, or many completed revisions never counts as evidence that the paper is correct or publication-ready.
+13. **Release is different from drafting.** Full integrity, cross-section, typography, rendering, package, and citation checks happen before release; they should not all occupy drafting context continuously.
 
 ## 2. Instruction precedence
 
@@ -114,6 +115,7 @@ Examples:
 - editing an abstract does need the abstract-information contract;
 - substantial paragraph/section drafting or revision needs the element-justification contract, while ordinary fluent clauses do not need a separate ledger unless risk escalates;
 - substantial section-specific language realization needs the scholarly-register contract, while a tiny copy edit does not need a full corpus calibration profile;
+- ordinary descriptive Results prose may not need a result-state ledger, but null/inconclusive/equivalence/non-inferiority/harm/heterogeneity/failed/exploratory/claim-changing sensitivity results do;
 - a paper without quantitative inference does not need the full statistical contract in drafting context;
 - final submission does need the complete release and integrity bundle.
 
@@ -223,6 +225,7 @@ Run a whole-paper pass only when it answers a global question such as:
 - are terms activated before first use?
 - does every section and paragraph perform a necessary manuscript function?
 - do the active sections use appropriately different scholarly registers while still sounding like one author?
+- do headline result statements preserve the same evidence state across abstract, Results, displays, Discussion and conclusion?
 - are sections proportioned correctly?
 - do numbers/claims agree across abstract, Results, figures, and Discussion?
 - does the paper remain standalone?
@@ -246,7 +249,7 @@ A session stops or changes mode when:
 - the current output passes its exit test;
 - the next step requires unavailable evidence/data;
 - a hard target rule is unresolved;
-- continued polishing no longer changes comprehension, correctness, target fit, evidence communication, element justification, or section-appropriate scholarly realization;
+- continued polishing no longer changes comprehension, correctness, target fit, evidence communication, element justification, result-state fidelity, or section-appropriate scholarly realization;
 - a local repair would require changing a frozen scientific claim/evidence relation;
 - context has accumulated stale history and should be compacted into a checkpoint.
 

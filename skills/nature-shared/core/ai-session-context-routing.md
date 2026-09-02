@@ -49,7 +49,7 @@ Do not load sentence-level polishing, release packaging, or full reviewer rules 
 
 ### RESEARCH bundle
 
-Use when finding/validating external scientific evidence, literature position, novelty boundaries, venue/reporting norms, or section-register evidence.
+Use when finding/validating external scientific evidence, literature position, novelty boundaries, venue/reporting norms, section-register evidence, or result-reporting evidence.
 
 Load as applicable:
 
@@ -58,10 +58,11 @@ Load as applicable:
 - `atomic-claim-verification.md` for claim-level support decisions
 - `analogue-paper-calibration.md` for close-paper structure/evidence/register calibration
 - `top-tier-section-register-style-evidence-2026-09-02.md` only when language/register research is the active question
+- `atomic-result-rhetoric-and-writing-quality-evidence-2026-09-02.md` only when fine-grained result-state rhetoric, spin, null/adverse reporting, or well-vs-poor writing evidence is the active question
 - `unknown-paper-research-protocol.md` for uncovered genres
 - target/reporting-standard references only when they affect the active research question
 
-Return structured source/evidence cards or register observations rather than raw search dumps. Never carry source-sentence banks into COMPOSE.
+Return structured source/evidence cards, result-state observations, or register observations rather than raw search dumps. Never carry source-sentence banks into COMPOSE.
 
 Do not carry the entire search corpus into COMPOSE.
 
@@ -80,6 +81,7 @@ Load as applicable:
 - `venue-constrained-manuscript-budget.md` when target/length is known
 - `formal-spine-preservation.md` when the contribution has formal content
 - `section-register-and-human-scholarly-style.md` when section/archetype language behavior must be planned before drafting
+- `scientific-rhetorical-act-and-result-state.md` when the argument contains claim-changing null/inconclusive/equivalence/non-inferiority/harm/heterogeneity/failed/contradictory/sensitivity/exploratory results whose exact state affects sequencing or headline claims
 - `figure-evidence-planning.md` / `scientific-display-decision-contract.md` when displays are part of the evidence architecture
 
 Produce/freeze:
@@ -88,6 +90,7 @@ Produce/freeze:
 - section-function map;
 - hierarchical element-justification map at least through the paragraph level for substantial manuscript architecture;
 - reader-state activation map;
+- result-state map for headline/claim-changing findings when needed;
 - section-register plan when language variation is material;
 - main-versus-support allocation;
 - target budget snapshot if applicable.
@@ -109,6 +112,7 @@ Load only relevant detailed contracts, for example:
 - `abstract-information-budget.md` for abstract;
 - `manuscript-section-craftsmanship.md` for the active section;
 - `section-register-and-human-scholarly-style.md` for substantial section-specific prose realization, especially when Abstract, theory/formulation, Methods, Results, Discussion, captions/tables or support material should not share one generic cadence;
+- `scientific-rhetorical-act-and-result-state.md` before wording a claim-bearing ordinary non-significant, inconclusive, evidence-of-absence, equivalence, non-inferiority, harm, failed-hypothesis/replication, contradiction, heterogeneity, robustness/sensitivity, control, exploratory, threshold, or failure-boundary result;
 - `manuscript-element-justification.md` for substantial paragraph drafting or whenever a paragraph/sentence/citation/equation/display must justify its necessity, placement, representation, or opportunity cost;
 - `sentence-logic-and-cohesion.md` only when local flow is difficult;
 - `natural-scholarly-prose.md` / `author-voice-profile.md` during prose realization after scientific logic is fixed;
@@ -117,7 +121,7 @@ Load only relevant detailed contracts, for example:
 - `formal-spine-preservation.md` when composing formal contribution text;
 - statistics/reporting/figure contracts only when the section actually uses them.
 
-Do **not** preload the full style evidence ledger, every analogue paper, full reviewer, acceptance-optimization, release-integrity, or package-verification contracts during ordinary prose generation.
+Do **not** preload the full style/result-rhetoric evidence ledgers, every analogue paper, full reviewer, acceptance-optimization, release-integrity, or package-verification contracts during ordinary prose generation.
 
 ### AUDIT bundle
 
@@ -127,6 +131,7 @@ Load the contract(s) corresponding to the question being audited, plus the small
 
 Examples:
 
+- result-state/claim mismatch, null-as-absence, secondary rescue, heterogeneity rhetoric, harms omission or optimism drift -> `scientific-rhetorical-act-and-result-state.md` + its schema/verifier when machine-checkable review is useful;
 - element necessity/placement/redundancy -> `manuscript-element-justification.md` + its ledger/verifier when a machine-checkable audit is useful;
 - section-register flattening/monotone prose -> `section-register-and-human-scholarly-style.md` + scholarly-register profile/verifier when persistent calibration is useful;
 - abstract density -> `abstract-information-budget.md` + `audit_abstract_information.py`;
@@ -148,11 +153,12 @@ Load:
 - concern IDs and resolution tests;
 - changed evidence/results;
 - local section craftsmanship/narrative contract;
+- `scientific-rhetorical-act-and-result-state.md` when the concern changes result polarity/state, primary/secondary/exploratory hierarchy, absence/equivalence wording, harms, heterogeneity, failed-result interpretation, sensitivity scope, or cross-surface optimism;
 - `section-register-and-human-scholarly-style.md` when the concern is generic/monotone prose, wrong local register, inappropriate agency/stance/list use, or cross-section flattening;
 - `manuscript-element-justification.md` when adding, deleting, moving, merging, compressing, or replacing manuscript material;
 - any scientific contract directly implicated by the concern.
 
-Avoid loading unrelated closed concerns, the full style corpus, and full historical reviewer prose.
+Avoid loading unrelated closed concerns, the full style/result corpus, and full historical reviewer prose.
 
 After repair, update the checkpoint and revision delta.
 
@@ -168,6 +174,7 @@ Load:
 - `paper-archetype-atlas.md` so evidence, explanation and display expectations are judged against the actual paper class;
 - `standalone-manuscript-reader-contract.md` for zero-context reader judgment;
 - `manuscript-section-craftsmanship.md` when section-function quality is in scope;
+- `scientific-rhetorical-act-and-result-state.md` when review must distinguish ordinary null from absence/equivalence, detect secondary-outcome rescue, check harms/failed hypotheses/heterogeneity/sensitivity rhetoric, or compare abstract/conclusion tone to Results;
 - `section-register-and-human-scholarly-style.md` when review includes whether the manuscript sounds uniformly generated or whether each section realizes its correct intellectual register;
 - `manuscript-element-justification.md` for paragraph-level necessity and targeted sentence/citation/equation/display deletion challenges;
 - target decision contract/publication model;
@@ -184,6 +191,7 @@ Load all applicable final gates, including:
 
 - `manuscript-excellence-release-gate.md`;
 - `manuscript-element-justification.md` with at least full paragraph-level coverage and targeted sentence-level escalation for risky/central passages;
+- `scientific-rhetorical-act-and-result-state.md` for final headline result-state and optimism-drift checks when the paper contains quantitative/null/adverse/failed/heterogeneous/exploratory claim-bearing results;
 - `section-register-and-human-scholarly-style.md` for a final cross-section register/author-identity pass when substantial AI rewriting occurred;
 - `atomic-claim-verification.md`;
 - `research-integrity-verification.md`;
@@ -197,6 +205,21 @@ Load all applicable final gates, including:
 This is intentionally the widest context mode.
 
 ## 3. Task-specific bundles
+
+### RESULT RHETORIC task
+
+Trigger when a claim-bearing result is ordinary non-significant, inconclusive, evidence-of-absence, equivalence, non-inferiority, harmful/adverse, a failed hypothesis/replication, contradictory, heterogeneous, robustness/sensitivity evidence, a positive/negative control, unexpected/exploratory, threshold-based, or a failure boundary; also trigger when title/abstract/conclusion may be more favorable than the primary Results evidence.
+
+Load:
+
+- `scientific-rhetorical-act-and-result-state.md`
+- `statistical-inference-uncertainty-contract.md` when the result is quantitative/inferential
+- `epistemic-rhetoric-and-qualification.md`
+- `scientific-rhetorical-act.schema.json` + `verify_scientific_rhetorical_act.py` for risky/final result-state records
+- exact reporting standard/target rules when they govern the state
+- `atomic-result-rhetoric-and-writing-quality-evidence-2026-09-02.md` only when evidence/transfer limits need inspection
+
+Do not infer absence, equivalence, heterogeneity, or confirmatory success from wording preferences. The underlying analysis state controls the prose.
 
 ### ELEMENT JUSTIFICATION task
 
@@ -244,6 +267,7 @@ Trigger when claim-bearing numerical/statistical inference is being designed, re
 Load:
 
 - `statistical-inference-uncertainty-contract.md`
+- `scientific-rhetorical-act-and-result-state.md` when inferential state affects prose/claiming
 - `numerical-reporting-precision.md`
 - relevant reporting guideline/target requirements
 
@@ -293,13 +317,14 @@ Keep:
 - verified source/evidence cards;
 - unresolved novelty boundary;
 - target constraints;
+- compact result-state decisions when reporting semantics were the research objective;
 - compact register observations when language calibration was the research objective.
 
 Evict:
 
 - raw search results;
 - duplicate abstracts;
-- source prose/full-text excerpts used only for style observation;
+- source prose/full-text excerpts used only for style/result-rhetoric observation;
 - search-query history;
 - irrelevant source metadata.
 
@@ -313,7 +338,7 @@ Keep:
 
 - must-address concern IDs;
 - exact resolution tests;
-- affected claim/evidence references;
+- affected claim/evidence/result-state references;
 - editor decision conditions;
 - affected register observation if a style concern remains live.
 
@@ -322,7 +347,7 @@ Evict:
 - reviewer prose that does not affect a live concern;
 - resolved concerns;
 - redundant reviewer agreement;
-- unrelated style examples.
+- unrelated style/result examples.
 
 ## 5. Full manuscript policy
 
@@ -332,6 +357,7 @@ The full manuscript is justified for:
 - clean-reader self-containment review;
 - paragraph-level element-justification coverage;
 - cross-section register/author-identity review;
+- headline result-state consistency and optimism-drift review;
 - terminology/number/claim consistency;
 - global section allocation;
 - editor/reviewer simulation;
@@ -343,7 +369,7 @@ For local drafting/revision, prefer:
 active section
 + preceding/following handoff
 + relevant abstract/introduction claim if needed
-+ active evidence cards
++ active evidence cards/result-state row
 + current terminology state
 + active section-register observation when useful
 ```
@@ -356,7 +382,7 @@ Before a substantial model step, ask:
 
 1. Does every included item affect the current decision?
 2. Is a missing item capable of changing correctness or scientific interpretation?
-3. Is any long source/review/history/style-example block replaceable by a structured card, register observation, or checkpoint row?
+3. Is any long source/review/history/style-example block replaceable by a structured card, result-state row, register observation, or checkpoint row?
 4. Are duplicate instructions stated in more than one loaded contract?
 5. Is the session attempting more than one primary operation?
 6. Can deterministic work be moved to a script/validator first?
@@ -371,10 +397,11 @@ When starting a new AI session on an existing paper:
 1. load the compact checkpoint;
 2. load the current manuscript version or only the active section according to mode;
 3. load relevant claim/evidence/source rows;
-4. load the stage bundle;
-5. load a compact scholarly-register profile only when the active writing/review depends on it;
-6. verify unresolved blockers and next action;
-7. continue from the checkpoint rather than reconstructing project history from memory.
+4. load live result-state records for claim-changing findings when needed;
+5. load the stage bundle;
+6. load a compact scholarly-register profile only when the active writing/review depends on it;
+7. verify unresolved blockers and next action;
+8. continue from the checkpoint rather than reconstructing project history from memory.
 
 If the checkpoint conflicts with the current manuscript/evidence artifacts, the artifacts win and the checkpoint is refreshed.
 
@@ -383,10 +410,11 @@ If the checkpoint conflicts with the current manuscript/evidence artifacts, the 
 Do not turn context routing into a bureaucracy that costs more than it saves.
 
 - Short one-off edits can use a minimal local packet without creating every ledger.
-- Machine-checkable checkpoints, element ledgers and scholarly-register profiles are most useful for long, multi-session, multi-review manuscripts and final cross-section audits.
+- Machine-checkable checkpoints, element ledgers, result-state records and scholarly-register profiles are most useful for long, multi-session, multi-review manuscripts and final cross-section audits.
+- Do not create a result-state record for every ordinary descriptive sentence; use it for claim-bearing or epistemically risky states.
 - Do not create a new bundle for every minor prose issue.
 - Do not load a contract solely because its name sounds related; use its trigger.
 - The universal element-justification invariant does **not** require a clause-level ledger for ordinary fluent prose; audit depth is proportional to risk.
 - The one-author/multiple-register invariant does **not** require corpus research before every paragraph; use the maintained contract and retrieve deeper evidence only when the genre/target is uncertain or style calibration materially matters.
 
-The optimization target is **scientific correctness and reader effectiveness per unit of active context and session effort**, not minimum token count or maximum style variation in isolation.
+The optimization target is **scientific correctness and reader effectiveness per unit of active context and session effort**, not minimum token count, maximum style variation, or maximum ledger density in isolation.
