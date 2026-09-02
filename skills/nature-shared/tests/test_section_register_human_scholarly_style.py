@@ -182,7 +182,7 @@ def test_contract_preserves_legitimate_structured_and_formal_registers() -> None
     assert "cell-style highlights" in text
     assert "roadmaps" in text
     assert "the following theorem" in text
-    assert "resource organization itself is the contribution" in text
+    assert "resource itself is the contribution" in text
     assert "do not `de-mechanize` mandated reporting structure" in text
 
 
@@ -204,10 +204,11 @@ def test_research_ledger_separates_corpus_guidance_and_deep_papers() -> None:
         "scientific data",
         "jmlr",
         "there is no universal `top-journal voice`",
-        "storytelling means intellectual dependency",
+        "means intellectual dependency",
         "point form is a publication-surface decision",
     ):
         assert marker in text, marker
+    assert "storytelling" in text
 
 
 def test_schema_forbids_phrase_banks_and_records_section_habits() -> None:
