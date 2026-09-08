@@ -1,5 +1,5 @@
 name: academic-paper-pipeline
-version: 1.23.0
+version: 1.24.0
 description: >
   Journal-agnostic iterative academic-paper orchestration optimized for long-
   horizon AI sessions. The pipeline keeps a compact execution kernel, stage
@@ -26,6 +26,16 @@ references:
       path: ../nature-shared/analysis-contracts/paper-existence-scientific-mass.schema.json
     - condition: a paper-existence ledger must be checked for unsupported surviving claims, incomplete hostile review, effective-N inflation, validity/integrity substitution, sibling fragmentation or evidence-acquisition stop rules
       path: ../nature-shared/scripts/verify_paper_existence_scientific_mass.py
+    - condition: any publication route includes a preprint deposit, or a repository/primary category/cross-list must be resolved; the repository is a moderated venue whose content-type refusal can remove the preprint route for the life of the manuscript
+      path: ../nature-shared/core/preprint-repository-admissibility.md
+    - condition: a manuscript is bound for a preprint repository and its content type must be read from what the body displays rather than from what the title and abstract call it
+      path: ../nature-shared/scripts/detect_manuscript_content_type.py
+    - condition: a preprint deposit must be checked against the target repository's content-type and category admissibility rules before a package is built
+      path: ../nature-shared/scripts/verify_preprint_admissibility.py
+    - condition: the current admissibility ruleset, source-cited and time-versioned, is needed to evaluate an arXiv deposit
+      path: ../nature-shared/preprint-repositories/arxiv-admissibility-rules.json
+    - condition: a finished manuscript must be swept for hard artifacts before deposit or submission, including missing reference apparatus, dangling citation keys, assistant-voice residue, unresolved placeholders and broken cross-references
+      path: ../nature-shared/scripts/audit_deposit_integrity.py
     - condition: long-running, multi-session or multi-review work needs a compact resumable state with one primary operation, active scope, blockers, required contracts, next action and stop condition
       path: ../nature-shared/analysis-contracts/ai-session-checkpoint.schema.json
     - condition: a saved session checkpoint should be validated before resume, handoff or release

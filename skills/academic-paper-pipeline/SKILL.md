@@ -45,6 +45,8 @@ The core lifecycle is defined by:
 - `../nature-shared/core/scientific-display-decision-contract.md`;
 - `../nature-shared/core/manuscript-surface-qa.md`.
 
+Load `../nature-shared/core/preprint-repository-admissibility.md` as soon as a route includes a preprint deposit, or a repository, primary category or cross-list is being resolved. It is not in `always_load` because the working set is kept small, but it is **not optional**: skipping it is how a content-type refusal reaches a moderator unexamined.
+
 ## Canonical role map
 
 Use the installed specialist capabilities as roles in one pipeline:
@@ -178,6 +180,33 @@ Stage 2 publication conditions
 Do not call a Registered Report a shortcut or guarantee. It is a different review architecture that can move methodological peer review before results and, at eligible venues, make final publication less dependent on outcome direction when the approved protocol is followed.
 
 If result/outcome access already makes Stage 1 ineligible, record that fact and continue with the appropriate route rather than backdating prospective status.
+
+## Preprint deposit admissibility gate
+
+A preprint repository is a moderated venue with its own admissibility contract, not a file host. Resolve it with the same seriousness as a journal route, and resolve it **before** a package is built.
+
+Contract: `../nature-shared/core/preprint-repository-admissibility.md` (always loaded).
+
+Repositories refuse manuscripts on **content type** and **category**, independently of quality. Where a repository admits a restricted type only with completed peer review, a refusal typically forbids resubmission and allows an appeal only after peer review elsewhere — so one mislabelled deposit can remove the preprint route for the life of the manuscript.
+
+Run before packaging:
+
+```text
+detect_manuscript_content_type.py    read what the body displays
+verify_preprint_admissibility.py     apply the repository ruleset   0 pass / 1 block / 2 cannot evaluate
+audit_deposit_integrity.py           hard artifacts                 0 clean / 1 errors / 2 cannot audit
+```
+
+Hard rules:
+
+- **Exit 2 is not a pass.** A deposit the gate could not assess is never recorded as assessed and cleared.
+- **A restriction fires on evidence that a manuscript IS a review or position piece**, never on its failure to prove it is not. Terse theory papers and papers with descriptively named results sections are ordinary research.
+- **Where a declared label overstates the content, relabelling is not an available remedy.** The manuscript gains primary research, or the route changes.
+- **Cross-lists are in scope.** A non-restricted primary plus a cross-list into a restricted archive does not escape that archive's practice.
+- **Disclosure of AI assistance is never edited to reduce its visibility.** It is required, it stays, and no gate here rewards saying less than the truth. Divergence from a project's own settled wording is a consistency finding, nothing more.
+- **No check is keyed to a machine-text detector score.** Target writing quality and factual integrity instead; published detectors carry high false-positive rates against non-native English writers.
+
+Rulesets are data, carry their source and operative quotation, and expire. A ruleset past its staleness horizon causes a refusal to certify rather than silent application of superseded policy. An archive with no rule recorded is an open question, not clearance.
 
 ## Fit-first target ladder
 
