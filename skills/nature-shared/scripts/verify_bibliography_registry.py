@@ -1,0 +1,135 @@
+#!/usr/bin/env python3
+"""Verify a bibliography field by field against the DOI registry.
+
+A fabricated or misattributed reference is among the most damaging things a
+manuscript can carry. It is treated as a fatal integrity finding by editors, it
+survives every check that only asks whether a bibliography exists, and it is
+easy to introduce without meaning to: from recall, from a plausible-looking
+suggestion, or by carrying an entry across from a different manuscript because
+the topic looked close.
+
+This verifier answers one question per entry: **does the record this entry
+claims actually exist, and does it say what the entry says it says?**
+
+Two design commitments make it worth running.
+
+*It reads the file that will ship.* Not a list of candidates kept beside it, not
+the notes a reference was chosen from. What can be wrong is what was typed into
+the .bib, so that is what is checked.
+
+*It never silently passes an entry it could not check.* An entry with no DOI is
+reported separately as requiring a named non-registry basis, and an entry whose
+`note` does not record one is called out as unacceptable rather than tolerated.
+Some venues genuinely do not register DOIs, so absence of a DOI is not an error;
+absence of any verification is.
+
+Year comparison allows one specific benign disagreement: a registry record
+deposited years after publication carries the deposit date, so a mismatch is
+only reported when the venue name does not itself carry the year the entry
+claims. Without that allowance every older conference paper reads as wrong.
+
+Exit codes
+    0  every entry with a DOI verified
+    1  at least one entry disagrees with its registered record
+    2  the bibliography could not be read
+"""
+from __future__ import annotations
+
+import json
+import re
+import sys
+import time
+import urllib.parse
+import urllib.request
+
+UA = "orion-citation-verify/1.0 (mailto:sze-chun.yiu@fysik.su.se)"
+ENTRY = re.compile(r"@(\w+)\s*\{\s*([^,]+),(.*?)\n\}", re.S)
+FIELD = re.compile(r"(\w+)\s*=\s*[{\"](.+?)[}\"]\s*,?\s*\n", re.S)
+
+
+def norm(s):
+    s = re.sub(r"[{}\\]", "", s)
+    return re.sub(r"[^a-z0-9 ]", " ", s.lower())
+
+
+def squash(s):
+    return re.sub(r"\s+", " ", s).strip()
+
+
+def fetch(doi):
+    url = "https://api.crossref.org/works/" + urllib.parse.quote(doi)
+    req = urllib.request.Request(url, headers={"User-Agent": UA})
+    with urllib.request.urlopen(req, timeout=30) as r:
+        return json.load(r)["message"]
+
+
+def main(path):
+    try:
+        text = open(path, encoding="utf-8").read()
+    except OSError as e:
+        print("cannot read: %s" % e)
+        return 2
+
+    rows, bad, nodoi = [], [], []
+    for _kind, key, body in ENTRY.findall(text):
+        f = {k.lower(): squash(v) for k, v in FIELD.findall(body + "\n")}
+        key = key.strip()
+        doi = f.get("doi")
+        if not doi:
+            nodoi.append((key, f.get("title", "")[:60], f.get("note", "")[:70]))
+            continue
+        try:
+            m = fetch(doi)
+        except Exception as e:
+            bad.append((key, doi, "FETCH FAILED: %s" % e))
+            continue
+        reg_title = norm(" ".join(m.get("title") or []))
+        my_title = norm(f.get("title", ""))
+        authors = m.get("author") or []
+        reg_first = (authors[0].get("family") if authors else "") or ""
+        my_first = f.get("author", "").split(",")[0].strip()
+        yr = None
+        for k in ("published-print", "published-online", "issued"):
+            v = m.get(k, {}).get("date-parts", [[None]])[0][0]
+            if v:
+                yr = v
+                break
+        container = (m.get("container-title") or [""])[0]
+
+        problems = []
+        key_words = [w for w in my_title.split() if len(w) > 3][:4]
+        if not all(w in reg_title for w in key_words):
+            problems.append("title: registry has %r" % squash(reg_title)[:60])
+        if my_first and reg_first and my_first.lower() not in reg_first.lower():
+            problems.append("first author: registry has %r, bib has %r" % (reg_first, my_first))
+        my_year = f.get("year", "")
+        if yr and my_year and str(yr) != my_year:
+            # A deposit-date-only record is not a contradiction if the venue
+            # name carries the year the entry claims.
+            if my_year not in container:
+                problems.append("year: registry %s vs bib %s (container %r)" % (yr, my_year, container[:40]))
+        if problems:
+            bad.append((key, doi, "; ".join(problems)))
+        else:
+            rows.append((key, doi, reg_first, my_year, container[:44]))
+        time.sleep(0.6)
+
+    print("VERIFIED %d / %d entries with a DOI" % (len(rows), len(rows) + len(bad)))
+    for k, d, a, y, c in rows:
+        print("  %-32s %-30s %-12s %s  %s" % (k, d, a, y, c))
+    if nodoi:
+        print()
+        print("NO DOI — requires a named non-registry verification (%d)" % len(nodoi))
+        for k, t, n in nodoi:
+            print("  %-32s %s" % (k, t))
+            print("      basis: %s" % (n or "NONE RECORDED — not acceptable"))
+    if bad:
+        print()
+        print("MISMATCH (%d) — these must not ship" % len(bad))
+        for k, d, why in bad:
+            print("  %-32s %-30s %s" % (k, d, why))
+    return 1 if bad else 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main(sys.argv[1]))
