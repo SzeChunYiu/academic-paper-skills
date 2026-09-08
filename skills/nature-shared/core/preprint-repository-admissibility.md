@@ -111,7 +111,52 @@ discovering it after a deposit is refused means losing the route.
 2. Detect content type from the manuscript body.
 3. Run the admissibility gate. Resolve every block and every cannot-evaluate.
 4. Run the integrity audit. Resolve every error.
-5. Build the package; then run whatever package-format checks the project has.
+5. Build the package.
+6. **Compile the packaged source on the repository's toolchain.** Not the working
+   tree, not the newest release. A package that does not build cannot be
+   deposited at all, so this outranks every other finding on the list.
+7. Run whatever package-format checks the project has.
+
+## The source must compile on the repository's own toolchain
+
+A repository that accepts (La)TeX **compiles the submission itself**. A source
+archive that does not build is refused at upload, before any moderator reads a
+word of it, so buildability is a hard deposit blocker and not a cosmetic
+concern. It is also the cheapest gate here to satisfy and the easiest to skip,
+because a shipped PDF sitting beside a broken source looks like evidence that
+the source works.
+
+Three rules follow.
+
+**Build from the archive that will actually be uploaded**, not from the working
+tree it was made in. The failure mode is a source that compiles where it was
+written and nowhere else.
+
+**Use the repository's toolchain, not the newest one.** arXiv currently supports
+TeX Live 2023 and TeX Live 2025, "with 2025 being the default"
+(<https://info.arxiv.org/help/faq/texlive.html>). A document verified only on a
+newer release is unverified for the system that will compile it, and a
+reproduction claim pinned to a toolchain nobody can reach is worse than none:
+it reads as assurance and delivers nothing.
+
+**Ship the bibliography with the source.** Where a manuscript cites anything,
+the archive must carry the `.bbl`, or the `.bib` files the build needs. arXiv
+states that if no `.bbl` is uploaded "and at least one necessary `.bib` file is
+missing, the submission system will block you from proceeding with your
+submission" (<https://info.arxiv.org/help/submit_tex.html>). Adding citations to
+a manuscript without adding their source to the archive converts a compiling
+submission into a blocked one.
+
+Two constructs found breaking real submissions, recorded because both compiled
+under an older toolchain and neither is visible in the rendered PDF:
+
+- `\def\LTcaptype{none}`, used to stop an uncaptioned `longtable` stepping a
+  counter. Current LaTeX steps a counter named `none`, which does not exist.
+- Literal Unicode that the engine has no mapping for, such as U+220E used as a
+  QED tombstone, in a document compiled with pdflatex.
+
+Neither is caught by a package-format scan, a reference check, or a content-type
+gate. Only compiling the source catches them.
 
 ## Known limits, stated so they are not mistaken for coverage
 

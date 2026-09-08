@@ -34,6 +34,26 @@
         "generative_ai_responsibility": "it is the responsibility of the author(s). generative AI language tools should not be listed as an author"
       },
       "verified_scope_note": "Site-wide moderation policy, not archive-specific."
+    },
+    {
+      "id": "arxiv-tex-submission",
+      "url": "https://info.arxiv.org/help/submit_tex.html",
+      "publisher": "arXiv",
+      "retrieved": "2026-09-08",
+      "quotes": {
+        "bibliography_required": "In case the .bbl file is not uploaded, and at least one necessary .bib file is missing, the submission system will block you from proceeding with your submission."
+      },
+      "verified_scope_note": "arXiv compiles submitted (La)TeX itself; a source archive that does not build is refused at upload."
+    },
+    {
+      "id": "arxiv-texlive",
+      "url": "https://info.arxiv.org/help/faq/texlive.html",
+      "publisher": "arXiv",
+      "retrieved": "2026-09-08",
+      "quotes": {
+        "supported_versions": "arXiv currently supports TeX Live 2023 and TeX Live 2025, with 2025 being the default."
+      },
+      "verified_scope_note": "The toolchain a submission must compile on. Verifying only against a newer release leaves the submission unverified for the system that will build it."
     }
   ],
   "rules": [
@@ -146,6 +166,12 @@
       "statement": "No archive outside computer science carries a documented content-type refusal practice in this ruleset. That is not the same as permission: arXiv states site-wide that research articles are the primary content type and that submissions must be original, novel and significant self-contained research, and moderators outside cs retain discretion without a formal announcement. The site-wide rule is carried here as ADVISORY.",
       "verified": "site-wide standard verified; per-archive enforcement practice not documented",
       "source_ref": 1
+    },
+    {
+      "topic": "Source buildability",
+      "statement": "Buildability is a hard deposit blocker but is not expressed as a rule here, because it cannot be decided from metadata: it requires compiling the packaged source on the repository's toolchain. The contract states the requirement and the order it runs in.",
+      "verified": "arXiv compiles submitted (La)TeX and blocks submission when a needed .bbl or .bib is absent",
+      "source_ref": 2
     }
   ]
 }
