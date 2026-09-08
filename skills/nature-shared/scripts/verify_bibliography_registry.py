@@ -87,11 +87,47 @@ def squash(s):
     return re.sub(r"\s+", " ", s).strip()
 
 
-def fetch(doi):
+def _one(v):
+    """CrossRef returns lists where CSL JSON returns strings; accept both.
+
+    Joining a string here would compare the record character by character and
+    report every doi.org-resolved entry as a title mismatch.
+    """
+    if isinstance(v, (list, tuple)):
+        return " ".join(str(x) for x in v)
+    return "" if v is None else str(v)
+
+
+def _crossref(doi):
     url = "https://api.crossref.org/works/" + urllib.parse.quote(doi)
     req = urllib.request.Request(url, headers={"User-Agent": UA})
     with urllib.request.urlopen(req, timeout=30) as r:
-        return json.load(r)["message"]
+        return json.load(r)["message"], "crossref"
+
+
+def _doi_org(doi):
+    """Content-negotiate CSL JSON at doi.org.
+
+    CrossRef indexes only what CrossRef registers. Preprints registered through
+    DataCite, arXiv's 10.48550 prefix among them, return an error there and
+    would otherwise be reported as unverifiable — which for recent machine
+    learning work is most of the literature a paper needs to cite. doi.org
+    resolves every registered DOI regardless of registrar, so it is the correct
+    fallback rather than a second guess.
+    """
+    url = "https://doi.org/" + urllib.parse.quote(doi)
+    req = urllib.request.Request(url, headers={
+        "User-Agent": UA, "Accept": "application/vnd.citationstyles.csl+json"})
+    with urllib.request.urlopen(req, timeout=30) as r:
+        return json.load(r), "doi.org"
+
+
+def fetch(doi):
+    """Return (record, registrar). CrossRef first; doi.org for everything else."""
+    try:
+        return _crossref(doi)
+    except Exception:
+        return _doi_org(doi)
 
 
 def main(path):
@@ -110,11 +146,11 @@ def main(path):
             nodoi.append((key, f.get("title", "")[:60], f.get("note", "")[:70]))
             continue
         try:
-            m = fetch(doi)
+            m, registrar = fetch(doi)
         except Exception as e:
             bad.append((key, doi, "FETCH FAILED: %s" % e))
             continue
-        reg_title = norm(" ".join(m.get("title") or []))
+        reg_title = norm(_one(m.get("title")))
         my_title = norm(f.get("title", ""))
         authors = m.get("author") or []
         reg_first = (authors[0].get("family") if authors else "") or ""
@@ -125,7 +161,7 @@ def main(path):
             if v:
                 yr = v
                 break
-        container = (m.get("container-title") or [""])[0]
+        container = _one(m.get("container-title"))
 
         problems = []
         key_words = [w for w in my_title.split() if len(w) > 3][:4]
@@ -142,7 +178,7 @@ def main(path):
         if problems:
             bad.append((key, doi, "; ".join(problems)))
         else:
-            rows.append((key, doi, reg_first, my_year, container[:44]))
+            rows.append((key, doi, reg_first, my_year, ("%s via %s" % (container, registrar))[:44]))
         time.sleep(0.6)
 
     print("VERIFIED %d / %d entries with a DOI" % (len(rows), len(rows) + len(bad)))

@@ -84,6 +84,24 @@ class BibliographyRegistryVerificationTests(unittest.TestCase):
         """Folding must not make every name equal."""
         assert mod.norm("Alchourr{\\'o}n") != mod.norm("Makinson")
 
+    def test_list_and_string_record_shapes_both_read(self) -> None:
+        """CrossRef returns lists; CSL JSON from doi.org returns strings."""
+        assert mod._one(["A truth maintenance system"]) == "A truth maintenance system"
+        assert mod._one("A truth maintenance system") == "A truth maintenance system"
+        assert mod._one(None) == ""
+
+    def test_a_string_title_is_not_joined_character_by_character(self) -> None:
+        """The bug this guards: " ".join on a string spaces out every letter."""
+        assert mod._one("Reflexion") == "Reflexion"
+        assert " ".join("Reflexion") != mod._one("Reflexion")
+
+    def test_doi_org_fallback_is_documented_as_registrar_agnostic(self) -> None:
+        """arXiv DOIs are DataCite; CrossRef alone would call them unverifiable."""
+        src = SCRIPT.read_text(encoding="utf-8")
+        assert "doi.org" in src
+        assert "10.48550" in src
+        assert "regardless of registrar" in src
+
     def test_exit_codes_are_documented_and_distinct(self) -> None:
         doc = mod.__doc__ or ""
         assert "0  every entry with a DOI verified" in doc
