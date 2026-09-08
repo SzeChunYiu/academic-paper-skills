@@ -228,6 +228,36 @@ class PreprintRepositoryAdmissibilityTests(unittest.TestCase):
         assert "responsibility of the author" in q
         assert "should not be listed as an author" in q
 
+    def test_contract_requires_compiling_the_packaged_source(self) -> None:
+        """A package that does not build cannot be deposited at all."""
+        text = _flat(CONTRACT)
+        assert "compiles the submission itself" in text
+        assert "hard deposit blocker" in text
+        assert "compile the packaged source on the repository's toolchain" in text
+
+    def test_contract_pins_the_repository_toolchain_not_the_newest(self) -> None:
+        text = _flat(CONTRACT)
+        assert "tex live 2023 and tex live 2025" in text
+        assert "with 2025 being the default" in text
+        assert "nobody can reach is worse than none" in text
+
+    def test_contract_requires_shipping_the_bibliography_with_the_source(self) -> None:
+        """Adding citations without their source turns a good package into a blocked one."""
+        text = _flat(CONTRACT)
+        assert "block you from proceeding with your submission" in text
+
+    def test_buildability_sources_are_cited(self) -> None:
+        doc = json.loads(RULES.read_text(encoding="utf-8"))
+        ids = {s["id"] for s in doc["sources"]}
+        assert {"arxiv-tex-submission", "arxiv-texlive"} <= ids
+
+    def test_buildability_is_declared_a_non_rule_with_its_reason(self) -> None:
+        """It cannot be decided from metadata, so it must not masquerade as a rule."""
+        doc = json.loads(RULES.read_text(encoding="utf-8"))
+        entry = [n for n in doc["non_rules"] if "buildability" in n["topic"].lower()]
+        assert entry, "buildability must be recorded"
+        assert "cannot be decided from metadata" in entry[0]["statement"]
+
     def test_the_detector_bias_claim_is_cited_not_asserted(self) -> None:
         """The one outside-world claim this contract makes must carry its source."""
         doc = json.loads(RULES.read_text(encoding="utf-8"))
