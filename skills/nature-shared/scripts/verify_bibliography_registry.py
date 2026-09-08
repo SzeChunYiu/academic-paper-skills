@@ -47,8 +47,39 @@ ENTRY = re.compile(r"@(\w+)\s*\{\s*([^,]+),(.*?)\n\}", re.S)
 FIELD = re.compile(r"(\w+)\s*=\s*[{\"](.+?)[}\"]\s*,?\s*\n", re.S)
 
 
+# LaTeX accent macros, so a correctly-escaped BibTeX author matches the plain
+# Unicode the registry returns. Without this every accented name is reported as
+# a mismatch, which would make the check unusable for most of the world's
+# authors and would train its reader to ignore it.
+# Both spellings occur in real BibTeX: a braced argument (\'{o}, \H{o}) and a
+# bare letter after the macro (\'o, \H o). Missing the second form reports
+# Erd{\H o}s as a different author from Erdos.
+_ACCENT = re.compile(
+    r"\\[`'^\"~=.]\s*\{?([a-zA-Z])\}?"
+    r"|\\[a-zA-Z]+\s*\{([a-zA-Z])\}"
+    r"|\\[a-zA-Z]\s+([a-zA-Z])"
+)
+_LIGATURE = {"\\ss": "ss", "\\o": "o", "\\O": "O", "\\l": "l", "\\L": "L",
+             "\\aa": "aa", "\\AA": "AA", "\\ae": "ae", "\\AE": "AE"}
+
+
+def strip_latex(s):
+    """Reduce LaTeX-escaped text to comparable plain letters."""
+    for k, v in _LIGATURE.items():
+        s = s.replace(k, v)
+    s = _ACCENT.sub(lambda m: m.group(1) or m.group(2) or m.group(3), s)
+    return re.sub(r"[{}\\]", "", s)
+
+
+def fold(s):
+    """Fold accented Unicode to ASCII so both sides compare on the same ground."""
+    import unicodedata
+    return "".join(c for c in unicodedata.normalize("NFKD", s)
+                   if not unicodedata.combining(c))
+
+
 def norm(s):
-    s = re.sub(r"[{}\\]", "", s)
+    s = fold(strip_latex(s))
     return re.sub(r"[^a-z0-9 ]", " ", s.lower())
 
 
@@ -87,7 +118,7 @@ def main(path):
         my_title = norm(f.get("title", ""))
         authors = m.get("author") or []
         reg_first = (authors[0].get("family") if authors else "") or ""
-        my_first = f.get("author", "").split(",")[0].strip()
+        my_first = norm(f.get("author", "").split(",")[0]).strip()
         yr = None
         for k in ("published-print", "published-online", "issued"):
             v = m.get(k, {}).get("date-parts", [[None]])[0][0]
@@ -100,7 +131,7 @@ def main(path):
         key_words = [w for w in my_title.split() if len(w) > 3][:4]
         if not all(w in reg_title for w in key_words):
             problems.append("title: registry has %r" % squash(reg_title)[:60])
-        if my_first and reg_first and my_first.lower() not in reg_first.lower():
+        if my_first and reg_first and my_first not in norm(reg_first):
             problems.append("first author: registry has %r, bib has %r" % (reg_first, my_first))
         my_year = f.get("year", "")
         if yr and my_year and str(yr) != my_year:
