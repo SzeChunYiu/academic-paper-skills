@@ -43,8 +43,46 @@ import urllib.parse
 import urllib.request
 
 UA = "orion-citation-verify/1.0 (mailto:sze-chun.yiu@fysik.su.se)"
-ENTRY = re.compile(r"@(\w+)\s*\{\s*([^,]+),(.*?)\n\}", re.S)
-FIELD = re.compile(r"(\w+)\s*=\s*[{\"](.+?)[}\"]\s*,?\s*\n", re.S)
+# Entries are matched by balanced braces rather than by a closing "\n}",
+# because a perfectly valid .bib written compactly ends its last field and the
+# entry on the same line. The old pattern found zero entries in such a file and
+# the run then reported "0 / 0 verified" and exited 0 — an unparsed bibliography
+# passing as a checked one.
+ENTRY = re.compile(r"@(\w+)\s*\{\s*([^,\s]+)\s*,", re.S)
+FIELD_NAME = re.compile(r"(\w+)\s*=\s*")
+
+
+def fields_of(body):
+    """Parse `name = {value}` pairs with balanced braces.
+
+    A line-terminated pattern misses every field in a compactly written entry,
+    which silently drops its DOI and sends a perfectly checkable reference into
+    the unverifiable bucket.
+    """
+    out = {}
+    for m in FIELD_NAME.finditer(body):
+        i = m.end()
+        if i >= len(body):
+            break
+        if body[i] == "{":
+            depth, j = 0, i
+            while j < len(body):
+                if body[j] == "{":
+                    depth += 1
+                elif body[j] == "}":
+                    depth -= 1
+                    if depth == 0:
+                        break
+                j += 1
+            out[m.group(1).lower()] = body[i + 1:j]
+        elif body[i] == '"':
+            j = body.find('"', i + 1)
+            if j > 0:
+                out[m.group(1).lower()] = body[i + 1:j]
+        else:
+            j = body.find(",", i)
+            out[m.group(1).lower()] = body[i:j if j > 0 else len(body)]
+    return out
 
 
 # LaTeX accent macros, so a correctly-escaped BibTeX author matches the plain
@@ -138,9 +176,30 @@ def main(path):
         return 2
 
     rows, bad, nodoi = [], [], []
-    for _kind, key, body in ENTRY.findall(text):
-        f = {k.lower(): squash(v) for k, v in FIELD.findall(body + "\n")}
-        key = key.strip()
+    entries = []
+    for m in ENTRY.finditer(text):
+        # Walk braces from the entry's opening brace so the body ends where the
+        # entry ends, whatever the file's line discipline.
+        i = text.index("{", m.start())
+        depth, j = 0, i
+        while j < len(text):
+            if text[j] == "{":
+                depth += 1
+            elif text[j] == "}":
+                depth -= 1
+                if depth == 0:
+                    break
+            j += 1
+        entries.append((m.group(2).strip(), text[m.end():j]))
+
+    if not entries and text.strip():
+        print("CANNOT PARSE: no bibliography entries found in a non-empty file. "
+              "This is reported as a failure, never as a clean run: a bibliography "
+              "nothing could read has not been checked.")
+        return 2
+
+    for key, body in entries:
+        f = {k: squash(v) for k, v in fields_of(body).items()}
         doi = f.get("doi")
         if not doi:
             nodoi.append((key, f.get("title", "")[:60], f.get("note", "")[:70]))

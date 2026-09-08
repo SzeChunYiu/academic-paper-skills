@@ -52,15 +52,16 @@ class BibliographyRegistryVerificationTests(unittest.TestCase):
     def test_entries_and_fields_parse(self) -> None:
         entries = mod.ENTRY.findall(BIB)
         assert len(entries) == 3
-        _kind, key, body = entries[0]
-        fields = {k.lower(): mod.squash(v) for k, v in mod.FIELD.findall(body + "\n")}
+        _kind, key = entries[0]
+        body = BIB[BIB.index("good2020"):BIB.index("nodoi2019")]
+        fields = {k: mod.squash(v) for k, v in mod.fields_of(body).items()}
         assert key.strip() == "good2020"
         assert fields["doi"] == "10.1145/359168.359176"
         assert fields["year"] == "1979"
 
     def test_an_entry_without_a_doi_is_separated_not_passed(self) -> None:
         """No DOI is not an error; no verification basis is."""
-        keys = {k.strip() for _kind, k, _b in mod.ENTRY.findall(BIB)}
+        keys = {k.strip() for _kind, k in mod.ENTRY.findall(BIB)}
         assert "nodoi2019" in keys and "nodoi_nobasis" in keys
         src = SCRIPT.read_text(encoding="utf-8")
         assert "NOT ACCEPTABLE" in src.upper()
@@ -101,6 +102,26 @@ class BibliographyRegistryVerificationTests(unittest.TestCase):
         assert "doi.org" in src
         assert "10.48550" in src
         assert "regardless of registrar" in src
+
+    def test_compact_entries_parse(self) -> None:
+        """A valid .bib whose last field and closing brace share a line."""
+        compact = ("@article{k1,\n  author = {A, B},\n  title = {T},\n"
+                   "  year = {2020}, doi = {10.1/x}}\n")
+        keys = [m.group(2).strip() for m in mod.ENTRY.finditer(compact)]
+        assert keys == ["k1"], keys
+        body = compact[compact.index("k1,") + 3:]
+        assert mod.fields_of(body).get("doi") == "10.1/x"
+
+    def test_unparseable_file_is_a_failure_not_a_clean_run(self) -> None:
+        """0 of 0 verified must never exit 0: nothing was checked."""
+        import tempfile, os
+        fd, path = tempfile.mkstemp(suffix=".bib")
+        os.write(fd, b"this file contains no bibtex entries at all\n")
+        os.close(fd)
+        try:
+            assert mod.main(path) == 2
+        finally:
+            os.unlink(path)
 
     def test_exit_codes_are_documented_and_distinct(self) -> None:
         doc = mod.__doc__ or ""
