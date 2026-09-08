@@ -22,6 +22,18 @@
         "resubmission": "Do not resubmit your position paper or review article without an accepted appeal."
       },
       "verified_scope_note": "The announcement names the computer science category. Extension to other archives was not established as of the retrieval date and must be re-checked rather than assumed."
+    },
+    {
+      "id": "arxiv-moderation-policy",
+      "url": "https://info.arxiv.org/help/moderation/",
+      "publisher": "arXiv",
+      "retrieved": "2026-09-08",
+      "quotes": {
+        "primary_content_type": "Research articles are the primary content-type submitted to arXiv. For information about submissions other than research articles please see the specific content type policies",
+        "scholarly_standard": "Articles submitted to arXiv must be of original, novel, and significant self-contained research.",
+        "generative_ai_responsibility": "it is the responsibility of the author(s). generative AI language tools should not be listed as an author"
+      },
+      "verified_scope_note": "Site-wide moderation policy, not archive-specific."
     }
   ],
   "rules": [
@@ -65,25 +77,75 @@
         "peer_review_doi": "Acceptance at a peer-reviewed journal or conference, supplied as journal reference and DOI in the submission metadata. Workshop review does not satisfy this."
       },
       "consequence": "Likely rejected and not announced. The author may not simply resubmit; an appeal must be accepted first, and an appeal is entertained only once peer review has completed successfully."
+    },
+    {
+      "id": "arxiv.sitewide.research-article-is-the-primary-content-type",
+      "source_ref": 1,
+      "effect": "ADVISORY",
+      "applies_to": {
+        "archives": [
+          "cs",
+          "math",
+          "physics",
+          "quant-ph",
+          "stat",
+          "eess",
+          "econ",
+          "q-bio",
+          "q-fin",
+          "astro-ph",
+          "cond-mat",
+          "gr-qc",
+          "hep-ex",
+          "hep-lat",
+          "hep-ph",
+          "hep-th",
+          "math-ph",
+          "nlin",
+          "nucl-ex",
+          "nucl-th"
+        ],
+        "archive_match": "prefix",
+        "note": "Site-wide. Applies wherever a manuscript is deposited."
+      },
+      "triggers_on_content_types": [
+        "review",
+        "survey",
+        "position",
+        "perspective",
+        "programme"
+      ],
+      "content_type_basis": {
+        "review": "construed",
+        "survey": "construed",
+        "position": "construed",
+        "perspective": "construed",
+        "programme": "construed"
+      },
+      "content_type_basis_note": "arXiv states site-wide that research articles are the primary content type and that submissions must be original, novel and significant self-contained research. It does not name review or position papers as refused outside computer science. This rule is ADVISORY on purpose: outside cs there is a documented standard but no documented enforcement practice, so a trigger here means re-examine the content type and expect moderator discretion, not that the deposit will be refused.",
+      "requires": [],
+      "consequence": "Outside computer science there is no documented refusal practice for these content types, but they sit outside arXiv's stated primary content type and moderators retain discretion. Treat as a reason to confirm the manuscript's content type before depositing."
     }
   ],
   "non_rules": [
     {
       "topic": "AI assistance in writing",
       "statement": "No rule in this file blocks a deposit for disclosing AI assistance, and none should be added. Generative AI is cited by arXiv as a cause of submission volume, not as an independent ground for rejecting a submission. Editing a disclosure to reduce its visibility is misrepresentation and is out of scope for this gate.",
-      "verified": "No arXiv policy rejecting a submission for disclosed AI assistance was located as of 2026-09-08.",
+      "verified": "arXiv's site-wide moderation policy addresses generative AI through author responsibility and authorship, not through refusal: output included in a scientific work is the author's responsibility and such tools must not be listed as an author. No policy rejecting a submission for disclosed AI assistance was located as of 2026-09-08.",
       "evidence": {
         "claim": "Machine-text detectors are not a sound basis for any gate.",
         "source": "Liang, Yuksekgonul, Mao, Wu, Zou. GPT detectors are biased against non-native English writers. Patterns 4(7), 2023.",
         "doi": "10.1016/j.patter.2023.100779",
         "preprint": "https://arxiv.org/abs/2304.02819",
         "finding": "Widely-used detectors consistently misclassified non-native English writing samples as AI-generated while classifying native samples correctly; simple prompting both reduced the bias and evaded the detectors."
-      }
+      },
+      "source_ref": 1
     },
     {
       "topic": "Non-cs archives",
-      "statement": "math, quant-ph, stat, physics and other archives carry no equivalent content-type practice in this ruleset. Absence of a rule here means the policy was not found, not that one does not exist; re-verify before relying on it for a specific archive.",
-      "verified": "partial"
+      "statement": "No archive outside computer science carries a documented content-type refusal practice in this ruleset. That is not the same as permission: arXiv states site-wide that research articles are the primary content type and that submissions must be original, novel and significant self-contained research, and moderators outside cs retain discretion without a formal announcement. The site-wide rule is carried here as ADVISORY.",
+      "verified": "site-wide standard verified; per-archive enforcement practice not documented",
+      "source_ref": 1
     }
   ]
 }

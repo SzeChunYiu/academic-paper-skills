@@ -120,6 +120,12 @@ discovering it after a deposit is refused means losing the route.
   The gate catches declared labels and strong structural cases; it is not a
   substitute for the author answering honestly what the manuscript is.
 - Absence of a rule for an archive means the policy was not found, not that none
-  exists.
+  exists. Specifically for arXiv: outside computer science there is no documented
+  content-type refusal practice, but that is not permission. arXiv states
+  site-wide that "Research articles are the primary content-type submitted to
+  arXiv" and that submissions "must be of original, novel, and significant
+  self-contained research", and moderators outside cs retain discretion without a
+  formal announcement. The ruleset carries that as an ADVISORY rule: it never
+  blocks, and it is never reported as satisfied, because nothing was satisfied.
 - Repository practice changes without a migration period. The staleness horizon
   is the mechanism that stops this contract from going quietly out of date.

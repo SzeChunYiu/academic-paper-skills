@@ -195,6 +195,39 @@ class PreprintRepositoryAdmissibilityTests(unittest.TestCase):
         topics = [n["topic"].lower() for n in doc["non_rules"]]
         assert any("ai assistance" in t for t in topics)
 
+    def test_non_cs_archives_carry_an_advisory_not_silence(self) -> None:
+        """No documented refusal practice outside cs is not the same as permission."""
+        res = gate.evaluate(
+            _rules_doc(),
+            _decl(primary_category="math.NT", declared_content_type="survey"),
+            _detection([]), TODAY, 120,
+        )
+        assert res["verdict"] == "PASS", "an advisory must never block"
+        assert res["advisories"], "the site-wide standard must still be surfaced"
+        advisory = [f for f in res["findings"] if f["verdict"] == "ADVISORY"]
+        assert advisory
+        # An advisory is not a satisfied requirement; nothing was satisfied.
+        assert advisory[0]["verdict"] != "SATISFIED"
+
+    def test_advisory_does_not_fire_on_ordinary_research(self) -> None:
+        res = gate.evaluate(_rules_doc(), _decl(primary_category="math.NT"),
+                            _detection([]), TODAY, 120)
+        assert res["verdict"] == "PASS"
+        assert res["advisories"] == []
+
+    def test_cs_block_still_outranks_the_advisory(self) -> None:
+        res = gate.evaluate(_rules_doc(), _decl(declared_content_type="survey"),
+                            _detection([]), TODAY, 120)
+        assert res["verdict"] == "BLOCK"
+
+    def test_arxiv_ai_policy_is_cited_as_responsibility_not_refusal(self) -> None:
+        doc = json.loads(RULES.read_text(encoding="utf-8"))
+        src = [s for s in doc["sources"] if s["id"] == "arxiv-moderation-policy"]
+        assert src, "the site-wide moderation policy must be a cited source"
+        q = src[0]["quotes"]["generative_ai_responsibility"].lower()
+        assert "responsibility of the author" in q
+        assert "should not be listed as an author" in q
+
     def test_the_detector_bias_claim_is_cited_not_asserted(self) -> None:
         """The one outside-world claim this contract makes must carry its source."""
         doc = json.loads(RULES.read_text(encoding="utf-8"))

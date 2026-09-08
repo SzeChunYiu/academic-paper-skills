@@ -214,7 +214,13 @@ def evaluate(
             if rules_doc.get("sources")
             else None,
         }
-        if missing and rule.get("effect", "BLOCK").upper() == "BLOCK":
+        effect = rule.get("effect", "BLOCK").upper()
+        if effect == "ADVISORY":
+            # A standard with no documented enforcement practice. Recorded so the
+            # author sees it, never blocking, and never reported as "satisfied" —
+            # nothing was satisfied, the rule simply does not refuse.
+            finding["verdict"] = "ADVISORY"
+        elif missing:
             blocked = True
             finding["verdict"] = "BLOCK"
         else:
@@ -266,6 +272,7 @@ def evaluate(
             "peer_review_doi": declaration.get("peer_review_doi"),
         },
         "rules_evaluated": len(rules_doc.get("rules", [])),
+        "advisories": [f["rule_id"] for f in findings if f["verdict"] == "ADVISORY"],
         "findings": findings,
         "integrity_notes": integrity,
         "not_evaluable_because": unevaluable,
