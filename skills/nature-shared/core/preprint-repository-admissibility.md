@@ -72,7 +72,13 @@ measurements are all ordinary research and must pass.
   should be added. Repositories cite generative AI as a cause of submission
   volume, not as an independent ground for refusing a submission.
 - **It does not score prose.** Style is the writing skills' concern. Nothing
-  here is keyed to a machine-text detector.
+  here is keyed to a machine-text detector. Liang, Yuksekgonul, Mao, Wu and
+  Zou, *GPT detectors are biased against non-native English writers*, Patterns
+  4(7), 2023 (<https://doi.org/10.1016/j.patter.2023.100779>, preprint
+  <https://arxiv.org/abs/2304.02819>) report that widely-used detectors
+  "consistently misclassify non-native English writing samples as AI-generated"
+  while classifying native samples correctly, and that trivial prompting evades
+  them. A gate keyed to such a score would penalise the author, not the defect.
 
 ## Executable gates
 

@@ -195,6 +195,16 @@ class PreprintRepositoryAdmissibilityTests(unittest.TestCase):
         topics = [n["topic"].lower() for n in doc["non_rules"]]
         assert any("ai assistance" in t for t in topics)
 
+    def test_the_detector_bias_claim_is_cited_not_asserted(self) -> None:
+        """The one outside-world claim this contract makes must carry its source."""
+        doc = json.loads(RULES.read_text(encoding="utf-8"))
+        ev = [n.get("evidence") for n in doc["non_rules"] if n.get("evidence")]
+        assert ev, "the detector claim must cite a source"
+        assert ev[0]["doi"]
+        assert "non-native" in ev[0]["finding"].lower()
+        assert "patterns" in _flat(CONTRACT)
+        assert "10.1016/j.patter.2023.100779" in _flat(CONTRACT)
+
 
 # --------------------------------------------------------------------------
 # Detector

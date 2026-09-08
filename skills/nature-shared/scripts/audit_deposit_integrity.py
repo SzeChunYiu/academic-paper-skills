@@ -24,10 +24,12 @@ that form as a consistency finding, never as a reason to say less than the truth
 
 Prose quality is a separate concern handled by the writing skills. It is kept
 out of here because a check that flags ordinary academic phrasing as suspicious
-produces false accusations, and because published evaluations of machine-text
-detectors report high false-positive rates against non-native English writers.
+produces false accusations. Liang et al., Patterns 4(7), 2023
+(doi:10.1016/j.patter.2023.100779) report that widely-used detectors
+consistently misclassify non-native English writing as AI-generated while
+classifying native writing correctly, and that trivial prompting evades them.
 Targeting writing quality and factual integrity is defensible; targeting a
-detector score is not.
+detector score penalises the author rather than the defect.
 
 Exit codes
     0  clean
