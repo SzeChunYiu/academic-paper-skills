@@ -70,6 +70,20 @@ class BibliographyRegistryVerificationTests(unittest.TestCase):
         assert mod.norm("The {Byzantine} Generals Problem") == mod.norm(
             "the byzantine generals problem")
 
+    def test_latex_accents_match_plain_unicode(self) -> None:
+        """A correctly escaped BibTeX author must not read as a mismatch."""
+        assert mod.norm("Alchourr{\\'o}n") == mod.norm("Alchourrón")
+        assert mod.norm(r'G{\"a}rdenfors') == mod.norm("Gärdenfors")
+        assert mod.norm("Erd{\\H o}s") == mod.norm("Erdos")
+
+    def test_ligatures_and_special_letters_fold(self) -> None:
+        assert mod.norm("Wei{\\ss}") == mod.norm("Weiss")
+        assert mod.norm("{\\o}ksendal") == mod.norm("oksendal")
+
+    def test_accent_handling_does_not_erase_real_differences(self) -> None:
+        """Folding must not make every name equal."""
+        assert mod.norm("Alchourr{\\'o}n") != mod.norm("Makinson")
+
     def test_exit_codes_are_documented_and_distinct(self) -> None:
         doc = mod.__doc__ or ""
         assert "0  every entry with a DOI verified" in doc
