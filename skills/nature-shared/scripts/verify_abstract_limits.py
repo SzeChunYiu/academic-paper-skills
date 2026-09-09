@@ -75,9 +75,13 @@ def plain(text: str) -> str:
     t = t.replace("\\%", "%")
     t = re.sub(r"\\(?:label|cite[a-zA-Z]*|ref|input|hypersetup)\s*\{[^}]*\}", "", t)
     t = re.sub(r"\\[a-zA-Z]+\s*", " ", t)
-    # Math delimiters are markup: an author pasting the abstract into a form
-    # types the symbol, not the dollars around it.
-    t = t.replace("$", "")
+    # Math delimiters are NOT markup to strip. arXiv renders $...$ in the
+    # abstract field through MathJax, so a mathematics author pastes the TeX
+    # verbatim and every dollar is a character the 1920 limit counts. Removing
+    # them under-reports exactly the abstracts most likely to be long, and in
+    # the one direction that matters: it calls an over-length abstract fine.
+    # Font commands are a different case and are already dropped above, because
+    # arXiv states they are not processed and asks authors to omit them.
     t = t.replace("{", " ").replace("}", " ").replace("\\", " ")
     return re.sub(r"\s+", " ", t).strip()
 
@@ -150,8 +154,11 @@ def evaluate(abstract: str, repository: str | None, journal_words: int | None,
             {"limit": binding[0], "max": binding[1], "actual": binding[2],
              "headroom": binding[3]} if binding else None),
         "findings": findings,
-        "note": ("Characters are counted on plain text after markup is resolved, "
-                 "because that is what a submission form receives."),
+        "note": ("Characters are counted on the text a submission form receives: "
+                 "citation and font commands are resolved away, because arXiv "
+                 "states font commands are not processed and asks authors to omit "
+                 "them, but math delimiters are kept, because arXiv renders $...$ "
+                 "in the abstract through MathJax and counts those characters."),
     }
 
 
