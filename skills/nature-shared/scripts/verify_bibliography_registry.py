@@ -98,7 +98,13 @@ _ACCENT = re.compile(
     r"|\\[a-zA-Z]\s+([a-zA-Z])"
 )
 _LIGATURE = {"\\ss": "ss", "\\o": "o", "\\O": "O", "\\l": "l", "\\L": "L",
-             "\\aa": "aa", "\\AA": "AA", "\\ae": "ae", "\\AE": "AE"}
+             "\\aa": "aa", "\\AA": "AA", "\\ae": "ae", "\\AE": "AE",
+             "\\oe": "oe", "\\OE": "OE"}
+
+# NFKD leaves these joined letters alone, so a registry "Deno\u0153ux" and a
+# bibliography "Den{\\oe}ux" would never compare equal without an explicit map.
+_JOINED = {"\u0153": "oe", "\u0152": "OE", "\u00e6": "ae", "\u00c6": "AE",
+           "\u00df": "ss", "\u00f8": "o", "\u00d8": "O", "\u0142": "l", "\u0141": "L"}
 
 
 def strip_latex(s):
@@ -112,6 +118,8 @@ def strip_latex(s):
 def fold(s):
     """Fold accented Unicode to ASCII so both sides compare on the same ground."""
     import unicodedata
+    for k, v in _JOINED.items():
+        s = s.replace(k, v)
     return "".join(c for c in unicodedata.normalize("NFKD", s)
                    if not unicodedata.combining(c))
 
@@ -175,7 +183,7 @@ def main(path):
         print("cannot read: %s" % e)
         return 2
 
-    rows, bad, nodoi = [], [], []
+    rows, bad, nodoi, notes = [], [], [], []
     entries = []
     for m in ENTRY.finditer(text):
         # Walk braces from the entry's opening brace so the body ends where the
@@ -223,21 +231,51 @@ def main(path):
         container = _one(m.get("container-title"))
 
         problems = []
-        key_words = [w for w in my_title.split() if len(w) > 3][:4]
-        if not all(w in reg_title for w in key_words):
+        # Containment either way. A registry record is often the SHORTER text:
+        # ACM holds Cousot 1977 as "Abstract interpretation" and SAGE holds
+        # Lakens 2017 as "Equivalence Tests", with the full subtitle only in the
+        # bibliography. Requiring the bibliography's words to appear in the
+        # registry marks both correct entries as wrong, and sends the author to
+        # re-check references that were right.
+        def _covered(a, b):
+            words = [w for w in a.split() if len(w) > 3][:4]
+            return bool(words) and all(w in b for w in words)
+
+        if not (_covered(my_title, reg_title) or _covered(reg_title, my_title)):
             problems.append("title: registry has %r" % squash(reg_title)[:60])
-        if my_first and reg_first and my_first not in norm(reg_first):
-            problems.append("first author: registry has %r, bib has %r" % (reg_first, my_first))
+        # Name particles are indexed inconsistently: CrossRef holds Leonardo
+        # de Moura's family as "Moura". Compare on the last word of the family
+        # name, and accept containment either way, so "de Moura" and "Moura"
+        # agree while genuinely different names still differ.
+        reg_norm = norm(reg_first)
+        if my_first and reg_norm:
+            mine, theirs = my_first.split(), reg_norm.split()
+            same = (my_first in reg_norm or reg_norm in my_first
+                    or (mine and theirs and mine[-1] == theirs[-1]))
+            if not same:
+                problems.append("first author: registry has %r, bib has %r" % (reg_first, my_first))
         my_year = f.get("year", "")
+        year_note = None
         if yr and my_year and str(yr) != my_year:
-            # A deposit-date-only record is not a contradiction if the venue
-            # name carries the year the entry claims.
             if my_year not in container:
-                problems.append("year: registry %s vs bib %s (container %r)" % (yr, my_year, container[:40]))
+                gap = abs(int(yr) - int(my_year)) if my_year.isdigit() else 99
+                if gap <= 1:
+                    # Online-first publishing routinely puts a year between the
+                    # registered date and the issue an author cites. That is a
+                    # discrepancy worth showing, not evidence of a fabricated
+                    # reference, and blocking on it would bury the findings that
+                    # matter among ones that do not.
+                    year_note = "year: registry %s vs bib %s" % (yr, my_year)
+                else:
+                    problems.append("year: registry %s vs bib %s (container %r)"
+                                    % (yr, my_year, container[:40]))
         if problems:
             bad.append((key, doi, "; ".join(problems)))
         else:
-            rows.append((key, doi, reg_first, my_year, ("%s via %s" % (container, registrar))[:44]))
+            label = ("%s via %s" % (container, registrar))[:44]
+            if year_note:
+                notes.append((key, year_note))
+            rows.append((key, doi, reg_first, my_year, label))
         time.sleep(0.6)
 
     print("VERIFIED %d / %d entries with a DOI" % (len(rows), len(rows) + len(bad)))
@@ -249,6 +287,11 @@ def main(path):
         for k, t, n in nodoi:
             print("  %-32s %s" % (k, t))
             print("      basis: %s" % (n or "NONE RECORDED — not acceptable"))
+    if notes:
+        print()
+        print("YEAR DISCREPANCY (%d) — shown, not blocking; online-first vs issue year" % len(notes))
+        for k, n in notes:
+            print("  %-32s %s" % (k, n))
     if bad:
         print()
         print("MISMATCH (%d) — these must not ship" % len(bad))
