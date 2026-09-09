@@ -74,7 +74,17 @@ def plain(text: str) -> str:
     t = re.sub(r"(?<!\\)%.*?$", "", text, flags=re.M)
     t = t.replace("\\%", "%")
     t = re.sub(r"\\(?:label|cite[a-zA-Z]*|ref|input|hypersetup)\s*\{[^}]*\}", "", t)
-    t = re.sub(r"\\[a-zA-Z]+\s*", " ", t)
+    # Math spans are pasted verbatim. arXiv renders $...$ through MathJax, so a
+    # command inside math is characters in the submitted field, not zero: \oplus
+    # is six. Stripping them under-reports the same abstracts the dollar rule
+    # already protects, and in the same direction, so both must hold.
+    spans = re.split(r"(\$[^$]*\$)", t)
+    for i, part in enumerate(spans):
+        if i % 2 == 1:
+            continue
+        part = re.sub(r"\\[a-zA-Z]+\s*", " ", part)
+        spans[i] = part.replace("{", " ").replace("}", " ").replace("\\", " ")
+    t = "".join(spans)
     # Math delimiters are NOT markup to strip. arXiv renders $...$ in the
     # abstract field through MathJax, so a mathematics author pastes the TeX
     # verbatim and every dollar is a character the 1920 limit counts. Removing
@@ -82,7 +92,6 @@ def plain(text: str) -> str:
     # the one direction that matters: it calls an over-length abstract fine.
     # Font commands are a different case and are already dropped above, because
     # arXiv states they are not processed and asks authors to omit them.
-    t = t.replace("{", " ").replace("}", " ").replace("\\", " ")
     return re.sub(r"\s+", " ", t).strip()
 
 

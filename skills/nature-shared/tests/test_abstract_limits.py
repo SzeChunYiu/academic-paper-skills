@@ -81,6 +81,26 @@ class AbstractLimitTests(unittest.TestCase):
         # which is exactly the false pass this guards against.
         assert len(mod.plain(padded).replace("$", "")) < 1920
 
+    def test_commands_inside_math_are_counted_verbatim(self) -> None:
+        """A command inside math is characters in the submitted field. arXiv
+        renders $...$ through MathJax, so an author pastes \\oplus and its six
+        characters count. Stripping it under-reports in the same direction the
+        dollar rule already guards against."""
+        assert mod.plain(r"$a \oplus b$") == r"$a \oplus b$"
+        assert mod.plain(r"closure $\mathrm{Cl}(L)$ here") == r"closure $\mathrm{Cl}(L)$ here"
+        # ...while the same command outside math is still resolved away
+        assert "oplus" not in mod.plain(r"\oplus outside math")
+
+    def test_math_commands_can_decide_the_verdict(self) -> None:
+        """Regression. A real abstract measured 1867 with math commands stripped
+        and 1923 with them kept, straddling the 1920 limit."""
+        filler = "We report a bounded result. " * 66
+        assert mod.evaluate(filler, "arxiv", None, None)["verdict"] == "WITHIN_LIMITS"
+        padded = filler + r"$\oplus$ " * 14
+        result = mod.evaluate(padded, "arxiv", None, None)
+        assert result["verdict"] == "OVER", result["verdict"]
+        assert len(mod.plain(padded).replace("\\oplus", "")) < 1920
+
     def test_font_commands_are_still_dropped(self) -> None:
         """arXiv states font commands are not processed and asks authors to
         omit them, so they are not characters the form receives."""
