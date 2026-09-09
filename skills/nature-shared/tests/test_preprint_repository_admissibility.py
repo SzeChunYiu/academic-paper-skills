@@ -258,6 +258,18 @@ class PreprintRepositoryAdmissibilityTests(unittest.TestCase):
         assert entry, "buildability must be recorded"
         assert "cannot be decided from metadata" in entry[0]["statement"]
 
+    def test_contract_requires_a_clean_log_not_merely_a_pdf(self) -> None:
+        """pdflatex writes output even when it has errored."""
+        text = _flat(CONTRACT)
+        assert "a produced pdf is not a clean build" in text
+        assert "-halt-on-error" in text
+        assert "no `! ` lines" in text or "no ! lines" in text
+
+    def test_contract_requires_rebuilding_from_current_source(self) -> None:
+        text = _flat(CONTRACT)
+        assert "never a working copy taken earlier" in text
+        assert "leaves no trace in the diff" in text
+
     def test_the_detector_bias_claim_is_cited_not_asserted(self) -> None:
         """The one outside-world claim this contract makes must carry its source."""
         doc = json.loads(RULES.read_text(encoding="utf-8"))

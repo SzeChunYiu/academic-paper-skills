@@ -147,6 +147,18 @@ submission" (<https://info.arxiv.org/help/submit_tex.html>). Adding citations to
 a manuscript without adding their source to the archive converts a compiling
 submission into a blocked one.
 
+**A produced PDF is not a clean build.** `pdflatex` reports an error, continues,
+and writes output anyway, so a check that asks whether a PDF appeared passes on
+a manuscript that is failing. Require a clean log: run with `-halt-on-error`
+**and** assert the log contains no `! ` lines. Asking for the file alone is how a
+package that had already been fixed silently regressed and shipped again,
+because every intermediate check kept reporting success.
+
+**Rebuild from the current source, never a working copy taken earlier.** A fix
+landed in one change is undone by a later change built from a copy predating it.
+The regression leaves no trace in the diff of the change that caused it, because
+what shipped is a rebuilt binary artifact rather than an edited line.
+
 Two constructs found breaking real submissions, recorded because both compiled
 under an older toolchain and neither is visible in the rendered PDF:
 
