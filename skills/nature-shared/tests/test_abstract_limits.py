@@ -57,7 +57,34 @@ class AbstractLimitTests(unittest.TestCase):
         assert any(f["severity"] == "CANNOT_EVALUATE" for f in r["findings"])
 
     def test_characters_are_counted_after_markup_is_resolved(self) -> None:
-        assert mod.plain(r"\textbf{Result} of $x$ \cite{a}") == "Result of x"
+        assert mod.plain(r"\textbf{Result} of $x$ \cite{a}") == "Result of $x$"
+
+    def test_math_delimiters_are_counted_not_stripped(self) -> None:
+        """arXiv renders $...$ in the abstract field through MathJax, so a
+        mathematics author pastes the TeX verbatim and every dollar is a
+        character the 1920 limit counts."""
+        assert mod.plain(r"$a$ $b$ $c$") == r"$a$ $b$ $c$"
+        assert mod.plain(r"We determine $D_2(C_p^3) = (9p-5)/2$ here.") == (
+            r"We determine $D_2(C_p^3) = (9p-5)/2$ here.")
+
+    def test_dollars_can_decide_the_verdict(self) -> None:
+        """Regression. A real portfolio abstract measured 1906 characters with
+        dollars stripped and 1981 with them kept, straddling the 1920 limit, so
+        stripping them reported an over-length mathematics abstract as fine."""
+        filler = "We report a bounded result. " * 66
+        assert mod.evaluate(filler, "arxiv", None, None)["verdict"] == "WITHIN_LIMITS"
+        padded = filler + "$a$ " * 25
+        result = mod.evaluate(padded, "arxiv", None, None)
+        assert result["verdict"] == "OVER", result["verdict"]
+        assert result["characters"] > 1920
+        # Without the dollars the same content would have been under the limit,
+        # which is exactly the false pass this guards against.
+        assert len(mod.plain(padded).replace("$", "")) < 1920
+
+    def test_font_commands_are_still_dropped(self) -> None:
+        """arXiv states font commands are not processed and asks authors to
+        omit them, so they are not characters the form receives."""
+        assert mod.plain(r"\emph{pointed} form") == "pointed form"
 
     def test_an_escaped_percent_does_not_truncate_the_abstract(self) -> None:
         """A literal \\% is content; only an unescaped % starts a comment."""
