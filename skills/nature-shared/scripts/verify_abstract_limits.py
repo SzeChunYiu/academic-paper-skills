@@ -66,7 +66,13 @@ INPUT = re.compile(r"\\input\{([^}]+)\}")
 
 def plain(text: str) -> str:
     """Reduce LaTeX to the text a submission form would receive."""
-    t = re.sub(r"%.*?$", "", text, flags=re.M)
+    # Only an UNESCAPED % starts a comment. Stripping from every % swallows
+    # the rest of any line containing a literal \\%, which is common in an
+    # abstract reporting percentages, and under-counts the abstract. That is a
+    # false negative in the one direction that matters: it reports an
+    # over-length abstract as within limits.
+    t = re.sub(r"(?<!\\)%.*?$", "", text, flags=re.M)
+    t = t.replace("\\%", "%")
     t = re.sub(r"\\(?:label|cite[a-zA-Z]*|ref|input|hypersetup)\s*\{[^}]*\}", "", t)
     t = re.sub(r"\\[a-zA-Z]+\s*", " ", t)
     # Math delimiters are markup: an author pasting the abstract into a form

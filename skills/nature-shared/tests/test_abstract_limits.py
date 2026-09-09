@@ -59,6 +59,16 @@ class AbstractLimitTests(unittest.TestCase):
     def test_characters_are_counted_after_markup_is_resolved(self) -> None:
         assert mod.plain(r"\textbf{Result} of $x$ \cite{a}") == "Result of x"
 
+    def test_an_escaped_percent_does_not_truncate_the_abstract(self) -> None:
+        """A literal \\% is content; only an unescaped % starts a comment."""
+        got = mod.plain(r"We report 14.29\% false promotion and 0.857 accuracy.")
+        assert "false promotion" in got
+        assert "0.857" in got
+        assert "14.29%" in got
+
+    def test_a_real_comment_is_still_stripped(self) -> None:
+        assert mod.plain("Result here. % an editorial note\nMore text.") == "Result here. More text."
+
     def test_abstract_is_found_in_all_four_conventions(self) -> None:
         for body in (r"\begin{abstract}Bounded result here.\end{abstract}",
                      r"\subsection{Abstract}\label{abstract}Bounded result here.\section{X}",
