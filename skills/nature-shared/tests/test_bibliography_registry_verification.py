@@ -123,6 +123,35 @@ class BibliographyRegistryVerificationTests(unittest.TestCase):
         finally:
             os.unlink(path)
 
+    def test_joined_letters_fold(self) -> None:
+        """NFKD leaves oe and ae joined, so they need an explicit map."""
+        assert mod.norm("Den{\\oe}ux") == mod.norm("Den\u0153ux")
+        assert mod.norm("Wei\u00df") == mod.norm("Weiss")
+
+    def test_a_shorter_registry_title_is_not_a_mismatch(self) -> None:
+        """ACM holds Cousot 1977 as just 'Abstract interpretation'."""
+        src = SCRIPT.read_text(encoding="utf-8")
+        assert "_covered" in src
+        assert "SHORTER" in src
+        assert "Abstract interpretation" in src
+
+    def test_name_particles_are_documented_as_indexed_inconsistently(self) -> None:
+        src = SCRIPT.read_text(encoding="utf-8")
+        assert "de Moura" in src
+        assert "last word of the family" in src
+
+    def test_a_one_year_gap_is_shown_but_does_not_block(self) -> None:
+        """Online-first puts a year between registration and the cited issue."""
+        src = SCRIPT.read_text(encoding="utf-8")
+        assert "YEAR DISCREPANCY" in src
+        assert "not blocking" in src
+        assert "gap <= 1" in src
+
+    def test_a_large_year_gap_is_still_a_mismatch(self) -> None:
+        """The allowance must not swallow a genuinely wrong year."""
+        src = SCRIPT.read_text(encoding="utf-8")
+        assert "else:" in src and "problems.append(\"year:" in src
+
     def test_exit_codes_are_documented_and_distinct(self) -> None:
         doc = mod.__doc__ or ""
         assert "0  every entry with a DOI verified" in doc
