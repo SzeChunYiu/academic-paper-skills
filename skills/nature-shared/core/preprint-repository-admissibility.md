@@ -158,6 +158,31 @@ under an older toolchain and neither is visible in the rendered PDF:
 Neither is caught by a package-format scan, a reference check, or a content-type
 gate. Only compiling the source catches them.
 
+## The abstract has two limits at once
+
+An abstract is one of the few places where a preprint server and a journal
+impose different limits that both bind, and it is usually the last thing anyone
+measures. arXiv states that "abstracts longer than 1920 characters will not be
+accepted; abridge your abstract if necessary"
+(<https://info.arxiv.org/help/prep.html>). Journals state theirs in words, and
+usually smaller.
+
+Write to **the tighter of the two**, and check both before the package is
+frozen. Discovering the conflict at the submission form means rewriting an
+abstract after everything that quotes it has been bound.
+
+Two details decide whether the check is worth anything:
+
+**Measure the plain text, not the source.** The limit applies to what the
+submission form receives, after markup is resolved. A character count taken on
+LaTeX source is wrong in the direction that lets an over-length abstract through.
+
+**An abstract that cannot be located is a failure, not a pass.** Abstracts are
+routinely `\input` from a separate file, held in YAML front matter, or written
+under a `\subsection`. A reader that stops at any of those measures zero
+characters and reports comfortably within limits, which is worse than not
+checking at all.
+
 ## Known limits, stated so they are not mistaken for coverage
 
 - A manuscript that is substantively a survey, carries taxonomy tables, gives

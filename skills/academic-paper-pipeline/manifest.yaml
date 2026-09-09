@@ -36,6 +36,8 @@ references:
       path: ../nature-shared/preprint-repositories/arxiv-admissibility-rules.json
     - condition: a bibliography is about to ship and every entry must be checked against its registered record, because a fabricated or misattributed reference is a fatal integrity finding that passes any check asking only whether references exist
       path: ../nature-shared/scripts/verify_bibliography_registry.py
+    - condition: an abstract must satisfy a preprint repository's character limit and a journal's word limit at the same time, and the tighter of the two decides how it is written
+      path: ../nature-shared/scripts/verify_abstract_limits.py
     - condition: a finished manuscript must be swept for hard artifacts before deposit or submission, including missing reference apparatus, dangling citation keys, assistant-voice residue, unresolved placeholders and broken cross-references
       path: ../nature-shared/scripts/audit_deposit_integrity.py
     - condition: long-running, multi-session or multi-review work needs a compact resumable state with one primary operation, active scope, blockers, required contracts, next action and stop condition
