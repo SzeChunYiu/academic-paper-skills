@@ -1,5 +1,5 @@
 name: academic-writing
-version: 1.20.0
+version: 1.21.0
 description: >
   Journal-agnostic academic manuscript writing router optimized for long-running
   AI sessions. A compact execution kernel and context router are always loaded;
@@ -21,6 +21,9 @@ always_load:
 
 references:
   on_demand:
+    - condition: empirical trading or backtest paper, retrospective strategy synthesis, or worked trade examples require economic reporting and reader orientation
+      path: ../nature-shared/core/empirical-trading-paper.md
+      script: ../nature-shared/scripts/verify_trading_summary.py
     - condition: long-running or multi-session manuscript work needs a compact resumable state with one primary operation, live blockers, active claims/evidence, loaded contracts, next action and stop condition
       path: ../nature-shared/analysis-contracts/ai-session-checkpoint.schema.json
     - condition: a saved AI-session checkpoint should be checked for structural completeness, missing required contracts, missing active surface, or unresolved release target

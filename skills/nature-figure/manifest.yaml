@@ -1,5 +1,5 @@
 name: nature-figure
-version: 3.7.0
+version: 3.8.0
 description: >
   Declarative manifest for journal-aware scientific figure and table/visual
   evidence design. The legacy skill name is retained for compatibility. Data
@@ -16,6 +16,9 @@ always_load:
   - static/core/stance.md
 
 routes:
+  empirical_trading_displays:
+    detect: Trading or backtest manuscript needs cash attribution, worked episodes, per-panel growth and drawdown, or execution sensitivity.
+    reference: ../nature-shared/core/empirical-trading-paper.md
   scientific_diagram_workflow:
     detect: |
       Use for non-data or hybrid manuscript diagrams such as flowcharts,

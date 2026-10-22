@@ -58,6 +58,11 @@ Do not force one structure across:
 - reviews/perspectives/systematic syntheses;
 - hybrids.
 
+For empirical trading/backtest papers or worked trade explanations, also load
+[the empirical trading adapter](../nature-shared/core/empirical-trading-paper.md).
+It preserves reader orientation, outcome coverage, execution tiers, panel/account
+distinctions and growth–risk reporting without imposing these on other domains.
+
 ## 2. Self-research when uncertain
 
 If the paper type, target, reporting standard, writing convention, or figure grammar is not confidently covered, use `../nature-shared/core/unknown-paper-research-protocol.md` **before** inventing a rule.
