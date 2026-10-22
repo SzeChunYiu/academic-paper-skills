@@ -1,5 +1,5 @@
 name: nature-figure
-version: 3.8.0
+version: 3.9.0
 description: >
   Declarative manifest for journal-aware scientific figure and table/visual
   evidence design. The legacy skill name is retained for compatibility. Data

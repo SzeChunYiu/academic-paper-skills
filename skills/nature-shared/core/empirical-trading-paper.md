@@ -52,3 +52,23 @@ contract and identify the actual account calculation.
 A useful draft can expose unresolved evidence while improving explanation. Publication readiness additionally needs full claim coverage, verified literature, source reconciliation, defensible uncertainty, visual review and the existing release gate. Do not require fresh market experiments merely to improve a draft; do not call a draft economically certified because its reporting checks pass.
 
 This adapter generalizes reporting failures that can occur in archived strategy research. Its example checks are synthetic and contain no private project results. Methodological background: Bailey et al., The Probability of Backtest Overfitting, revised February 2015, https://www.davidhbailey.com/dhbpapers/backtest-prob.pdf (selection-risk rationale; not a universal choice of correction or proof that any particular study is overfit).
+
+## Mathematical audience and recursive explanation
+
+Determine domain familiarity separately from mathematical proficiency. A reader can know calculus, probability and optimization while knowing nothing about perpetuals, funding or execution. Preserve the formal spine for that reader; do not replace defining equations with elementary prose because the reader was called a layperson. Load `formal-spine-preservation.md` when expanding formal depth.
+
+Use the dependency order observations → operators → scores → targets → fills → cash → inference. For each defining equation explain the economic question, symbols and units, timing and index sets, assumptions and edge cases, then the observable implication. Expand unfamiliar operators until they reach the reader's stated prerequisites. Reuse linked definitions instead of recursively repeating elementary mathematics. Include an explicitly illustrative numerical calculation where it clarifies signs, units or capital denominators; never pass synthetic values off as an observed trade.
+
+Distinguish (a) an identity or definition, (b) a conditional derivation, (c) an exact code transcription, (d) a descriptive-source rule, and (e) a family template or hypothesis. Record source pin, dependencies and unresolved details. Transcribing code does not prove that it generated an archived result. Generic family equations do not supply missing variant-specific rules. Preserve tie handling, missingness, warm-up, ranking universe, rebalance phase, lag, state-update chronology, clipping and fallback branches when they affect meaning.
+
+For large strategy inventories separate family exposition, per-variant catalogue coverage and exact mathematical reproduction. Count each explicitly; do not call all variants reproduced when only family templates exist. Inherited verdicts remain attributed historical text, especially when they conflict or refer to an old live status. Keep family taxonomies distinct unless an explicit mapping exists.
+
+A claimed theorem needs assumptions and a proof, not a suggestive class name or code comment. Check dimensional consistency and derive simple limiting cases. In particular, compare a risk cap with its stated maintenance and loss inequalities; test whether covariance terms are omitted; inspect clipped log returns, claimed increment bounds and capped confidence radii before accepting statistical guarantees. Preserve any contradiction as an open proof obligation rather than cosmetically rewriting it away.
+
+## Mathematical and visual delivery
+
+Render equations with a real math engine, with stable numbering, readable symbols and offline fonts where an offline artifact is promised. Keep source equations editable. Verify the rendered output, long-equation overflow, navigation, figure labels and any catalogue search/filter controls. Do not flatten formulas to bold plain text or substitute screenshots for accessible mathematical text.
+
+Choose geometry by inferential task: waterfalls for cash reconciliation (unexplained residual separately labeled), paired points for matched stress changes, growth-versus-drawdown plots for joint risk interpretation, and full episode distributions beside a teaching pair's cash components. Inventory counts show reporting coverage, not independent trials or economic superiority. Do not connect incompatible windows as an account path, fabricate event trajectories, or use a decorative equity curve unsupported by records.
+
+Review prompts for this adapter are in `empirical-trading-math-review.md`; they are behavioral checks, not certification of source truth.

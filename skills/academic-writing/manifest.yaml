@@ -1,5 +1,5 @@
 name: academic-writing
-version: 1.21.0
+version: 1.22.0
 description: >
   Journal-agnostic academic manuscript writing router optimized for long-running
   AI sessions. A compact execution kernel and context router are always loaded;
