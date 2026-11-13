@@ -1,5 +1,5 @@
 name: academic-paper-pipeline
-version: 1.24.0
+version: 1.24.1
 description: >
   Journal-agnostic iterative academic-paper orchestration optimized for long-
   horizon AI sessions. The pipeline keeps a compact execution kernel, stage
@@ -22,6 +22,8 @@ always_load:
 
 references:
   on_demand:
+    - condition: a maintained research-operations manual, theory reference or code/API technical manual needs a non-journal reader profile without weakening scientific or release gates
+      path: ../nature-shared/core/documentation-profiles.md
     - condition: a full-paper route, claim narrowing, portfolio triage, merge/note/kill decision or publication-readiness decision requires a fail-closed paper-existence and scientific-mass ledger
       path: ../nature-shared/analysis-contracts/paper-existence-scientific-mass.schema.json
     - condition: a paper-existence ledger must be checked for unsupported surviving claims, incomplete hostile review, effective-N inflation, validity/integrity substitution, sibling fragmentation or evidence-acquisition stop rules
@@ -189,3 +191,4 @@ references:
       path: ../nature-shared/research/excellent-academic-writing-ai-failure-evidence-2026-08-31.md
     - condition: official venue evidence behind target-specific manuscript budgeting is needed
       path: ../nature-shared/research/venue-constrained-manuscript-budget-evidence-2026-08-31.md
+
