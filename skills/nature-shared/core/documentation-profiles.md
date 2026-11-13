@@ -1,9 +1,10 @@
 # Maintained documentation profiles
 
-Profile version: 1.0.0.
+Profile version: 1.1.0.
 
 - [Resolve the document](#resolve-the-document-before-drafting)
 - [Apply the existing loop](#apply-the-existing-loop-with-the-right-reader-contract)
+- [Coordinate updates and review](#coordinate-updates-and-review)
 - [Version and release binding](#version-and-release-binding)
 - [Figures and homepage projections](#figures-mathematics-and-homepage-projections)
 - [Sources and transfer limits](#sources-and-transfer-limits)
@@ -72,6 +73,47 @@ objects rather than unnecessary implementation trivia.
 The zero-context reader test is profile-specific: a technical reader may be
 required to install documented dependencies, but must not need the author's chat,
 private files or undocumented environment. Record prerequisites explicitly.
+
+## Coordinate updates and review
+
+Parallel findings enter the existing change/review queue with stable claim or
+section IDs, source/evidence revisions, affected dependencies and proposed edits.
+An appointed editor reconciles overlapping terminology, assumptions and outcomes
+on a named candidate. A session may propose freely; submitting an idea does not
+grant authority to overwrite accepted text or another session's current edit.
+
+Use dependency-aware delta review. Recheck every changed claim and its affected
+definitions, proofs, figures, examples, summaries and cross-volume consumers.
+Reuse a prior proof/review only when its exact claim, assumptions, evidence,
+dependency fingerprints and applicable review policy remain valid; record the
+reuse decision. An unchanged paragraph can still be invalidated by an upstream
+change. Do not restart a full review merely because a new event arrived, and do
+not infer unaffectedness from a clean textual diff. Independent final-artifact
+coverage and release binding still apply to the rebuilt PDF.
+
+The reviewer harness prepares the frozen packet, enforces access/identity and
+conflict boundaries, records concerns and checks closure evidence. It does not
+replace domain judgment or certify its own quality. Initial reviewers work from
+the current candidate and necessary evidence without prior verdicts or author
+reassurance; freeze their concerns before synthesis. Subsequent targeted review
+receives the relevant delta and earlier concern IDs. Keep contributor lineage
+across model switches, children and handoffs; neither role switching nor another
+model name grants independent status. Authors cannot approve their own work.
+
+Publish a compatible cross-volume release cut: an immutable manifest naming the
+operations, theory and technical editions and their dependency hashes. Only the
+affected volumes need new editions, but verify that every retained edition is
+compatible with the cut. Update the current index after that cut passes; an
+interrupted update must expose the old complete cut or an explicit incomplete
+draft, never a mixture advertised as current. Preserve prior cuts and errata.
+
+Measure substantive defect detection, false approvals, false blocks, valid novel
+contributions, rework, review latency and total cost on held-out task families.
+Compare the reviewer harness with a declared simpler review baseline under
+matched information and budgets. Proposed rival frameworks and unconventional
+methods remain admissible to investigation; stronger review applies to claimed
+results and release. An always-refuse reviewer fails usefulness even if it never
+approves a bad claim. Passing workflow checks alone cannot establish better review.
 
 ## Version and release binding
 
