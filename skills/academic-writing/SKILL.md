@@ -1,6 +1,6 @@
 ---
 name: academic-writing
-description: Canonical journal-agnostic academic manuscript writing skill. Draft, restructure, expand, compress, or plan titles, abstracts, Introductions, related work, Methods, Results, Discussions, Conclusions, and full-paper arguments from author-provided evidence. Resolve the paper archetype and target independently, research unfamiliar paper types/venues instead of forcing a template, study broad corpora and a few close analogue papers without copying them, plan evidence/figures, check explanatory sufficiency and sentence-to-sentence logic, preserve author voice, and run final manuscript-surface leakage/punctuation QA. Nature is only one optional target adapter. Use for academic writing, paper drafting, manuscript logic, natural scholarly prose, rich content, plot/figure planning, journal transfer, editor/reviewer preflight, 学术写作、科研写作、论文写作、句间逻辑、论文结构、论文润色与投稿写作.
+description: Canonical journal-agnostic academic manuscript writing skill. Draft, restructure, expand, compress, or plan titles, abstracts, Introductions, related work, Methods, Results, Discussions, Conclusions, and full-paper arguments from author-provided evidence. Resolve the paper archetype and target independently, research unfamiliar paper types/venues instead of forcing a template, study broad corpora and a few close analogue papers without copying them, plan evidence/figures, check explanatory sufficiency and sentence-to-sentence logic, preserve author voice, and run final manuscript-surface leakage/punctuation QA. Nature is only one optional target adapter. Also use for maintained research-operations, theory-reference and code/API manuals through the documentation profile. Use for academic writing, paper drafting, manuscript logic, natural scholarly prose, rich content, plot/figure planning, journal transfer, editor/reviewer preflight, 学术写作、科研写作、论文写作、句间逻辑、论文结构、论文润色与投稿写作.
 ---
 
 # Academic Writing — Canonical Router
@@ -10,6 +10,15 @@ description: Canonical journal-agnostic academic manuscript writing skill. Draft
 **Nature is not the default.** Target journal, paper archetype, evidence standard, article type, reporting obligations, prose conventions, and figure logic are resolved independently.
 
 The historical `skills/nature-writing/` directory remains only as a compatibility/reference implementation layer for section fragments, corpus scripts, examples, and older integrations. New user-facing routing should invoke `$academic-writing`.
+
+## Maintained research documentation
+
+For maintained research-operations manuals, theory references and code/API manuals,
+load `../nature-shared/core/documentation-profiles.md` before applying manuscript-only
+conventions. Use the same evidence, writing, independent-review and release loop,
+with the profile's reader contract; necessary APIs/commands belong in technical
+documentation. A manual is not a journal paper, and a document build is not a
+writing-pipeline pass. All applicable scientific and final-byte gates still apply.
 
 ## Load the core
 
@@ -458,3 +467,4 @@ Do not bury the manuscript under internal audit machinery unless the user asks.
 - `skills/nature-writing/` remains a compatibility/reference implementation layer only.
 - A request targeting Nature should resolve Nature through normal journal routing; a request targeting another venue must not inherit Nature rules.
 - New docs and examples should use `academic-writing` as the public name.
+

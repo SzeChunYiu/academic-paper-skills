@@ -4,6 +4,10 @@
 
 仓库已经从一组 Nature-oriented skills 扩展成更完整的 academic-paper system。这里是当前 architecture、写作研究和使用文档的入口。
 
+## 持续维护的研究文档
+
+- [文档类型与发布约束](../skills/nature-shared/core/documentation-profiles.md) — 操作手册、理论参考与代码/API 手册复用现有写作、独立审查及发布流程；绑定源文件/PDF 版本，规范图表、公式和首页摘要。
+
 ## 学术写作
 
 - [学术写作研究综述：强论文究竟是怎样写出来的](academic-writing-research.md) — 跨学科 rhetoric、cohesion、stance、sentence flow、human/LLM academic-writing research 与 section-specific writing。
@@ -41,3 +45,4 @@
 13. Publication optimization 要尽可能从 research-question / design 阶段开始，用 evidence-graded lever，并在 prospective 且 eligible 时检查 Registered Report 等 alternative route；target ladder 以 fit 为先，不以 prestige 为先。
 14. Public peer-review history 用来学习 concern → repair pattern，而不是 causal acceptance trick；accepted histories 必须明确 survivorship selection，并和 rejection evidence 一起看，才能讨论是否能提升为 reusable rule。
 15. 写作/评审规则应来自 empirical corpora、stratified direct reading、official guidance、counterexamples 与 regression tests。
+

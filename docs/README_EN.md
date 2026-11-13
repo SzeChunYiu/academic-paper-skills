@@ -19,6 +19,10 @@ The repository has grown from a collection of Nature-oriented skills into a broa
 - [Journal Acceptance Readiness: Editors, Reviewers, Routing, and Revision](journal-acceptance-readiness_EN.md) — separates target fit, editorial triage, editor-expertise routing, reviewer coverage, evidence maturity, revision closure, and uncontrollable editorial context; public editor identities are used only for professional routing, never personalized manipulation.
 - [Evidence-Graded Publication Optimization](acceptance-optimization_EN.md) — starts before manuscript writing: research-question/design quality, Registered Report screening, claim-backward evidence maturation, fit-first target ladders, desk-rejection stress tests, statistical/reporting red teams, public-review-history calibration, revision deltas, rejection triage, transfer, and retargeting. Every acceptance lever carries an evidence grade and public accepted-case patterns remain survivorship-bounded heuristics.
 
+## Maintained Research Documentation
+
+- [Documentation Profiles](../skills/nature-shared/core/documentation-profiles.md) — operations, theory and code/API manuals through the existing writing/review/release loop; source/PDF version binding, diagrams, equations and homepage projections.
+
 ## Tutorials and Integration
 
 - [Open-source Agent Frameworks](open-source-agent-frameworks_EN.md) — OpenClaw/OpenCode/Hermes and other-agent integration.
@@ -41,3 +45,4 @@ The repository has grown from a collection of Nature-oriented skills into a broa
 13. Publication optimization begins as early as research-question and design choice, uses evidence-graded levers, checks alternative routes such as Registered Reports when prospectively eligible, and uses fit-first target ladders rather than prestige-only ranking.
 14. Public peer-review histories teach concern-to-repair patterns, not causal acceptance tricks; accepted histories must be treated as survivorship-selected and balanced with rejection evidence before reusable rules are promoted.
 15. Research rules come from empirical corpora, stratified direct reading, official guidance, counterexamples and regression tests.
+

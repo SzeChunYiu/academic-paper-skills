@@ -10,7 +10,9 @@ description: >-
   Use for end-to-end paper workflows, maximum legitimate publication opportunity,
   repeated review and revision, publishability hardening, Registered Report
   planning, target/editorial triage, or self-research when a paper type or venue
-  is not already covered. The pipeline is journal-agnostic; Nature is only one
+  is not already covered, or for maintained research-operations, theory-reference
+  and code/API manuals using a non-journal reader profile.
+  The pipeline is journal-agnostic; Nature is only one
   optional target adapter. It never fabricates results, predicts acceptance
   probability, profiles editor/reviewer favorability, or treats reviewer votes
   as acceptance.
@@ -21,6 +23,15 @@ description: >-
 This is the canonical **orchestration skill** for end-to-end manuscript development.
 
 It does not replace specialist capabilities. It coordinates them as one stateful scientific and editorial loop.
+
+## Maintained research documentation
+
+For maintained research-operations manuals, theory references and code/API manuals,
+load `../nature-shared/core/documentation-profiles.md` before applying manuscript-only
+conventions. Use the same evidence, writing, independent-review and release loop,
+with the profile's reader contract; necessary APIs/commands belong in technical
+documentation. A manual is not a journal paper, and a document build is not a
+writing-pipeline pass. All applicable scientific and final-byte gates still apply.
 
 ## Always load
 
@@ -672,3 +683,4 @@ Never:
 - call prose-only rebuttal a scientific closure when the manuscript/evidence remains unchanged;
 - backdate Registered Report/prespecification status;
 - keep extending the study after only optional enrichment remains.
+
