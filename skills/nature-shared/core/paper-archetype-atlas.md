@@ -300,6 +300,12 @@ A 2025 Scientific Data arthropod Data Descriptor uses a first display combining 
 
 The proof may be the decisive evidence. Do not force empirical-figure logic onto it.
 
+For review and revision of mathematics manuscripts, load `mathematical-referee-review.md` (referee
+protocol: statement and proof audit, dependency/condition propagation, computer-assisted inputs,
+novelty, severity, convergence) and `mathematical-exposition-contract.md` (writing for
+checkability, frozen-scope revision rules), and run `../scripts/audit_math_manuscript.py` on the
+LaTeX source between rounds.
+
 ### Figures
 
 Use only when they reduce conceptual burden or test/illustrate consequences:

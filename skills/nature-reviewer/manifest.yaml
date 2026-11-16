@@ -1,5 +1,5 @@
 name: nature-reviewer
-version: 3.7.0
+version: 3.8.0
 description: >
   Journal-aware pre-submission editor/reviewer simulation optimized for focused
   AI review sessions. The reviewer always carries a compact execution kernel,
@@ -66,6 +66,12 @@ references:
       path: ../nature-shared/core/literature-version-and-source-quality.md
     - condition: reviewer/editor must independently inventory atomic claims, definitions, proof dependencies, numerical/source/availability claims or contradictions
       path: ../nature-shared/core/atomic-claim-verification.md
+    - condition: the dominant archetype is theory/proof (mathematics), or a theorem is a headline claim; reviewer must audit statements, proofs line by line, the result dependency graph and propagation of unproved conditions, computer-assisted inputs, small cases and novelty/priority, and write a mathematics referee report with separated correctness/checkability/novelty/significance verdicts
+      path: ../nature-shared/core/mathematical-referee-review.md
+    - condition: a mathematics manuscript is being written or revised for checkability (main results stated precisely in the introduction, conditions in statements and abstract, proof roadmaps, computational disclosure, frozen-scope revision rules, pre-submission checklist)
+      path: ../nature-shared/core/mathematical-exposition-contract.md
+    - condition: a LaTeX mathematics manuscript needs a deterministic structural audit (statements without proof, undefined references/citations, duplicate labels, proof-dependency graph with cycles and forward references, silent conditions, abstract conditions, hand-waving and TODO markers) before or between referee rounds; a locator, never a correctness verdict
+      path: ../nature-shared/scripts/audit_math_manuscript.py
     - condition: reviewer/editor must judge contribution-defining formal objects, proofs, bounds, non-implications or formal hierarchy
       path: ../nature-shared/core/formal-spine-preservation.md
     - condition: reviewer/editor must judge explanatory sufficiency when hidden premises prevent readers from reconstructing the evidence-to-claim chain or technically capable readers must guess rationale, mechanism, meaning or boundaries
