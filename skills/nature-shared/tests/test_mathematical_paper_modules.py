@@ -220,3 +220,17 @@ def test_command_line_exit_codes(tmp_path: Path) -> None:
     assert result.returncode == 1
     assert json.loads(result.stdout)["counts"]["error"] == 1
     assert run(str(tmp_path / "none.tex")).returncode == 2
+
+
+def test_intro_theorem_proved_later_may_cite_later_lemmas_and_parts_are_one_proof(tmp_path: Path) -> None:
+    path = write(tmp_path, r"""
+\begin{theorem}\label{thm:main} Main. \end{theorem}
+\begin{lemma}\label{lem:a} (1) A. (2) B. \end{lemma}
+\begin{proof}[Proof of (1)] Direct. \end{proof}
+\begin{proof}[Proof of (2)] Direct. \end{proof}
+\begin{proof}[Proof of Theorem~\ref{thm:main}] By Lemma~\ref{lem:a}. \end{proof}
+""")
+    report = audit_module.audit(path)
+    assert "forward_reference_in_proof" not in codes(report), report["findings"]
+    assert "orphan_proof" not in codes(report)
+    assert report["ok"]

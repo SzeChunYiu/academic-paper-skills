@@ -72,6 +72,7 @@ class Statement:
     text: str = ""
     proof_refs: list[str] = field(default_factory=list)
     restates: list[str] = field(default_factory=list)
+    proof_pos: int | None = None   # document position where its proof starts
     has_proof: bool = False
     cites_in_statement: bool = False
 
@@ -186,12 +187,16 @@ def audit(main: Path) -> dict[str, Any]:
                             target = statements[info[2]] if info and info[2] is not None else None
                             if target is None:
                                 target = Statement(-1, "deferred", "deferred", file, line, [target_label])
+                                target.proof_pos = position
                                 deferred.append(target)
                         if target is not None:
                             target.has_proof = True
+                            target.proof_pos = target.proof_pos or position
                             stack.append(("proof", target))
-                        elif last_statement is not None and not last_statement.has_proof:
+                        elif last_statement is not None and (not last_statement.has_proof or named):
+                            # an unreferenced "[Proof of (2)]" continues the proof of the last statement
                             last_statement.has_proof = True
+                            last_statement.proof_pos = last_statement.proof_pos or position
                             stack.append(("proof", last_statement))
                         else:
                             stack.append(("proof", None))
@@ -237,6 +242,7 @@ def audit(main: Path) -> dict[str, Any]:
             st = statements[info[2]]
             st.has_proof = True
             st.proof_refs.extend(proof.proof_refs)
+            st.proof_pos = st.proof_pos or proof.proof_pos
 
     # proofs written as paragraphs: "\emph{Proof of Theorem~\ref{x}.}" outside a proof environment
     for file, start, text in chunks:
@@ -284,7 +290,9 @@ def audit(main: Path) -> dict[str, Any]:
     sid_of = {label: info[2] for label, info in labels.items() if info[2] is not None}
     edges: dict[int, set[int]] = {st.sid: set() for st in statements}
     for st in statements:
-        own_pos = min((order[l] for l in st.labels), default=None)
+        # a proof may cite anything stated before the proof itself (an introduction theorem proved later
+        # legitimately cites later lemmas); only results stated after the proof begins are forward
+        own_pos = st.proof_pos if st.proof_pos is not None else min((order[l] for l in st.labels), default=None)
         for label in st.restates:   # an introduction restatement points forward by design
             target = sid_of.get(label)
             if target is not None and target != st.sid:
