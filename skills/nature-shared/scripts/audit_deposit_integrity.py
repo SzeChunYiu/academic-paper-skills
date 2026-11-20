@@ -123,6 +123,32 @@ def _read(path: Path) -> str:
     return path.read_text(encoding="utf-8", errors="replace")
 
 
+_INPUT_RE = re.compile(r"\\(?:input|include)\s*\{([^}]+)\}")
+
+
+def _expand_inputs(path: Path, seen: set[Path] | None = None) -> str:
+    """Inline \\input/\\include files (relative to the including file) so that labels, citations
+    and disclosures in a multi-file manuscript are audited as one document. A missing file is left
+    as written; a cycle is cut."""
+    seen = seen if seen is not None else set()
+    path = path.resolve()
+    if path in seen:
+        return ""
+    seen.add(path)
+    text = _read(path)
+
+    def inline(match: "re.Match[str]") -> str:
+        line_start = text.rfind("\n", 0, match.start()) + 1
+        if "%" in text[line_start:match.start()].replace("\\%", ""):
+            return match.group(0)  # commented out
+        target = path.parent / match.group(1).strip()
+        if not target.suffix:
+            target = target.with_suffix(".tex")
+        return _expand_inputs(target, seen) if target.is_file() else match.group(0)
+
+    return _INPUT_RE.sub(inline, text)
+
+
 def audit(body: str, bib_sources: list[str], house_disclosure: str | None) -> dict[str, Any]:
     findings: list[dict[str, Any]] = []
 
@@ -288,7 +314,7 @@ def main(argv: list[str] | None = None) -> int:
     if not path.is_file():
         print(json.dumps({"verdict": "CANNOT_AUDIT", "error": "not found: %s" % path}))
         return 2
-    body = _read(path)
+    body = _expand_inputs(path)
     if not body.strip():
         print(json.dumps({"verdict": "CANNOT_AUDIT", "error": "empty: %s" % path}))
         return 2

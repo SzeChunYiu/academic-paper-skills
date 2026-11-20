@@ -1,5 +1,5 @@
 name: academic-paper-pipeline
-version: 1.24.0
+version: 1.25.0
 description: >
   Journal-agnostic iterative academic-paper orchestration optimized for long-
   horizon AI sessions. The pipeline keeps a compact execution kernel, stage
@@ -87,6 +87,12 @@ references:
       path: ../nature-shared/core/standalone-manuscript-reader-contract.md
     - condition: literature version-of-record, publication status or source maturity must be resolved
       path: ../nature-shared/core/literature-version-and-source-quality.md
+    - condition: the dominant archetype is theory/proof (mathematics), or a theorem is a headline claim; reviewer must audit statements, proofs line by line, the result dependency graph and propagation of unproved conditions, computer-assisted inputs, small cases and novelty/priority, and write a mathematics referee report with separated correctness/checkability/novelty/significance verdicts
+      path: ../nature-shared/core/mathematical-referee-review.md
+    - condition: a mathematics manuscript is being written or revised for checkability (main results stated precisely in the introduction, conditions in statements and abstract, proof roadmaps, computational disclosure, frozen-scope revision rules, pre-submission checklist)
+      path: ../nature-shared/core/mathematical-exposition-contract.md
+    - condition: a LaTeX mathematics manuscript needs a deterministic structural audit (statements without proof, undefined references/citations, duplicate labels, proof-dependency graph with cycles and forward references, silent conditions, abstract conditions, hand-waving and TODO markers) before or between referee rounds; a locator, never a correctness verdict
+      path: ../nature-shared/scripts/audit_math_manuscript.py
     - condition: contribution-defining equations, definitions, operators, bounds or non-implications may be lost during rewrite/compression
       path: ../nature-shared/core/formal-spine-preservation.md
     - condition: reviewer/editor simulation, decision synthesis or minimum-sufficient repair planning is active

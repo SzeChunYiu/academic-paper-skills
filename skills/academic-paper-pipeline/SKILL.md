@@ -158,6 +158,16 @@ When public editor identities, teams or sections matter, load `../nature-shared/
 
 Maintain uncontrollable editorial context separately from manuscript state: simultaneous overlapping work, competition among strong submissions, reviewer availability, legitimate editor disagreement and confidential information may affect a real decision without creating a valid manuscript repair.
 
+## Mathematics (theory/proof) papers
+
+When the dominant archetype is theory/proof, the review and revision loop runs on the mathematics modules:
+
+- `../nature-shared/core/mathematical-referee-review.md`: blind referees audit statements (restatement identity, quantifiers, edge cases), read proofs line by line with `VERIFIED` / `VERIFIED_WITH_FIX` / `GAP` / `NOT_READ` verdicts, propagate unproved conditions through the dependency graph, check computer-assisted inputs and novelty, and keep correctness, checkability, novelty and significance as separate verdicts;
+- `../nature-shared/core/mathematical-exposition-contract.md`: revisions aim at checkability. In a frozen-scope paper they close gaps, correct or narrow statements and improve exposition, but add no new theorems;
+- `../nature-shared/scripts/audit_math_manuscript.py`: a deterministic structural audit of the LaTeX source, run before each round. Its exit status is 0 clean, 1 errors, 2 cannot audit. It locates; it never verifies a proof.
+
+Convergence for a mathematics paper: every headline proof is verified by at least two blind referees with no open `GAP`, every condition is named in the statement and the abstract, the computational inputs meet the disclosure requirements, and the audit reports no errors.
+
 ## Prospective publication-route gate
 
 If the project is still prospective, check the publication route **before** outcome/results access where possible.
