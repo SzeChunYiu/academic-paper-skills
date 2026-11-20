@@ -498,3 +498,20 @@ class PreprintRepositoryAdmissibilityTests(unittest.TestCase):
 if __name__ == "__main__":
         unittest.main()
 
+
+
+def test_deposit_integrity_follows_input_files(tmp_path):
+    """A label defined in an \\input file is not an unresolved cross-reference (multi-file papers)."""
+    (tmp_path / "sections").mkdir()
+    (tmp_path / "sections" / "part.tex").write_text("\\section{Part}\\label{sec:part}\nText.\n", encoding="utf-8")
+    main = tmp_path / "main.tex"
+    main.write_text("\\documentclass{amsart}\\begin{document}\nSee Section~\\ref{sec:part}.\n"
+                    "\\input{sections/part}\n% \\input{sections/absent}\nAs in \\cite{a}.\n"
+                    "\\begin{thebibliography}{1}\\bibitem{a} A. Author, A paper, 2020.\\end{thebibliography}\n"
+                    "\\end{document}\n", encoding="utf-8")
+    out = tmp_path / "r.json"
+    code = integrity.main(["--manuscript", str(main), "--json-out", str(out)])
+    report = json.loads(out.read_text(encoding="utf-8"))
+    codes = [f["code"] for f in report["findings"]]
+    assert "unresolved_cross_reference" not in codes, report
+    assert code == 0
